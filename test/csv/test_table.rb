@@ -322,11 +322,14 @@ class TestCSV::Table < TestCSV
     # delete a col
     assert_equal(@rows.map { |row| row["A"] }, @table.delete("A"))
 
+    # delete an array of cols
+    assert_equal(["B"], @table.delete(["B"]))
+
     # verify resulting table
     assert_equal(<<-END_RESULT.gsub(/^\s+/, ""), @table.to_csv)
-    B,C
-    2,3
-    8,9
+    C
+    3
+    9
     END_RESULT
   end
 
