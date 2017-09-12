@@ -1,8 +1,9 @@
-# coding: utf-8
+# frozen_string_literal: true
 
 Gem::Specification.new do |spec|
   spec.name          = "csv"
   spec.version       = "0.1.0"
+  spec.date          = "2017-09-12"
   spec.authors       = ["James Edward Gray II"]
   spec.email         = [nil]
 
@@ -12,8 +13,6 @@ Gem::Specification.new do |spec|
   spec.license       = "BSD-2-Clause"
 
   spec.files         = ["lib/csv.rb"]
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
   spec.required_ruby_version = ">= 2.5.0dev"
 
