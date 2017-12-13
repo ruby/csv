@@ -3,7 +3,7 @@
 Gem::Specification.new do |spec|
   spec.name          = "csv"
   spec.version       = "1.0.0"
-  spec.date          = "2017-12-11"
+  spec.date          = "2017-12-13"
   spec.authors       = ["James Edward Gray II"]
   spec.email         = [nil]
 
