@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.email         = [nil]
 
   spec.summary       = "CSV Reading and Writing"
-  spec.description   = "the CSV library began its life as FasterCSV."
+  spec.description   = "The CSV library provides a complete interface to CSV files and data. It offers tools to enable you to read and write to and from Strings or IO objects, as needed."
   spec.homepage      = "https://github.com/ruby/csv"
   spec.license       = "BSD-2-Clause"
 
