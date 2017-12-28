@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/ruby/csv"
   spec.license       = "BSD-2-Clause"
 
-  spec.files         = ["lib/csv.rb"]
+  spec.files         = ["lib/csv.rb", "lib/ext/array.rb", "lib/ext/string.rb"]
   spec.require_paths = ["lib"]
   spec.required_ruby_version = ">= 2.4.0"
 
