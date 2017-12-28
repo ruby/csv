@@ -161,6 +161,9 @@ class TestCSV::Interface < TestCSV
       assert_equal(csv, csv << ["last", %Q{"row"}])
     end
     assert_equal(%Q{1,2,3\n4,,5\nlast,"""row"""\n}, str)
+
+    out = CSV.generate("test") { |csv| csv << ["row"] }
+    assert_equal("testrow\n", out)
   end
 
   def test_generate_line
