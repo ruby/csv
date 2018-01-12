@@ -377,4 +377,16 @@ class TestCSV::Row < TestCSV
     r = @row == []
     assert_equal false, r
   end
+
+  def test_dig
+    # by index
+    assert_equal(2, @row.dig(1))
+
+    # by header
+    assert_equal(2, @row.dig("B"))
+
+    # if missing
+    assert_nil(@row.dig("Missing"))
+    assert_nil(@row.dig(100))
+  end
 end

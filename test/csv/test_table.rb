@@ -494,4 +494,51 @@ class TestCSV::Table < TestCSV
                  @table.inspect.encoding],
             "inspect() was not ASCII compatible." )
   end
+
+  def test_dig
+    ##################
+    ### Mixed Mode ###
+    ##################
+    # by row
+    assert_equal(@rows[0], @table.dig(0))
+    assert_nil(@table.dig(100))  # empty row
+
+    # by col
+    @rows.first.headers.each do |header|
+      assert_equal(@rows.map { |row| row[header] }, @table[header])
+    end
+    assert_equal([nil] * @rows.size, @table["Z"])  # empty col
+
+    # by cell, row then col
+    assert_equal(2, @table.dig(0, 1))
+    assert_equal(6, @table.dig(1, "C"))
+
+    # by cell, col then row
+    assert_equal(5, @table.dig("B", 1))
+    assert_equal(9, @table.dig("C", 2))
+
+    ###################
+    ### Column Mode ###
+    ###################
+    @table.by_col!
+
+    assert_equal([2, 5, 8], @table.dig(1))
+    assert_equal([2, 5, 8], @table.dig("B"))
+
+    # by cell, col then row
+    assert_equal(5, @table.dig("B", 1))
+    assert_equal(9, @table.dig("C", 2))
+
+    ################
+    ### Row Mode ###
+    ################
+    @table.by_row!
+
+    assert_equal(@rows[1], @table.dig(1))
+    assert_raise(TypeError) { @table.dig("B") }
+
+    # by cell, row then col
+    assert_equal(2, @table.dig(0, 1))
+    assert_equal(6, @table.dig(1, "C"))
+  end
 end

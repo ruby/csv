@@ -547,6 +547,21 @@ class CSV
     end
     alias_method :to_s, :to_csv
 
+    #
+    # Extracts the nested value specified by the sequence of name objects by calling dig at each step,
+    # returning nil if any intermediate step is nil.
+    #
+    def dig(index_or_header, *index_or_headers)
+      value = field(index_or_header)
+      if value.nil?
+        nil
+      elsif index_or_headers.empty?
+        value
+      else
+        value.dig(*index_or_headers)
+      end
+    end
+
     # A summary of fields, by header, in an ASCII compatible String.
     def inspect
       str = ["#<", self.class.to_s]
@@ -902,6 +917,21 @@ class CSV
       return array.join('')
     end
     alias_method :to_s, :to_csv
+
+    #
+    # Extracts the nested value specified by the sequence of name objects by calling dig at each step,
+    # returning nil if any intermediate step is nil.
+    #
+    def dig(index_or_header, *index_or_headers)
+      value = send(:[], index_or_header)
+      if value.nil?
+        nil
+      elsif index_or_headers.empty?
+        value
+      else
+        value.dig(*index_or_headers)
+      end
+    end
 
     # Shows the mode and size of this table in a US-ASCII String.
     def inspect
