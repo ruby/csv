@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require_relative "lib/csv"
+
 Gem::Specification.new do |spec|
   spec.name          = "csv"
-  spec.version       = "2.5.0"
+  spec.version       = CSV::VERSION
   spec.date          = "2017-12-14"
   spec.authors       = ["James Edward Gray II"]
   spec.email         = [nil]
