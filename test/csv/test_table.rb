@@ -504,10 +504,8 @@ class TestCSV::Table < TestCSV
     assert_nil(@table.dig(100))  # empty row
 
     # by col
-    @rows.first.headers.each do |header|
-      assert_equal(@rows.map { |row| row[header] }, @table[header])
-    end
-    assert_equal([nil] * @rows.size, @table["Z"])  # empty col
+    assert_equal([2, 5, 8], @table.dig("B"))
+    assert_equal([nil] * @rows.size, @table.dig("Z"))  # empty col
 
     # by cell, row then col
     assert_equal(2, @table.dig(0, 1))
