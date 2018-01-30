@@ -434,7 +434,7 @@ class CSV
     # If no block is given, an Enumerator is returned.
     #
     def delete_if(&block)
-      block or return enum_for(__method__) { size }
+      return enum_for(__method__) { size } unless block_given?
 
       @row.delete_if(&block)
 
@@ -513,7 +513,7 @@ class CSV
     # Support for Enumerable.
     #
     def each(&block)
-      block or return enum_for(__method__) { size }
+      return enum_for(__method__) { size } unless block_given?
 
       @row.each(&block)
 
@@ -832,7 +832,7 @@ class CSV
     # If no block is given, an Enumerator is returned.
     #
     def delete_if(&block)
-      block or return enum_for(__method__) { @mode == :row or @mode == :col_or_row ? size : headers.size }
+      return enum_for(__method__) { @mode == :row or @mode == :col_or_row ? size : headers.size } unless block_given?
 
       if @mode == :row or @mode == :col_or_row  # by index
         @table.delete_if(&block)
@@ -858,7 +858,7 @@ class CSV
     # If no block is given, an Enumerator is returned.
     #
     def each(&block)
-      block or return enum_for(__method__) { @mode == :col ? headers.size : size }
+      return enum_for(__method__) { @mode == :col ? headers.size : size } unless block_given?
 
       if @mode == :col
         headers.each { |header| block[[header, self[header]]] }
@@ -1137,7 +1137,7 @@ class CSV
   # but transcode it to UTF-8 before CSV parses it.
   #
   def self.foreach(path, **options, &block)
-    return to_enum(__method__, path, options) unless block
+    return to_enum(__method__, path, options) unless block_given?
     open(path, options) do |csv|
       csv.each(&block)
     end
@@ -1309,7 +1309,7 @@ class CSV
   #
   def self.parse(*args, &block)
     csv = new(*args)
-    if block.nil?  # slurp contents, if no block is given
+    unless block_given? # slurp contents, if no block is given
       begin
         csv.read
       ensure
