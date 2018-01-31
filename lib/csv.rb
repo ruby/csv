@@ -1309,14 +1309,13 @@ class CSV
   #
   def self.parse(*args, &block)
     csv = new(*args)
-    unless block_given? # slurp contents, if no block is given
-      begin
-        csv.read
-      ensure
-        csv.close
-      end
-    else           # or pass each row to a provided block
-      csv.each(&block)
+
+    return csv.each(&block) if block_given? # slurp contents, if no block is given
+
+    begin
+      csv.read
+    ensure
+      csv.close
     end
   end
 
