@@ -839,7 +839,7 @@ class CSV
       else                                      # by header
         deleted = []
         headers.each do |header|
-          deleted << delete(header) if block[[header, self[header]]]
+          deleted << delete(header) if yield([header, self[header]])
         end
       end
 
@@ -861,7 +861,7 @@ class CSV
       return enum_for(__method__) { @mode == :col ? headers.size : size } unless block_given?
 
       if @mode == :col
-        headers.each { |header| block[[header, self[header]]] }
+        headers.each { |header| yield([header, self[header]]) }
       else
         @table.each(&block)
       end
