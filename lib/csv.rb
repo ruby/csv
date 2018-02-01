@@ -923,7 +923,7 @@ class CSV
     # returning nil if any intermediate step is nil.
     #
     def dig(index_or_header, *index_or_headers)
-      value = send(:[], index_or_header)
+      value = self[index_or_header]
       if value.nil?
         nil
       elsif index_or_headers.empty?
