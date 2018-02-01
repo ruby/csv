@@ -1310,8 +1310,9 @@ class CSV
   def self.parse(*args, &block)
     csv = new(*args)
 
-    return csv.each(&block) if block_given? # slurp contents, if no block is given
+    return csv.each(&block) if block_given?
 
+    # slurp contents, if no block is given
     begin
       csv.read
     ensure
