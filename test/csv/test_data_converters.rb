@@ -67,6 +67,55 @@ class TestCSV::DataConverters < TestCSV
     assert_instance_of(String, CSV::Converters[:date_time]["junk"])
   end
 
+  def test_builtin_date_time_converter_iso8601_date
+    iso8601_string = "2018-01-14"
+    datetime = DateTime.new(2018, 1, 14)
+    assert_equal(datetime,
+                 CSV::Converters[:date_time][iso8601_string])
+  end
+
+  def test_builtin_date_time_converter_iso8601_minute
+    iso8601_string = "2018-01-14T22:25"
+    datetime = DateTime.new(2018, 1, 14, 22, 25)
+    assert_equal(datetime,
+                 CSV::Converters[:date_time][iso8601_string])
+  end
+
+  def test_builtin_date_time_converter_iso8601_second
+    iso8601_string = "2018-01-14T22:25:19"
+    datetime = DateTime.new(2018, 1, 14, 22, 25, 19)
+    assert_equal(datetime,
+                 CSV::Converters[:date_time][iso8601_string])
+  end
+
+  def test_builtin_date_time_converter_iso8601_under_second
+    iso8601_string = "2018-01-14T22:25:19.1"
+    datetime = DateTime.new(2018, 1, 14, 22, 25, 19.1)
+    assert_equal(datetime,
+                 CSV::Converters[:date_time][iso8601_string])
+  end
+
+  def test_builtin_date_time_converter_iso8601_under_second_offset
+    iso8601_string = "2018-01-14T22:25:19.1+09:00"
+    datetime = DateTime.new(2018, 1, 14, 22, 25, 19.1, "+9")
+    assert_equal(datetime,
+                 CSV::Converters[:date_time][iso8601_string])
+  end
+
+  def test_builtin_date_time_converter_iso8601_offset
+    iso8601_string = "2018-01-14T22:25:19+09:00"
+    datetime = DateTime.new(2018, 1, 14, 22, 25, 19, "+9")
+    assert_equal(datetime,
+                 CSV::Converters[:date_time][iso8601_string])
+  end
+
+  def test_builtin_date_time_converter_iso8601_utc
+    iso8601_string = "2018-01-14T22:25:19Z"
+    datetime = DateTime.new(2018, 1, 14, 22, 25, 19)
+    assert_equal(datetime,
+                 CSV::Converters[:date_time][iso8601_string])
+  end
+
   def test_convert_with_builtin_integer
     # setup parser...
     assert_respond_to(@parser, :convert)
