@@ -1168,8 +1168,8 @@ class CSV
   def self.generate(str=nil, **options)
     # add a default empty String, if none was given
     if str
-      io = StringIO.new(str)
-      io.seek(0, IO::SEEK_END)
+      str = StringIO.new(str)
+      str.seek(0, IO::SEEK_END)
     else
       encoding = options[:encoding]
       str      = String.new
