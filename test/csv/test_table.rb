@@ -317,16 +317,16 @@ class TestCSV::Table < TestCSV
     ### Mixed Mode ###
     ##################
     # delete a row
-    assert_equal(@rows[1], @table.delete(1))
+    assert_equal([@rows[1]], @table.delete(1))
 
-    # delete a col
-    assert_equal(@rows.map { |row| row["A"] }, @table.delete("A"))
-
+    # delete cols
+    assert_equal([@rows.map { |row| row["A"] }, @rows.map { |row| row["B"] }], @table.delete("A", "B"))
+    
     # verify resulting table
     assert_equal(<<-END_RESULT.gsub(/^\s+/, ""), @table.to_csv)
-    B,C
-    2,3
-    8,9
+    C
+    3
+    9
     END_RESULT
   end
 
@@ -336,8 +336,8 @@ class TestCSV::Table < TestCSV
     ###################
     @table.by_col!
 
-    assert_equal(@rows.map { |row| row[0] }, @table.delete(0))
-    assert_equal(@rows.map { |row| row["C"] }, @table.delete("C"))
+    assert_equal([@rows.map { |row| row[0] }], @table.delete(0))
+    assert_equal([@rows.map { |row| row["C"] }], @table.delete("C"))
 
     # verify resulting table
     assert_equal(<<-END_RESULT.gsub(/^\s+/, ""), @table.to_csv)
@@ -354,7 +354,7 @@ class TestCSV::Table < TestCSV
     ################
     @table.by_row!
 
-    assert_equal(@rows[1], @table.delete(1))
+    assert_equal([@rows[1]], @table.delete(1))
     assert_raise(TypeError) { @table.delete("C") }
 
     # verify resulting table
@@ -368,7 +368,7 @@ class TestCSV::Table < TestCSV
   def test_delete_with_blank_rows
     data = "col1,col2\nra1,ra2\n\nrb1,rb2"
     table = CSV.parse(data, :headers => true)
-    assert_equal(["ra2", nil, "rb2"], table.delete("col2"))
+    assert_equal([["ra2", nil, "rb2"]], table.delete("col2"))
   end
 
   def test_delete_if_row

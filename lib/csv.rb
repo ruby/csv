@@ -808,16 +808,18 @@ class CSV
     end
 
     #
-    # Removes and returns the indicated column or row.  In the default mixed
+    # Removes and returns the indicated columns or rows.  In the default mixed
     # mode indices refer to rows and everything else is assumed to be a column
-    # header.  Use by_col!() or by_row!() to force the lookup.
+    # headers.  Use by_col!() or by_row!() to force the lookup.
     #
-    def delete(index_or_header)
-      if @mode == :row or  # by index
-         (@mode == :col_or_row and index_or_header.is_a? Integer)
-        @table.delete_at(index_or_header)
-      else                 # by header
-        @table.map { |row| row.delete(index_or_header).last }
+    def delete(*indexes_or_headers)
+      indexes_or_headers.map do |index_or_header|
+        if @mode == :row or  # by index
+          (@mode == :col_or_row and index_or_header.is_a? Integer)
+          @table.delete_at(index_or_header)
+        else                 # by header      
+          @table.map { |row| row.delete(index_or_header).last }  
+        end
       end
     end
 
