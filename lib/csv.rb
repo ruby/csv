@@ -2348,22 +2348,5 @@ def CSV(*args, &block)
   CSV.instance(*args, &block)
 end
 
-class Array # :nodoc:
-  # Equivalent to CSV::generate_line(self, options)
-  #
-  #   ["CSV", "data"].to_csv
-  #     #=> "CSV,data\n"
-  def to_csv(**options)
-    CSV.generate_line(self, options)
-  end
-end
-
-class String # :nodoc:
-  # Equivalent to CSV::parse_line(self, options)
-  #
-  #   "CSV,data".parse_csv
-  #     #=> ["CSV", "data"]
-  def parse_csv(**options)
-    CSV.parse_line(self, options)
-  end
-end
+require_relative "core_ext/array"
+require_relative "core_ext/string"
