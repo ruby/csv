@@ -551,14 +551,14 @@ class CSV
     # Extracts the nested value specified by the sequence of name objects by calling dig at each step,
     # returning nil if any intermediate step is nil.
     #
-    def dig(index_or_header, *index_or_headers)
+    def dig(index_or_header, *indexes)
       value = field(index_or_header)
       if value.nil?
         nil
-      elsif index_or_headers.empty?
+      elsif indexes.empty?
         value
       else
-        value.dig(*index_or_headers)
+        value.dig(*indexes)
       end
     end
 
