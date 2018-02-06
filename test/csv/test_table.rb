@@ -540,5 +540,19 @@ class TestCSV::Table < TestCSV
     # by cell, row then col
     assert_equal(2, @table.dig(0, 1))
     assert_equal(6, @table.dig(1, "C"))
+
+    ########################################
+    ### Test for three or more arguments ###
+    ########################################
+    @table.by_col_or_row!
+    @table << ["foo", ["bar", ["baz", 4]]]
+
+    # by cell, row then col
+    assert_equal("bar", @table.dig(3, "B", 0))
+    assert_equal("baz", @table.dig(3, "B", 1, 0))
+
+    # by cell, col then row
+    assert_equal("bar", @table.dig("B", 3, 0))
+    assert_equal(4, @table.dig("B", 3, 1, 1))
   end
 end
