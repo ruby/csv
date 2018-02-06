@@ -548,7 +548,7 @@ class CSV
     alias_method :to_s, :to_csv
 
     #
-    # Extracts the nested value specified by the sequence of name objects by calling dig at each step,
+    # Extracts the nested value specified by the sequence of +index+ or +header+ objects by calling dig at each step,
     # returning nil if any intermediate step is nil.
     #
     def dig(index_or_header, *indexes)
@@ -923,7 +923,7 @@ class CSV
     alias_method :to_s, :to_csv
 
     #
-    # Extracts the nested value specified by the sequence of name objects by calling dig at each step,
+    # Extracts the nested value specified by the sequence of +index+ or +header+ objects by calling dig at each step,
     # returning nil if any intermediate step is nil.
     #
     def dig(index_or_header, *index_or_headers)
