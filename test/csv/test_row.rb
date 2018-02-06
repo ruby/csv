@@ -388,5 +388,10 @@ class TestCSV::Row < TestCSV
     # if missing
     assert_nil(@row.dig("Missing"))
     assert_nil(@row.dig(100))
+
+    # if multiple arguments
+    # following value does not have #dig method
+    assert_raise(TypeError) { @row.dig(1, "A") }
+    assert_raise(TypeError) { @row.dig("B", 0) }
   end
 end

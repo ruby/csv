@@ -510,10 +510,12 @@ class TestCSV::Table < TestCSV
     # by cell, row then col
     assert_equal(2, @table.dig(0, 1))
     assert_equal(6, @table.dig(1, "C"))
+    assert_raise(TypeError) { @table.dig(0, 1, 0) } # following value does not have #dig method
 
     # by cell, col then row
     assert_equal(5, @table.dig("B", 1))
     assert_equal(9, @table.dig("C", 2))
+    assert_raise(TypeError) { @table.dig("B", 1, 0) } # following value does not have #dig method
 
     ###################
     ### Column Mode ###
