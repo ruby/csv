@@ -378,30 +378,36 @@ class TestCSV::Row < TestCSV
     assert_equal false, r
   end
 
-  def test_dig
-    # by index
+  def test_dig_by_index
     assert_equal(2, @row.dig(1))
 
-    # by header
+    assert_nil(@row.dig(100))
+  end
+
+  def test_dig_by_header
     assert_equal(2, @row.dig("B"))
 
-    # if missing
     assert_nil(@row.dig("Missing"))
-    assert_nil(@row.dig(100))
+  end
 
-    # if multiple arguments
-    @row << ["foo", ["bar", ["baz", 4]]]
+  def test_dig_cell
+    row = CSV::Row.new(%w{A}, [["foo", ["bar", ["baz"]]]])
 
-    # by index
-    assert_equal("bar", @row.dig(5, 0))
-    assert_equal("baz", @row.dig(5, 1, 0))
+    assert_equal("foo", row.dig(0, 0))
+    assert_equal("bar", row.dig(0, 1, 0))
 
-    # by header
-    assert_equal("bar", @row.dig("foo", 0))
-    assert_equal(4, @row.dig("foo", 1, 1))
+    assert_equal("foo", row.dig("A", 0))
+    assert_equal("bar", row.dig("A", 1, 0))
+  end
 
-    # following value does not have #dig method
-    assert_raise(TypeError) { @row.dig(1, "A") }
-    assert_raise(TypeError) { @row.dig("B", 0) }
+  def test_dig_cell_no_dig
+    row = CSV::Row.new(%w{A}, ["foo"])
+
+    assert_raise(TypeError) do
+      row.dig(0, 0)
+    end
+    assert_raise(TypeError) do
+      row.dig("A", 0)
+    end
   end
 end

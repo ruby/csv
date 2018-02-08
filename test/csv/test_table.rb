@@ -517,10 +517,7 @@ class TestCSV::Table < TestCSV
             "inspect() was not ASCII compatible." )
   end
 
-  def test_dig
-    ##################
-    ### Mixed Mode ###
-    ##################
+  def test_dig_mixed
     # by row
     assert_equal(@rows[0], @table.dig(0))
     assert_nil(@table.dig(100))  # empty row
@@ -529,52 +526,60 @@ class TestCSV::Table < TestCSV
     assert_equal([2, 5, 8], @table.dig("B"))
     assert_equal([nil] * @rows.size, @table.dig("Z"))  # empty col
 
-    # by cell, row then col
+    # by row then col
     assert_equal(2, @table.dig(0, 1))
     assert_equal(6, @table.dig(1, "C"))
-    assert_raise(TypeError) { @table.dig(0, 1, 0) } # following value does not have #dig method
 
-    # by cell, col then row
+    # by col then row
     assert_equal(5, @table.dig("B", 1))
     assert_equal(9, @table.dig("C", 2))
-    assert_raise(TypeError) { @table.dig("B", 1, 0) } # following value does not have #dig method
+  end
 
-    ###################
-    ### Column Mode ###
-    ###################
+  def test_dig_by_column
     @table.by_col!
 
     assert_equal([2, 5, 8], @table.dig(1))
     assert_equal([2, 5, 8], @table.dig("B"))
 
-    # by cell, col then row
+    # by col then row
     assert_equal(5, @table.dig("B", 1))
     assert_equal(9, @table.dig("C", 2))
+  end
 
-    ################
-    ### Row Mode ###
-    ################
+  def test_dig_by_row
     @table.by_row!
 
     assert_equal(@rows[1], @table.dig(1))
     assert_raise(TypeError) { @table.dig("B") }
 
-    # by cell, row then col
+    # by row then col
     assert_equal(2, @table.dig(0, 1))
     assert_equal(6, @table.dig(1, "C"))
+  end
 
-    ########################################
-    ### Test for three or more arguments ###
-    ########################################
-    @table.by_col_or_row!
-    @table << ["foo", ["bar", ["baz", 4]]]
+  def test_dig_cell
+    table = CSV::Table.new([CSV::Row.new(["A"], [["foo", ["bar", ["baz"]]]])])
 
-    # by cell, row then col
-    assert_equal("bar", @table.dig(3, "B", 0))
-    assert_equal("baz", @table.dig(3, "B", 1, 0))
+    # by row, col then cell
+    assert_equal("foo", table.dig(0, "A", 0))
+    assert_equal(["baz"], table.dig(0, "A", 1, 1))
 
-    # by cell, col then row
-    assert_equal("bar", @table.dig("B", 3, 0))
-    assert_equal(4, @table.dig("B", 3, 1, 1))
+    # by col, row then cell
+    assert_equal("foo", table.dig("A", 0, 0))
+    assert_equal(["baz"], table.dig("A", 0, 1, 1))
+  end
+
+  def test_dig_cell_no_dig
+    table = CSV::Table.new([CSV::Row.new(["A"], ["foo"])])
+
+    # by row, col then cell
+    assert_raise(TypeError) do
+      table.dig(0, "A", 0)
+    end
+
+    # by col, row then cell
+    assert_raise(TypeError) do
+      table.dig("A", 0, 0)
+    end
   end
 end
