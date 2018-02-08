@@ -323,7 +323,7 @@ class TestCSV::Features < TestCSV
     assert_not_nil(CSV::VERSION)
     assert_instance_of(String, CSV::VERSION)
     assert_predicate(CSV::VERSION, :frozen?)
-    assert_match(/\A\d\.\d\.\d\Z/, CSV::VERSION)
+    assert_match(/\A\d\.\d\.\d\z/, CSV::VERSION)
   end
 
   def test_accepts_comment_skip_lines_option
