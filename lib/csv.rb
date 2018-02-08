@@ -558,11 +558,10 @@ class CSV
       elsif indexes.empty?
         value
       else
-        begin
-          value.dig(*indexes)
-        rescue NoMethodError => e
-          raise TypeError, "#{e.args.first.class} does not have #dig method"
+        unless value.respond_to?(:dig)
+          raise TypeError, "#{value.class} does not have \#dig method"
         end
+        value.dig(*indexes)
       end
     end
 
@@ -943,11 +942,10 @@ class CSV
       elsif index_or_headers.empty?
         value
       else
-        begin
-          value.dig(*index_or_headers)
-        rescue NoMethodError => e
-          raise TypeError, "#{e.args.first.class} does not have #dig method"
-        end  
+        unless value.respond_to?(:dig)
+          raise TypeError, "#{value.class} does not have \#dig method"
+        end
+        value.dig(*index_or_headers)
       end
     end
 
