@@ -2384,5 +2384,5 @@ def CSV(*args, &block)
   CSV.instance(*args, &block)
 end
 
-require_relative "core_ext/array"
-require_relative "core_ext/string"
+require_relative "csv/core_ext/array"
+require_relative "csv/core_ext/string"
