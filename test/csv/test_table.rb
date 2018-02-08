@@ -516,4 +516,65 @@ class TestCSV::Table < TestCSV
                  @table.inspect.encoding],
             "inspect() was not ASCII compatible." )
   end
+
+  def test_dig
+    ##################
+    ### Mixed Mode ###
+    ##################
+    # by row
+    assert_equal(@rows[0], @table.dig(0))
+    assert_nil(@table.dig(100))  # empty row
+
+    # by col
+    assert_equal([2, 5, 8], @table.dig("B"))
+    assert_equal([nil] * @rows.size, @table.dig("Z"))  # empty col
+
+    # by cell, row then col
+    assert_equal(2, @table.dig(0, 1))
+    assert_equal(6, @table.dig(1, "C"))
+    assert_raise(TypeError) { @table.dig(0, 1, 0) } # following value does not have #dig method
+
+    # by cell, col then row
+    assert_equal(5, @table.dig("B", 1))
+    assert_equal(9, @table.dig("C", 2))
+    assert_raise(TypeError) { @table.dig("B", 1, 0) } # following value does not have #dig method
+
+    ###################
+    ### Column Mode ###
+    ###################
+    @table.by_col!
+
+    assert_equal([2, 5, 8], @table.dig(1))
+    assert_equal([2, 5, 8], @table.dig("B"))
+
+    # by cell, col then row
+    assert_equal(5, @table.dig("B", 1))
+    assert_equal(9, @table.dig("C", 2))
+
+    ################
+    ### Row Mode ###
+    ################
+    @table.by_row!
+
+    assert_equal(@rows[1], @table.dig(1))
+    assert_raise(TypeError) { @table.dig("B") }
+
+    # by cell, row then col
+    assert_equal(2, @table.dig(0, 1))
+    assert_equal(6, @table.dig(1, "C"))
+
+    ########################################
+    ### Test for three or more arguments ###
+    ########################################
+    @table.by_col_or_row!
+    @table << ["foo", ["bar", ["baz", 4]]]
+
+    # by cell, row then col
+    assert_equal("bar", @table.dig(3, "B", 0))
+    assert_equal("baz", @table.dig(3, "B", 1, 0))
+
+    # by cell, col then row
+    assert_equal("bar", @table.dig("B", 3, 0))
+    assert_equal(4, @table.dig("B", 3, 1, 1))
+  end
 end

@@ -547,6 +547,25 @@ class CSV
     end
     alias_method :to_s, :to_csv
 
+    #
+    # Extracts the nested value specified by the sequence of +index+ or +header+ objects by calling dig at each step,
+    # returning nil if any intermediate step is nil.
+    #
+    def dig(index_or_header, *indexes)
+      value = field(index_or_header)
+      if value.nil?
+        nil
+      elsif indexes.empty?
+        value
+      else
+        begin
+          value.dig(*indexes)
+        rescue NoMethodError => e
+          raise TypeError, "#{e.args.first.class} does not have #dig method"
+        end
+      end
+    end
+
     # A summary of fields, by header, in an ASCII compatible String.
     def inspect
       str = ["#<", self.class.to_s]
@@ -912,6 +931,25 @@ class CSV
       return array.join('')
     end
     alias_method :to_s, :to_csv
+
+    #
+    # Extracts the nested value specified by the sequence of +index+ or +header+ objects by calling dig at each step,
+    # returning nil if any intermediate step is nil.
+    #
+    def dig(index_or_header, *index_or_headers)
+      value = self[index_or_header]
+      if value.nil?
+        nil
+      elsif index_or_headers.empty?
+        value
+      else
+        begin
+          value.dig(*index_or_headers)
+        rescue NoMethodError => e
+          raise TypeError, "#{e.args.first.class} does not have #dig method"
+        end  
+      end
+    end
 
     # Shows the mode and size of this table in a US-ASCII String.
     def inspect
