@@ -207,9 +207,6 @@ require "stringio"
 # find with it.
 #
 class CSV
-  # The version of the installed library.
-  VERSION = "1.0.2"
-
   #
   # A CSV::Row is part Array and part Hash.  It retains an order for the fields
   # and allows duplicates just as an Array would, but also allows you to access
@@ -2384,5 +2381,6 @@ def CSV(*args, &block)
   CSV.instance(*args, &block)
 end
 
+require_relative "csv/version"
 require_relative "csv/core_ext/array"
 require_relative "csv/core_ext/string"
