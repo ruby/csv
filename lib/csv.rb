@@ -208,7 +208,7 @@ require "stringio"
 #
 class CSV
   # The version of the installed library.
-  VERSION = "1.0.1"
+  VERSION = "1.0.2"
 
   #
   # A CSV::Row is part Array and part Hash.  It retains an order for the fields
