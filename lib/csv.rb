@@ -831,21 +831,21 @@ class CSV
     # headers.  Use by_col!() or by_row!() to force the lookup.
     #
     def delete(*indexes_or_headers)
-      case indexes_or_headers.size
-      when 0
+      if indexes_or_headers.empty?
         raise ArgumentError, "wrong number of arguments (given 0, expected 1+)"
-      when 1
-        index_or_header = indexes_or_headers[0]
+      end
+      deleted_values = indexes_or_headers.map do |index_or_header|
         if @mode == :row or  # by index
-          (@mode == :col_or_row and index_or_header.is_a? Integer)
+            (@mode == :col_or_row and index_or_header.is_a? Integer)
           @table.delete_at(index_or_header)
         else                 # by header
           @table.map { |row| row.delete(index_or_header).last }
         end
+      end
+      if indexes_or_headers.size == 1
+        deleted_values[0]
       else
-        indexes_or_headers.map do |index_or_header|
-          delete(index_or_header)
-        end
+        deleted_values
       end
     end
 
