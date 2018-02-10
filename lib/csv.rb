@@ -2,9 +2,7 @@
 # frozen_string_literal: true
 # = csv.rb -- CSV Reading and Writing
 #
-#  Created by James Edward Gray II on 2005-10-31.
-#  Copyright 2005 James Edward Gray II. You can redistribute or modify this code
-#  under the terms of Ruby's license.
+# Created by James Edward Gray II on 2005-10-31.
 #
 # See CSV for documentation.
 #
