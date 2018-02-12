@@ -354,11 +354,13 @@ class TestCSV::Features < TestCSV
   end
 
   def test_comment_rows_are_ignored_with_heredoc
-    c = CSV.new(<<~EOL, skip_lines: ".")
-    1,foo
-    .2,bar
-    3,baz
+    sample_data = <<~EOL
+      1,foo
+      .2,bar
+      3,baz
     EOL
+
+    c = CSV.new(sample_data, skip_lines: ".")
     assert_equal [["1", "foo"], ["3", "baz"]], c.each.to_a
   end
 
