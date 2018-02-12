@@ -4,9 +4,7 @@
 
 # tc_encodings.rb
 #
-#  Created by James Edward Gray II on 2008-09-13.
-#  Copyright 2008 James Edward Gray II. You can redistribute or modify this code
-#  under the terms of Ruby's license.
+# Created by James Edward Gray II on 2005-10-31.
 
 require_relative "base"
 
