@@ -91,16 +91,26 @@ class TestCSV::Interface < TestCSV
   end
 
   def test_read_and_readlines
-    assert_equal( @expected,
-                  CSV.read(@path, col_sep: "\t", row_sep: "\r\n") )
-    assert_equal( @expected,
-                  CSV.readlines(@path, col_sep: "\t", row_sep: "\r\n") )
+    assert_equal(
+      @expected,
+      CSV.read(@path, col_sep: "\t", row_sep: "\r\n")
+    )
 
+    assert_equal(
+      @expected,
+      CSV.read(@path, col_sep: "\t", row_sep: "\r\n", encoding: "bom|utf-8")
+    )
+
+    assert_equal(
+      @expected,
+      CSV.readlines(@path, col_sep: "\t", row_sep: "\r\n")
+    )
 
     data = CSV.open(@path, col_sep: "\t", row_sep: "\r\n") do |csv|
       csv.read
     end
     assert_equal(@expected, data)
+
     data = CSV.open(@path, col_sep: "\t", row_sep: "\r\n") do |csv|
       csv.readlines
     end
