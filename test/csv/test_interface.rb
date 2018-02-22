@@ -62,6 +62,52 @@ class TestCSV::Interface < TestCSV
     assert_equal("Return value.", ret)
   end
 
+  def test_open_encoding_valid
+    # U+1F600 GRINNING FACE
+    # U+1F601 GRINNING FACE WITH SMILING EYES
+    File.open(@path, "w") do |file|
+      file << "\u{1F600},\u{1F601}"
+    end
+    CSV.open(@path, encoding: "utf-8") do |csv|
+      assert_equal([["\u{1F600}", "\u{1F601}"]],
+                   csv.to_a)
+    end
+  end
+
+  def test_open_encoding_invalid
+    # U+1F600 GRINNING FACE
+    # U+1F601 GRINNING FACE WITH SMILING EYES
+    File.open(@path, "w") do |file|
+      file << "\u{1F600},\u{1F601}"
+    end
+    assert_raise(ArgumentError) do
+      CSV.open(@path, encoding: "EUC-JP") do
+      end
+    end
+  end
+
+  def test_open_encoding_nonexistent
+    _output, error = capture_io do
+      CSV.open(@path, encoding: "nonexistent") do
+      end
+    end
+    assert_equal("path:0: warning: Unsupported encoding nonexistent ignored\n",
+                 error.gsub(/\A.+:\d+: /, "path:0: "))
+  end
+
+  def test_open_encoding_utf_8_with_bom
+    # U+FEFF ZERO WIDTH NO-BREAK SPACE, BOM
+    # U+1F600 GRINNING FACE
+    # U+1F601 GRINNING FACE WITH SMILING EYES
+    File.open(@path, "w") do |file|
+      file << "\u{FEFF}\u{1F600},\u{1F601}"
+    end
+    CSV.open(@path, encoding: "bom|utf-8") do |csv|
+      assert_equal([["\u{1F600}", "\u{1F601}"]],
+                   csv.to_a)
+    end
+  end
+
   def test_parse
     data = File.binread(@path)
     assert_equal( @expected,

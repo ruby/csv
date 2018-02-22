@@ -1199,15 +1199,7 @@ class CSV
 
     # create the IO object we will read from
     @io = data.is_a?(String) ? StringIO.new(data) : data
-    # honor the IO encoding if we can, otherwise default to ASCII-8BIT
-    internal_encoding = Encoding.find(internal_encoding) if internal_encoding
-    external_encoding = Encoding.find(external_encoding) if external_encoding
-    if encoding
-      encoding, = encoding.split(":", 2) if encoding.is_a?(String)
-      encoding = Encoding.find(encoding)
-    end
-    @encoding = raw_encoding(nil) || internal_encoding || encoding ||
-                Encoding.default_internal || Encoding.default_external
+    @encoding = determine_encoding(encoding, internal_encoding)
     #
     # prepare for building safe regular expressions in the target encoding,
     # if we can transcode the needed characters
@@ -1669,6 +1661,21 @@ class CSV
   end
 
   private
+
+  def determine_encoding(encoding, internal_encoding)
+    # honor the IO encoding if we can, otherwise default to ASCII-8BIT
+    io_encoding = raw_encoding(nil)
+    return io_encoding if io_encoding
+
+    return Encoding.find(internal_encoding) if internal_encoding
+
+    if encoding
+      encoding, = encoding.split(":", 2) if encoding.is_a?(String)
+      return Encoding.find(encoding)
+    end
+
+    Encoding.default_internal || Encoding.default_external
+  end
 
   #
   # Stores the indicated separators for later use.
