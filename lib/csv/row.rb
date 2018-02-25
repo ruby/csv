@@ -326,9 +326,7 @@ class CSV
     # Collapses the row into a simple Hash.  Be warned that this discards field
     # order and clobbers duplicate fields.
     #
-    def to_hash
-      @row.to_h
-    end
+    alias_method :to_hash, :to_h
 
     #
     # Returns the row as a CSV String.  Headers are not used.  Equivalent to:
