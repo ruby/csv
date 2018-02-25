@@ -326,6 +326,13 @@ class CSV
     # Collapses the row into a simple Hash.  Be warned that this discards field
     # order and clobbers duplicate fields.
     #
+    def to_h
+      hash = {}
+      each do |key, _value|
+        hash[key] = self[key] unless hash.key?(key)
+      end
+      hash
+    end
     alias_method :to_hash, :to_h
 
     #
