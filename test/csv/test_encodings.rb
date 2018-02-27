@@ -260,6 +260,16 @@ class TestCSV::Encodings < TestCSV
     assert_equal("\r\n", csv.row_sep)
   end
 
+  def test_invalid_encoding_row_error
+    csv = CSV.new("invalid,\xF8\r\nvalid,x\r\n".force_encoding("UTF-8"),
+                  encoding: "UTF-8")
+    error = assert_raise(CSV::MalformedCSVError) do
+      csv.shift
+    end
+    assert_equal("Invalid byte sequence in UTF-8 in line 1",
+                 error.message)
+  end
+
   private
 
   def assert_parses(fields, encoding, options = { })

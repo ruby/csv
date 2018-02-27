@@ -1125,7 +1125,16 @@ class CSV
         @line = parse.clone
       end
 
-      parse.sub!(@parsers[:line_end], "")
+      begin
+        parse.sub!(@parsers[:line_end], "")
+      rescue ArgumentError
+        unless parse.valid_encoding?
+          message =
+            "Invalid byte sequence in #{parse.encoding} in line #{lineno + 1}"
+          raise MalformedCSVError, message
+        end
+        raise
+      end
 
       if csv.empty?
         #
