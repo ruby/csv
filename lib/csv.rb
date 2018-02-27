@@ -1353,8 +1353,12 @@ class CSV
             end
 
             # try to find a standard separator
-            if sample =~ encode_re("\r\n?|\n")
-              @row_sep = $&
+            first_line = sample.each_line.first
+            if first_line.end_with?(encode_str("\r\n"))
+              @row_sep = "\r\n"
+              break
+            elsif first_line.end_with?(encode_str("\n"))
+              @row_sep = "\n"
               break
             end
           end

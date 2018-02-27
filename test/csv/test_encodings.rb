@@ -254,6 +254,12 @@ class TestCSV::Encodings < TestCSV
     assert_equal(["foo,\u3042\n".encode(Encoding::Windows_31J), Encoding::Windows_31J], [s, s.encoding], bug9766)
   end
 
+  def test_row_separator_detection_with_invalid_encoding
+    csv = CSV.new("invalid,\xF8\r\nvalid,x\r\n".force_encoding("UTF-8"),
+                  encoding: "UTF-8")
+    assert_equal("\r\n", csv.row_sep)
+  end
+
   private
 
   def assert_parses(fields, encoding, options = { })
