@@ -1363,19 +1363,28 @@ class CSV
             # (ensure will set default value)
             #
             break unless sample = @io.gets(nil, 1024)
+
+            cr = encode_str("\r")
+            lf = encode_str("\n")
             # extend sample if we're unsure of the line ending
-            if sample.end_with? encode_str("\r")
+            if sample.end_with?(cr)
               sample << (@io.gets(nil, 1) || "")
             end
 
             # try to find a standard separator
-            first_line = sample.each_line.first
-            if first_line.end_with?(encode_str("\r\n"))
-              @row_sep = "\r\n"
-              break
-            elsif first_line.end_with?(encode_str("\n"))
-              @row_sep = "\n"
-              break
+            sample.each_char.each_cons(2) do |char, next_char|
+              case char
+              when cr
+                if next_char == lf
+                  @row_sep = encode_str("\r\n")
+                else
+                  @row_sep = cr
+                end
+                break
+              when lf
+                @row_sep = lf
+                break
+              end
             end
           end
 
