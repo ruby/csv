@@ -166,7 +166,7 @@ class TestCSV::Parsing < TestCSV
         assert_send([csv.lineno, :<, 4])
       end
     rescue CSV::MalformedCSVError
-      assert_equal( "Unquoted fields do not allow \\r or \\n (line 4).",
+      assert_equal( "Unquoted fields do not allow \\r or \\n in line 4.",
                     $!.message )
     end
 

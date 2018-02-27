@@ -209,7 +209,14 @@ require_relative "csv/row"
 class CSV
 
   # The error thrown when the parser encounters illegal CSV formatting.
-  class MalformedCSVError < RuntimeError; end
+  class MalformedCSVError < RuntimeError
+    attr_reader :line_number
+    alias_method :lineno, :line_number
+    def initialize(message, line_number)
+      @line_number = line_number
+      super("#{message} in line #{line_number}.")
+    end
+  end
 
   #
   # A FieldInfo Struct contains details about a field's position in the data
@@ -1129,9 +1136,8 @@ class CSV
         parse.sub!(@parsers[:line_end], "")
       rescue ArgumentError
         unless parse.valid_encoding?
-          message =
-            "Invalid byte sequence in #{parse.encoding} in line #{lineno + 1}"
-          raise MalformedCSVError, message
+          message = "Invalid byte sequence in #{parse.encoding}"
+          raise MalformedCSVError.new(message, lineno + 1)
         end
         raise
       end
@@ -1175,8 +1181,8 @@ class CSV
             # extended column ends
             csv.last << part[0..-2]
             if csv.last =~ @parsers[:stray_quote]
-              raise MalformedCSVError,
-                    "Missing or stray quote in line #{lineno + 1}"
+              raise MalformedCSVError.new("Missing or stray quote",
+                                          lineno + 1)
             end
             csv.last.gsub!(@double_quote_char, @quote_char)
             in_extended_col = false
@@ -1193,26 +1199,26 @@ class CSV
             # regular quoted column
             csv << part[1..-2]
             if csv.last =~ @parsers[:stray_quote]
-              raise MalformedCSVError,
-                    "Missing or stray quote in line #{lineno + 1}"
+              raise MalformedCSVError.new("Missing or stray quote",
+                                          lineno + 1)
             end
             csv.last.gsub!(@double_quote_char, @quote_char)
           elsif @liberal_parsing
             csv << part
           else
-            raise MalformedCSVError,
-                  "Missing or stray quote in line #{lineno + 1}"
+            raise MalformedCSVError.new("Missing or stray quote",
+                                        lineno + 1)
           end
         elsif part =~ @parsers[:quote_or_nl]
           # Unquoted field with bad characters.
           if part =~ @parsers[:nl_or_lf]
-            raise MalformedCSVError, "Unquoted fields do not allow " +
-                                     "\\r or \\n (line #{lineno + 1})."
+            message = "Unquoted fields do not allow \\r or \\n"
+            raise MalformedCSVError.new(message, lineno + 1)
           else
             if @liberal_parsing
               csv << part
             else
-              raise MalformedCSVError, "Illegal quoting in line #{lineno + 1}."
+              raise MalformedCSVError.new("Illegal quoting", lineno + 1)
             end
           end
         else
@@ -1228,10 +1234,11 @@ class CSV
       if in_extended_col
         # if we're at eof?(), a quoted field wasn't closed...
         if @io.eof?
-          raise MalformedCSVError,
-                "Unclosed quoted field on line #{lineno + 1}."
+          raise MalformedCSVError.new("Unclosed quoted field",
+                                      lineno + 1)
         elsif @field_size_limit and csv.last.size >= @field_size_limit
-          raise MalformedCSVError, "Field size exceeded on line #{lineno + 1}."
+          raise MalformedCSVError.new("Field size exceeded",
+                                      lineno + 1)
         end
         # otherwise, we need to loop and pull some more data to complete the row
       else

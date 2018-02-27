@@ -266,7 +266,7 @@ class TestCSV::Encodings < TestCSV
     error = assert_raise(CSV::MalformedCSVError) do
       csv.shift
     end
-    assert_equal("Invalid byte sequence in UTF-8 in line 1",
+    assert_equal("Invalid byte sequence in UTF-8 in line 1.",
                  error.message)
   end
 
