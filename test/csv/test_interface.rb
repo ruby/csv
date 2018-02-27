@@ -80,9 +80,12 @@ class TestCSV::Interface < TestCSV
     File.open(@path, "w") do |file|
       file << "\u{1F600},\u{1F601}"
     end
-    assert_raise(ArgumentError) do
-      CSV.open(@path, encoding: "EUC-JP") do
+    CSV.open(@path, encoding: "EUC-JP") do |csv|
+      error = assert_raise(CSV::MalformedCSVError) do
+        csv.shift
       end
+      assert_equal("Invalid byte sequence in EUC-JP in line 1.",
+                   error.message)
     end
   end
 
