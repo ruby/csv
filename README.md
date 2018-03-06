@@ -40,6 +40,10 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/ruby/csv.
 
+### NOTE: About RuboCop
+
+We don't use RuboCop because we can manage our coding style by ourselves. We want to accept small fluctuations in our coding style because we use Ruby.
+Please do not submit issues and PRs that aim to introduce RuboCop in this repository.
 
 ## License
 
