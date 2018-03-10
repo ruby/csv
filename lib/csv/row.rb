@@ -335,6 +335,8 @@ class CSV
     end
     alias_method :to_hash, :to_h
 
+    alias_method :to_ary, :to_a
+
     #
     # Returns the row as a CSV String.  Headers are not used.  Equivalent to:
     #

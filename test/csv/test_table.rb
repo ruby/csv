@@ -261,6 +261,15 @@ class TestCSV::Table < TestCSV
     @table.each { |row| assert_instance_of(CSV::Row, row) }
   end
 
+  def test_each_split
+    yielded_values = []
+    @table.each do |column1, column2, column3|
+      yielded_values << [column1, column2, column3]
+    end
+    assert_equal(@rows.collect(&:to_a),
+                 yielded_values)
+  end
+
   def test_enumerable
     assert_equal( @rows.values_at(0, 2),
                   @table.select { |row| (row["B"] % 2).zero? } )
