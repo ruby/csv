@@ -1163,7 +1163,7 @@ class CSV
 
       next if @skip_lines and @skip_lines.match parse
 
-      parts =  parse.split(@col_sep, -1)
+      parts =  parse.split(@col_sep_split_separator, -1)
       if parts.empty?
         if in_extended_col
           csv[-1] << @col_sep   # will be replaced with a @row_sep after the parts.each loop
@@ -1334,6 +1334,11 @@ class CSV
   def init_separators(col_sep, row_sep, quote_char, force_quotes)
     # store the selected separators
     @col_sep    = col_sep.to_s.encode(@encoding)
+    if @col_sep == " "
+      @col_sep_split_separator = Regexp.new(/#{Regexp.escape(@col_sep)}/)
+    else
+      @col_sep_split_separator = @col_sep
+    end
     @row_sep    = row_sep # encode after resolving :auto
     @quote_char = quote_char.to_s.encode(@encoding)
     @double_quote_char = @quote_char * 2

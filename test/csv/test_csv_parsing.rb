@@ -229,6 +229,16 @@ class TestCSV::Parsing < TestCSV
     assert_parse_errors_out(data, field_size_limit: 5)
   end
 
+  def test_col_sep_comma
+    assert_equal([["a", "b", nil, "d"]],
+                 CSV.parse("a,b,,d", col_sep: ","))
+  end
+
+  def test_col_sep_space
+    assert_equal([["a", "b", nil, "d"]],
+                 CSV.parse("a b  d", col_sep: " "))
+  end
+
   private
 
   def assert_parse_errors_out(*args)
