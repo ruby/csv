@@ -1,20 +1,20 @@
 # benchmark script for CSV.parse
 # Usage: `ruby $0 [rows count(default: 1000)]`
-require 'csv'
-require 'benchmark/ips'
+require "csv"
+require "benchmark/ips"
 
 Benchmark.ips do |x|
   rows = ARGV.fetch(0, "1000").to_i
 
-  alphas = ['AAAAA'] * 50
-  unquoted = (alphas.join(',') + "\r\n") * rows
-  quoted = (alphas.map { |s| %("#{s}") }.join(',') + "\r\n") * rows
-  inc_col_sep = (alphas.map { |s| %(",#{s}") }.join(',') + "\r\n") * rows
-  inc_row_sep = (alphas.map { |s| %("#{s}\r\n") }.join(',') + "\r\n") * rows
+  alphas = ["AAAAA"] * 50
+  unquoted = (alphas.join(",") + "\r\n") * rows
+  quoted = (alphas.map { |s| %("#{s}") }.join(",") + "\r\n") * rows
+  inc_col_sep = (alphas.map { |s| %(",#{s}") }.join(",") + "\r\n") * rows
+  inc_row_sep = (alphas.map { |s| %("#{s}\r\n") }.join(",") + "\r\n") * rows
 
-  hiraganas = ['あああああ'] * 50
-  enc_utf8 = (hiraganas.join(',') + "\r\n") * rows
-  enc_sjis = enc_utf8.encode('Windows-31J')
+  hiraganas = ["あああああ"] * 50
+  enc_utf8 = (hiraganas.join(",") + "\r\n") * rows
+  enc_sjis = enc_utf8.encode("Windows-31J")
 
   x.report("unquoted") { CSV.parse(unquoted) }
   x.report("quoted") { CSV.parse(quoted) }
