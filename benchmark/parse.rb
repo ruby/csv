@@ -1,19 +1,29 @@
-# benchmark script for CSV.parse
-# Usage: `ruby $0 [rows count(default: 1000)]`
+#!/usr/bin/env ruby
+
 require "csv"
+require "optparse"
+
 require "benchmark/ips"
 
-Benchmark.ips do |x|
-  rows = ARGV.fetch(0, "1000").to_i
+n_rows = 1000
 
+parser = OptionParser.new
+parser.on("--n-rows=N", Integer,
+          "The number of rows to be parsed",
+          "(#{n_rows})") do |n|
+  n_rows = n
+end
+parser.parse!(ARGV)
+
+Benchmark.ips do |x|
   alphas = ["AAAAA"] * 50
-  unquoted = (alphas.join(",") + "\r\n") * rows
-  quoted = (alphas.map { |s| %("#{s}") }.join(",") + "\r\n") * rows
-  inc_col_sep = (alphas.map { |s| %(",#{s}") }.join(",") + "\r\n") * rows
-  inc_row_sep = (alphas.map { |s| %("#{s}\r\n") }.join(",") + "\r\n") * rows
+  unquoted = (alphas.join(",") + "\r\n") * n_rows
+  quoted = (alphas.map { |s| %("#{s}") }.join(",") + "\r\n") * n_rows
+  inc_col_sep = (alphas.map { |s| %(",#{s}") }.join(",") + "\r\n") * n_rows
+  inc_row_sep = (alphas.map { |s| %("#{s}\r\n") }.join(",") + "\r\n") * n_rows
 
   hiraganas = ["あああああ"] * 50
-  enc_utf8 = (hiraganas.join(",") + "\r\n") * rows
+  enc_utf8 = (hiraganas.join(",") + "\r\n") * n_rows
   enc_sjis = enc_utf8.encode("Windows-31J")
 
   x.report("unquoted") { CSV.parse(unquoted) }
