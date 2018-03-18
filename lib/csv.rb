@@ -329,7 +329,7 @@ class CSV
     date:      lambda { |f|
       begin
         e = f.encode(ConverterEncoding)
-        e =~ DateMatcher ? Date.parse(e) : f
+        e.match?(DateMatcher) ? Date.parse(e) : f
       rescue  # encoding conversion or date parse errors
         f
       end
@@ -337,7 +337,7 @@ class CSV
     date_time: lambda { |f|
       begin
         e = f.encode(ConverterEncoding)
-        e =~ DateTimeMatcher ? DateTime.parse(e) : f
+        e.match?(DateTimeMatcher) ? DateTime.parse(e) : f
       rescue  # encoding conversion or date parse errors
         f
       end
@@ -630,7 +630,7 @@ class CSV
     begin
       f = File.open(filename, mode, file_opts)
     rescue ArgumentError => e
-      raise unless /needs binmode/ =~ e.message and mode == "r"
+      raise unless /needs binmode/.match?(e.message) and mode == "r"
       mode = "rb"
       file_opts = {encoding: Encoding.default_external}.merge(file_opts)
       retry
@@ -1229,7 +1229,7 @@ class CSV
           if part.end_with?(@quote_char) && part.count(@quote_char) % 2 != 0
             # extended column ends
             csv.last << part[0..-2]
-            if csv.last =~ @parsers[:stray_quote]
+            if csv.last.match?(@parsers[:stray_quote])
               raise MalformedCSVError.new("Missing or stray quote",
                                           lineno + 1)
             end
@@ -1247,7 +1247,7 @@ class CSV
           elsif part.end_with?(@quote_char)
             # regular quoted column
             csv << part[1..-2]
-            if csv.last =~ @parsers[:stray_quote]
+            if csv.last.match?(@parsers[:stray_quote])
               raise MalformedCSVError.new("Missing or stray quote",
                                           lineno + 1)
             end
@@ -1258,9 +1258,9 @@ class CSV
             raise MalformedCSVError.new("Missing or stray quote",
                                         lineno + 1)
           end
-        elsif part =~ @parsers[:quote_or_nl]
+        elsif part.match?(@parsers[:quote_or_nl])
           # Unquoted field with bad characters.
-          if part =~ @parsers[:nl_or_lf]
+          if part.match?(@parsers[:nl_or_lf])
             message = "Unquoted fields do not allow \\r or \\n"
             raise MalformedCSVError.new(message, lineno + 1)
           else
