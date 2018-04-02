@@ -302,6 +302,17 @@ class TestCSV::Row < TestCSV
     end
   end
 
+  def test_each_pair
+    assert_equal([
+                   ["A", 1],
+                   ["B", 2],
+                   ["C", 3],
+                   ["A", 4],
+                   ["A", nil],
+                 ],
+                 @row.each_pair.to_a)
+  end
+
   def test_enumerable
     assert_equal( [["A", 1], ["A", 4], ["A", nil]],
                   @row.select { |pair| pair.first == "A" } )
