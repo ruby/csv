@@ -313,7 +313,7 @@ class CSV
       self  # for chaining
     end
 
-    alias each_pair each
+    alias_method :each_pair, :each
 
     #
     # Returns +true+ if this row contains the same headers and fields in the
