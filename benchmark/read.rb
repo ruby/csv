@@ -19,7 +19,7 @@ Benchmark.ips do |x|
 
   x.report "CSV#shift" do
     CSV.open("/tmp/file.csv") do |csv|
-      while line = csv.shift
+      while _line = csv.shift
       end
     end
   end
