@@ -4,11 +4,11 @@ require "csv"
 
 require "benchmark/ips"
 
-csv_text = <<EOT
+csv_text = <<CSV
 foo,bar,,baz
 hoge,,temo,
 roo,goo,por,kosh
-EOT
+CSV
 
 convert_nil = ->(s) {s || ""}
 
@@ -24,4 +24,6 @@ Benchmark.ips do |r|
   r.report "option" do
     CSV.parse(csv_text, nil_value: "")
   end
+
+  r.compare!
 end
