@@ -890,6 +890,8 @@ class CSV
   #                                       attempt to parse input not conformant
   #                                       with RFC 4180, such as double quotes
   #                                       in unquoted fields.
+  # <b><tt>:nil_value</tt></b>::          TODO: WRITE ME.
+  # <b><tt>:empty_value</tt></b>::        TODO: WRITE ME.
   #
   # See CSV::DEFAULT_OPTIONS for the default settings.
   #
@@ -899,7 +901,9 @@ class CSV
   def initialize(data, col_sep: ",", row_sep: :auto, quote_char: '"', field_size_limit:   nil,
                  converters: nil, unconverted_fields: nil, headers: false, return_headers: false,
                  write_headers: nil, header_converters: nil, skip_blanks: false, force_quotes: false,
-                 skip_lines: nil, liberal_parsing: false, internal_encoding: nil, external_encoding: nil, encoding: nil)
+                 skip_lines: nil, liberal_parsing: false, internal_encoding: nil, external_encoding: nil, encoding: nil,
+                 nil_value: nil,
+                 empty_value: "")
     raise ArgumentError.new("Cannot parse nil as CSV") if data.nil?
 
     # create the IO object we will read from
@@ -920,6 +924,10 @@ class CSV
 
     # headers must be delayed until shift(), in case they need a row of content
     @headers = nil
+
+    @nil_value = nil_value
+    @empty_value = empty_value
+    @empty_value_is_empty_string = (empty_value == "")
 
     init_separators(col_sep, row_sep, quote_char, force_quotes)
     init_parsers(skip_blanks, field_size_limit, liberal_parsing)
@@ -1317,10 +1325,13 @@ class CSV
         # save fields unconverted fields, if needed...
         unconverted = csv.dup if @unconverted_fields
 
-        # convert fields, if needed...
-        csv = convert_fields(csv) unless @use_headers or @converters.empty?
-        # parse out header rows and handle CSV::Row conversions...
-        csv = parse_headers(csv)  if     @use_headers
+        if @use_headers
+          # parse out header rows and handle CSV::Row conversions...
+          csv = parse_headers(csv)
+        else
+          # convert fields, if needed...
+          csv = convert_fields(csv)
+        end
 
         # inject unconverted fields and accessor, if requested...
         if @unconverted_fields and not csv.respond_to? :unconverted_fields
@@ -1613,10 +1624,24 @@ class CSV
   # shortcut.
   #
   def convert_fields(fields, headers = false)
-    # see if we are converting headers or fields
-    converters = headers ? @header_converters : @converters
+    if headers
+      converters = @header_converters
+    else
+      converters = @converters
+      if !@use_headers and
+          converters.empty? and
+          @nil_value.nil? and
+          @empty_value_is_empty_string
+        return fields
+      end
+    end
 
     fields.map.with_index do |field, index|
+      if field.nil?
+        field = @nil_value
+      elsif field.empty?
+        field = @empty_value unless @empty_value_is_empty_string
+      end
       converters.each do |converter|
         break if headers && field.nil?
         field = if converter.arity == 1  # straight field converter

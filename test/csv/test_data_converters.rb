@@ -317,4 +317,14 @@ class TestCSV::DataConverters < TestCSV
     assert_respond_to(row, :unconverted_fields)
     assert_equal(Array.new, row.unconverted_fields)
   end
+
+  def test_nil_value
+    assert_equal(["nil", "", "a"],
+                 CSV.parse_line(',"",a', nil_value: "nil"))
+  end
+
+  def test_empty_value
+    assert_equal([nil, "empty", "a"],
+                 CSV.parse_line(',"",a', empty_value: "empty"))
+  end
 end
