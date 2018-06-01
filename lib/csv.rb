@@ -1232,7 +1232,7 @@ class CSV
           elsif @unconverted_fields
             return add_unconverted_fields(Array.new, Array.new)
           elsif @use_headers
-            return self.class::Row.new(Array.new, Array.new)
+            return self.class::Row.new(@headers, Array.new)
           else
             return Array.new
           end

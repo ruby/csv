@@ -300,4 +300,20 @@ class TestCSV::Headers < TestCSV
       assert_instance_of(CSV::Row, row)
     end
   end
+
+  def test_nil_row_header_bug_fix
+    @data = <<-END_CSV.gsub(/^ +/, "")
+      A
+
+      1
+    END_CSV
+
+    csv = CSV.parse(@data, headers: true)
+
+    # ensure nil row creates Row object with headers
+    row = csv[0]
+    assert_instance_of(CSV::Row, row)
+    assert_equal(%w[A], row.headers)
+    assert_equal([nil], row.fields)
+  end
 end
