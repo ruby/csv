@@ -37,12 +37,12 @@ class TestCSV::Features < TestCSV
 
   def setup
     super
-    @sample_data = <<-END_DATA.gsub(/^ +/, "")
-    line,1,abc
-    line,2,"def\nghi"
+    @sample_data = <<-CSV
+line,1,abc
+line,2,"def\nghi"
 
-    line,4,jkl
-    END_DATA
+line,4,jkl
+    CSV
     @csv = CSV.new(@sample_data)
   end
 
@@ -239,10 +239,10 @@ class TestCSV::Features < TestCSV
 
   # reported by Dave Burt
   def test_leading_empty_fields_with_multibyte_col_sep
-    data = <<-END_DATA.gsub(/^\s+/, "")
-    <=><=>A<=>B<=>C
-    1<=>2<=>3
-    END_DATA
+    data = <<-CSV
+<=><=>A<=>B<=>C
+1<=>2<=>3
+    CSV
     parsed = CSV.parse(data, col_sep: "<=>")
     assert_equal([[nil, nil, "A", "B", "C"], ["1", "2", "3"]], parsed)
   end
