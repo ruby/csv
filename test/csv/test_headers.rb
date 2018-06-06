@@ -292,7 +292,7 @@ class TestCSV::Headers < TestCSV
     assert_equal(%w[first second third], csv.headers)  # after headers are read
   end
 
-  def test_blank_row_bug_fix
+  def test_blank_row
     @data += "\n#{@data}"  # add a blank row
 
     # ensure that everything returned is a Row object
@@ -301,7 +301,7 @@ class TestCSV::Headers < TestCSV
     end
   end
 
-  def test_nil_row_header_bug_fix
+  def test_nil_row_header
     @data = <<-END_CSV.gsub(/^ +/, "")
       A
 
