@@ -1,5 +1,16 @@
 # News
 
+## 3.0.0 - 2018-06-06
+
+### Fixes
+
+  * Fixed a bug that header isn't returned for empty row.
+    [GitHub#37][Patch by Grace Lee]
+
+### Thanks
+
+  * Grace Lee
+
 ## 1.0.2 - 2018-05-03
 
 ### Improvements
