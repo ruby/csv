@@ -312,8 +312,7 @@ class TestCSV::Headers < TestCSV
 
     # ensure nil row creates Row object with headers
     row = csv[0]
-    assert_instance_of(CSV::Row, row)
-    assert_equal(%w[A], row.headers)
-    assert_equal([nil], row.fields)
+    assert_equal([["A"], [nil]],
+                 [row.headers, row.fields])
   end
 end
