@@ -42,6 +42,11 @@ class TestCSV::Table < TestCSV
     assert_equal(:row, rows.mode)
     assert_equal(@table, rows)
 
+    col_or_row = rows.by_col_or_row
+    assert_equal(:row, rows.mode)
+    assert_equal(:col_or_row, col_or_row.mode)
+    assert_equal(@table, col_or_row)
+
     # destructive mode changing calls
     assert_equal(@table, @table.by_row!)
     assert_equal(:row, @table.mode)
