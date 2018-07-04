@@ -141,7 +141,7 @@ end
 # There are several specialized class methods for one-statement reading or writing,
 # described in the Specialized Methods section.
 #
-# If a String passed into ::new, it is internally wrapped into a StringIO object.
+# If a String is passed into ::new, it is internally wrapped into a StringIO object.
 #
 # +options+ can be used for specifying the particular CSV flavor (column
 # separators, row separators, value quoting and so on), and for data conversion,
