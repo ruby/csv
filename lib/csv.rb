@@ -890,8 +890,12 @@ class CSV
   #                                       attempt to parse input not conformant
   #                                       with RFC 4180, such as double quotes
   #                                       in unquoted fields.
-  # <b><tt>:nil_value</tt></b>::          TODO: WRITE ME.
-  # <b><tt>:empty_value</tt></b>::        TODO: WRITE ME.
+  # <b><tt>:nil_value</tt></b>::          When set an object, any values of an
+  #                                       empty field are replaced by the set
+  #                                       object, not nil.
+  # <b><tt>:empty_value</tt></b>::        When set an object, any values of a
+  #                                       blank string field is replaced by
+  #                                       the set object.
   #
   # See CSV::DEFAULT_OPTIONS for the default settings.
   #
