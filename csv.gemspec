@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/csv/version"
+begin
+  require_relative "lib/csv/version"
+rescue LoadError
+  require_relative "version"
+end
 
 Gem::Specification.new do |spec|
   spec.name          = "csv"
