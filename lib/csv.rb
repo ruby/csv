@@ -912,6 +912,7 @@ class CSV
 
     # create the IO object we will read from
     @io = data.is_a?(String) ? StringIO.new(data) : data
+    @prefix_io = nil  # cache for input data possibly read by init_separators
     @encoding = determine_encoding(encoding, internal_encoding)
     #
     # prepare for building safe regular expressions in the target encoding,
@@ -1204,8 +1205,14 @@ class CSV
 
     loop do
       # add another read to the line
-      unless parse = @io.gets(@row_sep)
-        return nil
+      if @prefix_io
+        parse = @prefix_io.gets(@row_sep)
+        if @prefix_io.eof?
+          parse << (@io.gets(@row_sep) || "") unless parse.end_with?(@row_sep)
+          @prefix_io = nil  # avoid having to test @prefix_io.eof? in main code path
+        end
+      else
+        return nil unless parse = @io.gets(@row_sep)
       end
 
       if in_extended_col
@@ -1315,7 +1322,7 @@ class CSV
 
       if in_extended_col
         # if we're at eof?(), a quoted field wasn't closed...
-        if @io.eof?
+        if @io.eof? and !@prefix_io
           raise MalformedCSVError.new("Unclosed quoted field",
                                       lineno + 1)
         elsif @field_size_limit and csv.last.size >= @field_size_limit
@@ -1437,68 +1444,52 @@ class CSV
     # (not fully encoding safe)
     #
     if @row_sep == :auto
-      if [ARGF, STDIN, STDOUT, STDERR].include?(@io) or
-         (defined?(Zlib) and @io.class == Zlib::GzipWriter)
-        @row_sep = $INPUT_RECORD_SEPARATOR
-      else
-        begin
+      saved_prefix = []  # sample chunks to be reprocessed later
+      begin
+        while @row_sep == :auto && @io.respond_to?(:gets)
           #
-          # remember where we were (pos() will raise an exception if @io is pipe
-          # or not opened for reading)
+          # if we run out of data, it's probably a single line
+          # (ensure will set default value)
           #
-          saved_pos = @io.pos
-          while @row_sep == :auto
-            #
-            # if we run out of data, it's probably a single line
-            # (ensure will set default value)
-            #
-            break unless sample = @io.gets(nil, 1024)
+          break unless sample = @io.gets(nil, 1024)
 
-            cr = encode_str("\r")
-            lf = encode_str("\n")
-            # extend sample if we're unsure of the line ending
-            if sample.end_with?(cr)
-              sample << (@io.gets(nil, 1) || "")
-            end
+          cr = encode_str("\r")
+          lf = encode_str("\n")
+          # extend sample if we're unsure of the line ending
+          if sample.end_with?(cr)
+            sample << (@io.gets(nil, 1) || "")
+          end
 
-            # try to find a standard separator
-            sample.each_char.each_cons(2) do |char, next_char|
-              case char
-              when cr
-                if next_char == lf
-                  @row_sep = encode_str("\r\n")
-                else
-                  @row_sep = cr
-                end
-                break
-              when lf
-                @row_sep = lf
-                break
+          saved_prefix << sample
+
+          # try to find a standard separator
+          sample.each_char.each_cons(2) do |char, next_char|
+            case char
+            when cr
+              if next_char == lf
+                @row_sep = encode_str("\r\n")
+              else
+                @row_sep = cr
               end
+              break
+            when lf
+              @row_sep = lf
+              break
             end
           end
-
-          # tricky seek() clone to work around GzipReader's lack of seek()
-          @io.rewind
-          # reset back to the remembered position
-          while saved_pos > 1024  # avoid loading a lot of data into memory
-            @io.read(1024)
-            saved_pos -= 1024
-          end
-          @io.read(saved_pos) if saved_pos.nonzero?
-        rescue IOError         # not opened for reading
-          # do nothing:  ensure will set default
-        rescue NoMethodError   # Zlib::GzipWriter doesn't have some IO methods
-          # do nothing:  ensure will set default
-        rescue SystemCallError # pipe
-          # do nothing:  ensure will set default
-        ensure
-          #
-          # set default if we failed to detect
-          # (stream not opened for reading, a pipe, or a single line of data)
-          #
-          @row_sep = $INPUT_RECORD_SEPARATOR if @row_sep == :auto
         end
+      rescue IOError
+        # do nothing:  ensure will set default
+      ensure
+        #
+        # set default if we failed to detect
+        # (stream not opened for reading or a single line of data)
+        #
+        @row_sep = $INPUT_RECORD_SEPARATOR if @row_sep == :auto
+
+        # save sampled input for later parsing (but only if there is some!)
+        saved_prefix = saved_prefix.join('')
+        @prefix_io = StringIO.new(saved_prefix) unless saved_prefix.empty?
       end
     end
     @row_sep = @row_sep.to_s.encode(@encoding)
