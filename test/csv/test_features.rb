@@ -375,4 +375,43 @@ line,4,jkl
   def test_table_nil_equality
     assert_nothing_raised(NoMethodError) { CSV.parse("test", headers: true) == nil }
   end
+
+  # non-seekable input stream for testing https://github.com/ruby/csv/issues/44
+  class DummyIO
+    extend Forwardable
+    def_delegators :@io, :gets, :read, :pos  # no seek or rewind!
+    def initialize(data)
+      @io = StringIO.new(data)
+    end
+  end
+
+  def test_line_separator_autodetection_for_non_seekable_input
+    # simple input with LF line breaks
+    c = CSV.new(DummyIO.new("one,two,three\nfoo,bar,baz\n"))
+    assert_equal [["one", "two", "three"], ["foo", "bar", "baz"]], c.each.to_a
+
+    # simple input with CR line breaks
+    c = CSV.new(DummyIO.new("one,two,three\rfoo,bar,baz\r"))
+    assert_equal [["one", "two", "three"], ["foo", "bar", "baz"]], c.each.to_a
+
+    # simple input with CRLF line breaks
+    c = CSV.new(DummyIO.new("one,two,three\r\nfoo,bar,baz\r\n"))
+    assert_equal [["one", "two", "three"], ["foo", "bar", "baz"]], c.each.to_a
+
+    # input with lines longer than 1024 bytes
+    table = (1..10).map { |row| (1..200).map { |col| "row#{row}col#{col}" }.to_a }.to_a
+    input = table.map { |line| line.join(",") }.join("\n")
+    c = CSV.new(DummyIO.new(input))
+    assert_equal table, c.each.to_a
+
+    # same with CRLF line breaks
+    input = table.map { |line| line.join(",") }.join("\r\n")
+    c = CSV.new(DummyIO.new(input))
+    assert_equal table, c.each.to_a
+
+    # input with lots of CRs (to make sure no bytes are lost due to look-ahead)
+    c = CSV.new(DummyIO.new("foo\r" + "\r" * 9999 + "bar\r"))
+    assert_equal [["foo"]] + [[]] * 9999 + [["bar"]], c.each.to_a
+  end
+
 end
