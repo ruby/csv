@@ -16,10 +16,11 @@ class TestCSV::Table < TestCSV
     @rows  = [ CSV::Row.new(%w{A B C}, [1, 2, 3]),
                CSV::Row.new(%w{A B C}, [4, 5, 6]),
                CSV::Row.new(%w{A B C}, [7, 8, 9]) ]
-    @table = CSV::Table.new(@rows)
+    @table = CSV::Table.new(@rows, %w{A B C})
 
     @header_table = CSV::Table.new(
-      [CSV::Row.new(%w{A B C}, %w{A B C}, true)] + @rows
+      [CSV::Row.new(%w{A B C}, %w{A B C}, true)] + @rows,
+      %w{A B C}
     )
   end
 
@@ -61,6 +62,11 @@ class TestCSV::Table < TestCSV
   def test_headers_empty
     t = CSV::Table.new([])
     assert_equal Array.new, t.headers
+  end
+
+  def test_headers_only
+    t = CSV::Table.new([], %w{A B C})
+    assert_equal(%w[A B C], t.headers)
   end
 
   def test_index
@@ -204,7 +210,7 @@ A,B,C,Type,Index
 
   def test_set_by_col_with_header_row
     r  = [ CSV::Row.new(%w{X Y Z}, [97, 98, 99], true) ]
-    t = CSV::Table.new(r)
+    t = CSV::Table.new(r, %w{X Y Z})
     t.by_col!
     t['A'] = [42]
     assert_equal(['A'], t['A'])
@@ -570,7 +576,7 @@ A
   end
 
   def test_dig_cell
-    table = CSV::Table.new([CSV::Row.new(["A"], [["foo", ["bar", ["baz"]]]])])
+    table = CSV::Table.new([CSV::Row.new(["A"], [["foo", ["bar", ["baz"]]]])], ["A"])
 
     # by row, col then cell
     assert_equal("foo", table.dig(0, "A", 0))
@@ -582,7 +588,7 @@ A
   end
 
   def test_dig_cell_no_dig
-    table = CSV::Table.new([CSV::Row.new(["A"], ["foo"])])
+    table = CSV::Table.new([CSV::Row.new(["A"], ["foo"])], ["A"])
 
     # by row, col then cell
     assert_raise(TypeError) do
