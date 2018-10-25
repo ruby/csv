@@ -1161,7 +1161,7 @@ class CSV
   def read
     rows = to_a
     if @use_headers
-      Table.new(rows)
+      Table.new(rows, @headers)
     else
       rows
     end

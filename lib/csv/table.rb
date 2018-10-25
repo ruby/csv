@@ -23,7 +23,8 @@ class CSV
     # * length()
     # * size()
     #
-    def initialize(array_of_rows)
+    def initialize(array_of_rows, headers=nil)
+      @headers = headers || []
       @table = array_of_rows
       @mode  = :col_or_row
     end
@@ -122,11 +123,7 @@ class CSV
     # other rows).  An empty Array is returned for empty tables.
     #
     def headers
-      if @table.empty?
-        Array.new
-      else
-        @table.first.headers
-      end
+      @headers.dup
     end
 
     #
@@ -171,6 +168,10 @@ class CSV
           @table[index_or_header] = value
         end
       else                 # set column
+        unless index_or_header.is_a? Integer
+          index = @headers.index(index_or_header) || @headers.size
+          @headers[index] = index_or_header
+        end
         if value.is_a? Array  # multiple values
           @table.each_with_index do |row, i|
             if row.header_row?
@@ -258,6 +259,11 @@ class CSV
             (@mode == :col_or_row and index_or_header.is_a? Integer)
           @table.delete_at(index_or_header)
         else                 # by header
+          if index_or_header.is_a? Integer
+            @headers.delete_at(index_or_header)
+          else
+            @headers.delete(index_or_header)
+          end
           @table.map { |row| row.delete(index_or_header).last }
         end
       end
@@ -285,7 +291,8 @@ class CSV
         @table.delete_if(&block)
       else                                      # by header
         deleted = []
-        headers.each do |header|
+        initial_headers = headers.dup
+        initial_headers.each do |header|
           deleted << delete(header) if yield([header, self[header]])
         end
       end
