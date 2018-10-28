@@ -1738,8 +1738,6 @@ class CSV
   def raw_encoding(default = Encoding::ASCII_8BIT)
     if @io.respond_to? :internal_encoding
       @io.internal_encoding || @io.external_encoding
-    elsif @io.is_a? StringIO
-      @io.string.encoding
     elsif @io.respond_to? :encoding
       @io.encoding
     else
