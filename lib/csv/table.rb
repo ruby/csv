@@ -24,8 +24,18 @@ class CSV
     # * size()
     #
     def initialize(array_of_rows, headers=nil)
-      @headers = headers || []
-      @table = array_of_rows
+      if headers.nil?
+        @table = array_of_rows
+        if @table.empty?
+          @headers = []
+        else
+          @headers = @table.first.headers
+        end
+      else
+        @headers = headers
+        @table = array_of_rows
+      end
+
       @mode  = :col_or_row
     end
 
@@ -291,7 +301,7 @@ class CSV
         @table.delete_if(&block)
       else                                      # by header
         deleted = []
-        initial_headers = headers.dup
+        initial_headers = headers
         initial_headers.each do |header|
           deleted << delete(header) if yield([header, self[header]])
         end

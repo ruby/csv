@@ -16,12 +16,13 @@ class TestCSV::Table < TestCSV
     @rows  = [ CSV::Row.new(%w{A B C}, [1, 2, 3]),
                CSV::Row.new(%w{A B C}, [4, 5, 6]),
                CSV::Row.new(%w{A B C}, [7, 8, 9]) ]
-    @table = CSV::Table.new(@rows, %w{A B C})
+    @table = CSV::Table.new(@rows)
 
     @header_table = CSV::Table.new(
-      [CSV::Row.new(%w{A B C}, %w{A B C}, true)] + @rows,
-      %w{A B C}
+      [CSV::Row.new(%w{A B C}, %w{A B C}, true)] + @rows
     )
+    
+    @header_only_table = CSV::Table.new([], %w{A B C})
   end
 
   def test_initialze
@@ -65,8 +66,7 @@ class TestCSV::Table < TestCSV
   end
 
   def test_headers_only
-    t = CSV::Table.new([], %w{A B C})
-    assert_equal(%w[A B C], t.headers)
+    assert_equal(%w[A B C], @header_only_table.headers)
   end
 
   def test_index
@@ -210,7 +210,7 @@ A,B,C,Type,Index
 
   def test_set_by_col_with_header_row
     r  = [ CSV::Row.new(%w{X Y Z}, [97, 98, 99], true) ]
-    t = CSV::Table.new(r, %w{X Y Z})
+    t = CSV::Table.new(r)
     t.by_col!
     t['A'] = [42]
     assert_equal(['A'], t['A'])
@@ -477,6 +477,21 @@ A
     CSV
   end
 
+  def test_delete_headers_only
+    ###################
+    ### Column Mode ###
+    ###################
+    @header_only_table.by_col!
+
+    # delete by index
+    assert_equal([], @header_only_table.delete(0))
+    assert_equal(%w[B C], @header_only_table.headers)
+
+    # delete by header
+    assert_equal([], @header_only_table.delete("C"))
+    assert_equal(%w[B], @header_only_table.headers)
+  end
+
   def test_values_at
     ##################
     ### Mixed Mode ###
@@ -576,7 +591,7 @@ A
   end
 
   def test_dig_cell
-    table = CSV::Table.new([CSV::Row.new(["A"], [["foo", ["bar", ["baz"]]]])], ["A"])
+    table = CSV::Table.new([CSV::Row.new(["A"], [["foo", ["bar", ["baz"]]]])])
 
     # by row, col then cell
     assert_equal("foo", table.dig(0, "A", 0))
@@ -588,7 +603,7 @@ A
   end
 
   def test_dig_cell_no_dig
-    table = CSV::Table.new([CSV::Row.new(["A"], ["foo"])], ["A"])
+    table = CSV::Table.new([CSV::Row.new(["A"], ["foo"])])
 
     # by row, col then cell
     assert_raise(TypeError) do
