@@ -16,6 +16,11 @@ class CSV
     # Construct a new CSV::Table from +array_of_rows+, which are expected
     # to be CSV::Row objects.  All rows are assumed to have the same headers.
     #
+    # The optional +headers+ parameter can be set to Array of headers.
+    # If headers aren't set, headers are fetched from CSV::Row objects.
+    # Otherwise, headers() method will return headers being set in
+    # headers arugument.
+    #
     # A CSV::Table object supports the following Array methods through
     # delegation:
     #
@@ -24,16 +29,15 @@ class CSV
     # * size()
     #
     def initialize(array_of_rows, headers=nil)
-      if headers.nil?
-        @table = array_of_rows
+      @table = array_of_rows
+      if headers
+        @headers = headers
+      else
         if @table.empty?
           @headers = []
         else
           @headers = @table.first.headers
         end
-      else
-        @headers = headers
-        @table = array_of_rows
       end
 
       @mode  = :col_or_row
@@ -301,8 +305,7 @@ class CSV
         @table.delete_if(&block)
       else                                      # by header
         deleted = []
-        initial_headers = headers
-        initial_headers.each do |header|
+        headers.each do |header|
           deleted << delete(header) if yield([header, self[header]])
         end
       end
