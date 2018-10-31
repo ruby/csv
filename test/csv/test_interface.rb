@@ -139,6 +139,18 @@ class TestCSV::Interface < TestCSV
     assert_equal(Array.new, CSV.parse_line("\n1,2,3"))
   end
 
+  def test_parse_header_only
+    table = CSV.parse("a,b,c", headers: true)
+    assert_equal([
+                   ["a", "b", "c"],
+                   [],
+                 ],
+                 [
+                   table.headers,
+                   table.each.to_a,
+                 ])
+  end
+
   def test_read_and_readlines
     assert_equal( @expected,
                   CSV.read(@path, col_sep: "\t", row_sep: "\r\n") )
