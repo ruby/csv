@@ -28,11 +28,10 @@ class CSV
     # * length()
     # * size()
     #
-    def initialize(array_of_rows, headers=nil)
+    def initialize(array_of_rows, headers: nil)
       @table = array_of_rows
-      if headers
-        @headers = headers
-      else
+      @headers = headers
+      unless @headers
         if @table.empty?
           @headers = []
         else

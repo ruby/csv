@@ -22,7 +22,7 @@ class TestCSV::Table < TestCSV
       [CSV::Row.new(%w{A B C}, %w{A B C}, true)] + @rows
     )
     
-    @header_only_table = CSV::Table.new([], %w{A B C})
+    @header_only_table = CSV::Table.new([], headers: %w{A B C})
   end
 
   def test_initialze
