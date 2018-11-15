@@ -9,6 +9,9 @@ require_relative '../envutil'
 require 'test/unit/testcase'
 require 'optparse'
 
+require 'simplecov'
+SimpleCov.start
+
 # See Test::Unit
 module Test
   ##
