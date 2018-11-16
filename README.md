@@ -1,6 +1,7 @@
 # CSV
 
 [![Build Status](https://travis-ci.org/ruby/csv.svg?branch=master)](https://travis-ci.org/ruby/csv)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/321fa39e510a0abd0369/test_coverage)](https://codeclimate.com/github/ruby/csv/test_coverage)
 
 This library provides a complete interface to CSV files and data. It offers tools to enable you to read and write to and from Strings or IO objects, as needed.
 

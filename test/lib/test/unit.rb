@@ -9,6 +9,11 @@ require_relative '../envutil'
 require 'test/unit/testcase'
 require 'optparse'
 
+if ENV['CI']
+  require 'simplecov'
+  SimpleCov.start
+end
+
 # See Test::Unit
 module Test
   ##
