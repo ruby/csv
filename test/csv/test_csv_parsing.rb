@@ -239,6 +239,18 @@ line,5,jkl
                  CSV.parse("a b  d", col_sep: " "))
   end
 
+  def test_row_sep_auto_cr
+    assert_equal([["a"]], CSV.parse("a\r"))
+  end
+
+  def test_row_sep_auto_lf
+    assert_equal([["a"]], CSV.parse("a\n"))
+  end
+
+  def test_row_sep_auto_cr_lf
+    assert_equal([["a"]], CSV.parse("a\r\n"))
+  end
+
   private
 
   def assert_parse_errors_out(*args)

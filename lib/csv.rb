@@ -1463,7 +1463,9 @@ class CSV
           saved_prefix << sample
 
           # try to find a standard separator
+          last_char = nil
           sample.each_char.each_cons(2) do |char, next_char|
+            last_char = next_char
             case char
             when cr
               if next_char == lf
@@ -1475,6 +1477,14 @@ class CSV
             when lf
               @row_sep = lf
               break
+            end
+          end
+          if @row_sep == :auto
+            case last_char
+            when cr
+              @row_sep = cr
+            when lf
+              @row_sep = lf
             end
           end
         end
