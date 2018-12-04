@@ -59,7 +59,7 @@ line,4,jkl
 
   def test_row_sep
     assert_raise(CSV::MalformedCSVError) do
-        CSV.parse_line("1,2,3\n,4,5\r\n", row_sep: "\r\n")
+      CSV.parse_line("1,2,3\n,4,5\r\n", row_sep: "\r\n")
     end
     assert_equal( ["1", "2", "3\n", "4", "5"],
                   CSV.parse_line(%Q{1,2,"3\n",4,5\r\n}, row_sep: "\r\n"))
