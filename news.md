@@ -1,5 +1,56 @@
 # News
 
+## 3.0.1 - 2018-12-07
+
+### Improvements
+
+  * Added a test.
+    [GitHub#38][Patch by 284km]
+
+  * `CSV::Row#dup`: Changed to duplicate internal data.
+    [GitHub#39][Reported by André Guimarães Sakata]
+
+  * Documented `:nil_value` and `:empty_value` options.
+    [GitHub#41][Patch by OwlWorks]
+
+  * Added support for separator detection for non-seekable inputs.
+    [GitHub#45][Patch by Ilmari Karonen]
+
+  * Removed needless code.
+    [GitHub#48][Patch by Espartaco Palma]
+
+  * Added support for parsing header only CSV with `headers: true`.
+    [GitHub#47][Patch by Kazuma Shibasaka]
+
+  * Added support for coverage report in CI.
+    [GitHub#48][Patch by Espartaco Palma]
+
+  * Improved auto CR row separator detection.
+    [GitHub#51][Reported by Yuki Kurihara]
+
+### Fixes
+
+  * Fixed a typo in document.
+    [GitHub#40][Patch by Marcus Stollsteimer]
+
+### Thanks
+
+  * 284km
+
+  * André Guimarães Sakata
+
+  * Marcus Stollsteimer
+
+  * OwlWorks
+
+  * Ilmari Karonen
+
+  * Espartaco Palma
+
+  * Kazuma Shibasaka
+
+  * Yuki Kurihara
+
 ## 3.0.0 - 2018-06-06
 
 ### Fixes
