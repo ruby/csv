@@ -1476,11 +1476,6 @@ class CSV
   def init_separators(col_sep, row_sep, quote_char, force_quotes)
     # store the selected separators
     @col_sep    = col_sep.to_s.encode(@encoding)
-    if @col_sep == " "
-      @col_sep_split_separator = "\s"
-    else
-      @col_sep_split_separator = @col_sep
-    end
     @row_sep    = row_sep # encode after resolving :auto
     @quote_char = quote_char.to_s.encode(@encoding)
 
@@ -1591,7 +1586,7 @@ class CSV
     # prebuild Regexps for faster parsing
     esc_row_sep = escape_re(@row_sep)
     esc_quote   = escape_re(@quote_char)
-    esc_col_sep = escape_re(@col_sep_split_separator)
+    esc_col_sep = escape_re(@col_sep)
     @parsers = {
       # for detecting parse errors
       col_sep: encode_re(esc_col_sep),
