@@ -178,6 +178,23 @@ line,4,jkl
 
     assert_equal(["is", 'this "three', ' or four"', "fields"],
       CSV.parse_line('is,this "three, or four",fields', liberal_parsing: true))
+
+    assert_equal(["1", "\"Hamlet says, \\\"Seems", "\\\" madam! Nay it is; I know not \\\"seems.\\\"\""],
+      CSV.parse_line('1,"Hamlet says, \"Seems,\" madam! Nay it is; I know not \"seems.\""', liberal_parsing: true))
+
+    assert_equal(["one", "two\"", "three", "four"],
+      CSV.parse_line('one,two",three,four', liberal_parsing: true))
+
+    input = <<~'CSV'
+      Los Angeles,   34°03'N,    118°15'W
+      New York City, 40°42'46"N, 74°00'21"W
+      Paris,         48°51'24"N, 2°21'03"E
+    CSV
+    assert_equal(
+      [["Los Angeles", "   34°03'N", "    118°15'W"],
+       ["New York City", " 40°42'46\"N", " 74°00'21\"W"],
+       ["Paris", "         48°51'24\"N", " 2°21'03\"E"]],
+      CSV.parse(input, liberal_parsing: true))
   end
 
   def test_csv_behavior_readers
