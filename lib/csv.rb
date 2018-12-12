@@ -1256,7 +1256,7 @@ class CSV
       scanner = StringScanner.new(parse)
       if scanner.eos?
         if in_extended_col
-          csv[-1] << @row_sep   # will be replaced with a @row_sep after the parts.each loop
+          csv[-1] << @row_sep
         else
           csv << nil
         end
