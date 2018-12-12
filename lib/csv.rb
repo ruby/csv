@@ -1284,10 +1284,9 @@ class CSV
               csv << +"#{@quote_char}#{liberal_parsing_string}#{@quote_char}"
               # e.g. '1,"\"2\"",3' #=> ["'1", "\"\\\"2\\\"\"", "3'"]
               csv.last << scanner.scan(@parsers[:unquoted_value_liberal_parsing])
-              unless (scanner.eos? || scanner.scan(@parsers[:col_sep]))
-                message = "Do not allow except col_sep_split_separator after quoted fields"
-                raise MalformedCSVError.new(message, lineno + 1)
-              end
+              next if scanner.eos? || scanner.scan(@parsers[:col_sep])
+              message = "Do not allow except col_sep_split_separator after quoted fields"
+              raise MalformedCSVError.new(message, lineno + 1)
             elsif scanner.eos?
               break
             else
