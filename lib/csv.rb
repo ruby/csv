@@ -1244,6 +1244,7 @@ class CSV
           elsif @unconverted_fields
             return add_unconverted_fields(Array.new, Array.new)
           elsif @use_headers
+            prepare_headers if @headers.nil?
             return self.class::Row.new(@headers, Array.new)
           else
             return Array.new
@@ -1705,6 +1706,24 @@ class CSV
     end
   end
 
+  def prepare_headers(row=nil)
+    raw_headers = case @use_headers  # save headers
+                  # Array of headers
+                  when Array then @use_headers
+                  # CSV header String
+                  when String
+                    self.class.parse_line( @use_headers,
+                                           col_sep:    @col_sep,
+                                           row_sep:    @row_sep,
+                                           quote_char: @quote_char )
+                  # first row is headers
+                  else            row
+                  end
+    @headers = convert_fields(raw_headers, true)
+    @headers.each { |h| h.freeze if h.is_a? String }
+    raw_headers
+  end
+
   #
   # This method is used to turn a finished +row+ into a CSV::Row.  Header rows
   # are also dealt with here, either by returning a CSV::Row with identical
@@ -1717,24 +1736,8 @@ class CSV
   #
   def parse_headers(row = nil)
     if @headers.nil?                # header row
-      @headers = case @use_headers  # save headers
-                 # Array of headers
-                 when Array then @use_headers
-                 # CSV header String
-                 when String
-                   self.class.parse_line( @use_headers,
-                                          col_sep:    @col_sep,
-                                          row_sep:    @row_sep,
-                                          quote_char: @quote_char )
-                 # first row is headers
-                 else            row
-                 end
-
-      # prepare converted and unconverted copies
-      row      = @headers                       if row.nil?
-      @headers = convert_fields(@headers, true)
-      @headers.each { |h| h.freeze if h.is_a? String }
-
+      raw_headers = prepare_headers(row)
+      row ||= raw_headers
       if @return_headers                                     # return headers
         return self.class::Row.new(@headers, row, true)
       elsif not [Array, String].include? @use_headers.class  # skip to field row
