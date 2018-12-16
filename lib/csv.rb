@@ -97,28 +97,6 @@ require "strscan"
 require_relative "csv/table"
 require_relative "csv/row"
 
-# This provides String#match? and Regexp#match? for Ruby 2.3.
-unless String.method_defined?(:match?)
-  class CSV
-    module MatchP
-      refine String do
-        def match?(pattern)
-          self =~ pattern
-        end
-      end
-
-      refine Regexp do
-        def match?(string)
-          self =~ string
-        end
-      end
-    end
-  end
-
-  using CSV::MatchP
-end
-
-#
 # This class provides a complete interface to CSV files and data.  It offers
 # tools to enable you to read and write to and from Strings or IO objects, as
 # needed.
