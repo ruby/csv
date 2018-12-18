@@ -248,7 +248,7 @@ class TestCSV::Interface < TestCSV
     CSV.open(@path, "w", headers: true) do |csv|
       csv << headers
       csv << %w{1 2 3}
-      assert_equal(headers, csv.instance_variable_get(:@headers))
+      assert_equal(headers, csv.headers)
     end
   end
 

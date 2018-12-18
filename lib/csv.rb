@@ -94,29 +94,13 @@ require "English"
 require "date"
 require "stringio"
 require "strscan"
-require_relative "csv/table"
+require_relative "csv/fields_converter"
+require_relative "csv/writer"
+require_relative "csv/match_p"
 require_relative "csv/row"
+require_relative "csv/table"
 
-# This provides String#match? and Regexp#match? for Ruby 2.3.
-unless String.method_defined?(:match?)
-  class CSV
-    module MatchP
-      refine String do
-        def match?(pattern)
-          self =~ pattern
-        end
-      end
-
-      refine Regexp do
-        def match?(string)
-          self =~ string
-        end
-      end
-    end
-  end
-
-  using CSV::MatchP
-end
+using CSV::MatchP if CSV.const_defined?(:MatchP)
 
 #
 # This class provides a complete interface to CSV files and data.  It offers
@@ -926,31 +910,37 @@ class CSV
     # Stores header row settings and loads header converters, if needed.
     @use_headers    = headers
     @return_headers = return_headers
-    @write_headers  = write_headers
 
     # headers must be delayed until shift(), in case they need a row of content
     @headers = nil
 
-    @nil_value = nil_value
-    @empty_value = empty_value
-    @empty_value_is_empty_string = (empty_value == "")
+    @base_fields_converter_options = {
+      nil_value: nil_value,
+      empty_value: empty_value,
+    }
+    @initial_converters = converters
+    @initial_header_converters = header_converters
 
-    init_separators(col_sep, row_sep, quote_char, force_quotes)
+    init_separators(col_sep, row_sep, quote_char)
     init_parsers(skip_blanks, field_size_limit, liberal_parsing)
-    init_converters(converters, :@converters, :convert)
-    init_converters(header_converters, :@header_converters, :header_convert)
     init_comments(skip_lines)
-
-    @force_encoding = !!encoding
 
     # track our own lineno since IO gets confused about line-ends is CSV fields
     @lineno = 0
 
-    # make sure headers have been assigned
-    if header_row? and [Array, String].include? @use_headers.class and @write_headers
-      parse_headers  # won't read data for Array or String
-      self << @headers
-    end
+    @writer_options = {
+      encoding: @encoding,
+      force_encoding: (not encoding.nil?),
+      force_quotes: force_quotes,
+      headers: headers,
+      write_headers: write_headers,
+      column_separator: col_sep,
+      row_separator: row_sep,
+      quote_character: quote_char,
+    }
+
+    @writer = nil
+    writer if @writer_options[:write_headers]
   end
 
   #
@@ -980,7 +970,7 @@ class CSV
   # as is.
   #
   def converters
-    @converters.map do |converter|
+    fields_converter.map do |converter|
       name = Converters.rassoc(converter)
       name ? name.first : converter
     end
@@ -996,7 +986,11 @@ class CSV
   # CSV::new for details.
   #
   def headers
-    @headers || true if @use_headers
+    if @writer
+      @writer.headers
+    else
+      @headers || true if @use_headers
+    end
   end
   #
   # Returns +true+ if headers will be returned as a row of results.
@@ -1004,14 +998,16 @@ class CSV
   #
   def return_headers?()     @return_headers     end
   # Returns +true+ if headers are written in output. See CSV::new for details.
-  def write_headers?()      @write_headers      end
+  def write_headers?
+    @writer_options[:write_headers]
+  end
   #
   # Returns the current list of converters in effect for headers.  See CSV::new
   # for details.  Built-in converters will be returned by name, while others
   # will be returned as is.
   #
   def header_converters
-    @header_converters.map do |converter|
+    header_fields_converter.map do |converter|
       name = HeaderConverters.rassoc(converter)
       name ? name.first : converter
     end
@@ -1022,7 +1018,9 @@ class CSV
   #
   def skip_blanks?()        @skip_blanks        end
   # Returns +true+ if all output fields are quoted. See CSV::new for details.
-  def force_quotes?()       @force_quotes       end
+  def force_quotes?
+    @writer_options[:force_quotes]
+  end
   # Returns +true+ if illegal input is handled. See CSV::new for details.
   def liberal_parsing?()    @liberal_parsing    end
 
@@ -1036,7 +1034,18 @@ class CSV
   # The line number of the last row read from this file.  Fields with nested
   # line-end characters will not affect this count.
   #
-  attr_reader :lineno, :line
+  def lineno
+    if @writer
+      @writer.lineno
+    else
+      @lineno
+    end
+  end
+
+  #
+  # The last row read from this file.
+  #
+  attr_reader :line
 
   ### IO and StringIO Delegation ###
 
@@ -1053,6 +1062,8 @@ class CSV
     @headers = nil
     @lineno  = 0
 
+    @writer.rewind if @writer
+
     @io.rewind
   end
 
@@ -1066,34 +1077,8 @@ class CSV
   # The data source must be open for writing.
   #
   def <<(row)
-    # make sure headers have been assigned
-    if header_row? and [Array, String].include? @use_headers.class and !@write_headers
-      parse_headers  # won't read data for Array or String
-    end
-
-    # handle CSV::Row objects and Hashes
-    row = case row
-          when self.class::Row then row.fields
-          when Hash            then @headers.map { |header| row[header] }
-          else                      row
-          end
-
-    @headers =  row if header_row?
-    @lineno  += 1
-
-    output = row.map(&@quote).join(@col_sep) + @row_sep  # quote and separate
-    if @io.is_a?(StringIO)             and
-       output.encoding != (encoding = raw_encoding)
-      if @force_encoding
-        output = output.encode(encoding)
-      elsif (compatible_encoding = Encoding.compatible?(@io.string, output))
-        @io.set_encoding(compatible_encoding)
-        @io.seek(0, IO::SEEK_END)
-      end
-    end
-    @io << output
-
-    self  # for chaining
+    writer << row
+    self
   end
   alias_method :add_row, :<<
   alias_method :puts,    :<<
@@ -1114,7 +1099,7 @@ class CSV
   # converted field or the field itself.
   #
   def convert(name = nil, &converter)
-    add_converter(:@converters, self.class::Converters, name, &converter)
+    fields_converter.add_converter(name, &converter)
   end
 
   #
@@ -1129,10 +1114,7 @@ class CSV
   # effect.
   #
   def header_convert(name = nil, &converter)
-    add_converter( :@header_converters,
-                   self.class::HeaderConverters,
-                   name,
-                   &converter )
+    header_fields_converter.add_converter(name, &converter)
   end
 
   include Enumerable
@@ -1347,7 +1329,7 @@ class CSV
             end
             if scanner.eos? || scanner.scan(@parsers[:col_sep])
               # e.g. '"aaa",""'
-              csv << "" # will be replaced with a @empty_value
+              csv << "" # will be replaced with a empty_value
               in_extended_col = false
               next
             else
@@ -1473,7 +1455,7 @@ class CSV
   #
   # This method also establishes the quoting rules used for CSV output.
   #
-  def init_separators(col_sep, row_sep, quote_char, force_quotes)
+  def init_separators(col_sep, row_sep, quote_char)
     # store the selected separators
     @col_sep    = col_sep.to_s.encode(@encoding)
     @row_sep    = row_sep # encode after resolving :auto
@@ -1547,33 +1529,6 @@ class CSV
       end
     end
     @row_sep = @row_sep.to_s.encode(@encoding)
-
-    # establish quoting rules
-    @force_quotes = force_quotes
-    do_quote = lambda do |field|
-      field = String(field)
-      encoded_quote = @quote_char.encode(field.encoding)
-      encoded_quote + field.gsub(encoded_quote, encoded_quote * 2) + encoded_quote
-    end
-    quotable_chars = encode_str("\r\n", @col_sep, @quote_char)
-    @quote         = if @force_quotes
-      do_quote
-    else
-      lambda do |field|
-        if field.nil?  # represent +nil+ fields as empty unquoted fields
-          ""
-        else
-          field = String(field)  # Stringify fields
-          # represent empty fields as empty quoted fields
-          if field.empty? or
-             field.count(quotable_chars).nonzero?
-            do_quote.call(field)
-          else
-            field  # unquoted field
-          end
-        end
-      end
-    end
   end
 
   # Pre-compiles parsers and stores them by name for access during reads.
@@ -1610,21 +1565,18 @@ class CSV
   # The <tt>:unconverted_fields</tt> option is also activated for
   # <tt>:converters</tt> calls, if requested.
   #
-  def init_converters(converters, ivar_name, convert_method)
+  def init_converters(converters)
     converters = case converters
                  when nil then []
                  when Array then converters
                  else [converters]
                  end
-    instance_variable_set(ivar_name, [])
-    convert = method(convert_method)
-
     # load converters
     converters.each do |converter|
-      if converter.is_a? Proc  # custom code block
-        convert.call(&converter)
+      if converter.is_a?(Proc)  # custom code block
+        yield(nil, converter)
       else                     # by name
-        convert.call(converter)
+        yield(converter, nil)
       end
     end
   end
@@ -1642,29 +1594,6 @@ class CSV
       raise ArgumentError, ":skip_lines has to respond to matches"
     end
   end
-  #
-  # The actual work method for adding converters, used by both CSV.convert() and
-  # CSV.header_convert().
-  #
-  # This method requires the +var_name+ of the instance variable to place the
-  # converters in, the +const+ Hash to lookup named converters in, and the
-  # normal parameters of the CSV.convert() and CSV.header_convert() methods.
-  #
-  def add_converter(var_name, const, name = nil, &converter)
-    if name.nil?  # custom converter
-      instance_variable_get(var_name) << converter
-    else          # named converter
-      combo = const[name]
-      case combo
-      when Array  # combo converter
-        combo.each do |converter_name|
-          add_converter(var_name, const, converter_name)
-        end
-      else        # individual named converter
-        instance_variable_get(var_name) << combo
-      end
-    end
-  end
 
   #
   # Processes +fields+ with <tt>@converters</tt>, or <tt>@header_converters</tt>
@@ -1675,34 +1604,9 @@ class CSV
   #
   def convert_fields(fields, headers = false)
     if headers
-      converters = @header_converters
+      header_fields_converter.convert(fields, nil, 0)
     else
-      converters = @converters
-      if !@use_headers and
-          converters.empty? and
-          @nil_value.nil? and
-          @empty_value_is_empty_string
-        return fields
-      end
-    end
-
-    fields.map.with_index do |field, index|
-      if field.nil?
-        field = @nil_value
-      elsif field.empty?
-        field = @empty_value unless @empty_value_is_empty_string
-      end
-      converters.each do |converter|
-        break if headers && field.nil?
-        field = if converter.arity == 1  # straight field converter
-          converter[field]
-        else                             # FieldInfo converter
-          header = @use_headers && !headers ? @headers[index] : nil
-          converter[field, FieldInfo.new(index, lineno, header)]
-        end
-        break unless field.is_a? String  # short-circuit pipeline for speed
-      end
-      field  # final state of each field, converted or original
+      fields_converter.convert(fields, @headers, lineno)
     end
   end
 
@@ -1800,6 +1704,47 @@ class CSV
     else
       default
     end
+  end
+
+  def fields_converter
+    @fields_converter ||= build_fields_converter
+  end
+
+  def build_fields_converter
+    specific_options = {
+      builtin_converters: Converters,
+    }
+    options = @base_fields_converter_options.merge(specific_options)
+    fields_converter = FieldsConverter.new(options)
+    init_converters(@initial_converters) do |name, converter|
+      fields_converter.add_converter(name, &converter)
+    end
+    fields_converter
+  end
+
+  def header_fields_converter
+    @header_fields_converter ||= build_header_fields_converter
+  end
+
+  def build_header_fields_converter
+    specific_options = {
+      builtin_converters: HeaderConverters,
+      accept_nil: true,
+    }
+    options = @base_fields_converter_options.merge(specific_options)
+    fields_converter = FieldsConverter.new(options)
+    init_converters(@initial_header_converters) do |name, converter|
+      fields_converter.add_converter(name, &converter)
+    end
+    fields_converter
+  end
+
+  def writer
+    @writer ||= Writer.new(@io, writer_options)
+  end
+
+  def writer_options
+    @writer_options.merge(header_fields_converter: header_fields_converter)
   end
 end
 
