@@ -1555,28 +1555,17 @@ class CSV
     }
   end
 
-  #
-  # Loads any converters requested during construction.
-  #
-  # If +field_name+ is set <tt>:converters</tt> (the default) field converters
-  # are set.  When +field_name+ is <tt>:header_converters</tt> header converters
-  # are added instead.
-  #
-  # The <tt>:unconverted_fields</tt> option is also activated for
-  # <tt>:converters</tt> calls, if requested.
-  #
-  def init_converters(converters)
-    converters = case converters
-                 when nil then []
-                 when Array then converters
-                 else [converters]
-                 end
-    # load converters
-    converters.each do |converter|
-      if converter.is_a?(Proc)  # custom code block
-        yield(nil, converter)
-      else                     # by name
-        yield(converter, nil)
+  def normalize_converters(converters)
+    converters ||= []
+    unless converters.is_a?(Array)
+      converters = [converters]
+    end
+    converters.collect do |converter|
+      case converter
+      when Proc # custom code block
+        [nil, converter]
+      else # by name
+        [converter, nil]
       end
     end
   end
@@ -1716,7 +1705,7 @@ class CSV
     }
     options = @base_fields_converter_options.merge(specific_options)
     fields_converter = FieldsConverter.new(options)
-    init_converters(@initial_converters) do |name, converter|
+    normalize_converters(@initial_converters).each do |name, converter|
       fields_converter.add_converter(name, &converter)
     end
     fields_converter
@@ -1733,7 +1722,7 @@ class CSV
     }
     options = @base_fields_converter_options.merge(specific_options)
     fields_converter = FieldsConverter.new(options)
-    init_converters(@initial_header_converters) do |name, converter|
+    normalize_converters(@initial_header_converters).each do |name, converter|
       fields_converter.add_converter(name, &converter)
     end
     fields_converter
