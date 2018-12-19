@@ -355,8 +355,9 @@ line,4,jkl
 
   def test_requires_skip_lines_to_call_match
     regex_stub = RegexStub.new
+    csv = CSV.new(@sample_data, :skip_lines => regex_stub)
     assert_raise_with_message(ArgumentError, /skip_lines/) do
-      CSV.new(@sample_data, :skip_lines => regex_stub)
+      csv.shift
     end
   end
 
