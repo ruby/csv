@@ -1,11 +1,7 @@
-sudo: false
-language: ruby
-rvm:
-  - 2.3.6
-  - 2.4.3
-  - 2.5.0
-  - ruby-head
-before_install: gem install bundler
+notifications:
+  webhooks:
+    - https://webhook.commit-email.info/
+
 env:
   global:
     - CC_TEST_REPORTER_ID=7e9fdb9b0066c819e6f0554e4ac81255f4f01d8da2a42ac1152402797e927401
@@ -13,7 +9,27 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-script:
-  - rake
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+matrix:
+  include:
+    - name: "2.3"
+      rvm: 2.3
+    - name: "2.4"
+      rvm: 2.4.5
+    - name: "2.5"
+      rvm: 2.5.2
+    - name: "2.6"
+      rvm: 2.6.0-rc2
+    - name: "trunk"
+      rvm: ruby-head
+    - name: "gem"
+      rvm: 2.6
+      install:
+        - rake install
+      script:
+        - mkdir -p tmp
+        - cd tmp
+        - cp -a ../test/ ./
+        - ../run-test.rb
