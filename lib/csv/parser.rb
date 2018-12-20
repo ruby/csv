@@ -370,65 +370,66 @@ class CSV
 
     def resolve_row_separator(separator)
       if separator == :auto
-        saved_prefix = []  # sample chunks to be reprocessed later
-        begin
-          while separator == :auto && @input.respond_to?(:gets)
-            #
-            # if we run out of data, it's probably a single line
-            # (ensure will set default value)
-            #
-            break unless sample = @input.gets(nil, 1024)
+        cr = "\r".encode(@encoding)
+        lf = "\n".encode(@encoding)
+        if @input.is_a?(StringIO)
+          separator = detect_row_separator(@input.string, cr, lf)
+        else
+          saved_prefix = []  # sample chunks to be reprocessed later
+          begin
+            while separator == :auto && @input.respond_to?(:gets)
+              #
+              # if we run out of data, it's probably a single line
+              # (ensure will set default value)
+              #
+              break unless sample = @input.gets(nil, 1024)
 
-            cr = "\r".encode(@encoding)
-            lf = "\n".encode(@encoding)
-            # extend sample if we're unsure of the line ending
-            if sample.end_with?(cr)
-              sample << (@input.gets(nil, 1) || "")
-            end
-
-            saved_prefix << sample
-
-            # try to find a standard separator
-            last_char = nil
-            sample.each_char.each_cons(2) do |char, next_char|
-              last_char = next_char
-              case char
-              when cr
-                if next_char == lf
-                  separator = "\r\n".encode(@encoding)
-                else
-                  separator = cr
-                end
-                break
-              when lf
-                separator = lf
-                break
+              # extend sample if we're unsure of the line ending
+              if sample.end_with?(cr)
+                sample << (@input.gets(nil, 1) || "")
               end
+
+              saved_prefix << sample
+
+              separator = detect_row_separator(sample, cr, lf)
             end
-            if separator == :auto
-              case last_char
-              when cr
-                separator = cr
-              when lf
-                separator = lf
-              end
-            end
+          rescue IOError
+            # do nothing:  ensure will set default
+          ensure
+            # save sampled input for later parsing (but only if there is some!)
+            saved_prefix = saved_prefix.join('')
+            @prefix_input = StringIO.new(saved_prefix) unless saved_prefix.empty?
           end
-        rescue IOError
-          # do nothing:  ensure will set default
-        ensure
-          #
-          # set default if we failed to detect
-          # (stream not opened for reading or a single line of data)
-          #
-          separator = $INPUT_RECORD_SEPARATOR if separator == :auto
-
-          # save sampled input for later parsing (but only if there is some!)
-          saved_prefix = saved_prefix.join('')
-          @prefix_input = StringIO.new(saved_prefix) unless saved_prefix.empty?
         end
+        separator = $INPUT_RECORD_SEPARATOR if separator == :auto
       end
       separator.to_s.encode(@encoding)
+    end
+
+    def detect_row_separator(sample, cr, lf)
+      last_char = nil
+      sample.each_char.each_cons(2) do |char, next_char|
+        last_char = next_char
+        case char
+        when cr
+          if next_char == lf
+            return "\r\n".encode(@encoding)
+          else
+            return cr
+          end
+        when lf
+          return lf
+        end
+      end
+
+      case last_char
+      when cr
+        cr
+      when lf
+        lf
+      else
+        :auto
+      end
     end
 
     def prepare_line
