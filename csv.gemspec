@@ -24,9 +24,13 @@ Gem::Specification.new do |spec|
     "lib/csv.rb",
     "lib/csv/core_ext/array.rb",
     "lib/csv/core_ext/string.rb",
+    "lib/csv/fields_converter.rb",
+    "lib/csv/match_p.rb",
+    "lib/csv/parser.rb",
     "lib/csv/row.rb",
     "lib/csv/table.rb",
     "lib/csv/version.rb",
+    "lib/csv/writer.rb",
   ]
   spec.require_paths = ["lib"]
   spec.required_ruby_version = ">= 2.3.0"
