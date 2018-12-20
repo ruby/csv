@@ -1240,9 +1240,8 @@ class CSV
       end
     end
     _headers = headers
-    if _headers
-      str << " headers:" << _headers.inspect
-    end
+    _headers = headers
+    str << " headers:" << _headers.inspect if _headers
     str << ">"
     begin
       str.join('')
