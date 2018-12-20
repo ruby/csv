@@ -248,12 +248,9 @@ class TestCSV::DataConverters < TestCSV
         ["Numbers", :integer, 1, :float, 3.015],
         %w{Numbers :integer 1 :float 3.015} ],
       ["\n", Array.new, Array.new] ].each do |test, fields, unconverted|
-      row = nil
-      assert_nothing_raised(Exception) do
-        row = CSV.parse_line( test,
-                              converters:         [:numeric, @custom],
-                              unconverted_fields: true )
-      end
+      row = CSV.parse_line(test,
+                           converters:         [:numeric, @custom],
+                           unconverted_fields: true )
       assert_not_nil(row)
       assert_equal(fields, row)
       assert_respond_to(row, :unconverted_fields)
