@@ -72,9 +72,7 @@ class CSV
     def each
       return to_enum(__method__) unless block_given?
 
-      # handle headers not based on document content
-      if @need_to_return_passed_headers
-        @need_to_return_passed_headers = false
+      if @return_headers and @headers
         headers = Row.new(@headers, @raw_headers, true)
         if @unconverted_fields
           headers = add_unconverted_fields(headers, [])
@@ -458,10 +456,8 @@ class CSV
       end
       if @raw_headers
         @headers = adjust_headers(@raw_headers)
-        @need_to_return_passed_headers = @return_headers
       else
         @headers = nil
-        @need_to_return_passed_headers = false
       end
     end
 
