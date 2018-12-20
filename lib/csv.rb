@@ -1103,6 +1103,7 @@ class CSV
   # Rewinds the underlying IO object and resets CSV's lineno() counter.
   def rewind
     @parser = nil
+    @parser_enumerator = nil
     @writer.rewind if @writer
     @io.rewind
   end
@@ -1166,14 +1167,8 @@ class CSV
   #
   # The data source must be open for reading.
   #
-  def each
-    if block_given?
-      while row = shift
-        yield row
-      end
-    else
-      to_enum
-    end
+  def each(&block)
+    parser.each(&block)
   end
 
   #
@@ -1205,7 +1200,12 @@ class CSV
   # The data source must be open for reading.
   #
   def shift
-    parser.shift
+    @parser_enumerator ||= parser.each
+    begin
+      @parser_enumerator.next
+    rescue StopIteration
+      nil
+    end
   end
   alias_method :gets,     :shift
   alias_method :readline, :shift

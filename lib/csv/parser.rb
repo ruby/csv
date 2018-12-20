@@ -7,6 +7,8 @@ require_relative "row"
 
 class CSV
   class Parser
+    include Enumerable
+
     def initialize(input, options)
       @input = input
       @options = options
@@ -67,11 +69,8 @@ class CSV
       @line
     end
 
-    def shift
-      #########################################################################
-      ### This method is purposefully kept a bit long as simple conditional ###
-      ### checks are faster than numerous (expensive) method calls.         ###
-      #########################################################################
+    def each
+      return to_enum(__method__) unless block_given?
 
       # handle headers not based on document content
       if @need_to_return_passed_headers
@@ -80,7 +79,7 @@ class CSV
         if @unconverted_fields
           headers = add_unconverted_fields(headers, [])
         end
-        return headers
+        yield headers
       end
 
       #
@@ -102,7 +101,7 @@ class CSV
           end
         else
           parse = @input.gets(@row_separator)
-          return nil unless parse
+          return unless parse
         end
 
         if in_extended_col
@@ -129,14 +128,14 @@ class CSV
           if parse.empty?
             @lineno += 1
             if @skip_blanks
-              next
             elsif @unconverted_fields
-              return add_unconverted_fields([], [])
+              yield add_unconverted_fields([], [])
             elsif @use_headers
-              return Row.new(@headers, [])
+              yield Row.new(@headers, [])
             else
-              return []
+              yield []
             end
+            next
           end
         end
 
@@ -299,7 +298,10 @@ class CSV
           end
 
           # return the results
-          break csv
+          yield csv
+
+          in_extended_col = false
+          csv = []
         end
       end
     end
