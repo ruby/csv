@@ -1301,19 +1301,6 @@ class CSV
   end
 
   #
-  # This method injects an instance variable <tt>unconverted_fields</tt> into
-  # +row+ and an accessor method for +row+ called unconverted_fields().  The
-  # variable is set to the contents of +fields+.
-  #
-  def add_unconverted_fields(row, fields)
-    class << row
-      attr_reader :unconverted_fields
-    end
-    row.instance_variable_set(:@unconverted_fields, fields)
-    row
-  end
-
-  #
   # Returns the encoding of the internal IO object.
   #
   def raw_encoding
