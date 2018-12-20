@@ -28,6 +28,7 @@ matrix:
       rvm: 2.6
       install:
         - rake install
+        - gem install simplecov
       script:
         - mkdir -p tmp
         - cd tmp
