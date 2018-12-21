@@ -907,7 +907,8 @@ class CSV
                  external_encoding: nil,
                  encoding: nil,
                  nil_value: nil,
-                 empty_value: "")
+                 empty_value: "",
+                 need_line: true)
     raise ArgumentError.new("Cannot parse nil as CSV") if data.nil?
 
     # create the IO object we will read from
@@ -935,6 +936,7 @@ class CSV
       encoding: @encoding,
       nil_value: nil_value,
       empty_value: empty_value,
+      need_line: need_line,
     }
     @parser = nil
 
@@ -1168,7 +1170,7 @@ class CSV
   # The data source must be open for reading.
   #
   def each(&block)
-    parser.each(&block)
+    parser.parse(&block)
   end
 
   #
@@ -1200,7 +1202,7 @@ class CSV
   # The data source must be open for reading.
   #
   def shift
-    @parser_enumerator ||= parser.each
+    @parser_enumerator ||= parser.parse
     begin
       @parser_enumerator.next
     rescue StopIteration

@@ -6,13 +6,86 @@ require_relative "table"
 require_relative "row"
 
 class CSV
-  class Parser
-    include Enumerable
+  class InputsScanner
+    class InvalidEncoding < StandardError
+    end
 
+    def initialize(inputs, encoding)
+      @inputs = inputs.dup
+      @encoding = encoding
+      @chunk_size = 8192
+      read_chunk
+    end
+
+    def scan(pattern)
+      value = @scanner.scan(pattern)
+      if value
+        read_chunk if @scanner.eos?
+        return value
+      else
+        nil
+      end
+    end
+
+    def scan_all(pattern)
+      value = @scanner.scan(pattern)
+      return nil if value.nil?
+      while @scanner.eos? and read_chunk and (sub_value = @scanner.scan(pattern))
+        value << sub_value
+      end
+      value
+    end
+
+    def eos?
+      @scanner.eos?
+    end
+
+    def rest
+      @scanner.rest
+    end
+
+    def pos
+      @scanner.pos
+    end
+
+    def pos=(new_pos)
+      @scanner.pos = new_pos
+      read_chunk if @scanner.eos?
+      new_pos
+    end
+
+    private
+    def read_chunk
+      return false if @inputs.empty?
+
+      input = @inputs.first
+      case input
+      when StringIO
+        string = input.string
+        raise InvalidEncoding unless string.valid_encoding?
+        @scanner = StringScanner.new(string)
+        @inputs.shift
+        true
+      else
+        chunk = input.gets(nil, @chunk_size)
+        if chunk
+          raise InvalidEncoding unless chunk.valid_encoding?
+          @scanner = StringScanner.new(chunk)
+          true
+        else
+          @scanner = StringScanner.new("".encode(@encoding))
+          @inputs.shift
+          false
+        end
+      end
+    end
+  end
+
+  class Parser
     def initialize(input, options)
       @input = input
       @options = options
-      @prefix_input = nil
+      @samples = []
 
       prepare
     end
@@ -69,7 +142,7 @@ class CSV
       @line
     end
 
-    def each
+    def parse(&block)
       return to_enum(__method__) unless block_given?
 
       if @return_headers and @headers
@@ -80,227 +153,57 @@ class CSV
         yield headers
       end
 
-      #
-      # it can take multiple calls to <tt>@io.gets()</tt> to get a full line,
-      # because of \r and/or \n characters embedded in quoted fields
-      #
-      in_extended_col = false
-      csv             = []
-
-      loop do
-        # add another read to the line
-        if @prefix_input
-          parse = @prefix_input.gets(@row_separator)
-          if @prefix_input.eof?
-            unless parse.end_with?(@row_separator)
-              parse << (@input.gets(@row_separator) || "")
-            end
-            @prefix_input = nil  # avoid having to test @prefix_input.eof? in main code path
+      row = []
+      @line = "".encode(@encoding) if @need_line
+      begin
+        scanner = build_scanner
+        skip_needless_lines(scanner)
+        while true
+          @quoted_column_value = false
+          @unquoted_column_value = false
+          value = parse_column_value(scanner)
+          if value and @field_size_limit and value.bytesize >= @field_size_limit
+            raise MalformedCSVError.new("Field size exceeded", @lineno + 1)
           end
-        else
-          parse = @input.gets(@row_separator)
-          return unless parse
-        end
-
-        if in_extended_col
-          @line.concat(parse)
-        else
-          @line = parse.clone
-        end
-
-        begin
-          parse.sub!(@line_end, "")
-        rescue ArgumentError
-          unless parse.valid_encoding?
-            message = "Invalid byte sequence in #{parse.encoding}"
-            raise MalformedCSVError.new(message, @lineno + 1)
-          end
-          raise
-        end
-
-        if csv.empty?
-          #
-          # I believe a blank line should be an <tt>Array.new</tt>, not Ruby 1.8
-          # CSV's <tt>[nil]</tt>
-          #
-          if parse.empty?
-            @lineno += 1
-            if @skip_blanks
-            elsif @unconverted_fields
-              yield add_unconverted_fields([], [])
-            elsif @use_headers
-              yield Row.new(@headers, [])
+          if scanner.scan(@column_end)
+            @line << @column_separator if @need_line
+            row << value
+          elsif scanner.scan(@row_end)
+            @line << @row_separator if @need_line
+            if row.empty? and value.nil?
+              emit_row([], &block) unless @skip_blanks
             else
-              yield []
+              row << value
+              emit_row(row, &block)
+              row = []
+              @line = "".encode(@encoding) if @need_line
             end
-            next
-          end
-        end
-
-        next if @skip_lines and @skip_lines.match(parse)
-
-        scanner = StringScanner.new(parse)
-        if scanner.eos?
-          if in_extended_col
-            csv[-1] << @row_separator
+            skip_needless_lines(scanner)
+          elsif scanner.eos?
+            return if row.empty? and value.nil?
+            row << value
+            emit_row(row, &block)
+            return
           else
-            csv << nil
-          end
-        end
-
-        # This loop is the hot path of csv parsing. Some things may be non-dry
-        # for a reason. Make sure to benchmark when refactoring.
-        liberal_parsing_string = ""
-        until scanner.eos?
-          if in_extended_col
-            if scanner.scan(@quote)
-              if scanner.scan(@quote)
-                csv.last << @quote_character
-                next
-              end
-              in_extended_col = false
-              if scanner.scan(@column_end)
-                csv << liberal_parsing_string if @liberal_parsing
-                if scanner.eos?
-                  # e.g. %Q{a,"""\nb\n""",\nc}
-                  csv << nil
-                  break
-                end
-              elsif @liberal_parsing
-                csv << +"#{@quote_character}#{liberal_parsing_string}#{@quote_character}"
-                # e.g. '1,"\"2\"",3' #=> ["'1", "\"\\\"2\\\"\"", "3'"]
-                csv.last << scanner.scan(@unquoted_value_liberal_parsing)
-                next if scanner.eos? || scanner.scan(@column_end)
-                message = "Do not allow except col_sep_split_separator after quoted fields"
-                raise MalformedCSVError.new(message, @lineno + 1)
-              elsif scanner.eos?
-                break
-              else
-                # '"aaa,bbb"ccc'
-                message = "Do not allow except col_sep_split_separator after quoted fields"
-                raise MalformedCSVError.new(message, @lineno + 1)
-              end
-            elsif v = scanner.scan(@value)
-              csv.last << v
-              csv.last << @row_separator if scanner.eos?
-            end
-          elsif v = scanner.scan(@unquoted_value)
-            csv << v
-
-            if scanner.scan(@column_end)
-              # e.g. "a,b,"
-              csv << nil if scanner.eos?
-              next
-            end
-
-            if @liberal_parsing && !scanner.eos?
-              csv.last << scanner.scan(@unquoted_value_liberal_parsing)
-              csv << nil if scanner.scan(@column_end) && scanner.eos?
-              next
-            end
-
-            if scanner.scan(@nl_or_lf)
+            if @quoted_column_value
+              message = "Do not allow except col_sep_split_separator " +
+                "after quoted fields"
+              raise MalformedCSVError.new(message, @lineno + 1)
+            elsif @unquoted_column_value and scanner.scan(@cr_or_lf)
               message = "Unquoted fields do not allow \\r or \\n"
               raise MalformedCSVError.new(message, @lineno + 1)
-            end
-
-            if scanner.scan(@quote)
-              raise MalformedCSVError.new("Illegal quoting", @lineno + 1)
-            end
-
-            unless scanner.eos?
-              message = "Do not allow except col_sep_split_separator after quoted fields"
+            elsif scanner.rest.start_with?(@quote_character)
+              message = "Illegal quoting"
               raise MalformedCSVError.new(message, @lineno + 1)
-            end
-          elsif scanner.scan(@quote)
-            # If we are starting a new quoted column
-            in_extended_col =  true
-
-            if v = scanner.scan(@value)
-              if @liberal_parsing
-                liberal_parsing_string = v
-                liberal_parsing_string << @row_separator if scanner.eos?
-              else
-                csv << v
-                csv.last << @row_separator if scanner.eos?
-              end
-            elsif scanner.scan(@quote)
-              if scanner.scan(@quote)
-                csv << @quote_character.dup
-                csv.last << @row_separator if scanner.eos?
-                next
-              end
-              if scanner.eos? || scanner.scan(@column_end)
-                # e.g. '"aaa",""'
-                csv << "" # will be replaced with a empty_value
-                in_extended_col = false
-                next
-              else
-                message = "Do not allow except col_sep_split_separator after quoted fields"
-                raise MalformedCSVError.new(message, @lineno + 1)
-              end
-            elsif scanner.eos?
-              csv << @row_separator.dup
             else
-              csv << ""
-            end
-          elsif scanner.scan(@column_end)
-            csv << nil
-            if scanner.eos?
-              # e.g. "a,b,"
-              csv << nil
-            else
-              next
+              raise MalformedCSVError.new("TODO: Meaningful message",
+                                          @lineno + 1)
             end
           end
         end
-
-        if in_extended_col
-          # if we're at eof?(), a quoted field wasn't closed...
-          if @input.eof? and !@prefix_input
-            raise MalformedCSVError.new("Unclosed quoted field",
-                                        @lineno + 1)
-          elsif @field_size_limit and csv.last.size >= @field_size_limit
-            raise MalformedCSVError.new("Field size exceeded",
-                                        @lineno + 1)
-          end
-          # otherwise, we need to loop and pull some more data to complete the row
-        else
-          @lineno += 1
-
-          # save fields unconverted fields, if needed...
-          unconverted = csv.dup if @unconverted_fields
-
-          if @use_headers
-            # parse out header rows and handle CSV::Row conversions...
-            if @headers.nil?
-              @headers = adjust_headers(csv)
-              if @return_headers
-                csv = Row.new(@headers, csv, true)
-              else
-                csv = []
-                next
-              end
-            else
-              csv = Row.new(@headers,
-                            @fields_converter.convert(csv, @headers, @lineno))
-            end
-          else
-            # convert fields, if needed...
-            csv = @fields_converter.convert(csv, nil, @lineno)
-          end
-
-          # inject unconverted fields and accessor, if requested...
-          if @unconverted_fields and not csv.respond_to? :unconverted_fields
-            add_unconverted_fields(csv, unconverted)
-          end
-
-          # return the results
-          yield csv
-
-          in_extended_col = false
-          csv = []
-        end
+      rescue InputsScanner::InvalidEncoding
+        message = "Invalid byte sequence in #{@encoding}"
+        raise MalformedCSVError.new(message, @lineno + 1)
       end
     end
 
@@ -320,13 +223,43 @@ class CSV
       @skip_blanks = @options[:skip_blanks]
       @fields_converter = @options[:fields_converter]
       @header_fields_converter = @options[:header_fields_converter]
+      @need_line = @options.fetch(:need_line, true)
     end
 
     def prepare_regexp
+      @column_separator = @options[:col_sep].to_s.encode(@encoding)
+      @row_separator = resolve_row_separator(@options[:row_sep]).encode(@encoding)
+      @quote_character = @options[:quote_char].to_s.encode(@encoding)
+      if @quote_character.length != 1
+        raise ArgumentError, ":quote_char has to be a single character String"
+      end
+
+      escaped_col_sep = Regexp.escape(@column_separator)
+      escaped_row_sep = Regexp.escape(@row_separator)
+      escaped_quote_char = Regexp.escape(@quote_character)
+
       skip_lines = @options[:skip_lines]
       case skip_lines
       when String
-        @skip_lines = Regexp.new(Regexp.escape(skip_lines.encode(@encoding)))
+        @skip_lines = Regexp.new("\\A[^".encode(@encoding) +
+                                 escaped_row_sep +
+                                 "]*".encode(@encoding) +
+                                 Regexp.escape(skip_lines.encode(@encoding)) +
+                                 "[^".encode(@encoding) +
+                                 escaped_row_sep +
+                                 "]*".encode(@encoding) +
+                                 "(?:".encode(@encoding) +
+                                 escaped_row_sep +
+                                 ")?".encode(@encoding))
+      when Regexp
+        @skip_lines = Regexp.new("\\A".encode(@encoding) +
+                                 skip_lines.to_s +
+                                 "[^".encode(@encoding) +
+                                 escaped_row_sep +
+                                 "]*".encode(@encoding) +
+                                 "(?:".encode(@encoding) +
+                                 escaped_row_sep +
+                                 ")?".encode(@encoding))
       when nil
         @skip_lines = nil
       else
@@ -338,34 +271,28 @@ class CSV
         @skip_lines = skip_lines
       end
 
-      @column_separator = @options[:col_sep].to_s.encode(@encoding)
-      @row_separator = resolve_row_separator(@options[:row_sep])
-      @quote_character = @options[:quote_char].to_s.encode(@encoding)
-      if @quote_character.length != 1
-        raise ArgumentError, ":quote_char has to be a single character String"
-      end
-
-      escaped_col_sep = Regexp.escape(@column_separator)
-      escaped_row_sep = Regexp.escape(@row_separator)
-      escaped_quote_char = Regexp.escape(@quote_character)
       @column_end = Regexp.new(escaped_col_sep)
-      @value = Regexp.new("[^".encode(@encoding) +
-                          escaped_quote_char +
-                          "]+".encode(@encoding))
-      @unquoted_value = Regexp.new("[^".encode(@encoding) +
-                                   escaped_quote_char +
-                                   escaped_col_sep +
-                                   "\r\n]+".encode(@encoding))
-      @unquoted_value_liberal_parsing =
-        Regexp.new("[^".encode(@encoding) +
-                   escaped_col_sep +
-                   "\r\n]+".encode(@encoding))
-      @quote = Regexp.new("[".encode(@encoding) +
-                          escaped_quote_char +
-                          "]".encode(@encoding))
-      @nl_or_lf = Regexp.new("[\r\n]".encode(@encoding))
-      @line_end = Regexp.new(escaped_row_sep +
-                             "\\z".encode(@encoding))
+      @quoted_value = Regexp.new("[^".encode(@encoding) +
+                                 escaped_quote_char +
+                                 "]*".encode(@encoding) +
+                                 escaped_quote_char)
+      if @liberal_parsing
+        @unquoted_value = Regexp.new("[^".encode(@encoding) +
+                                     escaped_col_sep +
+                                     "\r\n]+".encode(@encoding))
+      else
+        @unquoted_value = Regexp.new("[^".encode(@encoding) +
+                                     escaped_quote_char +
+                                     escaped_col_sep +
+                                     "\r\n]+".encode(@encoding))
+      end
+      @quote = Regexp.new(escaped_quote_char)
+      @row_end = Regexp.new(escaped_row_sep)
+      @cr_or_lf = Regexp.new("[\r\n]".encode(@encoding))
+      @one_line = Regexp.new("\\A[^".encode(@encoding) +
+                             escaped_row_sep +
+                             "]*?".encode(@encoding) +
+                             escaped_row_sep)
     end
 
     def resolve_row_separator(separator)
@@ -374,10 +301,9 @@ class CSV
         lf = "\n".encode(@encoding)
         if @input.is_a?(StringIO)
           separator = detect_row_separator(@input.string, cr, lf)
-        else
-          saved_prefix = []  # sample chunks to be reprocessed later
+        elsif @input.respond_to?(:gets)
           begin
-            while separator == :auto && @input.respond_to?(:gets)
+            while separator == :auto
               #
               # if we run out of data, it's probably a single line
               # (ensure will set default value)
@@ -389,16 +315,12 @@ class CSV
                 sample << (@input.gets(nil, 1) || "")
               end
 
-              saved_prefix << sample
+              @samples << sample
 
               separator = detect_row_separator(sample, cr, lf)
             end
           rescue IOError
             # do nothing:  ensure will set default
-          ensure
-            # save sampled input for later parsing (but only if there is some!)
-            saved_prefix = saved_prefix.join('')
-            @prefix_input = StringIO.new(saved_prefix) unless saved_prefix.empty?
           end
         end
         separator = $INPUT_RECORD_SEPARATOR if separator == :auto
@@ -473,6 +395,138 @@ class CSV
       adjusted_headers = @header_fields_converter.convert(headers, nil, @lineno)
       adjusted_headers.each {|h| h.freeze if h.is_a? String}
       adjusted_headers
+    end
+
+    def build_scanner
+      if @samples.empty? and @input.is_a?(StringIO)
+        string = @input.string
+        unless string.valid_encoding?
+          message = "Invalid byte sequence in #{@encoding}"
+          raise MalformedCSVError.new(message, @lineno + 1)
+        end
+        scanner = StringScanner.new(string)
+        scanner.singleton_class.__send__(:alias_method, :scan_all, :scan)
+        scanner
+      else
+        inputs = @samples.collect do |sample|
+          StringIO.new(sample)
+        end
+        inputs << @input
+        InputsScanner.new(inputs, @encoding)
+      end
+    end
+
+    def skip_needless_lines(scanner)
+      case @skip_lines
+      when nil
+      when Regexp
+        while scanner.scan_all(@skip_lines)
+        end
+      else
+        while true
+          pos = scanner.pos
+          line = scanner.scan(@one_line)
+          break unless line
+          unless @skip_lines.match(line)
+            scanner.pos = pos
+            break
+          end
+        end
+      end
+    end
+
+    def parse_column_value(scanner)
+      if @liberal_parsing
+        if scanner.scan(@quote)
+          @line << @quote_character if @need_line
+          @quoted_column_value = true
+          quoted_value = nil
+          while true
+            sub_quoted_value = scanner.scan(@quoted_value)
+            unless sub_quoted_value
+              message = "Unclosed quoted field"
+              raise MalformedCSVError.new(message, @lineno + 1)
+            end
+            @line << sub_quoted_value if @need_line
+            if quoted_value
+              quoted_value << sub_quoted_value
+            else
+              quoted_value = sub_quoted_value
+            end
+            break unless scanner.scan(@quote)
+            @line << @quote_character if @need_line
+          end
+
+          unquoted_value = scanner.scan_all(@unquoted_value)
+          if unquoted_value
+            @line << quoted_value << unquoted_value if @need_line
+            @quote_character + quoted_value + unquoted_value
+          else
+            @line << quoted_value if @need_line
+            quoted_value[0..-2]
+          end
+        else
+          value = scanner.scan_all(@unquoted_value)
+          @line << value if @need_line and value
+          value
+        end
+      else
+        value = scanner.scan_all(@unquoted_value)
+        if value
+          @unquoted_column_value = true
+          @line << value if @need_line
+          return value
+        end
+        if scanner.scan(@quote)
+          @line << @quote_character if @need_line
+          @quoted_column_value = true
+          value = nil
+          while true
+            quoted_value = scanner.scan(@quoted_value)
+            unless quoted_value
+              message = "Unclosed quoted field"
+              raise MalformedCSVError.new(message, @lineno + 1)
+            end
+            @line << quoted_value if @need_line
+            if value
+              value << quoted_value
+            else
+              value = quoted_value
+            end
+            break unless scanner.scan(@quote)
+            @line << @quote_character if @need_line
+          end
+          value[0..-2]
+        else
+          nil
+        end
+      end
+    end
+
+    def emit_row(row, &block)
+      @lineno += 1
+
+      raw_row = row
+      if @use_headers
+        if @headers.nil?
+          @headers = adjust_headers(row)
+          return unless @return_headers
+          row = Row.new(@headers, row, true)
+        else
+          row = Row.new(@headers,
+                        @fields_converter.convert(raw_row, @headers, @lineno))
+        end
+      else
+        # convert fields, if needed...
+        row = @fields_converter.convert(raw_row, nil, @lineno)
+      end
+
+      # inject unconverted fields and accessor, if requested...
+      if @unconverted_fields and not row.respond_to?(:unconverted_fields)
+        add_unconverted_fields(row, raw_row)
+      end
+
+      yield(row)
     end
 
     # This method injects an instance variable <tt>unconverted_fields</tt> into

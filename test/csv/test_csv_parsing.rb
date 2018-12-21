@@ -143,7 +143,7 @@ class TestCSV::Parsing < TestCSV
     end
   end
 
-  def test_malformed_csv_nl_first_line
+  def test_malformed_csv_cr_first_line
     error = assert_raise(CSV::MalformedCSVError) do
       CSV.parse_line("1,2\r,3", row_sep: "\n")
     end
@@ -151,7 +151,7 @@ class TestCSV::Parsing < TestCSV
                  error.message)
   end
 
-  def test_malformed_csv_nl_middle_line
+  def test_malformed_csv_cr_middle_line
     csv = <<-CSV
 line,1,abc
 line,2,"def\nghi"

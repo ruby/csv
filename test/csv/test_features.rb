@@ -69,17 +69,26 @@ line,4,jkl
 
   def test_quote_char
     TEST_CASES.each do |test_case|
-      assert_equal( test_case.last.map { |t| t.tr('"', "'") unless t.nil? },
-                    CSV.parse_line( test_case.first.tr('"', "'"),
-                                    quote_char: "'" ) )
+      assert_equal(test_case.last.map {|t| t.tr('"', "'") unless t.nil?},
+                   CSV.parse_line(test_case.first.tr('"', "'"),
+                                  quote_char: "'" ))
     end
   end
 
-  def test_bug_8405
+  def test_quote_char_special_regexp_char
     TEST_CASES.each do |test_case|
-      assert_equal( test_case.last.map { |t| t.tr('"', "|") unless t.nil? },
-                    CSV.parse_line( test_case.first.tr('"', "|"),
-                                    quote_char: "|" ) )
+      assert_equal(test_case.last.map {|t| t.tr('"', "|") unless t.nil?},
+                   CSV.parse_line(test_case.first.tr('"', "|"),
+                                  quote_char: "|"))
+    end
+  end
+
+  def test_quote_char_special_regexp_char_liberal_parsing
+    TEST_CASES.each do |test_case|
+      assert_equal(test_case.last.map {|t| t.tr('"', "|") unless t.nil?},
+                   CSV.parse_line(test_case.first.tr('"', "|"),
+                                  quote_char: "|",
+                                  liberal_parsing: true))
     end
   end
 
@@ -385,6 +394,27 @@ line,4,jkl
     assert_raise_with_message(ArgumentError, /skip_lines/) do
       csv.shift
     end
+  end
+
+  class Matchable
+    def initialize(pattern)
+      @pattern = pattern
+    end
+
+    def match(line)
+      @pattern.match(line)
+    end
+  end
+
+  def test_requires_skip_lines_match
+    csv = <<-CSV
+1
+# 2
+3
+4
+    CSV
+    assert_equal([["1"], ["3"], ["4"]],
+                 CSV.parse(csv, :skip_lines => Matchable.new(/\A#/)))
   end
 
   def test_comment_rows_are_ignored
