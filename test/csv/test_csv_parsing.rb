@@ -143,55 +143,52 @@ class TestCSV::Parsing < TestCSV
     end
   end
 
-  def test_malformed_csv
-    assert_raise(CSV::MalformedCSVError) do
+  def test_malformed_csv_nl_first_line
+    error = assert_raise(CSV::MalformedCSVError) do
       CSV.parse_line("1,2\r,3", row_sep: "\n")
     end
+    assert_equal("Unquoted fields do not allow \\r or \\n in line 1.",
+                 error.message)
+  end
 
-    bad_data = <<-CSV
+  def test_malformed_csv_nl_middle_line
+    csv = <<-CSV
 line,1,abc
 line,2,"def\nghi"
 
 line,4,some\rjunk
 line,5,jkl
     CSV
-    lines = bad_data.lines.to_a
-    assert_equal(6, lines.size)
-    assert_match(/\Aline,4/, lines.find { |l| l =~ /some\rjunk/ })
 
-    csv = CSV.new(bad_data)
-    begin
-      loop do
-        assert_not_nil(csv.shift)
-        assert_send([csv.lineno, :<, 4])
-      end
-    rescue CSV::MalformedCSVError
-      assert_equal( "Unquoted fields do not allow \\r or \\n in line 4.",
-                    $!.message )
+    error = assert_raise(CSV::MalformedCSVError) do
+      CSV.parse(csv)
     end
+    assert_equal("Unquoted fields do not allow \\r or \\n in line 4.",
+                 error.message)
+  end
 
-    assert_raise(CSV::MalformedCSVError) { CSV.parse_line('1,2,"3...') }
+  def test_malformed_csv_unclosed_quote
+    error = assert_raise(CSV::MalformedCSVError) do
+      CSV.parse_line('1,2,"3...')
+    end
+    assert_equal("Unclosed quoted field in line 1.",
+                 error.message)
+  end
 
-    bad_data = <<-CSV
+  def test_malformed_csv_illegal_quote_middle_line
+    csv = <<-CSV
 line,1,abc
 line,2,"def\nghi"
 
 line,4,8'10"
 line,5,jkl
     CSV
-    lines = bad_data.lines.to_a
-    assert_equal(6, lines.size)
-    assert_match(/\Aline,4/, lines.find { |l| l =~ /8'10"/ })
 
-    csv = CSV.new(bad_data)
-    begin
-      loop do
-        assert_not_nil(csv.shift)
-        assert_send([csv.lineno, :<, 4])
-      end
-    rescue CSV::MalformedCSVError
-      assert_equal("Illegal quoting in line 4.", $!.message)
+    error = assert_raise(CSV::MalformedCSVError) do
+      CSV.parse(csv)
     end
+    assert_equal("Illegal quoting in line 4.",
+                 error.message)
   end
 
   def test_the_parse_fails_fast_when_it_can_for_unquoted_fields
