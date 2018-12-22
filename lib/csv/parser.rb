@@ -215,7 +215,7 @@ class CSV
           end
           if scanner.scan(@column_end)
             row << value
-          elsif scanner.scan(@row_end)
+          elsif parse_row_end(scanner)
             if row.empty? and value.nil?
               emit_row(scanner, [], &block) unless @skip_blanks
             else
@@ -317,6 +317,14 @@ class CSV
       end
 
       @column_end = Regexp.new(escaped_col_sep)
+      @row_end = Regexp.new(escaped_row_sep)
+      if @row_separator.size > 1
+        @row_ends = @row_separator.each_char.collect do |char|
+          Regexp.new(Regexp.escape(char))
+        end
+      else
+        @row_ends = nil
+      end
       @quoted_value = Regexp.new("[^".encode(@encoding) +
                                  escaped_quote_char +
                                  "]*".encode(@encoding) +
@@ -332,7 +340,6 @@ class CSV
                                      "\r\n]+".encode(@encoding))
       end
       @quote = Regexp.new(escaped_quote_char)
-      @row_end = Regexp.new(escaped_row_sep)
       @cr_or_lf = Regexp.new("[\r\n]".encode(@encoding))
       @one_line = Regexp.new("\\A[^".encode(@encoding) +
                              escaped_row_sep +
@@ -552,6 +559,11 @@ class CSV
           nil
         end
       end
+    end
+
+    def parse_row_end(scanner)
+      scanner.scan(@row_end) or
+        (@row_ends and @row_ends.all? {|row_end| scanner.scan(row_end)})
     end
 
     def emit_row(scanner, row, &block)
