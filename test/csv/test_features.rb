@@ -482,6 +482,7 @@ line,4,jkl
   end
 
   def test_line_separator_autodetection_for_non_seekable_input_1024_over_cr_lf
+    table = (1..10).map { |row| (1..200).map { |col| "row#{row}col#{col}" }.to_a }.to_a
     input = table.map { |line| line.join(",") }.join("\r\n")
     c = CSV.new(DummyIO.new(input))
     assert_equal table, c.each.to_a
