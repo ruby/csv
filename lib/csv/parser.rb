@@ -97,10 +97,12 @@ class CSV
         if @keep_start
           string = @scanner.string
           keep = string[@keep_start, @scanner.pos - @keep_start]
-          if @keep_buffer
-            @keep_buffer << keep
-          else
-            @keep_buffer = keep.dup
+          if keep
+            if @keep_buffer
+              @keep_buffer << keep
+            else
+              @keep_buffer = keep.dup
+            end
           end
           @keep_start = 0
         end
