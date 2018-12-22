@@ -206,7 +206,7 @@ class CSV
             end
           end
         end
-      rescue InputsScanner::InvalidEncoding
+      rescue InvalidEncoding
         message = "Invalid byte sequence in #{@encoding}"
         raise MalformedCSVError.new(message, @lineno + 1)
       end
