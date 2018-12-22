@@ -124,7 +124,7 @@ class CSV
           else
             @scanner = StringScanner.new("".encode(@encoding))
             @inputs.shift
-            false
+            read_chunk
           end
         end
       end
