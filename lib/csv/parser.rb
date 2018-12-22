@@ -374,25 +374,19 @@ class CSV
     end
 
     def detect_row_separator(sample, cr, lf)
-      last_char = nil
-      sample.each_char.each_cons(2) do |char, next_char|
-        last_char = next_char
-        case char
-        when cr
-          if next_char == lf
-            return "\r\n".encode(@encoding)
-          else
-            return cr
-          end
-        when lf
-          return lf
+      cr_index = sample.index(cr)
+      lf_index = sample.index(lf)
+      if cr_index and lf_index
+        if cr_index + 1 == lf_index
+          cr + lf
+        elsif cr_index < lf_index
+          cr
+        else
+          lf
         end
-      end
-
-      case last_char
-      when cr
+      elsif cr_index
         cr
-      when lf
+      elsif lf_index
         lf
       else
         :auto
