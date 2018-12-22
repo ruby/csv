@@ -329,10 +329,11 @@ class CSV
       else
         @row_ends = nil
       end
+      @quotes = Regexp.new(escaped_quote_char +
+                           "+".encode(@encoding))
       @quoted_value = Regexp.new("[^".encode(@encoding) +
                                  escaped_quote_char +
-                                 "]*".encode(@encoding) +
-                                 escaped_quote_char)
+                                 "]+".encode(@encoding))
       if @liberal_parsing
         @unquoted_value = Regexp.new("[^".encode(@encoding) +
                                      escaped_col_sep +
@@ -343,7 +344,6 @@ class CSV
                                      escaped_col_sep +
                                      "\r\n]+".encode(@encoding))
       end
-      @quote = Regexp.new(escaped_quote_char)
       @cr_or_lf = Regexp.new("[\r\n]".encode(@encoding))
       @one_line = Regexp.new("\\A[^".encode(@encoding) +
                              escaped_row_sep +
@@ -510,28 +510,13 @@ class CSV
 
     def parse_column_value(scanner)
       if @liberal_parsing
-        if scanner.scan(@quote)
-          @quoted_column_value = true
-          quoted_value = nil
-          while true
-            sub_quoted_value = scanner.scan(@quoted_value)
-            unless sub_quoted_value
-              message = "Unclosed quoted field"
-              raise MalformedCSVError.new(message, @lineno + 1)
-            end
-            if quoted_value
-              quoted_value << sub_quoted_value
-            else
-              quoted_value = sub_quoted_value
-            end
-            break unless scanner.scan(@quote)
-          end
-
+        quoted_value = parse_quoted_column_value(scanner)
+        if quoted_value
           unquoted_value = scanner.scan_all(@unquoted_value)
           if unquoted_value
-            @quote_character + quoted_value + unquoted_value
+            @quote_character + quoted_value + @quote_character + unquoted_value
           else
-            quoted_value[0..-2]
+            quoted_value
           end
         else
           scanner.scan_all(@unquoted_value)
@@ -540,28 +525,42 @@ class CSV
         value = scanner.scan_all(@unquoted_value)
         if value
           @unquoted_column_value = true
-          return value
-        end
-        if scanner.scan(@quote)
-          @quoted_column_value = true
-          value = nil
-          while true
-            quoted_value = scanner.scan(@quoted_value)
-            unless quoted_value
-              message = "Unclosed quoted field"
-              raise MalformedCSVError.new(message, @lineno + 1)
-            end
-            if value
-              value << quoted_value
-            else
-              value = quoted_value
-            end
-            break unless scanner.scan(@quote)
-          end
-          value[0..-2]
+          value
         else
-          nil
+          parse_quoted_column_value(scanner)
         end
+      end
+    end
+
+    def parse_quoted_column_value(scanner)
+      quotes = scanner.scan_all(@quotes)
+      return nil unless quotes
+
+      @quoted_column_value = true
+      n_quotes = quotes.size
+      if (n_quotes % 2).zero?
+        quotes[0, (n_quotes - 2) / 2]
+      else
+        value = quotes[0, (n_quotes - 1) / 2]
+        while true
+          quoted_value = scanner.scan_all(@quoted_value)
+          value << quoted_value if quoted_value
+          quotes = scanner.scan_all(@quotes)
+          unless quotes
+            message = "Unclosed quoted field"
+            raise MalformedCSVError.new(message, @lineno + 1)
+          end
+          n_quotes = quotes.size
+          if n_quotes == 1
+            break
+          elsif (n_quotes % 2) == 1
+            value << quotes[0, (n_quotes - 1) / 2]
+            break
+          else
+            value << quotes[0, n_quotes / 2]
+          end
+        end
+        value
       end
     end
 
