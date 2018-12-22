@@ -374,8 +374,12 @@ class CSV
     end
 
     def detect_row_separator(sample, cr, lf)
-      cr_index = sample.index(cr)
       lf_index = sample.index(lf)
+      if lf_index
+        cr_index = sample[0, lf_index].index(cr)
+      else
+        cr_index = sample.index(cr)
+      end
       if cr_index and lf_index
         if cr_index + 1 == lf_index
           cr + lf
