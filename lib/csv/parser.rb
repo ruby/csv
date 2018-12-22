@@ -12,14 +12,27 @@ class CSV
 
     class Scanner < StringScanner
       alias_method :scan_all, :scan
+
+      def initialize(*args)
+        super
+        @keep_start = nil
+      end
+
+      def keep_start
+        @keep_start = pos
+      end
+
+      def keep_end
+        string[@keep_start, pos - @keep_start]
+      end
     end
 
     class InputsScanner
-
-      def initialize(inputs, encoding)
+      def initialize(inputs, encoding, chunk_size: 8192)
         @inputs = inputs.dup
         @encoding = encoding
-        @chunk_size = 8192
+        @chunk_size = chunk_size
+        @keep_start = nil
         read_chunk
       end
 
@@ -46,6 +59,23 @@ class CSV
         @scanner.eos?
       end
 
+      def keep_start
+        @keep_start = @scanner.pos
+        @keep_buffer = nil
+      end
+
+      def keep_end
+        keep = @scanner.string[@keep_start, @scanner.pos - @keep_start]
+        start = @keep_start
+        @keep_start = nil
+        if @keep_buffer
+          @keep_buffer << keep
+          keep = @keep_buffer
+          @keep_buffer = nil
+        end
+        keep
+      end
+
       def rest
         @scanner.rest
       end
@@ -63,6 +93,17 @@ class CSV
       private
       def read_chunk
         return false if @inputs.empty?
+
+        if @keep_start
+          string = @scanner.string
+          keep = string[@keep_start, @scanner.pos - @keep_start]
+          if @keep_buffer
+            @keep_buffer << keep
+          else
+            @keep_buffer = keep.dup
+          end
+          @keep_start = 0
+        end
 
         input = @inputs.first
         case input
@@ -159,10 +200,10 @@ class CSV
       end
 
       row = []
-      @line = "".encode(@encoding) if @need_line
       begin
         scanner = build_scanner
         skip_needless_lines(scanner)
+        scanner.keep_start
         while true
           @quoted_column_value = false
           @unquoted_column_value = false
@@ -171,23 +212,21 @@ class CSV
             raise MalformedCSVError.new("Field size exceeded", @lineno + 1)
           end
           if scanner.scan(@column_end)
-            @line << @column_separator if @need_line
             row << value
           elsif scanner.scan(@row_end)
-            @line << @row_separator if @need_line
             if row.empty? and value.nil?
-              emit_row([], &block) unless @skip_blanks
+              emit_row(scanner, [], &block) unless @skip_blanks
             else
               row << value
-              emit_row(row, &block)
+              emit_row(scanner, row, &block)
               row = []
-              @line = "".encode(@encoding) if @need_line
             end
             skip_needless_lines(scanner)
+            scanner.keep_start
           elsif scanner.eos?
             return if row.empty? and value.nil?
             row << value
-            emit_row(row, &block)
+            emit_row(scanner, row, &block)
             return
           else
             if @quoted_column_value
@@ -228,7 +267,6 @@ class CSV
       @skip_blanks = @options[:skip_blanks]
       @fields_converter = @options[:fields_converter]
       @header_fields_converter = @options[:header_fields_converter]
-      @need_line = @options.fetch(:need_line, true)
     end
 
     def prepare_regexp
@@ -402,20 +440,41 @@ class CSV
       adjusted_headers
     end
 
-    def build_scanner
-      if @samples.empty? and @input.is_a?(StringIO)
-        string = @input.string
-        unless string.valid_encoding?
-          message = "Invalid byte sequence in #{@encoding}"
-          raise MalformedCSVError.new(message, @lineno + 1)
+    SCANNER_TEST = (ENV["CSV_PARSER_SCANNER_TEST"] == "yes")
+    if SCANNER_TEST
+      class UnoptimizedStringIO
+        def initialize(string)
+          @io = StringIO.new(string)
         end
-        Scanner.new(string)
-      else
+
+        def gets(*args)
+          @io.gets(*args)
+        end
+      end
+
+      def build_scanner
         inputs = @samples.collect do |sample|
-          StringIO.new(sample)
+          UnoptimizedStringIO.new(sample)
         end
         inputs << @input
-        InputsScanner.new(inputs, @encoding)
+        InputsScanner.new(inputs, @encoding, chunk_size: 1)
+      end
+    else
+      def build_scanner
+        if @samples.empty? and @input.is_a?(StringIO)
+          string = @input.string
+          unless string.valid_encoding?
+            message = "Invalid byte sequence in #{@encoding}"
+            raise MalformedCSVError.new(message, @lineno + 1)
+          end
+          Scanner.new(string)
+        else
+          inputs = @samples.collect do |sample|
+            StringIO.new(sample)
+          end
+          inputs << @input
+          InputsScanner.new(inputs, @encoding)
+        end
       end
     end
 
@@ -441,7 +500,6 @@ class CSV
     def parse_column_value(scanner)
       if @liberal_parsing
         if scanner.scan(@quote)
-          @line << @quote_character if @need_line
           @quoted_column_value = true
           quoted_value = nil
           while true
@@ -450,38 +508,30 @@ class CSV
               message = "Unclosed quoted field"
               raise MalformedCSVError.new(message, @lineno + 1)
             end
-            @line << sub_quoted_value if @need_line
             if quoted_value
               quoted_value << sub_quoted_value
             else
               quoted_value = sub_quoted_value
             end
             break unless scanner.scan(@quote)
-            @line << @quote_character if @need_line
           end
 
           unquoted_value = scanner.scan_all(@unquoted_value)
           if unquoted_value
-            @line << quoted_value << unquoted_value if @need_line
             @quote_character + quoted_value + unquoted_value
           else
-            @line << quoted_value if @need_line
             quoted_value[0..-2]
           end
         else
-          value = scanner.scan_all(@unquoted_value)
-          @line << value if @need_line and value
-          value
+          scanner.scan_all(@unquoted_value)
         end
       else
         value = scanner.scan_all(@unquoted_value)
         if value
           @unquoted_column_value = true
-          @line << value if @need_line
           return value
         end
         if scanner.scan(@quote)
-          @line << @quote_character if @need_line
           @quoted_column_value = true
           value = nil
           while true
@@ -490,14 +540,12 @@ class CSV
               message = "Unclosed quoted field"
               raise MalformedCSVError.new(message, @lineno + 1)
             end
-            @line << quoted_value if @need_line
             if value
               value << quoted_value
             else
               value = quoted_value
             end
             break unless scanner.scan(@quote)
-            @line << @quote_character if @need_line
           end
           value[0..-2]
         else
@@ -506,8 +554,9 @@ class CSV
       end
     end
 
-    def emit_row(row, &block)
+    def emit_row(scanner, row, &block)
       @lineno += 1
+      @line = scanner.keep_end
 
       raw_row = row
       if @use_headers
