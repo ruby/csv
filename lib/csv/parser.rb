@@ -6,82 +6,87 @@ require_relative "table"
 require_relative "row"
 
 class CSV
-  class InputsScanner
+  class Parser
     class InvalidEncoding < StandardError
     end
 
-    def initialize(inputs, encoding)
-      @inputs = inputs.dup
-      @encoding = encoding
-      @chunk_size = 8192
-      read_chunk
+    class Scanner < StringScanner
+      alias_method :scan_all, :scan
     end
 
-    def scan(pattern)
-      value = @scanner.scan(pattern)
-      if value
+    class InputsScanner
+
+      def initialize(inputs, encoding)
+        @inputs = inputs.dup
+        @encoding = encoding
+        @chunk_size = 8192
+        read_chunk
+      end
+
+      def scan(pattern)
+        value = @scanner.scan(pattern)
+        if value
+          read_chunk if @scanner.eos?
+          return value
+        else
+          nil
+        end
+      end
+
+      def scan_all(pattern)
+        value = @scanner.scan(pattern)
+        return nil if value.nil?
+        while @scanner.eos? and read_chunk and (sub_value = @scanner.scan(pattern))
+          value << sub_value
+        end
+        value
+      end
+
+      def eos?
+        @scanner.eos?
+      end
+
+      def rest
+        @scanner.rest
+      end
+
+      def pos
+        @scanner.pos
+      end
+
+      def pos=(new_pos)
+        @scanner.pos = new_pos
         read_chunk if @scanner.eos?
-        return value
-      else
-        nil
+        new_pos
       end
-    end
 
-    def scan_all(pattern)
-      value = @scanner.scan(pattern)
-      return nil if value.nil?
-      while @scanner.eos? and read_chunk and (sub_value = @scanner.scan(pattern))
-        value << sub_value
-      end
-      value
-    end
+      private
+      def read_chunk
+        return false if @inputs.empty?
 
-    def eos?
-      @scanner.eos?
-    end
-
-    def rest
-      @scanner.rest
-    end
-
-    def pos
-      @scanner.pos
-    end
-
-    def pos=(new_pos)
-      @scanner.pos = new_pos
-      read_chunk if @scanner.eos?
-      new_pos
-    end
-
-    private
-    def read_chunk
-      return false if @inputs.empty?
-
-      input = @inputs.first
-      case input
-      when StringIO
-        string = input.string
-        raise InvalidEncoding unless string.valid_encoding?
-        @scanner = StringScanner.new(string)
-        @inputs.shift
-        true
-      else
-        chunk = input.gets(nil, @chunk_size)
-        if chunk
-          raise InvalidEncoding unless chunk.valid_encoding?
-          @scanner = StringScanner.new(chunk)
+        input = @inputs.first
+        case input
+        when StringIO
+          string = input.string
+          raise InvalidEncoding unless string.valid_encoding?
+          @scanner = StringScanner.new(string)
+          @inputs.shift
           true
         else
-          @scanner = StringScanner.new("".encode(@encoding))
-          @inputs.shift
-          false
+          chunk = input.gets(nil, @chunk_size)
+          if chunk
+            raise InvalidEncoding unless chunk.valid_encoding?
+            @scanner = StringScanner.new(chunk)
+            true
+          else
+            @scanner = StringScanner.new("".encode(@encoding))
+            @inputs.shift
+            false
+          end
         end
       end
     end
-  end
 
-  class Parser
     def initialize(input, options)
       @input = input
       @options = options
@@ -404,9 +409,7 @@ class CSV
           message = "Invalid byte sequence in #{@encoding}"
           raise MalformedCSVError.new(message, @lineno + 1)
         end
-        scanner = StringScanner.new(string)
-        scanner.singleton_class.__send__(:alias_method, :scan_all, :scan)
-        scanner
+        Scanner.new(string)
       else
         inputs = @samples.collect do |sample|
           StringIO.new(sample)
