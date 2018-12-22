@@ -459,33 +459,37 @@ line,4,jkl
     end
   end
 
-  def test_line_separator_autodetection_for_non_seekable_input
-    # simple input with LF line breaks
+  def test_line_separator_autodetection_for_non_seekable_input_lf
     c = CSV.new(DummyIO.new("one,two,three\nfoo,bar,baz\n"))
     assert_equal [["one", "two", "three"], ["foo", "bar", "baz"]], c.each.to_a
+  end
 
-    # simple input with CR line breaks
+  def test_line_separator_autodetection_for_non_seekable_input_cr
     c = CSV.new(DummyIO.new("one,two,three\rfoo,bar,baz\r"))
     assert_equal [["one", "two", "three"], ["foo", "bar", "baz"]], c.each.to_a
+  end
 
-    # simple input with CRLF line breaks
+  def test_line_separator_autodetection_for_non_seekable_input_cr_lf
     c = CSV.new(DummyIO.new("one,two,three\r\nfoo,bar,baz\r\n"))
     assert_equal [["one", "two", "three"], ["foo", "bar", "baz"]], c.each.to_a
+  end
 
-    # input with lines longer than 1024 bytes
+  def test_line_separator_autodetection_for_non_seekable_input_1024_over_lf
     table = (1..10).map { |row| (1..200).map { |col| "row#{row}col#{col}" }.to_a }.to_a
     input = table.map { |line| line.join(",") }.join("\n")
     c = CSV.new(DummyIO.new(input))
     assert_equal table, c.each.to_a
+  end
 
-    # same with CRLF line breaks
+  def test_line_separator_autodetection_for_non_seekable_input_1024_over_cr_lf
     input = table.map { |line| line.join(",") }.join("\r\n")
     c = CSV.new(DummyIO.new(input))
     assert_equal table, c.each.to_a
+  end
 
+  def test_line_separator_autodetection_for_non_seekable_input_many_cr_only
     # input with lots of CRs (to make sure no bytes are lost due to look-ahead)
     c = CSV.new(DummyIO.new("foo\r" + "\r" * 9999 + "bar\r"))
     assert_equal [["foo"]] + [[]] * 9999 + [["bar"]], c.each.to_a
   end
-
 end
