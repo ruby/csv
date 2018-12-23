@@ -222,7 +222,7 @@ class CSV
     end
 
     def line
-      @line
+      last_line
     end
 
     def parse(&block)
@@ -238,42 +238,42 @@ class CSV
 
       row = []
       begin
-        scanner = build_scanner
-        skip_needless_lines(scanner)
-        scanner.keep_start
+        @scanner = build_scanner
+        skip_needless_lines
+        start_row
         while true
           @quoted_column_value = false
           @unquoted_column_value = false
-          value = parse_column_value(scanner)
+          value = parse_column_value
           if value and @field_size_limit and value.bytesize >= @field_size_limit
             raise MalformedCSVError.new("Field size exceeded", @lineno + 1)
           end
-          if parse_column_end(scanner)
+          if parse_column_end
             row << value
-          elsif parse_row_end(scanner)
+          elsif parse_row_end
             if row.empty? and value.nil?
-              emit_row(scanner, [], &block) unless @skip_blanks
+              emit_row([], &block) unless @skip_blanks
             else
               row << value
-              emit_row(scanner, row, &block)
+              emit_row(row, &block)
               row = []
             end
-            skip_needless_lines(scanner)
-            scanner.keep_start
-          elsif scanner.eos?
+            skip_needless_lines
+            start_row
+          elsif @scanner.eos?
             return if row.empty? and value.nil?
             row << value
-            emit_row(scanner, row, &block)
+            emit_row(row, &block)
             return
           else
             if @quoted_column_value
               message = "Do not allow except col_sep_split_separator " +
                 "after quoted fields"
               raise MalformedCSVError.new(message, @lineno + 1)
-            elsif @unquoted_column_value and scanner.scan(@cr_or_lf)
+            elsif @unquoted_column_value and @scanner.scan(@cr_or_lf)
               message = "Unquoted fields do not allow \\r or \\n"
               raise MalformedCSVError.new(message, @lineno + 1)
-            elsif scanner.rest.start_with?(@quote_character)
+            elsif @scanner.rest.start_with?(@quote_character)
               message = "Illegal quoting"
               raise MalformedCSVError.new(message, @lineno + 1)
             else
@@ -430,7 +430,16 @@ class CSV
 
     def prepare_line
       @lineno = 0
-      @line = nil
+      @last_line = nil
+      @scanner = nil
+    end
+
+    def last_line
+      if @scanner
+        @last_line ||= @scanner.keep_end
+      else
+        @last_line
+      end
     end
 
     def prepare_header
@@ -527,17 +536,17 @@ class CSV
       end
     end
 
-    def skip_needless_lines(scanner)
+    def skip_needless_lines
       return unless @skip_lines
 
       while true
-        scanner.keep_start
-        line = scanner.scan_all(@not_row_end) || "".encode(@encoding)
-        line << @row_separator if parse_row_end(scanner)
+        @scanner.keep_start
+        line = @scanner.scan_all(@not_row_end) || "".encode(@encoding)
+        line << @row_separator if parse_row_end
         if skip_line?(line)
-          scanner.keep_drop
+          @scanner.keep_drop
         else
-          scanner.keep_back
+          @scanner.keep_back
           return
         end
       end
@@ -554,36 +563,36 @@ class CSV
       end
     end
 
-    def parse_column_value(scanner)
+    def parse_column_value
       if @liberal_parsing
-        quoted_value = parse_quoted_column_value(scanner)
+        quoted_value = parse_quoted_column_value
         if quoted_value
-          unquoted_value = parse_unquoted_column_value(scanner)
+          unquoted_value = parse_unquoted_column_value
           if unquoted_value
             @quote_character + quoted_value + @quote_character + unquoted_value
           else
             quoted_value
           end
         else
-          parse_unquoted_column_value(scanner)
+          parse_unquoted_column_value
         end
       elsif @may_quoted
-        parse_quoted_column_value(scanner) ||
-          parse_unquoted_column_value(scanner)
+        parse_quoted_column_value ||
+          parse_unquoted_column_value
       else
-        parse_unquoted_column_value(scanner) ||
-          parse_quoted_column_value(scanner)
+        parse_unquoted_column_value ||
+          parse_quoted_column_value
       end
     end
 
-    def parse_unquoted_column_value(scanner)
-      value = scanner.scan_all(@unquoted_value)
+    def parse_unquoted_column_value
+      value = @scanner.scan_all(@unquoted_value)
       @unquoted_column_value = true if value
       value
     end
 
-    def parse_quoted_column_value(scanner)
-      quotes = scanner.scan_all(@quotes)
+    def parse_quoted_column_value
+      quotes = @scanner.scan_all(@quotes)
       return nil unless quotes
 
       @quoted_column_value = true
@@ -593,9 +602,9 @@ class CSV
       else
         value = quotes[0, (n_quotes - 1) / 2]
         while true
-          quoted_value = scanner.scan_all(@quoted_value)
+          quoted_value = @scanner.scan_all(@quoted_value)
           value << quoted_value if quoted_value
-          quotes = scanner.scan_all(@quotes)
+          quotes = @scanner.scan_all(@quotes)
           unless quotes
             message = "Unclosed quoted field"
             raise MalformedCSVError.new(message, @lineno + 1)
@@ -614,36 +623,43 @@ class CSV
       end
     end
 
-    def parse_column_end(scanner)
-      return true if scanner.scan(@column_end)
+    def parse_column_end
+      return true if @scanner.scan(@column_end)
       return false unless @column_ends
 
-      scanner.keep_start
-      if @column_ends.all? {|column_end| scanner.scan(column_end)}
-        scanner.keep_drop
+      @scanner.keep_start
+      if @column_ends.all? {|column_end| @scanner.scan(column_end)}
+        @scanner.keep_drop
         true
       else
-        scanner.keep_back
+        @scanner.keep_back
         false
       end
     end
 
-    def parse_row_end(scanner)
-      return true if scanner.scan(@row_end)
+    def parse_row_end
+      return true if @scanner.scan(@row_end)
       return false unless @row_ends
-      scanner.keep_start
-      if @row_ends.all? {|row_end| scanner.scan(row_end)}
-        scanner.keep_drop
+      @scanner.keep_start
+      if @row_ends.all? {|row_end| @scanner.scan(row_end)}
+        @scanner.keep_drop
         true
       else
-        scanner.keep_back
+        @scanner.keep_back
         false
       end
     end
 
-    def emit_row(scanner, row, &block)
+    def start_row
+      if @last_line
+        @scanner.keep_drop
+        @last_line = nil
+      end
+      @scanner.keep_start
+    end
+
+    def emit_row(row, &block)
       @lineno += 1
-      @line = scanner.keep_end
 
       raw_row = row
       if @use_headers
