@@ -147,7 +147,7 @@ class CSV
           if chunk
             raise InvalidEncoding unless chunk.valid_encoding?
             @scanner = StringScanner.new(chunk)
-            if input.eof?
+            if input.respond_to?(:eof?) and input.eof?
               @inputs.shift
               @last_scanner = @inputs.empty?
             end
