@@ -531,6 +531,8 @@ class CSV
             raise MalformedCSVError.new(message, @lineno + 1)
           end
           Scanner.new(string)
+        elsif @samples.size == 1 and @input.respond_to?(:eof?) and @input.eof?
+          Scanner.new(@samples[0])
         else
           inputs = @samples.collect do |sample|
             StringIO.new(sample)
