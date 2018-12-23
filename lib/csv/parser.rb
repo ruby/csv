@@ -44,12 +44,15 @@ class CSV
         @inputs = inputs.dup
         @encoding = encoding
         @chunk_size = chunk_size
+        @last_scanner = @inputs.empty?
         @keeps = []
         read_chunk
       end
 
       def scan(pattern)
         value = @scanner.scan(pattern)
+        return value if @last_scanner
+
         if value
           read_chunk if @scanner.eos?
           return value
@@ -60,6 +63,8 @@ class CSV
 
       def scan_all(pattern)
         value = @scanner.scan(pattern)
+        return value if @last_scanner
+
         return nil if value.nil?
         while @scanner.eos? and read_chunk and (sub_value = @scanner.scan(pattern))
           value << sub_value
@@ -109,7 +114,7 @@ class CSV
 
       private
       def read_chunk
-        return false if @inputs.empty?
+        return false if @last_scanner
 
         unless @keeps.empty?
           keep = @keeps.last
@@ -134,17 +139,23 @@ class CSV
           raise InvalidEncoding unless string.valid_encoding?
           @scanner = StringScanner.new(string)
           @inputs.shift
+          @last_scanner = @inputs.empty?
           true
         else
           chunk = input.gets(nil, @chunk_size)
           if chunk
             raise InvalidEncoding unless chunk.valid_encoding?
             @scanner = StringScanner.new(chunk)
+            if input.eof?
+              @inputs.shift
+              @last_scanner = @inputs.empty?
+            end
             true
           else
             @scanner = StringScanner.new("".encode(@encoding))
             @inputs.shift
-            if @inputs.empty?
+            @last_scanner = @inputs.empty?
+            if @last_scanner
               false
             else
               read_chunk
