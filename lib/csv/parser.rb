@@ -274,6 +274,7 @@ class CSV
       prepare_regexp
       prepare_line
       prepare_header
+      prepare_parser
     end
 
     def prepare_variable
@@ -443,6 +444,20 @@ class CSV
       adjusted_headers
     end
 
+    def prepare_parser
+      @may_quoted = may_quoted?
+    end
+
+    def may_quoted?
+      if @input.is_a?(StringIO)
+        sample = @input.string
+      else
+        return false if @samples.empty?
+        sample = @samples.first
+      end
+      sample[0, 128].index(@quote_character)
+    end
+
     SCANNER_TEST = (ENV["CSV_PARSER_SCANNER_TEST"] == "yes")
     if SCANNER_TEST
       class UnoptimizedStringIO
@@ -514,24 +529,28 @@ class CSV
       if @liberal_parsing
         quoted_value = parse_quoted_column_value(scanner)
         if quoted_value
-          unquoted_value = scanner.scan_all(@unquoted_value)
+          unquoted_value = parse_unquoted_column_value(scanner)
           if unquoted_value
             @quote_character + quoted_value + @quote_character + unquoted_value
           else
             quoted_value
           end
         else
-          scanner.scan_all(@unquoted_value)
+          parse_unquoted_column_value(scanner)
         end
+      elsif @may_quoted
+        parse_quoted_column_value(scanner) ||
+          parse_unquoted_column_value(scanner)
       else
-        value = scanner.scan_all(@unquoted_value)
-        if value
-          @unquoted_column_value = true
-          value
-        else
+        parse_unquoted_column_value(scanner) ||
           parse_quoted_column_value(scanner)
-        end
       end
+    end
+
+    def parse_unquoted_column_value(scanner)
+      value = scanner.scan_all(@unquoted_value)
+      @unquoted_column_value = true if value
+      value
     end
 
     def parse_quoted_column_value(scanner)
