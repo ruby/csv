@@ -1,5 +1,34 @@
 # News
 
+## 3.0.2 - 2018-12-23
+
+### Improvements
+
+  * Changed to use strscan in parser.
+    [GitHub#52][Patch by 284km]
+
+  * Improves CSV write performance.
+    3.0.2 will be about 2 times faster than 3.0.1.
+
+  * Improves CSV parse performance for complex case.
+    3.0.2 will be about 2 times faster than 3.0.1.
+
+### Fixes
+
+  * Fixed a parse error bug for new line only input with `headers` option.
+    [GitHub#53][Reported by Chris Beer]
+
+  * Fixed some typos in document.
+    [GitHub#54][Patch by Victor Shepelev]
+
+### Thanks
+
+  * 284km
+
+  * Chris Beer
+
+  * Victor Shepelev
+
 ## 3.0.1 - 2018-12-07
 
 ### Improvements
