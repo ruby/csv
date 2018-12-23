@@ -309,16 +309,17 @@ class CSV
     end
 
     def prepare_regexp
-      @column_separator = @options[:col_sep].to_s.encode(@encoding)
-      @row_separator = resolve_row_separator(@options[:row_sep]).encode(@encoding)
-      @quote_character = @options[:quote_char].to_s.encode(@encoding)
+      @column_separator = @options[:column_separator].to_s.encode(@encoding)
+      @row_separator =
+        resolve_row_separator(@options[:row_separator]).encode(@encoding)
+      @quote_character = @options[:quote_character].to_s.encode(@encoding)
       if @quote_character.length != 1
         raise ArgumentError, ":quote_char has to be a single character String"
       end
 
-      escaped_col_sep = Regexp.escape(@column_separator)
-      escaped_row_sep = Regexp.escape(@row_separator)
-      escaped_quote_char = Regexp.escape(@quote_character)
+      escaped_column_separator = Regexp.escape(@column_separator)
+      escaped_row_separator = Regexp.escape(@row_separator)
+      escaped_quote_character = Regexp.escape(@quote_character)
 
       skip_lines = @options[:skip_lines]
       case skip_lines
@@ -335,7 +336,7 @@ class CSV
         @skip_lines = skip_lines
       end
 
-      @column_end = Regexp.new(escaped_col_sep)
+      @column_end = Regexp.new(escaped_column_separator)
       if @column_separator.size > 1
         @column_ends = @column_separator.each_char.collect do |char|
           Regexp.new(Regexp.escape(char))
@@ -343,7 +344,7 @@ class CSV
       else
         @column_ends = nil
       end
-      @row_end = Regexp.new(escaped_row_sep)
+      @row_end = Regexp.new(escaped_row_separator)
       if @row_separator.size > 1
         @row_ends = @row_separator.each_char.collect do |char|
           Regexp.new(Regexp.escape(char))
@@ -351,19 +352,19 @@ class CSV
       else
         @row_ends = nil
       end
-      @quotes = Regexp.new(escaped_quote_char +
+      @quotes = Regexp.new(escaped_quote_character +
                            "+".encode(@encoding))
       @quoted_value = Regexp.new("[^".encode(@encoding) +
-                                 escaped_quote_char +
+                                 escaped_quote_character +
                                  "]+".encode(@encoding))
       if @liberal_parsing
         @unquoted_value = Regexp.new("[^".encode(@encoding) +
-                                     escaped_col_sep +
+                                     escaped_column_separator +
                                      "\r\n]+".encode(@encoding))
       else
         @unquoted_value = Regexp.new("[^".encode(@encoding) +
-                                     escaped_quote_char +
-                                     escaped_col_sep +
+                                     escaped_quote_character +
+                                     escaped_column_separator +
                                      "\r\n]+".encode(@encoding))
       end
       @cr_or_lf = Regexp.new("[\r\n]".encode(@encoding))

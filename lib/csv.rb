@@ -922,9 +922,9 @@ class CSV
     @initial_header_converters = header_converters
 
     @parser_options = {
-      col_sep: col_sep,
-      row_sep: row_sep,
-      quote_char: quote_char,
+      column_separator: col_sep,
+      row_separator: row_sep,
+      quote_character: quote_char,
       field_size_limit: field_size_limit,
       unconverted_fields: unconverted_fields,
       headers: headers,
