@@ -657,8 +657,9 @@ class CSV
 
     def start_row
       if @last_line
-        @scanner.keep_drop
         @last_line = nil
+      else
+        @scanner.keep_drop
       end
       @scanner.keep_start
     end
