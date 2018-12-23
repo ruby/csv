@@ -246,7 +246,7 @@ class CSV
           @quoted_column_value = false
           @unquoted_column_value = false
           value = parse_column_value
-          if value and @field_size_limit and value.bytesize >= @field_size_limit
+          if value and @field_size_limit and value.size >= @field_size_limit
             raise MalformedCSVError.new("Field size exceeded", @lineno + 1)
           end
           if parse_column_end
