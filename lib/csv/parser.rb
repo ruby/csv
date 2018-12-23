@@ -379,13 +379,18 @@ class CSV
         if @input.is_a?(StringIO)
           separator = detect_row_separator(@input.string, cr, lf)
         elsif @input.respond_to?(:gets)
+          if @input.is_a?(File)
+            chunk_size = 32 * 1024
+          else
+            chunk_size = 1024
+          end
           begin
             while separator == :auto
               #
               # if we run out of data, it's probably a single line
               # (ensure will set default value)
               #
-              break unless sample = @input.gets(nil, 1024)
+              break unless sample = @input.gets(nil, chunk_size)
 
               # extend sample if we're unsure of the line ending
               if sample.end_with?(cr)
