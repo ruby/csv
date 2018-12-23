@@ -529,15 +529,18 @@ class CSV
       end
     else
       def build_scanner
+        string = nil
         if @samples.empty? and @input.is_a?(StringIO)
           string = @input.string
+        elsif @samples.size == 1 and @input.respond_to?(:eof?) and @input.eof?
+          string = @samples[0]
+        end
+        if string
           unless string.valid_encoding?
             message = "Invalid byte sequence in #{@encoding}"
             raise MalformedCSVError.new(message, @lineno + 1)
           end
           Scanner.new(string)
-        elsif @samples.size == 1 and @input.respond_to?(:eof?) and @input.eof?
-          Scanner.new(@samples[0])
         else
           inputs = @samples.collect do |sample|
             StringIO.new(sample)
