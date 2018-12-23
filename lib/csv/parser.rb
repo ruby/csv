@@ -25,6 +25,10 @@ class CSV
       def keep_end
         string[@keep_start, pos - @keep_start]
       end
+
+      def keep_back
+        self.pos = @keep_start
+      end
     end
 
     class InputsScanner
@@ -76,18 +80,22 @@ class CSV
         keep
       end
 
+      def keep_back
+        if @keep_buffer
+          string = @scanner.string
+          keep = string[@keep_start, string.size - @keep_start]
+          if keep and not keep.empty?
+            @inputs.unshift(StringIO.new(keep))
+          end
+          @scanner = StringScanner.new(@keep_buffer)
+        else
+          @scanner.pos = @keep_start
+        end
+        @keep_start = nil
+      end
+
       def rest
         @scanner.rest
-      end
-
-      def pos
-        @scanner.pos
-      end
-
-      def pos=(new_pos)
-        @scanner.pos = new_pos
-        read_chunk if @scanner.eos?
-        new_pos
       end
 
       private
@@ -345,10 +353,9 @@ class CSV
                                      "\r\n]+".encode(@encoding))
       end
       @cr_or_lf = Regexp.new("[\r\n]".encode(@encoding))
-      @one_line = Regexp.new("\\A[^".encode(@encoding) +
-                             escaped_row_sep +
-                             "]*?".encode(@encoding) +
-                             escaped_row_sep)
+      @not_row_end = Regexp.new("[^".encode(@encoding) +
+                                escaped_row_sep +
+                                "]+".encode(@encoding))
     end
 
     def resolve_row_separator(separator)
@@ -467,7 +474,11 @@ class CSV
         inputs = @samples.collect do |sample|
           UnoptimizedStringIO.new(sample)
         end
-        inputs << @input
+        if @input.is_a?(StringIO)
+          inputs << UnoptimizedStringIO.new(@input.string)
+        else
+          inputs << @input
+        end
         InputsScanner.new(inputs, @encoding, chunk_size: 1)
       end
     else
@@ -497,11 +508,11 @@ class CSV
         end
       else
         while true
-          pos = scanner.pos
-          line = scanner.scan(@one_line)
-          break unless line
+          scanner.keep_start
+          line = scanner.scan_all(@not_row_end) || "".encode(@encoding)
+          line << @row_separator if parse_row_end(scanner)
           unless @skip_lines.match(line)
-            scanner.pos = pos
+            scanner.keep_back
             break
           end
         end

@@ -406,14 +406,14 @@ line,4,jkl
     end
   end
 
-  def test_requires_skip_lines_match
-    csv = <<-CSV
+  def test_skip_lines_match
+    csv = <<-CSV.chomp
 1
 # 2
 3
-4
+# 4
     CSV
-    assert_equal([["1"], ["3"], ["4"]],
+    assert_equal([["1"], ["3"]],
                  CSV.parse(csv, :skip_lines => Matchable.new(/\A#/)))
   end
 
