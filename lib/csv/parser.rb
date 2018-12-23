@@ -97,6 +97,7 @@ class CSV
           keep = string[start, string.size - start]
           if keep and not keep.empty?
             @inputs.unshift(StringIO.new(keep))
+            @last_scanner = false
           end
           @scanner = StringScanner.new(buffer)
         else
@@ -503,6 +504,10 @@ class CSV
 
         def gets(*args)
           @io.gets(*args)
+        end
+
+        def eof?
+          @io.eof?
         end
       end
 
