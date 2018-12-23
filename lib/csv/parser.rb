@@ -2,8 +2,11 @@
 
 require "strscan"
 
-require_relative "table"
+require_relative "match_p"
 require_relative "row"
+require_relative "table"
+
+using CSV::MatchP if CSV.const_defined?(:MatchP)
 
 class CSV
   class Parser
@@ -298,27 +301,9 @@ class CSV
       skip_lines = @options[:skip_lines]
       case skip_lines
       when String
-        @skip_lines = Regexp.new("\\A[^".encode(@encoding) +
-                                 escaped_row_sep +
-                                 "]*".encode(@encoding) +
-                                 Regexp.escape(skip_lines.encode(@encoding)) +
-                                 "[^".encode(@encoding) +
-                                 escaped_row_sep +
-                                 "]*".encode(@encoding) +
-                                 "(?:".encode(@encoding) +
-                                 escaped_row_sep +
-                                 ")?".encode(@encoding))
-      when Regexp
-        @skip_lines = Regexp.new("\\A".encode(@encoding) +
-                                 skip_lines.to_s +
-                                 "[^".encode(@encoding) +
-                                 escaped_row_sep +
-                                 "]*".encode(@encoding) +
-                                 "(?:".encode(@encoding) +
-                                 escaped_row_sep +
-                                 ")?".encode(@encoding))
-      when nil
-        @skip_lines = nil
+        @skip_lines = skip_lines.encode(@encoding)
+      when Regexp, nil
+        @skip_lines = skip_lines
       else
         unless skip_lines.respond_to?(:match)
           message =
@@ -501,21 +486,27 @@ class CSV
     end
 
     def skip_needless_lines(scanner)
+      return unless @skip_lines
+
+      while true
+        scanner.keep_start
+        line = scanner.scan_all(@not_row_end) || "".encode(@encoding)
+        line << @row_separator if parse_row_end(scanner)
+        unless skip_line?(line)
+          scanner.keep_back
+          break
+        end
+      end
+    end
+
+    def skip_line?(line)
       case @skip_lines
-      when nil
+      when String
+        line.include?(@skip_lines)
       when Regexp
-        while scanner.scan_all(@skip_lines)
-        end
+        @skip_lines.match?(line)
       else
-        while true
-          scanner.keep_start
-          line = scanner.scan_all(@not_row_end) || "".encode(@encoding)
-          line << @row_separator if parse_row_end(scanner)
-          unless @skip_lines.match(line)
-            scanner.keep_back
-            break
-          end
-        end
+        @skip_lines.match(line)
       end
     end
 
