@@ -3,11 +3,12 @@
 require "csv"
 require "optparse"
 
+n_columns = 1000
 n_rows = 1000
 type = "unquoted"
 
-alphas = ["AAAAA"] * 50
-hiraganas = ["あああああ"] * 50
+alphas = nil
+hiraganas = nil
 
 builders = {
   "unquoted" => lambda {(alphas.join(",") + "\r\n") * n_rows},
@@ -22,6 +23,11 @@ builders = {
 }
 
 parser = OptionParser.new
+parser.on("--n-columns=N", Integer,
+          "The number of columns to be parsed",
+          "(#{n_columns})") do |n|
+  n_columns = n
+end
 parser.on("--n-rows=N", Integer,
           "The number of rows to be parsed",
           "(#{n_rows})") do |n|
@@ -33,6 +39,9 @@ parser.on("--type=TYPE", builders.keys,
   type = t
 end
 parser.parse!(ARGV)
+
+alphas = ["AAAAA"] * n_columns
+hiragans = ["あああああ"] * n_columns
 
 data = builders[type].call
 
