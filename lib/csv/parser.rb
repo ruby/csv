@@ -368,9 +368,7 @@ class CSV
                                      "\r\n]+".encode(@encoding))
       end
       @cr_or_lf = Regexp.new("[\r\n]".encode(@encoding))
-      @not_row_end = Regexp.new("[^".encode(@encoding) +
-                                escaped_row_sep +
-                                "]+".encode(@encoding))
+      @not_line_end = Regexp.new("[^\r\n]+".encode(@encoding))
     end
 
     def resolve_row_separator(separator)
@@ -557,7 +555,7 @@ class CSV
 
       while true
         @scanner.keep_start
-        line = @scanner.scan_all(@not_row_end) || "".encode(@encoding)
+        line = @scanner.scan_all(@not_line_end) || "".encode(@encoding)
         line << @row_separator if parse_row_end
         if skip_line?(line)
           @scanner.keep_drop
