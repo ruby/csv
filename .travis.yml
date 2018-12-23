@@ -21,9 +21,13 @@ matrix:
     - name: "2.5"
       rvm: 2.5.2
     - name: "2.6"
-      rvm: 2.6.0-rc2
+      rvm: 2.6
     - name: "trunk"
       rvm: ruby-head
+    - name: "scanner"
+      rvm: 2.6
+      env:
+        - CSV_PARSER_SCANNER_TEST=yes
     - name: "gem"
       rvm: 2.6
       install:

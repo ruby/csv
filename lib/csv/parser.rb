@@ -18,19 +18,24 @@ class CSV
 
       def initialize(*args)
         super
-        @keep_start = nil
+        @keeps = []
       end
 
       def keep_start
-        @keep_start = pos
+        @keeps.push(pos)
       end
 
       def keep_end
-        string[@keep_start, pos - @keep_start]
+        start = @keeps.pop
+        string[start, pos - start]
       end
 
       def keep_back
-        self.pos = @keep_start
+        self.pos = @keeps.pop
+      end
+
+      def keep_drop
+        @keeps.pop
       end
     end
 
@@ -39,7 +44,7 @@ class CSV
         @inputs = inputs.dup
         @encoding = encoding
         @chunk_size = chunk_size
-        @keep_start = nil
+        @keeps = []
         read_chunk
       end
 
@@ -67,34 +72,35 @@ class CSV
       end
 
       def keep_start
-        @keep_start = @scanner.pos
-        @keep_buffer = nil
+        @keeps.push([@scanner.pos, nil])
       end
 
       def keep_end
-        keep = @scanner.string[@keep_start, @scanner.pos - @keep_start]
-        start = @keep_start
-        @keep_start = nil
-        if @keep_buffer
-          @keep_buffer << keep
-          keep = @keep_buffer
-          @keep_buffer = nil
+        start, buffer = @keeps.pop
+        keep = @scanner.string[start, @scanner.pos - start]
+        if buffer
+          buffer << keep
+          keep = buffer
         end
         keep
       end
 
       def keep_back
-        if @keep_buffer
+        start, buffer = @keeps.pop
+        if buffer
           string = @scanner.string
-          keep = string[@keep_start, string.size - @keep_start]
+          keep = string[start, string.size - start]
           if keep and not keep.empty?
             @inputs.unshift(StringIO.new(keep))
           end
-          @scanner = StringScanner.new(@keep_buffer)
+          @scanner = StringScanner.new(buffer)
         else
-          @scanner.pos = @keep_start
+          @scanner.pos = start
         end
-        @keep_start = nil
+      end
+
+      def keep_drop
+        @keeps.pop
       end
 
       def rest
@@ -105,17 +111,20 @@ class CSV
       def read_chunk
         return false if @inputs.empty?
 
-        if @keep_start
+        unless @keeps.empty?
+          keep = @keeps.last
+          keep_start = keep[0]
           string = @scanner.string
-          keep = string[@keep_start, @scanner.pos - @keep_start]
-          if keep
-            if @keep_buffer
-              @keep_buffer << keep
+          keep_data = string[keep_start, @scanner.pos - keep_start]
+          if keep_data
+            keep_buffer = keep[1]
+            if keep_buffer
+              keep_buffer << keep_data
             else
-              @keep_buffer = keep.dup
+              keep[1] = keep_data.dup
             end
           end
-          @keep_start = 0
+          keep[0] = 0
         end
 
         input = @inputs.first
@@ -228,7 +237,7 @@ class CSV
           if value and @field_size_limit and value.bytesize >= @field_size_limit
             raise MalformedCSVError.new("Field size exceeded", @lineno + 1)
           end
-          if scanner.scan(@column_end)
+          if parse_column_end(scanner)
             row << value
           elsif parse_row_end(scanner)
             if row.empty? and value.nil?
@@ -315,6 +324,13 @@ class CSV
       end
 
       @column_end = Regexp.new(escaped_col_sep)
+      if @column_separator.size > 1
+        @column_ends = @column_separator.each_char.collect do |char|
+          Regexp.new(Regexp.escape(char))
+        end
+      else
+        @column_ends = nil
+      end
       @row_end = Regexp.new(escaped_row_sep)
       if @row_separator.size > 1
         @row_ends = @row_separator.each_char.collect do |char|
@@ -507,9 +523,11 @@ class CSV
         scanner.keep_start
         line = scanner.scan_all(@not_row_end) || "".encode(@encoding)
         line << @row_separator if parse_row_end(scanner)
-        unless skip_line?(line)
+        if skip_line?(line)
+          scanner.keep_drop
+        else
           scanner.keep_back
-          break
+          return
         end
       end
     end
@@ -585,9 +603,31 @@ class CSV
       end
     end
 
+    def parse_column_end(scanner)
+      return true if scanner.scan(@column_end)
+      return false unless @column_ends
+
+      scanner.keep_start
+      if @column_ends.all? {|column_end| scanner.scan(column_end)}
+        scanner.keep_drop
+        true
+      else
+        scanner.keep_back
+        false
+      end
+    end
+
     def parse_row_end(scanner)
-      scanner.scan(@row_end) or
-        (@row_ends and @row_ends.all? {|row_end| scanner.scan(row_end)})
+      return true if scanner.scan(@row_end)
+      return false unless @row_ends
+      scanner.keep_start
+      if @row_ends.all? {|row_end| scanner.scan(row_end)}
+        scanner.keep_drop
+        true
+      else
+        scanner.keep_back
+        false
+      end
     end
 
     def emit_row(scanner, row, &block)
