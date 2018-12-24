@@ -1,0 +1,32 @@
+prelude: |-
+  require "csv"
+  require "optparse"
+  n_columns = 50
+  n_rows = 1000
+  parser = OptionParser.new
+  parser.on("--n-columns=N", Integer,
+            "The number of columns to be parsed",
+            "(#{n_columns})") do |n|
+    n_columns = n
+  end
+  parser.on("--n-rows=N", Integer,
+            "The number of rows to be parsed",
+            "(#{n_rows})") do |n|
+    n_rows = n
+  end
+  parser.parse!(ARGV)
+  alphas = ["AAAAA"] * n_columns
+  unquoted = (alphas.join(",") + "\r\n") * n_rows
+  quoted = (alphas.map { |s| %("#{s}") }.join(",") + "\r\n") * n_rows
+  inc_col_sep = (alphas.map { |s| %(",#{s}") }.join(",") + "\r\n") * n_rows
+  inc_row_sep = (alphas.map { |s| %("#{s}\r\n") }.join(",") + "\r\n") * n_rows
+  hiraganas = ["あああああ"] * n_columns
+  enc_utf8 = (hiraganas.join(",") + "\r\n") * n_rows
+  enc_sjis = enc_utf8.encode("Windows-31J")
+benchmark:
+  unquoted: CSV.parse(unquoted)
+  quoted: CSV.parse(quoted)
+  include_col_sep: CSV.parse(inc_col_sep)
+  include_row_sep: CSV.parse(inc_row_sep)
+  encode_utf-8: CSV.parse(enc_utf8)
+  encode_sjis: CSV.parse(enc_sjis)

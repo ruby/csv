@@ -1,0 +1,21 @@
+prelude: |-
+  require 'csv'
+  require 'benchmark/ips'
+  CSV.open("/tmp/file.csv", "w") do |csv|
+    csv << ["player", "gameA", "gameB"]
+    1000.times do
+      csv << ['"Alice"', "84.0", "79.5"]
+      csv << ['"Bob"', "20.0", "56.5"]
+    end
+  end
+benchmark:
+  'CSV.foreach':
+    CSV.foreach("/tmp/file.csv") do |row|
+    end
+  'CSV#shift': |-
+    CSV.open("/tmp/file.csv") do |csv|
+      while _line = csv.shift
+      end
+    end
+  'CSV.read': CSV.read("/tmp/file.csv")
+  'CSV.table': CSV.table("/tmp/file.csv")

@@ -1,0 +1,14 @@
+prelude: |-
+  require "csv"
+  csv_text = <<CSV
+  foo,bar,,baz
+  hoge,,temo,
+  roo,goo,por,kosh
+  CSV
+  convert_nil = ->(s) {s || ""}
+benchmark:
+  'not convert': CSV.parse(csv_text)
+  converter: |-
+    CSV.parse(csv_text, converters: convert_nil)
+  option: |-
+    CSV.parse(csv_text, nil_value: "")
