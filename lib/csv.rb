@@ -534,7 +534,7 @@ class CSV
       str.seek(0, IO::SEEK_END)
     else
       encoding = options[:encoding]
-      str      = String.new
+      str      = +""
       str.force_encoding(encoding) if encoding
     end
     csv = new(str, options) # wrap

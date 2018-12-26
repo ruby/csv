@@ -211,15 +211,17 @@ class TestCSV::Interface < TestCSV
       assert_instance_of(CSV, csv)
       assert_equal(csv, csv << [1, 2, 3])
       assert_equal(csv, csv << [4, nil, 5])
+      assert_equal(csv, csv << ["あ", "い", "う"])
     end
     assert_not_nil(str)
     assert_instance_of(String, str)
-    assert_equal("1,2,3\n4,,5\n", str)
+    assert_equal("1,2,3\n4,,5\nあ,い,う\n", str)
+    assert_equal(Encoding::UTF_8, str.encoding)
 
     CSV.generate(str) do |csv|   # appending to a String
       assert_equal(csv, csv << ["last", %Q{"row"}])
     end
-    assert_equal(%Q{1,2,3\n4,,5\nlast,"""row"""\n}, str)
+    assert_equal(%Q{1,2,3\n4,,5\nあ,い,う\nlast,"""row"""\n}, str)
 
     out = CSV.generate("test") { |csv| csv << ["row"] }
     assert_equal("testrow\n", out)
