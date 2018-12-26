@@ -289,6 +289,10 @@ class CSV
       end
     end
 
+    def use_headers
+      @use_headers
+    end
+
     private
     def prepare
       prepare_variable
