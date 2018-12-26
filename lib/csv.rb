@@ -1179,7 +1179,7 @@ class CSV
   def read
     rows = to_a
     headers = parser.headers
-    if headers
+    if headers || rows.empty?
       Table.new(rows, headers: headers)
     else
       rows

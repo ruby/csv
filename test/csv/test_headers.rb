@@ -315,4 +315,9 @@ A
     assert_equal([["A"], [nil]],
                  [row.headers, row.fields])
   end
+
+  def test_empty_string_value_with_headers_true
+    row = CSV.parse('', headers: true)
+    assert_equal([], row.headers)
+  end
 end
