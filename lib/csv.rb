@@ -1178,9 +1178,8 @@ class CSV
   #
   def read
     rows = to_a
-    headers = parser.headers
-    if headers
-      Table.new(rows, headers: headers)
+    if parser.use_headers?
+      Table.new(rows, headers: parser.headers)
     else
       rows
     end
