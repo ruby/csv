@@ -289,7 +289,7 @@ class CSV
       end
     end
 
-    def use_headers
+    def use_headers?
       @use_headers
     end
 
