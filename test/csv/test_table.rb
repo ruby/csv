@@ -6,7 +6,7 @@
 #
 # Created by James Edward Gray II on 2005-10-31.
 
-require_relative "base"
+require_relative "helper"
 
 class TestCSVTable < Test::Unit::TestCase
   extend DifferentOFS

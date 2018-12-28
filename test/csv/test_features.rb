@@ -11,7 +11,7 @@ begin
 rescue LoadError
 end
 
-require_relative "base"
+require_relative "helper"
 require "tempfile"
 
 class TestCSVFeatures < Test::Unit::TestCase

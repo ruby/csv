@@ -8,7 +8,7 @@
 
 require "timeout"
 
-require_relative "base"
+require_relative "helper"
 
 #
 # Following tests are my interpretation of the
