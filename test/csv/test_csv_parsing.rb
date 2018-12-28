@@ -1,10 +1,5 @@
-#!/usr/bin/env ruby -w
-# encoding: UTF-8
+# -*- coding: utf-8 -*-
 # frozen_string_literal: false
-
-# tc_csv_parsing.rb
-#
-# Created by James Edward Gray II on 2005-10-31.
 
 require "timeout"
 
