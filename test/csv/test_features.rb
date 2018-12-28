@@ -14,7 +14,7 @@ end
 require_relative "base"
 require "tempfile"
 
-class TestCSV::Features < TestCSV
+class TestCSVFeatures < Test::Unit::TestCase
   extend DifferentOFS
 
   TEST_CASES = [ [%Q{a,b},               ["a", "b"]],

@@ -16,7 +16,7 @@ require_relative "base"
 # document in one place (intentionally) and that is to make the default row
 # separator <tt>$/</tt>.
 #
-class TestCSV::Parsing < TestCSV
+class TestCSVParsing < Test::Unit::TestCase
   extend DifferentOFS
 
   BIG_DATA = "123456789\n" * 1024

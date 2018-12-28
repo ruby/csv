@@ -8,7 +8,7 @@
 
 require_relative "base"
 
-class TestCSV::DataConverters < TestCSV
+class TestCSVDataConverters < Test::Unit::TestCase
   extend DifferentOFS
 
   def setup

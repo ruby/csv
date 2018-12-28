@@ -7,7 +7,7 @@
 # Created by James Edward Gray II on 2005-10-31.
 require_relative "base"
 
-class TestCSV::Writing < TestCSV
+class TestCSVWriting < Test::Unit::TestCase
   extend DifferentOFS
 
   def test_writing

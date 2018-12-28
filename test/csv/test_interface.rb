@@ -9,7 +9,7 @@
 require_relative "base"
 require "tempfile"
 
-class TestCSV::Interface < TestCSV
+class TestCSVInterface < Test::Unit::TestCase
   extend DifferentOFS
 
   def setup

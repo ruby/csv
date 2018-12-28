@@ -8,7 +8,7 @@
 
 require_relative "base"
 
-class TestCSV::Headers < TestCSV
+class TestCSVHeaders < Test::Unit::TestCase
   extend DifferentOFS
 
   def setup

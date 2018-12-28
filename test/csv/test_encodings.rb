@@ -8,7 +8,7 @@
 
 require_relative "base"
 
-class TestCSV::Encodings < TestCSV
+class TestCSVEncodings < Test::Unit::TestCase
   extend DifferentOFS
 
   def setup
