@@ -36,6 +36,30 @@ class TestCSVWriting < Test::Unit::TestCase
                  CSV.generate_line([%Q["\r], %Q["\r]]))
   end
 
+  def test_quote_last
+    assert_equal(%Q[foo,"bar"""#{$INPUT_RECORD_SEPARATOR}],
+                 CSV.generate_line(["foo", %Q[bar"]]))
+  end
+
+  def test_quote_lf_last
+    assert_equal(%Q[foo,"\nbar"""#{$INPUT_RECORD_SEPARATOR}],
+                 CSV.generate_line(["foo", %Q[\nbar"]]))
+  end
+
+  def test_quote_lf_value_lf
+    assert_equal(%Q[foo,"""\nbar\n"""#{$INPUT_RECORD_SEPARATOR}],
+                 CSV.generate_line(["foo", %Q["\nbar\n"]]))
+  end
+
+  def test_quote_lf_value_lf_nil
+    assert_equal(%Q[foo,"""\nbar\n""",#{$INPUT_RECORD_SEPARATOR}],
+                 CSV.generate_line(["foo", %Q["\nbar\n"], nil]))
+  end
+
+  def test_quote_empty
+    assert_equal(%Q["""",""#{$INPUT_RECORD_SEPARATOR}],
+                 CSV.generate_line([%Q["], ""]))
+  end
   def test_empty
     assert_equal(%Q[foo,"",baz#{$INPUT_RECORD_SEPARATOR}],
                  CSV.generate_line(["foo", "", "baz"]))
@@ -44,6 +68,11 @@ class TestCSVWriting < Test::Unit::TestCase
   def test_empty_only
     assert_equal(%Q[""#{$INPUT_RECORD_SEPARATOR}],
                  CSV.generate_line([""]))
+  end
+
+  def test_empty_double
+    assert_equal(%Q["",""#{$INPUT_RECORD_SEPARATOR}],
+                 CSV.generate_line(["", ""]))
   end
 
   def test_cr
@@ -76,6 +105,16 @@ class TestCSVWriting < Test::Unit::TestCase
                  CSV.generate_line(["foo", "\r\n\n", "baz"]))
   end
 
+  def test_cr_lf_comma
+    assert_equal(%Q["\r\n,"#{$INPUT_RECORD_SEPARATOR}],
+                 CSV.generate_line(["\r\n,"]))
+  end
+
+  def test_cr_lf_comma_nil
+    assert_equal(%Q["\r\n,",#{$INPUT_RECORD_SEPARATOR}],
+                 CSV.generate_line(["\r\n,", nil]))
+  end
+
   def test_comma
     assert_equal(%Q[","#{$INPUT_RECORD_SEPARATOR}],
                  CSV.generate_line([","]))
@@ -96,14 +135,19 @@ class TestCSVWriting < Test::Unit::TestCase
                  CSV.generate_line(["foo"]))
   end
 
-  def test_nil_values
+  def test_nil_values_only
     assert_equal(%Q[,,#{$INPUT_RECORD_SEPARATOR}],
                  CSV.generate_line([nil, nil, nil]))
   end
 
-  def test_nil_double
+  def test_nil_double_only
     assert_equal(%Q[,#{$INPUT_RECORD_SEPARATOR}],
                  CSV.generate_line([nil, nil]))
+  end
+
+  def test_nil_values
+    assert_equal(%Q[foo,,,#{$INPUT_RECORD_SEPARATOR}],
+                 CSV.generate_line(["foo", nil, nil, nil]))
   end
 
   def test_nil_value_first
@@ -119,6 +163,16 @@ class TestCSVWriting < Test::Unit::TestCase
   def test_nil_value_last
     assert_equal(%Q[foo,baz,#{$INPUT_RECORD_SEPARATOR}],
                  CSV.generate_line(["foo", "baz", nil]))
+  end
+
+  def test_nil_empty
+    assert_equal(%Q[,""#{$INPUT_RECORD_SEPARATOR}],
+                 CSV.generate_line([nil, ""]))
+  end
+
+  def test_nil_cr
+    assert_equal(%Q[,"\r"#{$INPUT_RECORD_SEPARATOR}],
+                 CSV.generate_line([nil, "\r"]))
   end
 
   def test_values
@@ -139,44 +193,6 @@ class TestCSVWriting < Test::Unit::TestCase
   def test_tab_values
     assert_equal(%Q[\t,\t#{$INPUT_RECORD_SEPARATOR}],
                  CSV.generate_line(["\t", "\t"]))
-  end
-
-  def test_writing
-    [ ["foo,\"\"\"\"\"\",baz",    ["foo", "\"\"", "baz"]],
-      ["foo,\"\"\"bar\"\"\",baz", ["foo", "\"bar\"", "baz"]],
-      ["foo,\"\r\n\",baz",        ["foo", "\r\n", "baz"]],
-      ["\"\"",                    [""]],
-      ["foo,\"\"\"\",baz",        ["foo", "\"", "baz"]],
-      ["foo,\"\r.\n\",baz",       ["foo", "\r.\n", "baz"]],
-      ["foo,\"\r\",baz",          ["foo", "\r", "baz"]],
-      ["foo,\"\",baz",            ["foo", "", "baz"]],
-      ["foo",                     ["foo"]],
-      [",,",                      [nil, nil, nil]],
-      [",",                       [nil, nil]],
-      ["foo,\"\n\",baz",          ["foo", "\n", "baz"]],
-      ["foo,,baz",                ["foo", nil, "baz"]],
-      ["foo,bar",                 ["foo", "bar"]],
-      ["foo,\"\r\n\n\",baz",      ["foo", "\r\n\n", "baz"]],
-      ["foo,\"foo,bar\",baz",     ["foo", "foo,bar", "baz"]],
-      [%Q{a,b},                   ["a", "b"]],
-      [%Q{a,"""b"""},             ["a", "\"b\""]],
-      [%Q{a,"""b"},               ["a", "\"b"]],
-      [%Q{a,"b"""},               ["a", "b\""]],
-      [%Q{a,"\nb"""},             ["a", "\nb\""]],
-      [%Q{a,"""\nb"},             ["a", "\"\nb"]],
-      [%Q{a,"""\nb\n"""},         ["a", "\"\nb\n\""]],
-      [%Q{a,"""\nb\n""",},        ["a", "\"\nb\n\"", nil]],
-      [%Q{a,,,},                  ["a", nil, nil, nil]],
-      [%Q{,},                     [nil, nil]],
-      [%Q{"",""},                 ["", ""]],
-      [%Q{""""},                  ["\""]],
-      [%Q{"""",""},               ["\"",""]],
-      [%Q{,""},                   [nil,""]],
-      [%Q{,"\r"},                 [nil,"\r"]],
-      [%Q{"\r\n,"},               ["\r\n,"]],
-      [%Q{"\r\n,",},              ["\r\n,", nil]] ].each do |test_case|
-        assert_equal(test_case.first + $/, CSV.generate_line(test_case.last))
-      end
   end
 
   def test_col_sep
