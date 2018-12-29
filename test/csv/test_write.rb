@@ -3,7 +3,7 @@
 
 require_relative "helper"
 
-class TestCSVWriting < Test::Unit::TestCase
+class TestCSVWrite < Test::Unit::TestCase
   extend DifferentOFS
 
   def test_tab
