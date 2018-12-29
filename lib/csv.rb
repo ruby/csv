@@ -534,7 +534,7 @@ class CSV
       str.seek(0, IO::SEEK_END)
     else
       encoding = options[:encoding]
-      str      = +""
+      str = +""
       str.force_encoding(encoding) if encoding
     end
     csv = new(str, options) # wrap
@@ -557,11 +557,11 @@ class CSV
   #
   def self.generate_line(row, **options)
     options = {row_sep: $INPUT_RECORD_SEPARATOR}.merge(options)
-    str = String.new
+    str = +""
     if options[:encoding]
       str.force_encoding(options[:encoding])
-    elsif field = row.find { |f| not f.nil? }
-      str.force_encoding(String(field).encoding)
+    elsif field = row.find {|f| f.is_a?(String)}
+      str.force_encoding(field.encoding)
     end
     (new(str, options) << row).string
   end
