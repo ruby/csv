@@ -243,14 +243,7 @@ line,5,jkl
     assert_equal([["a"]], CSV.parse("a\r\n"))
   end
 
-  def test_headers_empty_line
-    assert_equal(CSV::Table.new([CSV::Row.new(["header1"], [])],
-                                headers: ["header1"]),
-                 CSV.parse("\n", headers: "header1"))
-  end
-
   private
-
   def assert_parse_errors_out(*args)
     assert_raise(CSV::MalformedCSVError) do
       Timeout.timeout(0.2) do

@@ -311,8 +311,25 @@ A
                  [row.headers, row.fields])
   end
 
-  def test_empty_string_value_with_headers_true
-    table = CSV.parse('', headers: true)
-    assert_equal(CSV::Table.new([], {}), table)
+  def test_parse_empty
+    assert_equal(CSV::Table.new([], {}),
+                 CSV.parse("", headers: true))
+  end
+
+  def test_parse_empty_line
+    assert_equal(CSV::Table.new([], {}),
+                 CSV.parse("\n", headers: true))
+  end
+
+  def test_specified_empty
+    assert_equal(CSV::Table.new([],
+                                headers: ["header1"]),
+                 CSV.parse("", headers: ["header1"]))
+  end
+
+  def test_specified_empty_line
+    assert_equal(CSV::Table.new([CSV::Row.new(["header1"], [])],
+                                headers: ["header1"]),
+                 CSV.parse("\n", headers: ["header1"]))
   end
 end
