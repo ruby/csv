@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # frozen_string_literal: false
 
-require_relative "helper"
+require_relative "../helper"
 
 class TestCSVHeaders < Test::Unit::TestCase
   extend DifferentOFS

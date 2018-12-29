@@ -3,7 +3,7 @@
 
 require "timeout"
 
-require_relative "helper"
+require_relative "../helper"
 
 #
 # Following tests are my interpretation of the
@@ -11,7 +11,7 @@ require_relative "helper"
 # document in one place (intentionally) and that is to make the default row
 # separator <tt>$/</tt>.
 #
-class TestCSVParsing < Test::Unit::TestCase
+class TestCSVParseGeneral < Test::Unit::TestCase
   extend DifferentOFS
 
   BIG_DATA = "123456789\n" * 1024
