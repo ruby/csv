@@ -221,16 +221,6 @@ line,5,jkl
     assert_parse_errors_out(data, field_size_limit: 5)
   end
 
-  def test_col_sep_comma
-    assert_equal([["a", "b", nil, "d"]],
-                 CSV.parse("a,b,,d", col_sep: ","))
-  end
-
-  def test_col_sep_space
-    assert_equal([["a", "b", nil, "d"]],
-                 CSV.parse("a b  d", col_sep: " "))
-  end
-
   def test_row_sep_auto_cr
     assert_equal([["a"]], CSV.parse("a\r"))
   end

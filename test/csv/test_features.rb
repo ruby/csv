@@ -284,16 +284,6 @@ line,4,jkl
     csv.each {|row| assert_predicate row, :header_row?}
   end
 
-  # reported by Dave Burt
-  def test_leading_empty_fields_with_multibyte_col_sep
-    data = <<-CSV
-<=><=>A<=>B<=>C
-1<=>2<=>3
-    CSV
-    parsed = CSV.parse(data, col_sep: "<=>")
-    assert_equal([[nil, nil, "A", "B", "C"], ["1", "2", "3"]], parsed)
-  end
-
   def test_gzip_reader
     zipped = nil
     assert_nothing_raised(NoMethodError) do
