@@ -1,5 +1,11 @@
+contexts:
+  - gems: { csv: 3.0.1 }
+  - gems: { csv: 3.0.2 }
+  - name: "master"
+    require: false
+    prelude: |
+      require './lib/csv'
 prelude: |-
-  require 'csv'
   require 'benchmark/ips'
   CSV.open("/tmp/file.csv", "w") do |csv|
     csv << ["player", "gameA", "gameB"]
