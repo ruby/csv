@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 # frozen_string_literal: false
 
-require "timeout"
-
 require_relative "../helper"
 
 class TestCSVParseColumnSeparator < Test::Unit::TestCase
