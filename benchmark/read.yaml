@@ -16,13 +16,13 @@ prelude: |-
     end
   end
 benchmark:
-  'CSV.foreach':
+  "CSV.foreach":
     CSV.foreach("/tmp/file.csv") do |row|
     end
-  'CSV#shift': |-
+  "CSV#shift": |-
     CSV.open("/tmp/file.csv") do |csv|
       while _line = csv.shift
       end
     end
-  'CSV.read': CSV.read("/tmp/file.csv")
-  'CSV.table': CSV.table("/tmp/file.csv")
+  "CSV.read": CSV.read("/tmp/file.csv")
+  "CSV.table": CSV.table("/tmp/file.csv")
