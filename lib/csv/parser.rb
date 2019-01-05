@@ -609,24 +609,24 @@ class CSV
 
     def parse_unquoted_column_value
       value = @scanner.scan_all(@unquoted_value)
-      if value
-        if @first_column_separators
-          while true
-            @scanner.keep_start
-            is_column_end = @column_ends.all? do |column_end|
-              @scanner.scan(column_end)
-            end
-            @scanner.keep_back
-            break if is_column_end
-            sub_separator = @scanner.scan_all(@first_column_separators)
-            break if sub_separator.nil?
-            value << sub_separator
-            sub_value = @scanner.scan_all(@unquoted_value)
-            break if sub_value.nil?
-            value << sub_value
+      return nil unless value
+
+      @unquoted_column_value = true
+      if @first_column_separators
+        while true
+          @scanner.keep_start
+          is_column_end = @column_ends.all? do |column_end|
+            @scanner.scan(column_end)
           end
+          @scanner.keep_back
+          break if is_column_end
+          sub_separator = @scanner.scan_all(@first_column_separators)
+          break if sub_separator.nil?
+          value << sub_separator
+          sub_value = @scanner.scan_all(@unquoted_value)
+          break if sub_value.nil?
+          value << sub_value
         end
-        @unquoted_column_value = true
       end
       value
     end
