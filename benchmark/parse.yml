@@ -1,10 +1,12 @@
 contexts:
-  - gems: { csv: 3.0.1 }
-  - gems: { csv: 3.0.2 }
+  - gems:
+      csv: 3.0.1
+  - gems:
+      csv: 3.0.2
   - name: "master"
     require: false
     prelude: |
-      require './lib/csv'
+      require_relative "lib/csv"
 prelude: |-
   require "optparse"
   n_columns = 50
