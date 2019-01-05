@@ -54,25 +54,6 @@ module TestCSVWriteGeneral
                  generate_line(["foo", %Q["\nbar\n"], nil]))
   end
 
-  def test_quote_empty
-    assert_equal(%Q["""",""#{$INPUT_RECORD_SEPARATOR}],
-                 generate_line([%Q["], ""]))
-  end
-  def test_empty
-    assert_equal(%Q[foo,"",baz#{$INPUT_RECORD_SEPARATOR}],
-                 generate_line(["foo", "", "baz"]))
-  end
-
-  def test_empty_only
-    assert_equal(%Q[""#{$INPUT_RECORD_SEPARATOR}],
-                 generate_line([""]))
-  end
-
-  def test_empty_double
-    assert_equal(%Q["",""#{$INPUT_RECORD_SEPARATOR}],
-                 generate_line(["", ""]))
-  end
-
   def test_cr
     assert_equal(%Q[foo,"\r",baz#{$INPUT_RECORD_SEPARATOR}],
                  generate_line(["foo", "\r", "baz"]))
@@ -226,7 +207,7 @@ module TestCSVWriteGeneral
   end
 end
 
-class TestCSVWriteGenerateLine < Test::Unit::TestCase
+class TestCSVWriteGeneralGenerateLine < Test::Unit::TestCase
   include TestCSVWriteGeneral
   extend DifferentOFS
 
@@ -235,7 +216,7 @@ class TestCSVWriteGenerateLine < Test::Unit::TestCase
   end
 end
 
-class TestCSVWriteGenerate < Test::Unit::TestCase
+class TestCSVWriteGeneralGenerate < Test::Unit::TestCase
   include TestCSVWriteGeneral
   extend DifferentOFS
 

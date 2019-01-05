@@ -397,6 +397,7 @@ class CSV
   # <b><tt>:force_quotes</tt></b>::       +false+
   # <b><tt>:skip_lines</tt></b>::         +nil+
   # <b><tt>:liberal_parsing</tt></b>::    +false+
+  # <b><tt>:quote_empty</tt></b>::        +true+
   #
   DEFAULT_OPTIONS = {
     col_sep:            ",",
@@ -412,6 +413,7 @@ class CSV
     force_quotes:       false,
     skip_lines:         nil,
     liberal_parsing:    false,
+    quote_empty:        true,
   }.freeze
 
   #
@@ -882,6 +884,7 @@ class CSV
   # <b><tt>:empty_value</tt></b>::        When set an object, any values of a
   #                                       blank string field is replaced by
   #                                       the set object.
+  # <b><tt>:quote_empty</tt></b>::        TODO
   #
   # See CSV::DEFAULT_OPTIONS for the default settings.
   #
@@ -907,7 +910,8 @@ class CSV
                  external_encoding: nil,
                  encoding: nil,
                  nil_value: nil,
-                 empty_value: "")
+                 empty_value: "",
+                 quote_empty: true)
     raise ArgumentError.new("Cannot parse nil as CSV") if data.nil?
 
     # create the IO object we will read from
@@ -947,6 +951,7 @@ class CSV
       column_separator: col_sep,
       row_separator: row_sep,
       quote_character: quote_char,
+      quote_empty: quote_empty,
     }
 
     @writer = nil

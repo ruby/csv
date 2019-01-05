@@ -102,6 +102,7 @@ class CSV
                      Regexp.escape(@quote_character.encode(@encoding)) +
                      "]".encode(@encoding))
       end
+      @quote_empty = @options.fetch(:quote_empty, true)
     end
 
     def prepare_output
@@ -140,7 +141,7 @@ class CSV
         else
           field = String(field)  # Stringify fields
           # represent empty fields as empty quoted fields
-          if field.empty? or @quotable_pattern.match?(field)
+          if (@quote_empty and field.empty?) or @quotable_pattern.match?(field)
             quote_field(field)
           else
             field  # unquoted field
