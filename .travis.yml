@@ -30,6 +30,10 @@ matrix:
         - CSV_PARSER_SCANNER_TEST=yes
     - name: "benchmark"
       rvm: 2.6
+      install:
+        - bundle install --jobs=3 --retry=3
+        - gem install csv -v 3.0.1
+        - gem install csv -v 3.0.2
       script:
         - bundle exec rake benchmark
     - name: "gem"
