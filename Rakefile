@@ -15,6 +15,7 @@ namespace :benchmark do
     desc "Run #{name} benchmark"
     task name do
       puts("```")
+      ENV["RUBYLIB"] = nil
       ruby("-v", "-S", "benchmark-driver", File.expand_path(yaml))
       puts("```")
     end
