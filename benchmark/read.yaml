@@ -8,7 +8,6 @@ contexts:
       $LOAD_PATH.unshift(File.expand_path("lib"))
       require "csv"
 prelude: |-
-  require 'benchmark/ips'
   CSV.open("/tmp/file.csv", "w") do |csv|
     csv << ["player", "gameA", "gameB"]
     1000.times do
