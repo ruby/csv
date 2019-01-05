@@ -4,7 +4,6 @@ contexts:
   - gems:
       csv: 3.0.2
   - name: "master"
-    require: false
     prelude: |
       $LOAD_PATH.unshift(File.expand_path("lib"))
       require "csv"
