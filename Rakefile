@@ -10,7 +10,7 @@ task :default => :test
 
 benchmark_tasks = []
 namespace :benchmark do
-  Dir.glob("benchmark/*.yml") do |yaml|
+  Dir.glob("benchmark/*.yaml") do |yaml|
     name = File.basename(yaml, ".*")
     desc "Run #{name} benchmark"
     task name do
