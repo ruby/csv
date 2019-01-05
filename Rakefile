@@ -1,5 +1,4 @@
 require "bundler/gem_tasks"
-require "open3"
 
 desc "Run test"
 task :test do
