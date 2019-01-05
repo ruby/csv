@@ -28,6 +28,10 @@ matrix:
       rvm: 2.6
       env:
         - CSV_PARSER_SCANNER_TEST=yes
+    - name: "benchmark"
+      rvm: 2.6
+      script:
+        - bundle exec rake benchmark
     - name: "gem"
       rvm: 2.6
       install:
