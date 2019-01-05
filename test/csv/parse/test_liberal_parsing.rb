@@ -69,4 +69,25 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
                  ],
                  CSV.parse(input, liberal_parsing: true))
   end
+
+  def test_double_quote_outside_quote
+    data = %Q{a,""b""}
+    error = assert_raise(CSV::MalformedCSVError) do
+      CSV.parse(data)
+    end
+    assert_equal("Do not allow except col_sep_split_separator " +
+                 "after quoted fields in line 1.",
+                 error.message)
+    assert_equal([
+                   [["a", %Q{""b""}]],
+                   [["a", %Q{"b"}]],
+                 ],
+                 [
+                   CSV.parse(data, liberal_parsing: true),
+                   CSV.parse(data,
+                             liberal_parsing: {
+                               double_quote_outside_quote: true,
+                             }),
+                 ])
+  end
 end

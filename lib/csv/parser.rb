@@ -304,7 +304,18 @@ class CSV
 
     def prepare_variable
       @encoding = @options[:encoding]
-      @liberal_parsing = @options[:liberal_parsing]
+      liberal_parsing = @options[:liberal_parsing]
+      if liberal_parsing
+        @liberal_parsing = true
+        if liberal_parsing.is_a?(Hash)
+          @double_quote_outside_quote =
+            liberal_parsing[:double_quote_outside_quote]
+        else
+          @double_quote_outside_quote = false
+        end
+      else
+        @liberal_parsing = false
+      end
       @unconverted_fields = @options[:unconverted_fields]
       @field_size_limit = @options[:field_size_limit]
       @skip_blanks = @options[:skip_blanks]
@@ -591,6 +602,13 @@ class CSV
         if quoted_value
           unquoted_value = parse_unquoted_column_value
           if unquoted_value
+            if @double_quote_outside_quote
+              unquoted_value = unquoted_value.gsub(@quote_character * 2,
+                                                   @quote_character)
+              if quoted_value.empty? # %Q{""...} case
+                return @quote_character + unquoted_value
+              end
+            end
             @quote_character + quoted_value + @quote_character + unquoted_value
           else
             quoted_value
