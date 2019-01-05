@@ -16,7 +16,7 @@ prelude: |-
     end
   end
 benchmark:
-  "CSV.foreach":
+  "CSV.foreach": |-
     CSV.foreach("/tmp/file.csv") do |row|
     end
   "CSV#shift": |-

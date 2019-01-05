@@ -8,21 +8,8 @@ contexts:
       $LOAD_PATH.unshift(File.expand_path("lib"))
       require "csv"
 prelude: |-
-  require "optparse"
-  n_columns = 50
-  n_rows = 1000
-  parser = OptionParser.new
-  parser.on("--n-columns=N", Integer,
-            "The number of columns to be parsed",
-            "(#{n_columns})") do |n|
-    n_columns = n
-  end
-  parser.on("--n-rows=N", Integer,
-            "The number of rows to be parsed",
-            "(#{n_rows})") do |n|
-    n_rows = n
-  end
-  parser.parse!(ARGV)
+  n_columns = Integer(ENV.fetch("N_COLUMNS", "50"), 10)
+  n_rows = Integer(ENV.fetch("N_ROWS", "1000"), 10)
   alphas = ["AAAAA"] * n_columns
   unquoted = (alphas.join(",") + "\r\n") * n_rows
   quoted = (alphas.map { |s| %("#{s}") }.join(",") + "\r\n") * n_rows

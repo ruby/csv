@@ -8,21 +8,8 @@ contexts:
       $LOAD_PATH.unshift(File.expand_path("lib"))
       require "csv"
 prelude: |-
-  require "optparse"
-  n_columns = 5
-  n_rows = 100
-  parser = OptionParser.new
-  parser.on("--n-columns=N", Integer,
-            "The number of columns to be generated",
-            "(#{n_columns})") do |n|
-    n_columns = n
-  end
-  parser.on("--n-rows=N", Integer,
-            "The number of rows to be generated",
-            "(#{n_rows})") do |n|
-    n_rows = n
-  end
-  parser.parse!(ARGV)
+  n_columns = Integer(ENV.fetch("N_COLUMNS", "5"), 10)
+  n_rows = Integer(ENV.fetch("N_ROWS", "100"), 10)
   fields = ["AAAAA"] * n_columns
   headers = n_columns.times.collect do |i|
     "header#{i}"
@@ -33,49 +20,49 @@ prelude: |-
     raw_row[headers[i]] = fields[i]
   end
 benchmark:
-  generate_line_fields:
+  "generate_line: fields": |-
     n_rows.times do
       CSV.generate_line(fields)
     end
-  generate_line_Row:
+  "generate_line: Row": |-
     n_rows.times do
       CSV.generate_line(row)
     end
-  generate_line_Hash: |-
+  "generate_line: Hash": |-
     n_rows.times do
       CSV.generate_line(raw_row, headers: headers)
     end
-  '<< fields': |-
+  "<< fields": |-
     output = StringIO.new
     csv = CSV.new(output)
     n_rows.times do
       csv << fields
     end
-  '<< Row': |-
+  "<< Row": |-
     output = StringIO.new
     csv = CSV.new(output)
     n_rows.times do
       csv << row
     end
-  '<< Hash': |-
+  "<< Hash": |-
     output = StringIO.new
     csv = CSV.new(output, headers: headers)
     n_rows.times do
       csv << raw_row
     end
-  '<< fields: write headers': |-
+  "<< fields: write headers": |-
     output = StringIO.new
     csv = CSV.new(output, headers: headers, write_headers: true)
     n_rows.times do
       csv << fields
     end
-  '<< Row: write headers': |-
+  "<< Row: write headers": |-
     output = StringIO.new
     csv = CSV.new(output, headers: headers, write_headers: true)
     n_rows.times do
       csv << row
     end
-  '<< Hash: write headers': |-
+  "<< Hash: write headers": |-
     output = StringIO.new
     csv = CSV.new(output, headers: headers, write_headers: true)
     n_rows.times do
