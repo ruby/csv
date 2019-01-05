@@ -1,27 +1,26 @@
-#!/usr/bin/env ruby
-
-require "csv"
-require "optparse"
-
-require "benchmark/ips"
-
-n_columns = 5
-n_rows = 100
-
-parser = OptionParser.new
-parser.on("--n-columns=N", Integer,
-          "The number of columns to be generated",
-          "(#{n_columns})") do |n|
-  n_columns = n
-end
-parser.on("--n-rows=N", Integer,
-          "The number of rows to be generated",
-          "(#{n_rows})") do |n|
-  n_rows = n
-end
-parser.parse!(ARGV)
-
-Benchmark.ips do |job|
+contexts:
+  - gems: { csv: 3.0.1 }
+  - gems: { csv: 3.0.2 }
+  - name: "master"
+    require: false
+    prelude: |
+      require './lib/csv'
+prelude: |-
+  require "optparse"
+  n_columns = 5
+  n_rows = 100
+  parser = OptionParser.new
+  parser.on("--n-columns=N", Integer,
+            "The number of columns to be generated",
+            "(#{n_columns})") do |n|
+    n_columns = n
+  end
+  parser.on("--n-rows=N", Integer,
+            "The number of rows to be generated",
+            "(#{n_rows})") do |n|
+    n_rows = n
+  end
+  parser.parse!(ARGV)
   fields = ["AAAAA"] * n_columns
   headers = n_columns.times.collect do |i|
     "header#{i}"
@@ -31,70 +30,52 @@ Benchmark.ips do |job|
   n_columns.times do |i|
     raw_row[headers[i]] = fields[i]
   end
-
-  job.report("generate_line: fields") do
+benchmark:
+  generate_line_fields:
     n_rows.times do
       CSV.generate_line(fields)
     end
-  end
-
-  job.report("generate_line: Row") do
+  generate_line_Row:
     n_rows.times do
       CSV.generate_line(row)
     end
-  end
-
-  job.report("generate_line: Hash") do
+  generate_line_Hash: |-
     n_rows.times do
       CSV.generate_line(raw_row, headers: headers)
     end
-  end
-
-  job.report("<< fields") do
+  '<< fields': |-
     output = StringIO.new
     csv = CSV.new(output)
     n_rows.times do
       csv << fields
     end
-  end
-
-  job.report("<< Row") do
+  '<< Row': |-
     output = StringIO.new
     csv = CSV.new(output)
     n_rows.times do
       csv << row
     end
-  end
-
-  job.report("<< Hash") do
+  '<< Hash': |-
     output = StringIO.new
     csv = CSV.new(output, headers: headers)
     n_rows.times do
       csv << raw_row
     end
-  end
-
-  job.report("<< fields: write headers") do
+  '<< fields: write headers': |-
     output = StringIO.new
     csv = CSV.new(output, headers: headers, write_headers: true)
     n_rows.times do
       csv << fields
     end
-  end
-
-  job.report("<< Row: write headers") do
+  '<< Row: write headers': |-
     output = StringIO.new
     csv = CSV.new(output, headers: headers, write_headers: true)
     n_rows.times do
       csv << row
     end
-  end
-
-  job.report("<< Hash: write headers") do
+  '<< Hash: write headers': |-
     output = StringIO.new
     csv = CSV.new(output, headers: headers, write_headers: true)
     n_rows.times do
       csv << raw_row
     end
-  end
-end
