@@ -6,7 +6,8 @@ contexts:
   - name: "master"
     require: false
     prelude: |
-      require_relative "lib/csv"
+      $LOAD_PATH.unshift(File.expand_path("lib"))
+      require "csv"
 prelude: |-
   require "optparse"
   n_columns = 5

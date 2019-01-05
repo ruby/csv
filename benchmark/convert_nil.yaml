@@ -6,7 +6,8 @@ contexts:
   - name: "master"
     require: false
     prelude: |
-      require_relative "lib/csv"
+      $LOAD_PATH.unshift(File.expand_path("lib"))
+      require "csv"
 prelude: |-
   csv_text = <<CSV
   foo,bar,,baz
