@@ -13,6 +13,7 @@ namespace :benchmark do
     name = File.basename(yaml, ".*")
     env = {
       "RUBYLIB" => nil,
+      "BUNDLER_ORIG_RUBYLIB" => nil,
     }
     command_line = [
       FileUtils::RUBY, "-v", "-S", "benchmark-driver", File.expand_path(yaml),
