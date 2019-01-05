@@ -8,14 +8,19 @@ end
 
 task :default => :test
 
-desc "Run benchmark scripts"
-task :benchmark do
-  Dir.glob(File.expand_path('./benchmark/*.yml', __dir__)).each do |yaml|
-    stdout, stderr, status = Open3.capture3("benchmark-driver", yaml)
-    yaml.gsub!(Dir.pwd, '.')
-    puts "\n```\n$ benchmark-driver #{yaml}\n#{stdout}```\n\n"
-    unless stderr.empty?
-      $stderr.puts "stderr:\n```\n#{stderr}```"
+benchmark_tasks = []
+namespace :benchmark do
+  Dir.glob("benchmark/*.yml") do |yaml|
+    name = File.basename(yaml, ".*")
+    desc "Run #{name} benchmark"
+    task name do
+      puts("```")
+      ruby("-v", "-S", "benchmark-driver", File.expand_path(yaml))
+      puts("```")
     end
+    benchmark_tasks << "benchmark:#{name}"
   end
 end
+
+desc "Run all benchmarks"
+task :benchmark => benchmark_tasks
