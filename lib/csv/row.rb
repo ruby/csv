@@ -123,14 +123,6 @@ class CSV
       end
     end
 
-    # Returns +true+ if there is a field with the given +header+.
-    def has_key?(header)
-      !!@row.assoc(header)
-    end
-    alias_method :include?, :has_key?
-    alias_method :key?,     :has_key?
-    alias_method :member?,  :has_key?
-
     #
     # :call-seq:
     #   []=( header, value )
@@ -290,7 +282,10 @@ class CSV
     def header?(name)
       headers.include? name
     end
-    alias_method :include?, :header?
+    alias_method :key?,      :header?
+    alias_method :has_key?,  :header?
+    alias_method :member?,   :header?
+    alias_method :include?,  :header?
 
     #
     # Returns +true+ if +data+ matches a field in this row, and +false+
