@@ -97,11 +97,6 @@ class TestCSVRow < Test::Unit::TestCase
     end
   end
 
-  def test_has_key?
-    assert_equal(true, @row.has_key?('B'))
-    assert_equal(false, @row.has_key?('foo'))
-  end
-
   def test_set_field
     # set field by name
     assert_equal(100, @row["A"] = 100)
@@ -261,6 +256,9 @@ class TestCSVRow < Test::Unit::TestCase
     assert_send([@row, :header?, "C"])
     assert_not_send([@row, :header?, "Z"])
     assert_send([@row, :include?, "A"])  # alias
+    assert_send([@row, :member?, "A"])  # alias
+    assert_send([@row, :key?, "A"])  # alias
+    assert_send([@row, :has_key?, "A"])  # alias
 
     # fields
     assert(@row.field?(4))
