@@ -170,6 +170,7 @@ class CSV
       @input = input
       @options = options
       @samples = []
+      @parsed = false
 
       prepare
     end
@@ -229,6 +230,8 @@ class CSV
     def parse(&block)
       return to_enum(__method__) unless block_given?
 
+      return if @parsed
+
       if @return_headers and @headers
         headers = Row.new(@headers, @raw_headers, true)
         if @unconverted_fields
@@ -262,10 +265,10 @@ class CSV
             skip_needless_lines
             start_row
           elsif @scanner.eos?
-            return if row.empty? and value.nil?
+            break if row.empty? and value.nil?
             row << value
             emit_row(row, &block)
-            return
+            break
           else
             if @quoted_column_value
               message = "Do not allow except col_sep_split_separator " +
@@ -287,6 +290,8 @@ class CSV
         message = "Invalid byte sequence in #{@encoding}"
         raise MalformedCSVError.new(message, @lineno + 1)
       end
+
+      @parsed = true
     end
 
     def use_headers?
