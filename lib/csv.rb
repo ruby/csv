@@ -1244,7 +1244,6 @@ class CSV
       end
     end
     _headers = headers
-    _headers = headers
     str << " headers:" << _headers.inspect if _headers
     str << ">"
     begin
