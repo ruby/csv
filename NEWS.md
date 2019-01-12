@@ -1,5 +1,48 @@
 # News
 
+## 3.0.3 - 2019-01-12
+
+### Improvements
+
+  * Migrated benchmark tool to benchmark-driver from benchmark-ips.
+    [GitHub#57][Patch by 284km]
+
+  * Added `liberal_parsing: {double_quote_outside_quote: true}` parse
+    option.
+    [GitHub#66][Reported by Watson]
+
+  * Added `quote_empty:` write option.
+    [GitHub#35][Reported by Dave Myron]
+
+### Fixes
+
+  * Fixed a compatibility bug that `CSV.generate` always return
+    `ASCII-8BIT` encoding string.
+    [GitHub#63][Patch by Watson]
+
+  * Fixed a compatibility bug that `CSV.parse("", headers: true)`
+    doesn't return `CSV::Table`.
+    [GitHub#64][Reported by Watson][Patch by 284km]
+
+  * Fixed a compatibility bug that multiple-characters column
+    separator doesn't work.
+    [GitHub#67][Reported by Jesse Reiss]
+
+  * Fixed a compatibility bug that double `#each` parse twice.
+    [GitHub#68][Reported by Max Schwenk]
+
+### Thanks
+
+  * Watson
+
+  * 284km
+
+  * Jesse Reiss
+
+  * Dave Myron
+
+  * Max Schwenk
+
 ## 3.0.2 - 2018-12-23
 
 ### Improvements
