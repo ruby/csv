@@ -133,10 +133,15 @@ class CSV
 
     #
     # Returns the headers for the first row of this table (assumed to match all
-    # other rows).  An empty Array is returned for empty tables.
+    # other rows). The headers Array passed to CSV::Table.new is returned for
+    # empty tables.
     #
     def headers
-      @headers.dup
+      if @table.empty?
+        @headers.dup
+      else
+        @table.first.headers
+      end
     end
 
     #

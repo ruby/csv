@@ -64,6 +64,13 @@ class TestCSVTable < Test::Unit::TestCase
     assert_equal(%w[A B C], @header_only_table.headers)
   end
 
+  def test_headers_modified_by_row
+    table = CSV::Table.new([], headers: ["A", "B"])
+    table << ["a", "b"]
+    table.first << {"C" => "c"}
+    assert_equal(["A", "B", "C"], table.headers)
+  end
+
   def test_index
     ##################
     ### Mixed Mode ###
