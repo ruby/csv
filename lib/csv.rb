@@ -910,6 +910,7 @@ class CSV
                  external_encoding: nil,
                  encoding: nil,
                  nil_value: nil,
+                 write_converters: nil,
                  empty_value: "",
                  quote_empty: true)
     raise ArgumentError.new("Cannot parse nil as CSV") if data.nil?
@@ -924,6 +925,7 @@ class CSV
     }
     @initial_converters = converters
     @initial_header_converters = header_converters
+    @initial_write_converters = write_converters
 
     @parser_options = {
       column_separator: col_sep,
@@ -952,6 +954,7 @@ class CSV
       row_separator: row_sep,
       quote_character: quote_char,
       quote_empty: quote_empty,
+      write_converters: write_converters,
     }
 
     @writer = nil
@@ -1325,11 +1328,7 @@ class CSV
       builtin_converters: Converters,
     }
     options = @base_fields_converter_options.merge(specific_options)
-    fields_converter = FieldsConverter.new(options)
-    normalize_converters(@initial_converters).each do |name, converter|
-      fields_converter.add_converter(name, &converter)
-    end
-    fields_converter
+    parse_converters(@initial_converters, options)
   end
 
   def header_fields_converter
@@ -1342,8 +1341,25 @@ class CSV
       accept_nil: true,
     }
     options = @base_fields_converter_options.merge(specific_options)
+    parse_converters(@initial_header_converters, options)
+  end
+
+  def writer_fields_converter
+    @writer_fields_converter ||= build_writer_fields_converter
+  end
+
+  def build_writer_fields_converter
+    specific_options = {
+      builtin_converters: Converters
+    }
+    options = @base_fields_converter_options.merge(specific_options)
+
+    parse_converters(@initial_write_converters, options)
+  end
+
+  def parse_converters(initial_converters, options)
     fields_converter = FieldsConverter.new(options)
-    normalize_converters(@initial_header_converters).each do |name, converter|
+    normalize_converters(initial_converters).each do |name, converter|
       fields_converter.add_converter(name, &converter)
     end
     fields_converter
@@ -1363,7 +1379,8 @@ class CSV
   end
 
   def writer_options
-    @writer_options.merge(header_fields_converter: header_fields_converter)
+    @writer_options.merge(header_fields_converter: header_fields_converter,
+                          writer_fields_converters: writer_fields_converter)
   end
 end
 

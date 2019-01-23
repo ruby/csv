@@ -31,6 +31,8 @@ class CSV
       @headers ||= row if @use_headers
       @lineno += 1
 
+      apply_converters_to(row, lineno)
+
       converted_row = row.collect do |field|
         quote(field)
       end
@@ -148,6 +150,11 @@ class CSV
           end
         end
       end
+    end
+
+    def apply_converters_to(row, lineno)
+      converter = @options[:writer_fields_converters]
+      converter.convert(row, nil, lineno) if converter
     end
   end
 end
