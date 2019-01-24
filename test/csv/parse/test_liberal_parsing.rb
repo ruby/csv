@@ -105,6 +105,20 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
                  ])
   end
 
+  def test_backslash_quote_true_with_unquoted_value
+    data = '\"\"a\"\"'
+    assert_equal([
+                   [["\\\"\\\"a\\\"\\\""]],
+                   [["\"\"a\"\""]],
+                   [["\"\"a\"\""]]
+                 ],
+                 [
+                   CSV.parse(data, liberal_parsing: true),
+                   CSV.parse(data, liberal_parsing: { backslash_quote: true }),
+                   CSV.parse(data, liberal_parsing: { backslash_quote: true, double_quote_outside_quote: true }),
+                 ])
+  end
+
   def test_backslash_quote_true_with_quoted_value
     data = '"\"\"a\"\""'
     assert_equal([
