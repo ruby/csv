@@ -315,8 +315,10 @@ class CSV
         if liberal_parsing.is_a?(Hash)
           @double_quote_outside_quote =
             liberal_parsing[:double_quote_outside_quote]
+          @backslash_quote = liberal_parsing[:backslash_quote]
         else
           @double_quote_outside_quote = false
+          @backslash_quote = false
         end
       else
         @liberal_parsing = false
@@ -341,6 +343,8 @@ class CSV
       escaped_first_column_separator = Regexp.escape(@column_separator[0])
       escaped_row_separator = Regexp.escape(@row_separator)
       escaped_quote_character = Regexp.escape(@quote_character)
+      escaped_escape_character = Regexp.escape("\\".encode(@encoding))
+      @escaped_quote_character = "\\".encode(@encoding) + escaped_quote_character
 
       skip_lines = @options[:skip_lines]
       case skip_lines
@@ -376,11 +380,23 @@ class CSV
       else
         @row_ends = nil
       end
+      @escaped_quotes = Regexp.new("(".encode(@encoding) +
+                           escaped_escape_character +
+                           escaped_quote_character +
+                           ")".encode(@encoding) +
+                           "+".encode(@encoding))
       @quotes = Regexp.new(escaped_quote_character +
                            "+".encode(@encoding))
-      @quoted_value = Regexp.new("[^".encode(@encoding) +
-                                 escaped_quote_character +
-                                 "]+".encode(@encoding))
+      if @backslash_quote
+        @quoted_value = Regexp.new("[^".encode(@encoding) +
+                                   escaped_quote_character +
+                                   escaped_escape_character +
+                                   "]+".encode(@encoding))
+      else
+        @quoted_value = Regexp.new("[^".encode(@encoding) +
+                                   escaped_quote_character +
+                                   "]+".encode(@encoding))
+      end
       if @liberal_parsing
         @unquoted_value = Regexp.new("[^".encode(@encoding) +
                                      escaped_first_column_separator +
@@ -630,6 +646,19 @@ class CSV
       end
     end
 
+    def parse_backslash_quote
+      value = +""
+      while true
+        escaped_quotes = @scanner.scan_all(@escaped_quotes)
+        break unless escaped_quotes
+        value << escaped_quotes
+        quoted_value = @scanner.scan_all(@quoted_value)
+        break unless quoted_value
+        value << quoted_value
+      end
+      value.gsub(@escaped_quote_character, @quote_character)
+    end
+
     def parse_unquoted_column_value
       value = @scanner.scan_all(@unquoted_value)
       return nil unless value
@@ -667,6 +696,8 @@ class CSV
         while true
           quoted_value = @scanner.scan_all(@quoted_value)
           value << quoted_value if quoted_value
+          value << parse_backslash_quote if @backslash_quote
+
           quotes = @scanner.scan_all(@quotes)
           unless quotes
             message = "Unclosed quoted field"
