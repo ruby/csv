@@ -1,5 +1,31 @@
 # News
 
+## 3.0.4 - 2019-01-25
+
+### Improvements
+
+  * Removed duplicated `CSV::Row#include?` implementations.
+    [GitHub#69][Patch by Max Schwenk]
+
+  * Removed duplicated `CSV::Row#header?` implementations.
+    [GitHub#70][Patch by Max Schwenk]
+
+### Fixes
+
+  * Fixed a typo in document.
+    [GitHub#72][Patch by Artur Beljajev]
+
+  * Fixed a compatibility bug when row headers are changed.
+    [GitHub#71][Reported by tomoyuki kosaka]
+
+### Thanks
+
+  * Max Schwenk
+
+  * Artur Beljajev
+
+  * tomoyuki kosaka
+
 ## 3.0.3 - 2019-01-12
 
 ### Improvements
