@@ -343,7 +343,7 @@ class CSV
       escaped_first_column_separator = Regexp.escape(@column_separator[0])
       escaped_row_separator = Regexp.escape(@row_separator)
       escaped_quote_character = Regexp.escape(@quote_character)
-      escaped_escape_character = Regexp.escape("\\".encode(@encoding))
+      escaped_backslash_character = Regexp.escape("\\".encode(@encoding))
       @escaped_quote_character = "\\".encode(@encoding) + escaped_quote_character
 
       skip_lines = @options[:skip_lines]
@@ -381,7 +381,7 @@ class CSV
         @row_ends = nil
       end
       @escaped_quotes = Regexp.new("(".encode(@encoding) +
-                           escaped_escape_character +
+                           escaped_backslash_character +
                            escaped_quote_character +
                            ")".encode(@encoding) +
                            "+".encode(@encoding))
@@ -390,7 +390,7 @@ class CSV
       if @backslash_quote
         @quoted_value = Regexp.new("[^".encode(@encoding) +
                                    escaped_quote_character +
-                                   escaped_escape_character +
+                                   escaped_backslash_character +
                                    "]+".encode(@encoding))
       else
         @quoted_value = Regexp.new("[^".encode(@encoding) +
