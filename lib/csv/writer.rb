@@ -152,9 +152,5 @@ class CSV
         end
       end
     end
-
-    def apply_converters_to(row, lineno)
-      @converters.convert(row, nil, lineno)
-    end
   end
 end
