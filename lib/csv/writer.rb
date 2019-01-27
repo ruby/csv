@@ -18,7 +18,7 @@ class CSV
       if @options[:write_headers] and @headers
         self << @headers
       end
-      @converters = @options[:fields_converter]
+      @converters = @options[:fields_converter] unless @options[:fields_converter].empty?
     end
 
     def <<(row)
@@ -32,7 +32,7 @@ class CSV
       @headers ||= row if @use_headers
       @lineno += 1
 
-      row = apply_converters_to(row, lineno) if @converters
+      row = @converters.convert(row, nil, lineno) if @converters
 
       converted_row = row.collect do |field|
         quote(field)
