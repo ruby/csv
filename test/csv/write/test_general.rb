@@ -209,7 +209,7 @@ module TestCSVWriteGeneral
   def test_write_converters
     assert_equal(%Q[=a,=b,=c\n],
                  generate_line(["a", "b", "c"],
-                               write_converters: ->(value) { value.prepend('=') } ))
+                               write_converters: ->(value) { '=' + value } ))
   end
 end
 
