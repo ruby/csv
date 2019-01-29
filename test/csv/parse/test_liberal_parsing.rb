@@ -100,8 +100,15 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
                  ],
                  [
                    CSV.parse(data, liberal_parsing: true),
-                   CSV.parse(data, liberal_parsing: { backslash_quote: true }),
-                   CSV.parse(data, liberal_parsing: { backslash_quote: true, double_quote_outside_quote: true }),
+                   CSV.parse(data,
+                             liberal_parsing: {
+                               backslash_quote: true
+                             }),
+                   CSV.parse(data,
+                             liberal_parsing: {
+                               backslash_quote: true,
+                               double_quote_outside_quote: true
+                             }),
                  ])
   end
 
@@ -114,8 +121,15 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
                  ],
                  [
                    CSV.parse(data, liberal_parsing: true),
-                   CSV.parse(data, liberal_parsing: { backslash_quote: true }),
-                   CSV.parse(data, liberal_parsing: { backslash_quote: true, double_quote_outside_quote: true }),
+                   CSV.parse(data,
+                             liberal_parsing: {
+                               backslash_quote: true
+                             }),
+                   CSV.parse(data,
+                             liberal_parsing: {
+                               backslash_quote: true,
+                               double_quote_outside_quote: true
+                             }),
                  ])
   end
 
@@ -128,8 +142,15 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
                  ],
                  [
                    CSV.parse(data, liberal_parsing: true),
-                   CSV.parse(data, liberal_parsing: { backslash_quote: true }),
-                   CSV.parse(data, liberal_parsing: { backslash_quote: true, double_quote_outside_quote: true }),
+                   CSV.parse(data,
+                             liberal_parsing: {
+                               backslash_quote: true
+                             }),
+                   CSV.parse(data,
+                             liberal_parsing: {
+                               backslash_quote: true,
+                               double_quote_outside_quote: true
+                             }),
                  ])
   end
 end

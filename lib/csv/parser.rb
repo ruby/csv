@@ -322,6 +322,7 @@ class CSV
         end
       else
         @liberal_parsing = false
+        @backslash_quote = false
       end
       @unconverted_fields = @options[:unconverted_fields]
       @field_size_limit = @options[:field_size_limit]
@@ -344,7 +345,9 @@ class CSV
       escaped_row_separator = Regexp.escape(@row_separator)
       escaped_quote_character = Regexp.escape(@quote_character)
       escaped_backslash_character = Regexp.escape("\\".encode(@encoding))
-      @escaped_quote_character = "\\".encode(@encoding) + escaped_quote_character
+      @escaped_backslash = Regexp.new(escaped_backslash_character)
+      @escaped_quote = Regexp.new(escaped_quote_character)
+      @escaped_backslash_quote_character = "\\".encode(@encoding) + escaped_quote_character
 
       skip_lines = @options[:skip_lines]
       case skip_lines
@@ -380,11 +383,7 @@ class CSV
       else
         @row_ends = nil
       end
-      @escaped_quotes = Regexp.new("(".encode(@encoding) +
-                           escaped_backslash_character +
-                           escaped_quote_character +
-                           ")".encode(@encoding) +
-                           "+".encode(@encoding))
+
       @quotes = Regexp.new(escaped_quote_character +
                            "+".encode(@encoding))
       if @backslash_quote
@@ -649,20 +648,29 @@ class CSV
     def parse_backslash_quote
       value = +""
       while true
-        escaped_quotes = @scanner.scan_all(@escaped_quotes)
-        break unless escaped_quotes
-        value << escaped_quotes
+        while true
+          backslash = @scanner.scan(@escaped_backslash)
+          break unless backslash
+          quote = @scanner.scan(@escaped_quote)
+          if quote
+            value << backslash << quote 
+          else
+            # If it is not quote_character after backslash, which is not closed by quote.
+            message = "Unclosed quoted field"
+            raise MalformedCSVError.new(message, @lineno + 1)
+          end
+        end
         quoted_value = @scanner.scan_all(@quoted_value)
         break unless quoted_value
         value << quoted_value
       end
-      value.gsub(@escaped_quote_character, @quote_character)
+      value.gsub(@escaped_backslash_quote_character, @quote_character)
     end
 
     def parse_unquoted_column_value
       value = @scanner.scan_all(@unquoted_value)
       if @backslash_quote and value
-        value = value.gsub(@escaped_quote_character, @quote_character)
+        value = value.gsub(@escaped_backslash_quote_character, @quote_character)
       end
       return nil unless value
 
