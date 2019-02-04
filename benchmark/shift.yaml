@@ -1,0 +1,45 @@
+contexts:
+  - gems:
+      csv: 3.0.1
+  - gems:
+      csv: 3.0.2
+  - name: "master"
+    prelude: |
+      $LOAD_PATH.unshift(File.expand_path("lib"))
+      require "csv"
+prelude: |-
+  n_columns = Integer(ENV.fetch("N_COLUMNS", "50"), 10)
+  n_rows = Integer(ENV.fetch("N_ROWS", "1000"), 10)
+  alphas = ["AAAAA"] * n_columns
+  unquoted = (alphas.join(",") + "\r\n") * n_rows
+  quoted = (alphas.map { |s| %("#{s}") }.join(",") + "\r\n") * n_rows
+  inc_col_sep = (alphas.map { |s| %(",#{s}") }.join(",") + "\r\n") * n_rows
+  inc_row_sep = (alphas.map { |s| %("#{s}\r\n") }.join(",") + "\r\n") * n_rows
+  hiraganas = ["あああああ"] * n_columns
+  enc_utf8 = (hiraganas.join(",") + "\r\n") * n_rows
+  enc_sjis = enc_utf8.encode("Windows-31J")
+benchmark:
+  unquoted: |-
+    csv = CSV.new(unquoted)
+    while csv.shift do
+    end
+  quoted: |-
+    csv = CSV.new(quoted)
+    while csv.shift do
+    end
+  include_col_sep: |-
+    csv = CSV.new(inc_col_sep)
+    while csv.shift do
+    end
+  include_row_sep: |-
+    csv = CSV.new(inc_row_sep)
+    while csv.shift do
+    end
+  encode_utf-8: |-
+    csv = CSV.new(enc_utf8)
+    while csv.shift do
+    end
+  encode_sjis: |-
+    csv = CSV.new(enc_sjis)
+    while csv.shift do
+    end

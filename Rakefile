@@ -28,8 +28,8 @@ namespace :benchmark do
     benchmark_tasks << "benchmark:#{name}"
 
     case name
-    when "parse"
-      namespace :parse do
+    when "parse", "shift"
+      namespace name do
         desc "Run #{name} benchmark: small"
         task :small do
           puts("```")
@@ -37,7 +37,7 @@ namespace :benchmark do
              *command_line)
           puts("```")
         end
-        benchmark_tasks << "benchmark:parse:small"
+        benchmark_tasks << "benchmark:#{name}:small"
       end
     end
   end
