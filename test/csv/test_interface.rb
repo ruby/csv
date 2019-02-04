@@ -190,6 +190,20 @@ class TestCSV::Interface < TestCSV
     end
   end
 
+  def test_shift_removes_from_each
+    CSV.open(@path, col_sep: "\t", row_sep: "\r\n") do |csv|
+      assert_equal(@expected.shift, csv.shift)
+      assert_equal(@expected.count, csv.count)
+    end
+  end
+
+  def test_each_consumes
+    CSV.open(@path, col_sep: "\t", row_sep: "\r\n") do |csv|
+      csv.each do end
+      assert_equal(0, csv.count)
+    end
+  end
+
   def test_nil_is_not_acceptable
     assert_raise_with_message ArgumentError, "Cannot parse nil as CSV" do
       CSV.new(nil)
