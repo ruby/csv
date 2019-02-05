@@ -653,7 +653,7 @@ class CSV
           break unless backslash
           quote = @scanner.scan(@escaped_quote)
           if quote
-            value << backslash << quote 
+            value << quote
           else
             # If it is not quote_character after backslash, which is not closed by quote.
             message = "Unclosed quoted field"
