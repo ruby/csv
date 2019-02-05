@@ -339,15 +339,16 @@ class CSV
       if @quote_character.length != 1
         raise ArgumentError, ":quote_char has to be a single character String"
       end
+      @backslash_character = "\\".encode(@encoding)
 
       escaped_column_separator = Regexp.escape(@column_separator)
       escaped_first_column_separator = Regexp.escape(@column_separator[0])
       escaped_row_separator = Regexp.escape(@row_separator)
       escaped_quote_character = Regexp.escape(@quote_character)
-      escaped_backslash_character = Regexp.escape("\\".encode(@encoding))
+      escaped_backslash_character = Regexp.escape(@backslash_character)
       @escaped_backslash = Regexp.new(escaped_backslash_character)
       @escaped_quote = Regexp.new(escaped_quote_character)
-      @escaped_backslash_quote_character = "\\".encode(@encoding) + escaped_quote_character
+      @backslash_quote_character = @backslash_character + escaped_quote_character
 
       skip_lines = @options[:skip_lines]
       case skip_lines
@@ -645,28 +646,6 @@ class CSV
       end
     end
 
-    def parse_backslash_quote
-      value = +""
-      while true
-        while true
-          backslash = @scanner.scan(@escaped_backslash)
-          break unless backslash
-          quote = @scanner.scan(@escaped_quote)
-          if quote
-            value << quote
-          else
-            # If it is not quote_character after backslash, which is not closed by quote.
-            message = "Unclosed quoted field"
-            raise MalformedCSVError.new(message, @lineno + 1)
-          end
-        end
-        quoted_value = @scanner.scan_all(@quoted_value)
-        break unless quoted_value
-        value << quoted_value
-      end
-      value.gsub(@escaped_backslash_quote_character, @quote_character)
-    end
-
     def parse_unquoted_column_value
       value = @scanner.scan_all(@unquoted_value)
       return nil unless value
@@ -705,7 +684,16 @@ class CSV
         while true
           quoted_value = @scanner.scan_all(@quoted_value)
           value << quoted_value if quoted_value
-          value << parse_backslash_quote if @backslash_quote
+          if @backslash_quote
+            if @scanner.scan(@escaped_backslash)
+              if @scanner.scan(@escaped_quote)
+                value << @quote_character
+              else
+                value << @backslash_character
+              end
+              next
+            end
+          end
 
           quotes = @scanner.scan_all(@quotes)
           unless quotes
