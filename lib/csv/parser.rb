@@ -669,9 +669,6 @@ class CSV
 
     def parse_unquoted_column_value
       value = @scanner.scan_all(@unquoted_value)
-      if @backslash_quote and value
-        value = value.gsub(@escaped_backslash_quote_character, @quote_character)
-      end
       return nil unless value
 
       @unquoted_column_value = true
@@ -691,6 +688,7 @@ class CSV
           value << sub_value
         end
       end
+      value.gsub!(@backslash_quote_character, @quote_character) if @backslash_quote
       value
     end
 
