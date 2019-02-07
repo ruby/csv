@@ -1173,7 +1173,7 @@ class CSV
     return to_enum(__method__) unless block_given?
     @parser_enumerator ||= parser.parse
     begin
-      loop do
+      while true
         yield @parser_enumerator.next
       end
     rescue StopIteration
@@ -1210,8 +1210,9 @@ class CSV
   # The data source must be open for reading.
   #
   def shift
+    @parser_enumerator ||= parser.parse
     begin
-      each.next
+      @parser_enumerator.next
     rescue StopIteration
       nil
     end
