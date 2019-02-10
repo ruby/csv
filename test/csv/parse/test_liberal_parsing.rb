@@ -114,10 +114,10 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
     end
 
     def test_unquoted_value
-      data = '\"\"a\"\"'
+      data = %q{\"\"a\"\"}
       assert_equal([
-                     [[%Q{\\\"\\\"a\\\"\\\"}]],
-                     [[%Q{\"\"a\"\"}]],
+                     [[%q{\"\"a\"\"}]],
+                     [[%q{""a""}]],
                    ],
                    [
                      CSV.parse(data, liberal_parsing: true),
@@ -129,7 +129,7 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
     end
 
     def test_unquoted_value_multiple_characters_col_sep
-      data = 'a<\\"b<=>x'
+      data = %q{a<\\"b<=>x}
       assert_equal([[%Q{a<"b}, "x"]],
                    CSV.parse(data,
                              col_sep: "<=>",
@@ -139,11 +139,11 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
     end
 
     def test_quoted_value
-      data = '"\"\"a\"\""'
+      data = %q{"\"\"a\"\""}
       assert_equal([
-                     [[%Q{\"\\\"\\\"a\\\"\\\"\"}]],
-                     [[%Q{\"\"a\"\"}]],
-                     [[%Q{\"\"a\"\"}]],
+                     [[%q{"\"\"a\"\""}]],
+                     [[%q{""a""}]],
+                     [[%q{""a""}]],
                    ],
                    [
                      CSV.parse(data, liberal_parsing: true),
