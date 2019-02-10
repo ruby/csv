@@ -90,4 +90,84 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
                              }),
                  ])
   end
+
+  class TestBackslashQuote < Test::Unit::TestCase
+    def test_double_quote_outside_quote
+      data = %Q{a,""b""}
+      assert_equal([
+                     [["a", %Q{""b""}]],
+                     [["a", %Q{""b""}]],
+                     [["a", %Q{"b"}]],
+                   ],
+                   [
+                     CSV.parse(data, liberal_parsing: true),
+                     CSV.parse(data,
+                               liberal_parsing: {
+                                 backslash_quote: true
+                               }),
+                     CSV.parse(data,
+                               liberal_parsing: {
+                                 backslash_quote: true,
+                                 double_quote_outside_quote: true
+                               }),
+                   ])
+    end
+
+    def test_unquoted_value
+      data = '\"\"a\"\"'
+      assert_equal([
+                     [[%Q{\\\"\\\"a\\\"\\\"}]],
+                     [[%Q{\"\"a\"\"}]],
+                   ],
+                   [
+                     CSV.parse(data, liberal_parsing: true),
+                     CSV.parse(data,
+                               liberal_parsing: {
+                                 backslash_quote: true
+                               }),
+                   ])
+    end
+
+    def test_unquoted_value_multiple_characters_col_sep
+      data = 'a<\\"b<=>x'
+      assert_equal([
+                     [[%Q{a<\\\"b<=>x}]],
+                     [[%Q{a<"b<=>x}]],
+                     [[%Q{a<"b}, "x"]],
+                   ],
+                   [
+                     CSV.parse(data, liberal_parsing: true),
+                     CSV.parse(data,
+                               liberal_parsing: {
+                                 backslash_quote: true
+                               }),
+                     CSV.parse(data,
+                               col_sep: "<=>",
+                               liberal_parsing: {
+                                 backslash_quote: true
+                               }),
+                   ])
+    end
+
+    def test_quoted_value
+      data = '"\"\"a\"\""'
+      assert_equal([
+                     [[%Q{\"\\\"\\\"a\\\"\\\"\"}]],
+                     [[%Q{\"\"a\"\"}]],
+                     [[%Q{\"\"a\"\"}]],
+                   ],
+                   [
+                     CSV.parse(data, liberal_parsing: true),
+                     CSV.parse(data,
+                               liberal_parsing: {
+                                 backslash_quote: true
+                               }),
+                     CSV.parse(data,
+                               liberal_parsing: {
+                                 backslash_quote: true,
+                                 double_quote_outside_quote: true
+                               }),
+                   ])
+    end
+  end
 end

@@ -1,0 +1,44 @@
+contexts:
+  - gems:
+      csv: 3.0.2
+  - name: "master"
+    prelude: |
+      $LOAD_PATH.unshift(File.expand_path("lib"))
+      require "csv"
+prelude: |-
+  n_columns = Integer(ENV.fetch("N_COLUMNS", "50"), 10)
+  n_rows = Integer(ENV.fetch("N_ROWS", "1000"), 10)
+  alphas = ['\"\"a\"\"'] * n_columns
+  unquoted = (alphas.join(",") + "\r\n") * n_rows
+  quoted = (alphas.map { |s| %("#{s}") }.join(",") + "\r\n") * n_rows
+  inc_col_sep = (alphas.map { |s| %(",#{s}") }.join(",") + "\r\n") * n_rows
+  inc_row_sep = (alphas.map { |s| %("#{s}") }.join(",") + "\r\n") * n_rows
+  hiraganas = ["あああああ"] * n_columns
+  enc_utf8 = (hiraganas.join(",") + "\r\n") * n_rows
+  enc_sjis = enc_utf8.encode("Windows-31J")
+benchmark:
+  unquoted: |-
+    CSV.parse(unquoted, liberal_parsing: true)
+  unquoted_backslash_quote: |-
+    CSV.parse(unquoted, liberal_parsing: {
+                          backslash_quote: true,
+                        })
+  quoted: |-
+    CSV.parse(quoted, liberal_parsing: true)
+  quoted_double_quote_outside_quote: |-
+    CSV.parse(quoted, liberal_parsing: {
+                        double_quote_outside_quote: true
+                      })
+  quoted_backslash_quote: |-
+    CSV.parse(quoted, liberal_parsing: {
+                        double_quote_outside_quote: true,
+                        backslash_quote: true,
+                      })
+  include_col_sep: |-
+    CSV.parse(inc_col_sep, liberal_parsing: true)
+  include_row_sep: |-
+    CSV.parse(inc_row_sep, liberal_parsing: true)
+  encode_utf-8: |-
+    CSV.parse(enc_utf8, liberal_parsing: true)
+  encode_sjis: |-
+    CSV.parse(enc_sjis, liberal_parsing: true)
