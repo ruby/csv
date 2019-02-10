@@ -96,11 +96,9 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
       data = %Q{a,""b""}
       assert_equal([
                      [["a", %Q{""b""}]],
-                     [["a", %Q{""b""}]],
                      [["a", %Q{"b"}]],
                    ],
                    [
-                     CSV.parse(data, liberal_parsing: true),
                      CSV.parse(data,
                                liberal_parsing: {
                                  backslash_quote: true
