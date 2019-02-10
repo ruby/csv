@@ -130,23 +130,12 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
 
     def test_unquoted_value_multiple_characters_col_sep
       data = 'a<\\"b<=>x'
-      assert_equal([
-                     [[%Q{a<\\\"b<=>x}]],
-                     [[%Q{a<"b<=>x}]],
-                     [[%Q{a<"b}, "x"]],
-                   ],
-                   [
-                     CSV.parse(data, liberal_parsing: true),
-                     CSV.parse(data,
-                               liberal_parsing: {
-                                 backslash_quote: true
-                               }),
-                     CSV.parse(data,
-                               col_sep: "<=>",
-                               liberal_parsing: {
-                                 backslash_quote: true
-                               }),
-                   ])
+      assert_equal([[%Q{a<"b}, "x"]],
+                   CSV.parse(data,
+                             col_sep: "<=>",
+                             liberal_parsing: {
+                               backslash_quote: true
+                             }))
     end
 
     def test_quoted_value
