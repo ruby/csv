@@ -92,6 +92,8 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
   end
 
   class TestBackslashQuote < Test::Unit::TestCase
+    extend DifferentOFS
+
     def test_double_quote_outside_quote
       data = %Q{a,""b""}
       assert_equal([
