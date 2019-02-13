@@ -1,3 +1,4 @@
+require "tempfile"
 require "test/unit"
 
 require "csv"
