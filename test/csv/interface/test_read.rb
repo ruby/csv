@@ -237,6 +237,19 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
     end
   end
 
+  def test_eof?
+    eofs = []
+    CSV.open(@input.path, col_sep: "\t", row_sep: "\r\n") do |csv|
+      eofs << csv.eof?
+      csv.shift
+      eofs << csv.eof?
+      csv.shift
+      eofs << csv.eof?
+    end
+    assert_equal([false, false, true],
+                 eofs)
+  end
+
   def test_new_nil
     assert_raise_with_message ArgumentError, "Cannot parse nil as CSV" do
       CSV.new(nil)

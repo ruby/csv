@@ -1099,11 +1099,21 @@ class CSV
 
   extend Forwardable
   def_delegators :@io, :binmode, :binmode?, :close, :close_read, :close_write,
-                       :closed?, :eof, :eof?, :external_encoding, :fcntl,
+                       :closed?, :external_encoding, :fcntl,
                        :fileno, :flock, :flush, :fsync, :internal_encoding,
                        :ioctl, :isatty, :path, :pid, :pos, :pos=, :reopen,
                        :seek, :stat, :string, :sync, :sync=, :tell, :to_i,
                        :to_io, :truncate, :tty?
+
+  def eof?
+    begin
+      parser_enumerator.peek
+      false
+    rescue StopIteration
+      true
+    end
+  end
+  alias_method :eof, :eof?
 
   # Rewinds the underlying IO object and resets CSV's lineno() counter.
   def rewind
@@ -1174,10 +1184,10 @@ class CSV
   #
   def each
     return to_enum(__method__) unless block_given?
-    @parser_enumerator ||= parser.parse
+    enumerator = parser_enumerator
     begin
       while true
-        yield @parser_enumerator.next
+        yield enumerator.next
       end
     rescue StopIteration
     end
@@ -1212,9 +1222,8 @@ class CSV
   # The data source must be open for reading.
   #
   def shift
-    @parser_enumerator ||= parser.parse
     begin
-      @parser_enumerator.next
+      parser_enumerator.next
     rescue StopIteration
       nil
     end
@@ -1364,6 +1373,10 @@ class CSV
   def parser_options
     @parser_options.merge(fields_converter: fields_converter,
                           header_fields_converter: header_fields_converter)
+  end
+
+  def parser_enumerator
+    @parser_enumerator ||= parser.parse
   end
 
   def writer
