@@ -18,7 +18,7 @@ class CSV
       if @options[:write_headers] and @headers
         self << @headers
       end
-      @converters = @options[:fields_converter] unless @options[:fields_converter].empty?
+      @converters = @options[:fields_converter]
     end
 
     def <<(row)
