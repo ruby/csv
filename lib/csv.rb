@@ -1349,7 +1349,7 @@ class CSV
   end
 
   def build_writer_fields_converter
-    generate_fields_converter(@initial_write_converters, {})
+    generate_fields_converter(@initial_write_converters, @base_fields_converter_options)
   end
 
   def generate_fields_converter(initial_converters, options)
