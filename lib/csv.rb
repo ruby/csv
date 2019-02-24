@@ -1006,7 +1006,7 @@ class CSV
   # as is.
   #
   def converters
-    fields_converter.map do |converter|
+    parser_fields_converter.map do |converter|
       name = Converters.rassoc(converter)
       name ? name.first : converter
     end
@@ -1163,7 +1163,7 @@ class CSV
   # converted field or the field itself.
   #
   def convert(name = nil, &converter)
-    fields_converter.add_converter(name, &converter)
+    parser_fields_converter.add_converter(name, &converter)
   end
 
   #
@@ -1324,7 +1324,7 @@ class CSV
     if headers
       header_fields_converter.convert(fields, nil, 0)
     else
-      fields_converter.convert(fields, @headers, lineno)
+      parser_fields_converter.convert(fields, @headers, lineno)
     end
   end
 
@@ -1341,11 +1341,11 @@ class CSV
     end
   end
 
-  def fields_converter
-    @fields_converter ||= build_fields_converter
+  def parser_fields_converter
+    @parser_fields_converter ||= build_parser_fields_converter
   end
 
-  def build_fields_converter
+  def build_parser_fields_converter
     specific_options = {
       builtin_converters: Converters,
     }
@@ -1388,8 +1388,8 @@ class CSV
   end
 
   def parser_options
-    @parser_options.merge(fields_converter: fields_converter,
-                          header_fields_converter: header_fields_converter)
+    @parser_options.merge(header_fields_converter: header_fields_converter,
+                          fields_converter: parser_fields_converter)
   end
 
   def parser_enumerator
