@@ -205,6 +205,12 @@ module TestCSVWriteGeneral
     assert_equal(%Q[あ,い,う#{$INPUT_RECORD_SEPARATOR}].encode("EUC-JP"),
                  generate_line(row))
   end
+
+  def test_write_converters
+    assert_equal(%Q[=a,=b,=c\n],
+                 generate_line(["a", "b", "c"],
+                               write_converters: ->(value) { '=' + value } ))
+  end
 end
 
 class TestCSVWriteGeneralGenerateLine < Test::Unit::TestCase
