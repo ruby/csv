@@ -954,7 +954,6 @@ class CSV
       row_separator: row_sep,
       quote_character: quote_char,
       quote_empty: quote_empty,
-      converters: write_converters,
     }
 
     @writer = nil
