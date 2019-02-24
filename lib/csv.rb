@@ -910,9 +910,11 @@ class CSV
                  external_encoding: nil,
                  encoding: nil,
                  nil_value: nil,
-                 write_converters: nil,
                  empty_value: "",
-                 quote_empty: true)
+                 quote_empty: true,
+                 write_converters: nil,
+                 write_nil_value: nil,
+                 write_empty_value: "")
     raise ArgumentError.new("Cannot parse nil as CSV") if data.nil?
 
     # create the IO object we will read from
@@ -922,6 +924,10 @@ class CSV
     @base_fields_converter_options = {
       nil_value: nil_value,
       empty_value: empty_value,
+    }
+    @write_fields_converter_options = {
+      nil_value: write_nil_value,
+      empty_value: write_empty_value,
     }
     @initial_converters = converters
     @initial_header_converters = header_converters
@@ -1365,7 +1371,8 @@ class CSV
   end
 
   def build_writer_fields_converter
-    generate_fields_converter(@initial_write_converters, @base_fields_converter_options)
+    generate_fields_converter(@initial_write_converters,
+                              @write_fields_converter_options)
   end
 
   def generate_fields_converter(initial_converters, options)
