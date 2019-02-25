@@ -575,9 +575,9 @@ class CSV
           string = @samples[0]
         end
         if string
-          unless string.valid_encoding?
+          if index = string.lines(@row_separator).index { |l| !l.valid_encoding? }
             message = "Invalid byte sequence in #{@encoding}"
-            raise MalformedCSVError.new(message, @lineno + 1)
+            raise MalformedCSVError.new(message, @lineno + index + 1)
           end
           Scanner.new(string)
         else
