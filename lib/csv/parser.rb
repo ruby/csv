@@ -575,7 +575,8 @@ class CSV
           string = @samples[0]
         end
         if string
-          if index = string.lines(@row_separator).index { |l| !l.valid_encoding? }
+          index = string.lines(@row_separator).index {|line| !line.valid_encoding?}
+          if index
             message = "Invalid byte sequence in #{@encoding}"
             raise MalformedCSVError.new(message, @lineno + index + 1)
           end
