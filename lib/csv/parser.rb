@@ -282,6 +282,10 @@ class CSV
             elsif @scanner.rest.start_with?(@quote_character)
               message = "Illegal quoting"
               raise MalformedCSVError.new(message, @lineno + 1)
+            elsif (new_line = @scanner.scan(@cr_or_lf))
+              message = "New line must be <#{@row_separator.inspect}> " +
+                        "not <#{new_line.inspect}>"
+              raise MalformedCSVError.new(message, @lineno + 1)
             else
               raise MalformedCSVError.new("TODO: Meaningful message",
                                           @lineno + 1)
