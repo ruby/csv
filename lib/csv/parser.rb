@@ -272,10 +272,12 @@ class CSV
           else
             if @quoted_column_value
               message = "Do not allow except col_sep_split_separator " +
-                "after quoted fields"
+                        "after quoted fields"
               raise MalformedCSVError.new(message, @lineno + 1)
-            elsif @unquoted_column_value and @scanner.scan(@cr_or_lf)
-              message = "Unquoted fields do not allow \\r or \\n"
+            elsif @unquoted_column_value and
+                  (new_line = @scanner.scan(@cr_or_lf))
+              message = "Unquoted fields do not allow new line " +
+                        "<#{new_line.inspect}>"
               raise MalformedCSVError.new(message, @lineno + 1)
             elsif @scanner.rest.start_with?(@quote_character)
               message = "Illegal quoting"

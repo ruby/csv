@@ -56,7 +56,7 @@ line,4,jkl
     error = assert_raise(CSV::MalformedCSVError) do
       CSV.parse_line("1,2,3\n,4,5\r\n", row_sep: "\r\n")
     end
-    assert_equal("Unquoted fields do not allow \\r or \\n in line 1.",
+    assert_equal("Unquoted fields do not allow new line <\"\\n\"> in line 1.",
                  error.message)
     assert_equal( ["1", "2", "3\n", "4", "5"],
                   CSV.parse_line(%Q{1,2,"3\n",4,5\r\n}, row_sep: "\r\n"))
