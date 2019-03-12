@@ -24,34 +24,14 @@ class TestCSVParseQuoteCharNil < Test::Unit::TestCase
   end
 
   def test_csv_header_string
-    # activate headers
-    csv = nil
-    data = <<~DATA
-      first,second,third
-      A,B,C
-      1,2,3
-    DATA
-
-    # first data row - skipping headers
-    row = csv[0]
-    assert_not_nil(row)
-    assert_instance_of(CSV::Row, row)
-    assert_equal([%w{my first}, %w{new second}, %w{headers third}], row.to_a)
-
-    # second data row
-    row = csv[1]
-    assert_not_nil(row)
-    assert_instance_of(CSV::Row, row)
-    assert_equal([%w{my A}, %w{new B}, %w{headers C}], row.to_a)
-
-    # third data row
-    row = csv[2]
-    assert_not_nil(row)
-    assert_instance_of(CSV::Row, row)
-    assert_equal([%w{my 1}, %w{new 2}, %w{headers 3}], row.to_a)
-
-    # empty
-    assert_nil(csv[3])
+    assert_equal(
+      CSV::Table.new([
+        CSV::Row.new(["my", "new", "headers"], ["first", "second", "third"]),
+        CSV::Row.new(["my", "new", "headers"], ["A", "B", "C"]),
+        CSV::Row.new(["my", "new", "headers"], ["1", "2", "3"])
+      ]),
+      CSV.parse(data, headers: "my,new,headers", quote_char: nil)
+    )
   end
 
   def test_comma
