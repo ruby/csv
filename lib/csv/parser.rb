@@ -306,7 +306,7 @@ class CSV
       prepare_regexp
       prepare_line
       prepare_header
-      prepare_parser if @options[:quote_character]
+      prepare_parser
     end
 
     def prepare_variable
@@ -539,7 +539,7 @@ class CSV
     end
 
     def prepare_parser
-      @may_quoted = may_quoted?
+      @may_quoted = may_quoted? if @options[:quote_character]
     end
 
     def may_quoted?
