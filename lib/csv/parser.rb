@@ -497,10 +497,12 @@ class CSV
     end
 
     def prepare_parser
-      @may_quoted = may_quoted? if @quote_character
+      @may_quoted = may_quoted?
     end
 
     def may_quoted?
+      return false if @quote_character.nil?
+
       if @input.is_a?(StringIO)
         sample = @input.string
       else
