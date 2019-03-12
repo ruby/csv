@@ -242,6 +242,8 @@ class CSV
 
       row = []
       begin
+        return parse_quote_character_nil(&block) if quote_character.nil?
+
         @scanner = build_scanner
         skip_needless_lines
         start_row
@@ -341,20 +343,28 @@ class CSV
       @column_separator = @options[:column_separator].to_s.encode(@encoding)
       @row_separator =
         resolve_row_separator(@options[:row_separator]).encode(@encoding)
-      @quote_character = @options[:quote_character].to_s.encode(@encoding)
-      if @quote_character.length != 1
-        raise ArgumentError, ":quote_char has to be a single character String"
-      end
+
+
       @backslash_character = "\\".encode(@encoding)
+      if @options[:quote_character].nil?
+        @quote_character = nil
+      else
+        @quote_character = @options[:quote_character].to_s.encode(@encoding)
+        if @quote_character.length != 1
+          raise ArgumentError, ":quote_char has to be nil or a single character String"
+        end
+      end
 
       escaped_column_separator = Regexp.escape(@column_separator)
       escaped_first_column_separator = Regexp.escape(@column_separator[0])
       escaped_row_separator = Regexp.escape(@row_separator)
-      escaped_quote_character = Regexp.escape(@quote_character)
       escaped_backslash_character = Regexp.escape(@backslash_character)
       @escaped_backslash = Regexp.new(escaped_backslash_character)
-      @escaped_quote = Regexp.new(escaped_quote_character)
-      @backslash_quote_character = @backslash_character + escaped_quote_character
+      if @quote_character
+        escaped_quote_character = Regexp.escape(@quote_character)
+        @escaped_quote = Regexp.new(escaped_quote_character)
+        @backslash_quote_character = @backslash_character + escaped_quote_character
+      end
 
       skip_lines = @options[:skip_lines]
       case skip_lines
@@ -391,23 +401,26 @@ class CSV
         @row_ends = nil
       end
 
-      @quotes = Regexp.new(escaped_quote_character +
-                           "+".encode(@encoding))
-      if @backslash_quote
-        @quoted_value = Regexp.new("[^".encode(@encoding) +
-                                   escaped_quote_character +
-                                   escaped_backslash_character +
-                                   "]+".encode(@encoding))
-      else
-        @quoted_value = Regexp.new("[^".encode(@encoding) +
-                                   escaped_quote_character +
-                                   "]+".encode(@encoding))
+      if @quote_character
+        @quotes = Regexp.new(escaped_quote_character +
+                             "+".encode(@encoding))
+        if @backslash_quote
+          @quoted_value = Regexp.new("[^".encode(@encoding) +
+                                     escaped_quote_character +
+                                     escaped_backslash_character +
+                                     "]+".encode(@encoding))
+        else
+          @quoted_value = Regexp.new("[^".encode(@encoding) +
+                                     escaped_quote_character +
+                                     "]+".encode(@encoding))
+        end
       end
+
       if @liberal_parsing
         @unquoted_value = Regexp.new("[^".encode(@encoding) +
                                      escaped_first_column_separator +
                                      "\r\n]+".encode(@encoding))
-      else
+      elsif @quote_character
         @unquoted_value = Regexp.new("[^".encode(@encoding) +
                                      escaped_quote_character +
                                      escaped_first_column_separator +
@@ -532,7 +545,7 @@ class CSV
     end
 
     def prepare_parser
-      @may_quoted = may_quoted?
+      @may_quoted = may_quoted? if @options[:quote_character]
     end
 
     def may_quoted?
@@ -746,6 +759,33 @@ class CSV
         @scanner.keep_back
         false
       end
+    end
+
+    def parse_quote_character_nil(&block)
+      @input.string.each_line(@row_separator) do |value|
+        next if @skip_lines and skip_line?(value)
+        value.chomp!
+
+        row = []
+        if value.empty?
+          next if @skip_blanks
+        else
+          row = if @column_separator == " "
+            value.split(@column_end, -1)
+          else
+            value.split(@column_separator, -1)
+          end
+          n_columns = row.size
+          i = 0
+          while i < n_columns
+            row[i] = nil if row[i].empty?
+            i += 1
+          end
+        end
+        @last_line = value
+        emit_row(row, &block)
+      end
+      @parsed = true
     end
 
     def start_row

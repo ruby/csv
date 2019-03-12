@@ -28,7 +28,7 @@ namespace :benchmark do
     benchmark_tasks << "benchmark:#{name}"
 
     case name
-    when "parse", "shift", "parse_liberal_parsing"
+    when "parse", "shift", "parse_liberal_parsing", "parse_quote_char_nil"
       namespace name do
         desc "Run #{name} benchmark: small"
         task :small do

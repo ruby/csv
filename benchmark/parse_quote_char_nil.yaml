@@ -1,0 +1,19 @@
+contexts:
+  - name: "master"
+    prelude: |
+      $LOAD_PATH.unshift(File.expand_path("lib"))
+      require "csv"
+prelude: |-
+  n_columns = Integer(ENV.fetch("N_COLUMNS", "50"), 10)
+  n_rows = Integer(ENV.fetch("N_ROWS", "1000"), 10)
+  alphas = ["AAAAA"] * n_columns
+  unquoted = (alphas.join(",") + "\r\n") * n_rows
+  col_sep_space = (alphas.join(" ") + "\r\n") * n_rows
+
+benchmark:
+  without_quote_char: |-
+    CSV.parse(unquoted)
+  quote_char_nil: |-
+    CSV.parse(unquoted, quote_char: nil)
+  col_sep_space: |-
+    CSV.parse(col_sep_space, quote_char: nil, col_sep: " ")
