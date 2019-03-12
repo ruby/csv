@@ -227,33 +227,6 @@ class CSV
       last_line
     end
 
-    def parse_quote_character_nil(&block)
-      while true
-        return nil unless value = @input.gets(@row_separator)
-        next if @skip_lines and skip_line?(value)
-
-        value.chomp!
-
-        row = []
-        if value.empty?
-          next if @skip_blanks
-        else
-          columns = if @column_separator == " "
-            value.split(@column_end, -1)
-          else
-            value.split(@column_separator, -1)
-          end
-          columns.each do |column|
-            row << (column.empty? ? nil : column)
-          end
-        end
-        @last_line = value
-
-        emit_row(row, &block)
-      end
-      @parsed = true
-    end
-
     def parse(&block)
       return to_enum(__method__) unless block_given?
 
@@ -777,6 +750,31 @@ class CSV
         @scanner.keep_back
         false
       end
+    end
+
+    def parse_quote_character_nil(&block)
+      while true
+        return nil unless value = @input.gets(@row_separator)
+        next if @skip_lines and skip_line?(value)
+        value.chomp!
+
+        row = []
+        if value.empty?
+          next if @skip_blanks
+        else
+          columns = if @column_separator == " "
+            value.split(@column_end, -1)
+          else
+            value.split(@column_separator, -1)
+          end
+          columns.each do |column|
+            row << (column.empty? ? nil : column)
+          end
+        end
+        @last_line = value
+        emit_row(row, &block)
+      end
+      @parsed = true
     end
 
     def start_row
