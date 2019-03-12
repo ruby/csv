@@ -753,8 +753,7 @@ class CSV
     end
 
     def parse_quote_character_nil(&block)
-      while true
-        return nil unless value = @input.gets(@row_separator)
+      @input.string.each_line(@row_separator) do |value|
         next if @skip_lines and skip_line?(value)
         value.chomp!
 
