@@ -9,9 +9,6 @@ prelude: |-
   alphas = ["AAAAA"] * n_columns
   unquoted = (alphas.join(",") + "\r\n") * n_rows
   col_sep_space = (alphas.join(" ") + "\r\n") * n_rows
-  hiraganas = ["あああああ"] * n_columns
-  enc_utf8 = (hiraganas.join(",") + "\r\n") * n_rows
-  enc_sjis = enc_utf8.encode("Windows-31J")
 
 benchmark:
   without_quote_char: |-
@@ -20,7 +17,3 @@ benchmark:
     CSV.parse(unquoted, quote_char: nil)
   col_sep_space: |-
     CSV.parse(col_sep_space, quote_char: nil, col_sep: " ")
-  encode_utf-8: |-
-    CSV.parse(enc_utf8, quote_char: nil)
-  encode_sjis: |-
-    CSV.parse(enc_sjis, quote_char: nil)
