@@ -6,7 +6,7 @@ require_relative "../helper"
 class TestCSVParseQuoteCharNil < Test::Unit::TestCase
   extend DifferentOFS
 
-  def test_general
+  def test_full
     assert_equal(["a", "b"], CSV.parse_line(%Q{a,b}, quote_char: nil))
   end
 
@@ -47,6 +47,20 @@ class TestCSVParseQuoteCharNil < Test::Unit::TestCase
   def test_space
     assert_equal([["a", "b", nil, "d"]],
                  CSV.parse("a b  d", col_sep: " ", quote_char: nil))
+  end
+
+  def encode_array(array, encoding)
+    array.collect do |element|
+      element ? element.encode(encoding) : element
+    end
+  end
+
+  def test_space_no_ascii
+    encoding = Encoding::UTF_16LE
+    assert_equal([encode_array(["a", "b", nil, "d"], encoding)],
+                 CSV.parse("a b  d".encode(encoding),
+                           col_sep: " ".encode(encoding),
+                           quote_char: nil))
   end
 
   def test_multiple_space

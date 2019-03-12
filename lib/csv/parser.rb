@@ -590,19 +590,20 @@ class CSV
     end
 
     def parse_no_quote(&block)
+      if @column_separator == " ".encode(@encoding)
+        column_separator = @column_end
+      else
+        column_separator = @column_separator
+      end
       @input.string.each_line(@row_separator) do |value|
         next if @skip_lines and skip_line?(value)
         value.chomp!
 
-        row = []
         if value.empty?
           next if @skip_blanks
+          row = []
         else
-          row = if @column_separator == " "
-            value.split(@column_end, -1)
-          else
-            value.split(@column_separator, -1)
-          end
+          row = value.split(column_separator, -1)
           n_columns = row.size
           i = 0
           while i < n_columns
