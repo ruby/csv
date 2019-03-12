@@ -393,7 +393,7 @@ class CSV
         @row_ends = nil
       end
 
-      if @options[:quote_character]
+      if @quote_character
         @quotes = Regexp.new(escaped_quote_character +
                              "+".encode(@encoding))
         if @backslash_quote
@@ -412,7 +412,7 @@ class CSV
         @unquoted_value = Regexp.new("[^".encode(@encoding) +
                                      escaped_first_column_separator +
                                      "\r\n]+".encode(@encoding))
-      elsif @options[:quote_character]
+      elsif @quote_character
         @unquoted_value = Regexp.new("[^".encode(@encoding) +
                                      escaped_quote_character +
                                      escaped_first_column_separator +
