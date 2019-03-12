@@ -545,7 +545,7 @@ class CSV
     end
 
     def prepare_parser
-      @may_quoted = may_quoted? if @options[:quote_character]
+      @may_quoted = may_quoted? if @quote_character
     end
 
     def may_quoted?
