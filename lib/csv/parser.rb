@@ -761,13 +761,16 @@ class CSV
         if value.empty?
           next if @skip_blanks
         else
-          columns = if @column_separator == " "
+          row = if @column_separator == " "
             value.split(@column_end, -1)
           else
             value.split(@column_separator, -1)
           end
-          columns.each do |column|
-            row << (column.empty? ? nil : column)
+          n_columns = row.size
+          i = 0
+          while i < n_columns
+            row[i] = nil if row[i].empty?
+            i += 1
           end
         end
         @last_line = value
