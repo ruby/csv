@@ -7,12 +7,15 @@ class TestCSVParseQuoteCharNil < Test::Unit::TestCase
   extend DifferentOFS
 
   def test_general
-    [[%Q{a,b},  ["a", "b"]],
-     [%Q{a,,,}, ["a", nil, nil, nil]],
-     [%Q{,},    [nil, nil]],
-    ].each do |edge_case|
-      assert_equal(edge_case.last, CSV.parse_line(edge_case.first, quote_char: nil))
-    end
+    assert_equal(["a", "b"], CSV.parse_line(%Q{a,b}, quote_char: nil))
+  end
+
+  def test_end_with_nil
+    assert_equal(["a", nil, nil, nil], CSV.parse_line(%Q{a,,,}, quote_char: nil))
+  end
+
+  def test_nil_nil
+    assert_equal([nil, nil], CSV.parse_line(%Q{,}, quote_char: nil))
   end
 
   def test_unquoted_value_multiple_characters_col_sep
