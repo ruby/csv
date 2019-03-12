@@ -31,9 +31,6 @@ class TestCSVParseQuoteCharNil < Test::Unit::TestCase
       A,B,C
       1,2,3
     DATA
-    assert_nothing_raised(Exception) do
-      csv = CSV.parse(data, headers: "my,new,headers", quote_char: nil)
-    end
 
     # first data row - skipping headers
     row = csv[0]
