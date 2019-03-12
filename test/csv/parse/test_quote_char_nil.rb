@@ -24,6 +24,11 @@ class TestCSVParseQuoteCharNil < Test::Unit::TestCase
   end
 
   def test_csv_header_string
+    data = <<~DATA
+      first,second,third
+      A,B,C
+      1,2,3
+    DATA
     assert_equal(
       CSV::Table.new([
         CSV::Row.new(["my", "new", "headers"], ["first", "second", "third"]),
