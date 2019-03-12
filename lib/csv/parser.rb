@@ -347,9 +347,6 @@ class CSV
         if @quote_character.length != 1
           raise ArgumentError, ":quote_char has to be a single character String"
         end
-        escaped_quote_character = Regexp.escape(@quote_character)
-        @escaped_quote = Regexp.new(escaped_quote_character)
-        @backslash_quote_character = @backslash_character + escaped_quote_character
       end
 
       escaped_column_separator = Regexp.escape(@column_separator)
@@ -357,6 +354,11 @@ class CSV
       escaped_row_separator = Regexp.escape(@row_separator)
       escaped_backslash_character = Regexp.escape(@backslash_character)
       @escaped_backslash = Regexp.new(escaped_backslash_character)
+      if @quote_character
+        escaped_quote_character = Regexp.escape(@quote_character)
+        @escaped_quote = Regexp.new(escaped_quote_character)
+        @backslash_quote_character = @backslash_character + escaped_quote_character
+      end
 
       skip_lines = @options[:skip_lines]
       case skip_lines
