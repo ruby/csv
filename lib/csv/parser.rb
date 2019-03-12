@@ -345,7 +345,7 @@ class CSV
       else
         @quote_character = @options[:quote_character].to_s.encode(@encoding)
         if @quote_character.length != 1
-          raise ArgumentError, ":quote_char has to be a single character String"
+          raise ArgumentError, ":quote_char has to be nil or a single character String"
         end
       end
 
