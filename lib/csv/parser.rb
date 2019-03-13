@@ -49,6 +49,28 @@ class CSV
         read_chunk
       end
 
+      def each_line(row_separator)
+        buffer = nil
+        input = @scanner.rest
+        @scanner.terminate
+        while input
+          input.each_line(row_separator) do |line|
+            if buffer
+              buffer << line
+              line = buffer
+              buffer = nil
+            end
+            if line.end_with?(row_separator)
+              yield(line)
+            else
+              buffer = line
+            end
+          end
+          input = @inputs.shift
+        end
+        yield(buffer) if buffer
+      end
+
       def scan(pattern)
         value = @scanner.scan(pattern)
         return value if @last_scanner
@@ -241,6 +263,7 @@ class CSV
       end
 
       begin
+        @scanner = build_scanner
         if quote_character.nil?
           parse_no_quote(&block)
         else
@@ -523,6 +546,10 @@ class CSV
           @io.gets(*args)
         end
 
+        def each_line(*args, &block)
+          @io.each_line(*args, &block)
+        end
+
         def eof?
           @io.eof?
         end
@@ -548,10 +575,14 @@ class CSV
           string = @samples[0]
         end
         if string
-          index = string.lines(@row_separator).index {|line| !line.valid_encoding?}
-          if index
-            message = "Invalid byte sequence in #{@encoding}"
-            raise MalformedCSVError.new(message, @lineno + index + 1)
+          unless string.valid_encoding?
+            index = string.lines(@row_separator).index do |line|
+              !line.valid_encoding?
+            end
+            if index
+              message = "Invalid byte sequence in #{@encoding}"
+              raise MalformedCSVError.new(message, @lineno + index + 1)
+            end
           end
           Scanner.new(string)
         else
@@ -597,7 +628,12 @@ class CSV
       else
         column_separator = @column_separator
       end
-      @input.string.each_line(@row_separator) do |value|
+      if @scanner.respond_to?(:string)
+        scanner = @scanner.string
+      else
+        scanner = @scanner
+      end
+      scanner.each_line(@row_separator) do |value|
         next if @skip_lines and skip_line?(value)
         value.chomp!
 
@@ -620,7 +656,6 @@ class CSV
 
     def parse_quotable(&block)
       row = []
-      @scanner = build_scanner
       skip_needless_lines
       start_row
       while true
