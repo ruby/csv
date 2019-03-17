@@ -1114,7 +1114,11 @@ class CSV
                        :truncate, :tty?
 
   def binmode?
-    !!(@io.binmode? if @io.respond_to?(:binmode?))
+    if @io.respond_to?(:binmode?)
+      @io.binmode?
+    else
+      false
+    end
   end
 
   def flock(*args)
