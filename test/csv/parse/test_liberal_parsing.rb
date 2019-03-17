@@ -22,8 +22,7 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
     error = assert_raise(CSV::MalformedCSVError) do
       CSV.parse_line(input)
     end
-    assert_equal("Do not allow except col_sep_split_separator " +
-                 "after quoted fields in line 1.",
+    assert_equal("Any value after quoted field isn't allowed in line 1.",
                  error.message)
     assert_equal(['"quoted" field'],
                  CSV.parse_line(input, liberal_parsing: true))
@@ -75,8 +74,7 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
     error = assert_raise(CSV::MalformedCSVError) do
       CSV.parse(data)
     end
-    assert_equal("Do not allow except col_sep_split_separator " +
-                 "after quoted fields in line 1.",
+    assert_equal("Any value after quoted field isn't allowed in line 1.",
                  error.message)
     assert_equal([
                    [["a", %Q{""b""}]],

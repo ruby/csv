@@ -684,8 +684,7 @@ class CSV
           break
         else
           if @quoted_column_value
-            message = "Do not allow except col_sep_split_separator " +
-                      "after quoted fields"
+            message = "Any value after quoted field isn't allowed"
             raise MalformedCSVError.new(message, @lineno + 1)
           elsif @unquoted_column_value and
                 (new_line = @scanner.scan(@cr_or_lf))
