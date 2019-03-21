@@ -192,7 +192,6 @@ class CSV
       @input = input
       @options = options
       @samples = []
-      @parsed = false
 
       prepare
     end
@@ -252,9 +251,7 @@ class CSV
     def parse(&block)
       return to_enum(__method__) unless block_given?
 
-      return if @parsed
-
-      if @return_headers and @headers
+      if @return_headers and @headers and @raw_headers
         headers = Row.new(@headers, @raw_headers, true)
         if @unconverted_fields
           headers = add_unconverted_fields(headers, [])
@@ -263,18 +260,17 @@ class CSV
       end
 
       begin
-        @scanner = build_scanner
+        @scanner ||= build_scanner
         if quote_character.nil?
           parse_no_quote(&block)
         else
           parse_quotable(&block)
         end
       rescue InvalidEncoding
+        ignore_broken_line if @scanner
         message = "Invalid byte sequence in #{@encoding}"
-        raise MalformedCSVError.new(message, @lineno + 1)
+        raise MalformedCSVError.new(message, @lineno)
       end
-
-      @parsed = true
     end
 
     def use_headers?
@@ -603,6 +599,7 @@ class CSV
         line = @scanner.scan_all(@not_line_end) || "".encode(@encoding)
         line << @row_separator if parse_row_end
         if skip_line?(line)
+          @lineno += 1
           @scanner.keep_drop
         else
           @scanner.keep_back
@@ -663,7 +660,8 @@ class CSV
         @unquoted_column_value = false
         value = parse_column_value
         if value and @field_size_limit and value.size >= @field_size_limit
-          raise MalformedCSVError.new("Field size exceeded", @lineno + 1)
+          ignore_broken_line
+          raise MalformedCSVError.new("Field size exceeded", @lineno)
         end
         if parse_column_end
           row << value
@@ -684,23 +682,28 @@ class CSV
           break
         else
           if @quoted_column_value
+            ignore_broken_line
             message = "Any value after quoted field isn't allowed"
-            raise MalformedCSVError.new(message, @lineno + 1)
+            raise MalformedCSVError.new(message, @lineno)
           elsif @unquoted_column_value and
                 (new_line = @scanner.scan(@cr_or_lf))
+            ignore_broken_line
             message = "Unquoted fields do not allow new line " +
                       "<#{new_line.inspect}>"
-            raise MalformedCSVError.new(message, @lineno + 1)
+            raise MalformedCSVError.new(message, @lineno)
           elsif @scanner.rest.start_with?(@quote_character)
+            ignore_broken_line
             message = "Illegal quoting"
-            raise MalformedCSVError.new(message, @lineno + 1)
+            raise MalformedCSVError.new(message, @lineno)
           elsif (new_line = @scanner.scan(@cr_or_lf))
+            ignore_broken_line
             message = "New line must be <#{@row_separator.inspect}> " +
                       "not <#{new_line.inspect}>"
-            raise MalformedCSVError.new(message, @lineno + 1)
+            raise MalformedCSVError.new(message, @lineno)
           else
+            ignore_broken_line
             raise MalformedCSVError.new("TODO: Meaningful message",
-                                        @lineno + 1)
+                                        @lineno)
           end
         end
       end
@@ -786,8 +789,9 @@ class CSV
 
           quotes = @scanner.scan_all(@quotes)
           unless quotes
+            ignore_broken_line
             message = "Unclosed quoted field"
-            raise MalformedCSVError.new(message, @lineno + 1)
+            raise MalformedCSVError.new(message, @lineno)
           end
           n_quotes = quotes.size
           if n_quotes == 1
@@ -828,6 +832,12 @@ class CSV
         @scanner.keep_back
         false
       end
+    end
+
+    def ignore_broken_line
+      @scanner.scan_all(@not_line_end)
+      @scanner.scan_all(@cr_or_lf)
+      @lineno += 1
     end
 
     def start_row

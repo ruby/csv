@@ -12,4 +12,25 @@ class TestCSVParseInvalid < Test::Unit::TestCase
     assert_equal("New line must be <\"\\n\"> not <\"\\r\"> in line 2.",
                  error.message)
   end
+
+  def test_ignore_invalid_line
+    csv = CSV.new(<<-CSV, headers: true, return_headers: true)
+head1,head2,head3
+aaa,bbb,ccc
+ddd,ee"e.fff
+ggg,hhh,iii
+    CSV
+    headers = ["head1", "head2", "head3"]
+    assert_equal(CSV::Row.new(headers, headers),
+                 csv.shift)
+    assert_equal(CSV::Row.new(headers, ["aaa", "bbb", "ccc"]),
+                 csv.shift)
+    error = assert_raise(CSV::MalformedCSVError) do
+      csv.shift
+    end
+    assert_equal("Illegal quoting in line 3.",
+                 error.message)
+    assert_equal(CSV::Row.new(headers, ["ggg", "hhh", "iii"]),
+                 csv.shift)
+  end
 end
