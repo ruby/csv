@@ -76,7 +76,7 @@ class TestCSVParseSkipLines < Test::Unit::TestCase
     end
   end
 
-  def test_skip_lines_match
+  def test_matchable
     csv = <<-CSV
 1
 # 2
@@ -88,5 +88,27 @@ class TestCSVParseSkipLines < Test::Unit::TestCase
                    ["3"],
                  ],
                  CSV.parse(csv, :skip_lines => Matchable.new(/\A#/)))
+  end
+
+  def test_multibyte_data
+    # U+3042 HIRAGANA LETTER A
+    # U+3044 HIRAGANA LETTER I
+    # U+3046 HIRAGANA LETTER U
+    value = "\u3042\u3044\u3046"
+    with_chunk_size("5") do
+      assert_equal([[value], [value]],
+                   CSV.parse("#{value}\n#{value}\n",
+                             :skip_lines => /\A#/))
+    end
+  end
+
+  def with_chunk_size(chunk_size)
+    chunk_size_keep = ENV["CSV_PARSER_SCANNER_TEST_CHUNK_SIZE"]
+    begin
+      ENV["CSV_PARSER_SCANNER_TEST_CHUNK_SIZE"] = chunk_size
+      yield
+    ensure
+      ENV["CSV_PARSER_SCANNER_TEST_CHUNK_SIZE"] = chunk_size_keep
+    end
   end
 end

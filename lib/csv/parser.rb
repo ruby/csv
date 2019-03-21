@@ -116,7 +116,7 @@ class CSV
         start, buffer = @keeps.pop
         if buffer
           string = @scanner.string
-          keep = string[start, string.size - start]
+          keep = string.byteslice(start, string.bytesize - start)
           if keep and not keep.empty?
             @inputs.unshift(StringIO.new(keep))
             @last_scanner = false
@@ -143,7 +143,7 @@ class CSV
           keep = @keeps.last
           keep_start = keep[0]
           string = @scanner.string
-          keep_data = string[keep_start, @scanner.pos - keep_start]
+          keep_data = string.byteslice(keep_start, @scanner.pos - keep_start)
           if keep_data
             keep_buffer = keep[1]
             if keep_buffer
@@ -560,7 +560,10 @@ class CSV
         else
           inputs << @input
         end
-        InputsScanner.new(inputs, @encoding, chunk_size: 1)
+        chunk_size = ENV["CSV_PARSER_SCANNER_TEST_CHUNK_SIZE"] || "1"
+        InputsScanner.new(inputs,
+                          @encoding,
+                          chunk_size: Integer(chunk_size, 10))
       end
     else
       def build_scanner
