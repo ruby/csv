@@ -267,9 +267,14 @@ class CSV
           parse_quotable(&block)
         end
       rescue InvalidEncoding
-        ignore_broken_line if @scanner
+        if @scanner
+          ignore_broken_line
+          lineno = @lineno
+        else
+          lineno = @lineno + 1
+        end
         message = "Invalid byte sequence in #{@encoding}"
-        raise MalformedCSVError.new(message, @lineno)
+        raise MalformedCSVError.new(message, lineno)
       end
     end
 
