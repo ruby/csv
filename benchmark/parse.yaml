@@ -13,6 +13,7 @@ prelude: |-
   alphas = ["AAAAA"] * n_columns
   unquoted = (alphas.join(",") + "\r\n") * n_rows
   quoted = (alphas.map { |s| %("#{s}") }.join(",") + "\r\n") * n_rows
+  mixed = (alphas.map.with_index { |s, i| i.odd? ? s : %("#{s}") }.join(",") + "\r\n") * n_rows
   inc_col_sep = (alphas.map { |s| %(",#{s}") }.join(",") + "\r\n") * n_rows
   inc_row_sep = (alphas.map { |s| %("#{s}\r\n") }.join(",") + "\r\n") * n_rows
   hiraganas = ["あああああ"] * n_columns
@@ -21,6 +22,7 @@ prelude: |-
 benchmark:
   unquoted: CSV.parse(unquoted)
   quoted: CSV.parse(quoted)
+  mixed: CSV.parse(mixed)
   include_col_sep: CSV.parse(inc_col_sep)
   include_row_sep: CSV.parse(inc_row_sep)
   encode_utf-8: CSV.parse(enc_utf8)
