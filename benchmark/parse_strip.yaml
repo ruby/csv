@@ -1,0 +1,16 @@
+contexts:
+  - name: "master"
+    prelude: |
+      $LOAD_PATH.unshift(File.expand_path("lib"))
+      require "csv"
+prelude: |-
+  n_columns = Integer(ENV.fetch("N_COLUMNS", "50"), 10)
+  n_rows = Integer(ENV.fetch("N_ROWS", "1000"), 10)
+  alphas = ["AAAAA"] * n_columns
+  quoted = (alphas.map { |s| %("#{s}") }.join(",") + "\r\n") * n_rows
+
+benchmark:
+  default: |-
+    CSV.parse(quoted)
+  no_quote_strip: |-
+    CSV.parse(quoted, quote_char: nil, strip: '"')

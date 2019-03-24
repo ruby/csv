@@ -885,6 +885,10 @@ class CSV
   #                                       blank string field is replaced by
   #                                       the set object.
   # <b><tt>:quote_empty</tt></b>::        TODO
+  # <b><tt>:write_converters</tt></b>::   TODO
+  # <b><tt>:write_nil_value</tt></b>::    TODO
+  # <b><tt>:write_empty_value</tt></b>::  TODO
+  # <b><tt>:strip</tt></b>::              TODO
   #
   # See CSV::DEFAULT_OPTIONS for the default settings.
   #
@@ -914,7 +918,8 @@ class CSV
                  quote_empty: true,
                  write_converters: nil,
                  write_nil_value: nil,
-                 write_empty_value: "")
+                 write_empty_value: "",
+                 strip: false)
     raise ArgumentError.new("Cannot parse nil as CSV") if data.nil?
 
     # create the IO object we will read from
@@ -947,6 +952,7 @@ class CSV
       encoding: @encoding,
       nil_value: nil_value,
       empty_value: empty_value,
+      strip: strip,
     }
     @parser = nil
 
