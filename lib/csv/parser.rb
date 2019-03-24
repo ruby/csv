@@ -369,12 +369,19 @@ class CSV
       @escaped_strip = nil
       @strip_value = nil
       if @strip.is_a?(String)
+        case @strip.length
+        when 0
+          raise ArgumentError, ":strip must not be an empty String"
+        when 1
+          # ok
+        else
+          raise ArgumentError, ":strip doesn't support 2 or more characters yet"
+        end
         @strip = @strip.encode(@encoding)
         @escaped_strip = Regexp.escape(@strip)
         if @quote_character
-          @strip_value = Regexp.new("(?:".encode(@encoding) +
-                                    @escaped_strip +
-                                    ")+".encode(@encoding))
+          @strip_value = Regexp.new(@escaped_strip +
+                                    "+".encode(@encoding))
         end
       elsif @strip
         strip_values = " \t\r\n\f\v"
