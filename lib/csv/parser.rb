@@ -696,16 +696,16 @@ class CSV
       else
         scanner = @scanner
       end
-      scanner.each_line(@row_separator) do |value|
-        next if @skip_lines and skip_line?(value)
-        value.chomp!
+      scanner.each_line(@row_separator) do |line|
+        next if @skip_lines and skip_line?(line)
+        line.chomp!
 
-        if value.empty?
+        if line.empty?
           next if @skip_blanks
           row = []
         else
-          value = strip_value(value)
-          row = value.split(@split_column_separator, -1)
+          line = strip_value(line)
+          row = line.split(@split_column_separator, -1)
           n_columns = row.size
           i = 0
           while i < n_columns
@@ -713,7 +713,7 @@ class CSV
             i += 1
           end
         end
-        @last_line = value
+        @last_line = line
         emit_row(row, &block)
       end
     end
