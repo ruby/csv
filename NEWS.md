@@ -1,5 +1,67 @@
 # News
 
+## 3.0.5 - 2019-03-24
+
+### Improvements
+
+  * Added `:liberal_parsing => {backslash_quote: true}` option.
+    [GitHub#74][Patch by 284km]
+
+  * Added `:write_converters` option.
+    [GitHub#73][Patch by Danillo Souza]
+
+  * Added `:write_nil_value` option.
+
+  * Added `:write_empty_value` option.
+
+  * Improved invalid byte line number detection.
+    [GitHub#78][Patch by Alyssa Ross]
+
+  * Added `quote_char: nil` optimization.
+    [GitHub#79][Patch by 284km]
+
+  * Improved error message.
+    [GitHub#81][Patch by Andrés Torres]
+
+  * Improved IO-like implementation for `StringIO` data.
+    [GitHub#80][Patch by Genadi Samokovarov]
+
+  * Added `:strip` option.
+    [GitHub#58]
+
+### Fixes
+
+  * Fixed a compatibility bug that `CSV#each` doesn't care `CSV#shift`.
+    [GitHub#76][Patch by Alyssa Ross]
+
+  * Fixed a compatibility bug that `CSV#eof?` doesn't care `CSV#each`
+    and `CSV#shift`.
+    [GitHub#77][Reported by Chi Leung]
+
+  * Fixed a compatibility bug that invalid line isn't ignored.
+    [GitHub#82][Reported by krororo]
+
+  * Fixed a bug that `:skip_lines` doesn't work with multibyte characters data.
+    [GitHub#83][Reported by ff2248]
+
+### Thanks
+
+  * Alyssa Ross
+
+  * 284km
+
+  * Chi Leung
+
+  * Danillo Souza
+
+  * Andrés Torres
+
+  * Genadi Samokovarov
+
+  * krororo
+
+  * ff2248
+
 ## 3.0.4 - 2019-01-25
 
 ### Improvements
