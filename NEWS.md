@@ -1,5 +1,11 @@
 # News
 
+## 3.0.6 - 2019-03-30
+
+### Improvements
+
+  * `CSV.foreach`: Added support for `mode`.
+
 ## 3.0.5 - 2019-03-24
 
 ### Improvements
