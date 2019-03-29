@@ -504,9 +504,9 @@ class CSV
   # <tt>encoding: "UTF-32BE:UTF-8"</tt> would read UTF-32BE data from the file
   # but transcode it to UTF-8 before CSV parses it.
   #
-  def self.foreach(path, **options, &block)
-    return to_enum(__method__, path, options) unless block_given?
-    open(path, options) do |csv|
+  def self.foreach(path, mode="r", **options, &block)
+    return to_enum(__method__, path, mode, options) unless block_given?
+    open(path, mode, options) do |csv|
       csv.each(&block)
     end
   end

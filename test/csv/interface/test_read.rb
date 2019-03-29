@@ -32,6 +32,14 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
     assert_equal(@rows, rows)
   end
 
+  def test_foreach_mode
+    rows = []
+    CSV.foreach(@input.path, "r", col_sep: "\t", row_sep: "\r\n").each do |row|
+      rows << row
+    end
+    assert_equal(@rows, rows)
+  end
+
   def test_foreach_enumurator
     rows = CSV.foreach(@input.path, col_sep: "\t", row_sep: "\r\n").to_a
     assert_equal(@rows, rows)
