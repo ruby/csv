@@ -285,8 +285,8 @@ class CSV
     private
     def prepare
       prepare_variable
-      prepare_backslash
       prepare_quote_character
+      prepare_backslash
       prepare_skip_lines
       prepare_strip
       prepare_separators
@@ -321,19 +321,11 @@ class CSV
       @header_fields_converter = @options[:header_fields_converter]
     end
 
-    def prepare_backslash
-      @backslash_character = "\\".encode(@encoding)
-
-      @escaped_backslash_character = Regexp.escape(@backslash_character)
-      @escaped_backslash = Regexp.new(@escaped_backslash_character)
-    end
-
     def prepare_quote_character
       @quote_character = @options[:quote_character]
       if @quote_character.nil?
         @escaped_quote_character = nil
         @escaped_quote = nil
-        @backslash_quote_character = nil
       else
         @quote_character = @quote_character.to_s.encode(@encoding)
         if @quote_character.length != 1
@@ -342,6 +334,19 @@ class CSV
         end
         @escaped_quote_character = Regexp.escape(@quote_character)
         @escaped_quote = Regexp.new(@escaped_quote_character)
+      end
+    end
+
+    def prepare_backslash
+      return unless @backslash_quote
+
+      @backslash_character = "\\".encode(@encoding)
+
+      @escaped_backslash_character = Regexp.escape(@backslash_character)
+      @escaped_backslash = Regexp.new(@escaped_backslash_character)
+      if @quote_character.nil?
+        @backslash_quote_character = nil
+      else
         @backslash_quote_character =
           @backslash_character + @escaped_quote_character
       end
