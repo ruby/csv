@@ -1,3 +1,4 @@
+loop_count: 100
 contexts:
   - name: "master"
     prelude: |

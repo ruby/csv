@@ -1,3 +1,4 @@
+loop_count: 100
 contexts:
   - gems:
       csv: 3.0.2
