@@ -397,6 +397,14 @@ class CSV
       end
     end
 
+    begin
+      StringScanner.new("x").scan("x")
+    rescue TypeError
+      @@string_scanner_scan_accept_string = false
+    else
+      @@string_scanner_scan_accept_string = true
+    end
+
     def prepare_separators
       @column_separator = @options[:column_separator].to_s.encode(@encoding)
       @row_separator =
@@ -404,14 +412,19 @@ class CSV
 
       @escaped_column_separator = Regexp.escape(@column_separator)
       @escaped_first_column_separator = Regexp.escape(@column_separator[0])
-      @column_end = Regexp.new(@escaped_column_separator)
       if @column_separator.size > 1
+        @column_end = Regexp.new(@escaped_column_separator)
         @column_ends = @column_separator.each_char.collect do |char|
           Regexp.new(Regexp.escape(char))
         end
         @first_column_separators = Regexp.new(@escaped_first_column_separator +
                                               "+".encode(@encoding))
       else
+        if @@string_scanner_scan_accept_string
+          @column_end = @column_separator
+        else
+          @column_end = Regexp.new(@escaped_column_separator)
+        end
         @column_ends = nil
         @first_column_separators = nil
       end
@@ -450,7 +463,7 @@ class CSV
                                                "*".encode(@encoding))
         else
           if @column_separator == " ".encode(@encoding)
-            @split_column_separator = @column_end
+            @split_column_separator = Regexp.new(@escaped_column_separator)
           else
             @split_column_separator = @column_separator
           end
