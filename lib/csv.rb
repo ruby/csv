@@ -1232,16 +1232,8 @@ class CSV
   #
   # The data source must be open for reading.
   #
-  def each
-    return to_enum(__method__) unless block_given?
-    enumerator = parser_enumerator
-    begin
-      while true
-        yield enumerator.next
-      end
-    rescue StopIteration
-    end
-    self
+  def each(&block)
+    parser_enumerator.each(&block)
   end
 
   #
