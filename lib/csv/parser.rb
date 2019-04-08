@@ -68,6 +68,7 @@ class CSV
         n_row_separator_chars = row_separator.size
         while true
           input.each_line(row_separator) do |line|
+            @scanner.pos += line.bytesize
             if buffer
               if n_row_separator_chars == 2 and
                 buffer.end_with?(row_separator[0]) and
@@ -100,11 +101,7 @@ class CSV
           position = @scanner.pos
           offset = -buffer.bytesize if buffer
         end
-        if buffer
-          position += buffer.bytesize + offset
-          @scanner.pos = position
-          yield(buffer)
-        end
+        yield(buffer) if buffer
       end
 
       def scan(pattern)
@@ -161,6 +158,7 @@ class CSV
         else
           @scanner.pos = start
         end
+        read_chunk if @scanner.eos?
       end
 
       def keep_drop
