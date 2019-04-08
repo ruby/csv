@@ -1,5 +1,18 @@
 # News
 
+## 3.0.7 - 2019-04-08
+
+### Improvements
+
+  * Improve parse performance 1.5x by introducing loose parser.
+
+### Fixes
+
+  * Fix performance regression in 3.0.5.
+
+  * Fix a bug that `CSV#line` returns wrong value when you
+    use `quote_char: nil`.
+
 ## 3.0.6 - 2019-03-30
 
 ### Improvements
