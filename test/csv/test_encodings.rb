@@ -271,9 +271,9 @@ class TestCSVEncodings < Test::Unit::TestCase
   def assert_parses(fields, encoding, options = { })
     encoding = Encoding.find(encoding) unless encoding.is_a? Encoding
     orig_fields = fields
-    fields   = encode_ary(fields, encoding)
+    fields = encode_ary(fields, encoding)
     data = ary_to_data(fields, options)
-    parsed   = CSV.parse(data, options)
+    parsed = CSV.parse(data, options)
     assert_equal(fields, parsed)
     parsed.flatten.each_with_index do |field, i|
       assert_equal(encoding, field.encoding, "Field[#{i + 1}] was transcoded.")

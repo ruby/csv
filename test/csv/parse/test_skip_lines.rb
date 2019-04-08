@@ -4,6 +4,7 @@ require_relative "../helper"
 
 class TestCSVParseSkipLines < Test::Unit::TestCase
   extend DifferentOFS
+  include Helper
 
   def test_default
     csv = CSV.new("a,b,c\n")
@@ -99,16 +100,6 @@ class TestCSVParseSkipLines < Test::Unit::TestCase
       assert_equal([[value], [value]],
                    CSV.parse("#{value}\n#{value}\n",
                              :skip_lines => /\A#/))
-    end
-  end
-
-  def with_chunk_size(chunk_size)
-    chunk_size_keep = ENV["CSV_PARSER_SCANNER_TEST_CHUNK_SIZE"]
-    begin
-      ENV["CSV_PARSER_SCANNER_TEST_CHUNK_SIZE"] = chunk_size
-      yield
-    ensure
-      ENV["CSV_PARSER_SCANNER_TEST_CHUNK_SIZE"] = chunk_size_keep
     end
   end
 end

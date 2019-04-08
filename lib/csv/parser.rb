@@ -2,10 +2,12 @@
 
 require "strscan"
 
+require_relative "delete_suffix"
 require_relative "match_p"
 require_relative "row"
 require_relative "table"
 
+using CSV::DeleteSuffix if CSV.const_defined?(:DeleteSuffix)
 using CSV::MatchP if CSV.const_defined?(:MatchP)
 
 class CSV
@@ -19,6 +21,15 @@ class CSV
       def initialize(*args)
         super
         @keeps = []
+      end
+
+      def each_line(row_separator)
+        position = pos
+        rest.each_line(row_separator) do |line|
+          position += line.bytesize
+          self.pos = position
+          yield(line)
+        end
       end
 
       def keep_start
@@ -52,23 +63,48 @@ class CSV
       def each_line(row_separator)
         buffer = nil
         input = @scanner.rest
-        @scanner.terminate
-        while input
+        position = @scanner.pos
+        offset = 0
+        n_row_separator_chars = row_separator.size
+        while true
           input.each_line(row_separator) do |line|
             if buffer
-              buffer << line
-              line = buffer
-              buffer = nil
+              if n_row_separator_chars == 2 and
+                buffer.end_with?(row_separator[0]) and
+                line.start_with?(row_separator[1])
+                buffer << line[0]
+                line = line[1..-1]
+                position += buffer.bytesize + offset
+                @scanner.pos = position
+                offset = 0
+                yield(buffer)
+                buffer = nil
+                next if line.empty?
+              else
+                buffer << line
+                line = buffer
+                buffer = nil
+              end
             end
             if line.end_with?(row_separator)
+              position += line.bytesize + offset
+              @scanner.pos = position
+              offset = 0
               yield(line)
             else
               buffer = line
             end
           end
-          input = @inputs.shift
+          break unless read_chunk
+          input = @scanner.rest
+          position = @scanner.pos
+          offset = -buffer.bytesize if buffer
         end
-        yield(buffer) if buffer
+        if buffer
+          position += buffer.bytesize + offset
+          @scanner.pos = position
+          yield(buffer)
+        end
       end
 
       def scan(pattern)
@@ -263,8 +299,10 @@ class CSV
         @scanner ||= build_scanner
         if quote_character.nil?
           parse_no_quote(&block)
+        elsif @need_robust_parsing
+          parse_quotable_robust(&block)
         else
-          parse_quotable(&block)
+          parse_quotable_loose(&block)
         end
       rescue InvalidEncoding
         if @scanner
@@ -298,6 +336,7 @@ class CSV
     end
 
     def prepare_variable
+      @need_robust_parsing = false
       @encoding = @options[:encoding]
       liberal_parsing = @options[:liberal_parsing]
       if liberal_parsing
@@ -310,6 +349,7 @@ class CSV
           @double_quote_outside_quote = false
           @backslash_quote = false
         end
+        @need_robust_parsing = true
       else
         @liberal_parsing = false
         @backslash_quote = false
@@ -332,6 +372,7 @@ class CSV
           message = ":quote_char has to be nil or a single character String"
           raise ArgumentError, message
         end
+        @double_quote_character = @quote_character * 2
         @escaped_quote_character = Regexp.escape(@quote_character)
         @escaped_quote = Regexp.new(@escaped_quote_character)
       end
@@ -394,6 +435,7 @@ class CSV
         if @quote_character
           @strip_value = Regexp.new("[#{strip_values}]+".encode(@encoding))
         end
+        @need_robust_parsing = true
       end
     end
 
@@ -439,6 +481,8 @@ class CSV
         @row_ends = nil
       end
 
+      @cr = "\r".encode(@encoding)
+      @lf = "\n".encode(@encoding)
       @cr_or_lf = Regexp.new("[\r\n]".encode(@encoding))
       @not_line_end = Regexp.new("[^\r\n]+".encode(@encoding))
     end
@@ -454,19 +498,18 @@ class CSV
         @quoted_value = Regexp.new("[^".encode(@encoding) +
                                    no_quoted_values +
                                    "]+".encode(@encoding))
+      end
+      if @escaped_strip
+        @split_column_separator = Regexp.new(@escaped_strip +
+                                             "*".encode(@encoding) +
+                                             @escaped_column_separator +
+                                             @escaped_strip +
+                                             "*".encode(@encoding))
       else
-        if @escaped_strip
-          @split_column_separator = Regexp.new(@escaped_strip +
-                                               "*".encode(@encoding) +
-                                               @escaped_column_separator +
-                                               @escaped_strip +
-                                               "*".encode(@encoding))
+        if @column_separator == " ".encode(@encoding)
+          @split_column_separator = Regexp.new(@escaped_column_separator)
         else
-          if @column_separator == " ".encode(@encoding)
-            @split_column_separator = Regexp.new(@escaped_column_separator)
-          else
-            @split_column_separator = @column_separator
-          end
+          @split_column_separator = @column_separator
         end
       end
     end
@@ -709,12 +752,7 @@ class CSV
     end
 
     def parse_no_quote(&block)
-      if @scanner.respond_to?(:string)
-        scanner = @scanner.string
-      else
-        scanner = @scanner
-      end
-      scanner.each_line(@row_separator) do |line|
+      @scanner.each_line(@row_separator) do |line|
         next if @skip_lines and skip_line?(line)
         original_line = line
         line = line.delete_suffix(@row_separator)
@@ -737,7 +775,62 @@ class CSV
       end
     end
 
-    def parse_quotable(&block)
+    def parse_quotable_loose(&block)
+      @scanner.keep_start
+      @scanner.each_line(@row_separator) do |line|
+        if @skip_lines and skip_line?(line)
+          @scanner.keep_drop
+          @scanner.keep_start
+          next
+        end
+        original_line = line
+        line = line.delete_suffix(@row_separator)
+
+        if line.empty?
+          if @skip_blanks
+            @scanner.keep_drop
+            @scanner.keep_start
+            next
+          end
+          row = []
+        elsif line.include?(@cr) or line.include?(@lf)
+          @scanner.keep_back
+          @need_robust_parsing = true
+          return parse_quotable_robust(&block)
+        else
+          row = line.split(@split_column_separator, -1)
+          n_columns = row.size
+          i = 0
+          while i < n_columns
+            column = row[i]
+            if column.empty?
+              row[i] = nil
+            else
+              n_quotes = column.count(@quote_character)
+              if n_quotes.zero?
+                # no quote
+              elsif n_quotes == 2 and
+                   column.start_with?(@quote_character) and
+                   column.end_with?(@quote_character)
+                row[i] = column[1..-2]
+              else
+                @scanner.keep_back
+                @need_robust_parsing = true
+                return parse_quotable_robust(&block)
+              end
+            end
+            i += 1
+          end
+        end
+        @scanner.keep_drop
+        @scanner.keep_start
+        @last_line = original_line
+        emit_row(row, &block)
+      end
+      @scanner.keep_drop
+    end
+
+    def parse_quotable_robust(&block)
       row = []
       skip_needless_lines
       start_row
