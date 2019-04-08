@@ -716,7 +716,8 @@ class CSV
       end
       scanner.each_line(@row_separator) do |line|
         next if @skip_lines and skip_line?(line)
-        line.chomp!
+        original_line = line
+        line = line.delete_suffix(@row_separator)
 
         if line.empty?
           next if @skip_blanks
@@ -731,7 +732,7 @@ class CSV
             i += 1
           end
         end
-        @last_line = line
+        @last_line = original_line
         emit_row(row, &block)
       end
     end

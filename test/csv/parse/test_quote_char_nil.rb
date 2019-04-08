@@ -79,4 +79,15 @@ class TestCSVParseQuoteCharNil < Test::Unit::TestCase
                  ],
                  CSV.parse(data, col_sep: "<=>", quote_char: nil))
   end
+
+  def test_line
+    lines = [
+      "abc,def\n",
+    ]
+    csv = CSV.new(lines.join(""), quote_char: nil)
+    lines.each do |line|
+      csv.shift
+      assert_equal(line, csv.line)
+    end
+  end
 end
