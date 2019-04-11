@@ -1,5 +1,11 @@
 # News
 
+## 3.0.8 - 2019-04-11
+
+### Fixes
+
+  * Fixed a bug that `strip: String` doesn't work.
+
 ## 3.0.7 - 2019-04-08
 
 ### Improvements
