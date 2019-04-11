@@ -427,6 +427,7 @@ class CSV
           @strip_value = Regexp.new(@escaped_strip +
                                     "+".encode(@encoding))
         end
+        @need_robust_parsing = true
       elsif @strip
         strip_values = " \t\r\n\f\v"
         @escaped_strip = strip_values.encode(@encoding)

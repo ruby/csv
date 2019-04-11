@@ -33,6 +33,12 @@ class TestCSVParseStrip < Test::Unit::TestCase
                                 liberal_parsing: true))
   end
 
+  def test_string
+    assert_equal(["a", " b"],
+                 CSV.parse_line(%Q{  a  , " b"  },
+                                strip: " "))
+  end
+
   def test_no_quote
     assert_equal(["  a  ", "  b  "],
                  CSV.parse_line(%Q{"  a  ",  b  },
