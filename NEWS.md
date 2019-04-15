@@ -1,5 +1,11 @@
 # News
 
+## 3.0.9 - 2019-04-15
+
+### Fixes
+
+  * Fixed a test for Windows.
+
 ## 3.0.8 - 2019-04-11
 
 ### Fixes
