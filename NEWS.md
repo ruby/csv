@@ -1,5 +1,17 @@
 # News
 
+## 3.1.0 - 2019-04-17
+
+### Fixes
+
+  * Fixed a backward incompatibility bug that `CSV#eof?` may raises an
+    error.
+    [GitHub#86][Reported by krororo]
+
+### Thanks
+
+  * krororo
+
 ## 3.0.9 - 2019-04-15
 
 ### Fixes
