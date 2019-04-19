@@ -890,7 +890,7 @@ class CSV
   # <b><tt>:write_empty_value</tt></b>::  TODO
   # <b><tt>:strip</tt></b>::              When set to a +true+ value, CSV will
   #                                       strip "\t\r\n\f\v" around the values.
-  #                                       If yoxxu specify a string instead of
+  #                                       If you specify a string instead of
   #                                       +true+, CSV will strip string. The
   #                                       length of string must be 1.
   #
