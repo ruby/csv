@@ -907,6 +907,13 @@ class CSV
   #                                       +true+, CSV will strip string. The
   #                                       length of string must be 1.
   #
+  # <b><tt>:undef</tt></b>::              When Converting encoding with 
+  #                                       "undef: :replace", you will replace
+  #                                       character to replace.
+  #                                       
+  # <b><tt>:replace</tt></b>::            Replace undef character to this value
+  #                                       
+  #
   # See CSV::DEFAULT_OPTIONS for the default settings.
   #
   # Options cannot be overridden in the instance methods for performance reasons,
@@ -936,7 +943,9 @@ class CSV
                  write_converters: nil,
                  write_nil_value: nil,
                  write_empty_value: "",
-                 strip: false)
+                 strip: false,
+                 undef: nil,
+                 replace: nil)
     raise ArgumentError.new("Cannot parse nil as CSV") if data.nil?
 
     # create the IO object we will read from

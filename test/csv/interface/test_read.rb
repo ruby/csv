@@ -264,6 +264,14 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
     end
   end
 
+  def test_foreach_undef_replace
+    rows = []
+    CSV.foreach(@input.path, col_sep: "\t", row_sep: "\r\n", undef: :replace, replace: "*").each do |row|
+      rows << row
+    end
+    assert_equal(@rows, rows)
+  end
+
   def test_options_not_modified
     options = {}.freeze
     CSV.foreach(@input.path, options)
