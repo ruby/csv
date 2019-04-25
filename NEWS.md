@@ -1,5 +1,31 @@
 # News
 
+## 3.1.1 - 2019-04-26
+
+### Improvements
+
+  * Added documentation for `strip` option.
+    [GitHub#88][Patch by hayashiyoshino]
+
+  * Added documentation for `write_converters`, `write_nil_value` and
+    `write_empty_value` options.
+    [GitHub#87][Patch by Masafumi Koba]
+
+  * Added documentation for `quote_empty` option.
+    [GitHub#89][Patch by kawa\_tech]
+
+### Fixes
+
+  * Fixed a bug that `strip; true` removes a newline.
+
+### Thanks
+
+  * hayashiyoshino
+
+  * Masafumi Koba
+
+  * kawa\_tech
+
 ## 3.1.0 - 2019-04-17
 
 ### Fixes
