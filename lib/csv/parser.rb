@@ -447,7 +447,13 @@ class CSV
     end
 
     def prepare_separators
-      @column_separator = @options[:column_separator].to_s.encode(@encoding)
+      column_separator = @options[:column_separator]
+      @column_separator = column_separator.to_s.encode(@encoding)
+      if @column_separator.size < 1
+        message = ":col_sep must be 1 or more characters: "
+        message += column_separator.inspect
+        raise ArgumentError, message
+      end
       @row_separator =
         resolve_row_separator(@options[:row_separator]).encode(@encoding)
 
