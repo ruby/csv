@@ -38,7 +38,7 @@ class CSV
 
       def keep_end
         start = @keeps.pop
-        string[start, pos - start]
+        string.byteslice(start, pos - start)
       end
 
       def keep_back
@@ -137,7 +137,7 @@ class CSV
 
       def keep_end
         start, buffer = @keeps.pop
-        keep = @scanner.string[start, @scanner.pos - start]
+        keep = @scanner.string.byteslice(start, @scanner.pos - start)
         if buffer
           buffer << keep
           keep = buffer
