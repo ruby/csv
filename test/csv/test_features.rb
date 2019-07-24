@@ -124,10 +124,10 @@ line,4,jkl
 
   def test_line
     lines = [
-      %Q(abc,def\n),
-      %Q(abc,"d\nef"\n),
-      %Q(abc,"d\r\nef"\n),
-      %Q(abc,"d\ref")
+      %Q(\u{3000}abc,def\n),
+      %Q(\u{3000}abc,"d\nef"\n),
+      %Q(\u{3000}abc,"d\r\nef"\n),
+      %Q(\u{3000}abc,"d\ref")
     ]
     csv = CSV.new(lines.join(''))
     lines.each do |line|
