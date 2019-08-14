@@ -351,6 +351,13 @@ line,4,jkl
     assert_equal table, c.each.to_a
   end
 
+  def test_line_sparator_seeking_string_io
+    io = DummyIO.new("\xEF\xBB\xBF".b + "a,b\n")
+    io.read(3)
+    c = CSV.new(io)
+    assert_equal [["a", "b"]], c.each.to_a
+  end
+
   def test_line_separator_autodetection_for_non_seekable_input_many_cr_only
     # input with lots of CRs (to make sure no bytes are lost due to look-ahead)
     c = CSV.new(DummyIO.new("foo\r" + "\r" * 9999 + "bar\r"))
