@@ -192,7 +192,7 @@ class CSV
         input = @inputs.first
         case input
         when StringIO
-          string = input.string[input.pos..-1]
+          string = input.read
           raise InvalidEncoding unless string.valid_encoding?
           @scanner = StringScanner.new(string)
           @inputs.shift
@@ -540,7 +540,7 @@ class CSV
         cr = "\r".encode(@encoding)
         lf = "\n".encode(@encoding)
         if @input.is_a?(StringIO)
-          separator = detect_row_separator(@input.string[@input.pos..-1], cr, lf)
+          separator = detect_row_separator(@input.read, cr, lf)
         elsif @input.respond_to?(:gets)
           if @input.is_a?(File)
             chunk_size = 32 * 1024
@@ -657,7 +657,7 @@ class CSV
       return false if @quote_character.nil?
 
       if @input.is_a?(StringIO)
-        sample = @input.string[@input.pos..-1]
+        sample = @input.read
       else
         return false if @samples.empty?
         sample = @samples.first
@@ -703,7 +703,7 @@ class CSV
       def build_scanner
         string = nil
         if @samples.empty? and @input.is_a?(StringIO)
-          string = @input.string[@input.pos..-1]
+          string = @input.read
         elsif @samples.size == 1 and @input.respond_to?(:eof?) and @input.eof?
           string = @samples[0]
         end
