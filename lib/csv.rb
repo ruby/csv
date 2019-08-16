@@ -901,7 +901,7 @@ class CSV
   # <b><tt>:write_empty_value</tt></b>::  When a <tt>String</tt> or +nil+ value,
   #                                       empty value(s) on each line will be
   #                                       replaced with the specified value.
-  # <b><tt>:strip</tt></b>::              When setting to a +true+ value, CSV will
+  # <b><tt>:strip</tt></b>::              When setting a +true+ value, CSV will
   #                                       strip "\t\r\n\f\v" around the values.
   #                                       If you specify a string instead of
   #                                       +true+, CSV will strip string. The
