@@ -853,7 +853,7 @@ class CSV
   #                                       converting. The conversion will fail
   #                                       if the data cannot be transcoded,
   #                                       leaving the header unchanged.
-  # <b><tt>:skip_blanks</tt></b>::        When setting to a +true+ value, CSV will
+  # <b><tt>:skip_blanks</tt></b>::        When setting a +true+ value, CSV will
   #                                       skip over any empty rows. Note that
   #                                       this setting will not skip rows that
   #                                       contain column separators, even if
@@ -863,9 +863,9 @@ class CSV
   #                                       using <tt>:skip_lines</tt>, or
   #                                       inspecting fields.compact.empty? on
   #                                       each row.
-  # <b><tt>:force_quotes</tt></b>::       When setting to a +true+ value, CSV will
+  # <b><tt>:force_quotes</tt></b>::       When setting a +true+ value, CSV will
   #                                       quote all CSV fields it creates.
-  # <b><tt>:skip_lines</tt></b>::         When setting to an object responding to
+  # <b><tt>:skip_lines</tt></b>::         When setting an object responding to
   #                                       <tt>match</tt>, every line matching
   #                                       it is considered a comment and ignored
   #                                       during parsing. When set to a String,
@@ -874,7 +874,7 @@ class CSV
   #                                       a comment. If the passed object does
   #                                       not respond to <tt>match</tt>,
   #                                       <tt>ArgumentError</tt> is thrown.
-  # <b><tt>:liberal_parsing</tt></b>::    When setting to a +true+ value, CSV will
+  # <b><tt>:liberal_parsing</tt></b>::    When setting a +true+ value, CSV will
   #                                       attempt to parse input not conformant
   #                                       with RFC 4180, such as double quotes
   #                                       in unquoted fields.
@@ -884,7 +884,7 @@ class CSV
   # <b><tt>:empty_value</tt></b>::        When setting an object, any values of a
   #                                       blank string field is replaced by
   #                                       the set object.
-  # <b><tt>:quote_empty</tt></b>::        When setting to a +true+ value, CSV will
+  # <b><tt>:quote_empty</tt></b>::        When setting a +true+ value, CSV will
   #                                       quote empty values with double quotes.
   #                                       When +false+, CSV will emit an
   #                                       empty string for an empty field value.
