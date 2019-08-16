@@ -19,7 +19,7 @@ class CSV
     #
     # The optional +header_row+ parameter can be set to +true+ to indicate, via
     # CSV::Row.header_row?() and CSV::Row.field_row?(), that this is a header
-    # row.  Otherwise, the row assumes to be a field row.
+    # row. Otherwise, the row assumes to be a field row.
     #
     # A CSV::Row object supports the following Array methods through delegation:
     #
