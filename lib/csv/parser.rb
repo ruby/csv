@@ -13,13 +13,14 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 class CSV
   class Parser
     #
-    # A CSV::Parser is [m17n aware](https://www.ruby-forum.com/t/csv-goes-m17n/149145). The parser works in the Encoding of the IO
+    # A CSV::Parser is m17n aware. The parser works in the Encoding of the IO
     # or String object being read from or written to. Your data is never transcoded
     # (unless you ask Ruby to transcode it for you) and will literally be parsed in
     # the Encoding it is in. Thus CSV will return Arrays or Rows of Strings in the
     # Encoding of your data. This is accomplished by transcoding the parser itself
     # into your Encoding.
     #
+
     class InvalidEncoding < StandardError
     end
 
