@@ -3,7 +3,20 @@
 class CSV
   class FieldsConverter
     include Enumerable
-
+    #
+    # A CSV::FieldsConverter is a data structure for storing the
+    # fields converter properties to be passed as a parameter
+    # when parsing a new file (e.g. CSV::Parser.new(@io, parser_options))
+    #
+    # FieldsConverter options:
+    # 1. The option +converters+ stores all the converters added by you
+    # when calling the CSV::FieldsConverter.add_converter method.
+    # 2. The option +builtin_converters+ stores the following converter parsers:
+    # - :integer
+    # - :float
+    # - :date
+    # - :date_time
+    #
     def initialize(options={})
       @converters = []
       @nil_value = options[:nil_value]
