@@ -25,6 +25,17 @@ class CSV
     class InvalidEncoding < StandardError
     end
 
+    #
+    # CSV::Scanner receives a CSV output, scans it and return the content.
+    # It also controls the life cycle of the object with its methods +keep_start+,
+    # +keep_end+, +keep_back+, +keep_drop+
+    #
+    # Uses StringScanner (the official strscan gem). Strscan provides lexical
+    # scanning operations on a String. We inherit its object and take advantage
+    # on the methods.
+    #
+    # TODO: each_line responsibility and how it works
+    #
     class Scanner < StringScanner
       alias_method :scan_all, :scan
 
@@ -60,6 +71,14 @@ class CSV
       end
     end
 
+    #
+    # CSV::InputsScanner receives IO inputs, encoding and the chunk_size.
+    # It also controls the life cycle of the object with its methods +keep_start+,
+    # +keep_end+, +keep_back+, +keep_drop+
+    #
+    # TODO: each_line responsibility and how it works
+    # TODO: the difference between scan() and scan_all()
+    #
     class InputsScanner
       def initialize(inputs, encoding, chunk_size: 8192)
         @inputs = inputs.dup
@@ -329,6 +348,7 @@ class CSV
     end
 
     private
+    # A set of tasks to prepare the file in order to parse it
     def prepare
       prepare_variable
       prepare_quote_character
