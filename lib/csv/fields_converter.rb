@@ -16,7 +16,10 @@ class CSV
     # - :float
     # - :date
     # - :date_time
+    # - :numeric
+    # - :all
     #
+
     def initialize(options={})
       @converters = []
       @nil_value = options[:nil_value]
