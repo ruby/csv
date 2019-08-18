@@ -21,7 +21,7 @@ class CSV
     # into your Encoding.
     #
 
-    # Raised when enconding is invalid
+    # Raised when encoding is invalid
     class InvalidEncoding < StandardError
     end
 
