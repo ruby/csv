@@ -5,6 +5,7 @@ require_relative "row"
 
 using CSV::MatchP if CSV.const_defined?(:MatchP)
 
+# Note: Don't use this class directly. This is an internal class.
 class CSV
   class Writer
     #
