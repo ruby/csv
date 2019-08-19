@@ -10,6 +10,7 @@ require_relative "table"
 using CSV::DeleteSuffix if CSV.const_defined?(:DeleteSuffix)
 using CSV::MatchP if CSV.const_defined?(:MatchP)
 
+# Note: Don't use this class directly. This is an internal class.
 class CSV
   class Parser
     #
@@ -21,20 +22,19 @@ class CSV
     # into your Encoding.
     #
 
-    # Raised when encoding is invalid
+    # Raised when encoding is invalid.
     class InvalidEncoding < StandardError
     end
 
     #
     # CSV::Scanner receives a CSV output, scans it and return the content.
     # It also controls the life cycle of the object with its methods +keep_start+,
-    # +keep_end+, +keep_back+, +keep_drop+
+    # +keep_end+, +keep_back+, +keep_drop+.
     #
     # Uses StringScanner (the official strscan gem). Strscan provides lexical
     # scanning operations on a String. We inherit its object and take advantage
-    # on the methods.
-    #
-    # TODO: each_line responsibility and how it works
+    # on the methods. For more information, please visit:
+    # https://ruby-doc.org/stdlib-2.6.1/libdoc/strscan/rdoc/StringScanner.html
     #
     class Scanner < StringScanner
       alias_method :scan_all, :scan
@@ -74,10 +74,14 @@ class CSV
     #
     # CSV::InputsScanner receives IO inputs, encoding and the chunk_size.
     # It also controls the life cycle of the object with its methods +keep_start+,
-    # +keep_end+, +keep_back+, +keep_drop+
+    # +keep_end+, +keep_back+, +keep_drop+.
     #
-    # TODO: each_line responsibility and how it works
-    # TODO: the difference between scan() and scan_all()
+    # CSV::InputsScanner.scan() tries to match with pattern at the current position.
+    # If there's a match, the scanner advances the “scan pointer” and returns the matched string.
+    # Otherwise, the scanner returns nil.
+    #
+    # CSV::InputsScanner.rest() returns the “rest” of the string (i.e. everything after the scan pointer).
+    # If there is no more data (eos? = true), it returns "".
     #
     class InputsScanner
       def initialize(inputs, encoding, chunk_size: 8192)
