@@ -192,10 +192,7 @@ class CSV
         input = @inputs.first
         case input
         when StringIO
-          pos = input.pos
           string = input.read
-          input.rewind
-          input.seek(pos)
           raise InvalidEncoding unless string.valid_encoding?
           @scanner = StringScanner.new(string)
           @inputs.shift
@@ -697,7 +694,7 @@ class CSV
           UnoptimizedStringIO.new(sample)
         end
         if @input.is_a?(StringIO)
-          inputs << UnoptimizedStringIO.new(@input.string)
+          inputs << UnoptimizedStringIO.new(@input.read)
         else
           inputs << @input
         end
@@ -710,10 +707,7 @@ class CSV
       def build_scanner
         string = nil
         if @samples.empty? and @input.is_a?(StringIO)
-          input_pos = @input.pos
           string = @input.read
-          @input.rewind
-          @input.seek(input_pos)
         elsif @samples.size == 1 and @input.respond_to?(:eof?) and @input.eof?
           string = @samples[0]
         end
