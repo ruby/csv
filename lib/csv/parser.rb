@@ -545,7 +545,6 @@ class CSV
         if @input.is_a?(StringIO)
           pos = @input.pos
           separator = detect_row_separator(@input.read, cr, lf)
-          @input.rewind
           @input.seek(pos)
         elsif @input.respond_to?(:gets)
           if @input.is_a?(File)
@@ -665,7 +664,6 @@ class CSV
       if @input.is_a?(StringIO)
         pos = @input.pos
         sample = @input.read
-        @input.rewind
         @input.seek(pos)
       else
         return false if @samples.empty?
