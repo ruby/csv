@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Note: Don't use this class directly. This is an internal class.
 class CSV
+  # Note: Don't use this class directly. This is an internal class.
   class FieldsConverter
     include Enumerable
     #
