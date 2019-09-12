@@ -10,8 +10,8 @@ require_relative "table"
 using CSV::DeleteSuffix if CSV.const_defined?(:DeleteSuffix)
 using CSV::MatchP if CSV.const_defined?(:MatchP)
 
-# Note: Don't use this class directly. This is an internal class.
 class CSV
+  # Note: Don't use this class directly. This is an internal class.
   class Parser
     #
     # A CSV::Parser is m17n aware. The parser works in the Encoding of the IO
