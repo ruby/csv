@@ -11,10 +11,31 @@ using CSV::DeleteSuffix if CSV.const_defined?(:DeleteSuffix)
 using CSV::MatchP if CSV.const_defined?(:MatchP)
 
 class CSV
+  # Note: Don't use this class directly. This is an internal class.
   class Parser
+    #
+    # A CSV::Parser is m17n aware. The parser works in the Encoding of the IO
+    # or String object being read from or written to. Your data is never transcoded
+    # (unless you ask Ruby to transcode it for you) and will literally be parsed in
+    # the Encoding it is in. Thus CSV will return Arrays or Rows of Strings in the
+    # Encoding of your data. This is accomplished by transcoding the parser itself
+    # into your Encoding.
+    #
+
+    # Raised when encoding is invalid.
     class InvalidEncoding < StandardError
     end
 
+    #
+    # CSV::Scanner receives a CSV output, scans it and return the content.
+    # It also controls the life cycle of the object with its methods +keep_start+,
+    # +keep_end+, +keep_back+, +keep_drop+.
+    #
+    # Uses StringScanner (the official strscan gem). Strscan provides lexical
+    # scanning operations on a String. We inherit its object and take advantage
+    # on the methods. For more information, please visit:
+    # https://ruby-doc.org/stdlib-2.6.1/libdoc/strscan/rdoc/StringScanner.html
+    #
     class Scanner < StringScanner
       alias_method :scan_all, :scan
 
@@ -50,6 +71,18 @@ class CSV
       end
     end
 
+    #
+    # CSV::InputsScanner receives IO inputs, encoding and the chunk_size.
+    # It also controls the life cycle of the object with its methods +keep_start+,
+    # +keep_end+, +keep_back+, +keep_drop+.
+    #
+    # CSV::InputsScanner.scan() tries to match with pattern at the current position.
+    # If there's a match, the scanner advances the “scan pointer” and returns the matched string.
+    # Otherwise, the scanner returns nil.
+    #
+    # CSV::InputsScanner.rest() returns the “rest” of the string (i.e. everything after the scan pointer).
+    # If there is no more data (eos? = true), it returns "".
+    #
     class InputsScanner
       def initialize(inputs, encoding, chunk_size: 8192)
         @inputs = inputs.dup
@@ -319,6 +352,7 @@ class CSV
     end
 
     private
+    # A set of tasks to prepare the file in order to parse it
     def prepare
       prepare_variable
       prepare_quote_character
