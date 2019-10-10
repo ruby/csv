@@ -416,320 +416,322 @@ class CSV
     quote_empty:        true,
   }.freeze
 
-  #
-  # This method will return a CSV instance, just like CSV::new(), but the
-  # instance will be cached and returned for all future calls to this method for
-  # the same +data+ object (tested by Object#object_id()) with the same
-  # +options+.
-  #
-  # If a block is given, the instance is passed to the block and the return
-  # value becomes the return value of the block.
-  #
-  def self.instance(data = $stdout, **options)
-    # create a _signature_ for this method call, data object and options
-    sig = [data.object_id] +
-          options.values_at(*DEFAULT_OPTIONS.keys.sort_by { |sym| sym.to_s })
+  class << self
+    #
+    # This method will return a CSV instance, just like CSV::new(), but the
+    # instance will be cached and returned for all future calls to this method for
+    # the same +data+ object (tested by Object#object_id()) with the same
+    # +options+.
+    #
+    # If a block is given, the instance is passed to the block and the return
+    # value becomes the return value of the block.
+    #
+    def instance(data = $stdout, **options)
+      # create a _signature_ for this method call, data object and options
+      sig = [data.object_id] +
+            options.values_at(*DEFAULT_OPTIONS.keys.sort_by { |sym| sym.to_s })
 
-    # fetch or create the instance for this signature
-    @@instances ||= Hash.new
-    instance = (@@instances[sig] ||= new(data, options))
+      # fetch or create the instance for this signature
+      @@instances ||= Hash.new
+      instance = (@@instances[sig] ||= new(data, options))
 
-    if block_given?
-      yield instance  # run block, if given, returning result
-    else
-      instance        # or return the instance
-    end
-  end
-
-  #
-  # :call-seq:
-  #   filter( **options ) { |row| ... }
-  #   filter( input, **options ) { |row| ... }
-  #   filter( input, output, **options ) { |row| ... }
-  #
-  # This method is a convenience for building Unix-like filters for CSV data.
-  # Each row is yielded to the provided block which can alter it as needed.
-  # After the block returns, the row is appended to +output+ altered or not.
-  #
-  # The +input+ and +output+ arguments can be anything CSV::new() accepts
-  # (generally String or IO objects). If not given, they default to
-  # <tt>ARGF</tt> and <tt>$stdout</tt>.
-  #
-  # The +options+ parameter is also filtered down to CSV::new() after some
-  # clever key parsing. Any key beginning with <tt>:in_</tt> or
-  # <tt>:input_</tt> will have that leading identifier stripped and will only
-  # be used in the +options+ Hash for the +input+ object. Keys starting with
-  # <tt>:out_</tt> or <tt>:output_</tt> affect only +output+. All other keys
-  # are assigned to both objects.
-  #
-  # The <tt>:output_row_sep</tt> +option+ defaults to
-  # <tt>$INPUT_RECORD_SEPARATOR</tt> (<tt>$/</tt>).
-  #
-  def self.filter(input=nil, output=nil, **options)
-    # parse options for input, output, or both
-    in_options, out_options = Hash.new, {row_sep: $INPUT_RECORD_SEPARATOR}
-    options.each do |key, value|
-      case key.to_s
-      when /\Ain(?:put)?_(.+)\Z/
-        in_options[$1.to_sym] = value
-      when /\Aout(?:put)?_(.+)\Z/
-        out_options[$1.to_sym] = value
+      if block_given?
+        yield instance  # run block, if given, returning result
       else
-        in_options[key]  = value
-        out_options[key] = value
+        instance        # or return the instance
       end
     end
-    # build input and output wrappers
-    input  = new(input  || ARGF,    in_options)
-    output = new(output || $stdout, out_options)
 
-    # read, yield, write
-    input.each do |row|
-      yield row
-      output << row
+    #
+    # :call-seq:
+    #   filter( **options ) { |row| ... }
+    #   filter( input, **options ) { |row| ... }
+    #   filter( input, output, **options ) { |row| ... }
+    #
+    # This method is a convenience for building Unix-like filters for CSV data.
+    # Each row is yielded to the provided block which can alter it as needed.
+    # After the block returns, the row is appended to +output+ altered or not.
+    #
+    # The +input+ and +output+ arguments can be anything CSV::new() accepts
+    # (generally String or IO objects). If not given, they default to
+    # <tt>ARGF</tt> and <tt>$stdout</tt>.
+    #
+    # The +options+ parameter is also filtered down to CSV::new() after some
+    # clever key parsing. Any key beginning with <tt>:in_</tt> or
+    # <tt>:input_</tt> will have that leading identifier stripped and will only
+    # be used in the +options+ Hash for the +input+ object. Keys starting with
+    # <tt>:out_</tt> or <tt>:output_</tt> affect only +output+. All other keys
+    # are assigned to both objects.
+    #
+    # The <tt>:output_row_sep</tt> +option+ defaults to
+    # <tt>$INPUT_RECORD_SEPARATOR</tt> (<tt>$/</tt>).
+    #
+    def filter(input=nil, output=nil, **options)
+      # parse options for input, output, or both
+      in_options, out_options = Hash.new, {row_sep: $INPUT_RECORD_SEPARATOR}
+      options.each do |key, value|
+        case key.to_s
+        when /\Ain(?:put)?_(.+)\Z/
+          in_options[$1.to_sym] = value
+        when /\Aout(?:put)?_(.+)\Z/
+          out_options[$1.to_sym] = value
+        else
+          in_options[key]  = value
+          out_options[key] = value
+        end
+      end
+      # build input and output wrappers
+      input  = new(input  || ARGF,    in_options)
+      output = new(output || $stdout, out_options)
+
+      # read, yield, write
+      input.each do |row|
+        yield row
+        output << row
+      end
     end
-  end
 
-  #
-  # This method is intended as the primary interface for reading CSV files. You
-  # pass a +path+ and any +options+ you wish to set for the read. Each row of
-  # file will be passed to the provided +block+ in turn.
-  #
-  # The +options+ parameter can be anything CSV::new() understands. This method
-  # also understands an additional <tt>:encoding</tt> parameter that you can use
-  # to specify the Encoding of the data in the file to be read. You must provide
-  # this unless your data is in Encoding::default_external(). CSV will use this
-  # to determine how to parse the data. You may provide a second Encoding to
-  # have the data transcoded as it is read. For example,
-  # <tt>encoding: "UTF-32BE:UTF-8"</tt> would read UTF-32BE data from the file
-  # but transcode it to UTF-8 before CSV parses it.
-  #
-  def self.foreach(path, mode="r", **options, &block)
-    return to_enum(__method__, path, mode, options) unless block_given?
-    open(path, mode, options) do |csv|
-      csv.each(&block)
+    #
+    # This method is intended as the primary interface for reading CSV files. You
+    # pass a +path+ and any +options+ you wish to set for the read. Each row of
+    # file will be passed to the provided +block+ in turn.
+    #
+    # The +options+ parameter can be anything CSV::new() understands. This method
+    # also understands an additional <tt>:encoding</tt> parameter that you can use
+    # to specify the Encoding of the data in the file to be read. You must provide
+    # this unless your data is in Encoding::default_external(). CSV will use this
+    # to determine how to parse the data. You may provide a second Encoding to
+    # have the data transcoded as it is read. For example,
+    # <tt>encoding: "UTF-32BE:UTF-8"</tt> would read UTF-32BE data from the file
+    # but transcode it to UTF-8 before CSV parses it.
+    #
+    def foreach(path, mode="r", **options, &block)
+      return to_enum(__method__, path, mode, options) unless block_given?
+      open(path, mode, options) do |csv|
+        csv.each(&block)
+      end
     end
-  end
 
-  #
-  # :call-seq:
-  #   generate( str, **options ) { |csv| ... }
-  #   generate( **options ) { |csv| ... }
-  #
-  # This method wraps a String you provide, or an empty default String, in a
-  # CSV object which is passed to the provided block. You can use the block to
-  # append CSV rows to the String and when the block exits, the final String
-  # will be returned.
-  #
-  # Note that a passed String *is* modified by this method. Call dup() before
-  # passing if you need a new String.
-  #
-  # The +options+ parameter can be anything CSV::new() understands.  This method
-  # understands an additional <tt>:encoding</tt> parameter when not passed a
-  # String to set the base Encoding for the output.  CSV needs this hint if you
-  # plan to output non-ASCII compatible data.
-  #
-  def self.generate(str=nil, **options)
-    # add a default empty String, if none was given
-    if str
-      str = StringIO.new(str)
-      str.seek(0, IO::SEEK_END)
-    else
-      encoding = options[:encoding]
+    #
+    # :call-seq:
+    #   generate( str, **options ) { |csv| ... }
+    #   generate( **options ) { |csv| ... }
+    #
+    # This method wraps a String you provide, or an empty default String, in a
+    # CSV object which is passed to the provided block. You can use the block to
+    # append CSV rows to the String and when the block exits, the final String
+    # will be returned.
+    #
+    # Note that a passed String *is* modified by this method. Call dup() before
+    # passing if you need a new String.
+    #
+    # The +options+ parameter can be anything CSV::new() understands.  This method
+    # understands an additional <tt>:encoding</tt> parameter when not passed a
+    # String to set the base Encoding for the output.  CSV needs this hint if you
+    # plan to output non-ASCII compatible data.
+    #
+    def generate(str=nil, **options)
+      # add a default empty String, if none was given
+      if str
+        str = StringIO.new(str)
+        str.seek(0, IO::SEEK_END)
+      else
+        encoding = options[:encoding]
+        str = +""
+        str.force_encoding(encoding) if encoding
+      end
+      csv = new(str, options) # wrap
+      yield csv         # yield for appending
+      csv.string        # return final String
+    end
+
+    #
+    # This method is a shortcut for converting a single row (Array) into a CSV
+    # String.
+    #
+    # The +options+ parameter can be anything CSV::new() understands. This method
+    # understands an additional <tt>:encoding</tt> parameter to set the base
+    # Encoding for the output. This method will try to guess your Encoding from
+    # the first non-+nil+ field in +row+, if possible, but you may need to use
+    # this parameter as a backup plan.
+    #
+    # The <tt>:row_sep</tt> +option+ defaults to <tt>$INPUT_RECORD_SEPARATOR</tt>
+    # (<tt>$/</tt>) when calling this method.
+    #
+    def generate_line(row, **options)
+      options = {row_sep: $INPUT_RECORD_SEPARATOR}.merge(options)
       str = +""
-      str.force_encoding(encoding) if encoding
-    end
-    csv = new(str, options) # wrap
-    yield csv         # yield for appending
-    csv.string        # return final String
-  end
-
-  #
-  # This method is a shortcut for converting a single row (Array) into a CSV
-  # String.
-  #
-  # The +options+ parameter can be anything CSV::new() understands. This method
-  # understands an additional <tt>:encoding</tt> parameter to set the base
-  # Encoding for the output. This method will try to guess your Encoding from
-  # the first non-+nil+ field in +row+, if possible, but you may need to use
-  # this parameter as a backup plan.
-  #
-  # The <tt>:row_sep</tt> +option+ defaults to <tt>$INPUT_RECORD_SEPARATOR</tt>
-  # (<tt>$/</tt>) when calling this method.
-  #
-  def self.generate_line(row, **options)
-    options = {row_sep: $INPUT_RECORD_SEPARATOR}.merge(options)
-    str = +""
-    if options[:encoding]
-      str.force_encoding(options[:encoding])
-    elsif field = row.find {|f| f.is_a?(String)}
-      str.force_encoding(field.encoding)
-    end
-    (new(str, options) << row).string
-  end
-
-  #
-  # :call-seq:
-  #   open( filename, mode = "rb", **options ) { |faster_csv| ... }
-  #   open( filename, **options ) { |faster_csv| ... }
-  #   open( filename, mode = "rb", **options )
-  #   open( filename, **options )
-  #
-  # This method opens an IO object, and wraps that with CSV. This is intended
-  # as the primary interface for writing a CSV file.
-  #
-  # You must pass a +filename+ and may optionally add a +mode+ for Ruby's
-  # open(). You may also pass an optional Hash containing any +options+
-  # CSV::new() understands as the final argument.
-  #
-  # This method works like Ruby's open() call, in that it will pass a CSV object
-  # to a provided block and close it when the block terminates, or it will
-  # return the CSV object when no block is provided. (*Note*: This is different
-  # from the Ruby 1.8 CSV library which passed rows to the block. Use
-  # CSV::foreach() for that behavior.)
-  #
-  # You must provide a +mode+ with an embedded Encoding designator unless your
-  # data is in Encoding::default_external(). CSV will check the Encoding of the
-  # underlying IO object (set by the +mode+ you pass) to determine how to parse
-  # the data. You may provide a second Encoding to have the data transcoded as
-  # it is read just as you can with a normal call to IO::open(). For example,
-  # <tt>"rb:UTF-32BE:UTF-8"</tt> would read UTF-32BE data from the file but
-  # transcode it to UTF-8 before CSV parses it.
-  #
-  # An opened CSV object will delegate to many IO methods for convenience. You
-  # may call:
-  #
-  # * binmode()
-  # * binmode?()
-  # * close()
-  # * close_read()
-  # * close_write()
-  # * closed?()
-  # * eof()
-  # * eof?()
-  # * external_encoding()
-  # * fcntl()
-  # * fileno()
-  # * flock()
-  # * flush()
-  # * fsync()
-  # * internal_encoding()
-  # * ioctl()
-  # * isatty()
-  # * path()
-  # * pid()
-  # * pos()
-  # * pos=()
-  # * reopen()
-  # * seek()
-  # * stat()
-  # * sync()
-  # * sync=()
-  # * tell()
-  # * to_i()
-  # * to_io()
-  # * truncate()
-  # * tty?()
-  #
-  def self.open(filename, mode="r", **options)
-    # wrap a File opened with the remaining +args+ with no newline
-    # decorator
-    file_opts = {universal_newline: false}.merge(options)
-
-    begin
-      f = File.open(filename, mode, file_opts)
-    rescue ArgumentError => e
-      raise unless /needs binmode/.match?(e.message) and mode == "r"
-      mode = "rb"
-      file_opts = {encoding: Encoding.default_external}.merge(file_opts)
-      retry
-    end
-    begin
-      csv = new(f, options)
-    rescue Exception
-      f.close
-      raise
+      if options[:encoding]
+        str.force_encoding(options[:encoding])
+      elsif field = row.find {|f| f.is_a?(String)}
+        str.force_encoding(field.encoding)
+      end
+      (new(str, options) << row).string
     end
 
-    # handle blocks like Ruby's open(), not like the CSV library
-    if block_given?
+    #
+    # :call-seq:
+    #   open( filename, mode = "rb", **options ) { |faster_csv| ... }
+    #   open( filename, **options ) { |faster_csv| ... }
+    #   open( filename, mode = "rb", **options )
+    #   open( filename, **options )
+    #
+    # This method opens an IO object, and wraps that with CSV. This is intended
+    # as the primary interface for writing a CSV file.
+    #
+    # You must pass a +filename+ and may optionally add a +mode+ for Ruby's
+    # open(). You may also pass an optional Hash containing any +options+
+    # CSV::new() understands as the final argument.
+    #
+    # This method works like Ruby's open() call, in that it will pass a CSV object
+    # to a provided block and close it when the block terminates, or it will
+    # return the CSV object when no block is provided. (*Note*: This is different
+    # from the Ruby 1.8 CSV library which passed rows to the block. Use
+    # CSV::foreach() for that behavior.)
+    #
+    # You must provide a +mode+ with an embedded Encoding designator unless your
+    # data is in Encoding::default_external(). CSV will check the Encoding of the
+    # underlying IO object (set by the +mode+ you pass) to determine how to parse
+    # the data. You may provide a second Encoding to have the data transcoded as
+    # it is read just as you can with a normal call to IO::open(). For example,
+    # <tt>"rb:UTF-32BE:UTF-8"</tt> would read UTF-32BE data from the file but
+    # transcode it to UTF-8 before CSV parses it.
+    #
+    # An opened CSV object will delegate to many IO methods for convenience. You
+    # may call:
+    #
+    # * binmode()
+    # * binmode?()
+    # * close()
+    # * close_read()
+    # * close_write()
+    # * closed?()
+    # * eof()
+    # * eof?()
+    # * external_encoding()
+    # * fcntl()
+    # * fileno()
+    # * flock()
+    # * flush()
+    # * fsync()
+    # * internal_encoding()
+    # * ioctl()
+    # * isatty()
+    # * path()
+    # * pid()
+    # * pos()
+    # * pos=()
+    # * reopen()
+    # * seek()
+    # * stat()
+    # * sync()
+    # * sync=()
+    # * tell()
+    # * to_i()
+    # * to_io()
+    # * truncate()
+    # * tty?()
+    #
+    def open(filename, mode="r", **options)
+      # wrap a File opened with the remaining +args+ with no newline
+      # decorator
+      file_opts = {universal_newline: false}.merge(options)
+
       begin
-        yield csv
+        f = File.open(filename, mode, file_opts)
+      rescue ArgumentError => e
+        raise unless /needs binmode/.match?(e.message) and mode == "r"
+        mode = "rb"
+        file_opts = {encoding: Encoding.default_external}.merge(file_opts)
+        retry
+      end
+      begin
+        csv = new(f, options)
+      rescue Exception
+        f.close
+        raise
+      end
+
+      # handle blocks like Ruby's open(), not like the CSV library
+      if block_given?
+        begin
+          yield csv
+        ensure
+          csv.close
+        end
+      else
+        csv
+      end
+    end
+
+    #
+    # :call-seq:
+    #   parse( str, **options ) { |row| ... }
+    #   parse( str, **options )
+    #
+    # This method can be used to easily parse CSV out of a String. You may either
+    # provide a +block+ which will be called with each row of the String in turn,
+    # or just use the returned Array of Arrays (when no +block+ is given).
+    #
+    # You pass your +str+ to read from, and an optional +options+ containing
+    # anything CSV::new() understands.
+    #
+    def parse(*args, &block)
+      csv = new(*args)
+
+      return csv.each(&block) if block_given?
+
+      # slurp contents, if no block is given
+      begin
+        csv.read
       ensure
         csv.close
       end
-    else
-      csv
     end
-  end
 
-  #
-  # :call-seq:
-  #   parse( str, **options ) { |row| ... }
-  #   parse( str, **options )
-  #
-  # This method can be used to easily parse CSV out of a String. You may either
-  # provide a +block+ which will be called with each row of the String in turn,
-  # or just use the returned Array of Arrays (when no +block+ is given).
-  #
-  # You pass your +str+ to read from, and an optional +options+ containing
-  # anything CSV::new() understands.
-  #
-  def self.parse(*args, &block)
-    csv = new(*args)
-
-    return csv.each(&block) if block_given?
-
-    # slurp contents, if no block is given
-    begin
-      csv.read
-    ensure
-      csv.close
+    #
+    # This method is a shortcut for converting a single line of a CSV String into
+    # an Array. Note that if +line+ contains multiple rows, anything beyond the
+    # first row is ignored.
+    #
+    # The +options+ parameter can be anything CSV::new() understands.
+    #
+    def parse_line(line, **options)
+      new(line, options).shift
     end
-  end
 
-  #
-  # This method is a shortcut for converting a single line of a CSV String into
-  # an Array. Note that if +line+ contains multiple rows, anything beyond the
-  # first row is ignored.
-  #
-  # The +options+ parameter can be anything CSV::new() understands.
-  #
-  def self.parse_line(line, **options)
-    new(line, options).shift
-  end
+    #
+    # Use to slurp a CSV file into an Array of Arrays. Pass the +path+ to the
+    # file and any +options+ CSV::new() understands. This method also understands
+    # an additional <tt>:encoding</tt> parameter that you can use to specify the
+    # Encoding of the data in the file to be read. You must provide this unless
+    # your data is in Encoding::default_external(). CSV will use this to determine
+    # how to parse the data. You may provide a second Encoding to have the data
+    # transcoded as it is read. For example,
+    # <tt>encoding: "UTF-32BE:UTF-8"</tt> would read UTF-32BE data from the file
+    # but transcode it to UTF-8 before CSV parses it.
+    #
+    def read(path, *options)
+      open(path, *options) { |csv| csv.read }
+    end
 
-  #
-  # Use to slurp a CSV file into an Array of Arrays. Pass the +path+ to the
-  # file and any +options+ CSV::new() understands. This method also understands
-  # an additional <tt>:encoding</tt> parameter that you can use to specify the
-  # Encoding of the data in the file to be read. You must provide this unless
-  # your data is in Encoding::default_external(). CSV will use this to determine
-  # how to parse the data. You may provide a second Encoding to have the data
-  # transcoded as it is read. For example,
-  # <tt>encoding: "UTF-32BE:UTF-8"</tt> would read UTF-32BE data from the file
-  # but transcode it to UTF-8 before CSV parses it.
-  #
-  def self.read(path, *options)
-    open(path, *options) { |csv| csv.read }
-  end
+    # Alias for CSV::read().
+    def readlines(*args)
+      read(*args)
+    end
 
-  # Alias for CSV::read().
-  def self.readlines(*args)
-    read(*args)
-  end
-
-  #
-  # A shortcut for:
-  #
-  #   CSV.read( path, { headers:           true,
-  #                     converters:        :numeric,
-  #                     header_converters: :symbol }.merge(options) )
-  #
-  def self.table(path, **options)
-    read( path, { headers:           true,
-                  converters:        :numeric,
-                  header_converters: :symbol }.merge(options) )
+    #
+    # A shortcut for:
+    #
+    #   CSV.read( path, { headers:           true,
+    #                     converters:        :numeric,
+    #                     header_converters: :symbol }.merge(options) )
+    #
+    def table(path, **options)
+      read( path, { headers:           true,
+                    converters:        :numeric,
+                    header_converters: :symbol }.merge(options) )
+    end
   end
 
   #
