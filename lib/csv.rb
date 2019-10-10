@@ -433,7 +433,7 @@ class CSV
 
       # fetch or create the instance for this signature
       @@instances ||= Hash.new
-      instance = (@@instances[sig] ||= new(data, options))
+      instance = (@@instances[sig] ||= new(data, **options))
 
       if block_given?
         yield instance  # run block, if given, returning result
@@ -481,8 +481,8 @@ class CSV
         end
       end
       # build input and output wrappers
-      input  = new(input  || ARGF,    in_options)
-      output = new(output || $stdout, out_options)
+      input  = new(input  || ARGF,    **in_options)
+      output = new(output || $stdout, **out_options)
 
       # read, yield, write
       input.each do |row|
@@ -506,8 +506,8 @@ class CSV
     # but transcode it to UTF-8 before CSV parses it.
     #
     def foreach(path, mode="r", **options, &block)
-      return to_enum(__method__, path, mode, options) unless block_given?
-      open(path, mode, options) do |csv|
+      return to_enum(__method__, path, mode, **options) unless block_given?
+      open(path, mode, **options) do |csv|
         csv.each(&block)
       end
     end
@@ -540,7 +540,7 @@ class CSV
         str = +""
         str.force_encoding(encoding) if encoding
       end
-      csv = new(str, options) # wrap
+      csv = new(str, **options) # wrap
       yield csv         # yield for appending
       csv.string        # return final String
     end
@@ -566,7 +566,7 @@ class CSV
       elsif field = row.find {|f| f.is_a?(String)}
         str.force_encoding(field.encoding)
       end
-      (new(str, options) << row).string
+      (new(str, **options) << row).string
     end
 
     #
@@ -638,7 +638,7 @@ class CSV
       file_opts = {universal_newline: false}.merge(options)
 
       begin
-        f = File.open(filename, mode, file_opts)
+        f = File.open(filename, mode, **file_opts)
       rescue ArgumentError => e
         raise unless /needs binmode/.match?(e.message) and mode == "r"
         mode = "rb"
@@ -646,7 +646,7 @@ class CSV
         retry
       end
       begin
-        csv = new(f, options)
+        csv = new(f, **options)
       rescue Exception
         f.close
         raise
@@ -676,8 +676,8 @@ class CSV
     # You pass your +str+ to read from, and an optional +options+ containing
     # anything CSV::new() understands.
     #
-    def parse(*args, &block)
-      csv = new(*args)
+    def parse(str, **options, &block)
+      csv = new(str, **options)
 
       return csv.each(&block) if block_given?
 
@@ -697,7 +697,7 @@ class CSV
     # The +options+ parameter can be anything CSV::new() understands.
     #
     def parse_line(line, **options)
-      new(line, options).shift
+      new(line, **options).shift
     end
 
     #
@@ -711,13 +711,13 @@ class CSV
     # <tt>encoding: "UTF-32BE:UTF-8"</tt> would read UTF-32BE data from the file
     # but transcode it to UTF-8 before CSV parses it.
     #
-    def read(path, *options)
-      open(path, *options) { |csv| csv.read }
+    def read(path, **options)
+      open(path, **options) { |csv| csv.read }
     end
 
     # Alias for CSV::read().
-    def readlines(*args)
-      read(*args)
+    def readlines(path, **options)
+      read(path, **options)
     end
 
     #
@@ -728,9 +728,13 @@ class CSV
     #                     header_converters: :symbol }.merge(options) )
     #
     def table(path, **options)
-      read( path, { headers:           true,
-                    converters:        :numeric,
-                    header_converters: :symbol }.merge(options) )
+      default_options = {
+        headers:           true,
+        converters:        :numeric,
+        header_converters: :symbol,
+      }
+      options = default_options.merge(options)
+      read(path, **options)
     end
   end
 
