@@ -14,15 +14,13 @@ after_script:
 
 matrix:
   include:
-    - name: "2.3"
-      rvm: 2.3
     - name: "2.4"
-      rvm: 2.4.5
+      rvm: 2.4
     - name: "2.5"
-      rvm: 2.5.2
+      rvm: 2.5
     - name: "2.6"
       rvm: 2.6
-    - name: "trunk"
+    - name: "master"
       rvm: ruby-head
     - name: "scanner"
       rvm: 2.6
