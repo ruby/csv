@@ -945,8 +945,12 @@ class CSV
                  strip: false)
     raise ArgumentError.new("Cannot parse nil as CSV") if data.nil?
 
-    # create the IO object we will read from
-    @io = data.is_a?(String) ? StringIO.new(data) : data
+    if data.is_a?(String)
+      @io = StringIO.new(data)
+      @io.set_encoding(encoding || data.encoding)
+    else
+      @io = data
+    end
     @encoding = determine_encoding(encoding, internal_encoding)
 
     @base_fields_converter_options = {
