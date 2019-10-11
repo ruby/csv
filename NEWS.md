@@ -1,5 +1,52 @@
 # News
 
+## 3.1.2 - 2019-10-12
+
+### Improvements
+
+  * Added `:col_sep` check.
+    [GitHub#94][Reported by Florent Beaurain]
+
+  * Suppressed warnings.
+    [GitHub#96][Patch by Nobuyoshi Nakada]
+
+  * Improved documentation.
+    [GitHub#101][GitHub#102][Patch by Vitor Oliveira]
+
+### Fixes
+
+  * Fixed a typo in documentation.
+    [GitHub#95][Patch by Yuji Yaginuma]
+
+  * Fixed a multibyte character handling bug.
+    [GitHub#97][Patch by koshigoe]
+
+  * Fixed typos in documentation.
+    [GitHub#100][Patch by Vitor Oliveira]
+
+  * Fixed a bug that seeked `StringIO` isn't accepted.
+    [GitHub#98][Patch by MATSUMOTO Katsuyoshi]
+
+  * Fixed a bug that `CSV.generate_line` doesn't work with
+    `Encoding.default_internal`.
+    [GitHub#105][Reported by David Rodríguez]
+
+### Thanks
+
+  * Florent Beaurain
+
+  * Yuji Yaginuma
+
+  * Nobuyoshi Nakada
+
+  * koshigoe
+
+  * Vitor Oliveira
+
+  * MATSUMOTO Katsuyoshi
+
+  * David Rodríguez
+
 ## 3.1.1 - 2019-04-26
 
 ### Improvements
