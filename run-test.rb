@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+$VERBOSE = true
+
 $LOAD_PATH.unshift("test")
 $LOAD_PATH.unshift("test/lib")
 $LOAD_PATH.unshift("lib")
