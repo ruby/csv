@@ -50,11 +50,7 @@ class CSV
 
     def initialize_copy(other)
       super
-      @row = if other.headers.size >= other.fields.size
-               other.headers.zip(other.fields)
-             else
-               other.fields.zip(other.headers).each(&:reverse!)
-             end
+      @row = @row.collect(&:dup)
     end
 
     # Returns +true+ if this is a header row.
