@@ -263,32 +263,11 @@ class CSV
       prepare
     end
 
-    def column_separator
-      @column_separator
-    end
-
-    def row_separator
-      @row_separator
-    end
-
-    def quote_character
-      @quote_character
-    end
-
-    def field_size_limit
-      @field_size_limit
-    end
-
-    def skip_lines
-      @skip_lines
-    end
+    attr_reader :column_separator, :row_separator, :quote_character,
+                :field_size_limit, :skip_lines, :headers, :lineno
 
     def unconverted_fields?
       @unconverted_fields
-    end
-
-    def headers
-      @headers
     end
 
     def header_row?
@@ -305,10 +284,6 @@ class CSV
 
     def liberal_parsing?
       @liberal_parsing
-    end
-
-    def lineno
-      @lineno
     end
 
     def line
