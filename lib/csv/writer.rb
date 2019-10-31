@@ -117,7 +117,7 @@ class CSV
                      Regexp.escape(@quote_character.encode(@encoding)) +
                      "]".encode(@encoding))
       end
-      @quote_empty = @options.fetch(:quote_empty, true)
+      @quote_empty = @options.fetch(:quote_empty) { true }
     end
 
     def prepare_output
