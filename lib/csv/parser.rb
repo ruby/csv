@@ -899,7 +899,7 @@ class CSV
             emit_row(row, &block)
             row = []
           end
-          skip_needless_lines
+          skip_needless_lines unless @scanner.eos?
           start_row
         elsif @scanner.eos?
           break if row.empty? and value.nil?
