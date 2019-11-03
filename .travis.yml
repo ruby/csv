@@ -33,7 +33,7 @@ matrix:
         - gem install csv -v 3.0.1
         - gem install csv -v 3.0.2
       script:
-        - bundle exec rake benchmark
+        - rake benchmark
     - name: "gem"
       rvm: 2.6
       install:
