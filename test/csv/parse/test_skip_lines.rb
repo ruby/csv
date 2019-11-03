@@ -103,8 +103,10 @@ class TestCSVParseSkipLines < Test::Unit::TestCase
     end
   end
 
-  def test_empty_anchored_regexp
-    # protect against infinite loop
-    assert_equal([[","]], CSV.parse(%[","\n], :skip_lines => /^$/))
+  def test_empty_line_and_liberal_parsing
+    assert_equal([["a", "b"]],
+                 CSV.parse("a,b\n",
+                           :liberal_parsing => true,
+                           :skip_lines => /^$/))
   end
 end
