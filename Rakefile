@@ -1,3 +1,4 @@
+require "rbconfig"
 require "bundler/gem_tasks"
 
 desc "Run test"
@@ -16,7 +17,7 @@ namespace :benchmark do
       "BUNDLER_ORIG_RUBYLIB" => nil,
     }
     command_line = [
-      FileUtils::RUBY, "-v", "-S", "benchmark-driver", File.expand_path(yaml),
+      RbConfig.ruby, "-v", "-S", "benchmark-driver", File.expand_path(yaml),
     ]
 
     desc "Run #{name} benchmark"
