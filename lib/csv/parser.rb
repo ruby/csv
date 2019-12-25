@@ -893,6 +893,8 @@ class CSV
         if parse_column_end
           row << value
         elsif parse_row_end
+          @scanner.keep_drop
+          @scanner.keep_start
           if row.empty? and value.nil?
             emit_row([], &block) unless @skip_blanks
           else
@@ -905,6 +907,8 @@ class CSV
         elsif @scanner.eos?
           break if row.empty? and value.nil?
           row << value
+          @scanner.keep_drop
+          @scanner.keep_start
           emit_row(row, &block)
           break
         else
