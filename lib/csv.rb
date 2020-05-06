@@ -103,6 +103,13 @@ require_relative "csv/writer"
 
 using CSV::MatchP if CSV.const_defined?(:MatchP)
 
+# :include: ../doc/col_sep.rdoc
+#
+# :include: ../doc/row_sep.rdoc
+#
+# :include: ../doc/quote_char.rdoc
+#
+# :include: ../doc/field_size_limit.rdoc
 #
 # This class provides a complete interface to CSV files and data. It offers
 # tools to enable you to read and write to and from Strings or IO objects, as
