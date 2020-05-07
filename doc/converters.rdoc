@@ -1,0 +1,94 @@
+====== Option +converters+
+
+An \String converter name or and \Array of converter names.
+
+By default, all parsed data is formed into Strings.
+A converter can convert selected data into other Ruby objects.
+
+The built-in converters are in \Hash CSV::Converters.
+The keys there are the names of the converters:
+
+  CSV::Converters.keys # => [:integer, :float, :numeric, :date, :date_time, :all]
+
+Two keys, +:all+ and +:numeric+, have values that are the names of other converters:
+
+  CSV::Converters.assoc(:all) # => [:all, [:date_time, :numeric]]
+  CSV::Converters.assoc(:numeric) # => [:numeric, [:integer, :float]]
+
+The other keys have values that are lambdas.
+
+All built-in converters try to transcode fields to UTF-8 before converting.
+The conversion will fail if the data cannot be transcoded, leaving the field unchanged.
+
+Converter +:integer+ converts to Integer:
+  data = <<-EOT
+  foo,0
+  bar,1
+  baz,2
+  EOT
+  # Without the converter
+  csv = CSV.parse(data)
+  csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+  # With the converter
+  csv = CSV.parse(data, converters: :integer)
+  csv # => [["foo", 0], ["bar", 1], ["baz", 2]]
+
+Converter +:float+ converts to Float:
+  data = <<-EOT
+  foo,0.0
+  bar,1.0
+  baz,2.0
+  EOT
+  # Without the converter
+  csv = CSV.parse(data)
+  csv # => [["foo", "0.0"], ["bar", "1.0"], ["baz", "2.0"]]
+  # With the converter
+  csv = CSV.parse(data, converters: :float)
+  csv # => [["foo", 0.0], ["bar", 1.0], ["baz", 2.0]]
+
+Converter +:date+ converts to Date:
+  data = <<-EOT
+  foo,2001-02-03
+  EOT
+  # Without the converter
+  csv = CSV.parse(data)
+  csv # => [["foo", "2001-02-03"]]
+  # With the converter
+  csv = CSV.parse(data, converters: :date)
+  csv # => [["foo", #<Date: 2001-02-03 ((2451944j,0s,0n),+0s,2299161j)>]]
+
+Converter +:date_time+ converts to DateTime:
+  data = <<-EOT
+  foo,2020-05-07T14:59:00-05:00
+  EOT
+  # Without the converter
+  csv = CSV.parse(data)
+  csv # => [["foo", "2020-05-07T14:59:00-05:00"]]
+  # With the converter
+  csv = CSV.parse(data, converters: :date_time)
+  csv # => [["foo", #<DateTime: 2020-05-07T14:59:00-05:00 ((2458977j,71940s,0n),-18000s,2299161j)>]]
+
+Two converters:
+  data = <<-EOT
+  1.0,2001-02-03
+  EOT
+  # Without the converters
+  csv = CSV.parse(data)
+  csv # => [["1.0", "2001-02-03"]]
+  # With the converters
+  csv = CSV.parse(data, converters: [:date, :float])
+  csv # => [[1.0, #<Date: 2001-02-03 ((2451944j,0s,0n),+0s,2299161j)>]]
+
+Custom converter (strips fields):
+  data = <<-EOT
+   foo , 0
+   bar , 1
+   baz , 2
+  EOT
+  # Without the converter
+  csv = CSV.parse(data)
+  csv # => [["foo ", " 0"], ["bar ", " 1"], ["baz ", " 2"]]
+  # With the converter
+  strip_converter = lambda { |field, _| field.strip }
+  csv = CSV.parse(data, converters: strip_converter)
+  csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]

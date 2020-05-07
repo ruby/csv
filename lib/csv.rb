@@ -103,20 +103,6 @@ require_relative "csv/writer"
 
 using CSV::MatchP if CSV.const_defined?(:MatchP)
 
-# ==Options for +parse+ and +generate+
-
-# :include: ../doc/col_sep.rdoc
-#
-# :include: ../doc/row_sep.rdoc
-#
-# :include: ../doc/quote_char.rdoc
-#
-# == Options for +parse+ Only
-#
-# :include: ../doc/field_size_limit.rdoc
-#
-# == Options for +generate+ Only
-#
 # This class provides a complete interface to CSV files and data. It offers
 # tools to enable you to read and write to and from Strings or IO objects, as
 # needed.
@@ -191,6 +177,24 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #   CSV(csv = "")   { |csv_str| csv_str << %w{my data here} }  # to a String
 #   CSV($stderr)    { |csv_err| csv_err << %w{my data here} }  # to $stderr
 #   CSV($stdin)     { |csv_in|  csv_in.each { |row| p row } }  # from $stdin
+#
+# ==Options
+#
+# === Options for Both +parse+ and +generate+
+#
+# :include: ../doc/col_sep.rdoc
+#
+# :include: ../doc/row_sep.rdoc
+#
+# :include: ../doc/quote_char.rdoc
+#
+# === Options for +parse+ Only
+#
+# :include: ../doc/field_size_limit.rdoc
+#
+# :include: ../doc/converters.rdoc
+#
+# === Options for +generate+ Only
 #
 # == Data Conversion
 #
