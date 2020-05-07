@@ -1,0 +1,43 @@
+====== Option +col_sep+
+
+The String field separator.
+This String will be transcoded into the data's \Encoding before parsing.
+
+The default is <tt>,</tt> (comma):
+  CSV.new('').col_sep # => ","
+
+Using the default:
+  ary = %w/a b c d/
+  txt = CSV.generate_line(ary)
+  txt # => "a,b,c,d\n"
+  csv = CSV.parse(txt)
+  csv # => [["a", "b", "c", "d"]]
+
+Using +:+ (colon):
+  col_sep = ':'
+  txt = CSV.generate_line(ary, col_sep: col_sep)
+  txt # => "a:b:c:d\n"
+  csv = CSV.parse(txt, col_sep: col_sep)
+  csv # => [["a", "b", "c", "d"]]
+
+Using +::+ (two colons):
+  col_sep = '::'
+  txt = CSV.generate_line(ary, col_sep: col_sep)
+  txt # => "a::b::c::d\n"
+  csv = CSV.parse(txt, col_sep: col_sep)
+  csv # => [["a", "b", "c", "d"]]
+
+---
+
+Raises an exception if the given value is not String-convertible:
+  col_sep = BasicObject.new
+  # Raises NoMethodError (undefined method `to_s' for #<BasicObject:>)
+  CSV.generate_line(ary, col_sep: col_sep)
+  # Raises NoMethodError (undefined method `to_s' for #<BasicObject:>)
+  CSV.parse(txt, col_sep: col_sep)
+
+Raises an exception if given the empty \String:
+  # Raises ArgumentError (:col_sep must be 1 or more characters: "")
+  CSV.parse('', col_sep: '')
+
+
