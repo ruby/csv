@@ -1,4 +1,6 @@
 require "rbconfig"
+require "rdoc/task"
+
 require "bundler/gem_tasks"
 
 desc "Run test"
@@ -7,6 +9,17 @@ task :test do
 end
 
 task :default => :test
+
+RDoc::Task.new do |rdoc|
+  rdoc.main = "README.md"
+  files = [
+    "LICENSE.txt",
+    "NEWS.md",
+    "README.md",
+    "lib/**/*.rb",
+  ]
+  rdoc.rdoc_files.include(*files)
+end
 
 benchmark_tasks = []
 namespace :benchmark do
