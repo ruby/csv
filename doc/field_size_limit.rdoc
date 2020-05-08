@@ -1,9 +1,9 @@
 ====== Option +field_size_limit+
 
-This is a maximum size CSV will read ahead looking for the closing quote for a field. (In truth, it reads to the first line ending beyond this size.) If a quote cannot be found within the limit CSV will raise a MalformedCSVError, assuming the data is faulty. You can use this limit to prevent what are effectively DoS attacks on the parser. However, this limit can cause a legitimate parse to fail and thus is set to nil, or off, by default.
-
-The default is +nil+:
+Specifies the \Integer field size limit. Default: +nil+:
   CSV.new('').field_size_limit # => nil
+
+This is a maximum size CSV will read ahead looking for the closing quote for a field. (In truth, it reads to the first line ending beyond this size.) If a quote cannot be found within the limit CSV will raise a MalformedCSVError, assuming the data is faulty. You can use this limit to prevent what are effectively DoS attacks on the parser. However, this limit can cause a legitimate parse to fail and thus is set to nil, or off, by default.
 
   data = <<~DATA
     "a","b"
@@ -23,7 +23,7 @@ For these examples:
     ",""
   DATA
   data # => "\"a\",\"b\"\n\"\n2345\n\",\"\"\n"
-xxx
+
 Using the default:
   csv = CSV.parse(data)
   csv # => [["a", "b"], ["\n2345\n", ""]]

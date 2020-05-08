@@ -1,0 +1,60 @@
+====== Option +headers+
+
+Specifies the boolean, \Symbol, \Array, or \String to be used
+to define column headers.  Default: +nil+.
+
+---
+
+Without +headers+:
+  data = <<-EOT
+  Name,Count
+  foo,0
+  bar,1
+  bax,2
+  EOT
+  csv = CSV.new(data)
+  csv # => #<CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
+  csv.headers # => nil
+  csv.shift # => ["Name", "Count"]
+
+---
+
+If set to +true+ or the \Symbol +:first_row+,
+the first row of the data is treated as a row of headers:
+  data = <<-EOT
+  Name,Count
+  foo,0
+  bar,1
+  bax,2
+  EOT
+  csv = CSV.new(data, headers: true)
+  csv # => #<CSV io_type:StringIO encoding:UTF-8 lineno:2 col_sep:"," row_sep:"\n" quote_char:"\"" headers:["Name", "Count"]>
+  csv.headers # => ["Name", "Count"]
+  csv.shift # => #<CSV::Row "Name":"bar" "Count":"1">
+
+---
+
+If set to an \Array, the \Array elements are treated as headers:
+  data = <<-EOT
+  foo,0
+  bar,1
+  bax,2
+  EOT
+  csv = CSV.new(data, headers: ['Name', 'Count'])
+  csv
+  csv.headers # => ["Name", "Count"]
+  csv.shift # => #<CSV::Row "Name":"bar" "Count":"1">
+
+---
+
+If set to a \String +str+, method <tt>CSV::parse_line(str, options)</tt> is called
+with the current +options+, and the returned \Array is treated as headers:
+  data = <<-EOT
+  foo,0
+  bar,1
+  bax,2
+  EOT
+  csv = CSV.new(data, headers: 'Name,Count')
+  csv
+  csv.headers # => ["Name", "Count"]
+  csv.shift # => #<CSV::Row "Name":"bar" "Count":"1">

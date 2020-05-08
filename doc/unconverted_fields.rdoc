@@ -1,6 +1,6 @@
 ====== Option +unconverted_fields+
 
-A boolean determining whether unconverted field values are to be available.
+Specifies the boolean determining whether unconverted field values are to be available.
 Default: +false+.
 
 The unconverted field values are those found in the source data,

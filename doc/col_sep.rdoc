@@ -1,6 +1,6 @@
 ====== Option +col_sep+
 
-The String field separator.
+Speficies the String field separator.
 This String will be transcoded into the data's \Encoding before parsing.
 
 The default is <tt>,</tt> (comma):
