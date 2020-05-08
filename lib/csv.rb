@@ -200,7 +200,11 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # :include: ../doc/return_headers.rdoc
 #
+# :include: ../doc/header_converters.rdoc
+#
 # === Options for +generate+ Only
+#
+# :include: ../doc/write_headers.rdoc
 #
 # == Data Conversion
 #
