@@ -1,5 +1,37 @@
 # News
 
+## 3.1.3 - 2020-05-09
+
+### Improvements
+
+  * `CSV::Row#dup`: Copied deeply.
+    [GitHub#108][Patch by Jim Kane]
+
+### Fixes
+
+  * Fixed a infinite loop bug for zero length match `skip_lines`.
+    [GitHub#110][Patch by Mike MacDonald]
+
+  * `CSV.generate`: Fixed a bug that encoding isn't set correctly.
+    [GitHub#110][Patch by Seiei Miyagi]
+
+  * Fixed document for the `:strip` option.
+    [GitHub#114][Patch by TOMITA Masahiro]
+
+  * Fixed a parse bug when split charcter exists in middle of column
+    value.
+    [GitHub#115][Reported by TOMITA Masahiro]
+
+### Thanks
+
+  * Jim Kane
+
+  * Mike MacDonald
+
+  * Seiei Miyagi
+
+  * TOMITA Masahiro
+
 ## 3.1.2 - 2019-10-12
 
 ### Improvements
