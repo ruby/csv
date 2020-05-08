@@ -1,0 +1,15 @@
+====== Option +force_quotes+
+
+Specifies a boolean that determines whether each output field is to be double-quoted.
+Default: +false+.
+
+For examples in this section:
+  data = ['foo', 0, nil]
+
+Using the default, +false+:
+  str = CSV.generate_line(data)
+  str # => "foo,0,\n"
+
+Using +true+:
+  str = CSV.generate_line(data, force_quotes: true)
+  str # => "\"foo\",\"0\",\"\"\n"

@@ -15,13 +15,13 @@ Without +write_headers+:
     csv.shift
   end # => ["foo", "0"]
 
-With +write_headers+"
+With +write_headers+":
   CSV.open(file_path,'w',
       :write_headers=> true,
       :headers => ['Name','Value']
     ) do |csv|
       csv << ['foo', '0']
   end
-  CSV.open(with_file_path) do |csv|
+  CSV.open(file_path) do |csv|
     csv.shift
   end # => ["Name", "Value"]

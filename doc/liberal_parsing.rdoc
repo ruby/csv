@@ -1,0 +1,17 @@
+====== Option +liberal_parsing+
+
+Specifies the boolean value that determines whether
+CSV will attempt to parse input not conformant with RFC 4180,
+such as double quotes in unquoted fields.
+Default is +false+.
+
+For examples in this section:
+  line = 'is,this "three, or four",fields'
+
+Without +liberal_parsing+:
+  # Raises CSV::MalformedCSVError (Illegal quoting in line 1.)
+  CSV.parse_line(line)
+
+With +liberal_parsing+:
+  csv = CSV.parse_line(line, liberal_parsing: true)
+  csv # => ["is", "this \"three", " or four\"", "fields"]

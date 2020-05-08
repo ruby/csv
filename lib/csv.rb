@@ -206,9 +206,13 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # :include: ../doc/skip_lines.rdoc
 #
+# :include: ../doc/liberal_parsing.rdoc
+#
 # === Options for +generate+ Only
 #
 # :include: ../doc/write_headers.rdoc
+#
+# :include: ../doc/force_quotes.rdoc
 #
 # == Data Conversion
 #

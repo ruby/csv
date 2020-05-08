@@ -2,16 +2,14 @@
 
 Specifies the row separator: a \String or the \Symbol <tt>:auto</tt> (see below).
 This String will be transcoded into the data's \Encoding before parsing.
+Default is +:auto+.
 
 ---
 
 When +row_sep+ is a \String, that \String becomes the row separator.
 The String will be transcoded into the data's Encoding before parsing.
 
-The default is <tt>"\n"</tt>:
-  CSV.new('').row_sep # => "\n"
-
-Using the default:
+Using <tt>"\n"</tt>:
   txt = CSV.generate do |csv|
     csv << [:foo, 0]
     csv << [:bar, 1]
@@ -56,7 +54,8 @@ Using <tt>''</tt> (empty string):
 
 ---
 
-When +row_sep+ is the \Symbol +:auto+, invokes auto-discovery of the row separator.
+When +row_sep+ is the \Symbol +:auto+ (the default),
+invokes auto-discovery of the row separator.
 
 Auto-discovery reads ahead in the data looking for the next <tt>\r\n</tt>, +\n+, or +\r+ sequence.
 The sequence will be selected even if it occurs in a quoted field,
