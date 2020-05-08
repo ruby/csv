@@ -96,7 +96,6 @@ Custom converter (strips fields):
 ---
 
 Raises an exception if the converter does not exist:
-
   data = 'foo,0'
   Raises NoMethodError (undefined method `arity' for nil:NilClass)
   CSV.parse(data, converters: :foo)

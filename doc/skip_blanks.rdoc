@@ -1,0 +1,29 @@
+====== Option +skip_blanks+
+
+Specifies a boolean that determines whether blank lines in the input will be ignored;
+a line that contains a column separator is not considered to be blank.
+Defaults to +false+.
+
+See also option {skiplines}[#class-CSV-label-Option+skip_lines].
+
+For examples in this section:
+  data = <<-EOT
+  foo,0
+
+  bar,1
+  baz,2
+
+  ,
+  EOT
+
+Using the default, +false+:
+  csv = CSV.parse(data)
+  csv # => [["foo", "0"], [], ["bar", "1"], ["baz", "2"], [], [nil, nil]]
+
+Using +true+:
+  csv = CSV.parse(data, skip_blanks: true)
+  csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"], [nil, nil]]
+
+Using a truthy value:
+  csv = CSV.parse(data, skip_blanks: :foo)
+  csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"], [nil, nil]]

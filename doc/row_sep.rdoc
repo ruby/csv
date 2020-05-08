@@ -55,6 +55,7 @@ Using <tt>''</tt> (empty string):
   csv # => [["foo", "0bar", "1baz", "2"]]
 
 ---
+
 When +row_sep+ is the \Symbol +:auto+, invokes auto-discovery of the row separator.
 
 Auto-discovery reads ahead in the data looking for the next <tt>\r\n</tt>, +\n+, or +\r+ sequence.

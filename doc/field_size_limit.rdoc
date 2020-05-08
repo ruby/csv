@@ -37,6 +37,8 @@ Using <tt>50</tt>:
   csv = CSV.parse(data, field_size_limit: field_size_limit)
   csv # => [["a", "b"], ["\n2345\n", ""]]
 
+---
+
 Raises an exception if a field is too long:
   big_data = "123456789\n" * 1024
   # Raises CSV::MalformedCSVError (Field size exceeded in line 1.)

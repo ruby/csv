@@ -202,6 +202,10 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # :include: ../doc/header_converters.rdoc
 #
+# :include: ../doc/skip_blanks.rdoc
+#
+# :include: ../doc/skip_lines.rdoc
+#
 # === Options for +generate+ Only
 #
 # :include: ../doc/write_headers.rdoc

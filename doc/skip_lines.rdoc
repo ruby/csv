@@ -1,0 +1,33 @@
+====== Option +skip_lines+
+
+Specifies an object to use in identifying comment lines in the input that are to be ignored:
+* If a \Regexp, ignores lines that match it.
+* If a \String, converts it to a \Regexp, ignores lines that match it.
+* If +nil+, no lines are considered to be comments.
+
+For examples in this section:
+  data = <<-EOT
+  # Comment
+  foo,0
+  bar,1
+  baz,2
+  # Another comment
+  EOT
+
+Using the default, +nil+:
+  csv = CSV.parse(data)
+  csv # => [["# Comment"], ["foo", "0"], ["bar", "1"], ["baz", "2"], ["# Another comment"]]
+
+Using a \Regexp:
+  csv = CSV.parse(data, skip_lines: /^#/)
+  csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+
+Using a \String:
+  csv = CSV.parse(data, skip_lines: '#')
+  csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+
+---
+
+Raises an exception if given an object that is not a \Regexp, a \String, or +nil+:
+  # Raises ArgumentError (:skip_lines has to respond to #match: 0)
+  CSV.parse(data, skip_lines: 0)
