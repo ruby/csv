@@ -198,6 +198,8 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # :include: ../doc/headers.rdoc
 #
+# :include: ../doc/return_headers.rdoc
+#
 # === Options for +generate+ Only
 #
 # == Data Conversion

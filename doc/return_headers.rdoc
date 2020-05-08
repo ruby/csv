@@ -1,0 +1,26 @@
+====== Option +return_headers+
+
+Specifies the boolean that determines whether method #shift
+returns or ignores the header row.  Default: +false+ (ignore):
+  data = <<-EOT
+  Name,Count
+  foo,0
+  bar,1
+  bax,2
+  EOT
+  # Without return_headers
+  csv = CSV.new(data, headers: true)
+  csv.shift # => #<CSV::Row "Name":"foo" "Count":"0">
+  # With return_headers
+  csv = CSV.new(data, headers: true, return_headers: true)
+  csv.shift # => #<CSV::Row "Name":"Name" "Count":"Count">
+
+The returned headers do not pass through any specified converters:
+  data = <<-EOT
+  Header,-1
+  foo,0
+  bar,1
+  bax,2
+  EOT
+  csv = CSV.new(data, headers: true, return_headers: true, converters: :integer)
+  csv.shift # => #<CSV::Row "Header":"Header" "-1":"-1">
