@@ -194,6 +194,8 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # :include: ../doc/converters.rdoc
 #
+# :include: ../doc/unconverted_fields.rdoc
+#
 # === Options for +generate+ Only
 #
 # == Data Conversion

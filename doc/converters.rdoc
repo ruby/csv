@@ -1,6 +1,6 @@
 ====== Option +converters+
 
-An \String converter name or and \Array of converter names.
+A \String converter name or an \Array of converter names.
 
 By default, all parsed data is formed into Strings.
 A converter can convert selected data into other Ruby objects.
