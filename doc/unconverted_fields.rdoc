@@ -1,7 +1,8 @@
 ====== Option +unconverted_fields+
 
 Specifies the boolean determining whether unconverted field values are to be available.
-Default: +false+.
+
+  CSV::DEFAULT_OPTIONS[:unconverted_fields] # => nil
 
 The unconverted field values are those found in the source data,
 prior to any conversions performed via option +converters+.

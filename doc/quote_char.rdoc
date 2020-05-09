@@ -3,11 +3,10 @@
 Specifies the character (\String of length 1) used used to quote fields.
 This String will be transcoded into the data's \Encoding before parsing.
 
+  CSV::DEFAULT_OPTIONS[:quote_char] # => "\"" (backslash)
+
 This is useful for application that incorrectly use <tt>'</tt> (single-quote)
 to quote fields, instead of the correct <tt>"</tt> (double-quote).
-
-The default is <tt>\</tt> (double-quote):
-  CSV.new('').quote_char # => "\""
 
 Using the default:
   ary = ['a', 'b', '"c"', 'd']

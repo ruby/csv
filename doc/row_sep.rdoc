@@ -2,7 +2,8 @@
 
 Specifies the row separator: a \String or the \Symbol <tt>:auto</tt> (see below).
 This String will be transcoded into the data's \Encoding before parsing.
-Default is +:auto+.
+
+  CSV::DEFAULT_OPTIONS[:row_sep] # => :auto
 
 ---
 

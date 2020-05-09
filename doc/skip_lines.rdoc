@@ -5,6 +5,8 @@ Specifies an object to use in identifying comment lines in the input that are to
 * If a \String, converts it to a \Regexp, ignores lines that match it.
 * If +nil+, no lines are considered to be comments.
 
+  CSV::DEFAULT_OPTIONS[:skip_lines] # => nil
+
 For examples in this section:
   data = <<-EOT
   # Comment

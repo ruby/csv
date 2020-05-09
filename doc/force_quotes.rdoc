@@ -1,7 +1,8 @@
 ====== Option +force_quotes+
 
 Specifies a boolean that determines whether each output field is to be double-quoted.
-Default: +false+.
+
+  CSV::DEFAULT_OPTIONS[:force_quotes]  # => false
 
 For examples in this section:
   data = ['foo', 0, nil]

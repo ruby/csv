@@ -208,6 +208,10 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # :include: ../doc/liberal_parsing.rdoc
 #
+# :include: ../doc/nil_value.rdoc
+#
+# :include: ../doc/empty_value.rdoc
+#
 # === Options for +generate+ Only
 #
 # :include: ../doc/write_headers.rdoc
@@ -448,6 +452,7 @@ class CSV
     force_quotes:       false,
     skip_lines:         nil,
     liberal_parsing:    false,
+    empty_value:        "",
     quote_empty:        true,
   }.freeze
 
