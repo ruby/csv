@@ -180,16 +180,13 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # == Options
 #
-# There are options for:
-# - Parsing.
-# - Generating.
-# - Both.
-#
 # The default values for options are:
 #   DEFAULT_OPTIONS = {
+#     # For both parsing and generating.
 #     col_sep:            ",",
 #     row_sep:            :auto,
 #     quote_char:         '"',
+#     # For parsing.
 #     field_size_limit:   nil,
 #     converters:         nil,
 #     unconverted_fields: nil,
@@ -197,13 +194,14 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #     return_headers:     false,
 #     header_converters:  nil,
 #     skip_blanks:        false,
-#     force_quotes:       false,
 #     skip_lines:         nil,
 #     liberal_parsing:    false,
 #     nil_value:          nil,
 #     empty_value:        "",
-#     quote_empty:        true,
+#     # For generating.
 #     write_headers:      nil,
+#     quote_empty:        true,
+#     force_quotes:       false,
 #     write_converters:   nil,
 #     write_nil_value:    nil,
 #     write_empty_value:  "",
@@ -459,29 +457,13 @@ class CSV
                                            gsub(/\s+/, "_").to_sym
     }
   }
-
-  #
-  # The options used when no overrides are given by calling code. They are:
-  #
-  # <b><tt>:col_sep</tt></b>::            <tt>","</tt>
-  # <b><tt>:row_sep</tt></b>::            <tt>:auto</tt>
-  # <b><tt>:quote_char</tt></b>::         <tt>'"'</tt>
-  # <b><tt>:field_size_limit</tt></b>::   +nil+
-  # <b><tt>:converters</tt></b>::         +nil+
-  # <b><tt>:unconverted_fields</tt></b>:: +nil+
-  # <b><tt>:headers</tt></b>::            +false+
-  # <b><tt>:return_headers</tt></b>::     +false+
-  # <b><tt>:header_converters</tt></b>::  +nil+
-  # <b><tt>:skip_blanks</tt></b>::        +false+
-  # <b><tt>:force_quotes</tt></b>::       +false+
-  # <b><tt>:skip_lines</tt></b>::         +nil+
-  # <b><tt>:liberal_parsing</tt></b>::    +false+
-  # <b><tt>:quote_empty</tt></b>::        +true+
-  #
+  # Default values for method options.
   DEFAULT_OPTIONS = {
+    # For both parsing and generating.
     col_sep:            ",",
     row_sep:            :auto,
     quote_char:         '"',
+    # For parsing.
     field_size_limit:   nil,
     converters:         nil,
     unconverted_fields: nil,
@@ -489,13 +471,14 @@ class CSV
     return_headers:     false,
     header_converters:  nil,
     skip_blanks:        false,
-    force_quotes:       false,
     skip_lines:         nil,
     liberal_parsing:    false,
     nil_value:          nil,
     empty_value:        "",
-    quote_empty:        true,
+    # For generating.
     write_headers:      nil,
+    quote_empty:        true,
+    force_quotes:       false,
     write_converters:   nil,
     write_nil_value:    nil,
     write_empty_value:  "",
