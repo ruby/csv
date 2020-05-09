@@ -3,7 +3,7 @@
 Specifies the object that is to be substituted
 for each field that has an empty \String.
 
-  CSV::DEFAULT_OPTIONS[:empty_value] # => "" (empty string)
+  CSV::DEFAULT_OPTIONS.fetch(:empty_value) # => "" (empty string)
 
 With the default, <tt>""</tt>:
   CSV.parse_line('a,"",b,"",c') # => ["a", "", "b", "", "c"]

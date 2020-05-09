@@ -2,7 +2,7 @@
 
 Specifies the object that is to be substituted for each null (no-text) field.
 
-  CSV::DEFAULT_OPTIONS[:nil_value] # => nil
+  CSV::DEFAULT_OPTIONS.fetch(:nil_value) # => nil
 
 With the default, +nil+:
   CSV.parse_line('a,,b,,c') # => ["a", nil, "b", nil, "c"]

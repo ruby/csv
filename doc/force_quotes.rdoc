@@ -2,7 +2,7 @@
 
 Specifies a boolean that determines whether each output field is to be double-quoted.
 
-  CSV::DEFAULT_OPTIONS[:force_quotes]  # => false
+  CSV::DEFAULT_OPTIONS.fetch(:force_quotes) # => false
 
 For examples in this section:
   data = ['foo', 0, nil]

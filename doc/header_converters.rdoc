@@ -2,7 +2,7 @@
 
 Specifies a \String converter name or an \Array of converter names.
 
-  CSV::DEFAULT_OPTIONS[:header_converters]  # => nil
+  CSV::DEFAULT_OPTIONS.fetch(:header_converters) # => nil
 
 Identical in functionality to option {converters}[#class-CSV-label-Option+converters]
 except that:

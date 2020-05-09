@@ -3,7 +3,7 @@
 Speficies the String field separator.
 This String will be transcoded into the data's \Encoding before parsing.
 
-  CSV::DEFAULT_OPTIONS[:col_sep] # => "," (comma)
+  CSV::DEFAULT_OPTIONS.fetch(:col_sep) # => "," (comma)
 
 Using the default:
   ary = %w/a b c d/

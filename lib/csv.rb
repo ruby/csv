@@ -218,6 +218,16 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # :include: ../doc/force_quotes.rdoc
 #
+# :include: ../doc/quote_empty.rdoc
+#
+# :include: ../doc/write_converters.rdoc
+#
+# :include: ../doc/write_nil_value.rdoc
+#
+# :include: ../doc/write_empty_value.rdoc
+#
+# :include: ../doc/strip.rdoc
+#
 # == Data Conversion
 #
 # === CSV with headers
@@ -452,8 +462,14 @@ class CSV
     force_quotes:       false,
     skip_lines:         nil,
     liberal_parsing:    false,
+    nil_value:          nil,
     empty_value:        "",
     quote_empty:        true,
+    write_headers:      nil,
+    write_converters:   nil,
+    write_nil_value:    nil,
+    write_empty_value:  "",
+    strip:              false,
   }.freeze
 
   class << self

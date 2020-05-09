@@ -1,6 +1,6 @@
 ====== Option +return_headers+
 
-  CSV::DEFAULT_OPTIONS[:return_headers] # => false
+  CSV::DEFAULT_OPTIONS.fetch(:return_headers) # => false
 
 Specifies the boolean that determines whether method #shift
 returns or ignores the header row.  Default: +false+ (ignore):

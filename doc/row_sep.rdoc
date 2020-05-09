@@ -3,7 +3,7 @@
 Specifies the row separator: a \String or the \Symbol <tt>:auto</tt> (see below).
 This String will be transcoded into the data's \Encoding before parsing.
 
-  CSV::DEFAULT_OPTIONS[:row_sep] # => :auto
+  CSV::DEFAULT_OPTIONS.fetch(:row_sep) # => :auto
 
 ---
 

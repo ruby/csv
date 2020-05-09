@@ -3,7 +3,7 @@
 A boolean specifying whether a header row is included in the output;
 ignored if there are no headers.
 
-  CSV::DEFAULT_OPTIONS[:write_headers] # => nil
+  CSV::DEFAULT_OPTIONS.fetch(:write_headers) # => nil
 
 Without +write_headers+:
   file_path = 't.csv'

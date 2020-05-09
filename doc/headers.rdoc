@@ -3,7 +3,7 @@
 Specifies the boolean, \Symbol, \Array, or \String to be used
 to define column headers.
 
-  CSV::DEFAULT_OPTIONS[:headers]  # => false
+  CSV::DEFAULT_OPTIONS.fetch(:headers) # => false
 
 ---
 
