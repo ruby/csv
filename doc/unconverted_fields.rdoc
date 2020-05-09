@@ -1,6 +1,6 @@
 ====== Option +unconverted_fields+
 
-Specifies the boolean determining whether unconverted field values are to be available.
+Specifies the boolean that determines whether unconverted field values are to be available.
 
   CSV::DEFAULT_OPTIONS.fetch(:unconverted_fields) # => nil
 

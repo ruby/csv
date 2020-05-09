@@ -1,6 +1,6 @@
 ====== Option +headers+
 
-Specifies the boolean, \Symbol, \Array, or \String to be used
+Specifies a boolean, \Symbol, \Array, or \String to be used
 to define column headers.
 
   CSV::DEFAULT_OPTIONS.fetch(:headers) # => false

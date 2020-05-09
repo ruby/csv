@@ -1,6 +1,6 @@
 ====== Option +quote_empty+
 
-Specifies a boolean that determines whether an empty value is to be double-quoted.
+Specifies the boolean that determines whether an empty value is to be double-quoted.
 
   CSV::DEFAULT_OPTIONS.fetch(:quote_empty) # => true
 

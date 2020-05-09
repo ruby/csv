@@ -1,6 +1,6 @@
 ====== Option +write_empty_value+
 
-Specifies an output value to be substituted for each field
+Specifies the object that is to be substituted for each field
 that has an empty \String.
 
   CSV::DEFAULT_OPTIONS.fetch(:write_empty_value) # => ""

@@ -1,6 +1,6 @@
 ====== Option +force_quotes+
 
-Specifies a boolean that determines whether each output field is to be double-quoted.
+Specifies the boolean that determines whether each output field is to be double-quoted.
 
   CSV::DEFAULT_OPTIONS.fetch(:force_quotes) # => false
 

@@ -11,46 +11,46 @@ When +row_sep+ is a \String, that \String becomes the row separator.
 The String will be transcoded into the data's Encoding before parsing.
 
 Using <tt>"\n"</tt>:
-  txt = CSV.generate do |csv|
+  str = CSV.generate do |csv|
     csv << [:foo, 0]
     csv << [:bar, 1]
     csv << [:baz, 2]
   end
-  txt # => "foo,0\nbar,1\nbaz,2\n"
-  csv = CSV.parse(txt)
+  str # => "foo,0\nbar,1\nbaz,2\n"
+  csv = CSV.parse(str)
   csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
 
 Using <tt>|</tt> (pipe):
   row_sep = '|'
-  txt = CSV.generate(row_sep: row_sep) do |csv|
+  str = CSV.generate(row_sep: row_sep) do |csv|
     csv << [:foo, 0]
     csv << [:bar, 1]
     csv << [:baz, 2]
   end
-  txt # => "foo,0|bar,1|baz,2|"
-  csv = CSV.parse(txt, row_sep: row_sep)
+  str # => "foo,0|bar,1|baz,2|"
+  csv = CSV.parse(str, row_sep: row_sep)
   csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
 
 Using <tt>--</tt> (two hyphens):
   row_sep = '--'
-  txt = CSV.generate(row_sep: row_sep) do |csv|
+  str = CSV.generate(row_sep: row_sep) do |csv|
     csv << [:foo, 0]
     csv << [:bar, 1]
     csv << [:baz, 2]
   end
-  txt # => "foo,0--bar,1--baz,2--"
-  csv = CSV.parse(txt, row_sep: row_sep)
+  str # => "foo,0--bar,1--baz,2--"
+  csv = CSV.parse(str, row_sep: row_sep)
   csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
 
 Using <tt>''</tt> (empty string):
   row_sep = ''
-  txt = CSV.generate(row_sep: row_sep) do |csv|
+  str = CSV.generate(row_sep: row_sep) do |csv|
     csv << [:foo, 0]
     csv << [:bar, 1]
     csv << [:baz, 2]
   end
-  txt # => "foo,0bar,1baz,2"
-  csv = CSV.parse(txt, row_sep: row_sep)
+  str # => "foo,0bar,1baz,2"
+  csv = CSV.parse(str, row_sep: row_sep)
   csv # => [["foo", "0bar", "1baz", "2"]]
 
 ---
@@ -63,13 +63,13 @@ The sequence will be selected even if it occurs in a quoted field,
 assuming that you would have the same line endings there.
 
   row_sep = :auto
-  txt = CSV.generate(row_sep: row_sep) do |csv|
+  str = CSV.generate(row_sep: row_sep) do |csv|
     csv << [:foo, 0]
     csv << [:bar, 1]
     csv << [:baz, 2]
   end
-  txt # => "foo,0\nbar,1\nbaz,2\n"
-  csv = CSV.parse(txt, row_sep: row_sep)
+  str # => "foo,0\nbar,1\nbaz,2\n"
+  csv = CSV.parse(str, row_sep: row_sep)
   csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
 
 The default <tt>$INPUT_RECORD_SEPARATOR</tt> (<tt>$/</tt>) is used
@@ -87,6 +87,4 @@ Raises an exception if the given value is not String-convertible:
   # Raises NoMethodError (undefined method `to_s' for #<BasicObject:>)
   CSV.generate_line(ary, row_sep: row_sep)
   # Raises NoMethodError (undefined method `to_s' for #<BasicObject:>)
-  CSV.parse(txt, row_sep: row_sep)
-
-
+  CSV.parse(str, row_sep: row_sep)

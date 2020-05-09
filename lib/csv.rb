@@ -180,7 +180,7 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # ==Options
 #
-# === Options for Both +parse+ and +generate+
+# === Options for Both Parsing an Generating
 #
 # :include: ../doc/col_sep.rdoc
 #
@@ -188,7 +188,7 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # :include: ../doc/quote_char.rdoc
 #
-# === Options for +parse+ Only
+# === Options for Parsing
 #
 # :include: ../doc/field_size_limit.rdoc
 #
@@ -212,7 +212,7 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # :include: ../doc/empty_value.rdoc
 #
-# === Options for +generate+ Only
+# === Options for Generating
 #
 # :include: ../doc/write_headers.rdoc
 #
