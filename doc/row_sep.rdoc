@@ -2,14 +2,13 @@
 
 Specifies the row separator, a \String or the \Symbol <tt>:auto</tt> (see below),
 to be used for both parsing and generating.
-This String will be transcoded into the data's \Encoding before use.
 
   CSV::DEFAULT_OPTIONS.fetch(:row_sep) # => :auto
 
 ---
 
 When +row_sep+ is a \String, that \String becomes the row separator.
-The String will be transcoded into the data's Encoding before parsing.
+The String will be transcoded into the data's Encoding before use.
 
 Using <tt>"\n"</tt>:
   str = CSV.generate do |csv|
