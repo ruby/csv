@@ -3,6 +3,7 @@
 Specifies the \Proc or \Array of Procs that are to be called
 for converting each output field.
 
+Default value:
   CSV::DEFAULT_OPTIONS.fetch(:write_converters) # => nil
 
 With no write converter:

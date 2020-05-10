@@ -3,6 +3,7 @@
 Specifies the row separator, a \String or the \Symbol <tt>:auto</tt> (see below),
 to be used for both parsing and generating.
 
+Default value:
   CSV::DEFAULT_OPTIONS.fetch(:row_sep) # => :auto
 
 ---

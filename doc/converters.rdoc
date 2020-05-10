@@ -2,6 +2,7 @@
 
 Specifies a \String converter name or an \Array of converter names.
 
+Default value:
   CSV::DEFAULT_OPTIONS.fetch(:converters) # => nil
 
 By default, all parsed data is formed into Strings.

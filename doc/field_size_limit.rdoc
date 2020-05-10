@@ -2,6 +2,7 @@
 
 Specifies the \Integer field size limit.
 
+Default value:
   CSV::DEFAULT_OPTIONS.fetch(:field_size_limit) # => nil
 
 This is a maximum size CSV will read ahead looking for the closing quote for a field.

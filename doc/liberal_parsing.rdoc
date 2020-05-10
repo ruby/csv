@@ -4,6 +4,7 @@ Specifies the boolean value that determines whether
 CSV will attempt to parse input not conformant with RFC 4180,
 such as double quotes in unquoted fields.
 
+Default value:
   CSV::DEFAULT_OPTIONS.fetch(:liberal_parsing) # => false
 
 For examples in this section:

@@ -4,6 +4,7 @@ Specifies the \String field separator to be used
 for both parsing and generating.
 The \String will be transcoded into the data's \Encoding before use.
 
+Default value:
   CSV::DEFAULT_OPTIONS.fetch(:col_sep) # => "," (comma)
 
 For examples in this section:

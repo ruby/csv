@@ -3,6 +3,7 @@
 Specifies the boolean value that determines whether
 whitespace is stripped from each input field.
 
+Default value:
   CSV::DEFAULT_OPTIONS.fetch(:strip) # => false
 
 With default value +false+:

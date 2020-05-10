@@ -2,6 +2,7 @@
 
 Specifies the object that is to be substituted for each null (no-text) field.
 
+Default value:
   CSV::DEFAULT_OPTIONS.fetch(:nil_value) # => nil
 
 With the default, +nil+:

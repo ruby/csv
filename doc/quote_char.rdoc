@@ -4,6 +4,7 @@ Specifies the character (\String of length 1) used used to quote fields
 in both parsing and generating.
 This String will be transcoded into the data's \Encoding before use.
 
+Default value:
   CSV::DEFAULT_OPTIONS.fetch(:quote_char) # => "\"" (backslash)
 
 This is useful for an application that incorrectly uses <tt>'</tt> (single-quote)

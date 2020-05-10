@@ -3,6 +3,7 @@
 Specifies the boolean that determines whether a header row is included in the output;
 ignored if there are no headers.
 
+Default value:
   CSV::DEFAULT_OPTIONS.fetch(:write_headers) # => nil
 
 Without +write_headers+:

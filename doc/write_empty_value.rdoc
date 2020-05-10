@@ -3,6 +3,7 @@
 Specifies the object that is to be substituted for each field
 that has an empty \String.
 
+Default value:
   CSV::DEFAULT_OPTIONS.fetch(:write_empty_value) # => ""
 
 Without the option:
