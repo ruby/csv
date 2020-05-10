@@ -84,22 +84,6 @@ Two converters:
 
 ---
 
-Custom converter (strips fields):
-  data = <<-EOT
-   foo , 0
-   bar , 1
-   baz , 2
-  EOT
-  # Without the converter
-  csv = CSV.parse(data)
-  csv # => [["foo ", " 0"], ["bar ", " 1"], ["baz ", " 2"]]
-  # With the converter
-  strip_converter = proc { |field, _| field.strip }
-  csv = CSV.parse(data, converters: strip_converter)
-  csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
-
----
-
 Raises an exception if the converter does not exist:
   data = 'foo,0'
   Raises NoMethodError (undefined method `arity' for nil:NilClass)
