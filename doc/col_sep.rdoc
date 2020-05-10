@@ -1,7 +1,8 @@
 ====== Option +col_sep+
 
-Specifies the \String field separator.
-The \String will be transcoded into the data's \Encoding before parsing.
+Specifies the \String field separator to be used
+for both parsing and generating.
+The \String will be transcoded into the data's \Encoding before use.
 
   CSV::DEFAULT_OPTIONS.fetch(:col_sep) # => "," (comma)
 

@@ -1,7 +1,8 @@
 ====== Option +row_sep+
 
-Specifies the row separator: a \String or the \Symbol <tt>:auto</tt> (see below).
-This String will be transcoded into the data's \Encoding before parsing.
+Specifies the row separator, a \String or the \Symbol <tt>:auto</tt> (see below),
+to be used for both parsing and generating.
+This String will be transcoded into the data's \Encoding before use.
 
   CSV::DEFAULT_OPTIONS.fetch(:row_sep) # => :auto
 

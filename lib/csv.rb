@@ -208,15 +208,13 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #     strip:              false,
 #   }
 #
-# === Options for Both Parsing an Generating
+# === Options for Parsing
 #
 # :include: ../doc/col_sep.rdoc
 #
 # :include: ../doc/row_sep.rdoc
 #
 # :include: ../doc/quote_char.rdoc
-#
-# === Options for Parsing
 #
 # :include: ../doc/field_size_limit.rdoc
 #
@@ -241,6 +239,12 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 # :include: ../doc/empty_value.rdoc
 #
 # === Options for Generating
+#
+# :include: ../doc/col_sep.rdoc
+#
+# :include: ../doc/row_sep.rdoc
+#
+# :include: ../doc/quote_char.rdoc
 #
 # :include: ../doc/write_headers.rdoc
 #
@@ -492,7 +496,8 @@ class CSV
     # the same +data+ object (tested by Object#object_id()) with the same
     # +options+.
     #
-    # See {Options}[#class-CSV-label-Options].
+    # See {Options for Parsing}[#class-CSV-label-Options+for+Parsing]
+    # and {Options for Generating}[#class-CSV-label-Options+for+Generating].
     #
     # If a block is given, the instance is passed to the block and the return
     # value becomes the return value of the block.
@@ -534,7 +539,8 @@ class CSV
     # <tt>:out_</tt> or <tt>:output_</tt> affect only +output+. All other keys
     # are assigned to both objects.
     #
-    # See {Options}[#class-CSV-label-Options].
+    # See {Options for Parsing}[#class-CSV-label-Options+for+Parsing]
+    # and {Options for Generating}[#class-CSV-label-Options+for+Generating].
     #
     # The <tt>:output_row_sep</tt> +option+ defaults to
     # <tt>$INPUT_RECORD_SEPARATOR</tt> (<tt>$/</tt>).
@@ -569,7 +575,7 @@ class CSV
     # pass a +path+ and any +options+ you wish to set for the read. Each row of
     # file will be passed to the provided +block+ in turn.
     #
-    # See {Options}[#class-CSV-label-Options].
+    # See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
     #
     # The +options+ parameter can be anything CSV::new() understands. This method
     # also understands an additional <tt>:encoding</tt> parameter that you can use
@@ -600,7 +606,7 @@ class CSV
     # Note that a passed String *is* modified by this method. Call dup() before
     # passing if you need a new String.
     #
-    # See {Options}[#class-CSV-label-Options].
+    # See {Options for Generating}[#class-CSV-label-Options+for+Generating].
     #
     # This method has one additional option: <tt>:encoding</tt>,
     # which sets the base Encoding for the output if no no +str+ is specified.
@@ -626,7 +632,7 @@ class CSV
     # This method is a shortcut for converting a single row (Array) into a CSV
     # String.
     #
-    # See {Options}[#class-CSV-label-Options].
+    # See {Options for Generating}[#class-CSV-label-Options+for+Generating].
     #
     # This method accepts an additional option, <tt>:encoding</tt>, which sets the base
     # Encoding for the output. This method will try to guess your Encoding from
@@ -660,7 +666,7 @@ class CSV
     # You must pass a +filename+ and may optionally add a +mode+ for Ruby's
     # open().
     #
-    # See {Options}[#class-CSV-label-Options].
+    # See {Options for Generating}[#class-CSV-label-Options+for+Generating].
     #
     # This method works like Ruby's open() call, in that it will pass a CSV object
     # to a provided block and close it when the block terminates, or it will
@@ -753,7 +759,7 @@ class CSV
     # or just use the returned Array of Arrays (when no +block+ is given).
     #
     # You pass your +str+ to read from, and an optional +options+.
-    # See {Options}[#class-CSV-label-Options].
+    # See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
     #
     def parse(str, **options, &block)
       csv = new(str, **options)
@@ -773,7 +779,7 @@ class CSV
     # an Array. Note that if +line+ contains multiple rows, anything beyond the
     # first row is ignored.
     #
-    # See {Options}[#class-CSV-label-Options].
+    # See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
     #
     def parse_line(line, **options)
       new(line, **options).shift
@@ -782,7 +788,7 @@ class CSV
     #
     # Use to slurp a CSV file into an Array of Arrays. Pass the +path+ to the
     # file and +options+.
-    # See {Options}[#class-CSV-label-Options].
+    # See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
     #
     # This method also understands
     # an additional <tt>:encoding</tt> parameter that you can use to specify the
@@ -809,7 +815,7 @@ class CSV
     #                     converters:        :numeric,
     #                     header_converters: :symbol }.merge(options) )
     #
-    # See {Options}[#class-CSV-label-Options].
+    # See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
     def table(path, **options)
       default_options = {
         headers:           true,
@@ -832,7 +838,8 @@ class CSV
   # reading). If you want it at the end (for writing), use CSV::generate().
   # If you want any other positioning, pass a preset StringIO object instead.
   #
-  # See {Options}[#class-CSV-label-Options].
+  # See {Options for Parsing}[#class-CSV-label-Options+for+Parsing]
+  # and {Options for Generating}[#class-CSV-label-Options+for+Generating].
   #
   # Options cannot be overridden in the instance methods for performance reasons,
   # so be sure to set what you want here.

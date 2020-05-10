@@ -1,7 +1,8 @@
 ====== Option +quote_char+
 
-Specifies the character (\String of length 1) used used to quote fields.
-This String will be transcoded into the data's \Encoding before parsing.
+Specifies the character (\String of length 1) used used to quote fields
+in both parsing and generating.
+This String will be transcoded into the data's \Encoding before use.
 
   CSV::DEFAULT_OPTIONS.fetch(:quote_char) # => "\"" (backslash)
 
