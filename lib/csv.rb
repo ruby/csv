@@ -290,20 +290,44 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 # When you specify a converter for parsing,
 # each parsed field is passed to the converter;
 # its return value becomes the new value for the field.
+# A converter might, for example, convert an integer embedded in a \String
+# into a true \Integer.
+# (In fact, that's what built-in field converter +:integer+ does.)
 #
-# There are built-in converters, and custom converters are also supported.
+# There are additional built-in \converters, and custom \converters are also supported.
 #
-# All converters try to transcode fields to UTF-8 before converting.
+# All \converters try to transcode fields to UTF-8 before converting.
 # The conversion will fail if the data cannot be transcoded, leaving the field unchanged.
 #
 # === Field \Converters
 #
-# The built-in field converters are in \Hash CSV::Converters.
-# The \Symbol keys there are the names of the converters:
+# There are three ways to use field \converters;
+# these examples use built-in field converter +:integer+,
+# which converts each parsed integer string to a true \Integer:
 #
-#   CSV::Converters.keys # => [:integer, :float, :numeric, :date, :date_time, :all]
+# Option +converters+ with a singleton parsing method:
+#   csv = CSV.parse_line('0,1,2', converters: :integer)
+#   csv # => [0, 1, 2]
+#
+# Option +converters+ with a new \CSV instance:
+#   csv = CSV.new('0,1,2', converters: :integer)
+#   # Field converters in effect:
+#   csv.converters # => [:integer]
+#   csv.shift # => [0, 1, 2]
+#
+# Method #convert adds a converter to a \CSV instance:
+#   csv = CSV.new('0,1,2')
+#   # Add a converter.
+#   csv.convert(:integer)
+#   csv.converters # => [:integer]
+#   csv.shift # => [0, 1, 2]
 #
 # ---
+#
+# The built-in field \converters are in \Hash CSV::Converters.
+# The \Symbol keys there are the names of the \converters:
+#
+#   CSV::Converters.keys # => [:integer, :float, :numeric, :date, :date_time, :all]
 #
 # Converter +:integer+ converts each field that +Integer()+ accepts:
 #   data = '0,1,2,x'
@@ -345,21 +369,19 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # Converter +:numeric+ converts with both +:date_time+ and +:numeric+..
 #
-# ---
-#
-# As seen above, converters may be specified for \CSV singleton parsing methods
-# such as CSV::parse_line and CSV::parse.
-#
-# Converters may also be specified for a \CSV instance:
-#
-#
-# #convert and #converters
-#
+# As seen above, method #convert adds \converters to a \CSV instance,
+# and method #converters returns an \Array of the \converters in effect:
+#   csv = CSV.new('0,1,2')
+#   csv.converters # => []
+#   csv.convert(:integer)
+#   csv.converters # => [:integer]
+#   csv.convert(:date)
+#   csv.converters # => [:integer, :date]
 #
 # === Header Converters
 #
-# The built-in header converters are in \Hash CSV::Converters.
-# The \Symbol keys there are the names of the converters:
+# The built-in header \converters are in \Hash CSV::Converters.
+# The \Symbol keys there are the names of the \converters:
 #
 #   CSV::HeaderConverters.keys # => [:downcase, :symbol]
 #
