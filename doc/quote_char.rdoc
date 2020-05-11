@@ -11,19 +11,19 @@ This is useful for an application that incorrectly uses <tt>'</tt> (single-quote
 to quote fields, instead of the correct <tt>"</tt> (double-quote).
 
 Using the default:
-  line = ['a', 'b', '"c"', 'd']
-  str = CSV.generate_line(line)
+  ary = ['a', 'b', '"c"', 'd']
+  str = CSV.generate_line(ary)
   str # => "a,b,\"\"\"c\"\"\",d\n"
-  csv = CSV.parse_line(str)
-  csv # => ["a", "b", "\"c\"", "d"]
+  ary = CSV.parse_line(str)
+  ary # => ["a", "b", "\"c\"", "d"]
 
 Using <tt>'</tt> (single-quote):
   quote_char = "'"
-  line = ['a', 'b', '\'c\'', 'd']
-  str = CSV.generate_line(line, quote_char: quote_char)
+  ary = ['a', 'b', '\'c\'', 'd']
+  str = CSV.generate_line(ary, quote_char: quote_char)
   str # => "a,b,'''c''',d\n"
-  csv = CSV.parse_line(str, quote_char: quote_char)
-  csv # => [["a", "b", "'c'", "d"]]
+  ary = CSV.parse_line(str, quote_char: quote_char)
+  ary # => [["a", "b", "'c'", "d"]]
 
 ---
 

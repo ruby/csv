@@ -260,9 +260,7 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # :include: ../doc/strip.rdoc
 #
-# == Data Conversion
-#
-# === CSV with headers
+# == CSV with headers
 #
 # CSV allows to specify column names of CSV file, whether they are in data, or
 # provided separately. If headers are specified, reading methods return an instance
@@ -284,10 +282,98 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #   data = CSV.parse('Bob,Engineering,1000', headers: %i[name department salary])
 #   data.first      #=> #<CSV::Row name:"Bob" department:"Engineering" salary:"1000">
 #
-# === Typed data reading
+# == \CSV Converters
+#
+# By default, each field parsed by \CSV is formed into a \String.
+# You can use a _converter_ to convert certain fields into other Ruby objects.
+#
+# When you specify a converter for parsing,
+# each parsed field is passed to the converter;
+# its return value becomes the new value for the field.
+#
+# There are built-in converters, and custom converters are also supported.
+#
+# All converters try to transcode fields to UTF-8 before converting.
+# The conversion will fail if the data cannot be transcoded, leaving the field unchanged.
+#
+# === Field \Converters
+#
+# The built-in field converters are in \Hash CSV::Converters.
+# The \Symbol keys there are the names of the converters:
+#
+#   CSV::Converters.keys # => [:integer, :float, :numeric, :date, :date_time, :all]
+#
+# ---
+#
+# Converter +:integer+ converts each field that +Integer()+ accepts:
+#   data = '0,1,2,x'
+#   # Without the converter
+#   csv = CSV.parse_line(data)
+#   csv # => ["0", "1", "2", "x"]
+#   # With the converter
+#   csv = CSV.parse_line(data, converters: :integer)
+#   csv # => [0, 1, 2, "x"]
+#
+# Converter +:float+ converts each field that +Float()+ accepts:
+#   data = '1.0,3.14159,x'
+#   # Without the converter
+#   csv = CSV.parse_line(data)
+#   csv # => ["1.0", "3.14159", "x"]
+#   # With the converter
+#   csv = CSV.parse_line(data, converters: :float)
+#   csv # => [1.0, 3.14159, "x"]
+#
+# Converter +:numeric+ converts with both +:integer+ and +:float+..
+#
+# Converter +:date+ converts each field that +Date::parse()+ accepts:
+#   data = '2001-02-03,x'
+#   # Without the converter
+#   csv = CSV.parse_line(data)
+#   csv # => ["2001-02-03", "x"]
+#   # With the converter
+#   csv = CSV.parse_line(data, converters: :date)
+#   csv # => [#<Date: 2001-02-03 ((2451944j,0s,0n),+0s,2299161j)>, "x"]
+#
+# Converter +:date_time+ converts each field that +DateTime::parse() accepts:
+#   data = '2020-05-07T14:59:00-05:00,x'
+#   # Without the converter
+#   csv = CSV.parse_line(data)
+#   csv # => ["2020-05-07T14:59:00-05:00", "x"]
+#   # With the converter
+#   csv = CSV.parse_line(data, converters: :date_time)
+#   csv # => [#<DateTime: 2020-05-07T14:59:00-05:00 ((2458977j,71940s,0n),-18000s,2299161j)>, "x"]
+#
+# Converter +:numeric+ converts with both +:date_time+ and +:numeric+..
+#
+# ---
+#
+# As seen above, converters may be specified for \CSV singleton parsing methods
+# such as CSV::parse_line and CSV::parse.
+#
+# Converters may also be specified for a \CSV instance:
+#
+#
+# #convert and #converters
+#
+#
+# === Header Converters
+#
+# The built-in header converters are in \Hash CSV::Converters.
+# The \Symbol keys there are the names of the converters:
+#
+#   CSV::HeaderConverters.keys # => [:downcase, :symbol]
+#
+# <b><tt>:downcase</tt></b>::  Calls downcase() on the header String.
+# <b><tt>:symbol</tt></b>::    Leading/trailing spaces are dropped, string is
+#                              downcased, remaining spaces are replaced with
+#                              underscores, non-word characters are dropped,
+#                              and finally to_sym() is called.#
+# === Custom Converters
 #
 # CSV allows to provide a set of data _converters_ e.g. transformations to try on input
 # data. Converter could be a symbol from CSV::Converters constant's keys, or lambda.
+#
+# Also, FieldInfo.
 #
 #   # Without any converters:
 #   CSV.parse('Bob,2018-03-01,100')

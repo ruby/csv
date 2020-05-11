@@ -11,17 +11,17 @@ prior to any conversions performed via option +converters+.
 When option +unconverted_fields+ is +true+,
 each returned row (\Array or \CSV::Row) has an added method,
 +unconverted_fields+, that returns the unconverted field values:
-  data = <<-EOT
+  str = <<-EOT
   foo,0
   bar,1
   baz,2
   EOT
   # Without unconverted_fields
-  csv = CSV.parse(data, converters: :integer)
+  csv = CSV.parse(str, converters: :integer)
   csv # => [["foo", 0], ["bar", 1], ["baz", 2]]
   csv.first.respond_to?(:unconverted_fields) # => false
   # With unconverted_fields
-  csv = CSV.parse(data, converters: :integer, unconverted_fields: true)
+  csv = CSV.parse(str, converters: :integer, unconverted_fields: true)
   csv # => [["foo", 0], ["bar", 1], ["baz", 2]]
   csv.first.respond_to?(:unconverted_fields) # => true
   csv.first.unconverted_fields # => ["foo", "0"]

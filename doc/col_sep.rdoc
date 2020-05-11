@@ -8,27 +8,27 @@ Default value:
   CSV::DEFAULT_OPTIONS.fetch(:col_sep) # => "," (comma)
 
 For examples in this section:
-  line = ['a', 'b', 'c']
+  ary = ['a', 'b', 'c']
 
 Using the default:
   str = CSV.generate_line(line)
   str # => "a,b,c\n"
-  csv = CSV.parse_line(str)
-  csv # => ["a", "b", "c"]
+  ary = CSV.parse_line(str)
+  ary # => ["a", "b", "c"]
 
 Using +:+ (colon):
   col_sep = ':'
-  str = CSV.generate_line(line, col_sep: col_sep)
+  str = CSV.generate_line(ary, col_sep: col_sep)
   str # => "a:b:c\n"
-  csv = CSV.parse_line(str, col_sep: col_sep)
-  csv # => [["a", "b", "c"]]
+  ary = CSV.parse_line(str, col_sep: col_sep)
+  ary # => [["a", "b", "c"]]
 
 Using +::+ (two colons):
   col_sep = '::'
-  str = CSV.generate_line(line, col_sep: col_sep)
+  str = CSV.generate_line(ary, col_sep: col_sep)
   str # => "a::b::c\n"
-  csv = CSV.parse_line(str, col_sep: col_sep)
-  csv # => [["a", "b", "c"]]
+  ary = CSV.parse_line(str, col_sep: col_sep)
+  ary # => [["a", "b", "c"]]
 
 ---
 

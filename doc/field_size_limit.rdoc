@@ -14,26 +14,26 @@ However, this limit can cause a legitimate parse to fail;
 therefore the default value is +nil+ (no limit).
 
 For the examples in this section:
-  data = <<~EOT
+  str = <<~EOT
     "a","b"
     "
     2345
     ",""
   EOT
-  data # => "\"a\",\"b\"\n\"\n2345\n\",\"\"\n"
+  str # => "\"a\",\"b\"\n\"\n2345\n\",\"\"\n"
 
 Using the default +nil+:
-  csv = CSV.parse(data)
-  csv # => [["a", "b"], ["\n2345\n", ""]]
+  ary = CSV.parse(str)
+  ary # => [["a", "b"], ["\n2345\n", ""]]
 
 Using <tt>50</tt>:
   field_size_limit = 50
-  csv = CSV.parse(data, field_size_limit: field_size_limit)
-  csv # => [["a", "b"], ["\n2345\n", ""]]
+  ary = CSV.parse(str, field_size_limit: field_size_limit)
+  ary # => [["a", "b"], ["\n2345\n", ""]]
 
 ---
 
 Raises an exception if a field is too long:
-  big_data = "123456789\n" * 1024
+  big_str = "123456789\n" * 1024
   # Raises CSV::MalformedCSVError (Field size exceeded in line 1.)
-  CSV.parse('valid,fields,"' + big_data + '"', field_size_limit: 2048)
+  CSV.parse('valid,fields,"' + big_str + '"', field_size_limit: 2048)

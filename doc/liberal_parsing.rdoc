@@ -8,12 +8,12 @@ Default value:
   CSV::DEFAULT_OPTIONS.fetch(:liberal_parsing) # => false
 
 For examples in this section:
-  line = 'is,this "three, or four",fields'
+  str = 'is,this "three, or four",fields'
 
 Without +liberal_parsing+:
-  # Raises CSV::MalformedCSVError (Illegal quoting in line 1.)
-  CSV.parse_line(line)
+  # Raises CSV::MalformedCSVError (Illegal quoting in str 1.)
+  CSV.parse_line(str)
 
 With +liberal_parsing+:
-  csv = CSV.parse_line(line, liberal_parsing: true)
-  csv # => ["is", "this \"three", " or four\"", "fields"]
+  ary = CSV.parse_line(str, liberal_parsing: true)
+  ary # => ["is", "this \"three", " or four\"", "fields"]

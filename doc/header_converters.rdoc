@@ -11,21 +11,21 @@ except that:
 - The built-in header converters are +:downcase+ and +:symbol+.
 
 Examples:
-  data = <<-EOT
+  str = <<-EOT
   foo,0
   bar,1
   baz,2
   EOT
   headers = ['Name', 'Value']
   # With no header converter
-  csv = CSV.parse(data, headers: headers)
+  csv = CSV.parse(str, headers: headers)
   csv.headers # => ["Name", "Value"]
   # With header converter :downcase
-  csv = CSV.parse(data, headers: headers, header_converters: :downcase)
+  csv = CSV.parse(str, headers: headers, header_converters: :downcase)
   csv.headers # => ["name", "value"]
   # With header converter :symbol
-  csv = CSV.parse(data, headers: headers, header_converters: :symbol)
+  csv = CSV.parse(str, headers: headers, header_converters: :symbol)
   csv.headers # => [:name, :value]
   # With both
-  csv = CSV.parse(data, headers: headers, header_converters: [:downcase, :symbol])
-  csv.headers # => [:name, :value] # => [:name, :value]
+  csv = CSV.parse(str, headers: headers, header_converters: [:downcase, :symbol])
+  csv.headers # => [:name, :value]

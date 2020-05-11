@@ -9,7 +9,7 @@ Default value:
 See also option {skiplines}[#class-CSV-label-Option+skip_lines].
 
 For examples in this section:
-  data = <<-EOT
+  str = <<-EOT
   foo,0
 
   bar,1
@@ -19,13 +19,13 @@ For examples in this section:
   EOT
 
 Using the default, +false+:
-  csv = CSV.parse(data)
-  csv # => [["foo", "0"], [], ["bar", "1"], ["baz", "2"], [], [nil, nil]]
+  ary = CSV.parse(str)
+  ary # => [["foo", "0"], [], ["bar", "1"], ["baz", "2"], [], [nil, nil]]
 
 Using +true+:
-  csv = CSV.parse(data, skip_blanks: true)
-  csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"], [nil, nil]]
+  ary = CSV.parse(str, skip_blanks: true)
+  ary # => [["foo", "0"], ["bar", "1"], ["baz", "2"], [nil, nil]]
 
 Using a truthy value:
-  csv = CSV.parse(data, skip_blanks: :foo)
-  csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"], [nil, nil]]
+  ary = CSV.parse(str, skip_blanks: :foo)
+  ary # => [["foo", "0"], ["bar", "1"], ["baz", "2"], [nil, nil]]

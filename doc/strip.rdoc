@@ -7,9 +7,9 @@ Default value:
   CSV::DEFAULT_OPTIONS.fetch(:strip) # => false
 
 With default value +false+:
-  csv = CSV.parse_line(' a , b ')
-  csv # => [" a ", " b "]
+  ary = CSV.parse_line(' a , b ')
+  ary # => [" a ", " b "]
 
 With value +true+:
-  csv = CSV.parse_line(' a , b ', strip: true)
-  csv # => ["a", "b"]
+  ary = CSV.parse_line(' a , b ', strip: true)
+  ary # => ["a", "b"]

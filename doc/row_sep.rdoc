@@ -18,8 +18,8 @@ Using <tt>"\n"</tt>:
     csv << [:baz, 2]
   end
   str # => "foo,0\nbar,1\nbaz,2\n"
-  csv = CSV.parse(str)
-  csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+  ary = CSV.parse(str)
+  ary # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
 
 Using <tt>|</tt> (pipe):
   row_sep = '|'
@@ -29,8 +29,8 @@ Using <tt>|</tt> (pipe):
     csv << [:baz, 2]
   end
   str # => "foo,0|bar,1|baz,2|"
-  csv = CSV.parse(str, row_sep: row_sep)
-  csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+  ary = CSV.parse(str, row_sep: row_sep)
+  ary # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
 
 Using <tt>--</tt> (two hyphens):
   row_sep = '--'
@@ -40,8 +40,8 @@ Using <tt>--</tt> (two hyphens):
     csv << [:baz, 2]
   end
   str # => "foo,0--bar,1--baz,2--"
-  csv = CSV.parse(str, row_sep: row_sep)
-  csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+  ary = CSV.parse(str, row_sep: row_sep)
+  ary # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
 
 Using <tt>''</tt> (empty string):
   row_sep = ''
@@ -51,8 +51,8 @@ Using <tt>''</tt> (empty string):
     csv << [:baz, 2]
   end
   str # => "foo,0bar,1baz,2"
-  csv = CSV.parse(str, row_sep: row_sep)
-  csv # => [["foo", "0bar", "1baz", "2"]]
+  ary = CSV.parse(str, row_sep: row_sep)
+  ary # => [["foo", "0bar", "1baz", "2"]]
 
 ---
 
@@ -70,8 +70,8 @@ assuming that you would have the same line endings there.
     csv << [:baz, 2]
   end
   str # => "foo,0\nbar,1\nbaz,2\n"
-  csv = CSV.parse(str, row_sep: row_sep)
-  csv # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+  ary = CSV.parse(str, row_sep: row_sep)
+  ary # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
 
 The default <tt>$INPUT_RECORD_SEPARATOR</tt> (<tt>$/</tt>) is used
 if any of the following is true:
