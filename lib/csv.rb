@@ -306,8 +306,8 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 # which converts each parsed integer string to a true \Integer:
 #
 # Option +converters+ with a singleton parsing method:
-#   csv = CSV.parse_line('0,1,2', converters: :integer)
-#   csv # => [0, 1, 2]
+#   ary = CSV.parse_line('0,1,2', converters: :integer)
+#   ary # => [0, 1, 2]
 #
 # Option +converters+ with a new \CSV instance:
 #   csv = CSV.new('0,1,2', converters: :integer)
@@ -380,16 +380,53 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # === Header Converters
 #
+# Header converters operate only on headers (and not on other rows).
+#
+# There are three ways to use header \converters;
+# these examples use built-in header converter +:dowhcase+,
+# which downcases each parsed header:
+#
+# Option +header_converters+ with a singleton parsing method:
+#   str = "Name,Count\nFoo,0\n,Bar,1\nBaz,2"
+#   tbl = CSV.parse(str, headers: true, header_converters: :downcase)
+#   tbl.class # => CSV::Table
+#   tbl.headers # => ["name", "count"]
+#
+# Option +header_converters+ with a new \CSV instance:
+#   csv = CSV.new(str, header_converters: :downcase)
+#   # Header converters in effect:
+#   csv.header_converters # => [:downcase]
+#
+# Method #header_convert adds a header converter to a \CSV instance:
+#   csv = CSV.new(str)
+#   # Add a header converter.
+#   csv.header_convert(:downcase)
+#   csv.header_converters # => [:downcase]
+#
+# ---
+#
 # The built-in header \converters are in \Hash CSV::Converters.
 # The \Symbol keys there are the names of the \converters:
 #
 #   CSV::HeaderConverters.keys # => [:downcase, :symbol]
 #
-# <b><tt>:downcase</tt></b>::  Calls downcase() on the header String.
-# <b><tt>:symbol</tt></b>::    Leading/trailing spaces are dropped, string is
-#                              downcased, remaining spaces are replaced with
-#                              underscores, non-word characters are dropped,
-#                              and finally to_sym() is called.#
+# Converter +:downcase+ converts each header by downcasing it:
+#   str = "Name,Count\nFoo,0\n,Bar,1\nBaz,2"
+#   tbl = CSV.parse(str, headers: true, header_converters: :downcase)
+#   tbl.class # => CSV::Table
+#   tbl.headers # => ["name", "count"]
+#
+# Converter +:symbol+ by making it into a \Symbol:
+#   str = "Name,Count\nFoo,0\n,Bar,1\nBaz,2"
+#   tbl = CSV.parse(str, headers: true, header_converters: :symbol)
+#   tbl.headers # => [:name, :count]
+# Details:
+# - Strips leading and trailing whitespace.
+# - Downcases the header.
+# - Replaces embedded spaces with underscores.
+# - Removes non-word characters.
+# - Makes the string into a \Symbol.
+#
 # === Custom Converters
 #
 # CSV allows to provide a set of data _converters_ e.g. transformations to try on input
