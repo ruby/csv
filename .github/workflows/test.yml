@@ -66,6 +66,7 @@ jobs:
       - name: Install
         run: |
           rake install
+          gem install simplecov
       - name: Test
         run: |
           mkdir -p tmp
