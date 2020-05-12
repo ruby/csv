@@ -1025,7 +1025,31 @@ class CSV
   # Options cannot be overridden in the instance methods for performance reasons,
   # so be sure to set what you want here.
   #
-  def initialize(data, **options)
+  def initialize(data,
+                 col_sep: ",",
+                 row_sep: :auto,
+                 quote_char: '"',
+                 field_size_limit: nil,
+                 converters: nil,
+                 unconverted_fields: nil,
+                 headers: false,
+                 return_headers: false,
+                 write_headers: nil,
+                 header_converters: nil,
+                 skip_blanks: false,
+                 force_quotes: false,
+                 skip_lines: nil,
+                 liberal_parsing: false,
+                 internal_encoding: nil,
+                 external_encoding: nil,
+                 encoding: nil,
+                 nil_value: nil,
+                 empty_value: "",
+                 quote_empty: true,
+                 write_converters: nil,
+                 write_nil_value: nil,
+                 write_empty_value: "",
+                 strip: false)
     raise ArgumentError.new("Cannot parse nil as CSV") if data.nil?
 
     if data.is_a?(String)
