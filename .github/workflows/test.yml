@@ -1,0 +1,74 @@
+name: Test
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  normal:
+    name: "Normal test: Ruby ${{ matrix.ruby-version }}: ${{ matrix.runs-on }}"
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby-version:
+          - 2.5
+          - 2.6
+          - 2.7
+        runs-on:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
+    runs-on: ${{ matrix.runs-on }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+      - name: Install dependencies
+        run: |
+          bundle install
+      - name: Test
+        run: |
+          bundle exec rake
+
+  scanner:
+    name: "Scanner test: Ruby ${{ matrix.ruby-version }}: ${{ matrix.runs-on }}"
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby-version:
+          - 2.7
+        runs-on:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
+    runs-on: ${{ matrix.runs-on }}
+    env:
+      CSV_PARSER_SCANNER_TEST: "yes"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+      - name: Install dependencies
+        run: |
+          bundle install
+      - name: Test
+        run: |
+          bundle exec rake
+
+  gem:
+    name: "Gem test"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+      - name: Install
+        run: |
+          rake install
+      - name: Test
+        run: |
+          mkdir -p tmp
+          cd tmp
+          cp -a ../test/ ./
+          ../run-test.rb

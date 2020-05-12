@@ -14,33 +14,5 @@ after_script:
 
 matrix:
   include:
-    - name: "2.4"
-      rvm: 2.4
-    - name: "2.5"
-      rvm: 2.5
-    - name: "2.6"
-      rvm: 2.6
     - name: "master"
       rvm: ruby-head
-    - name: "scanner"
-      rvm: 2.6
-      env:
-        - CSV_PARSER_SCANNER_TEST=yes
-    - name: "benchmark"
-      rvm: 2.6
-      install:
-        - bundle install --jobs=3 --retry=3
-        - gem install csv -v 3.0.1
-        - gem install csv -v 3.0.2
-      script:
-        - rake benchmark
-    - name: "gem"
-      rvm: 2.6
-      install:
-        - rake install
-        - gem install simplecov
-      script:
-        - mkdir -p tmp
-        - cd tmp
-        - cp -a ../test/ ./
-        - ../run-test.rb

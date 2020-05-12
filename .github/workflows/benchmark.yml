@@ -1,0 +1,32 @@
+name: Benchmark
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  benchmark:
+    name: "Benchmark: Ruby ${{ matrix.ruby-version }}: ${{ matrix.runs-on }}"
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby-version:
+          - 2.7
+        runs-on:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
+    runs-on: ${{ matrix.runs-on }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+      - name: Install dependencies
+        run: |
+          bundle install
+          gem install csv -v 3.0.1
+          gem install csv -v 3.0.2
+      - name: Benchmark
+        run: |
+          rake benchmark
