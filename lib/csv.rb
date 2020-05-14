@@ -956,14 +956,13 @@ class CSV
     end
 
     # Returns the new \Array created by parsing the first line of +line+
-    # using the options specified by the keyword arguments.
+    # using the specified +options+.
     #
     # Argument +line+ should be either a \String object or an \IO object:
     # * If a \String object, it will be put into a new \StringIO object positioned at the beginning;
     # * If an \IO object, it will be positioned at the beginning.
     #
-    # After argument +line+, the keyword arguments specify the options parsing.
-    # See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
+    # For +options+, see {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
     #
     # ---
     # Returns data from the first line from a String object:
