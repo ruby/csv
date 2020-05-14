@@ -955,10 +955,14 @@ class CSV
       end
     end
 
-    # Returns the new \Array created by parsing the first line of +line+
+    # :call-seq:
+    #   CSV.parse_line(string_or_io)
+    #   CSV.parse_line(string_or_io, **options)
+    #
+    # Returns the new \Array created by parsing the first line of +string_or_io+
     # using the specified +options+.
     #
-    # Argument +line+ should be either a \String object or an \IO object:
+    # Argument +string_or_io+ should be either a \String object or an \IO object:
     # * If a \String object, it will be put into a new \StringIO object positioned at the beginning;
     # * If an \IO object, it will be positioned at the beginning.
     #
@@ -975,12 +979,12 @@ class CSV
     # Ignores lines after the first:
     #   CSV.parse_line("foo,0\nbar,1\nbaz,2") # => ["foo", "0"]
     #
-    # Returns +nil+ if +line+ is empty:
+    # Returns +nil+ if +string_or_io+ is empty:
     #   CSV.parse_line('') # => nil
     #
     # ---
     #
-    # Raises an exception if +line+ is nil:
+    # Raises an exception if +string_or_io+ is nil:
     #   # Raises ArgumentError (Cannot parse nil as CSV):
     #   CSV.parse_line(nil)
     #
@@ -1031,12 +1035,13 @@ class CSV
   end
 
   # :call-seq:
-  #   CSV.new(data, **options)
+  #   CSV.new(string_or_io)
+  #   CSV.new(string_or_io, **options)
   #
-  # Returns the new \CSV object created using +data+
+  # Returns the new \CSV object created using +string_or_io+
   # and the specified +options+.
   #
-  # Argument +data+ should be either a \String object
+  # Argument +string_or_io+ should be either a \String object
   # or an \IO object:
   # * If a \String object, it will be put into a new \StringIO object
   #   positioned at the beginning;
@@ -1068,7 +1073,7 @@ class CSV
   #
   # ---
   #
-  # Raises an exception if +data+ is +nil+:
+  # Raises an exception if +string_or_io+ is +nil+:
   #   # Raises ArgumentError (Cannot parse nil as CSV):
   #   CSV.new(nil)
   #
