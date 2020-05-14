@@ -1030,8 +1030,11 @@ class CSV
     end
   end
 
+  # :call-seq:
+  #   CSV.new(data, **options)
+  #
   # Returns the new \CSV object created using +data+
-  # and the options specified by the keyword arguments.
+  # and the specified +options+.
   #
   # Argument +data+ should be either a \String object
   # or an \IO object:
@@ -1045,9 +1048,7 @@ class CSV
   # In addition to the \CSV instance methods, several \IO
   # methods are delegated. See CSV::open for a complete list.
   #
-  # After argument +data+, the keyword arguments
-  # specify the options for creating the new \CSV object.
-  # See:
+  # For +options+, see:
   # * {Options for Parsing}[#class-CSV-label-Options+for+Parsing]
   # * {Options for Generating}[#class-CSV-label-Options+for+Generating]
   #
