@@ -1008,22 +1008,46 @@ class CSV
     end
   end
 
+  # Returns the new \CSV object created using +data+
+  # and the options specified by the keyword arguments.
   #
-  # This constructor will wrap either a String or IO object passed in +data+ for
-  # reading and/or writing. In addition to the CSV instance methods, several IO
-  # methods are delegated. (See CSV::open() for a complete list.) If you pass
-  # a String for +data+, you can later retrieve it (after writing to it, for
-  # example) with CSV.string().
+  # Argument +data+ should be either a \String object
+  # or an \IO object:
+  # * If a \String object, it will be put into a new \StringIO object
+  #   positioned at the beginning;
+  # * If an \IO object, it will be positioned at the beginning.
   #
-  # Note that a wrapped String will be positioned at the beginning (for
-  # reading). If you want it at the end (for writing), use CSV::generate().
-  # If you want any other positioning, pass a preset StringIO object instead.
+  # To position at the end, for appending, use method CSV.generate.
+  # For any other positioning, pass a preset StringIO object instead.
   #
-  # See {Options for Parsing}[#class-CSV-label-Options+for+Parsing]
-  # and {Options for Generating}[#class-CSV-label-Options+for+Generating].
+  # In addition to the \CSV instance methods, several \IO
+  # methods are delegated. See CSV::open for a complete list.
   #
-  # Options cannot be overridden in the instance methods for performance reasons,
-  # so be sure to set what you want here.
+  # After argument +data+, the keyword arguments
+  # specify the options for creating the new \CSV object.
+  # See:
+  # * {Options for Parsing}[#class-CSV-label-Options+for+Parsing]
+  # * {Options for Generating}[#class-CSV-label-Options+for+Generating]
+  #
+  # For performance reasons, the options cannot be overridden
+  # in a \CSV object, so the options specified here will endure.
+  #
+  # ---
+  #
+  # Create a \CSV object from a \String object:
+  #   csv = CSV.new('foo,0')
+  #   csv # => #<CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
+  #
+  # Create a \CSV object from an \File object:
+  #   File.write('t.csv', 'foo,0')
+  #   csv = CSV.new(File.open('t.csv'))
+  #   csv # => #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
+  #
+  # ---
+  #
+  # Raises an exception if +data+ is +nil+:
+  #   # Raises ArgumentError (Cannot parse nil as CSV):
+  #   CSV.new(nil)
   #
   def initialize(data,
                  col_sep: ",",
