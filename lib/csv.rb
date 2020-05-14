@@ -809,19 +809,37 @@ class CSV
       csv.string        # return final String
     end
 
+    # :call-seq:
+    #   CSV.generate_line(ary)
+    #   CSV.generate_line(ary, **options)
     #
-    # This method is a shortcut for converting a single row (Array) into a CSV
-    # String.
+    # Returns the \String created by generating \CSV from +ary+
+    # using the specified +options+.
     #
-    # See {Options for Generating}[#class-CSV-label-Options+for+Generating].
+    # Argument +ary+ must be an \Array.
     #
-    # This method accepts an additional option, <tt>:encoding</tt>, which sets the base
-    # Encoding for the output. This method will try to guess your Encoding from
-    # the first non-+nil+ field in +row+, if possible, but you may need to use
-    # this parameter as a backup plan.
+    # Special options:
+    # * Option <tt>:row_sep</tt> defaults to <tt>$INPUT_RECORD_SEPARATOR</tt>
+    #   (<tt>$/</tt>).:
+    #     $INPUT_RECORD_SEPARATOR # => "\n"
+    # * This method accepts an additional option, <tt>:encoding</tt>, which sets the base
+    #   Encoding for the output. This method will try to guess your Encoding from
+    #   the first non-+nil+ field in +row+, if possible, but you may need to use
+    #   this parameter as a backup plan.
     #
-    # The <tt>:row_sep</tt> +option+ defaults to <tt>$INPUT_RECORD_SEPARATOR</tt>
-    # (<tt>$/</tt>) when calling this method.
+    # For other +options+,
+    # see {Options for Generating}[#class-CSV-label-Options+for+Generating].
+    #
+    # ---
+    #
+    # Returns the \String generated from an \Array:
+    #   CSV.generate_line(['foo', '0']) # => "foo,0\n"
+    #
+    # ---
+    #
+    # Raises an exception if +ary+ is not an \Array:
+    #   # Raises NoMethodError (undefined method `find' for :foo:Symbol)
+    #   CSV.generate_line(:foo)
     #
     def generate_line(row, **options)
       options = {row_sep: $INPUT_RECORD_SEPARATOR}.merge(options)
