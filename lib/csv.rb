@@ -955,12 +955,35 @@ class CSV
       end
     end
 
+    # Returns the new \Array created by parsing the first line of +line+
+    # using the options specified by the keyword arguments.
     #
-    # This method is a shortcut for converting a single line of a CSV String into
-    # an Array. Note that if +line+ contains multiple rows, anything beyond the
-    # first row is ignored.
+    # Argument +line+ should be either a \String object or an \IO object:
+    # * If a \String object, it will be put into a new \StringIO object positioned at the beginning;
+    # * If an \IO object, it will be positioned at the beginning.
     #
+    # After argument +line+, the keyword arguments specify the options parsing.
     # See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
+    #
+    # ---
+    # Returns data from the first line from a String object:
+    #   CSV.parse_line('foo,0') # => ["foo", "0"]
+    #
+    # Returns data from the first line from a File object:
+    #   File.write('t.csv', 'foo,0')
+    #   CSV.parse_line(File.open('t.csv')) # => ["foo", "0"]
+    #
+    # Ignores lines after the first:
+    #   CSV.parse_line("foo,0\nbar,1\nbaz,2") # => ["foo", "0"]
+    #
+    # Returns +nil+ if +line+ is empty:
+    #   CSV.parse_line('') # => nil
+    #
+    # ---
+    #
+    # Raises an exception if +line+ is nil:
+    #   # Raises ArgumentError (Cannot parse nil as CSV):
+    #   CSV.parse_line(nil)
     #
     def parse_line(line, **options)
       new(line, **options).shift
@@ -1038,7 +1061,7 @@ class CSV
   #   csv = CSV.new('foo,0')
   #   csv # => #<CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
   #
-  # Create a \CSV object from an \File object:
+  # Create a \CSV object from a \File object:
   #   File.write('t.csv', 'foo,0')
   #   csv = CSV.new(File.open('t.csv'))
   #   csv # => #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
