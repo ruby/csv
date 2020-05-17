@@ -3,6 +3,8 @@ require "rdoc/task"
 
 require "bundler/gem_tasks"
 
+spec = Bundler::GemHelper.gemspec
+
 desc "Run test"
 task :test do
   ruby("run-test.rb")
@@ -11,14 +13,9 @@ end
 task :default => :test
 
 RDoc::Task.new do |rdoc|
-  rdoc.main = "README.md"
-  files = [
-    "LICENSE.txt",
-    "NEWS.md",
-    "README.md",
-    "lib/**/*.rb",
-  ]
-  rdoc.rdoc_files.include(*files)
+  rdoc.options = spec.rdoc_options
+  rdoc.rdoc_files.include(*spec.source_paths)
+  rdoc.rdoc_files.include(*spec.extra_rdoc_files)
 end
 
 benchmark_tasks = []
