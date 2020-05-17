@@ -1,5 +1,23 @@
 # News
 
+## 3.1.5 - 2020-05-18
+
+### Improvements
+
+  * Improved document.
+    [GitHub#124][Patch by Burdette Lamar]
+
+### Fixes
+
+  * Added missing document files.
+    [GitHub#125][Reported by joast]
+
+### Thanks
+
+  * Burdette Lamar
+
+  * joast
+
 ## 3.1.4 - 2020-05-17
 
 ### Improvements
