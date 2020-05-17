@@ -1,5 +1,30 @@
 # News
 
+## 3.1.4 - 2020-05-17
+
+### Improvements
+
+  * Improved document.
+    [GitHub#122][Patch by Burdette Lamar]
+
+  * Stopped to dropping stack trace for exception caused by
+    `CSV.parse_line`.
+    [GitHub#120][Reported by Kyle d'Oliveira]
+
+### Fixes
+
+  * Fixed a bug that `:write_nil_value` or `:write_empty_value` don't
+    work with non `String` objects.
+    [GitHub#123][Reported by asm256]
+
+### Thanks
+
+  * Burdette Lamar
+
+  * asm256
+
+  * Kyle d'Oliveira
+
 ## 3.1.3 - 2020-05-09
 
 ### Improvements
