@@ -837,22 +837,62 @@ class CSV
 
     #
     # :call-seq:
-    #   generate( str, **options ) { |csv| ... }
-    #   generate( **options ) { |csv| ... }
+    #   generate(csv_string, **options) {|csv| ... }
+    #   generate(**options) {|csv| ... }
     #
-    # This method wraps a String you provide, or an empty default String, in a
-    # CSV object which is passed to the provided block. You can use the block to
-    # append CSV rows to the String and when the block exits, the final String
-    # will be returned.
+    # * Argument +csv_string+, if given, must be a \String object;
+    #   defaults to a new empty \String.
+    # * Arguments +options+, if given, should be parsing options.
+    #   See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
     #
-    # Note that a passed String *is* modified by this method. Call dup() before
-    # passing if you need a new String.
+    # ---
     #
-    # See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
+    # Creates a new \CSV object via <tt>CSV.new(csv_string, **options)</tt>;
+    # calls the block with the \CSV object, which the block may modify;
+    # returns the \String generated from the \CSV object.
+    #
+    # Note that a passed \String *is* modified by this method.
+    # Pass <tt>csv_string</tt>.dup if the \String must be preserved.
     #
     # This method has one additional option: <tt>:encoding</tt>,
     # which sets the base Encoding for the output if no no +str+ is specified.
     # CSV needs this hint if you plan to output non-ASCII compatible data.
+    #
+    # ---
+    #
+    # Add lines:
+    #   input_string = "foo,0\nbar,1\nbaz,2\n"
+    #   output_string = CSV.generate(input_string) do |csv|
+    #     csv << ['bat', 3]
+    #     csv << ['bam', 4]
+    #   end
+    #   output_string # => "foo,0\nbar,1\nbaz,2\nbat,3\nbam,4\n"
+    #   input_string # => "foo,0\nbar,1\nbaz,2\nbat,3\nbam,4\n"
+    #   output_string.equal?(input_string) # => true # Same string, modified
+    #
+    # Add lines into new string, preserving old string:
+    #   input_string = "foo,0\nbar,1\nbaz,2\n"
+    #   output_string = CSV.generate(input_string.dup) do |csv|
+    #     csv << ['bat', 3]
+    #     csv << ['bam', 4]
+    #   end
+    #   output_string # => "foo,0\nbar,1\nbaz,2\nbat,3\nbam,4\n"
+    #   input_string # => "foo,0\nbar,1\nbaz,2\n"
+    #   output_string.equal?(input_string) # => false # Different strings
+    #
+    # Create lines from nothing:
+    #   output_string = CSV.generate do |csv|
+    #     csv << ['foo', 0]
+    #     csv << ['bar', 1]
+    #     csv << ['baz', 2]
+    #   end
+    #   output_string # => "foo,0\nbar,1\nbaz,2\n"
+    #
+    # ---
+    #
+    # Raises an exception if +csv_string+ is not a \String object:
+    #   # Raises TypeError (no implicit conversion of Integer into String)
+    #   CSV.generate(0)
     #
     def generate(str=nil, **options)
       encoding = options[:encoding]
