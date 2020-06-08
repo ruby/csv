@@ -17,6 +17,7 @@ class TestCSVRow < Test::Unit::TestCase
     assert_not_nil(row)
     assert_instance_of(CSV::Row, row)
     assert_equal([["A", 1], ["B", 2], ["C", 3]], row.to_a)
+    assert(row.headers.first.frozen?)
 
     # missing headers
     row = CSV::Row.new(%w{A}, [1, 2, 3])
@@ -29,21 +30,33 @@ class TestCSVRow < Test::Unit::TestCase
     assert_not_nil(row)
     assert_instance_of(CSV::Row, row)
     assert_equal([["A", 1], ["B", 2], ["C", nil]], row.to_a)
+
+    # Bad headers argument.
+    x = assert_raise(ArgumentError) do
+      CSV::Row.new(:foo, [])
+    end
+    assert_match('Expected argument headers to be Array-convertible', x.message)
+
+    # Bad fields argument.
+    x = assert_raise(ArgumentError) do
+      CSV::Row.new([], :foo)
+    end
+    assert_match('Expected argument fields to be Array-convertible', x.message)
   end
 
   def test_row_type
-    # field rows
-    row = CSV::Row.new(%w{A B C}, [1, 2, 3])         # implicit
-    assert_not_predicate(row, :header_row?)
-    assert_predicate(row, :field_row?)
-    row = CSV::Row.new(%w{A B C}, [1, 2, 3], false)  # explicit
-    assert_not_predicate(row, :header_row?)
-    assert_predicate(row, :field_row?)
-
-    # header row
+    # Default false.
+    row = CSV::Row.new(%w{A B C}, [1, 2, 3])
+    assert_equal(row.header_row?, false)
+    assert_equal(row.field_row?, true)
+    # Explicit false.
+    row = CSV::Row.new(%w{A B C}, [1, 2, 3], false)
+    assert_equal(row.header_row?, false)
+    assert_equal(row.field_row?, true)
+    # Explicit true.
     row = CSV::Row.new(%w{A B C}, [1, 2, 3], true)
-    assert_predicate(row, :header_row?)
-    assert_not_predicate(row, :field_row?)
+    assert_equal(row.header_row?, true)
+    assert_equal(row.field_row?, false)
   end
 
   def test_headers

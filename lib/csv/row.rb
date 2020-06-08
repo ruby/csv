@@ -4,34 +4,79 @@ require "forwardable"
 
 class CSV
   #
-  # A CSV::Row is part Array and part Hash. It retains an order for the fields
-  # and allows duplicates just as an Array would, but also allows you to access
-  # fields by name just as you could if they were in a Hash.
+  # A CSV::Row is both:
+  # - \Array-like: Gives field-access by index; allows duplicate fields.
+  # - \Hash-like: Gives field-acess by name.
   #
-  # All rows returned by CSV will be constructed from this class, if header row
-  # processing is activated.
+  # A CSV::Row object supports the following Array methods through delegation:
+  #
+  # * empty?()
+  # * length()
+  # * size()
   #
   class Row
+    # :call-seq:
+    #   new(headers, fields, header_row = false)
     #
-    # Constructs a new CSV::Row from +headers+ and +fields+, which are expected
-    # to be Arrays. If one Array is shorter than the other, it will be padded
-    # with +nil+ objects.
+    # Returns a new \CSV::Row object.
     #
-    # The optional +header_row+ parameter can be set to +true+ to indicate, via
-    # CSV::Row.header_row?() and CSV::Row.field_row?(), that this is a header
-    # row. Otherwise, the row assumes to be a field row.
+    # - Arguments +headers+ and +fields+ must be
+    #   {Array-convertible objects}[doc/implicit_conversion_rdoc.html#label-Array-Convertible+Objects].
     #
-    # A CSV::Row object supports the following Array methods through delegation:
+    # ---
     #
-    # * empty?()
-    # * length()
-    # * size()
+    # Stores the given +headers+ and +fields+:
+    #   row = CSV::Row.new(['Name', 'Age'], ['Chris', '50'])
+    #   row.headers # => ["Name", "Age"]
+    #   row.fields # => ["Chris", "50"]
     #
+    # Freezes each element of +headers+ that is a \String object:
+    #   h = 'foo'
+    #   h.frozen? # => false
+    #   row = CSV::Row.new([h], [])
+    #   h.frozen? # => true
+    #
+    # With no argument +header_row+, or with +header_row+
+    # given as +nil+ or +false+, the row becomes
+    # a field row, not a header row:
+    #   row = CSV::Row.new([], [])
+    #   row.field_row? # => true
+    #   row.header_row? # => false
+    #   row = CSV::Row.new([], [], nil)
+    #   row.field_row? # => true
+    #   row.header_row? # => false
+    #
+    # With +header_row+ given a truthy value, the row becomes
+    # a header row, not a field row:
+    #   row = CSV::Row.new([], [], header_row = 1)
+    #   row.field_row? # => false
+    #   row.header_row? # => true
+    #
+    # ---
+    #
+    # Raises an exception if either +headers+ or +fields+
+    # is not an \Array-convertible object:
+    #   # Raises ArgumentError (Expected argument headers to be Array-convertible, not foo):
+    #   CSV::Row.new(:foo, [])
+    #   # Raises ArgumentError (Expected argument fields to be Array-convertible, not foo)
+    #   CSV::Row.new([], :foo)
     def initialize(headers, fields, header_row = false)
-      @header_row = header_row
-      headers.each { |h| h.freeze if h.is_a? String }
-
-      # handle extra headers or fields
+      @header_row = header_row ? true : false
+      # Check headers and freeze.
+      converted_headers = Array.try_convert(headers)
+      unless converted_headers
+        message = "Expected argument headers to be Array-convertible, not #{headers}"
+        raise ArgumentError, message
+      end
+      headers = converted_headers.map {|h| h.is_a?(String) ? h.freeze : h }
+      # Check fields, but don't freeze.
+      converted_fields = Array.try_convert(fields)
+      unless converted_fields
+        message = "Expected argument fields to be Array-convertible, not #{fields}"
+        raise ArgumentError, message
+      end
+      fields = converted_fields
+      # Zip headers and fields (using the larger of the two).
       @row = if headers.size >= fields.size
         headers.zip(fields)
       else
