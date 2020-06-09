@@ -989,7 +989,7 @@ class CSV
     # <tt>"rb:UTF-32BE:UTF-8"</tt> would read UTF-32BE data from the file but
     # transcode it to UTF-8 before CSV parses it.
     #
-    # For convenience, an open CSV object will delegate to many methods in class IO.
+    # For convenience, an opened CSV object will delegate to many methods in class IO.
     # (A few have wrapper "guard code" in \CSV.) You may call:
     # * IO#binmode
     # * #binmode?
