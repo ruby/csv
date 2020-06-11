@@ -719,7 +719,7 @@ class CSV
     #   instance(io = $stdout, **options) {|csv| ... }
     #
     # Creates or retrieves cached \CSV objects.
-    # For arguments and options, see CSV::new.
+    # For arguments and options, see CSV.new.
     #
     # ---
     #
