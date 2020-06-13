@@ -1093,16 +1093,64 @@ class CSV
 
     #
     # :call-seq:
-    #   parse( str, **options ) { |row| ... }
-    #   parse( str, **options )
+    #   parse(string) -> array_of_arrays
+    #   parse(io) -> array_of_arrays
+    #   parse(string, **options) {|row| ... } -> integer
+    #   parse(io, **options) {|row| ... } -> integer
     #
-    # This method can be used to easily parse CSV out of a String. You may either
-    # provide a +block+ which will be called with each row of the String in turn,
-    # or just use the returned Array of Arrays (when no +block+ is given).
+    # Parses +string+ or +io+ using the specified +options+.
     #
-    # You pass your +str+ to read from, and an optional +options+.
-    # See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
+    # - Argument +string+ should be a \String object;
+    #   it will be put into a new StringIO object positioned at the beginning.
+    # - Argument +io+ should be an IO object, positioned at the beginning.
+    #   To position at the end, for appending, use method CSV.generate.
+    #   For any other positioning, pass a preset \StringIO object instead.
+    # - Argument +options+: see {Options for Parsing}[#class-CSV-label-Options+for+Parsing]
     #
+    # ---
+    #
+    # With no block given, returns an \Array of Arrays formed from the source.
+    #
+    # Parse a \String:
+    #   s = "foo,0\nbar,1\nbaz,2\n"
+    #   a_of_a = CSV.parse(s)
+    #   a_of_a # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+    #
+    # Parse an open \File:
+    #   File.write('t.csv', "foo,0\nbar,1\nbaz,2\n")
+    #   File.open('t.csv') do |file|
+    #     CSV.parse(file)
+    #   end # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+    #
+    # ---
+    #
+    # With a block given, calls the block with each parsed row:
+    #
+    # Parse a \String:
+    #   s = "foo,0\nbar,1\nbaz,2\n"
+    #   CSV.parse(s) {|row| p row } # => 10
+    #
+    # Output:
+    #   ["foo", "0"]
+    #   ["bar", "1"]
+    #   ["baz", "2"]
+    #
+    # Parse an open \File:
+    #   File.write('t.csv', "foo,0\nbar,1\nbaz,2\n")
+    #   File.open('t.csv') do |file|
+    #     CSV.parse(file) {|row| p row }
+    #   end # => 10
+    #
+    # Output:
+    #   ["foo", "0"]
+    #   ["bar", "1"]
+    #   ["baz", "2"]
+    #
+    # ---
+    #
+    # Raises an exception if the argument is not a \String object or \IO object:
+    #   # Raises NoMethodError (undefined method `close' for 1:Integer)
+    #   CSV.parse(:foo)
     def parse(str, **options, &block)
       csv = new(str, **options)
 
