@@ -832,7 +832,7 @@ class CSV
     # Returns an integer, or, if there were no rows, +nil+.
     #
     # * Argument +path+, if given, must be the path to a file.
-    # * Argument +io+, if given, must be an \IO object opened for reading.
+    # :include: ../doc/argument_io.rdoc
     # * Argument +mode+, if given, must be a \File mode
     #   See {Open Mode}[IO.html#method-c-new-label-Open+Mode].
     # * Arguments <tt>**options</tt> must be keyword options.
@@ -1034,7 +1034,7 @@ class CSV
     #     :replace => string   # replacement string ("?" or "\uFFFD" if not specified)
     #
     # * Argument +path+, if given, must be the path to a file.
-    # * Argument +io+, if given, must be an \IO object opened for reading.
+    # :include: ../doc/argument_io.rdoc
     # * Argument +mode+, if given, must be a \File mode
     #   See {Open Mode}[IO.html#method-c-new-label-Open+Mode].
     # * Arguments <tt>**options</tt> must be keyword options.
@@ -1136,9 +1136,7 @@ class CSV
     #
     # - Argument +string+ should be a \String object;
     #   it will be put into a new StringIO object positioned at the beginning.
-    # - Argument +io+ should be an IO object, positioned at the beginning.
-    #   To position at the end, for appending, use method CSV.generate.
-    #   For any other positioning, pass a preset \StringIO object instead.
+    # :include: ../doc/argument_io.rdoc
     # - Argument +options+: see {Options for Parsing}[#class-CSV-label-Options+for+Parsing]
     #
     # These examples assume prior execution of:
@@ -1207,7 +1205,7 @@ class CSV
     #
     # - Argument +string+ should be a \String object;
     #   it will be put into a new StringIO object positioned at the beginning.
-    # - Argument +io+ should be an IO object, positioned at the beginning.
+    # :include: ../doc/argument_io.rdoc
     #   To position at the end, for appending, use method CSV.generate.
     #   For any other positioning, pass a preset \StringIO object instead.
     # - Argument +options+: see {Options for Parsing}[#class-CSV-label-Options+for+Parsing]
@@ -1289,9 +1287,7 @@ class CSV
   #
   # - Argument +string+ should be a \String object;
   #   it will be put into a new StringIO object positioned at the beginning.
-  # - Argument +io+ should be an IO object, positioned at the beginning.
-  #   To position at the end, for appending, use method CSV.generate.
-  #   For any other positioning, pass a preset StringIO object instead.
+  # :include: ../doc/argument_io.rdoc
   # - Argument +options+: See:
   #   * {Options for Parsing}[#class-CSV-label-Options+for+Parsing]
   #   * {Options for Generating}[#class-CSV-label-Options+for+Generating]
