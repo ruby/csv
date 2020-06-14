@@ -863,9 +863,9 @@ class CSV
     #   ["baz", "2"]
     #
     # Read rows from an \IO object:
-    # File.open(path) do |file|
-    #   CSV.foreach(file) {|row| p row } # => 21
-    # end
+    #   File.open(path) do |file|
+    #     CSV.foreach(file) {|row| p row } # => 21
+    #   end
     #
     # Output:
     #   ["foo", "0"]
