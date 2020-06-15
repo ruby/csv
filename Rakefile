@@ -12,6 +12,16 @@ end
 
 task :default => :test
 
+namespace :warning do
+  desc "Treat warning as error"
+  task :error do
+    def Warning.warn(*message)
+      super
+      raise "Treat warning as error:\n" + message.join("\n")
+    end
+  end
+end
+
 RDoc::Task.new do |rdoc|
   rdoc.options = spec.rdoc_options
   rdoc.rdoc_files.include(*spec.source_paths)

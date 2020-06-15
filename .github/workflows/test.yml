@@ -5,8 +5,8 @@ on:
   - pull_request
 
 jobs:
-  normal:
-    name: "Normal test: Ruby ${{ matrix.ruby-version }}: ${{ matrix.runs-on }}"
+  in-place:
+    name: "In-place test: Ruby ${{ matrix.ruby-version }}: ${{ matrix.runs-on }}"
     strategy:
       fail-fast: false
       matrix:
@@ -73,3 +73,16 @@ jobs:
           cd tmp
           cp -a ../test/ ./
           ../run-test.rb
+
+  document:
+    name: "Document test"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+      - name: Install dependencies
+        run: |
+          bundle install
+      - name: Build document
+        run: |
+          bundle exec warning:error rake
