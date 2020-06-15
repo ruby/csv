@@ -85,4 +85,4 @@ jobs:
           bundle install
       - name: Build document
         run: |
-          bundle exec rake warning:error rake
+          bundle exec rake warning:error rdoc
