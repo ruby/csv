@@ -1134,7 +1134,7 @@ class CSV
     #   parse(string) -> array_of_arrays
     #   parse(io) -> array_of_arrays
     #   parse(string, headers: ..., **options) -> csv_table
-    #   parse(io, header: ..., **options) -> csv_table
+    #   parse(io, headers: ..., **options) -> csv_table
     #   parse(string, **options) {|row| ... } -> integer
     #   parse(io, **options) {|row| ... } -> integer
     #
