@@ -1290,10 +1290,10 @@ class CSV
     # :call-seq:
     #   CSV.parse_line(string) -> new_array or nil
     #   CSV.parse_line(io) -> new_array or nil
-    #   CSV.parse_line(string, **options)
-    #   CSV.parse_line(io, **options)
-    #   CSV.parse_line(string, headers: true, **options)
-    #   CSV.parse_line(io, headers: true, **options)
+    #   CSV.parse_line(string, **options) -> new_array or nil
+    #   CSV.parse_line(io, **options) -> new_array or nil
+    #   CSV.parse_line(string, headers: true, **options) -> csv_row or nil
+    #   CSV.parse_line(io, headers: true, **options) -> csv_row or nil
     #
     # Returns the data created by parsing the first line of +string+ or +io+
     # using the specified +options+.
