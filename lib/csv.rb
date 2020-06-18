@@ -888,7 +888,8 @@ class CSV
     #
     # ====== With Option +headers+
     #
-    # With option +headers+, returns each row as a CSV::Row object.
+    # With {option +headers+}[#class-CSV-label-Option+headers],
+    # returns each row as a CSV::Row object.
     #
     # These examples assume prior execution of:
     #   string = "Name,Count\nfoo,0\nbar,1\nbaz,2\n"
