@@ -942,8 +942,8 @@ class CSV
     #
     # * Argument +csv_string+, if given, must be a \String object;
     #   defaults to a new empty \String.
-    # * Arguments +options+, if given, should be parsing options.
-    #   See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
+    # * Arguments +options+, if given, should be generating options.
+    #   See {Options for Generating}[#class-CSV-label-Options+for+Generating].
     #
     # ---
     #
