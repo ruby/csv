@@ -1353,7 +1353,7 @@ class CSV
 
     #
     # :call-seq:
-    #   read(source, **options ) -> new_csv
+    #   read(source, **options) -> array_of_arrays or csv_table
     #
     # Opens the given +source+ with the given +options+ (see CSV.open),
     # reads the source (see CSV#read), and returns the result,
