@@ -778,7 +778,8 @@ class CSV
     #   filter(in_io, out_string, **options) {|row| ... }
     #   filter(in_io, out_io, **options) {|row| ... }
     #
-    # Reads \CSV input and writes \CSV output; returns +nil+.
+    # Reads \CSV input and writes \CSV output.
+    #
     # For each input row:
     # - Forms the data into:
     #   - A CSV::Row object, if headers are in use.
@@ -1205,7 +1206,7 @@ class CSV
     #
     # ====== Without Option +headers+
     #
-    # Without option +headers+, returns an \Array of Arrays or nil.
+    # Without {option +headers+}[#class-CSV-label-Option+headers] case.
     #
     # These examples assume prior execution of:
     #   string = "foo,0\nbar,1\nbaz,2\n"
@@ -1250,8 +1251,7 @@ class CSV
     #
     # ====== With Option +headers+
     #
-    # With {option +headers+}[#class-CSV-label-Option+headers],
-    # returns a new CSV::Table object or +nil+.
+    # With {option +headers+}[#class-CSV-label-Option+headers] case.
     #
     # These examples assume prior execution of:
     #   string = "Name,Count\nfoo,0\nbar,1\nbaz,2\n"
@@ -1302,6 +1302,7 @@ class CSV
     #   CSV.parse(:foo)
     def parse(str, **options, &block)
       csv = new(str, **options)
+
       return csv.each(&block) if block_given?
 
       # slurp contents, if no block is given
