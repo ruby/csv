@@ -770,15 +770,15 @@ class CSV
     end
 
     # :call-seq:
-    #   filter(**options) {|row| ... } -> integer
-    #   filter(in_string, **options) {|row| ... } -> integer
-    #   filter(in_io, **options) {|row| ... } -> integer
-    #   filter(in_string, out_string, **options) {|row| ... } -> integer
-    #   filter(in_string, out_io, **options) {|row| ... } -> integer
-    #   filter(in_io, out_string, **options) {|row| ... } -> integer
-    #   filter(in_io, out_io, **options) {|row| ... } -> integer
+    #   filter(**options) {|row| ... } -> nil
+    #   filter(in_string, **options) {|row| ... } -> nil
+    #   filter(in_io, **options) {|row| ... } -> nil
+    #   filter(in_string, out_string, **options) {|row| ... } -> nil
+    #   filter(in_string, out_io, **options) {|row| ... } -> nil
+    #   filter(in_io, out_string, **options) {|row| ... } -> nil
+    #   filter(in_io, out_io, **options) {|row| ... } -> nil
     #
-    # Reads \CSV input and writes \CSV output; returns an \Integer.
+    # Reads \CSV input and writes \CSV output; returns +nil+.
     # For each input row:
     # - Forms the data into:
     #   - A CSV::Row object, if headers are in use.
@@ -846,19 +846,20 @@ class CSV
         yield row
         output << row
       end
+      nil
     end
 
     #
     # :call-seq:
-    #   foreach(path, mode='r', **options) {|row| ... ) -> integer or nil
-    #   foreach(io, mode='r', **options {|row| ... ) -> integer or nil
-    #   foreach(path, mode='r', headers: ..., **options) {|row| ... ) -> integer or nil
-    #   foreach(io, mode='r', headers: ..., **options {|row| ... ) -> integer or nil
+    #   foreach(path, mode='r', **options) {|row| ... ) -> nil
+    #   foreach(io, mode='r', **options {|row| ... ) -> nil
+    #   foreach(path, mode='r', headers: ..., **options) {|row| ... ) -> nil
+    #   foreach(io, mode='r', headers: ..., **options {|row| ... ) -> nil
     #   foreach(path, mode='r', **options) -> new_enumerator
     #   foreach(io, mode='r', **options -> new_enumerator
     #
     # Calls the block with each row read from source +path+ or +io+.
-    # Returns an integer, or, if there were no rows, +nil+.
+    # Returns +nil+.
     #
     # * Argument +path+, if given, must be the path to a file.
     # :include: ../doc/arguments/io.rdoc
@@ -887,7 +888,7 @@ class CSV
     #   File.write(path, string)
     #
     # Read rows from a file at +path+:
-    #   CSV.foreach(path) {|row| p row } # => 21
+    #   CSV.foreach(path) {|row| p row }
     # Output:
     #   ["foo", "0"]
     #   ["bar", "1"]
@@ -895,7 +896,7 @@ class CSV
     #
     # Read rows from an \IO object:
     #   File.open(path) do |file|
-    #     CSV.foreach(file) {|row| p row } # => 21
+    #     CSV.foreach(file) {|row| p row }
     #   end
     #
     # Output:
@@ -908,7 +909,7 @@ class CSV
     #   CSV.foreach(File.open(path)) # => #<Enumerator: CSV:foreach(#<File:t.csv>, "r")>
     #
     # Issues a warning if an encoding is unsupported:
-    #   CSV.foreach(File.open(path), encoding: 'foo:bar') {|row| } # => 21
+    #   CSV.foreach(File.open(path), encoding: 'foo:bar') {|row| }
     # Output:
     #   warning: Unsupported encoding foo ignored
     #   warning: Unsupported encoding bar ignored
@@ -924,7 +925,7 @@ class CSV
     #   File.write(path, string)
     #
     # Read rows from a file at +path+:
-    #   CSV.foreach(path, headers: true) {|row| p row } # => 21
+    #   CSV.foreach(path, headers: true) {|row| p row }
     #
     # Output:
     #   #<CSV::Row "Name":"foo" "Count":"0">
@@ -933,7 +934,7 @@ class CSV
     #
     # Read rows from an \IO object:
     #   File.open(path) do |file|
-    #     CSV.foreach(file, headers: true) {|row| p row } # => 21
+    #     CSV.foreach(file, headers: true) {|row| p row }
     #   end
     #
     # Output:
@@ -961,6 +962,7 @@ class CSV
       open(path, mode, **options) do |csv|
         csv.each(&block)
       end
+      nil
     end
 
     #
@@ -1194,8 +1196,8 @@ class CSV
     #   parse(io) -> array_of_arrays
     #   parse(string, headers: ..., **options) -> csv_table
     #   parse(io, headers: ..., **options) -> csv_table
-    #   parse(string, **options) {|row| ... } -> integer
-    #   parse(io, **options) {|row| ... } -> integer
+    #   parse(string, **options) {|row| ... } -> nil
+    #   parse(io, **options) {|row| ... } -> nii
     #
     # Parses +string+ or +io+ using the specified +options+.
     #
@@ -1206,7 +1208,7 @@ class CSV
     #
     # ====== Without Option +headers+
     #
-    # Without option +headers+, returns an \Array of Arrays or an integer.
+    # Without option +headers+, returns an \Array of Arrays or nil.
     #
     # These examples assume prior execution of:
     #   string = "foo,0\nbar,1\nbaz,2\n"
@@ -1232,7 +1234,7 @@ class CSV
     # With a block given, calls the block with each parsed row:
     #
     # Parse a \String:
-    #   CSV.parse(string) {|row| p row } # => 18
+    #   CSV.parse(string) {|row| p row }
     #
     # Output:
     #   ["foo", "0"]
@@ -1241,7 +1243,7 @@ class CSV
     #
     # Parse an open \File:
     #   File.open(path) do |file|
-    #     CSV.parse(file) {|row| p row } # => 18
+    #     CSV.parse(file) {|row| p row }
     #   end
     #
     # Output:
@@ -1252,7 +1254,7 @@ class CSV
     # ====== With Option +headers+
     #
     # With {option +headers+}[#class-CSV-label-Option+headers],
-    # returns a new CSV::Table object or an integer.
+    # returns a new CSV::Table object or +nil+.
     #
     # These examples assume prior execution of:
     #   string = "Name,Count\nfoo,0\nbar,1\nbaz,2\n"
@@ -1279,7 +1281,7 @@ class CSV
     # which has been formed into a CSV::Row object:
     #
     # Parse a \String:
-    #   CSV.parse(string, headers: ['Name', 'Count']) {|row| p row } # => 18
+    #   CSV.parse(string, headers: ['Name', 'Count']) {|row| p row }
     #
     # Output:
     #   # <CSV::Row "Name":"foo" "Count":"0">
@@ -1288,7 +1290,7 @@ class CSV
     #
     # Parse an open \File:
     #   File.open(path) do |file|
-    #     CSV.parse(file, headers: ['Name', 'Count']) {|row| p row } # => 18
+    #     CSV.parse(file, headers: ['Name', 'Count']) {|row| p row }
     #   end
     #
     # Output:
@@ -1304,7 +1306,10 @@ class CSV
     def parse(str, **options, &block)
       csv = new(str, **options)
 
-      return csv.each(&block) if block_given?
+      if block_given?
+        csv.each(&block)
+        return nil
+      end
 
       # slurp contents, if no block is given
       begin
