@@ -770,13 +770,13 @@ class CSV
     end
 
     # :call-seq:
-    #   filter(**options) {|row| ... } -> nil
-    #   filter(in_string, **options) {|row| ... } -> nil
-    #   filter(in_io, **options) {|row| ... } -> nil
-    #   filter(in_string, out_string, **options) {|row| ... } -> nil
-    #   filter(in_string, out_io, **options) {|row| ... } -> nil
-    #   filter(in_io, out_string, **options) {|row| ... } -> nil
-    #   filter(in_io, out_io, **options) {|row| ... } -> nil
+    #   filter(**options) {|row| ... }
+    #   filter(in_string, **options) {|row| ... }
+    #   filter(in_io, **options) {|row| ... }
+    #   filter(in_string, out_string, **options) {|row| ... }
+    #   filter(in_string, out_io, **options) {|row| ... }
+    #   filter(in_io, out_string, **options) {|row| ... }
+    #   filter(in_io, out_io, **options) {|row| ... }
     #
     # Reads \CSV input and writes \CSV output; returns +nil+.
     # For each input row:
@@ -846,20 +846,18 @@ class CSV
         yield row
         output << row
       end
-      nil
     end
 
     #
     # :call-seq:
-    #   foreach(path, mode='r', **options) {|row| ... ) -> nil
-    #   foreach(io, mode='r', **options {|row| ... ) -> nil
-    #   foreach(path, mode='r', headers: ..., **options) {|row| ... ) -> nil
-    #   foreach(io, mode='r', headers: ..., **options {|row| ... ) -> nil
+    #   foreach(path, mode='r', **options) {|row| ... )
+    #   foreach(io, mode='r', **options {|row| ... )
+    #   foreach(path, mode='r', headers: ..., **options) {|row| ... )
+    #   foreach(io, mode='r', headers: ..., **options {|row| ... )
     #   foreach(path, mode='r', **options) -> new_enumerator
     #   foreach(io, mode='r', **options -> new_enumerator
     #
     # Calls the block with each row read from source +path+ or +io+.
-    # Returns +nil+.
     #
     # * Argument +path+, if given, must be the path to a file.
     # :include: ../doc/arguments/io.rdoc
@@ -962,7 +960,6 @@ class CSV
       open(path, mode, **options) do |csv|
         csv.each(&block)
       end
-      nil
     end
 
     #
@@ -1196,8 +1193,8 @@ class CSV
     #   parse(io) -> array_of_arrays
     #   parse(string, headers: ..., **options) -> csv_table
     #   parse(io, headers: ..., **options) -> csv_table
-    #   parse(string, **options) {|row| ... } -> nil
-    #   parse(io, **options) {|row| ... } -> nii
+    #   parse(string, **options) {|row| ... }
+    #   parse(io, **options) {|row| ... }
     #
     # Parses +string+ or +io+ using the specified +options+.
     #
@@ -1305,11 +1302,7 @@ class CSV
     #   CSV.parse(:foo)
     def parse(str, **options, &block)
       csv = new(str, **options)
-
-      if block_given?
-        csv.each(&block)
-        return nil
-      end
+      return csv.each(&block) if block_given?
 
       # slurp contents, if no block is given
       begin
