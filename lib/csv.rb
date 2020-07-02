@@ -1836,9 +1836,9 @@ class CSV
   #     end
   #   end
   # Output:
-  #   [1, "foo,0\r\n"]
-  #   [2, "bar,1\r\n"]
-  #   [3, "baz,2\r\n"]
+  #   [1, "foo,0\n"]
+  #   [2, "bar,1\n"]
+  #   [3, "baz,2\n"]
   def line
     parser.line
   end
