@@ -1826,7 +1826,7 @@ class CSV
     end
   end
 
-  # Returns the row most recently parsed:
+  # Returns the line most recently read:
   #   string = "foo,0\nbar,1\nbaz,2\n"
   #   path = 't.csv'
   #   File.write(path, string)
