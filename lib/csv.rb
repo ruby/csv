@@ -337,9 +337,29 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # ==== Options for Parsing
 #
-# :include: ../doc/options/common/col_sep.rdoc
+# Options for parsing, described in detail below, include:
+# - +row_sep+: Specifies the row separator; used to delimit rows.
+# - +col_sep+: Specifies the column separator; used to delimit fields.
+# - +quote_char+: Specifies the quote character; used to quote fields.
+# - +field_size_limit+: Specifies the maximum field size allowed.
+# - +converters+: Specifies the field converters to be used.
+# - +unconverted_fields+: Specifies whether unconverted fields are to be available.
+# - +headers+: Specifies whether data contains headers,
+#   or specifies the headers themselves.
+# - +return_headers+: Specifies whether headers are to be returned.
+# - +header_converters+: Specifies the header converters to be used.
+# - +skip_blanks+: Specifies whether blanks lines are to be ignored.
+# - +skip_lines+: Specifies how comments lines are to be recognized.
+# - +strip+: Specifies whether leading and trailing whitespace are
+#   to be stripped from fields..
+# - +liberal_parsing+: Specifies whether \CSV should attempt to parse
+#   non-compliant data.
+# - +nil_value+: Specifies the object that is to be substituted for each null (no-text) field.
+# - +empty_value+: Specifies the object that is to be substituted for each empty field.
 #
 # :include: ../doc/options/common/row_sep.rdoc
+#
+# :include: ../doc/options/common/col_sep.rdoc
 #
 # :include: ../doc/options/common/quote_char.rdoc
 #
@@ -369,9 +389,20 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # ==== Options for Generating
 #
-# :include: ../doc/options/common/col_sep.rdoc
+# Options for generating, described in detail below, include:
+# - +row_sep+: Specifies the row separator; used to delimit rows.
+# - +col_sep+: Specifies the column separator; used to delimit fields.
+# - +quote_char+: Specifies the quote character; used to quote fields.
+# - +write_headers+: Specifies whether headers are to be written.
+# - +force_quotes+: Specifies whether each output field is to be quoted.
+# - +quote_empty+: Specifies whether each empty output field is to be quoted.
+# - +write_converters+: Specifies the field converters to be used in writing.
+# - +write_nil_value+: Specifies the object that is to be substituted for each +nil+-valued field.
+# - +write_empty_value+: Specifies the object that is to be substituted for each empty field.
 #
 # :include: ../doc/options/common/row_sep.rdoc
+#
+# :include: ../doc/options/common/col_sep.rdoc
 #
 # :include: ../doc/options/common/quote_char.rdoc
 #
