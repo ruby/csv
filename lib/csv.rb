@@ -1766,7 +1766,8 @@ class CSV
   end
 
   # :call-seq:
-  #   csv.return_headers?
+  #   csv.return_headers? -> true or false
+  #
   # Returns the value that determines whether headers are to be returned; used for parsing;
   # see {Option +return_headers+}[#class-CSV-label-Option+return_headers]:
   #   CSV.new('').return_headers? # => false
