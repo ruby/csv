@@ -1242,11 +1242,11 @@ class CSV
     #
     # Create a \CSV object using a file path:
     #   csv = CSV.open(path)
-    #   csv # => #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\r\n" quote_char:"\"">
+    #   csv # => #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
     #
     # Create a \CSV object using an open \File:
     #   csv = CSV.open(File.open(path))
-    #   csv # => #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\r\n" quote_char:"\"">
+    #   csv # => #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
     #
     # ---
     #
@@ -1255,15 +1255,15 @@ class CSV
     #
     # Using a file path:
     #   csv = CSV.open(path) {|csv| p csv}
-    #   csv # => #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\r\n" quote_char:"\"">
+    #   csv # => #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
     # Output:
-    #   #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\r\n" quote_char:"\"">
+    #   #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
     #
     # Using an open \File:
     #   csv = CSV.open(File.open(path)) {|csv| p csv}
-    #   csv # => #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\r\n" quote_char:"\"">
+    #   csv # => #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
     # Output:
-    #   #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\r\n" quote_char:"\"">
+    #   #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
     #
     # ---
     #
