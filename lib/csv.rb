@@ -1714,7 +1714,7 @@ class CSV
   end
 
   # :call-seq:
-  #   csv.skip_lines -> new_regexp or nil
+  #   csv.skip_lines -> regexp or nil
   #
   # Returns the \Regexp used to identify comment lines; used for parsing;
   # see {Option +skip_lines+}[#class-CSV-label-Option+skip_lines]:
