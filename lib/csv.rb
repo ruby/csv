@@ -1809,7 +1809,8 @@ class CSV
   end
 
   # :call-seq:
-  #   csv.force_quotes? -> object
+  #   csv.force_quotes? -> true or false
+  #
   # Returns the value that determines whether all output fields are to be quoted;
   # used for generating;
   # see {Option +force_quotes+}[#class-CSV-label-Option+force_quotes]:
