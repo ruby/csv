@@ -1838,6 +1838,7 @@ class CSV
 
   # :call-seq:
   #   csv.line_no -> integer
+  #
   # Returns the count of the rows parsed or generated.
   #
   # Parsing:
