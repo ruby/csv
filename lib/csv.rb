@@ -1776,7 +1776,7 @@ class CSV
   end
 
   # :call-seq:
-  #   csv.write_headers? -> object
+  #   csv.write_headers? -> true or false
   #
   # Returns the value that determines whether headers are to be written; used for generating;
   # see {Option +write_headers+}[#class-CSV-label-Option+write_headers]:
