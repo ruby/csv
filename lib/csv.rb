@@ -1799,7 +1799,8 @@ class CSV
   end
 
   # :call-seq:
-  #   csv.skip_blanks? -> object
+  #   csv.skip_blanks? -> true or false
+  #
   # Returns the value that determines whether blank lines are to be ignored; used for parsing;
   # see {Option +skip_blanks+}[#class-CSV-label-Option+skip_blanks]:
   #   CSV.new('').skip_blanks? # => false
