@@ -1,7 +1,7 @@
 ====== Option +write_converters+
 
-Specifies the \Proc or \Array of Procs that are to be called
-for converting each output field.
+Specifies converters to be used in generating fields.
+See {Write Converters}[#class-CSV-label-Write+Converters]
 
 Default value:
   CSV::DEFAULT_OPTIONS.fetch(:write_converters) # => nil
@@ -21,6 +21,8 @@ With two write converters (called in order):
   write_converters = [upcase_converter, downcase_converter]
   str = CSV.generate_line(['a', 'b', 'c'], write_converters: write_converters)
   str # => "a,b,c\n"
+
+See also {Write Converters}[#class-CSV-label-Write+Converters]
 
 ---
 
