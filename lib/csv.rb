@@ -606,7 +606,7 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #     if value.kind_of?(Proc)
 #       p [name, value.class]
 #     else
-#      p [name, value]
+#       p [name, value]
 #     end
 #   end
 # Output:
