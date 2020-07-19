@@ -1,5 +1,41 @@
 # News
 
+## 3.1.6 - 2020-07-20
+
+### Improvements
+
+  * Improved document.
+    [GitHub#127][GitHub#135][GitHub#136][GitHub#137][GitHub#139][GitHub#140]
+    [GitHub#141][GitHub#142][GitHub#143][GitHub#145][GitHub#146][GitHub#148]
+    [GitHub#148][GitHub#151][GitHub#152][GitHub#154][GitHub#155][GitHub#157]
+    [Patch by Burdette Lamar]
+
+  * `CSV.open`: Added support for `undef: :replace`.
+    [GitHub#129][Patch by Koichi ITO]
+
+  * `CSV.open`: Added support for `invalid: :replace`.
+    [GitHub#129][Patch by Koichi ITO]
+
+  * Don't run quotable check for invalid encoding field values.
+    [GitHub#131][Patch by Koichi ITO]
+
+  * Added support for specifying the target indexes and names to
+    `force_quotes:`.
+    [GitHub#153][Reported by Aleksandr]
+
+  * `CSV.generate`: Changed to use the encoding of the first non-ASCII
+    field rather than the encoding of ASCII only field.
+
+  * Changed to require the stringio gem 0.1.3 or later.
+
+### Thanks
+
+  * Burdette Lamar
+
+  * Koichi ITO
+
+  * Aleksandr
+
 ## 3.1.5 - 2020-05-18
 
 ### Improvements
