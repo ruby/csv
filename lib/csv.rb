@@ -2261,7 +2261,8 @@ class CSV
   include Enumerable
 
   # :call-seq:
-  #   csv.each -> self
+  #   csv.each -> enumerator
+  #   csv.each {|row| ...}
   #
   # Calls the block with each successive row.
   # The data source must be opened for reading.
