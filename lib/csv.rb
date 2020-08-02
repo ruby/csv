@@ -104,7 +104,7 @@ require_relative "csv/writer"
 using CSV::MatchP if CSV.const_defined?(:MatchP)
 
 # == \CSV
-# \CSV (comma-separated variables) data is a text representation of a table:
+# \CSV (comma-separated values) data is a text representation of a table:
 # - A _row_ _separator_ delimits table rows.
 #   A common row separator is the newline character <tt>"\n"</tt>.
 # - A _column_ _separator_ delimits fields in a row.
