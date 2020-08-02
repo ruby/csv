@@ -3,31 +3,158 @@
 require "forwardable"
 
 class CSV
+  # = \CSV::Table
+  # A \CSV::Table instance is an object representing \CSV data.
+  # (see {class CSV}[../CSV.html]).
   #
-  # A CSV::Table is a two-dimensional data structure for representing CSV
-  # documents. Tables allow you to work with the data by row or column,
-  # manipulate the data, and even convert the results back to CSV, if needed.
+  # The instance may have:
+  # - Rows:  each is a Table::Row object.
+  # - Headers:  names for the columns.
   #
-  # All tables returned by CSV will be constructed from this class, if header
-  # row processing is activated.
+  # === Instance Methods
   #
+  # \CSV::Table has three groups of instance methods:
+  # - Its own internally defined instance methods.
+  # - Methods included by module Enumerable.
+  # - Methods delegated to class Array.:
+  #   * Array#empty?
+  #   * Array#length
+  #   * Array#size
+  #
+  # == Creating a \CSV::Table Instance
+  #
+  # Commonly, a new \CSV::Table instance is created by parsing \CSV source
+  # using headers:
+  #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+  #   table = CSV.parse(source, headers: true)
+  #   table.class # => CSV::Table
+  #
+  # You can also create an instance directly. See ::new.
+  #
+  # == Access Modes
+  #
+  # \CSV::Table provides three modes for accessing table data:
+  # - \Row mode.
+  # - Column mode.
+  # - Mixed mode (the default for a new table).
+  #
+  # === \Row Mode
+  #
+  # Set a table to row mode with method #by_row!:
+  #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+  #   table = CSV.parse(source, headers: true)
+  #   table.by_row! # => #<CSV::Table mode:row row_count:4>
+  #
+  # Specify a single row by an \Integer index:
+  #   # Get a row.
+  #   table[1] # => #<CSV::Row "Name":"bar" "Value":"1">
+  #   # Set a row, then get it.
+  #   table[1] = CSV::Row.new(['Name', 'Value'], ['bam', 3])
+  #   table[1] # => #<CSV::Row "Name":"bam" "Value":3>
+  #
+  # Specify a sequence of rows by a \Range:
+  #   # Get rows.
+  #   table[1..2] # => [#<CSV::Row "Name":"bam" "Value":3>, #<CSV::Row "Name":"baz" "Value":"2">]
+  #   # Set rows, then get them.
+  #   table[1..2] = [
+  #     CSV::Row.new(['Name', 'Value'], ['bat', 4]),
+  #     CSV::Row.new(['Name', 'Value'], ['bad', 5]),
+  #   ]
+  #   table[1..2] # => [["Name", #<CSV::Row "Name":"bat" "Value":4>], ["Value", #<CSV::Row "Name":"bad" "Value":5>]]
+  #
+  # === Column Mode
+  #
+  # Set a table to column mode with method #by_col!:
+  #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+  #   table = CSV.parse(source, headers: true)
+  #   table.by_col! # => #<CSV::Table mode:col row_count:4>
+  #
+  # Specify a column by an \Integer index:
+  #   # Get a column.
+  #   table[0]
+  #   # Set a column, then get it.
+  #   table[0] = ['FOO', 'BAR', 'BAZ']
+  #   table[0] # => ["FOO", "BAR", "BAZ"]
+  #
+  # Specify a column by its \String header:
+  #   # Get a column.
+  #   table['Name'] # => ["FOO", "BAR", "BAZ"]
+  #   # Set a column, then get it.
+  #   table['Name'] = ['Foo', 'Bar', 'Baz']
+  #   table['Name'] # => ["Foo", "Bar", "Baz"]
+  #
+  # === Mixed Mode
+  #
+  # In mixed mode, you can refer to either rows or columns:
+  # - An \Integer index refers to a row.
+  # - A \Range index refers to multiple rows.
+  # - A \String index refers to a column.
+  #
+  # Set a table to mixed mode with method #by_col_or_row!:
+  #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+  #   table = CSV.parse(source, headers: true)
+  #   table.by_col_or_row! # => #<CSV::Table mode:col_or_row row_count:4>
+  #
+  # Specify a single row by an \Integer index:
+  #   # Get a row.
+  #   table[1] # => #<CSV::Row "Name":"bar" "Value":"1">
+  #   # Set a row, then get it.
+  #   table[1] = CSV::Row.new(['Name', 'Value'], ['bam', 3])
+  #   table[1] # => #<CSV::Row "Name":"bam" "Value":3>
+  #
+  # Specify a sequence of rows by a \Range:
+  #   # Get rows.
+  #   table[1..2] # => [#<CSV::Row "Name":"bam" "Value":3>, #<CSV::Row "Name":"baz" "Value":"2">]
+  #   # Set rows, then get them.
+  #   table[1] = CSV::Row.new(['Name', 'Value'], ['bat', 4])
+  #   table[2] = CSV::Row.new(['Name', 'Value'], ['bad', 5])
+  #   table[1..2] # => [["Name", #<CSV::Row "Name":"bat" "Value":4>], ["Value", #<CSV::Row "Name":"bad" "Value":5>]]
+  #
+  # Specify a column by its \String header:
+  #   # Get a column.
+  #   table['Name'] # => ["foo", "bat", "bad"]
+  #   # Set a column, then get it.
+  #   table['Name'] = ['Foo', 'Bar', 'Baz']
+  #   table['Name'] # => ["Foo", "Bar", "Baz"]
   class Table
+    # :call-seq:
+    #   CSV::Table.new(array_of_rows, headers = nil)
     #
-    # Constructs a new CSV::Table from +array_of_rows+, which are expected
-    # to be CSV::Row objects. All rows are assumed to have the same headers.
+    # Returns a new \CSV::Table object.
     #
-    # The optional +headers+ parameter can be set to Array of headers.
-    # If headers aren't set, headers are fetched from CSV::Row objects.
-    # Otherwise, headers() method will return headers being set in
-    # headers argument.
+    # - Argument +array_of_rows+ must be an \Array of CSV::Row objects.
+    # - Argument +headers+, if given, may be an \Array of Strings.
     #
-    # A CSV::Table object supports the following Array methods through
-    # delegation:
+    # ---
     #
-    # * empty?()
-    # * length()
-    # * size()
+    # Create an empty \CSV::Table object:
+    #   table = CSV::Table.new([])
+    #   table # => #<CSV::Table mode:col_or_row row_count:1>
     #
+    # Create a non-empty \CSV::Table object:
+    #   rows = [
+    #     CSV::Row.new([], []),
+    #     CSV::Row.new([], []),
+    #     CSV::Row.new([], []),
+    #   ]
+    #   table  = CSV::Table.new(rows)
+    #   table # => #<CSV::Table mode:col_or_row row_count:4>
+    #
+    # ---
+    #
+    # Create a \CSV::Table object with headers:
+    #   table = CSV::Table.new([], headers: ['Name', 'Age'])
+    #   table.headers # => ["Name", "Age"]
+    #
+    # ---
+    #
+    # Raises an exception if argument +array_of_rows+ is not an \Array object:
+    #   # Raises NoMethodError (undefined method `first' for :foo:Symbol):
+    #   CSV::Table.new(:foo)
+    #
+    # Raises an exception if an element of +array_of_rows+ is not a \CSV::Table object:
+    #   # Raises NoMethodError (undefined method `headers' for :foo:Symbol):
+    #   CSV::Table.new([:foo])
     def initialize(array_of_rows, headers: nil)
       @table = array_of_rows
       @headers = headers
@@ -54,77 +181,114 @@ class CSV
     extend Forwardable
     def_delegators :@table, :empty?, :length, :size
 
+    # :call-seq:
+    #   table.by_col
     #
-    # Returns a duplicate table object, in column mode. This is handy for
-    # chaining in a single call without changing the table mode, but be aware
-    # that this method can consume a fair amount of memory for bigger data sets.
+    # Returns a duplicate of +self+, in column mode
+    # (see {Column Mode}[#class-CSV::Table-label-Column+Mode]):
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   table.mode # => :col_or_row
+    #   dup_table = table.by_col
+    #   dup_table.mode # => :col
+    #   dup_table.equal?(table) # => false # It's a dup
     #
-    # This method returns the duplicate table for chaining. Don't chain
-    # destructive methods (like []=()) this way though, since you are working
-    # with a duplicate.
+    # This may be used to chain method calls without changing the mode
+    # (but also will affect performance and memory usage):
+    #   dup_table.by_col['Name']
     #
+    # Also note that changes to the duplicate table will not affect the original.
     def by_col
       self.class.new(@table.dup).by_col!
     end
 
+    # :call-seq:
+    #   table.by_col!
     #
-    # Switches the mode of this table to column mode. All calls to indexing and
-    # iteration methods will work with columns until the mode is changed again.
-    #
-    # This method returns the table and is safe to chain.
-    #
+    # Sets the mode for +self+ to column mode
+    # (see {Column Mode}[#class-CSV::Table-label-Column+Mode]); returns +self+:
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   table.mode # => :col_or_row
+    #   table1 = table.by_col!
+    #   table.mode # => :col
+    #   table1.equal?(table) # => true # Returned self
     def by_col!
       @mode = :col
 
       self
     end
 
+    # :call-seq:
+    #   table.by_col_or_row
     #
-    # Returns a duplicate table object, in mixed mode. This is handy for
-    # chaining in a single call without changing the table mode, but be aware
-    # that this method can consume a fair amount of memory for bigger data sets.
+    # Returns a duplicate of +self+, in mixed mode
+    # (see {Mixed Mode}[#class-CSV::Table-label-Mixed+Mode]):
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true).by_col!
+    #   table.mode # => :col
+    #   dup_table = table.by_col_or_row
+    #   dup_table.mode # => :col_or_row
+    #   dup_table.equal?(table) # => false # It's a dup
     #
-    # This method returns the duplicate table for chaining.  Don't chain
-    # destructive methods (like []=()) this way though, since you are working
-    # with a duplicate.
+    # This may be used to chain method calls without changing the mode
+    # (but also will affect performance and memory usage):
+    #   dup_table.by_col_or_row['Name']
     #
+    # Also note that changes to the duplicate table will not affect the original.
     def by_col_or_row
       self.class.new(@table.dup).by_col_or_row!
     end
 
+    # :call-seq:
+    #   table.by_col_or_row!
     #
-    # Switches the mode of this table to mixed mode. All calls to indexing and
-    # iteration methods will use the default intelligent indexing system until
-    # the mode is changed again. In mixed mode an index is assumed to be a row
-    # reference while anything else is assumed to be column access by headers.
-    #
-    # This method returns the table and is safe to chain.
-    #
+    # Sets the mode for +self+ to mixed mode
+    # (see {Mixed Mode}[#class-CSV::Table-label-Mixed+Mode]); returns +self+:
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true).by_col!
+    #   table.mode # => :col
+    #   table1 = table.by_col_or_row!
+    #   table.mode # => :col_or_row
+    #   table1.equal?(table) # => true # Returned self
     def by_col_or_row!
       @mode = :col_or_row
 
       self
     end
 
+    # :call-seq:
+    #   table.by_row
     #
-    # Returns a duplicate table object, in row mode.  This is handy for chaining
-    # in a single call without changing the table mode, but be aware that this
-    # method can consume a fair amount of memory for bigger data sets.
+    # Returns a duplicate of +self+, in row mode
+    # (see {Row Mode}[#class-CSV::Table-label-Row+Mode]):
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   table.mode # => :col_or_row
+    #   dup_table = table.by_row
+    #   dup_table.mode # => :row
+    #   dup_table.equal?(table) # => false # It's a dup
     #
-    # This method returns the duplicate table for chaining.  Don't chain
-    # destructive methods (like []=()) this way though, since you are working
-    # with a duplicate.
+    # This may be used to chain method calls without changing the mode
+    # (but also will affect performance and memory usage):
+    #   dup_table.by_row[1]
     #
+    # Also note that changes to the duplicate table will not affect the original.
     def by_row
       self.class.new(@table.dup).by_row!
     end
 
+    # :call-seq:
+    #   table.by_row!
     #
-    # Switches the mode of this table to row mode. All calls to indexing and
-    # iteration methods will work with rows until the mode is changed again.
-    #
-    # This method returns the table and is safe to chain.
-    #
+    # Sets the mode for +self+ to row mode
+    # (see {Row Mode}[#class-CSV::Table-label-Row+Mode]); returns +self+:
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   table.mode # => :col_or_row
+    #   table1 = table.by_row!
+    #   table.mode # => :row
+    #   table1.equal?(table) # => true # Returned self
     def by_row!
       @mode = :row
 
