@@ -31,12 +31,37 @@ class CSV
   #
   # You can also create an instance directly. See ::new.
   #
+  # == Headers
+  #
+  # If a table has headers, the headers serve as labels for the columns of data.
+  # Each header is the label for its column.
+  #
+  # The headers for a \CSV::Table object are stored as an \Array of Strings.
+  #
+  # Commonly, headers are defined in the first row of \CSV source:
+  #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+  #   table = CSV.parse(source, headers: true)
+  #   table.headers # => ["Name", "Value"]
+  #
+  # If no headers are defined, the \Array is empty:
+  #   table = CSV::Table.new([])
+  #   table.headers # => []
+  #
   # == Access Modes
   #
   # \CSV::Table provides three modes for accessing table data:
   # - \Row mode.
   # - Column mode.
   # - Mixed mode (the default for a new table).
+  #
+  # The access mode for a\CSV::Table instance affects the behavior
+  # of some of its instance methods:
+  # - #[]
+  # - #[]=
+  # - #delete
+  # - #delete_if
+  # - #each
+  # - #values_at
   #
   # === \Row Mode
   #
