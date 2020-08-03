@@ -31,12 +31,37 @@ class CSV
   #
   # You can also create an instance directly. See ::new.
   #
+  # == Headers
+  #
+  # If a table has headers, the headers serve as labels for the columns of data.
+  # Each header serves as the label for its column.
+  #
+  # The headers for a \CSV::Table object are stored as an \Array of Strings.
+  #
+  # Commonly, headers are defined in the first row of \CSV source:
+  #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+  #   table = CSV.parse(source, headers: true)
+  #   table.headers # => ["Name", "Value"]
+  #
+  # If no headers are defined, the \Array is empty:
+  #   table = CSV::Table.new([])
+  #   table.headers # => []
+  #
   # == Access Modes
   #
   # \CSV::Table provides three modes for accessing table data:
   # - \Row mode.
   # - Column mode.
   # - Mixed mode (the default for a new table).
+  #
+  # The access mode for a\CSV::Table instance affects the behavior
+  # of some of its instance methods:
+  # - #[]
+  # - #[]=
+  # - #delete
+  # - #delete_if
+  # - #each
+  # - #values_at
   #
   # === \Row Mode
   #
@@ -142,9 +167,25 @@ class CSV
     #
     # ---
     #
-    # Create a \CSV::Table object with headers:
+    # If argument +headers+ is an \Array of Strings,
+    # those Strings become the table's headers:
     #   table = CSV::Table.new([], headers: ['Name', 'Age'])
     #   table.headers # => ["Name", "Age"]
+    #
+    # If argument +headers+ is not given and the table has rows,
+    # the headers are taken from the first row:
+    #   rows = [
+    #     CSV::Row.new(['Foo', 'Bar'], []),
+    #     CSV::Row.new(['foo', 'bar'], []),
+    #     CSV::Row.new(['FOO', 'BAR'], []),
+    #   ]
+    #   table  = CSV::Table.new(rows)
+    #   table.headers # => ["Foo", "Bar"]
+    #
+    # If argument +headers+ is not given and the table is empty (has no rows),
+    # the headers are also empty:
+    #   table  = CSV::Table.new([])
+    #   table.headers # => []
     #
     # ---
     #
@@ -295,11 +336,27 @@ class CSV
       self
     end
 
+    # :call-seq:
+    #   table.headers
     #
-    # Returns the headers for the first row of this table (assumed to match all
-    # other rows). The headers Array passed to CSV::Table.new is returned for
-    # empty tables.
+    # Returns a new \Array containing the \String headers for the table.
     #
+    # If the table is not empty, returns the headers from the first row:
+    #   rows = [
+    #     CSV::Row.new(['Foo', 'Bar'], []),
+    #     CSV::Row.new(['FOO', 'BAR'], []),
+    #     CSV::Row.new(['foo', 'bar'], []),
+    #   ]
+    #   table  = CSV::Table.new(rows)
+    #   table.headers # => ["Foo", "Bar"]
+    #   table.delete(0)
+    #   table.headers # => ["FOO", "BAR"]
+    #   table.delete(0)
+    #   table.headers # => ["foo", "bar"]
+    #
+    # If the table is empty, returns a copy of the headers in the table itself:
+    #   table.delete(0)
+    #   table.headers # => ["Foo", "Bar"]
     def headers
       if @table.empty?
         @headers.dup
