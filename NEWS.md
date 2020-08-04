@@ -1,5 +1,25 @@
 # News
 
+## 3.1.7 - 2020-08-04
+
+### Improvements
+
+  * Improved document.
+    [GitHub#158][GitHub#160][GitHub#161]
+    [Patch by Burdette Lamar]
+
+  * Updated required Ruby version to 2.5.0 or later.
+    [GitHub#159]
+    [Patch by Gabriel Nagy]
+
+  * Removed stringio 0.1.3 or later dependency.
+
+### Thanks
+
+  * Burdette Lamar
+
+  * Gabriel Nagy
+
 ## 3.1.6 - 2020-07-20
 
 ### Improvements
