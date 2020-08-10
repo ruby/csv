@@ -487,7 +487,7 @@ class CSV
     #
     # If <tt>range.start</tt> is larger than <tt>table.size</tt>,
     # returns an \Array of +nil+ values:
-    #   table[4..4] table[4..4]
+    #   table[4..4] # => [nil, nil, nil]
     #
     # ---
     #
