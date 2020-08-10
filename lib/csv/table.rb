@@ -8,8 +8,8 @@ class CSV
   # (see {class CSV}[../CSV.html]).
   #
   # The instance may have:
-  # - Rows:  each is a Table::Row object.
-  # - Headers:  names for the columns.
+  # - Rows: each is a Table::Row object.
+  # - Headers: names for the columns.
   #
   # === Instance Methods
   #
@@ -366,17 +366,21 @@ class CSV
     end
 
     # :call-seq:
-    #   table[n] -> row
-    #   table[range] -> array_of_rows
-    #   table[header] -> array_of_fields
+    #   table[n] -> row or column_data
+    #   table[range] -> array_of_rows or array_of_column_data
+    #   table[header] -> array_of_column_data
     #
     # Returns data from the table;  does not modify the table.
     #
     # ---
     #
-    # The expression <tt>table[n]</tt>, where +n+ is a non-negative \Integer,
-    # returns the +n+th row of the table, if that row exists,
-    # and if the access mode is <tt>:row</tt> or <tt>:col_or_row</tt>:
+    # Fetch a \Row by Its \Integer Index::
+    # - Form: <tt>table[n]</tt>, +n+ an integer.
+    # - Access mode: <tt>:row</tt> or <tt>:col_or_row</tt>.
+    # - Return value: _nth_ row of the table, if that row exists;
+    #   otherwise +nil+.
+    #
+    # Returns the _nth_ row of the table if that row exists:
     #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
     #   table = CSV.parse(source, headers: true)
     #   table.by_row! # => #<CSV::Table mode:row row_count:4>
@@ -389,7 +393,7 @@ class CSV
     #
     # Returns +nil+ if +n+ is too large or too small:
     #   table[4] # => nil
-    #   table[-4] => nil
+    #   table[-4] # => nil
     #
     # Raises an exception if the access mode is <tt>:row</tt>
     # and +n+ is not an
@@ -400,9 +404,35 @@ class CSV
     #
     # ---
     #
-    # The expression <tt>table[range]</tt>, where +range+ is a Range object,
-    # returns rows from the table, beginning at row <tt>range.first</tt>,
-    # if those rows exist, and if the access mode is <tt>:row</tt> or <tt>:col_or_row</tt>:
+    # Fetch a Column by Its \Integer Index::
+    # - Form: <tt>table[n]</tt>, +n+ an \Integer.
+    # - Access mode: <tt>:col</tt>.
+    # - Return value: _nth_ column of the table, if that column exists;
+    #   otherwise an \Array of +nil+ fields of length <tt>self.size</tt>.
+    #
+    # Returns the _nth_ column of the table if that column exists:
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   table.by_col! # => #<CSV::Table mode:col row_count:4>
+    #   table[1] # => ["0", "1", "2"]
+    #
+    # Counts backward from the last column if +n+ is negative:
+    #   table[-2] # => ["foo", "bar", "baz"]
+    #
+    # Returns an \Array of +nil+ fields if +n+ is too large or too small:
+    #   table[4] # => [nil, nil, nil]
+    #   table[-4] # => [nil, nil, nil]
+    #
+    # ---
+    #
+    # Fetch Rows by \Range::
+    # - Form: <tt>table[range]</tt>, +range+ a \Range object.
+    # - Access mode: <tt>:row</tt> or <tt>:col_or_row</tt>.
+    # - Return value: rows from the table, beginning at row <tt>range.start</tt>,
+    #   if those rows exists.
+    #
+    # Returns rows from the table, beginning at row <tt>range.first</tt>,
+    # if those rows exist:
     #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
     #   table = CSV.parse(source, headers: true)
     #   table.by_row! # => #<CSV::Table mode:row row_count:4>
@@ -412,11 +442,11 @@ class CSV
     #   rows = table[1..2] # => #<CSV::Row "Name":"bar" "Value":"1">
     #   rows # => [#<CSV::Row "Name":"bar" "Value":"1">, #<CSV::Row "Name":"baz" "Value":"2">]
     #
-    # If there are too few rows, returns all from <tt>range.first</tt> to the end:
+    # If there are too few rows, returns all from <tt>range.start</tt> to the end:
     #   rows = table[1..50] # => #<CSV::Row "Name":"bar" "Value":"1">
     #   rows # => [#<CSV::Row "Name":"bar" "Value":"1">, #<CSV::Row "Name":"baz" "Value":"2">]
     #
-    # Special case:  if <tt>range.start == table.size</tt>, returns an empty \Array:
+    # Special case: if <tt>range.start == table.size</tt>, returns an empty \Array:
     #   table[table.size..50] # => []
     #
     # If <tt>range.end</tt> is negative, calculates the ending index from the end:
@@ -432,9 +462,41 @@ class CSV
     #
     # ---
     #
-    # The expression <tt>table[header]</tt>, where +header+ is a \String,
-    # returns column values (\Array of \Strings) if the column exists
-    # and if the access mode is <tt>:col</tt> or <tt>:col_or_row</tt>:
+    # Fetch Columns by \Range::
+    # - Form: <tt>table[range]</tt>, +range+ a \Range object.
+    # - Access mode: <tt>:col</tt>.
+    # - Return value: column data from the table, beginning at column <tt>range.start</tt>,
+    #   if those columns exist.
+    #
+    # Returns column values from the table, if the column exists;
+    # the values are arranged by row:
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   table.by_col!
+    #   table[0..1] # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+    #
+    # Special case: if <tt>range.start == headers.size</tt>,
+    # returns an \Array (size: <tt>table.size</tt>) of empty \Arrays:
+    #   table[table.headers.size..50] # => [[], [], []]
+    #
+    # If <tt>range.end</tt> is negative, calculates the ending index from the end:
+    #   table[0..-1] # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+    #
+    # If <tt>range.start</tt> is negative, calculates the starting index from the end:
+    #   table[-2..2] # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+    #
+    # If <tt>range.start</tt> is larger than <tt>table.size</tt>,
+    # returns an \Array of +nil+ values:
+    #   table[4..4] # => [nil, nil, nil]
+    #
+    # ---
+    #
+    # Fetch a Column by Its \String Header::
+    # - Form: <tt>table[header]</tt>, +header+ a \String header.
+    # - Access mode: <tt>:col</tt> or <tt>:col_or_row</tt>
+    # - Return value: column data from the table, if that +header+ exists.
+    #
+    # Returns column values from the table, if the column exists:
     #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
     #   table = CSV.parse(source, headers: true)
     #   table.by_col! # => #<CSV::Table mode:col row_count:4>
@@ -459,22 +521,132 @@ class CSV
       end
     end
 
+    # :call-seq:
+    #   table[n] = row -> row
+    #   table[n] = field_or_array_of_fields -> field_or_array_of_fields
+    #   table[header] = field_or_array_of_fields -> field_or_array_of_fields
     #
-    # In the default mixed mode, this method assigns rows for index access and
-    # columns for header access. You can force the index association by first
-    # calling by_col!() or by_row!().
+    # Puts data onto the table.
     #
-    # Rows may be set to an Array of values (which will inherit the table's
-    # headers()) or a CSV::Row.
+    # ---
     #
-    # Columns may be set to a single value, which is copied to each row of the
-    # column, or an Array of values. Arrays of values are assigned to rows top
-    # to bottom in row major order. Excess values are ignored and if the Array
-    # does not have a value for each row the extra rows will receive a +nil+.
+    # Set a \Row by Its \Integer Index::
+    # - Form: <tt>table[n] = row</tt>, +n+ an \Integer,
+    #   +row+ a \CSV::Row instance or an \Array of fields.
+    # - Access mode: <tt>:row</tt> or <tt>:col_or_row</tt>.
+    # - Return value: +row+.
     #
-    # Assigning to an existing column or row clobbers the data. Assigning to
-    # new columns creates them at the right end of the table.
+    # If the row exists, it is replaced:
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   new_row = CSV::Row.new(['Name', 'Value'], ['bat', 3])
+    #   table.by_row! # => #<CSV::Table mode:row row_count:4>
+    #   return_value = table[0] = new_row
+    #   return_value.equal?(new_row) # => true # Returned the row
+    #   table[0].to_h # => {"Name"=>"bat", "Value"=>3}
     #
+    # With access mode <tt>:col_or_row</tt>:
+    #   table.by_col_or_row! # => #<CSV::Table mode:col_or_row row_count:4>
+    #   table[0] = CSV::Row.new(['Name', 'Value'], ['bam', 4])
+    #   table[0].to_h # => {"Name"=>"bam", "Value"=>4}
+    #
+    # With an \Array instead of a \CSV::Row, inherits headers from the table:
+    #   array = ['bad', 5]
+    #   return_value = table[0] = array
+    #   return_value.equal?(array) # => true # Returned the array
+    #   table[0].to_h # => {"Name"=>"bad", "Value"=>5}
+    #
+    # If the row does not exist, extends the table by adding rows:
+    # assigns rows with +nil+ as needed:
+    #   table.size # => 3
+    #   table[5] = ['bag', 6]
+    #   table.size # => 6
+    #   table[3] # => nil
+    #   table[4]# => nil
+    #   table[5].to_h # => {"Name"=>"bag", "Value"=>6}
+    #
+    # Note that the +nil+ rows are actually +nil+, not a row of +nil+ fields.
+    #
+    # ---
+    #
+    # Set a Column by Its \Integer Index::
+    # - Form: <tt>table[n] = array_of_fields</tt>, +n+ an \Integer,
+    #   +array_of_fields+ an \Array of \String fields.
+    # - Access mode: <tt>:col</tt>.
+    # - Return value: +array_of_fields+.
+    #
+    # If the column exists, it is replaced:
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   new_col = [3, 4, 5]
+    #   table.by_col! # => #<CSV::Table mode:col row_count:4>
+    #   return_value = table[1] = new_col
+    #   return_value.equal?(new_col) # => true # Returned the column
+    #   table[1] # => [3, 4, 5]
+    #   # The rows, as revised:
+    #   table.by_row! # => #<CSV::Table mode:row row_count:4>
+    #   table[0].to_h # => {"Name"=>"foo", "Value"=>3}
+    #   table[1].to_h # => {"Name"=>"bar", "Value"=>4}
+    #   table[2].to_h # => {"Name"=>"baz", "Value"=>5}
+    #   table.by_col! # => #<CSV::Table mode:col row_count:4>
+    #
+    # If there are too few values, fills with +nil+ values:
+    #   table[1] = [0]
+    #   table[1] # => [0, nil, nil]
+    #
+    # If there are too many values, ignores the extra values:
+    #   table[1] = [0, 1, 2, 3, 4]
+    #   table[1] # => [0, 1, 2]
+    #
+    # If a single value is given, replaces all fields in the column with that value:
+    #   table[1] = 'bat'
+    #   table[1] # => ["bat", "bat", "bat"]
+    #
+    # ---
+    #
+    # Set a Column by Its \String Header::
+    # - Form: <tt>table[header] = field_or_array_of_fields</tt>,
+    #   +header+ a \String header, +field_or_array_of_fields+ a field value
+    #   or an \Array of \String fields.
+    # - Access mode: <tt>:col</tt> or <tt>:col_or_row</tt>.
+    # - Return value: +field_or_array_of_fields+.
+    #
+    # If the column exists, it is replaced:
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   new_col = [3, 4, 5]
+    #   table.by_col! # => #<CSV::Table mode:col row_count:4>
+    #   return_value = table['Value'] = new_col
+    #   return_value.equal?(new_col) # => true # Returned the column
+    #   table['Value'] # => [3, 4, 5]
+    #   # The rows, as revised:
+    #   table.by_row! # => #<CSV::Table mode:row row_count:4>
+    #   table[0].to_h # => {"Name"=>"foo", "Value"=>3}
+    #   table[1].to_h # => {"Name"=>"bar", "Value"=>4}
+    #   table[2].to_h # => {"Name"=>"baz", "Value"=>5}
+    #   table.by_col! # => #<CSV::Table mode:col row_count:4>
+    #
+    # If there are too few values, fills with +nil+ values:
+    #   table['Value'] = [0]
+    #   table['Value'] # => [0, nil, nil]
+    #
+    # If there are too many values, ignores the extra values:
+    #   table['Value'] = [0, 1, 2, 3, 4]
+    #   table['Value'] # => [0, 1, 2]
+    #
+    # If the column does not exist, extends the table by adding columns:
+    #   table['Note'] = ['x', 'y', 'z']
+    #   table['Note'] # => ["x", "y", "z"]
+    #   # The rows, as revised:
+    #   table.by_row!
+    #   table[0].to_h # => {"Name"=>"foo", "Value"=>0, "Note"=>"x"}
+    #   table[1].to_h # => {"Name"=>"bar", "Value"=>1, "Note"=>"y"}
+    #   table[2].to_h # => {"Name"=>"baz", "Value"=>2, "Note"=>"z"}
+    #   table.by_col!
+    #
+    # If a single value is given, replaces all fields in the column with that value:
+    #   table['Value'] = 'bat'
+    #   table['Value'] # => ["bat", "bat", "bat"]
     def []=(index_or_header, value)
       if @mode == :row or  # by index
          (@mode == :col_or_row and index_or_header.is_a? Integer)
