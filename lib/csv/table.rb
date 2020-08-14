@@ -955,7 +955,7 @@ class CSV
     # Different last row:
     #   other_table << ['bat', 3]
     #   table == other_table # => false
-    def ==(other_table)
+    def ==(other)
       return @table == other.table if other.is_a? CSV::Table
       @table == other
     end
