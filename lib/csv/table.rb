@@ -806,34 +806,32 @@ class CSV
     #
     # ---
     #
-    # Returns rows as an \Array of \CSV::Row objects:
-    #   table.by_row! # => #<CSV::Table mode:row row_count:4>
+    # Returns rows as an \Array of \CSV::Row objects.
     #
     # One index:
     #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
     #   table = CSV.parse(source, headers: true)
-    #   values = table.delete(0)
-    #   values # => [#<CSV::Row "Name":"foo" "Value":"0">]
+    #   deleted_values = table.delete(0)
+    #   deleted_values # => [#<CSV::Row "Name":"foo" "Value":"0">]
     #
     # Two indexes:
     #   table = CSV.parse(source, headers: true)
-    #   values = table.delete(2, 0)
-    #   values # => [#<CSV::Row "Name":"baz" "Value":"2">, #<CSV::Row "Name":"foo" "Value":"0">]
+    #   deleted_values = table.delete(2, 0)
+    #   deleted_values # => [#<CSV::Row "Name":"baz" "Value":"2">, #<CSV::Row "Name":"foo" "Value":"0">]
     #
     # ---
     #
-    # Returns columns data as column Arrays:
-    #   table.by_col! # => #<CSV::Table mode:col row_count:4>
+    # Returns columns data as column Arrays.
     #
     # One header:
     #   table = CSV.parse(source, headers: true)
-    #   values = table.delete('Name')
-    #   values # => ["foo", "bar", "baz"]
+    #   deleted_values = table.delete('Name')
+    #   deleted_values # => ["foo", "bar", "baz"]
     #
     # Two headers:
     #   table = CSV.parse(source, headers: true)
-    #   values = table.delete('Value', 'Name')
-    #   values # => [["0", "1", "2"], ["foo", "bar", "baz"]]
+    #   deleted_values = table.delete('Value', 'Name')
+    #   deleted_values # => [["0", "1", "2"], ["foo", "bar", "baz"]]
     def delete(*indexes_or_headers)
       if indexes_or_headers.empty?
         raise ArgumentError, "wrong number of arguments (given 0, expected 1+)"
@@ -858,7 +856,7 @@ class CSV
       end
     end
 
-    # Removes rows or columns for which the block retruns a truthy value;
+    # Removes rows or columns for which the block returns a truthy value;
     # returns +self+.
     #
     # Removes rows when the access mode is <tt>:row</tt> or <tt>:col_or_row</tt>;
