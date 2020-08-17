@@ -143,7 +143,7 @@ class CSV
   #   table['Name'] # => ["Foo", "Bar", "Baz"]
   class Table
     # :call-seq:
-    #   CSV::Table.new(array_of_rows, headers = nil)
+    #   CSV::Table.new(array_of_rows, headers = nil) -> csv_table
     #
     # Returns a new \CSV::Table object.
     #
@@ -223,7 +223,7 @@ class CSV
     def_delegators :@table, :empty?, :length, :size
 
     # :call-seq:
-    #   table.by_col
+    #   table.by_col -> table_dup
     #
     # Returns a duplicate of +self+, in column mode
     # (see {Column Mode}[#class-CSV::Table-label-Column+Mode]):
@@ -244,7 +244,7 @@ class CSV
     end
 
     # :call-seq:
-    #   table.by_col!
+    #   table.by_col! -> self
     #
     # Sets the mode for +self+ to column mode
     # (see {Column Mode}[#class-CSV::Table-label-Column+Mode]); returns +self+:
@@ -261,7 +261,7 @@ class CSV
     end
 
     # :call-seq:
-    #   table.by_col_or_row
+    #   table.by_col_or_row -> table_dup
     #
     # Returns a duplicate of +self+, in mixed mode
     # (see {Mixed Mode}[#class-CSV::Table-label-Mixed+Mode]):
@@ -282,7 +282,7 @@ class CSV
     end
 
     # :call-seq:
-    #   table.by_col_or_row!
+    #   table.by_col_or_row! -> self
     #
     # Sets the mode for +self+ to mixed mode
     # (see {Mixed Mode}[#class-CSV::Table-label-Mixed+Mode]); returns +self+:
@@ -299,7 +299,7 @@ class CSV
     end
 
     # :call-seq:
-    #   table.by_row
+    #   table.by_row -> table_dup
     #
     # Returns a duplicate of +self+, in row mode
     # (see {Row Mode}[#class-CSV::Table-label-Row+Mode]):
@@ -320,7 +320,7 @@ class CSV
     end
 
     # :call-seq:
-    #   table.by_row!
+    #   table.by_row! -> self
     #
     # Sets the mode for +self+ to row mode
     # (see {Row Mode}[#class-CSV::Table-label-Row+Mode]); returns +self+:
@@ -337,7 +337,7 @@ class CSV
     end
 
     # :call-seq:
-    #   table.headers
+    #   table.headers -> array_of_headers
     #
     # Returns a new \Array containing the \String headers for the table.
     #
@@ -396,8 +396,7 @@ class CSV
     #   table[-4] # => nil
     #
     # Raises an exception if the access mode is <tt>:row</tt>
-    # and +n+ is not an
-    # {Integer-convertible object}[https://docs.ruby-lang.org/en/master/implicit_conversion_rdoc.html#label-Integer-Convertible+Objects].
+    # and +n+ is not an \Integer:
     #   table.by_row! # => #<CSV::Table mode:row row_count:4>
     #   # Raises TypeError (no implicit conversion of String into Integer):
     #   table['Name']
@@ -856,6 +855,9 @@ class CSV
       end
     end
 
+    # :call-seq:
+    #   table.delete_if {|row_or_column| ... } -> self
+    #
     # Removes rows or columns for which the block returns a truthy value;
     # returns +self+.
     #
@@ -899,6 +901,9 @@ class CSV
 
     include Enumerable
 
+    # :call-seq:
+    #  table.each {|row_or_column| ... ) -> self
+    #
     # Calls the block with each row or column; returns +self+.
     #
     # When the access mode is <tt>:row</tt> or <tt>:col_or_row</tt>,
@@ -935,6 +940,9 @@ class CSV
       self # for chaining
     end
 
+    # :call-seq:
+    #   table == other_table -> true or false
+    #
     # Returns +true+ if all each row of +self+ <tt>==</tt>
     # the corresponding row of +other_table+, otherwise, +false+.
     #
@@ -958,10 +966,14 @@ class CSV
       @table == other
     end
 
+    # :call-seq:
+    #   table.to_a -> array_of_arrays
     #
-    # Returns the table as an Array of Arrays. Headers will be the first row,
-    # then all of the field rows will follow.
-    #
+    # Returns the table as an \Array of \Arrays;
+    # the headers are in the first row:
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   table.to_a # => [["Name", "Value"], ["foo", "0"], ["bar", "1"], ["baz", "2"]]
     def to_a
       array = [headers]
       @table.each do |row|
@@ -971,13 +983,20 @@ class CSV
       array
     end
 
+    # :call-seq:
+    #   table.to_csv(**options) -> csv_string
     #
-    # Returns the table as a complete CSV String. Headers will be listed first,
-    # then all of the field rows.
+    # Returns the table as \CSV string.
+    # See {Options for Generating}[../CSV.html#class-CSV-label-Options+for+Generating].
     #
-    # This method assumes you want the Table.headers(), unless you explicitly
-    # pass <tt>:write_headers => false</tt>.
+    # Defaults option +write_headers+ to +true+:
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   table.to_csv # => "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
     #
+    # Omits the headers if option +write_headers+ is given as +false+
+    # (see {Option +write_headers+}[../CSV.html#class-CSV-label-Option+write_headers]):
+    #   table.to_csv(write_headers: false) # => "foo,0\nbar,1\nbaz,2\n"
     def to_csv(write_headers: true, **options)
       array = write_headers ? [headers.to_csv(**options)] : []
       @table.each do |row|
@@ -1006,7 +1025,18 @@ class CSV
       end
     end
 
-    # Shows the mode and size of this table in a US-ASCII String.
+    # :call-seq:
+    #   table.inspect => string
+    #
+    # Returns a <tt>US-ASCII</tt>-encoded \String showing table:
+    # - Class: <tt>CSV::Table</tt>.
+    # - Access mode: <tt>:row</tt>, <tt>:col</tt>, or <tt>:col_or_row</tt>.
+    # - Size:  Row count, including the header row.
+    #
+    # Example:
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   table.inspect # => "#<CSV::Table mode:col_or_row row_count:4>"
     def inspect
       "#<#{self.class} mode:#{@mode} row_count:#{to_a.size}>".encode("US-ASCII")
     end
