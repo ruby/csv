@@ -4,7 +4,7 @@ require "forwardable"
 
 class CSV
   # = \CSV::Table
-  # A \CSV::Table instance is an object representing \CSV data.
+  # A \CSV::Table instance represents \CSV data.
   # (see {class CSV}[../CSV.html]).
   #
   # The instance may have:
