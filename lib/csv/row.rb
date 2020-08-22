@@ -128,8 +128,9 @@ class CSV
     #
     # Calls superclass method.
     def initialize_copy(other)
-      super
+      super_return_value = super
       @row = @row.collect(&:dup)
+      super_return_value
     end
 
     # Returns +true+ if this is a header row.
