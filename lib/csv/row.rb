@@ -79,7 +79,7 @@ class CSV
   #
   class Row
     # :call-seq:
-    #   CSV::Row.new(headers, fields, header_row = false)
+    #   CSV::Row.new(headers, fields, header_row = false) -> csv_row
     #
     # Returns the new \CSV::Row instance constructed from
     # arguments +headers+ and +fields+; both should be Arrays;
@@ -150,7 +150,7 @@ class CSV
     end
 
     # :call-seq:
-    #    row.headers
+    #    row.headers -> array_of_headers
     #
     # Returns the headers for this row:
     #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
@@ -162,9 +162,9 @@ class CSV
     end
 
     # :call-seq:
-    #   field(index)
-    #   field(header)
-    #   field(header, offset)
+    #   field(index) -> value
+    #   field(header) -> value
+    #   field(header, offset) -> value
     #
     # Returns the field value for the given +index+ or +header+.
     #
@@ -216,9 +216,9 @@ class CSV
 
     #
     # :call-seq:
-    #   fetch(header)
-    #   fetch(header, default)
-    #   fetch(header) {|row| ... }
+    #   fetch(header) -> value
+    #   fetch(header, default) -> value
+    #   fetch(header) {|row| ... } -> value
     #
     # Returns the field value as specified by +header+.
     #
@@ -272,7 +272,7 @@ class CSV
     end
 
     # :call-seq:
-    #   row.has_key?(header)
+    #   row.has_key?(header) -> true or false
     #
     # Returns +true+ if there is a field with the given +header+,
     # +false+ otherwise.
@@ -399,7 +399,7 @@ class CSV
     end
 
     # :call-seq:
-    #   row.push(*values) ->self
+    #   row.push(*values) -> self
     #
     # Appends each of the given +values+ to +self+ as a field; returns +self+:
     #   source = "Name,Name,Name\nFoo,Bar,Baz\n"
@@ -482,7 +482,7 @@ class CSV
     end
 
     # :call-seq:
-    #   self.fields(*specifiers)
+    #   self.fields(*specifiers) -> array_of_fields
     #
     # Returns field values per the given +specifiers+, which may be any mixture of:
     # - \Integer index.
@@ -550,15 +550,26 @@ class CSV
     end
     alias_method :values_at, :fields
 
-    #
     # :call-seq:
-    #   index( header )
-    #   index( header, offset )
+    #   index(header) -> index
+    #   index(header, offset) -> index
     #
-    # This method will return the index of a field with the provided +header+.
-    # The +offset+ can be used to locate duplicate header names, as described in
-    # CSV::Row.field().
+    # Returns the index for the given header, if it exists;
+    # otherwise returns +nil+.
     #
+    # With the single argument +header+, returns the index
+    # of the first-found field with the given +header+:
+    #   source = "Name,Name,Name\nFoo,Bar,Baz\n"
+    #   table = CSV.parse(source, headers: true)
+    #   row = table[0]
+    #   row.index('Name') # => 0
+    #   row.index('NAME') # => nil
+    #
+    # With arguments +header+ and +offset+,
+    # returns the index of the first-found field with given +header+,
+    # but ignoring the first +offset+ fields:
+    #   row.index('Name', 1) # => 1
+    #   row.index('Name', 3) # => nil
     def index(header, minimum_index = 0)
       # find the pair
       index = headers[minimum_index..-1].index(header)
@@ -566,24 +577,36 @@ class CSV
       index.nil? ? nil : index + minimum_index
     end
 
+    # :call-seq:
+    #   row.field?(value) -> true or false
     #
-    # Returns +true+ if +data+ matches a field in this row, and +false+
-    # otherwise.
-    #
+    # Returns +true+ if +value+ is a field in this row, +false+ otherwise:
+    #   source = "Name,Name,Name\nFoo,Bar,Baz\n"
+    #   table = CSV.parse(source, headers: true)
+    #   row = table[0]
+    #   row.field?('Bar') # => true
+    #   row.field?('BAR') # => false
     def field?(data)
       fields.include? data
     end
 
     include Enumerable
 
+    # :call-seq:
+    #   row.each {|header, value| ... } -> self
     #
-    # Yields each pair of the row as header and field tuples (much like
-    # iterating over a Hash). This method returns the row for chaining.
+    # Calls the block with each header-value pair; returns +self+:
+    #   source = "Name,Name,Name\nFoo,Bar,Baz\n"
+    #   table = CSV.parse(source, headers: true)
+    #   row = table[0]
+    #   row.each {|header, value| p [header, value] }
+    # Output:
+    #   ["Name", "Foo"]
+    #   ["Name", "Bar"]
+    #   ["Name", "Baz"]
     #
-    # If no block is given, an Enumerator is returned.
-    #
-    # Support for Enumerable.
-    #
+    # If no block is given, returns a new Enumerator:
+    #   row.each # => #<Enumerator: #<CSV::Row "Name":"Foo" "Name":"Bar" "Name":"Baz">:each>
     def each(&block)
       return enum_for(__method__) { size } unless block_given?
 
@@ -594,10 +617,19 @@ class CSV
 
     alias_method :each_pair, :each
 
+    # :call-seq:
+    #   row == other -> true or false
     #
-    # Returns +true+ if this row contains the same headers and fields in the
-    # same order as +other+.
-    #
+    # Returns +true+ if +other+ is a /CSV::Row that has the same
+    # fields (headers and values) in the same order as +self+;
+    # otherwise returns +false+:
+    #   source = "Name,Name,Name\nFoo,Bar,Baz\n"
+    #   table = CSV.parse(source, headers: true)
+    #   row = table[0]
+    #   other_row = table[0]
+    #   row == other_row # => true
+    #   other_row = table[1]
+    #   row == other_row # => false
     def ==(other)
       return @row == other.row if other.is_a? CSV::Row
       @row == other
