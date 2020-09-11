@@ -24,6 +24,20 @@ class TestCSVInterfaceReadWrite < Test::Unit::TestCase
     CSV
   end
 
+  def test_filter_with_headers
+    input = <<-CSV
+Name,Value
+foo,0
+bar,1
+baz,2
+    CSV
+    output = ""
+    CSV.filter(input, output, headers: true, write_headers: true) do |row|
+      row
+    end
+    assert_equal(input, output)
+  end
+
   def test_instance_same
     data = ""
     assert_equal(CSV.instance(data, col_sep: ";").object_id,

@@ -1058,9 +1058,11 @@ class CSV
         end
       end
       # build input and output wrappers
-      input  = new(input  || ARGF,    **in_options)
+      input  = parse(input  || ARGF, **in_options)
       output = new(output || $stdout, **out_options)
-
+      if input.instance_of?(CSV::Table)
+        output << input.headers
+      end
       # read, yield, write
       input.each do |row|
         yield row
