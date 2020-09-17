@@ -156,8 +156,7 @@ that are to be generated:
 
 This example uses method CSV#<< to append the rows
 that are to be generated:
-  output_string = CSV.generate('', headers: ['Name', 'Value']) do |csv|
-    csv << csv.headers
+  output_string = CSV.generate('', headers: ['Name', 'Value'], write_headers: true) do |csv|
     csv << ['Foo', 0]
     csv << ['Bar', 1]
     csv << ['Baz', 2]
@@ -185,8 +184,7 @@ that are to be generated:
 This example uses method CSV#<< to append the rows
 that are to be generated:
   path = 't.csv'
-  CSV.open(path, 'w', headers: ['Name', 'Value']) do |csv|
-    csv << csv.headers
+  CSV.open(path, 'w', headers: ['Name', 'Value'], write_headers: true) do |csv|
     csv << ['Foo', 0]
     csv << ['Bar', 1]
     csv << ['Baz', 2]
