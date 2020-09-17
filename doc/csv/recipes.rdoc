@@ -148,7 +148,7 @@ that are to be generated:
     csv << ['Bar', 1]
     csv << ['Baz', 2]
   end
-  output_string # => "foo,0\nbar,1\nbaz,2\n"
+  output_string # => "Foo,0\nBar,1\nBaz,2\n"
 
 ==== Generate to \String with Headers
 
