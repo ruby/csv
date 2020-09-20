@@ -1,5 +1,8 @@
 == Recipes
 
+All code snippets on this page assume that the following has been executed:
+  require 'csv'
+
 === Contents
 
 - {Parsing: Source Formats}[#label-Parsing-3A+Source+Formats]
@@ -185,11 +188,8 @@ Output:
 
 ==== Convert Fields to Objects Using Custom Converters
 
-See {Custom Field Converters}[../../CSV.html#class-CSV-label-Custom+Field+Converters].
-
-Define a custom field converter and add it to the \Converters \Hash:
+Define a custom field converter:
   strip_converter = proc {|field| field.strip }
-  CSV::Converters[:strip] = strip_converter
 
 Without the new converter:
   string = " foo , 0 \n bar , 1 \n baz , 2 \n"
@@ -197,9 +197,10 @@ Without the new converter:
   array # => [[" foo ", " 0 "], [" bar ", " 1 "], [" baz ", " 2 "]]
 
 With the new converter:
-  string = " foo , 0 \n bar , 1 \n baz , 2 \n"
   array = CSV.parse(string, converters: strip_converter)
   array # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+
+See {Custom Field Converters}[../../CSV.html#class-CSV-label-Custom+Field+Converters].
 
 === Generating: Output Formats
 
