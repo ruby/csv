@@ -200,7 +200,10 @@ With the new converter:
   array = CSV.parse(string, converters: strip_converter)
   array # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
 
-See {Custom Field Converters}[../../CSV.html#class-CSV-label-Custom+Field+Converters].
+You can also register a custom field converter, then refer to it by name:
+  CSV::Converters[:strip] = strip_converter
+  array = CSV.parse(string, converters: :strip)
+  array # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
 
 === Generating: Output Formats
 
