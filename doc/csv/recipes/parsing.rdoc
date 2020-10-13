@@ -31,6 +31,15 @@ All code snippets on this page assume that the following has been executed:
   - {Using Multiple Field Converters}[#label-Using+Multiple+Field+Converters]
     - {Recipe: Specify Multiple Field Converters in Option :converters}[#label-Recipe-3A+Specify+Multiple+Field+Converters+in+Option+-3Aconverters]
     - {Recipe: Specify Multiple Field Converters in a Custom Converter List}[#label-Recipe-3A+Specify+Multiple+Field+Converters+in+a+Custom+Converter+List]
+- {Converting Headers}[#label-Converting+Headers]
+  - {Recipe: Convert Headers to Lowercase}[#label-Recipe-3A+Convert+Headers+to+Lowercase]
+  - {Recipe: Convert Headers to Symbols}[#label-Recipe-3A+Convert+Headers+to+Symbols]
+  - {Recipe: Filter Header Strings}[#label-Recipe-3A+Filter+Header+Strings]
+  - {Recipe: Register Header Converters}[#label-Recipe-3A+Register+Header+Converters]
+  - {Using Multiple Header Converters}[#label-Using+Multiple+Header+Converters]
+    - {Recipe: Specify Multiple Header Converters in Option :header_converters}[#label-Recipe-3A+Specify+Multiple+Header+Converters+in+Option+-3Aheader_converters]
+    - {Recipe: Specify Multiple Header Converters in a Custom Header Converter List}[#label-Recipe-3A+Specify+Multiple+Header+Converters+in+a+Custom+Header+Converter+List]
+
 === Source Formats
 
 You can parse \CSV data from a \String, from a \File (via its path), or from an \IO stream.
@@ -245,6 +254,9 @@ that strips whitespace from each field value:
 
 Register a custom field converter, assigning it a name;
 then refer to the converter by its name:
+  rational_converter = proc do |field, field_context|
+    field_context.index == 1 ? field.to_r : field
+  end
   CSV::Converters[:rational] = rational_converter
   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
   parsed = CSV.parse(source, headers: true, converters: :rational)
@@ -273,3 +285,69 @@ Apply multiple field converters by defining and registering a custom converter l
   parsed = CSV.parse(source, headers: true, converters: :my_converters)
   parsed['Name'] # => ["foo", "bar", "baz"]
   parsed['Value'] # => [0, 1.0, 2.0]
+
+=== Converting Headers
+
+You can use header converters to modify parsed \String headers.
+
+Built-in header converters include:
+- <tt>:symbol</tt>: converts \String header to \Symbol.
+- <tt>:downcase</tt>: converts \String header to lowercase.
+
+You can also define header converters to otherwise modify header \Strings.
+
+==== Recipe: Convert Headers to Lowercase
+
+Convert headers to lowercase using built-in converter <tt>:downcase</tt>:
+  source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+  parsed = CSV.parse(source, headers: true, header_converters: :downcase)
+  parsed.headers # => ["name", "value"]
+
+==== Recipe: Convert Headers to Symbols
+
+Convert headers to downcased Symbols using built-in converter <tt>:symbol</tt>:
+  source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+  parsed = CSV.parse(source, headers: true, header_converters: :symbol)
+  parsed.headers # => [:name, :value]
+  parsed.headers.map {|header| header.class} # => [Symbol, Symbol]
+
+==== Recipe: Filter Header Strings
+
+Define a custom header converter to modify \String fields.
+This example defines and uses a custom header converter
+that capitalizes each header \String:
+  capitalize_converter = proc {|header| header.capitalize }
+  source = "NAME,VALUE\nfoo,0\nbar,1\nbaz,2\n"
+  parsed = CSV.parse(source, headers: true, header_converters: capitalize_converter)
+  parsed.headers # => ["Name", "Value"]
+
+==== Recipe: Register Header Converters
+
+Register a custom header converter, assigning it a name;
+then refer to the converter by its name:
+  capitalize_converter = proc {|header| header.capitalize }
+  CSV::HeaderConverters[:capitalize] = capitalize_converter
+  source = "NAME,VALUE\nfoo,0\nbar,1\nbaz,2\n"
+  parsed = CSV.parse(source, headers: true, header_converters: :capitalize)
+  parsed.headers # => ["Name", "Value"]
+
+==== Using Multiple Header Converters
+
+You can use multiple header converters in either of these ways:
+- Specify header converters in option <tt>:header_converters</tt>.
+- Specify header converters in a custom header converter list.
+
+===== Recipe: Specify Multiple Header Converters in Option :header_converters
+
+Apply multiple header converters by specifying them in option <tt>:header_conveters</tt>:
+  source = "Name,Value\nfoo,0\nbar,1.0\nbaz,2.0\n"
+  parsed = CSV.parse(source, headers: true, header_converters: [:downcase, :symbol])
+  parsed.headers # => [:name, :value]
+
+===== Recipe: Specify Multiple Header Converters in a Custom Header Converter List
+
+Apply multiple header converters by defining and registering a custom header converter list:
+  CSV::HeaderConverters[:my_header_converters] = [:symbol, :downcase]
+  source = "NAME,VALUE\nfoo,0\nbar,1.0\nbaz,2.0\n"
+  parsed = CSV.parse(source, headers: true, header_converters: :my_header_converters)
+  parsed.headers # => [:name, :value]
