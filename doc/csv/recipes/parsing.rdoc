@@ -17,6 +17,17 @@ All code snippets on this page assume that the following has been executed:
   - {Parsing from an IO Stream}[#label-Parsing+from+an+IO+Stream]
     - {Recipe: Parse from IO Stream with Headers}[#label-Recipe-3A+Parse+from+IO+Stream+with+Headers]
     - {Recipe: Parse from IO Stream Without Headers}[#label-Recipe-3A+Parse+from+IO+Stream+Without+Headers]
+- {RFC 4180 Compliance}[#label-RFC+4180+Compliance]
+  - {Row Separator}[#label-Row+Separator]
+    - {Recipe: Handle Compliant Row Separator}[#label-Recipe-3A+Handle+Compliant+Row+Separator]
+    - {Recipe: Handle Non-Compliant Row Separator}[#label-Recipe-3A+Handle+Non-Compliant+Row+Separator]
+  - {Column Separator}[#label-Column+Separator]
+    - {Recipe: Handle Compliant Column Separator}[#label-Recipe-3A+Handle+Compliant+Column+Separator]
+    - {Recipe: Handle Non-Compliant Column Separator}[#label-Recipe-3A+Handle+Non-Compliant+Column+Separator]
+  - {Quote Character}[#label-Quote+Character]
+    - {Recipe: Handle Compliant Quote Character}[#label-Recipe-3A+Handle+Compliant+Quote+Character]
+    - {Recipe: Handle Non-Compliant Quote Character}[#label-Recipe-3A+Handle+Non-Compliant+Quote+Character]
+  - {Recipe: Allow Liberal Parsing}[#label-Recipe-3A+Allow+Liberal+Parsing]
 - {Converting Fields}[#label-Converting+Fields]
   - {Converting Fields to Objects}[#label-Converting+Fields+to+Objects]
     - {Recipe: Convert Fields to Integers}[#label-Recipe-3A+Convert+Fields+to+Integers]
@@ -163,6 +174,87 @@ Output:
   ["foo", "0"]
   ["bar", "1"]
   ["baz", "2"]
+
+=== RFC 4180 Compliance
+
+By default, \CSV parses data that is compliant with
+{RFC 4180}[https://tools.ietf.org/html/rfc4180]
+with respect to:
+- Row separator.
+- Column separator.
+- Quote character.
+
+==== Row Separator
+
+RFC 4180 specifies the row separator CRLF (Ruby "\r\n").
+
+Although the \CSV default row separator is "\n",
+the parser also by default handles row seperator "\r" and the RFC-compliant "\r\n".
+
+===== Recipe: Handle Compliant Row Separator
+
+For strict compliance, use row separator "\r\n",
+which allows the compliant row separator:
+  source = "foo,1\r\nbar,1\r\nbaz,2\r\n"
+  CSV.parse(source, row_sep: "\r\n") # => [["foo", "1"], ["bar", "1"], ["baz", "2"]]
+But rejects other row separators:
+  source = "foo,1\nbar,1\nbaz,2\n"
+  CSV.parse(source, row_sep: "\r\n") # Raised MalformedCSVError
+  source = "foo,1\rbar,1\rbaz,2\r"
+  CSV.parse(source, row_sep: "\r\n") # Raised MalformedCSVError
+  source = "foo,1\n\rbar,1\n\rbaz,2\n\r"
+  CSV.parse(source, row_sep: "\r\n") # Raised MalformedCSVError
+
+===== Recipe: Handle Non-Compliant Row Separator
+
+For data with non-compliant row separators, use option <tt>:row_sep</tt>.
+This example source uses semicolon (';') as its row separator:
+  source = "foo,1;bar,1;baz,2;"
+  CSV.parse(source, row_sep: ';') # => [["foo", "1"], ["bar", "1"], ["baz", "2"]]
+
+==== Column Separator
+
+RFC 4180 specifies column separator COMMA (Ruby ',').
+
+===== Recipe: Handle Compliant Column Separator
+
+Because the \CSV default comma separator is ',',
+you need not specify option <tt>:col_sep</tt> for compliant data:
+  source = "foo,1\nbar,1\nbaz,2\n"
+  CSV.parse(source) # => [["foo", "1"], ["bar", "1"], ["baz", "2"]]
+
+===== Recipe: Handle Non-Compliant Column Separator
+
+For data with non-compliant column separators, use option <tt>:col_sep</tt>.
+This example source uses TAB ("\t") as its column separator:
+  source = "foo,1\tbar,1\tbaz,2"
+  CSV.parse(source, col_sep: "\t") # => [["foo", "1"], ["bar", "1"], ["baz", "2"]]
+
+==== Quote Character
+
+RFC 4180 specifies quote character DQUOTE (Ruby '"').
+
+===== Recipe: Handle Compliant Quote Character
+
+Because the \CSV default quote character is '"',
+you need not specify option <tt>:quote_char</tt> for compliant data:
+  source = "\"foo\",\"1\"\n\"bar\",\"1\"\n\"baz\",\"2\"\n"
+  CSV.parse(source) # => [["foo", "1"], ["bar", "1"], ["baz", "2"]]
+
+===== Recipe: Handle Non-Compliant Quote Character
+
+For data with non-compliant quote characters, use option <tt>:quote_char</tt>.
+This example source uses SQUOTE ("'") as its quote character:
+  source = "'foo','1'\n'bar','1'\n'baz','2'\n"
+  CSV.parse(source, quote_char: "'") # => [["foo", "1"], ["bar", "1"], ["baz", "2"]]
+
+==== Recipe: Allow Liberal Parsing
+
+Use option <tt>:liberal_parsing</tt> to specify that \CSV should
+attempt to parse input not conformant with RFC 4180, such as double quotes in unquoted fields:
+  source = 'is,this "three, or four",fields'
+  CSV.parse(source) # Raises MalformedCSVError
+  CSV.parse(source, liberal_parsing: true) # => [["is", "this \"three", " or four\"", "fields"]]
 
 === Converting Fields
 
