@@ -28,6 +28,14 @@ All code snippets on this page assume that the following has been executed:
     - {Recipe: Handle Compliant Quote Character}[#label-Recipe-3A+Handle+Compliant+Quote+Character]
     - {Recipe: Handle Non-Compliant Quote Character}[#label-Recipe-3A+Handle+Non-Compliant+Quote+Character]
   - {Recipe: Allow Liberal Parsing}[#label-Recipe-3A+Allow+Liberal+Parsing]
+- {Special Handling}[#label-Special+Handling]
+  - {Special Line Handling}[#label-Special+Line+Handling]
+    - {Recipe: Ignore Blank Lines}[#label-Recipe-3A+Ignore+Blank+Lines]
+    - {Recipe: Ignore Selected Lines}[#label-Recipe-3A+Ignore+Selected+Lines]
+  - {Special Field Handling}[#label-Special+Field+Handling]
+    - {Recipe: Strip Fields}[#label-Recipe-3A+Strip+Fields]
+    - {Recipe: Handle Null Fields}[#label-Recipe-3A+Handle+Null+Fields]
+    - {Recipe: Handle Empty Fields}[#label-Recipe-3A+Handle+Empty+Fields]
 - {Converting Fields}[#label-Converting+Fields]
   - {Converting Fields to Objects}[#label-Converting+Fields+to+Objects]
     - {Recipe: Convert Fields to Integers}[#label-Recipe-3A+Convert+Fields+to+Integers]
@@ -255,6 +263,62 @@ attempt to parse input not conformant with RFC 4180, such as double quotes in un
   source = 'is,this "three, or four",fields'
   CSV.parse(source) # Raises MalformedCSVError
   CSV.parse(source, liberal_parsing: true) # => [["is", "this \"three", " or four\"", "fields"]]
+
+=== Special Handling
+
+You can use parsing options to specify special handling for certain lines and fields.
+
+==== Special Line Handling
+
+Use parsing options to specify special handling for blank lines, or for other selected lines.
+
+===== Recipe: Ignore Blank Lines
+
+Use option +:skip_blanks+ to ignore blank lines:
+  source = <<-EOT
+  foo,0
+
+  bar,1
+  baz,2
+
+  ,
+  EOT
+  parsed = CSV.parse(source, skip_blanks: true)
+  parsed # => [["foo", "0"], ["bar", "1"], ["baz", "2"], [nil, nil]]
+
+===== Recipe: Ignore Selected Lines
+
+Use option +:skip_lines+ to ignore selected lines.
+  source = <<-EOT
+  # Comment
+  foo,0
+  bar,1
+  baz,2
+  # Another comment
+  EOT
+  parsed = CSV.parse(source, skip_lines: /^#/)
+  parsed # => [["foo", "0"], ["bar", "1"], ["baz", "2"]]
+
+==== Special Field Handling
+
+Use parsing options to specify special handling for certain field values.
+
+===== Recipe: Strip Fields
+
+Use option +:strip+ to strip parsed field values:
+  CSV.parse_line(' a , b ', strip: true) # => ["a", "b"]
+
+===== Recipe: Handle Null Fields
+
+Use option +:nil_value+ to specify a value that will replace each field
+that is null (no text):
+  CSV.parse_line('a,,b,,c', nil_value: 0) # => ["a", 0, "b", 0, "c"]
+
+===== Recipe: Handle Empty Fields
+
+Use option +:empty_value+ to specify a value that will replace each field
+that is empty (\String of length 0);
+  CSV.parse_line('a,"",b,"",c', empty_value: 'x') # => ["a", "x", "b", "x", "c"]
 
 === Converting Fields
 
