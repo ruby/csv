@@ -104,6 +104,15 @@ require_relative "csv/writer"
 using CSV::MatchP if CSV.const_defined?(:MatchP)
 
 # == \CSV
+#
+# === In a Hurry?
+#
+# If you are familiar with \CSV data and have a particular task in mind,
+# you may want to go directly to the:
+# - {Recipes for CSV}[doc/csv/recipes/recipes_rdoc.html].
+#
+# === \CSV Data
+#
 # \CSV (comma-separated values) data is a text representation of a table:
 # - A _row_ _separator_ delimits table rows.
 #   A common row separator is the newline character <tt>"\n"</tt>.
