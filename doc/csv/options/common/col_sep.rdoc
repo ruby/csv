@@ -1,6 +1,6 @@
 ====== Option +col_sep+
 
-Specifies the \String field separator to be used
+Specifies the \String column separator to be used
 for both parsing and generating.
 The \String will be transcoded into the data's \Encoding before use.
 
