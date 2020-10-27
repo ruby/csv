@@ -86,3 +86,24 @@ jobs:
       - name: Build document
         run: |
           bundle exec rake warning:error rdoc
+      - name: Deploy
+        if: |
+          github.event_name == 'push'
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git checkout gh-pages
+          rm html/created.rid
+          touch html/.nojekyll
+          mv html ../
+          rsync \
+            -a \
+            --delete \
+            --exclude "/.git/" \
+            ../html/ \
+            ./
+          if [ "$(git status --porcelain)" != "" ]; then
+            git add --all
+            git commit -m "Generate (${GITHUB_SHA})"
+            git push
+          fi
