@@ -1,0 +1,19 @@
+Tue, 27 Oct 2020 09:31:57 -0500
+lib/csv/core_ext/array.rb	Tue, 27 Oct 2020 09:29:08 -0500
+lib/csv/core_ext/string.rb	Tue, 27 Oct 2020 09:29:08 -0500
+lib/csv/delete_suffix.rb	Tue, 27 Oct 2020 09:29:08 -0500
+lib/csv/fields_converter.rb	Tue, 27 Oct 2020 09:29:08 -0500
+lib/csv/match_p.rb	Tue, 27 Oct 2020 09:29:08 -0500
+lib/csv/parser.rb	Tue, 27 Oct 2020 09:29:08 -0500
+lib/csv/row.rb	Tue, 27 Oct 2020 09:29:08 -0500
+lib/csv/table.rb	Tue, 27 Oct 2020 09:29:08 -0500
+lib/csv/version.rb	Tue, 27 Oct 2020 09:29:08 -0500
+lib/csv/writer.rb	Tue, 27 Oct 2020 09:29:08 -0500
+lib/csv.rb	Tue, 27 Oct 2020 09:29:08 -0500
+LICENSE.txt	Tue, 27 Oct 2020 09:29:08 -0500
+NEWS.md	Tue, 27 Oct 2020 09:29:08 -0500
+README.md	Tue, 27 Oct 2020 09:29:08 -0500
+doc/csv/recipes/filtering.rdoc	Tue, 27 Oct 2020 09:29:08 -0500
+doc/csv/recipes/generating.rdoc	Tue, 27 Oct 2020 09:29:08 -0500
+doc/csv/recipes/parsing.rdoc	Tue, 27 Oct 2020 09:29:08 -0500
+doc/csv/recipes/recipes.rdoc	Tue, 27 Oct 2020 09:29:08 -0500
