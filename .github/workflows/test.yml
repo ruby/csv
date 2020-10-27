@@ -86,24 +86,29 @@ jobs:
       - name: Build document
         run: |
           bundle exec rake warning:error rdoc
+      - uses: actions/checkout@v2
+        if: |
+          github.event_name == 'push'
+        with:
+          ref: gh-pages
+          path: csv-gh-pages
       - name: Deploy
         if: |
           github.event_name == 'push'
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
           rm html/created.rid
           touch html/.nojekyll
-          mv html ../
-          git checkout --track origin/gh-pages
+          cd ../csv-gh-pages
           rsync \
             -a \
             --delete \
             --exclude "/.git/" \
-            ../html/ \
+            ../csv/html/ \
             ./
           if [ "$(git status --porcelain)" != "" ]; then
             git add --all
+            git config user.name github-actions
+            git config user.email github-actions@github.com
             git commit -m "Generate (${GITHUB_SHA})"
             git push
           fi
