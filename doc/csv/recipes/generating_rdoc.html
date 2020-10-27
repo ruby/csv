@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>generating - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-Recipes+for+Generating+CSV">Recipes for Generating CSV</a>
+    <li><a href="#label-Contents">Contents</a>
+    <li><a href="#label-Output+Formats">Output Formats</a>
+    <li><a href="#label-Generating+to+a+String">Generating to a String</a>
+    <li><a href="#label-Recipe-3A+Generate+to+String+with+Headers">Recipe: Generate to String with Headers</a>
+    <li><a href="#label-Recipe-3A+Generate+to+String+Without+Headers">Recipe: Generate to String Without Headers</a>
+    <li><a href="#label-Generating+to+a+File">Generating to a File</a>
+    <li><a href="#label-Recipe-3A+Generate+to+File+with+Headers">Recipe: Generate to File with Headers</a>
+    <li><a href="#label-Recipe-3A+Generate+to+File+Without+Headers">Recipe: Generate to File Without Headers</a>
+    <li><a href="#label-Generating+to+an+IO+Stream">Generating to an IO Stream</a>
+    <li><a href="#label-Recipe-3A+Generate+to+IO+Stream+with+Headers">Recipe: Generate to IO Stream with Headers</a>
+    <li><a href="#label-Recipe-3A+Generate+to+IO+Stream+Without+Headers">Recipe: Generate to IO Stream Without Headers</a>
+    <li><a href="#label-Converting+Fields">Converting Fields</a>
+    <li><a href="#label-Recipe-3A+Filter+Generated+Field+Strings">Recipe: Filter Generated Field Strings</a>
+    <li><a href="#label-Recipe-3A+Specify+Multiple+Write+Converters">Recipe: Specify Multiple Write Converters</a>
+    <li><a href="#label-RFC+4180+Compliance">RFC 4180 Compliance</a>
+    <li><a href="#label-Row+Separator">Row Separator</a>
+    <li><a href="#label-Recipe-3A+Generate+Compliant+Row+Separator">Recipe: Generate Compliant Row Separator</a>
+    <li><a href="#label-Recipe-3A+Generate+Non-Compliant+Row+Separator">Recipe: Generate Non-Compliant Row Separator</a>
+    <li><a href="#label-Column+Separator">Column Separator</a>
+    <li><a href="#label-Recipe-3A+Generate+Compliant+Column+Separator">Recipe: Generate Compliant Column Separator</a>
+    <li><a href="#label-Recipe-3A+Generate+Non-Compliant+Column+Separator">Recipe: Generate Non-Compliant Column Separator</a>
+    <li><a href="#label-Quotes">Quotes</a>
+    <li><a href="#label-Recipe-3A+Quote+All+Fields">Recipe: Quote All Fields</a>
+    <li><a href="#label-Recipe-3A+Quote+Empty+Fields">Recipe: Quote Empty Fields</a>
+    <li><a href="#label-Recipe-3A+Generate+Compliant+Quote+Character">Recipe: Generate Compliant Quote Character</a>
+    <li><a href="#label-Recipe-3A+Generate+Non-Compliant+Quote+Character">Recipe: Generate Non-Compliant Quote Character</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    
+<div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+    <li><a href="../../../LICENSE_txt.html">LICENSE</a>
+    <li><a href="../../../NEWS_md.html">NEWS</a>
+    <li><a href="../../../README_md.html">README</a>
+    <li><a href="../../../doc/csv/recipes/filtering_rdoc.html">filtering</a>
+    <li><a href="../../../doc/csv/recipes/generating_rdoc.html">generating</a>
+    <li><a href="../../../doc/csv/recipes/parsing_rdoc.html">parsing</a>
+    <li><a href="../../../doc/csv/recipes/recipes_rdoc.html">recipes</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page doc/csv/recipes/generating.rdoc">
+
+<h2 id="label-Recipes+for+Generating+CSV">Recipes for Generating CSV<span><a href="#label-Recipes+for+Generating+CSV">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>For other recipes, see <a href="./recipes_rdoc.html">Recipes for CSV</a>.</p>
+
+<p>All code snippets on this page assume that the following has been executed:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;csv&#39;</span>
+</pre>
+
+<h3 id="label-Contents">Contents<span><a href="#label-Contents">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p><a href="#label-Output+Formats">Output Formats</a></p>
+<ul><li>
+<p><a href="#label-Generating+to+a+String">Generating to a String</a></p>
+<ul><li>
+<p><a href="#label-Recipe-3A+Generate+to+String+with+Headers">Recipe: Generate to String with Headers</a></p>
+</li><li>
+<p><a href="#label-Recipe-3A+Generate+to+String+Without+Headers">Recipe: Generate to String Without Headers</a></p>
+</li></ul>
+</li><li>
+<p><a href="#label-Generating+to+a+File">Generating to a File</a></p>
+<ul><li>
+<p><a href="#label-Recipe-3A+Generate+to+File+with+Headers">Recipe: Generate to File with Headers</a></p>
+</li><li>
+<p><a href="#label-Recipe-3A+Generate+to+File+Without+Headers">Recipe: Generate to File Without Headers</a></p>
+</li></ul>
+</li><li>
+<p><a href="#label-Generating+to+an+IO+Stream">Generating to IO an Stream</a></p>
+<ul><li>
+<p><a href="#label-Recipe-3A+Generate+to+IO+Stream+with+Headers">Recipe: Generate to IO Stream with Headers</a></p>
+</li><li>
+<p><a href="#label-Recipe-3A+Generate+to+IO+Stream+Without+Headers">Recipe: Generate to IO Stream Without Headers</a></p>
+</li></ul>
+</li></ul>
+</li><li>
+<p><a href="#label-Converting+Fields">Converting Fields</a></p>
+<ul><li>
+<p><a href="#label-Recipe-3A+Filter+Generated+Field+Strings">Recipe: Filter Generated Field Strings</a></p>
+</li><li>
+<p><a href="#label-Recipe-3A+Specify+Multiple+Write+Converters">Recipe: Specify Multiple Write Converters</a></p>
+</li></ul>
+</li><li>
+<p><a href="#label-RFC+4180+Compliance">RFC 4180 Compliance</a></p>
+<ul><li>
+<p><a href="#label-Row+Separator">Row Separator</a></p>
+<ul><li>
+<p><a href="#label-Recipe-3A+Generate+Compliant+Row+Separator">Recipe: Generate Compliant Row Separator</a></p>
+</li><li>
+<p><a href="#label-Recipe-3A+Generate+Non-Compliant+Row+Separator">Recipe: Generate Non-Compliant Row Separator</a></p>
+</li></ul>
+</li><li>
+<p><a href="#label-Column+Separator">Column Separator</a></p>
+<ul><li>
+<p><a href="#label-Recipe-3A+Generate+Compliant+Column+Separator">Recipe: Generate Compliant Column Separator</a></p>
+</li><li>
+<p><a href="#label-Recipe-3A+Generate+Non-Compliant+Column+Separator">Recipe: Generate Non-Compliant Column Separator</a></p>
+</li></ul>
+</li><li>
+<p><a href="#label-Quotes">Quotes</a></p>
+<ul><li>
+<p><a href="#label-Recipe-3A+Quote+All+Fields">Recipe: Quote All Fields</a></p>
+</li><li>
+<p><a href="#label-Recipe-3A+Quote+Empty+Fields">Recipe: Quote Empty Fields</a></p>
+</li><li>
+<p><a href="#label-Recipe-3A+Generate+Compliant+Quote+Character">Recipe: Generate Compliant Quote Character</a></p>
+</li><li>
+<p><a href="#label-Recipe-3A+Generate+Non-Compliant+Quote+Character">Recipe: Generate Non-Compliant Quote Character</a></p>
+</li></ul>
+</li></ul>
+</li></ul>
+
+<h3 id="label-Output+Formats">Output Formats<span><a href="#label-Output+Formats">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>You can generate CSV output to a String, to a File (via its path), or to an IO stream.</p>
+
+<h4 id="label-Generating+to+a+String">Generating to a String<span><a href="#label-Generating+to+a+String">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>You can generate CSV output to a String, with or without headers.</p>
+
+<h5 id="label-Recipe-3A+Generate+to+String+with+Headers">Recipe: Generate to String with Headers<span><a href="#label-Recipe-3A+Generate+to+String+with+Headers">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>Use class method <a href="../../../CSV.html#method-c-generate"><code>CSV.generate</code></a> with option <code>headers</code> to generate to a String.</p>
+
+<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
+
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">headers:</span> [<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], <span class="ruby-value">write_headers:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Name,Value\nFoo,0\nBar,1\nBaz,2\n&quot;</span>
+</pre>
+
+<h5 id="label-Recipe-3A+Generate+to+String+Without+Headers">Recipe: Generate to String Without Headers<span><a href="#label-Recipe-3A+Generate+to+String+Without+Headers">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>Use class method <a href="../../../CSV.html#method-c-generate"><code>CSV.generate</code></a> without option <code>headers</code> to generate to a String.</p>
+
+<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
+
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\nBaz,2\n&quot;</span>
+</pre>
+
+<h4 id="label-Generating+to+a+File">Generating to a File<span><a href="#label-Generating+to+a+File">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>You can generate /CSV data to a File, with or without headers.</p>
+
+<h5 id="label-Recipe-3A+Generate+to+File+with+Headers">Recipe: Generate to File with Headers<span><a href="#label-Recipe-3A+Generate+to+File+with+Headers">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>Use class method <a href="../../../CSV.html#method-c-open"><code>CSV.open</code></a> with option <code>headers</code> generate to a File.</p>
+
+<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
+
+<pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;w&#39;</span>, <span class="ruby-value">headers:</span> [<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], <span class="ruby-value">write_headers:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; &quot;Name,Value\nFoo,0\nBar,1\nBaz,2\n&quot;</span>
+</pre>
+
+<h5 id="label-Recipe-3A+Generate+to+File+Without+Headers">Recipe: Generate to File Without Headers<span><a href="#label-Recipe-3A+Generate+to+File+Without+Headers">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>Use class method <a href="../../../CSV.html#method-c-open"><code>CSV.open</code></a> without option <code>headers</code> to generate to a File.</p>
+
+<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
+
+<pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\nBaz,2\n&quot;</span>
+</pre>
+
+<h4 id="label-Generating+to+an+IO+Stream">Generating to an IO Stream<span><a href="#label-Generating+to+an+IO+Stream">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>You can generate CSV data to an IO stream, with or without headers.</p>
+
+<h4 id="label-Recipe-3A+Generate+to+IO+Stream+with+Headers">Recipe: Generate to IO Stream with Headers<span><a href="#label-Recipe-3A+Generate+to+IO+Stream+with+Headers">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>Use class method <a href="../../../CSV.html#method-c-new"><code>CSV.new</code></a> with option <code>headers</code> to generate CSV data to an IO stream:</p>
+
+<pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
+<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value">headers:</span> [<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], <span class="ruby-value">write_headers:</span> <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; &quot;Name,Value\nFoo,0\nBar,1\nBaz,2\n&quot;</span>
+</pre>
+
+<h5 id="label-Recipe-3A+Generate+to+IO+Stream+Without+Headers">Recipe: Generate to IO Stream Without Headers<span><a href="#label-Recipe-3A+Generate+to+IO+Stream+Without+Headers">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>Use class method <a href="../../../CSV.html#method-c-new"><code>CSV.new</code></a> without option <code>headers</code> to generate CSV data to an IO stream:</p>
+
+<pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
+<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>)
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\nBaz,2\n&quot;</span>
+</pre>
+
+<h3 id="label-Converting+Fields">Converting Fields<span><a href="#label-Converting+Fields">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>You can use <em>write</em> <em>converters</em> to convert fields when generating CSV.</p>
+
+<h4 id="label-Recipe-3A+Filter+Generated+Field+Strings">Recipe: Filter Generated Field Strings<span><a href="#label-Recipe-3A+Filter+Generated+Field+Strings">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>Use option <code>:write_converters</code> and a custom converter to convert field values when generating CSV.</p>
+
+<p>This example defines and uses a custom write converter to strip whitespace from generated fields:</p>
+
+<pre class="ruby"><span class="ruby-identifier">strip_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:strip</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">strip</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">field</span> }
+<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-value">write_converters:</span> <span class="ruby-identifier">strip_converter</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39; foo &#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39; bar &#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39; baz &#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;foo,0\nbar,1\nbaz,2\n&quot;</span>
+</pre>
+
+<h4 id="label-Recipe-3A+Specify+Multiple+Write+Converters">Recipe: Specify Multiple Write Converters<span><a href="#label-Recipe-3A+Specify+Multiple+Write+Converters">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>Use option <code>:write_converters</code> and multiple custom coverters to convert field values when generating CSV.</p>
+
+<p>This example defines and uses two custom write converters to strip and upcase generated fields:</p>
+
+<pre class="ruby"><span class="ruby-identifier">strip_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:strip</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">strip</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">field</span> }
+<span class="ruby-identifier">upcase_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:upcase</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">upcase</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">field</span> }
+<span class="ruby-identifier">converters</span> = [<span class="ruby-identifier">strip_converter</span>, <span class="ruby-identifier">upcase_converter</span>]
+<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-value">write_converters:</span> <span class="ruby-identifier">converters</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39; foo &#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39; bar &#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39; baz &#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;FOO,0\nBAR,1\nBAZ,2\n&quot;</span>
+</pre>
+
+<h3 id="label-RFC+4180+Compliance">RFC 4180 Compliance<span><a href="#label-RFC+4180+Compliance">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>By default, CSV generates data that is compliant with <a href="https://tools.ietf.org/html/rfc4180">RFC 4180</a> with respect to:</p>
+<ul><li>
+<p>Column separator.</p>
+</li><li>
+<p>Quote character.</p>
+</li></ul>
+
+<h4 id="label-Row+Separator">Row Separator<span><a href="#label-Row+Separator">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>RFC 4180 specifies the row separator CRLF (Ruby <code>&quot;\r\n&quot;</code>).</p>
+
+<h5 id="label-Recipe-3A+Generate+Compliant+Row+Separator">Recipe: Generate Compliant Row Separator<span><a href="#label-Recipe-3A+Generate+Compliant+Row+Separator">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>For strict compliance, use option <code>:row_sep</code> to specify row separator <code>&quot;\r\n&quot;</code>:</p>
+
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">row_sep:</span> <span class="ruby-string">&quot;\r\n&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0\r\nBar,1\r\nBaz,2\r\n&quot;</span>
+</pre>
+
+<h5 id="label-Recipe-3A+Generate+Non-Compliant+Row+Separator">Recipe: Generate Non-Compliant Row Separator<span><a href="#label-Recipe-3A+Generate+Non-Compliant+Row+Separator">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>For data with non-compliant row separators, use option <code>:row_sep</code> with a different value: This example source uses semicolon (<code>&quot;;&#39;</code>) as its row separator:</p>
+
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">row_sep:</span> <span class="ruby-string">&quot;;&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0;Bar,1;Baz,2;&quot;</span>
+</pre>
+
+<h4 id="label-Column+Separator">Column Separator<span><a href="#label-Column+Separator">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>RFC 4180 specifies column separator COMMA (Ruby <code>&quot;,&quot;</code>).</p>
+
+<h5 id="label-Recipe-3A+Generate+Compliant+Column+Separator">Recipe: Generate Compliant Column Separator<span><a href="#label-Recipe-3A+Generate+Compliant+Column+Separator">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>Because the CSV default comma separator is <code>&quot;,&quot;</code>, you need not specify option <code>:col_sep</code> for compliant data:</p>
+
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\nBaz,2\n&quot;</span>
+</pre>
+
+<h5 id="label-Recipe-3A+Generate+Non-Compliant+Column+Separator">Recipe: Generate Non-Compliant Column Separator<span><a href="#label-Recipe-3A+Generate+Non-Compliant+Column+Separator">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>For data with non-compliant column separators, use option <code>:col_sep</code>. This example source uses TAB (<code>&quot;\t&quot;</code>) as its column separator:</p>
+
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">col_sep:</span> <span class="ruby-string">&quot;\t&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo\t0\nBar\t1\nBaz\t2\n&quot;</span>
+</pre>
+
+<h4 id="label-Quotes">Quotes<span><a href="#label-Quotes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>IFC 4180 allows most fields to be quoted or not. By default, CSV does not quote most fields.</p>
+
+<p>However, a field containing the current row separator, column separator, or quote character is automatically quoted, producing IFC 4180 compliance:</p>
+
+<pre class="ruby"><span class="ruby-comment"># Field contains row separator.</span>
+<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">row_sep</span> = <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">row_sep</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-node">&quot;Foo#{row_sep}Foo&quot;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;\&quot;Foo\nFoo\&quot;,0\nBar,1\nBaz,2\n&quot;</span>
+<span class="ruby-comment"># Field contains column separator.</span>
+<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">col_sep</span> = <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">col_sep</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-node">&quot;Foo#{col_sep}Foo&quot;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;\&quot;Foo,Foo\&quot;,0\nBar,1\nBaz,2\n&quot;</span>
+<span class="ruby-comment"># Field contains quote character.</span>
+<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">quote_char</span> = <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">quote_char</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-node">&quot;Foo#{quote_char}Foo&quot;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;\&quot;Foo\&quot;\&quot;Foo\&quot;,0\nBar,1\nBaz,2\n&quot;</span>
+</pre>
+
+<h5 id="label-Recipe-3A+Quote+All+Fields">Recipe: Quote All Fields<span><a href="#label-Recipe-3A+Quote+All+Fields">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>Use option <code>:force_quotes</code> to force quoted fields:</p>
+
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">force_quotes:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;\&quot;Foo\&quot;,\&quot;0\&quot;\n\&quot;Bar\&quot;,\&quot;1\&quot;\n\&quot;Baz\&quot;,\&quot;2\&quot;\n&quot;</span>
+</pre>
+
+<h5 id="label-Recipe-3A+Quote+Empty+Fields">Recipe: Quote Empty Fields<span><a href="#label-Recipe-3A+Quote+Empty+Fields">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>Use option <code>:quote_empty</code> to force quoting for empty fields:</p>
+
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">quote_empty:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\n\&quot;\&quot;,2\n&quot;</span>
+</pre>
+
+<h5 id="label-Recipe-3A+Generate+Compliant+Quote+Character">Recipe: Generate Compliant Quote Character<span><a href="#label-Recipe-3A+Generate+Compliant+Quote+Character">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>RFC 4180 specifies quote character DQUOTE (Ruby <code>&quot;\&quot;&quot;</code>).</p>
+
+<p>Because the CSV default quote character is also <code>&quot;\&quot;&quot;</code>, you need not specify option <code>:quote_char</code> for compliant data:</p>
+
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">force_quotes:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;\&quot;Foo\&quot;,\&quot;0\&quot;\n\&quot;Bar\&quot;,\&quot;1\&quot;\n\&quot;Baz\&quot;,\&quot;2\&quot;\n&quot;</span>
+</pre>
+
+<h5 id="label-Recipe-3A+Generate+Non-Compliant+Quote+Character">Recipe: Generate Non-Compliant Quote Character<span><a href="#label-Recipe-3A+Generate+Non-Compliant+Quote+Character">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>For data with non-compliant quote characters, use option <code>:quote_char</code>. This example source uses SQUOTE (<code>&quot;&#39;&quot;</code>) as its quote character:</p>
+
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">quote_char:</span> <span class="ruby-string">&quot;&#39;&quot;</span>, <span class="ruby-value">force_quotes:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;&#39;Foo&#39;,&#39;0&#39;\n&#39;Bar&#39;,&#39;1&#39;\n&#39;Baz&#39;,&#39;2&#39;\n&quot;</span>
+</pre>
+
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
