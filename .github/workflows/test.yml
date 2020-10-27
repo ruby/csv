@@ -91,19 +91,19 @@ jobs:
           github.event_name == 'push'
         with:
           ref: gh-pages
-          path: csv-gh-pages
+          path: gh-pages
       - name: Deploy
         if: |
           github.event_name == 'push'
         run: |
           rm html/created.rid
           touch html/.nojekyll
-          cd ../csv-gh-pages
+          cd gh-pages
           rsync \
             -a \
             --delete \
             --exclude "/.git/" \
-            ../csv/html/ \
+            ../html/ \
             ./
           if [ "$(git status --porcelain)" != "" ]; then
             git add --all
