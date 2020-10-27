@@ -92,10 +92,10 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git checkout gh-pages
           rm html/created.rid
           touch html/.nojekyll
           mv html ../
+          git checkout --track origin/gh-pages
           rsync \
             -a \
             --delete \
