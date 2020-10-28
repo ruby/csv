@@ -31,6 +31,11 @@ CSV.foreach("path/to/file.csv") do |row|
 end
 ```
 
+## Documentation
+
+- {API}[CSV.html]:  all classes, methods, and constants.
+- {Recipes}[doc/csv/recipes/recipes_rdoc.html]:  specific code for specific tasks.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

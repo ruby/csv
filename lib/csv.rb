@@ -111,6 +111,8 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 # you may want to go directly to the:
 # - {Recipes for CSV}[doc/csv/recipes/recipes_rdoc.html].
 #
+# Otherwise, read on here, about the API: classes, methods, and constants.
+#
 # === \CSV Data
 #
 # \CSV (comma-separated values) data is a text representation of a table:
