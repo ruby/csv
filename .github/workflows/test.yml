@@ -26,6 +26,7 @@ jobs:
           ruby-version: ${{ matrix.ruby-version }}
       - name: Install dependencies
         run: |
+          gem install bundler
           bundle install
       - name: Test
         run: |
