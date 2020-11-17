@@ -1,5 +1,16 @@
 # News
 
+## 3.1.8 - 2020-11-18
+
+### Improvements
+
+  * Improved documentation.
+    [Patch by Burdette Lamar]
+
+### Thanks
+
+  * Burdette Lamar
+
 ## 3.1.7 - 2020-08-04
 
 ### Improvements
