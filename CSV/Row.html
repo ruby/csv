@@ -1132,7 +1132,7 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field</span>(<span class="ruby-identifier">header_or_index</span>, <span class="ruby-identifier">minimum_index</span> = <span class="ruby-value">0</span>)
   <span class="ruby-comment"># locate the pair</span>
   <span class="ruby-identifier">finder</span> = (<span class="ruby-identifier">header_or_index</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Integer</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">header_or_index</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Range</span>)) <span class="ruby-operator">?</span> <span class="ruby-value">:[]</span> <span class="ruby-operator">:</span> <span class="ruby-value">:assoc</span>
-  <span class="ruby-identifier">pair</span>   = <span class="ruby-ivar">@row</span>[<span class="ruby-identifier">minimum_index</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">send</span>(<span class="ruby-identifier">finder</span>, <span class="ruby-identifier">header_or_index</span>)
+  <span class="ruby-identifier">pair</span>   = <span class="ruby-ivar">@row</span>[<span class="ruby-identifier">minimum_index</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">public_send</span>(<span class="ruby-identifier">finder</span>, <span class="ruby-identifier">header_or_index</span>)
 
   <span class="ruby-comment"># return the field if we have a pair</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">pair</span>.<span class="ruby-identifier">nil?</span>
