@@ -33,8 +33,8 @@ end
 
 ## Documentation
 
-- {API}[CSV.html]:  all classes, methods, and constants.
-- {Recipes}[doc/csv/recipes/recipes_rdoc.html]:  specific code for specific tasks.
+- [API](https://www.rubydoc.info/gems/csv/):  all classes, methods, and constants.
+- [Recipes](doc/csv/recipes/recipes.rdoc):  specific code for specific tasks.
 
 ## Development
 
