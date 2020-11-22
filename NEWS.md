@@ -1,5 +1,17 @@
 # News
 
+## 3.1.9 - 2020-11-23
+
+### Fixes
+
+  * Fixed a compatibility bug that the line to be processed by
+    `skip_lines:` has a row separator.
+    [GitHub#194][Reported by Josef Šimánek]
+
+### Thanks
+
+  * Josef Šimánek
+
 ## 3.1.8 - 2020-11-18
 
 ### Improvements
