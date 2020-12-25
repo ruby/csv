@@ -736,7 +736,7 @@ baz,2
 
 <h5 id="label-Recipe-3A+Specify+Multiple+Field+Converters+in+Option+-3Aconverters">Recipe: Specify Multiple Field Converters in Option <code>:converters</code><span><a href="#label-Recipe-3A+Specify+Multiple+Field+Converters+in+Option+-3Aconverters">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
-<p>Apply multiple field converters by specifying them in option <code>:conveters</code>:</p>
+<p>Apply multiple field converters by specifying them in option <code>:converters</code>:</p>
 
 <pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1.0\nbaz,2.0\n&quot;</span>
 <span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters:</span> [<span class="ruby-value">:integer</span>, <span class="ruby-value">:float</span>])
@@ -820,7 +820,7 @@ baz,2
 
 <h5 id="label-Recipe-3A+Specify+Multiple+Header+Converters+in+Option+-3Aheader_converters">Recipe: Specify Multiple Header Converters in Option :header_converters<span><a href="#label-Recipe-3A+Specify+Multiple+Header+Converters+in+Option+-3Aheader_converters">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
-<p>Apply multiple header converters by specifying them in option <code>:header_conveters</code>:</p>
+<p>Apply multiple header converters by specifying them in option <code>:header_converters</code>:</p>
 
 <pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1.0\nbaz,2.0\n&quot;</span>
 <span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">header_converters:</span> [<span class="ruby-value">:downcase</span>, <span class="ruby-value">:symbol</span>])
