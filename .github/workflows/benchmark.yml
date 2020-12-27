@@ -12,6 +12,7 @@ jobs:
       matrix:
         ruby-version:
           - 2.7
+          - 3.0
         runs-on:
           - macos-latest
           - ubuntu-latest
