@@ -12,14 +12,17 @@ jobs:
       matrix:
         ruby-version:
           - 2.7
+          - 3.0
         runs-on:
           - macos-latest
           - ubuntu-latest
           - windows-latest
+        exclude:
+          - { runs-on: windows-latest , ruby-version: 3.0 }
     runs-on: ${{ matrix.runs-on }}
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
       - name: Install dependencies
