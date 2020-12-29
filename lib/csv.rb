@@ -48,7 +48,7 @@
 #
 # === Interface
 #
-# * CSV now uses Hash-style parameters to set options.
+# * CSV now uses keyword parameters to set options.
 # * CSV no longer has generate_row() or parse_row().
 # * The old CSV's Reader and Writer classes have been dropped.
 # * CSV::open() is now more like Ruby's open().
@@ -1356,7 +1356,7 @@ class CSV
     #   open(io, mode = "rb", **options ) { |csv| ... } -> object
     #
     # possible options elements:
-    #   hash form:
+    #   keyword form:
     #     :invalid => nil      # raise error on invalid byte sequence (default)
     #     :invalid => :replace # replace invalid byte sequence
     #     :undef => :replace   # replace undefined conversion
