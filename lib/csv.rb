@@ -1423,10 +1423,14 @@ class CSV
     def open(filename, mode="r", **options)
       # wrap a File opened with the remaining +args+ with no newline
       # decorator
-      file_opts = {universal_newline: false}.merge(options)
+      file_opts = options.dup
+      unless file_opts.key?(:newline)
+        file_opts[:universal_newline] ||= false
+      end
       options.delete(:invalid)
       options.delete(:undef)
       options.delete(:replace)
+      options.delete_if {|k, _| /newline\z/.match?(k)}
 
       begin
         f = File.open(filename, mode, **file_opts)
