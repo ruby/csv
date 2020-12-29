@@ -1430,7 +1430,7 @@ class CSV
       options.delete(:invalid)
       options.delete(:undef)
       options.delete(:replace)
-      options.delete_if {|k, _| /newline\z/ =~ k}
+      options.delete_if {|k, _| /newline\z/.match?(k)}
 
       begin
         f = File.open(filename, mode, **file_opts)
