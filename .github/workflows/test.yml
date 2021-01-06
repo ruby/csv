@@ -15,12 +15,17 @@ jobs:
           - 2.6
           - 2.7
           - 3.0
+          - debug
         runs-on:
           - macos-latest
           - ubuntu-latest
           - windows-latest
         exclude:
           - { runs-on: windows-latest , ruby-version: 3.0 }
+          - { runs-on: windows-latest , ruby-version: debug }
+        include:
+          - { runs-on: windows-latest , ruby-version: mingw }
+          - { runs-on: windows-latest , ruby-version: mswin }
     runs-on: ${{ matrix.runs-on }}
     steps:
       - uses: actions/checkout@v2
@@ -43,12 +48,17 @@ jobs:
         ruby-version:
           - 3.0
           - 2.7
+          - debug
         runs-on:
           - macos-latest
           - ubuntu-latest
           - windows-latest
         exclude:
           - { runs-on: windows-latest , ruby-version: 3.0 }
+          - { runs-on: windows-latest , ruby-version: debug }
+        include:
+          - { runs-on: windows-latest , ruby-version: mingw }
+          - { runs-on: windows-latest , ruby-version: mswin }
     runs-on: ${{ matrix.runs-on }}
     env:
       CSV_PARSER_SCANNER_TEST: "yes"
