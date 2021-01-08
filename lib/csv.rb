@@ -1006,60 +1006,142 @@ class CSV
     end
 
     # :call-seq:
-    #   filter(**options) {|row| ... }
-    #   filter(in_string, **options) {|row| ... }
-    #   filter(in_io, **options) {|row| ... }
-    #   filter(in_string, out_string, **options) {|row| ... }
-    #   filter(in_string, out_io, **options) {|row| ... }
-    #   filter(in_io, out_string, **options) {|row| ... }
-    #   filter(in_io, out_io, **options) {|row| ... }
+    #   filter(in_string_or_io, **options) {|row| ... } -> array_of_arrays or csv_table
+    #   filter(in_string_or_io, out_string_or_io, **options) {|row| ... } -> array_of_arrays or csv_table
+    #   filter(**options) {|row| ... } -> array_of_arrays or csv_table
     #
-    # Reads \CSV input and writes \CSV output.
+    # Parses \CSV from a source (\String, \IO stream, or ARGF)
+    # and generates \CSV to an output (\String, \IO stream, or STDOUT).
     #
-    # For each input row:
-    # - Forms the data into:
-    #   - A CSV::Row object, if headers are in use.
-    #   - An \Array of Arrays, otherwise.
-    # - Calls the block with that object.
-    # - Appends the block's return value to the output.
+    # When +in_string_or_io+ is given, but not +out_string_or_io+,
+    # parses from the given +in_string_or_io+
+    # and generates to STDOUT.
     #
-    # Arguments:
-    # * \CSV source:
-    #   * Argument +in_string+, if given, should be a \String object;
-    #     it will be put into a new StringIO object positioned at the beginning.
-    #   * Argument +in_io+, if given, should be an IO object that is
-    #     open for reading; on return, the IO object will be closed.
-    #   * If neither  +in_string+ nor +in_io+ is given,
-    #     the input stream defaults to {ARGF}[https://ruby-doc.org/core/ARGF.html].
-    # * \CSV output:
-    #   * Argument +out_string+, if given, should be a \String object;
-    #     it will be put into a new StringIO object positioned at the beginning.
-    #   * Argument +out_io+, if given, should be an IO object that is
-    #     ppen for writing; on return, the IO object will be closed.
-    #   * If neither +out_string+ nor +out_io+ is given,
-    #     the output stream defaults to <tt>$stdout</tt>.
-    # * Argument +options+ should be keyword arguments.
-    #   - Each argument name that is prefixed with +in_+ or +input_+
-    #     is stripped of its prefix and is treated as an option
-    #     for parsing the input.
-    #     Option +input_row_sep+ defaults to <tt>$INPUT_RECORD_SEPARATOR</tt>.
-    #   - Each argument name that is prefixed with +out_+ or +output_+
-    #     is stripped of its prefix and is treated as an option
-    #     for generating the output.
-    #     Option +output_row_sep+ defaults to <tt>$INPUT_RECORD_SEPARATOR</tt>.
-    #   - Each argument not prefixed as above is treated as an option
-    #     both for parsing the input and for generating the output.
-    #   - See {Options for Parsing}[#class-CSV-label-Options+for+Parsing]
-    #     and {Options for Generating}[#class-CSV-label-Options+for+Generating].
+    # \String input without headers:
     #
-    # Example:
-    #   in_string = "foo,0\nbar,1\nbaz,2\n"
-    #   out_string = ''
-    #   CSV.filter(in_string, out_string) do |row|
-    #     row[0] = row[0].upcase
-    #     row[1] *= 4
+    #   in_string = "foo,0\nbar,1\nbaz,2"
+    #   CSV::filter(in_string) {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #
+    # Output (to STDOUT):
+    #
+    #   FOO,0
+    #   BAR,-1
+    #   BAZ,-2
+    #
+    # \String input with headers:
+    #
+    #   in_string = "Name,Value\nfoo,0\nbar,1\nbaz,2"
+    #   CSV::filter(in_string, headers: true) {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #
+    # Output (to STDOUT):
+    #
+    #   Name,Value
+    #   FOO,0
+    #   BAR,-1
+    #   BAZ,-2
+    #
+    # \IO stream input without headers:
+    #
+    #   File.write('t.csv', "foo,0\nbar,1\nbaz,2")
+    #   File.open('t.csv') do |in_io|
+    #     CSV.filter(in_io) {|row| row[0].upcase!; row[1] = - row[1].to_i }
     #   end
-    #   out_string # => "FOO,0000\nBAR,1111\nBAZ,2222\n"
+    #
+    # Output (to STDOUT):
+    #
+    #   FOO,0
+    #   BAR,-1
+    #   BAZ,-2
+    #
+    # \IO stream input with headers:
+    #
+    #   File.write('t.csv', "Name,Value\nfoo,0\nbar,1\nbaz,2")
+    #   File.open('t.csv') do |in_io|
+    #     CSV.filter(in_io, headers: true) {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #   end
+    #
+    # Output (to STDOUT):
+    #
+    #   Name,Value
+    #   FOO,0
+    #   BAR,-1
+    #   BAZ,-2
+    #
+    # When both +in_string_or_io+ and +out_string_or_io+ are given,
+    # parses from +in_string_or_io+ and generates to +out_string_or_io+.
+    #
+    # \String output without headers:
+    #
+    #   in_string = "foo,0\nbar,1\nbaz,2"
+    #   out_string = ''
+    #   CSV.filter(in_string, out_string) {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #   out_string # => "FOO,0\nBAR,-1\nBAZ,-2\n"
+    #
+    # \String output with headers:
+    #
+    #   in_string = "Name,Value\nfoo,0\nbar,1\nbaz,2"
+    #   out_string = ''
+    #   CSV.filter(in_string, out_string, headers: true) {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #   out_string # => "Name,Value\nFOO,0\nBAR,-1\nBAZ,-2\n"
+    #
+    # \IO stream output without headers:
+    #
+    #   in_string = "foo,0\nbar,1\nbaz,2"
+    #   File.open('t.csv', 'w') do |out_io|
+    #     CSV.filter(in_string, out_io) {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #   end
+    #   File.read('t.csv') # => "FOO,0\nBAR,-1\nBAZ,-2\n"
+    #
+    # \IO stream output with headers:
+    #
+    #   in_string = "Name,Value\nfoo,0\nbar,1\nbaz,2"
+    #   File.open('t.csv', 'w') do |out_io|
+    #     CSV.filter(in_string, out_io, headers: true) {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #   end
+    #   File.read('t.csv') # => "Name,Value\nFOO,0\nBAR,-1\nBAZ,-2\n"
+    #
+    # When neither +in_string_or_io+ nor +out_string_or_io+ given,
+    # parses from {ARGF}[https://ruby-doc.org/core/ARGF.html]
+    # and generates to STDOUT.
+    #
+    # Without headers:
+    #
+    #   # Put Ruby code into a file.
+    #   ruby = <<-EOT
+    #     require 'csv'
+    #     CSV::filter {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #   EOT
+    #   File.write('t.rb', ruby)
+    #   # Put some CSV into a file.
+    #   File.write('t.csv', "foo,0\nbar,1\nbaz,2")
+    #   # Run the Ruby code with CSV filename as argument.
+    #   `ruby t.rb t.csv`
+    #
+    # Output (to STDOUT):
+    #
+    #   FOO,0
+    #   BAR,-1
+    #   BAZ,-2
+    #
+    # With headers:
+    #
+    #   # Put Ruby code into a file.
+    #   ruby = <<-EOT
+    #     require 'csv'
+    #     p CSV::filter(headers: true) {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #   EOT
+    #   File.write('t.rb', ruby)
+    #   # Put some CSV into a file.
+    #   File.write('t.csv', "Name,Value\nfoo,0\nbar,1\nbaz,2")
+    #   # Run the Ruby code with CSV filename as argument.
+    #   `ruby t.rb t.csv`
+    #
+    # Output (to STDOUT):
+    #
+    #   Name,Value
+    #   FOO,0
+    #   BAR,-1
+    #   BAZ,-2
     def filter(input=nil, output=nil, **options)
       # parse options for input, output, or both
       in_options, out_options = Hash.new, {row_sep: $INPUT_RECORD_SEPARATOR}
