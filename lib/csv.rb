@@ -1106,19 +1106,78 @@ class CSV
 
     #
     # :call-seq:
-    #   foreach(path, mode='r', **options) {|row| ... )
-    #   foreach(io, mode='r', **options {|row| ... )
-    #   foreach(path, mode='r', headers: ..., **options) {|row| ... )
-    #   foreach(io, mode='r', headers: ..., **options {|row| ... )
-    #   foreach(path, mode='r', **options) -> new_enumerator
-    #   foreach(io, mode='r', **options -> new_enumerator
+    #   foreach(path_or_io, mode='r', **options) {|row| ... )
+    #   foreach(path_or_io, mode='r', **options) -> new_enumerator
     #
-    # Calls the block with each row read from source +path+ or +io+.
+    # Calls the block with each row read from source +path_or_io+.
     #
-    # * Argument +path+, if given, must be the path to a file.
-    # :include: ../doc/csv/arguments/io.rdoc
+    # \Path input without headers:
+    #
+    #   string = "foo,0\nbar,1\nbaz,2\n"
+    #   in_path = 't.csv'
+    #   File.write(in_path, string)
+    #   CSV.foreach(in_path) {|row| p row }
+    #
+    # Output:
+    #
+    #   ["foo", "0"]
+    #   ["bar", "1"]
+    #   ["baz", "2"]
+    #
+    # \Path input with headers:
+    #
+    #   string = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   in_path = 't.csv'
+    #   File.write(in_path, string)
+    #   CSV.foreach(in_path, headers: true) {|row| p row }
+    #
+    # Output:
+    #
+    #   <CSV::Row "Name":"foo" "Value":"0">
+    #   <CSV::Row "Name":"bar" "Value":"1">
+    #   <CSV::Row "Name":"baz" "Value":"2">
+    #
+    # \IO stream input without headers:
+    #
+    #   string = "foo,0\nbar,1\nbaz,2\n"
+    #   path = 't.csv'
+    #   File.write(path, string)
+    #   File.open('t.csv') do |in_io|
+    #     CSV.foreach(in_io) {|row| p row }
+    #   end
+    #
+    # Output:
+    #
+    #   ["foo", "0"]
+    #   ["bar", "1"]
+    #   ["baz", "2"]
+    #
+    # \IO stream input with headers:
+    #
+    #   string = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   path = 't.csv'
+    #   File.write(path, string)
+    #   File.open('t.csv') do |in_io|
+    #     CSV.foreach(in_io, headers: true) {|row| p row }
+    #   end
+    #
+    # Output:
+    #
+    #   <CSV::Row "Name":"foo" "Value":"0">
+    #   <CSV::Row "Name":"bar" "Value":"1">
+    #   <CSV::Row "Name":"baz" "Value":"2">
+    #
+    # With no block given, returns an \Enumerator:
+    #
+    #   string = "foo,0\nbar,1\nbaz,2\n"
+    #   path = 't.csv'
+    #   File.write(path, string)
+    #   CSV.foreach(path) # => #<Enumerator: CSV:foreach("t.csv", "r")>
+    #
+    # Arguments:
+    # * Argument +path_or_io+ must be a file path or an \IO stream.
     # * Argument +mode+, if given, must be a \File mode
-    #   See {Open Mode}[IO.html#method-c-new-label-Open+Mode].
+    #   See {Open Mode}[https://ruby-doc.org/core/IO.html#method-c-new-label-Open+Mode].
     # * Arguments <tt>**options</tt> must be keyword options.
     #   See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
     # * This method optionally accepts an additional <tt>:encoding</tt> option
@@ -1131,86 +1190,6 @@ class CSV
     #     encoding: 'UTF-32BE:UTF-8'
     #   would read +UTF-32BE+ data from the file
     #   but transcode it to +UTF-8+ before parsing.
-    #
-    # ====== Without Option +headers+
-    #
-    # Without option +headers+, returns each row as an \Array object.
-    #
-    # These examples assume prior execution of:
-    #   string = "foo,0\nbar,1\nbaz,2\n"
-    #   path = 't.csv'
-    #   File.write(path, string)
-    #
-    # Read rows from a file at +path+:
-    #   CSV.foreach(path) {|row| p row }
-    # Output:
-    #   ["foo", "0"]
-    #   ["bar", "1"]
-    #   ["baz", "2"]
-    #
-    # Read rows from an \IO object:
-    #   File.open(path) do |file|
-    #     CSV.foreach(file) {|row| p row }
-    #   end
-    #
-    # Output:
-    #   ["foo", "0"]
-    #   ["bar", "1"]
-    #   ["baz", "2"]
-    #
-    # Returns a new \Enumerator if no block given:
-    #   CSV.foreach(path) # => #<Enumerator: CSV:foreach("t.csv", "r")>
-    #   CSV.foreach(File.open(path)) # => #<Enumerator: CSV:foreach(#<File:t.csv>, "r")>
-    #
-    # Issues a warning if an encoding is unsupported:
-    #   CSV.foreach(File.open(path), encoding: 'foo:bar') {|row| }
-    # Output:
-    #   warning: Unsupported encoding foo ignored
-    #   warning: Unsupported encoding bar ignored
-    #
-    # ====== With Option +headers+
-    #
-    # With {option +headers+}[#class-CSV-label-Option+headers],
-    # returns each row as a CSV::Row object.
-    #
-    # These examples assume prior execution of:
-    #   string = "Name,Count\nfoo,0\nbar,1\nbaz,2\n"
-    #   path = 't.csv'
-    #   File.write(path, string)
-    #
-    # Read rows from a file at +path+:
-    #   CSV.foreach(path, headers: true) {|row| p row }
-    #
-    # Output:
-    #   #<CSV::Row "Name":"foo" "Count":"0">
-    #   #<CSV::Row "Name":"bar" "Count":"1">
-    #   #<CSV::Row "Name":"baz" "Count":"2">
-    #
-    # Read rows from an \IO object:
-    #   File.open(path) do |file|
-    #     CSV.foreach(file, headers: true) {|row| p row }
-    #   end
-    #
-    # Output:
-    #   #<CSV::Row "Name":"foo" "Count":"0">
-    #   #<CSV::Row "Name":"bar" "Count":"1">
-    #   #<CSV::Row "Name":"baz" "Count":"2">
-    #
-    # ---
-    #
-    # Raises an exception if +path+ is a \String, but not the path to a readable file:
-    #   # Raises Errno::ENOENT (No such file or directory @ rb_sysopen - nosuch.csv):
-    #   CSV.foreach('nosuch.csv') {|row| }
-    #
-    # Raises an exception if +io+ is an \IO object, but not open for reading:
-    #   io = File.open(path, 'w') {|row| }
-    #   # Raises TypeError (no implicit conversion of nil into String):
-    #   CSV.foreach(io) {|row| }
-    #
-    # Raises an exception if +mode+ is invalid:
-    #   # Raises ArgumentError (invalid access mode nosuch):
-    #   CSV.foreach(path, 'nosuch') {|row| }
-    #
     def foreach(path, mode="r", **options, &block)
       return to_enum(__method__, path, mode, **options) unless block_given?
       open(path, mode, **options) do |csv|
