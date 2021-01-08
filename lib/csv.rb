@@ -1142,6 +1142,13 @@ class CSV
     #   FOO,0
     #   BAR,-1
     #   BAZ,-2
+    #
+    # Arguments:
+    #
+    # * Argument +in_string_or_io+ must be a \String or an \IO stream.
+    # * Argument +out_string_or_io+ must be a \String or an \IO stream.
+    # * Arguments <tt>**options</tt> must be keyword options.
+    #   See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
     def filter(input=nil, output=nil, **options)
       # parse options for input, output, or both
       in_options, out_options = Hash.new, {row_sep: $INPUT_RECORD_SEPARATOR}
