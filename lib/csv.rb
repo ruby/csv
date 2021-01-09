@@ -1010,8 +1010,14 @@ class CSV
     #   filter(in_string_or_io, out_string_or_io, **options) {|row| ... } -> array_of_arrays or csv_table
     #   filter(**options) {|row| ... } -> array_of_arrays or csv_table
     #
-    # Parses \CSV from a source (\String, \IO stream, or ARGF)
-    # and generates \CSV to an output (\String, \IO stream, or STDOUT).
+    # - Parses \CSV from a source (\String, \IO stream, or ARGF).
+    # - Calls the given block with each parsed row:
+    #   - Without headers, each row is an \Array.
+    #   - With headers, each row is a CSV::Row.
+    # - Generates \CSV to an output (\String, \IO stream, or STDOUT).
+    # - Returns the parsed source:
+    #   - Without headers, an \Array of \Arrays.
+    #   - With headers, a CSV::Table.
     #
     # When +in_string_or_io+ is given, but not +out_string_or_io+,
     # parses from the given +in_string_or_io+
@@ -1020,7 +1026,10 @@ class CSV
     # \String input without headers:
     #
     #   in_string = "foo,0\nbar,1\nbaz,2"
-    #   CSV::filter(in_string) {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #   CSV.filter(in_string) do |row|
+    #     row[0].upcase!
+    #     row[1] = - row[1].to_i
+    #   end # => [["FOO", 0], ["BAR", -1], ["BAZ", -2]]
     #
     # Output (to STDOUT):
     #
@@ -1031,7 +1040,10 @@ class CSV
     # \String input with headers:
     #
     #   in_string = "Name,Value\nfoo,0\nbar,1\nbaz,2"
-    #   CSV::filter(in_string, headers: true) {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #   CSV.filter(in_string, headers: true) do |row|
+    #     row[0].upcase!
+    #     row[1] = - row[1].to_i
+    #   end # => #<CSV::Table mode:col_or_row row_count:4>
     #
     # Output (to STDOUT):
     #
@@ -1044,8 +1056,11 @@ class CSV
     #
     #   File.write('t.csv', "foo,0\nbar,1\nbaz,2")
     #   File.open('t.csv') do |in_io|
-    #     CSV.filter(in_io) {|row| row[0].upcase!; row[1] = - row[1].to_i }
-    #   end
+    #     CSV.filter(in_io) do |row|
+    #       row[0].upcase!
+    #       row[1] = - row[1].to_i
+    #     end
+    #   end # => [["FOO", 0], ["BAR", -1], ["BAZ", -2]]
     #
     # Output (to STDOUT):
     #
@@ -1057,8 +1072,11 @@ class CSV
     #
     #   File.write('t.csv', "Name,Value\nfoo,0\nbar,1\nbaz,2")
     #   File.open('t.csv') do |in_io|
-    #     CSV.filter(in_io, headers: true) {|row| row[0].upcase!; row[1] = - row[1].to_i }
-    #   end
+    #     CSV.filter(in_io, headers: true) do |row|
+    #       row[0].upcase!
+    #       row[1] = - row[1].to_i
+    #     end
+    #   end # => #<CSV::Table mode:col_or_row row_count:4>
     #
     # Output (to STDOUT):
     #
@@ -1074,34 +1092,46 @@ class CSV
     #
     #   in_string = "foo,0\nbar,1\nbaz,2"
     #   out_string = ''
-    #   CSV.filter(in_string, out_string) {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #   CSV.filter(in_string, out_string) do |row|
+    #     row[0].upcase!
+    #     row[1] = - row[1].to_i
+    #   end # => [["FOO", 0], ["BAR", -1], ["BAZ", -2]]
     #   out_string # => "FOO,0\nBAR,-1\nBAZ,-2\n"
     #
     # \String output with headers:
     #
     #   in_string = "Name,Value\nfoo,0\nbar,1\nbaz,2"
     #   out_string = ''
-    #   CSV.filter(in_string, out_string, headers: true) {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #   CSV.filter(in_string, out_string, headers: true) do |row|
+    #     row[0].upcase!
+    #     row[1] = - row[1].to_i
+    #   end # => #<CSV::Table mode:col_or_row row_count:4>
     #   out_string # => "Name,Value\nFOO,0\nBAR,-1\nBAZ,-2\n"
     #
     # \IO stream output without headers:
     #
     #   in_string = "foo,0\nbar,1\nbaz,2"
     #   File.open('t.csv', 'w') do |out_io|
-    #     CSV.filter(in_string, out_io) {|row| row[0].upcase!; row[1] = - row[1].to_i }
-    #   end
+    #     CSV.filter(in_string, out_io) do |row|
+    #       row[0].upcase!
+    #       row[1] = - row[1].to_i
+    #     end
+    #   end # => [["FOO", 0], ["BAR", -1], ["BAZ", -2]]
     #   File.read('t.csv') # => "FOO,0\nBAR,-1\nBAZ,-2\n"
     #
     # \IO stream output with headers:
     #
     #   in_string = "Name,Value\nfoo,0\nbar,1\nbaz,2"
     #   File.open('t.csv', 'w') do |out_io|
-    #     CSV.filter(in_string, out_io, headers: true) {|row| row[0].upcase!; row[1] = - row[1].to_i }
-    #   end
+    #     CSV.filter(in_string, out_io, headers: true) do |row|
+    #       row[0].upcase!
+    #       row[1] = - row[1].to_i
+    #     end
+    #   end # => #<CSV::Table mode:col_or_row row_count:4>
     #   File.read('t.csv') # => "Name,Value\nFOO,0\nBAR,-1\nBAZ,-2\n"
     #
     # When neither +in_string_or_io+ nor +out_string_or_io+ given,
-    # parses from {ARGF}[https://ruby-doc.org/core/ARGF.html]
+    # parses from {ARGF}[https://docs.ruby-lang.org/en/master/ARGF.html]
     # and generates to STDOUT.
     #
     # Without headers:
@@ -1109,13 +1139,16 @@ class CSV
     #   # Put Ruby code into a file.
     #   ruby = <<-EOT
     #     require 'csv'
-    #     CSV::filter {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #     CSV.filter do |row|
+    #       row[0].upcase!
+    #       row[1] = - row[1].to_i
+    #     end
     #   EOT
     #   File.write('t.rb', ruby)
     #   # Put some CSV into a file.
     #   File.write('t.csv', "foo,0\nbar,1\nbaz,2")
     #   # Run the Ruby code with CSV filename as argument.
-    #   `ruby t.rb t.csv`
+    #   system(Gem.ruby, "t.rb", "t.csv")
     #
     # Output (to STDOUT):
     #
@@ -1128,13 +1161,16 @@ class CSV
     #   # Put Ruby code into a file.
     #   ruby = <<-EOT
     #     require 'csv'
-    #     p CSV::filter(headers: true) {|row| row[0].upcase!; row[1] = - row[1].to_i }
+    #     CSV.filter(headers: true) do |row|
+    #       row[0].upcase!
+    #       row[1] = - row[1].to_i
+    #     end
     #   EOT
     #   File.write('t.rb', ruby)
     #   # Put some CSV into a file.
     #   File.write('t.csv', "Name,Value\nfoo,0\nbar,1\nbaz,2")
     #   # Run the Ruby code with CSV filename as argument.
-    #   `ruby t.rb t.csv`
+    #   system(Gem.ruby, "t.rb", "t.csv")
     #
     # Output (to STDOUT):
     #
