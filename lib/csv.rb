@@ -2093,7 +2093,7 @@ class CSV
   end
 
   # :call-seq:
-  #   csv.encoding -> endcoding
+  #   csv.encoding -> encoding
   #
   # Returns the encoding used for parsing and generating;
   # see {Character Encodings (M17n or Multilingualization)}[#class-CSV-label-Character+Encodings+-28M17n+or+Multilingualization-29]:
