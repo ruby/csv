@@ -21,8 +21,6 @@
 <link href="../../css/rdoc.css" rel="stylesheet">
 
 
-
-
 <body id="top" role="document" class="class">
 <nav role="navigation">
   <div id="project-navigation">
@@ -59,34 +57,27 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link">StringScanner
-  
 </div>
 
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li class="calls-super" ><a href="#method-c-new">::new</a>
-    
     <li ><a href="#method-i-each_line">#each_line</a>
-    
     <li ><a href="#method-i-keep_back">#keep_back</a>
-    
     <li ><a href="#method-i-keep_drop">#keep_drop</a>
-    
     <li ><a href="#method-i-keep_end">#keep_end</a>
-    
     <li ><a href="#method-i-keep_start">#keep_start</a>
-    
   </ul>
 </div>
 
@@ -106,46 +97,31 @@
 
   </section>
 
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
 
-    
+
      <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Class Methods</h3>
        </header>
 
-    
       <div id="method-c-new" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">new</span><span
             class="method-args">(*args)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
-          
-          
           
             <div class="method-calls-super">
               Calls superclass method
               
             </div>
-          
 
-          
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
@@ -153,41 +129,28 @@
   <span class="ruby-ivar">@keeps</span> = []
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-each_line" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">each_line</span><span
             class="method-args">(row_separator) { |line| ... }</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
           <div class="method-source-code" id="each_line-source">
             <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_line</span>(<span class="ruby-identifier">row_separator</span>)
@@ -199,99 +162,63 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-keep_back" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">keep_back</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
           <div class="method-source-code" id="keep_back-source">
             <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_back</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pos</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-keep_drop" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">keep_drop</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
           <div class="method-source-code" id="keep_drop-source">
             <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_drop</span>
   <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-keep_end" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">keep_end</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
           <div class="method-source-code" id="keep_end-source">
             <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_end</span>
@@ -299,58 +226,41 @@
   <span class="ruby-identifier">string</span>.<span class="ruby-identifier">byteslice</span>(<span class="ruby-identifier">start</span>, <span class="ruby-identifier">pos</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">start</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-keep_start" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">keep_start</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
           <div class="method-source-code" id="keep_start-source">
             <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_start</span>
   <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">pos</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
-  </section>
 
+  </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

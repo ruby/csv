@@ -21,8 +21,6 @@
 <link href="../css/rdoc.css" rel="stylesheet">
 
 
-
-
 <body id="top" role="document" class="class">
 <nav role="navigation">
   <div id="project-navigation">
@@ -59,28 +57,24 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link"><a href="../Object.html">Object</a>
-  
 </div>
 
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-c-new">::new</a>
-    
     <li ><a href="#method-i-3C-3C">#&lt;&lt;</a>
-    
     <li ><a href="#method-i-rewind">#rewind</a>
-    
   </ul>
 </div>
 
@@ -98,21 +92,15 @@
 
   </section>
 
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
     <section class="attribute-method-details" class="method-section">
       <header>
         <h3>Attributes</h3>
       </header>
 
-      
       <div id="attribute-i-headers" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">headers</span><span
@@ -121,11 +109,8 @@
 
         <div class="method-description">
         
-        
-        
         </div>
       </div>
-      
       <div id="attribute-i-lineno" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">lineno</span><span
@@ -133,40 +118,27 @@
         </div>
 
         <div class="method-description">
-        
         <p>A <a href="Writer.html"><code>CSV::Writer</code></a> receives an output, prepares the header, format and output. It allows us to write new rows in the object and rewind it.</p>
-        
         </div>
       </div>
-      
     </section>
-    
 
-    
+
      <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Class Methods</h3>
        </header>
 
-    
       <div id="method-c-new" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">new</span><span
             class="method-args">(output, options)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/csv/writer.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>)
@@ -181,41 +153,28 @@
   <span class="ruby-ivar">@fields_converter</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:fields_converter</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-3C-3C" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">&lt;&lt;</span><span
             class="method-args">(row)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Adds a new row</p>
-          
-          
 
-          
           <div class="method-source-code" id="3C-3C-source">
             <pre><span class="ruby-comment"># File lib/csv/writer.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-identifier">row</span>)
@@ -245,33 +204,21 @@
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-rewind" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">rewind</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Winds back to the beginning</p>
-          
-          
 
-          
           <div class="method-source-code" id="rewind-source">
             <pre><span class="ruby-comment"># File lib/csv/writer.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
@@ -279,25 +226,20 @@
   <span class="ruby-ivar">@headers</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:headers</span>].<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
-  </section>
 
+  </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

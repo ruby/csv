@@ -21,8 +21,6 @@
 <link href="../css/rdoc.css" rel="stylesheet">
 
 
-
-
 <body id="top" role="document" class="class">
 <nav role="navigation">
   <div id="project-navigation">
@@ -71,106 +69,68 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link"><a href="../Object.html">Object</a>
-  
 </div>
 
-    <div id="includes-section" class="nav-section">
+    
+<div id="includes-section" class="nav-section">
   <h3>Included Modules</h3>
 
   <ul class="link-list">
-  
-  
     <li><span class="include">Enumerable</span>
-  
-  
   </ul>
 </div>
 
-    <div id="extends-section" class="nav-section">
+    
+<div id="extends-section" class="nav-section">
   <h3>Extended With Modules</h3>
 
   <ul class="link-list">
-    
-  
     <li><span class="extend">Forwardable</span>
-  
-  
   </ul>
 </div>
 
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-c-new">::new</a>
-    
     <li ><a href="#method-i-3C-3C">#&lt;&lt;</a>
-    
     <li ><a href="#method-i-3D-3D">#==</a>
-    
     <li ><a href="#method-i-5B-5D">#[]</a>
-    
     <li ><a href="#method-i-5B-5D-3D">#[]=</a>
-    
     <li ><a href="#method-i-delete">#delete</a>
-    
     <li ><a href="#method-i-delete_if">#delete_if</a>
-    
     <li ><a href="#method-i-dig">#dig</a>
-    
     <li ><a href="#method-i-each">#each</a>
-    
     <li ><a href="#method-i-each_pair">#each_pair</a>
-    
     <li ><a href="#method-i-fetch">#fetch</a>
-    
     <li ><a href="#method-i-field">#field</a>
-    
     <li ><a href="#method-i-field-3F">#field?</a>
-    
     <li ><a href="#method-i-field_row-3F">#field_row?</a>
-    
     <li ><a href="#method-i-fields">#fields</a>
-    
     <li ><a href="#method-i-has_key-3F">#has_key?</a>
-    
     <li ><a href="#method-i-header-3F">#header?</a>
-    
     <li ><a href="#method-i-header_row-3F">#header_row?</a>
-    
     <li ><a href="#method-i-headers">#headers</a>
-    
     <li ><a href="#method-i-include-3F">#include?</a>
-    
     <li ><a href="#method-i-index">#index</a>
-    
     <li class="calls-super" ><a href="#method-i-initialize_copy">#initialize_copy</a>
-    
     <li ><a href="#method-i-inspect">#inspect</a>
-    
     <li ><a href="#method-i-key-3F">#key?</a>
-    
     <li ><a href="#method-i-member-3F">#member?</a>
-    
     <li ><a href="#method-i-push">#push</a>
-    
     <li ><a href="#method-i-to_csv">#to_csv</a>
-    
     <li ><a href="#method-i-to_h">#to_h</a>
-    
     <li ><a href="#method-i-to_hash">#to_hash</a>
-    
     <li ><a href="#method-i-to_s">#to_s</a>
-    
     <li ><a href="#method-i-values_at">#values_at</a>
-    
   </ul>
 </div>
 
@@ -279,21 +239,15 @@
 
   </section>
 
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
     <section class="attribute-method-details" class="method-section">
       <header>
         <h3>Attributes</h3>
       </header>
 
-      
       <div id="attribute-i-row" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">row</span><span
@@ -301,38 +255,26 @@
         </div>
 
         <div class="method-description">
-        
         <p>Internal data format used to compare equality.</p>
-        
         </div>
       </div>
-      
     </section>
-    
 
-    
+
      <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Class Methods</h3>
        </header>
 
-    
       <div id="method-c-new" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             CSV::Row.new(headers, fields, header_row = false) &rarr; csv_row
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns the new CSV::Row instance constructed from arguments <code>headers</code> and <code>fields</code>; both should be Arrays; note that the fields need not be Strings:</p>
 
 <pre class="ruby"><span class="ruby-identifier">row</span> = <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], [<span class="ruby-string">&#39;foo&#39;</span>, <span class="ruby-value">0</span>])
@@ -358,10 +300,7 @@
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">field_row?</span> <span class="ruby-comment"># =&gt; false</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">header_row?</span> <span class="ruby-comment"># =&gt; true</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">headers</span>, <span class="ruby-identifier">fields</span>, <span class="ruby-identifier">header_row</span> = <span class="ruby-keyword">false</span>)
@@ -376,53 +315,37 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-3C-3C" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             row &lt;&lt; [header, value] &rarr; self
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             row &lt;&lt; hash &rarr; self
           </span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             row &lt;&lt; value &rarr; self
           </span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Adds a field to <code>self</code>; returns <code>self</code>:</p>
 
 <p>If the argument is a 2-element Array <code>[header, value]</code>, a field is added with the given <code>header</code> and <code>value</code>:</p>
@@ -451,10 +374,7 @@
 <span class="ruby-identifier">row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Bag&#39;</span>
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;Foo&quot; &quot;Name&quot;:&quot;Bar&quot; &quot;Name&quot;:&quot;Baz&quot; nil:&quot;Bag&quot;&gt;</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="3C-3C-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 389</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-identifier">arg</span>)
@@ -469,31 +389,20 @@
   <span class="ruby-keyword">self</span>  <span class="ruby-comment"># for chaining</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-3D-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             row == other &rarr; true or false
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns <code>true</code> if <code>other</code> is a /CSV::Row that has the same fields (headers and values) in the same order as <code>self</code>; otherwise returns <code>false</code>:</p>
 
 <pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
@@ -504,10 +413,7 @@
 <span class="ruby-identifier">other_row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">1</span>]
 <span class="ruby-identifier">row</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other_row</span> <span class="ruby-comment"># =&gt; false</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="3D-3D-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 633</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
@@ -515,73 +421,43 @@
   <span class="ruby-ivar">@row</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-5B-5D" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">[]</span><span
-            class="method-args">(header_or_index, minimum_index = 0)</span>
-          
-        </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
         </div>
 
-        
 
-        
         <div class="aliases">
           Alias for: <a href="Row.html#method-i-field">field</a>
         </div>
-        
       </div>
 
-    
       <div id="method-i-5B-5D-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             row[index] = value &rarr; value
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             row[header, offset] = value &rarr; value
           </span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             row[header] = value &rarr; value
           </span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Assigns the field value for the given <code>index</code> or <code>header</code>; returns <code>value</code>.</p>
 <hr>
 
@@ -637,10 +513,7 @@
 <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;New&#39;</span>] = <span class="ruby-value">6</span>
 <span class="ruby-identifier">row</span><span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;foo&quot; &quot;Value&quot;:&quot;0&quot; &quot;New&quot;:6&gt;</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="5B-5D-3D-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 339</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]=</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
@@ -663,45 +536,30 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-delete" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             delete(index) &rarr; [header, value] or nil
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             delete(header) &rarr; [header, value] or empty_array
           </span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             delete(header, offset) &rarr; [header, value] or empty_array
           </span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Removes a specified field from <code>self</code>; returns the 2-element Array <code>[header, value]</code> if the field exists.</p>
 
 <p>If an Integer argument <code>index</code> is given, removes and returns the field at offset <code>index</code>, or returns <code>nil</code> if the field does not exist:</p>
@@ -730,10 +588,7 @@
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Bar&quot;]</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;NAME&#39;</span>, <span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; []</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="delete-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 451</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">header_or_index</span>, <span class="ruby-identifier">minimum_index</span> = <span class="ruby-value">0</span>)
@@ -746,31 +601,20 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-delete_if" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             delete_if {|header, value| ... } &rarr; self
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Removes fields from <code>self</code> as selected by the block; returns <code>self</code>.</p>
 
 <p>Removes each field for which the block returns a truthy value:</p>
@@ -787,10 +631,7 @@
 
 <pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete_if</span> <span class="ruby-comment"># =&gt; #&lt;Enumerator: #&lt;CSV::Row &quot;Name&quot;:&quot;Foo&quot;&gt;:delete_if&gt;</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="delete_if-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 476</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_if</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -801,31 +642,20 @@
   <span class="ruby-keyword">self</span>  <span class="ruby-comment"># for chaining</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-dig" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             dig(index_or_header, *identifiers) &rarr; object
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Finds and returns the object in nested object that is specified by <code>index_or_header</code> and <code>specifiers</code>.</p>
 
 <p>The nested objects may be instances of various classes. See <a href="https://docs.ruby-lang.org/en/master/doc/dig_methods_rdoc.html">Dig Methods</a>.</p>
@@ -839,10 +669,7 @@
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;Value&#39;</span>) <span class="ruby-comment"># =&gt; &quot;0&quot;</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-value">5</span>) <span class="ruby-comment"># =&gt; nil</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="dig-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 693</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dig</span>(<span class="ruby-identifier">index_or_header</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">indexes</span>)
@@ -859,31 +686,20 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-each" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             each {|header, value| ... } &rarr; self
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Calls the block with each header-value pair; returns <code>self</code>:</p>
 
 <pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
@@ -903,10 +719,7 @@
 
 <pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">each</span> <span class="ruby-comment"># =&gt; #&lt;Enumerator: #&lt;CSV::Row &quot;Name&quot;:&quot;Foo&quot; &quot;Name&quot;:&quot;Bar&quot; &quot;Name&quot;:&quot;Baz&quot;&gt;:each&gt;</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="each-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 610</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -917,77 +730,46 @@
   <span class="ruby-keyword">self</span>  <span class="ruby-comment"># for chaining</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
         <div class="aliases">
           Also aliased as: <a href="Row.html#method-i-each_pair">each_pair</a>
         </div>
-        
 
-        
       </div>
 
-    
       <div id="method-i-each_pair" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">each_pair</span><span
-            class="method-args">(&amp;block)</span>
-          
-        </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
         </div>
 
-        
 
-        
         <div class="aliases">
           Alias for: <a href="Row.html#method-i-each">each</a>
         </div>
-        
       </div>
 
-    
       <div id="method-i-fetch" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             fetch(header) &rarr; value
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             fetch(header, default) &rarr; value
           </span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             fetch(header) {|row| ... } &rarr; value
           </span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns the field value as specified by <code>header</code>.</p>
 <hr>
 
@@ -1020,10 +802,7 @@
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;Name&#39;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span><span class="ruby-operator">|</span> <span class="ruby-identifier">fail</span> <span class="ruby-string">&#39;Cannot happen&#39;</span> } <span class="ruby-comment"># =&gt; &quot;Foo&quot;</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:nosuch</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;Header &#39;#{header} not found&#39;&quot;</span> } <span class="ruby-comment"># =&gt; &quot;Header &#39;nosuch not found&#39;&quot;</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="fetch-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 258</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch</span>(<span class="ruby-identifier">header</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">varargs</span>)
@@ -1042,45 +821,30 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-field" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             field(index) &rarr; value
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             field(header) &rarr; value
           </span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             field(header, offset) &rarr; value
           </span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns the field value for the given <code>index</code> or <code>header</code>.</p>
 <hr>
 
@@ -1123,10 +887,7 @@
 </pre>
 
 <p>Returns <code>nil</code> if the header does not exist.</p>
-          
-          
 
-          
           <div class="method-source-code" id="field-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 203</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field</span>(<span class="ruby-identifier">header_or_index</span>, <span class="ruby-identifier">minimum_index</span> = <span class="ruby-value">0</span>)
@@ -1142,35 +903,23 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
         <div class="aliases">
           Also aliased as: <a href="Row.html#method-i-5B-5D">[]</a>
         </div>
-        
 
-        
       </div>
 
-    
       <div id="method-i-field-3F" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             field?(value) &rarr; true or false
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns <code>true</code> if <code>value</code> is a field in this row, <code>false</code> otherwise:</p>
 
 <pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
@@ -1179,77 +928,49 @@
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">field?</span>(<span class="ruby-string">&#39;Bar&#39;</span>) <span class="ruby-comment"># =&gt; true</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">field?</span>(<span class="ruby-string">&#39;BAR&#39;</span>) <span class="ruby-comment"># =&gt; false</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="field-3F-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 589</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field?</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">data</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-field_row-3F" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             field_row? &rarr; true or false
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns <code>true</code> if this is a field row, <code>false</code> otherwise.</p>
-          
-          
 
-          
           <div class="method-source-code" id="field_row-3F-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field_row?</span>
   <span class="ruby-keyword">not</span> <span class="ruby-identifier">header_row?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-fields" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             fields(*specifiers) &rarr; array_of_fields
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns field values per the given <code>specifiers</code>, which may be any mixture of:</p>
 <ul><li>
 <p>Integer index.</p>
@@ -1302,10 +1023,7 @@
 
 <pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">fields</span> <span class="ruby-comment"># =&gt; [&quot;Foo&quot;, &quot;Bar&quot;, &quot;Baz&quot;]</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="fields-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 530</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fields</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">headers_and_or_indices</span>)
@@ -1330,139 +1048,83 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
         <div class="aliases">
           Also aliased as: <a href="Row.html#method-i-values_at">values_at</a>
         </div>
-        
 
-        
       </div>
 
-    
       <div id="method-i-has_key-3F" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             has_key?(header) &rarr; true or false
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns <code>true</code> if there is a field with the given <code>header</code>, <code>false</code> otherwise.</p>
-          
-          
 
-          
           <div class="method-source-code" id="has_key-3F-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 279</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">has_key?</span>(<span class="ruby-identifier">header</span>)
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-ivar">@row</span>.<span class="ruby-identifier">assoc</span>(<span class="ruby-identifier">header</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
         <div class="aliases">
           Also aliased as: <a href="Row.html#method-i-include-3F">include?</a>, <a href="Row.html#method-i-key-3F">key?</a>, <a href="Row.html#method-i-member-3F">member?</a>, <a href="Row.html#method-i-header-3F">header?</a>
         </div>
-        
 
-        
       </div>
 
-    
       <div id="method-i-header-3F" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">header?</span><span
-            class="method-args">(header)</span>
-          
-        </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
         </div>
 
-        
 
-        
         <div class="aliases">
           Alias for: <a href="Row.html#method-i-has_key-3F">has_key?</a>
         </div>
-        
       </div>
 
-    
       <div id="method-i-header_row-3F" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             header_row? &rarr; true or false
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns <code>true</code> if this is a header row, <code>false</code> otherwise.</p>
-          
-          
 
-          
           <div class="method-source-code" id="header_row-3F-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_row?</span>
   <span class="ruby-ivar">@header_row</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-headers" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             headers &rarr; array_of_headers
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns the headers for this row:</p>
 
 <pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
@@ -1470,76 +1132,45 @@
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Value&quot;]</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="headers-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">headers</span>
   <span class="ruby-ivar">@row</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:first</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-include-3F" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">include?</span><span
-            class="method-args">(header)</span>
-          
-        </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
         </div>
 
-        
 
-        
         <div class="aliases">
           Alias for: <a href="Row.html#method-i-has_key-3F">has_key?</a>
         </div>
-        
       </div>
 
-    
       <div id="method-i-index" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             index(header) &rarr; index
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             index(header, offset) &rarr; index
           </span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns the index for the given header, if it exists; otherwise returns <code>nil</code>.</p>
 
 <p>With the single argument <code>header</code>, returns the index of the first-found field with the given <code>header</code>:</p>
@@ -1556,10 +1187,7 @@
 <pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; 1</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-value">3</span>) <span class="ruby-comment"># =&gt; nil</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="index-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 573</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>(<span class="ruby-identifier">header</span>, <span class="ruby-identifier">minimum_index</span> = <span class="ruby-value">0</span>)
@@ -1569,41 +1197,26 @@
   <span class="ruby-identifier">index</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">minimum_index</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-initialize_copy" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             initialize_copy(other_row) &rarr; self
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Calls superclass method.</p>
-          
-          
             <div class="method-calls-super">
               Calls superclass method
               
             </div>
-          
 
-          
           <div class="method-source-code" id="initialize_copy-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 130</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize_copy</span>(<span class="ruby-identifier">other</span>)
@@ -1612,31 +1225,20 @@
   <span class="ruby-identifier">super_return_value</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-inspect" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             inspect &rarr; string
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns an ASCII-compatible String showing:</p>
 <ul><li>
 <p>Class CSV::Row.</p>
@@ -1651,10 +1253,7 @@
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">inspect</span> <span class="ruby-comment"># =&gt; &quot;#&lt;CSV::Row \&quot;Name\&quot;:\&quot;foo\&quot; \&quot;Value\&quot;:\&quot;0\&quot;&gt;&quot;</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="inspect-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 718</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
@@ -1674,87 +1273,46 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-key-3F" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">key?</span><span
-            class="method-args">(header)</span>
-          
-        </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
         </div>
 
-        
 
-        
         <div class="aliases">
           Alias for: <a href="Row.html#method-i-has_key-3F">has_key?</a>
         </div>
-        
       </div>
 
-    
       <div id="method-i-member-3F" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">member?</span><span
-            class="method-args">(header)</span>
-          
-        </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
         </div>
 
-        
 
-        
         <div class="aliases">
           Alias for: <a href="Row.html#method-i-has_key-3F">has_key?</a>
         </div>
-        
       </div>
 
-    
       <div id="method-i-push" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             push(*values) &rarr; self
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Appends each of the given <code>values</code> to <code>self</code> as a field; returns <code>self</code>:</p>
 
 <pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
@@ -1763,10 +1321,7 @@
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;Bat&#39;</span>, <span class="ruby-string">&#39;Bam&#39;</span>)
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;Foo&quot; &quot;Name&quot;:&quot;Bar&quot; &quot;Name&quot;:&quot;Baz&quot; nil:&quot;Bat&quot; nil:&quot;Bam&quot;&gt;</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="push-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 410</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
@@ -1775,31 +1330,20 @@
   <span class="ruby-keyword">self</span>  <span class="ruby-comment"># for chaining</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-to_csv" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             to_csv &rarr; csv_string
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns the row as a CSV String. Headers are not included:</p>
 
 <pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
@@ -1807,45 +1351,30 @@
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">to_csv</span> <span class="ruby-comment"># =&gt; &quot;foo,0\n&quot;</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="to_csv-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 672</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_csv</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">to_csv</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
         <div class="aliases">
           Also aliased as: <a href="Row.html#method-i-to_s">to_s</a>
         </div>
-        
 
-        
       </div>
 
-    
       <div id="method-i-to_h" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             to_h &rarr; hash
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Returns the new Hash formed by adding each header-value pair in <code>self</code> as a key-value pair in the Hash.</p>
 
 <pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
@@ -1861,10 +1390,7 @@
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">to_h</span> <span class="ruby-comment"># =&gt; {&quot;Name&quot;=&gt;&quot;Foo&quot;}</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="to_h-source">
             <pre><span class="ruby-comment"># File lib/csv/row.rb, line 653</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_h</span>
@@ -1875,113 +1401,62 @@
   <span class="ruby-identifier">hash</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
         <div class="aliases">
           Also aliased as: <a href="Row.html#method-i-to_hash">to_hash</a>
         </div>
-        
 
-        
       </div>
 
-    
       <div id="method-i-to_hash" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">to_hash</span><span
-            class="method-args">()</span>
-          
-        </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
         </div>
 
-        
 
-        
         <div class="aliases">
           Alias for: <a href="Row.html#method-i-to_h">to_h</a>
         </div>
-        
       </div>
 
-    
       <div id="method-i-to_s" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">to_s</span><span
-            class="method-args">(**options)</span>
-          
-        </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
         </div>
 
-        
 
-        
         <div class="aliases">
           Alias for: <a href="Row.html#method-i-to_csv">to_csv</a>
         </div>
-        
       </div>
 
-    
       <div id="method-i-values_at" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">values_at</span><span
-            class="method-args">(*headers_and_or_indices)</span>
-          
-        </div>
-        
 
         <div class="method-description">
           
-          
-          
-          
 
-          
         </div>
 
-        
 
-        
         <div class="aliases">
           Alias for: <a href="Row.html#method-i-fields">fields</a>
         </div>
-        
       </div>
 
-    
     </section>
-  
-  </section>
 
+  </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

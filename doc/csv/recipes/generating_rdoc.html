@@ -21,8 +21,6 @@
 <link href="../../../css/rdoc.css" rel="stylesheet">
 
 
-
-
 <body id="top" role="document" class="file">
 <nav role="navigation">
   <div id="project-navigation">
@@ -92,25 +90,18 @@
 
 
   <div id="project-metadata">
-    <div id="fileindex-section" class="nav-section">
+    
+<div id="fileindex-section" class="nav-section">
   <h3>Pages</h3>
 
   <ul class="link-list">
-  
     <li><a href="../../../LICENSE_txt.html">LICENSE</a>
-  
     <li><a href="../../../NEWS_md.html">NEWS</a>
-  
     <li><a href="../../../README_md.html">README</a>
-  
     <li><a href="../../../doc/csv/recipes/filtering_rdoc.html">filtering</a>
-  
     <li><a href="../../../doc/csv/recipes/generating_rdoc.html">generating</a>
-  
     <li><a href="../../../doc/csv/recipes/parsing_rdoc.html">parsing</a>
-  
     <li><a href="../../../doc/csv/recipes/recipes_rdoc.html">recipes</a>
-  
   </ul>
 </div>
 
@@ -204,7 +195,7 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-generate"><code>CSV.generate</code></a> with option <code>headers</code> to generate to a String.</p>
 
-<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#<<</code></a> to append the rows that are to be generated:</p>
+<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
 <pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">headers:</span> [<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], <span class="ruby-value">write_headers:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
@@ -218,7 +209,7 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-generate"><code>CSV.generate</code></a> without option <code>headers</code> to generate to a String.</p>
 
-<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#<<</code></a> to append the rows that are to be generated:</p>
+<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
 <pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
@@ -236,7 +227,7 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-open"><code>CSV.open</code></a> with option <code>headers</code> generate to a File.</p>
 
-<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#<<</code></a> to append the rows that are to be generated:</p>
+<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
 <pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;w&#39;</span>, <span class="ruby-value">headers:</span> [<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], <span class="ruby-value">write_headers:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
@@ -251,7 +242,7 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-open"><code>CSV.open</code></a> without option <code>headers</code> to generate to a File.</p>
 
-<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#<<</code></a> to append the rows that are to be generated:</p>
+<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
 <pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
@@ -483,7 +474,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
