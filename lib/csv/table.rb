@@ -932,7 +932,9 @@ class CSV
       return enum_for(__method__) { @mode == :col ? headers.size : size } unless block_given?
 
       if @mode == :col
-        headers.each { |header| yield([header, self[header]]) }
+        headers.each.with_index do |header, i|
+          yield([header, @table.map {|row| row[header, i]}])
+        end
       else
         @table.each(&block)
       end

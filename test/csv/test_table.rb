@@ -274,6 +274,22 @@ A,B,C,Type,Index
     @table.each { |row| assert_instance_of(CSV::Row, row) }
   end
 
+  def test_each_by_col_duplicated_headers
+    table = CSV.parse(<<-CSV, headers: true)
+a,a,,,b
+1,2,3,4,5
+11,12,13,14,15
+    CSV
+    assert_equal([
+                   ["a", ["1", "11"]],
+                   ["a", ["2", "12"]],
+                   [nil, ["3", "13"]],
+                   [nil, ["4", "14"]],
+                   ["b", ["5", "15"]],
+                 ],
+                 table.by_col.each.to_a)
+  end
+
   def test_each_split
     yielded_values = []
     @table.each do |column1, column2, column3|
