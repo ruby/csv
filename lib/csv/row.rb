@@ -659,7 +659,25 @@ class CSV
     end
     alias_method :to_hash, :to_h
 
+    # :call-seq:
+    #   row.deconstruct_keys(keys) -> hash
+    #
+    # Returns the new \Hash suitable for pattern matching containing only the
+    # keys specified as an argument.
+    def deconstruct_keys(keys)
+      (keys || headers).to_h { |key| [key, self[key]] }
+    end
+
     alias_method :to_ary, :to_a
+
+    # :call-seq:
+    #   row.deconstruct -> array
+    #
+    # Returns the new \Array suitable for pattern matching containing the values
+    # of the row.
+    def deconstruct
+      fields
+    end
 
     # :call-seq:
     #   row.to_csv -> csv_string
