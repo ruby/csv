@@ -14,14 +14,14 @@ jobs:
           - 2.5
           - 2.6
           - 2.7
-          - 3.0
+          - '3.0'
           - debug
         runs-on:
           - macos-latest
           - ubuntu-latest
           - windows-latest
         exclude:
-          - { runs-on: windows-latest , ruby-version: 3.0 }
+          - { runs-on: windows-latest , ruby-version: '3.0' }
           - { runs-on: windows-latest , ruby-version: debug }
         include:
           - { runs-on: windows-latest , ruby-version: mingw }
@@ -46,7 +46,7 @@ jobs:
       fail-fast: false
       matrix:
         ruby-version:
-          - 3.0
+          - '3.0'
           - 2.7
           - debug
         runs-on:
@@ -54,7 +54,7 @@ jobs:
           - ubuntu-latest
           - windows-latest
         exclude:
-          - { runs-on: windows-latest , ruby-version: 3.0 }
+          - { runs-on: windows-latest , ruby-version: '3.0' }
           - { runs-on: windows-latest , ruby-version: debug }
         include:
           - { runs-on: windows-latest , ruby-version: mingw }
