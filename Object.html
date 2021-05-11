@@ -113,7 +113,7 @@
         
         <div class="method-heading">
           <span class="method-name">CSV</span><span
-            class="method-args">(*args, &amp;block)</span>
+            class="method-args">(*args, **options, &amp;block)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -138,14 +138,20 @@
   <span class="ruby-identifier">c</span>.<span class="ruby-identifier">read</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot;zombies&quot;</span>) }
 } <span class="ruby-comment">#=&gt; false</span>
 </pre>
+
+<p><a href="CSV.html"><code>CSV</code></a> options may also be given.</p>
+
+<pre class="ruby"><span class="ruby-identifier">io</span> = <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-constant">CSV</span>(<span class="ruby-identifier">io</span>, <span class="ruby-value">col_sep:</span> <span class="ruby-string">&quot;;&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&quot;a&quot;</span>, <span class="ruby-string">&quot;b&quot;</span>, <span class="ruby-string">&quot;c&quot;</span>] }
+</pre>
           
           
 
           
           <div class="method-source-code" id="CSV-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2772</span>
-<span class="ruby-keyword">def</span> <span class="ruby-constant">CSV</span>(<span class="ruby-operator">*</span><span class="ruby-identifier ruby-title">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-  <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">instance</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2777</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">CSV</span>(<span class="ruby-operator">*</span><span class="ruby-identifier ruby-title">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">instance</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
