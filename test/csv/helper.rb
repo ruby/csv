@@ -1,10 +1,6 @@
 require "tempfile"
 require "test/unit"
 
-require_relative "../lib/core_assertions"
-
-Test::Unit::TestCase.include Test::Unit::CoreAssertions
-
 require "csv"
 
 require_relative "../lib/with_different_ofs"
