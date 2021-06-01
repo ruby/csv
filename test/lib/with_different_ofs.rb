@@ -17,6 +17,6 @@ module DifferentOFS
 
   def self.extended(klass)
     super(klass)
-    klass.const_set(:DifferentOFS, Class.new(klass).class_eval {include WithDifferentOFS})
+    klass.const_set(:DifferentOFS, Class.new(klass).class_eval {include WithDifferentOFS})[0].name
   end
 end
