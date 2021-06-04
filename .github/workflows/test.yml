@@ -85,6 +85,7 @@ jobs:
       - name: Install
         run: |
           rake install
+          gem install test-unit
       - name: Test
         run: |
           mkdir -p tmp
