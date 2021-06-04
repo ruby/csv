@@ -7,7 +7,6 @@ spec = Bundler::GemHelper.gemspec
 
 desc "Run test"
 task :test do
-  ENV["RUBYOPT"] = "-Itest/lib -rhelper"
   ruby("run-test.rb")
 end
 

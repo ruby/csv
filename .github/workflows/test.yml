@@ -90,7 +90,6 @@ jobs:
           mkdir -p tmp
           cd tmp
           cp -a ../test/ ./
-          export RUBYOPT="-Itest/lib -rhelper"
           ../run-test.rb
 
   document:
