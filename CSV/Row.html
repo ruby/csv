@@ -119,6 +119,10 @@
     
     <li ><a href="#method-i-5B-5D-3D">#[]=</a>
     
+    <li ><a href="#method-i-deconstruct">#deconstruct</a>
+    
+    <li ><a href="#method-i-deconstruct_keys">#deconstruct_keys</a>
+    
     <li ><a href="#method-i-delete">#delete</a>
     
     <li ><a href="#method-i-delete_if">#delete_if</a>
@@ -672,6 +676,78 @@
       </div>
 
     
+      <div id="method-i-deconstruct" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            deconstruct &rarr; array
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Returns the new Array suitable for pattern matching containing the values of the row.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="deconstruct-source">
+            <pre><span class="ruby-comment"># File lib/csv/row.rb, line 678</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deconstruct</span>
+  <span class="ruby-identifier">fields</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-deconstruct_keys" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            deconstruct_keys(keys) &rarr; hash
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Returns the new Hash suitable for pattern matching containing only the keys specified as an argument.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="deconstruct_keys-source">
+            <pre><span class="ruby-comment"># File lib/csv/row.rb, line 667</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deconstruct_keys</span>(<span class="ruby-identifier">keys</span>)
+  (<span class="ruby-identifier">keys</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">headers</span>).<span class="ruby-identifier">to_h</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">key</span>, <span class="ruby-keyword">self</span>[<span class="ruby-identifier">key</span>]] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-delete" class="method-detail ">
         
         
@@ -844,7 +920,7 @@
 
           
           <div class="method-source-code" id="dig-source">
-            <pre><span class="ruby-comment"># File lib/csv/row.rb, line 693</span>
+            <pre><span class="ruby-comment"># File lib/csv/row.rb, line 711</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dig</span>(<span class="ruby-identifier">index_or_header</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">indexes</span>)
   <span class="ruby-identifier">value</span> = <span class="ruby-identifier">field</span>(<span class="ruby-identifier">index_or_header</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
@@ -1656,7 +1732,7 @@
 
           
           <div class="method-source-code" id="inspect-source">
-            <pre><span class="ruby-comment"># File lib/csv/row.rb, line 718</span>
+            <pre><span class="ruby-comment"># File lib/csv/row.rb, line 736</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
   <span class="ruby-identifier">str</span> = [<span class="ruby-string">&quot;#&lt;&quot;</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>]
   <span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">header</span>, <span class="ruby-identifier">field</span><span class="ruby-operator">|</span>
@@ -1812,7 +1888,7 @@
 
           
           <div class="method-source-code" id="to_csv-source">
-            <pre><span class="ruby-comment"># File lib/csv/row.rb, line 672</span>
+            <pre><span class="ruby-comment"># File lib/csv/row.rb, line 690</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_csv</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">to_csv</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
