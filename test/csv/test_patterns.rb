@@ -14,8 +14,7 @@ class TestCSVPatternMatching < Test::Unit::TestCase
   def test_hash_rest
     case CSV::Row.new(%i{A B C}, [1, 2, 3])
     in B: b, **rest
-      assert_equal(2, b)
-      assert_equal({ A: 1, C: 3 }, rest)
+      assert_equal([2, { A: 1, C: 3 }], [b, rest])
     end
   end
 
