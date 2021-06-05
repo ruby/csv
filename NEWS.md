@@ -1,5 +1,36 @@
 # News
 
+## 3.2.0 - 2021-06-06
+
+### Improvements
+
+  * `CSV.open`: Added support for `:newline` option.
+    [GitHub#198][Patch by Nobuyoshi Nakada]
+
+  * `CSV::Table#each`: Added support for column mode with duplicated
+    headers.
+    [GitHub#206][Reported by Yaroslav Berezovskiy]
+
+  * `Object#CSV`: Added support for Ruby 3.0.
+
+  * `CSV::Row`: Added support for pattern matching.
+    [GitHub#207][Patch by Kevin Newton]
+
+### Fixes
+
+  * Fixed typos in documentation.
+    [GitHub#196][GitHub#205][Patch by Sampat Badhe]
+
+### Thanks
+
+  * Sampat Badhe
+
+  * Nobuyoshi Nakada
+
+  * Yaroslav Berezovskiy
+
+  * Kevin Newton
+
 ## 3.1.9 - 2020-11-23
 
 ### Fixes
