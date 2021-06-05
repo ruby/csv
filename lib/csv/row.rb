@@ -665,7 +665,11 @@ class CSV
     # Returns the new \Hash suitable for pattern matching containing only the
     # keys specified as an argument.
     def deconstruct_keys(keys)
-      (keys || headers).to_h { |key| [key, self[key]] }
+      if keys.nil?
+        to_h
+      else
+        keys.to_h { |key| [key, self[key]] }
+      end
     end
 
     alias_method :to_ary, :to_a
