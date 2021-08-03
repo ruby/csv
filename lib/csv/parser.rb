@@ -477,12 +477,12 @@ class CSV
       end
     end
 
-    begin
+    def string_scanner_scan_accept_string
       StringScanner.new("x").scan("x")
     rescue TypeError
-      @@string_scanner_scan_accept_string = false
+      false
     else
-      @@string_scanner_scan_accept_string = true
+      true
     end
 
     def prepare_separators
@@ -506,7 +506,7 @@ class CSV
         @first_column_separators = Regexp.new(@escaped_first_column_separator +
                                               "+".encode(@encoding))
       else
-        if @@string_scanner_scan_accept_string
+        if string_scanner_scan_accept_string
           @column_end = @column_separator
         else
           @column_end = Regexp.new(@escaped_column_separator)
