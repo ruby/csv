@@ -25,6 +25,21 @@ class TestCSVInterfaceWrite < Test::Unit::TestCase
     CSV
   end
 
+  def test_generate_default_in_ractor
+    assert_ractor(<<~"end;", require: 'csv')
+      r = Ractor.new do
+        csv_text = CSV.generate do |csv|
+          csv << [1, 2, 3] << [4, nil, 5]
+        end
+        Ractor.yield csv_text
+      end
+      assert_equal(<<-CSV, r.take)
+1,2,3
+4,,5
+      CSV
+    end;
+  end
+
   def test_generate_append
     csv_text = <<-CSV
 1,2,3
@@ -99,6 +114,24 @@ testrow
 1,2,3
 a,b,c
     CSV
+  end
+
+
+  def test_append_row_in_ractor
+    assert_ractor(<<~"end;", require: 'csv')
+      r = Ractor.new('#{@output.path}') do |path|
+        CSV.open(path, "wb") do |csv|
+          csv <<
+            CSV::Row.new([], ["1", "2", "3"]) <<
+            CSV::Row.new([], ["a", "b", "c"])
+        end
+      end
+      r.take
+      assert_equal(<<-CSV, File.read('#{@output.path}', mode: "rb"))
+1,2,3
+a,b,c
+      CSV
+    end;
   end
 
   def test_append_hash
