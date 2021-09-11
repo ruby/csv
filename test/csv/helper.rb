@@ -4,8 +4,6 @@ require "test/unit"
 require "csv"
 
 require_relative "../lib/with_different_ofs"
-require_relative "../lib/core_assertions"
-Test::Unit::TestCase.include Test::Unit::CoreAssertions
 
 module Helper
   def with_chunk_size(chunk_size)
