@@ -152,7 +152,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 87</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">inputs</span>, <span class="ruby-identifier">encoding</span>, <span class="ruby-value">chunk_size:</span> <span class="ruby-value">8192</span>)
   <span class="ruby-ivar">@inputs</span> = <span class="ruby-identifier">inputs</span>.<span class="ruby-identifier">dup</span>
   <span class="ruby-ivar">@encoding</span> = <span class="ruby-identifier">encoding</span>
@@ -198,7 +198,7 @@
 
           
           <div class="method-source-code" id="each_line-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 96</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_line</span>(<span class="ruby-identifier">row_separator</span>)
   <span class="ruby-identifier">buffer</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">input</span> = <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">rest</span>
@@ -271,7 +271,7 @@
 
           
           <div class="method-source-code" id="eos-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 163</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eos?</span>
   <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">eos?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -304,7 +304,7 @@
 
           
           <div class="method-source-code" id="keep_back-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 181</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 182</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_back</span>
   <span class="ruby-identifier">start</span>, <span class="ruby-identifier">buffer</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">buffer</span>
@@ -349,7 +349,7 @@
 
           
           <div class="method-source-code" id="keep_drop-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 197</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 198</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_drop</span>
   <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
 <span class="ruby-keyword">end</span></pre>
@@ -382,7 +382,7 @@
 
           
           <div class="method-source-code" id="keep_end-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 171</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 172</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_end</span>
   <span class="ruby-identifier">start</span>, <span class="ruby-identifier">buffer</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-identifier">keep</span> = <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">string</span>.<span class="ruby-identifier">byteslice</span>(<span class="ruby-identifier">start</span>, <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">pos</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">start</span>)
@@ -421,7 +421,7 @@
 
           
           <div class="method-source-code" id="keep_start-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 167</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_start</span>
   <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">push</span>([<span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">pos</span>, <span class="ruby-keyword">nil</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -454,7 +454,7 @@
 
           
           <div class="method-source-code" id="rest-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 201</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 202</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rest</span>
   <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">rest</span>
 <span class="ruby-keyword">end</span></pre>
@@ -487,7 +487,7 @@
 
           
           <div class="method-source-code" id="scan-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 140</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">scan</span>(<span class="ruby-identifier">pattern</span>)
   <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-identifier">pattern</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">value</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@last_scanner</span>
@@ -528,7 +528,7 @@
 
           
           <div class="method-source-code" id="scan_all-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 152</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">scan_all</span>(<span class="ruby-identifier">pattern</span>)
   <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-identifier">pattern</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">value</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@last_scanner</span>

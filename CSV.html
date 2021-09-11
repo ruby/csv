@@ -2504,7 +2504,7 @@ BAZ,-2</pre>
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1188</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter</span>(<span class="ruby-identifier">input</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">output</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-comment"># parse options for input, output, or both</span>
-  <span class="ruby-identifier">in_options</span>, <span class="ruby-identifier">out_options</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>, {<span class="ruby-value">row_sep:</span> <span class="ruby-identifier">$INPUT_RECORD_SEPARATOR</span>}
+  <span class="ruby-identifier">in_options</span>, <span class="ruby-identifier">out_options</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>, {<span class="ruby-value">row_sep:</span> <span class="ruby-constant">InputRecordSeparator</span>.<span class="ruby-identifier">value</span>}
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">case</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span>
     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\Ain(?:put)?_(.+)\Z/</span>
@@ -2823,7 +2823,7 @@ BAZ,-2</pre>
 
 <p>Special options:</p>
 <ul><li>
-<p>Option <code>:row_sep</code> defaults to <code>$INPUT_RECORD_SEPARATOR</code> (<code>$/</code>).:</p>
+<p>Option <code>:row_sep</code> defaults to <code>&quot;\n&quot;&gt; on Ruby 3.0 or later and &lt;tt&gt;$INPUT_RECORD_SEPARATOR</code> (<code>$/</code>) otherwise.:</p>
 
 <pre class="ruby"><span class="ruby-identifier">$INPUT_RECORD_SEPARATOR</span> <span class="ruby-comment"># =&gt; &quot;\n&quot;</span>
 </pre>
@@ -2852,7 +2852,7 @@ BAZ,-2</pre>
           <div class="method-source-code" id="generate_line-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1432</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_line</span>(<span class="ruby-identifier">row</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
-  <span class="ruby-identifier">options</span> = {<span class="ruby-value">row_sep:</span> <span class="ruby-identifier">$INPUT_RECORD_SEPARATOR</span>}.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">options</span> = {<span class="ruby-value">row_sep:</span> <span class="ruby-constant">InputRecordSeparator</span>.<span class="ruby-identifier">value</span>}.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">str</span> = <span class="ruby-string">+&quot;&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:encoding</span>]
     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:encoding</span>])
