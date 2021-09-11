@@ -32,11 +32,12 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
     assert_equal(@rows, rows)
   end
 
-  def test_foreach_in_ractor
-    assert_ractor(<<~"end;", require: 'csv')
-      r = Ractor.new do
+  if(respond_to? :ractor)
+    ractor
+    def test_foreach_in_ractor
+      r = Ractor.new(@input.path) do |path|
         rows = []
-        CSV.foreach('#{@input.path}', col_sep: "\\t", row_sep: "\\r\\n").each do |row|
+        CSV.foreach(path, col_sep: "\t", row_sep: "\r\n").each do |row|
           rows << row
         end
         Ractor.yield rows
@@ -46,7 +47,7 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
         ["4", "5"],
       ]
       assert_equal(rows, r.take)
-    end;
+    end
   end
 
   def test_foreach_mode
@@ -267,17 +268,18 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
                  CSV.read(@input.path, col_sep: "\t", row_sep: "\r\n"))
   end
 
-  def test_read_in_ractor
-    assert_ractor(<<-"end;", require: 'csv')
-      r = Ractor.new('#{@input.path}') do |path|
-        Ractor.yield CSV.read(path, col_sep: "\\t", row_sep: "\\r\\n")
+  if(respond_to? :ractor)
+    ractor
+    def test_read_in_ractor
+      r = Ractor.new(@input.path) do |path|
+        Ractor.yield CSV.read(path, col_sep: "\t", row_sep: "\r\n")
       end
       rows = [
         ["1", "2", "3"],
         ["4", "5"],
       ]
       assert_equal(rows, r.take)
-    end;
+    end
   end
 
   def test_readlines
