@@ -156,7 +156,7 @@
   <span class="ruby-ivar">@empty_value</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:empty_value</span>]
   <span class="ruby-ivar">@empty_value_is_empty_string</span> = (<span class="ruby-ivar">@empty_value</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>)
   <span class="ruby-ivar">@accept_nil</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:accept_nil</span>]
-  <span class="ruby-ivar">@builtin_converters</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:builtin_converters</span>]
+  <span class="ruby-ivar">@builtin_converters_name</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:builtin_converters_name</span>]
   <span class="ruby-ivar">@need_static_convert</span> = <span class="ruby-identifier">need_static_convert?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -201,7 +201,7 @@
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span>  <span class="ruby-comment"># custom converter</span>
     <span class="ruby-ivar">@converters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">converter</span>
   <span class="ruby-keyword">else</span>          <span class="ruby-comment"># named converter</span>
-    <span class="ruby-identifier">combo</span> = <span class="ruby-ivar">@builtin_converters</span>[<span class="ruby-identifier">name</span>]
+    <span class="ruby-identifier">combo</span> = <span class="ruby-identifier">builtin_converters</span>[<span class="ruby-identifier">name</span>]
     <span class="ruby-keyword">case</span> <span class="ruby-identifier">combo</span>
     <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span>  <span class="ruby-comment"># combo converter</span>
       <span class="ruby-identifier">combo</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sub_name</span><span class="ruby-operator">|</span>
