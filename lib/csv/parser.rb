@@ -235,6 +235,9 @@ class CSV
         else
           chunk = input.gets(nil, @chunk_size)
           if chunk
+            if chunk[-1] == "\r" && (maybe_newline = input.gets(nil, 1))
+              chunk << maybe_newline
+            end
             raise InvalidEncoding unless chunk.valid_encoding?
             @scanner = StringScanner.new(chunk)
             if input.respond_to?(:eof?) and input.eof?
