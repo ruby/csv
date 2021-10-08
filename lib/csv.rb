@@ -547,6 +547,14 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #
 # There is no such storage structure for write headers.
 #
+# In order for the parsing methods to access stored converters in non-main-Ractors, the
+# storage structure must be made shareable first.
+# Therefore, <tt>Ractor.make_shareable(CSV::Converters)</tt> and
+# <tt>Ractor.make_shareable(CSV::HeaderConverters)</tt> must be called before the creation
+# of Ractors that use the converters stored in these structures. (Since making the storage
+# structures shareable involves freezing them, any custom converters that are to be used
+# must be added first.)
+#
 # ===== Converter Lists
 #
 # A _converter_ _list_ is an \Array that may include any assortment of:
@@ -879,7 +887,7 @@ class CSV
   # This \Hash is intentionally left unfrozen, and may be extended with
   # custom field converters.
   # See {Custom Field Converters}[#class-CSV-label-Custom+Field+Converters].
-  DefaultConverters  = {
+  Converters  = {
     integer:   lambda { |f|
       Integer(f.encode(ConverterEncoding)) rescue f
     },
@@ -905,16 +913,20 @@ class CSV
     },
     all:       [:date_time, :numeric],
   }
-  Ractor.make_shareable(DefaultConverters) if defined?(Ractor)
-  Converters = DefaultConverters.dup
-  Ractor.current[:__CSV_converters__] = Converters if defined?(Ractor)
+
+  def self.converters_hash_is_shareable?
+    Ractor.shareable?(Converters)
+  rescue Ractor::IsolationError
+    false
+  end
 
   def self.get_converters
-    if defined?(Ractor)
-      if Ractor.current[:__CSV_converters__].nil?
-        Ractor.current[:__CSV_converters__] = DefaultConverters.dup
+    if defined?(Ractor) && (Ractor.current != Ractor.main)
+      if converters_hash_is_shareable?
+        Converters
+      else
+        {}
       end
-      Ractor.current[:__CSV_converters__]
     else
       Converters
     end
@@ -926,23 +938,27 @@ class CSV
   # This \Hash is intentionally left unfrozen, and may be extended with
   # custom field converters.
   # See {Custom Header Converters}[#class-CSV-label-Custom+Header+Converters].
-  DefaultHeaderConverters = {
+  HeaderConverters = {
     downcase: lambda { |h| h.encode(ConverterEncoding).downcase },
     symbol:   lambda { |h|
       h.encode(ConverterEncoding).downcase.gsub(/[^\s\w]+/, "").strip.
                                            gsub(/\s+/, "_").to_sym
     }
   }
-  Ractor.make_shareable(DefaultHeaderConverters) if defined?(Ractor)
-  HeaderConverters = DefaultHeaderConverters.dup
-  Ractor.main[:__CSV_header_converters__] = HeaderConverters if defined?(Ractor)
+
+  def self.header_converters_hash_is_shareable?
+    Ractor.shareable?(HeaderConverters)
+  rescue Ractor::IsolationError
+    false
+  end
 
   def self.get_header_converters
-    if defined?(Ractor)
-      if Ractor.current[:__CSV_header_converters__].nil?
-        Ractor.current[:__CSV_header_converters__] = DefaultHeaderConverters.dup
+    if defined?(Ractor) && (Ractor.current != Ractor.main)
+      if header_converters_hash_is_shareable?
+        HeaderConverters
+      else
+        {}
       end
-      Ractor.current[:__CSV_header_converters__]
     else
       HeaderConverters
     end
@@ -986,6 +1002,8 @@ class CSV
     # Creates or retrieves cached \CSV objects.
     # For arguments and options, see CSV.new.
     #
+    # This API is not Ractor-safe.
+    #
     # ---
     #
     # With no block given, returns a \CSV object.
@@ -1024,13 +1042,8 @@ class CSV
             options.values_at(*DEFAULT_OPTIONS.keys.sort_by { |sym| sym.to_s })
 
       # fetch or create the instance for this signature
-      instances_hash = if defined?(Ractor)
-                         Ractor.current[:__CSV_instances_hash__] ||= Hash.new
-                       else
-                         @@instances ||= Hash.new
-                       end
-
-      instance = (instances_hash[sig] ||= new(data, **options))
+      @@instances ||= Hash.new
+      instance = (@@instances[sig] ||= new(data, **options))
 
       if block_given?
         yield instance  # run block, if given, returning result
@@ -2807,6 +2820,8 @@ end
 #
 #   io = StringIO.new
 #   CSV(io, col_sep: ";") { |csv| csv << ["a", "b", "c"] }
+#
+# This API is not Ractor-safe.
 #
 def CSV(*args, **options, &block)
   CSV.instance(*args, **options, &block)
