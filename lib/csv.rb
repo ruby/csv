@@ -914,42 +914,6 @@ class CSV
     all:       [:date_time, :numeric],
   }
 
-  def self.converters_hash_is_shareable?
-    Ractor.shareable?(Converters)
-  rescue Ractor::IsolationError
-    false
-  end
-
-  def self.get_converters
-    if defined?(Ractor) && (Ractor.current != Ractor.main)
-      if converters_hash_is_shareable?
-        Converters
-      else
-        {}
-      end
-    else
-      Converters
-    end
-  end
-
-  def self.converters_hash_is_shareable?
-    Ractor.shareable?(Converters)
-  rescue Ractor::IsolationError
-    false
-  end
-
-  def self.get_converters
-    if defined?(Ractor) && (Ractor.current != Ractor.main)
-      if converters_hash_is_shareable?
-        Converters
-      else
-        {}
-      end
-    else
-      Converters
-    end
-  end
-
   # A \Hash containing the names and \Procs for the built-in header converters.
   # See {Built-In Header Converters}[#class-CSV-label-Built-In+Header+Converters].
   #
@@ -963,24 +927,6 @@ class CSV
                                            gsub(/\s+/, "_").to_sym
     }
   }
-
-  def self.header_converters_hash_is_shareable?
-    Ractor.shareable?(HeaderConverters)
-  rescue Ractor::IsolationError
-    false
-  end
-
-  def self.get_header_converters
-    if defined?(Ractor) && (Ractor.current != Ractor.main)
-      if header_converters_hash_is_shareable?
-        HeaderConverters
-      else
-        {}
-      end
-    else
-      HeaderConverters
-    end
-  end
 
   # Default values for method options.
   DEFAULT_OPTIONS = {
@@ -2057,9 +2003,13 @@ class CSV
   #   csv.converters # => [:integer]
   #   csv.convert(proc {|x| x.to_s })
   #   csv.converters
+  #
+  # Notes that you need to call
+  # +Ractor.make_shareable(CSV::Converters)+ on the main Ractor to use
+  # this method.
   def converters
     parser_fields_converter.map do |converter|
-      name = CSV.get_converters.rassoc(converter)
+      name = Converters.rassoc(converter)
       name ? name.first : converter
     end
   end
@@ -2119,9 +2069,13 @@ class CSV
   # Returns an \Array containing header converters; used for parsing;
   # see {Header Converters}[#class-CSV-label-Header+Converters]:
   #   CSV.new('').header_converters # => []
+  #
+  # Notes that you need to call
+  # +Ractor.make_shareable(CSV::HeaderConverters)+ on the main Ractor
+  # to use this method.
   def header_converters
     header_fields_converter.map do |converter|
-      name = CSV.get_header_converters.rassoc(converter)
+      name = HeaderConverters.rassoc(converter)
       name ? name.first : converter
     end
   end
