@@ -725,6 +725,8 @@ class CSV
         end
       end
 
+      SCANNER_TEST_CHUNK_SIZE =
+        Integer((ENV["CSV_PARSER_SCANNER_TEST_CHUNK_SIZE"] || "1"), 10)
       def build_scanner
         inputs = @samples.collect do |sample|
           UnoptimizedStringIO.new(sample)
@@ -734,10 +736,9 @@ class CSV
         else
           inputs << @input
         end
-        chunk_size = ENV["CSV_PARSER_SCANNER_TEST_CHUNK_SIZE"] || "1"
         InputsScanner.new(inputs,
                           @encoding,
-                          chunk_size: Integer(chunk_size, 10))
+                          chunk_size: SCANNER_TEST_CHUNK_SIZE)
       end
     else
       def build_scanner
