@@ -144,12 +144,14 @@
 <pre class="ruby"><span class="ruby-identifier">io</span> = <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-constant">CSV</span>(<span class="ruby-identifier">io</span>, <span class="ruby-value">col_sep:</span> <span class="ruby-string">&quot;;&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&quot;a&quot;</span>, <span class="ruby-string">&quot;b&quot;</span>, <span class="ruby-string">&quot;c&quot;</span>] }
 </pre>
+
+<p>This API is not Ractor-safe.</p>
           
           
 
           
           <div class="method-source-code" id="CSV-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2777</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2798</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">CSV</span>(<span class="ruby-operator">*</span><span class="ruby-identifier ruby-title">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">instance</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
