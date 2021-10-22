@@ -1,5 +1,32 @@
 # News
 
+## 3.2.1 - 2021-10-23
+
+### Improvements
+
+  * doc: Fixed wrong class name.
+    [GitHub#217][Patch by Vince]
+
+  * Changed to always use `"\n"` for the default row separator on Ruby
+    3.0 or later because `$INPUT_RECORD_SEPARATOR` was deprecated
+    since Ruby 3.0.
+
+  * Added support for Ractor.
+    [GitHub#218][Patch by rm155]
+
+    * Users who want to use the built-in converters in non-main
+      Ractors need to call `Ractor.make_shareable(CSV::Converters)`
+      and/or `Ractor.make_shareable(CSV::HeaderConverters)` before
+      creating non-main Ractors.
+
+### Thanks
+
+  * Vince
+
+  * Joakim Antman
+
+  * rm155
+
 ## 3.2.0 - 2021-06-06
 
 ### Improvements
