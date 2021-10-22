@@ -61,6 +61,9 @@
 
   <ul class="link-list" role="directory">
     <li><a href="#label-News">News</a>
+    <li><a href="#label-3.2.1+-+2021-10-23">3.2.1 - 2021-10-23</a>
+    <li><a href="#label-Improvements">Improvements</a>
+    <li><a href="#label-Thanks">Thanks</a>
     <li><a href="#label-3.2.0+-+2021-06-06">3.2.0 - 2021-06-06</a>
     <li><a href="#label-Improvements">Improvements</a>
     <li><a href="#label-Fixes">Fixes</a>
@@ -173,6 +176,29 @@
 <main role="main" aria-label="Page NEWS.md">
 
 <h1 id="label-News">News<span><a href="#label-News">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<h2 id="label-3.2.1+-+2021-10-23">3.2.1 - 2021-10-23<span><a href="#label-3.2.1+-+2021-10-23">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>doc: Fixed wrong class name. [GitHub#217][Patch by Vince]</p>
+</li><li>
+<p>Changed to always use <code>&quot;\n&quot;</code> for the default row separator on Ruby 3.0 or later because <code>$INPUT_RECORD_SEPARATOR</code> was deprecated since Ruby 3.0.</p>
+</li><li>
+<p>Added support for Ractor. [GitHub#218][Patch by rm155]</p>
+<ul><li>
+<p>Users who want to use the built-in converters in non-main  Ractors need to call <code>Ractor.make_shareable(CSV::Converters)</code>  and/or <code>Ractor.make_shareable(CSV::HeaderConverters)</code> before  creating non-main Ractors.</p>
+</li></ul>
+</li></ul>
+
+<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Vince</p>
+</li><li>
+<p>Joakim Antman</p>
+</li><li>
+<p>rm155</p>
+</li></ul>
 
 <h2 id="label-3.2.0+-+2021-06-06">3.2.0 - 2021-06-06<span><a href="#label-3.2.0+-+2021-06-06">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
