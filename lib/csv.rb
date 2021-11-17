@@ -341,6 +341,7 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #     liberal_parsing:    false,
 #     nil_value:          nil,
 #     empty_value:        "",
+#     strip:              false,
 #     # For generating.
 #     write_headers:      nil,
 #     quote_empty:        true,
@@ -348,7 +349,6 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 #     write_converters:   nil,
 #     write_nil_value:    nil,
 #     write_empty_value:  "",
-#     strip:              false,
 #   }
 #
 # ==== Options for Parsing
@@ -367,7 +367,7 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 # - +skip_blanks+: Specifies whether blanks lines are to be ignored.
 # - +skip_lines+: Specifies how comments lines are to be recognized.
 # - +strip+: Specifies whether leading and trailing whitespace are
-#   to be stripped from fields..
+#   to be stripped from fields.
 # - +liberal_parsing+: Specifies whether \CSV should attempt to parse
 #   non-compliant data.
 # - +nil_value+: Specifies the object that is to be substituted for each null (no-text) field.
@@ -946,6 +946,7 @@ class CSV
     liberal_parsing:    false,
     nil_value:          nil,
     empty_value:        "",
+    strip:              false,
     # For generating.
     write_headers:      nil,
     quote_empty:        true,
@@ -953,7 +954,6 @@ class CSV
     write_converters:   nil,
     write_nil_value:    nil,
     write_empty_value:  "",
-    strip:              false,
   }.freeze
 
   class << self
@@ -1879,11 +1879,11 @@ class CSV
                  encoding: nil,
                  nil_value: nil,
                  empty_value: "",
+                 strip: false,
                  quote_empty: true,
                  write_converters: nil,
                  write_nil_value: nil,
-                 write_empty_value: "",
-                 strip: false)
+                 write_empty_value: "")
     raise ArgumentError.new("Cannot parse nil as CSV") if data.nil?
 
     if data.is_a?(String)
