@@ -366,8 +366,9 @@ using CSV::MatchP if CSV.const_defined?(:MatchP)
 # - +header_converters+: Specifies the header converters to be used.
 # - +skip_blanks+: Specifies whether blanks lines are to be ignored.
 # - +skip_lines+: Specifies how comments lines are to be recognized.
-# - +strip+: Specifies whether leading and trailing whitespace are
-#   to be stripped from fields.
+# - +strip+: Specifies whether leading and trailing whitespace are to be
+#   stripped from fields. This must be compatible with +col_sep+; if it is not,
+#   then an +ArgumentError+ exception will be raised.
 # - +liberal_parsing+: Specifies whether \CSV should attempt to parse
 #   non-compliant data.
 # - +nil_value+: Specifies the object that is to be substituted for each null (no-text) field.
