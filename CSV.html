@@ -593,6 +593,7 @@
   <span class="ruby-value">liberal_parsing:</span>    <span class="ruby-keyword">false</span>,
   <span class="ruby-value">nil_value:</span>          <span class="ruby-keyword">nil</span>,
   <span class="ruby-value">empty_value:</span>        <span class="ruby-string">&quot;&quot;</span>,
+  <span class="ruby-value">strip:</span>              <span class="ruby-keyword">false</span>,
   <span class="ruby-comment"># For generating.</span>
   <span class="ruby-value">write_headers:</span>      <span class="ruby-keyword">nil</span>,
   <span class="ruby-value">quote_empty:</span>        <span class="ruby-keyword">true</span>,
@@ -600,7 +601,6 @@
   <span class="ruby-value">write_converters:</span>   <span class="ruby-keyword">nil</span>,
   <span class="ruby-value">write_nil_value:</span>    <span class="ruby-keyword">nil</span>,
   <span class="ruby-value">write_empty_value:</span>  <span class="ruby-string">&quot;&quot;</span>,
-  <span class="ruby-value">strip:</span>              <span class="ruby-keyword">false</span>,
 }
 </pre>
 
@@ -630,7 +630,7 @@
 </li><li>
 <p><code>skip_lines</code>: Specifies how comments lines are to be recognized.</p>
 </li><li>
-<p><code>strip</code>: Specifies whether leading and trailing whitespace are to be stripped from fields..</p>
+<p><code>strip</code>: Specifies whether leading and trailing whitespace are to be stripped from fields. This must be compatible with <code>col_sep</code>; if it is not, then an <code>ArgumentError</code> exception will be raised.</p>
 </li><li>
 <p><code>liberal_parsing</code>: Specifies whether CSV should attempt to parse non-compliant data.</p>
 </li><li>
@@ -2503,7 +2503,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="filter-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1199</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1200</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter</span>(<span class="ruby-identifier">input</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">output</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-comment"># parse options for input, output, or both</span>
   <span class="ruby-identifier">in_options</span>, <span class="ruby-identifier">out_options</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>, {<span class="ruby-value">row_sep:</span> <span class="ruby-constant">InputRecordSeparator</span>.<span class="ruby-identifier">value</span>}
@@ -2671,7 +2671,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="foreach-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1329</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1330</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">foreach</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>=<span class="ruby-string">&quot;r&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-identifier">__method__</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
@@ -2770,7 +2770,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1395</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1396</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">str</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">encoding</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:encoding</span>]
   <span class="ruby-comment"># add a default empty String, if none was given</span>
@@ -2852,7 +2852,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="generate_line-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1443</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1444</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_line</span>(<span class="ruby-identifier">row</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">options</span> = {<span class="ruby-value">row_sep:</span> <span class="ruby-constant">InputRecordSeparator</span>.<span class="ruby-identifier">value</span>}.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">str</span> = <span class="ruby-string">+&quot;&quot;</span>
@@ -2968,7 +2968,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="instance-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1003</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1004</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">instance</span>(<span class="ruby-identifier">data</span> = <span class="ruby-identifier">$stdout</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-comment"># create a _signature_ for this method call, data object and options</span>
   <span class="ruby-identifier">sig</span> = [<span class="ruby-identifier">data</span>.<span class="ruby-identifier">object_id</span>] <span class="ruby-operator">+</span>
@@ -3079,7 +3079,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1862</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1863</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">data</span>,
                <span class="ruby-value">col_sep:</span> <span class="ruby-string">&quot;,&quot;</span>,
                <span class="ruby-value">row_sep:</span> <span class="ruby-value">:auto</span>,
@@ -3100,11 +3100,11 @@ BAZ,-2</pre>
                <span class="ruby-value">encoding:</span> <span class="ruby-keyword">nil</span>,
                <span class="ruby-value">nil_value:</span> <span class="ruby-keyword">nil</span>,
                <span class="ruby-value">empty_value:</span> <span class="ruby-string">&quot;&quot;</span>,
+               <span class="ruby-value">strip:</span> <span class="ruby-keyword">false</span>,
                <span class="ruby-value">quote_empty:</span> <span class="ruby-keyword">true</span>,
                <span class="ruby-value">write_converters:</span> <span class="ruby-keyword">nil</span>,
                <span class="ruby-value">write_nil_value:</span> <span class="ruby-keyword">nil</span>,
-               <span class="ruby-value">write_empty_value:</span> <span class="ruby-string">&quot;&quot;</span>,
-               <span class="ruby-value">strip:</span> <span class="ruby-keyword">false</span>)
+               <span class="ruby-value">write_empty_value:</span> <span class="ruby-string">&quot;&quot;</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Cannot parse nil as CSV&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">nil?</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
@@ -3296,7 +3296,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="open-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1538</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1539</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">mode</span>=<span class="ruby-string">&quot;r&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-comment"># wrap a File opened with the remaining +args+ with no newline</span>
   <span class="ruby-comment"># decorator</span>
@@ -3535,7 +3535,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1689</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1690</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">csv</span> = <span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 
@@ -3685,7 +3685,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="parse_line-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1762</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1763</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>).<span class="ruby-identifier">each</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>
@@ -3744,7 +3744,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="read-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1786</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1787</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">read</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -3780,7 +3780,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="readlines-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1794</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1795</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">readlines</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -3833,7 +3833,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="table-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1813</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1814</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">table</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">default_options</span> = {
     <span class="ruby-value">headers:</span>           <span class="ruby-keyword">true</span>,
@@ -3939,7 +3939,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="3C-3C-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2300</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2301</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-identifier">row</span>)
   <span class="ruby-identifier">writer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">row</span>
   <span class="ruby-keyword">self</span>
@@ -4005,7 +4005,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="binmode-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2189</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2190</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">binmode?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:binmode?</span>)
     <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">binmode?</span>
@@ -4048,7 +4048,7 @@ BAZ,-2</pre>
 
           
           <div class="method-source-code" id="col_sep-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1951</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1952</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">col_sep</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">column_separator</span>
 <span class="ruby-keyword">end</span></pre>
@@ -4164,7 +4164,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="convert-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2371</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2372</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">converter</span>)
   <span class="ruby-identifier">parser_fields_converter</span>.<span class="ruby-identifier">add_converter</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">converter</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -4210,7 +4210,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="converters-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2010</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2011</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">converters</span>
   <span class="ruby-identifier">parser_fields_converter</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">converter</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">name</span> = <span class="ruby-constant">Converters</span>.<span class="ruby-identifier">rassoc</span>(<span class="ruby-identifier">converter</span>)
@@ -4299,7 +4299,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2482</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2483</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">parser_enumerator</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -4360,7 +4360,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="eof-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2225</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2226</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eof?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eof_error</span>
   <span class="ruby-keyword">begin</span>
@@ -4412,7 +4412,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="field_size_limit-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1981</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1982</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field_size_limit</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">field_size_limit</span>
 <span class="ruby-keyword">end</span></pre>
@@ -4445,7 +4445,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="flock-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2197</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2198</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">flock</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:flock</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">flock</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
@@ -4485,7 +4485,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="force_quotes-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2100</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">force_quotes?</span>
   <span class="ruby-ivar">@writer_options</span>[<span class="ruby-value">:force_quotes</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -4569,7 +4569,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="header_convert-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2437</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2438</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_convert</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">converter</span>)
   <span class="ruby-identifier">header_fields_converter</span>.<span class="ruby-identifier">add_converter</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">converter</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -4610,7 +4610,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="header_converters-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2076</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2077</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_converters</span>
   <span class="ruby-identifier">header_fields_converter</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">converter</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">name</span> = <span class="ruby-constant">HeaderConverters</span>.<span class="ruby-identifier">rassoc</span>(<span class="ruby-identifier">converter</span>)
@@ -4675,7 +4675,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="header_row-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2553</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2554</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_row?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">header_row?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -4714,7 +4714,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="headers-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2034</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2035</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">headers</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@writer</span>
     <span class="ruby-ivar">@writer</span>.<span class="ruby-identifier">headers</span>
@@ -4764,7 +4764,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="inspect-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2612</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2613</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
   <span class="ruby-identifier">str</span> = [<span class="ruby-string">&quot;#&lt;&quot;</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-string">&quot; io_type:&quot;</span>]
   <span class="ruby-comment"># show type of wrapped IO</span>
@@ -4831,7 +4831,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="ioctl-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2202</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2203</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ioctl</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:ioctl</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">ioctl</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
@@ -4871,7 +4871,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="liberal_parsing-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2110</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">liberal_parsing?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">liberal_parsing?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -4924,7 +4924,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="line-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2175</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">line</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">line</span>
 <span class="ruby-keyword">end</span></pre>
@@ -4995,7 +4995,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="lineno-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2151</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2152</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lineno</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@writer</span>
     <span class="ruby-ivar">@writer</span>.<span class="ruby-identifier">lineno</span>
@@ -5032,7 +5032,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="path-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2207</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2208</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">path</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:path</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -5099,7 +5099,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="quote_char-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1971</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1972</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quote_char</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">quote_character</span>
 <span class="ruby-keyword">end</span></pre>
@@ -5170,7 +5170,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="read-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2517</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2518</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read</span>
   <span class="ruby-identifier">rows</span> = <span class="ruby-identifier">to_a</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">use_headers?</span>
@@ -5274,7 +5274,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="return_headers-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2052</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2053</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">return_headers?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">return_headers?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -5307,7 +5307,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="rewind-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2240</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2241</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
   <span class="ruby-ivar">@parser</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@parser_enumerator</span> = <span class="ruby-keyword">nil</span>
@@ -5350,7 +5350,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="row_sep-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1961</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1962</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">row_sep</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">row_separator</span>
 <span class="ruby-keyword">end</span></pre>
@@ -5423,7 +5423,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="shift-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2590</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2591</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">shift</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eof_error</span>
     <span class="ruby-identifier">eof_error</span>, <span class="ruby-ivar">@eof_error</span> = <span class="ruby-ivar">@eof_error</span>, <span class="ruby-keyword">nil</span>
@@ -5474,7 +5474,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="skip_blanks-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2089</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2090</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_blanks?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">skip_blanks?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -5513,7 +5513,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="skip_lines-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1991</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 1992</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_lines</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">skip_lines</span>
 <span class="ruby-keyword">end</span></pre>
@@ -5546,7 +5546,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="stat-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2211</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2212</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stat</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:stat</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">stat</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
@@ -5580,7 +5580,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="to_i-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2216</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2217</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_i</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_i</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">to_i</span>
@@ -5614,7 +5614,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="to_io-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2221</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2222</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_io</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_io</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">to_io</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@io</span>
 <span class="ruby-keyword">end</span></pre>
@@ -5653,7 +5653,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="unconverted_fields-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2024</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2025</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unconverted_fields?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">unconverted_fields?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -5692,7 +5692,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="write_headers-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2062</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2063</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">write_headers?</span>
   <span class="ruby-ivar">@writer_options</span>[<span class="ruby-value">:write_headers</span>]
 <span class="ruby-keyword">end</span></pre>
