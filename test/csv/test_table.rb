@@ -16,7 +16,7 @@ class TestCSVTable < Test::Unit::TestCase
     @header_table = CSV::Table.new(
       [CSV::Row.new(%w{A B C}, %w{A B C}, true)] + @rows
     )
-    
+
     @header_only_table = CSV::Table.new([], headers: %w{A B C})
   end
 
@@ -552,20 +552,22 @@ A
     assert_equal(@rows.size, @table.size)
   end
 
-  def test_inspect_shows_current_mode
-    str = @table.inspect
-    assert_include(str, "mode:#{@table.mode}", "Mode not shown.")
-
-    @table.by_col!
-    str = @table.inspect
-    assert_include(str, "mode:#{@table.mode}", "Mode not shown.")
+  def test_inspect_nil
+    row_counts = nil
+    table = @table.inspect(row_counts)
+    assert_equal(<<-CSV, table)
+A,B,C
+    CSV
   end
 
-  def test_inspect_encoding_is_ascii_compatible
-    assert_send([Encoding, :compatible?,
-                 Encoding.find("US-ASCII"),
-                 @table.inspect.encoding],
-            "inspect() was not ASCII compatible." )
+  def test_inspect_limited_row
+    row_counts = 4
+    table = @table.inspect(row_counts)
+    assert_equal(<<-CSV, table)
+A,B,C
+1,2,3
+4,5,6
+    CSV
   end
 
   def test_dig_mixed

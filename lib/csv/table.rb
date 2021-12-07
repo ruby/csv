@@ -1028,19 +1028,22 @@ class CSV
     end
 
     # :call-seq:
-    #   table.inspect => string
+    #   table.inspect(row_counts) -> self
     #
-    # Returns a <tt>US-ASCII</tt>-encoded \String showing table:
-    # - Class: <tt>CSV::Table</tt>.
-    # - Access mode: <tt>:row</tt>, <tt>:col</tt>, or <tt>:col_or_row</tt>.
-    # - Size:  Row count, including the header row.
-    #
-    # Example:
+    # Return table with specified rows data with header
     #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
     #   table = CSV.parse(source, headers: true)
-    #   table.inspect # => "#<CSV::Table mode:col_or_row row_count:4>"
-    def inspect
-      "#<#{self.class} mode:#{@mode} row_count:#{to_a.size}>".encode("US-ASCII")
+    #   table.inspect(2) # => #<CSV::Row "Name":"foo" "Value":"0">, #<CSV::Row "Name":"bar" "Value":"1">
+    #
+    def inspect(row_counts)
+      array = [headers.to_csv]
+      if row_counts.nil?
+        return array.join("")
+      end
+      @table.first(row_counts).each do |row|
+        array.push(row.fields.to_csv) unless row.header_row?
+      end
+      array.join("")
     end
   end
 end
