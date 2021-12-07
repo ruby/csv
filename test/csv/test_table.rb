@@ -561,7 +561,7 @@ A,B,C
   end
 
   def test_inspect_limited_row
-    row_counts = 4
+    row_counts = 2
     table = @table.inspect(row_counts)
     assert_equal(<<-CSV, table)
 A,B,C
