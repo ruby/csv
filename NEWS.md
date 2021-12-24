@@ -1,5 +1,33 @@
 # News
 
+## 3.2.2 - 2021-12-24
+
+### Improvements
+
+  * Added a validation for invalid option combination.
+    [GitHub#225][Patch by adamroyjones]
+
+  * Improved documentation for developers.
+    [GitHub#227][Patch by Eriko Sugiyama]
+
+### Fixes
+
+  * Fixed a bug that all of `ARGF` contents may not be consumed.
+    [GitHub#228][Reported by Rafael Navaza]
+
+  * Fixed a bug that some texts may be dropped unexpectedly.
+    [Bug #18245][ruby-core:105587][Reported by Hassan Abdul Rehman]
+
+### Thanks
+
+  * adamroyjones
+
+  * Eriko Sugiyama
+
+  * Rafael Navaza
+
+  * Hassan Abdul Rehman
+
 ## 3.2.1 - 2021-10-23
 
 ### Improvements
