@@ -305,7 +305,7 @@
 
           
           <div class="method-source-code" id="keep_back-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 184</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 183</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_back</span>
   <span class="ruby-identifier">start</span>, <span class="ruby-identifier">buffer</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">buffer</span>
@@ -350,19 +350,9 @@
 
           
           <div class="method-source-code" id="keep_drop-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 200</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_drop</span>
-  <span class="ruby-identifier">_</span>, <span class="ruby-identifier">buffer</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">buffer</span>
-
-  <span class="ruby-identifier">last_keep</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">last</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">last_keep</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">last_keep</span>[<span class="ruby-value">1</span>]
-    <span class="ruby-identifier">last_keep</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">buffer</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">last_keep</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">buffer</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -393,7 +383,7 @@
 
           
           <div class="method-source-code" id="keep_end-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 174</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 173</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_end</span>
   <span class="ruby-identifier">start</span>, <span class="ruby-identifier">buffer</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-identifier">keep</span> = <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">string</span>.<span class="ruby-identifier">byteslice</span>(<span class="ruby-identifier">start</span>, <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">pos</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">start</span>)
@@ -434,7 +424,6 @@
           <div class="method-source-code" id="keep_start-source">
             <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 169</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_start</span>
-  <span class="ruby-identifier">adjust_last_keep</span>
   <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">push</span>([<span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">pos</span>, <span class="ruby-keyword">nil</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -466,7 +455,7 @@
 
           
           <div class="method-source-code" id="rest-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 214</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 203</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rest</span>
   <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">rest</span>
 <span class="ruby-keyword">end</span></pre>
