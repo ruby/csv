@@ -1028,14 +1028,17 @@ class CSV
     end
 
     # :call-seq:
-    #   table.inspect(row_counts) -> self
+    #   table.inspect() => string
     #
-    # Return table with specified rows data with header
+    # Returns a table with specified rows data with header
     #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
     #   table = CSV.parse(source, headers: true)
-    #   table.inspect(2) # => #<CSV::Row "Name":"foo" "Value":"0">, #<CSV::Row "Name":"bar" "Value":"1">
     #
-    def inspect(row_counts)
+    # Example:
+    #   table.inspect() # => #<CSV::Row "Name":"foo" "Value":"0">, #<CSV::Row "Name":"bar" "Value":"1">
+    #
+    def inspect()
+      row_counts = 5
       array = [headers.to_csv]
       if row_counts.nil?
         return array.join("")
