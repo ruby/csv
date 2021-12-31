@@ -552,6 +552,22 @@ A
     assert_equal(@rows.size, @table.size)
   end
 
+  def test_inspect_shows_current_mode
+    str = @table.inspect
+    assert_include(str, "mode:#{@table.mode}", "Mode not shown.")
+
+    @table.by_col!
+    str = @table.inspect
+    assert_include(str, "mode:#{@table.mode}", "Mode not shown.")
+  end
+
+  def test_inspect_encoding_is_ascii_compatible
+    assert_send([Encoding, :compatible?,
+                 Encoding.find("US-ASCII"),
+                 @table.inspect.encoding],
+                "inspect() was not ASCII compatible." )
+  end
+  
   def test_inspect_nil
     row_counts = nil
     table = @table.inspect(row_counts)
