@@ -27,6 +27,10 @@ class CSV
     class InvalidEncoding < StandardError
     end
 
+    # Raised when unexpected case is happen.
+    class UnexpectedError < StandardError
+    end
+
     #
     # CSV::Scanner receives a CSV output, scans it and return the content.
     # It also controls the life cycle of the object with its methods +keep_start+,
@@ -96,11 +100,13 @@ class CSV
       end
 
       def each_line(row_separator)
+        return enum_for(__method__, row_separator) unless block_given?
         buffer = nil
         input = @scanner.rest
         position = @scanner.pos
         offset = 0
         n_row_separator_chars = row_separator.size
+        # trace(__method__, :start, line, input)
         while true
           input.each_line(row_separator) do |line|
             @scanner.pos += line.bytesize
@@ -140,25 +146,28 @@ class CSV
       end
 
       def scan(pattern)
+        # trace(__method__, pattern, :start)
         value = @scanner.scan(pattern)
+        # trace(__method__, pattern, :done, :last, value) if @last_scanner
         return value if @last_scanner
 
-        if value
-          read_chunk if @scanner.eos?
-          return value
-        else
-          nil
-        end
+        read_chunk if value and @scanner.eos?
+        # trace(__method__, pattern, :done, value)
+        value
       end
 
       def scan_all(pattern)
+        # trace(__method__, pattern, :start)
         value = @scanner.scan(pattern)
+        # trace(__method__, pattern, :done, :last, value) if @last_scanner
         return value if @last_scanner
 
         return nil if value.nil?
         while @scanner.eos? and read_chunk and (sub_value = @scanner.scan(pattern))
+          # trace(__method__, pattern, :sub, sub_value)
           value << sub_value
         end
+        # trace(__method__, pattern, :done, value)
         value
       end
 
@@ -167,37 +176,72 @@ class CSV
       end
 
       def keep_start
-        @keeps.push([@scanner.pos, nil])
+        # trace(__method__, :start)
+        adjust_last_keep
+        @keeps.push([@scanner, @scanner.pos, nil])
+        # trace(__method__, :done)
       end
 
       def keep_end
-        start, buffer = @keeps.pop
-        keep = @scanner.string.byteslice(start, @scanner.pos - start)
+        # trace(__method__, :start)
+        scanner, start, buffer = @keeps.pop
+        if scanner == @scanner
+          keep = @scanner.string.byteslice(start, @scanner.pos - start)
+        else
+          keep = @scanner.string.byteslice(0, @scanner.pos)
+        end
         if buffer
           buffer << keep
           keep = buffer
         end
+        # trace(__method__, :done, keep)
         keep
       end
 
       def keep_back
-        start, buffer = @keeps.pop
+        # trace(__method__, :start)
+        scanner, start, buffer = @keeps.pop
         if buffer
+          # trace(__method__, :rescan, start, buffer)
           string = @scanner.string
-          keep = string.byteslice(start, string.bytesize - start)
+          if scanner == @scanner
+            keep = string.byteslice(start, string.bytesize - start)
+          else
+            keep = string
+          end
           if keep and not keep.empty?
             @inputs.unshift(StringIO.new(keep))
             @last_scanner = false
           end
           @scanner = StringScanner.new(buffer)
         else
+          if @scanner != scanner
+            message = "scanners are different but no buffer: "
+            message += "#{@scanner.inspect}(#{@scanner.object_id}): "
+            message += "#{scanner.inspect}(#{scanner.object_id})"
+            raise UnexpectedError, message
+          end
+          # trace(__method__, :repos, start, buffer)
           @scanner.pos = start
         end
         read_chunk if @scanner.eos?
       end
 
       def keep_drop
-        @keeps.pop
+        _, _, buffer = @keeps.pop
+        # trace(__method__, :done, :emtpy) unless buffer
+        return unless buffer
+
+        last_keep = @keeps.last
+        # trace(__method__, :done, :no_last_keep) unless last_keep
+        return unless last_keep
+
+        if last_keep[2]
+          last_keep[2] << buffer
+        else
+          last_keep[2] = buffer
+        end
+        # trace(__method__, :done)
       end
 
       def rest
@@ -205,30 +249,49 @@ class CSV
       end
 
       private
+      def trace(*args)
+        pp([*args, @scanner, @scanner&.string, @scanner&.pos, @keeps])
+      end
+
+      def adjust_last_keep
+        # trace(__method__, :start)
+
+        keep = @keeps.last
+        # trace(__method__, :done, :empty) if keep.nil?
+        return if keep.nil?
+
+        scanner, start, buffer = keep
+        string = @scanner.string
+        if @scanner != scanner
+          start = 0
+        end
+        if start == 0 and @scanner.eos?
+          keep_data = string
+        else
+          keep_data = string.byteslice(start, @scanner.pos - start)
+        end
+        if keep_data
+          if buffer
+            buffer << keep_data
+          else
+            keep[2] = keep_data.dup
+          end
+        end
+
+        # trace(__method__, :done)
+      end
+
       def read_chunk
         return false if @last_scanner
 
-        unless @keeps.empty?
-          keep = @keeps.last
-          keep_start = keep[0]
-          string = @scanner.string
-          keep_data = string.byteslice(keep_start, @scanner.pos - keep_start)
-          if keep_data
-            keep_buffer = keep[1]
-            if keep_buffer
-              keep_buffer << keep_data
-            else
-              keep[1] = keep_data.dup
-            end
-          end
-          keep[0] = 0
-        end
+        adjust_last_keep
 
         input = @inputs.first
         case input
         when StringIO
           string = input.read
           raise InvalidEncoding unless string.valid_encoding?
+          # trace(__method__, :stringio, string)
           @scanner = StringScanner.new(string)
           @inputs.shift
           @last_scanner = @inputs.empty?
@@ -237,6 +300,7 @@ class CSV
           chunk = input.gets(@row_separator, @chunk_size)
           if chunk
             raise InvalidEncoding unless chunk.valid_encoding?
+            # trace(__method__, :chunk, chunk)
             @scanner = StringScanner.new(chunk)
             if input.respond_to?(:eof?) and input.eof?
               @inputs.shift
@@ -244,6 +308,7 @@ class CSV
             end
             true
           else
+            # trace(__method__, :no_chunk)
             @scanner = StringScanner.new("".encode(@encoding))
             @inputs.shift
             @last_scanner = @inputs.empty?
@@ -345,6 +410,16 @@ class CSV
           lineno = @lineno + 1
         end
         message = "Invalid byte sequence in #{@encoding}"
+        raise MalformedCSVError.new(message, lineno)
+      rescue UnexpectedError => error
+        if @scanner
+          ignore_broken_line
+          lineno = @lineno
+        else
+          lineno = @lineno + 1
+        end
+        message = "This should not be happen: #{error.message}: "
+        message += "Please report this to https://github.com/ruby/csv/issues"
         raise MalformedCSVError.new(message, lineno)
       end
     end
@@ -729,28 +804,26 @@ class CSV
       sample[0, 128].index(@quote_character)
     end
 
-    SCANNER_TEST = (ENV["CSV_PARSER_SCANNER_TEST"] == "yes")
-    if SCANNER_TEST
-      class UnoptimizedStringIO
-        def initialize(string)
-          @io = StringIO.new(string, "rb:#{string.encoding}")
-        end
-
-        def gets(*args)
-          @io.gets(*args)
-        end
-
-        def each_line(*args, &block)
-          @io.each_line(*args, &block)
-        end
-
-        def eof?
-          @io.eof?
-        end
+    class UnoptimizedStringIO # :nodoc:
+      def initialize(string)
+        @io = StringIO.new(string, "rb:#{string.encoding}")
       end
 
-      SCANNER_TEST_CHUNK_SIZE =
-        Integer((ENV["CSV_PARSER_SCANNER_TEST_CHUNK_SIZE"] || "1"), 10)
+      def gets(*args)
+        @io.gets(*args)
+      end
+
+      def each_line(*args, &block)
+        @io.each_line(*args, &block)
+      end
+
+      def eof?
+        @io.eof?
+      end
+    end
+
+    SCANNER_TEST = (ENV["CSV_PARSER_SCANNER_TEST"] == "yes")
+    if SCANNER_TEST
       def build_scanner
         inputs = @samples.collect do |sample|
           UnoptimizedStringIO.new(sample)
@@ -760,10 +833,12 @@ class CSV
         else
           inputs << @input
         end
+        chunk_size =
+          Integer((ENV["CSV_PARSER_SCANNER_TEST_CHUNK_SIZE"] || "1"), 10)
         InputsScanner.new(inputs,
                           @encoding,
                           @row_separator,
-                          chunk_size: SCANNER_TEST_CHUNK_SIZE)
+                          chunk_size: chunk_size)
       end
     else
       def build_scanner
