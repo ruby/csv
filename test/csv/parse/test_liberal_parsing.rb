@@ -28,6 +28,15 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
                  CSV.parse_line(input, liberal_parsing: true))
   end
 
+  def test_endline_after_quoted_field_end
+    input = "A\n\"B\"\r\n"
+    error = assert_raise(CSV::MalformedCSVError) do
+      CSV.parse(input, liberal_parsing: true)
+    end
+    assert_equal('Illegal end-of-line sequence outside of a quoted field <"\r\n"> in line 2.',
+                 error.message)
+  end
+
   def test_quote_after_column_separator
     error = assert_raise(CSV::MalformedCSVError) do
       CSV.parse_line('is,this "three," or four,fields', liberal_parsing: true)

@@ -1022,8 +1022,12 @@ class CSV
           break
         else
           if @quoted_column_value
+            message = if liberal_parsing? and (new_line = @scanner.scan(@line_end))
+              "Illegal end-of-line sequence outside of a quoted field " + "<#{new_line.inspect}>"
+            else
+              "Any value after quoted field isn't allowed"
+            end
             ignore_broken_line
-            message = "Any value after quoted field isn't allowed"
             raise MalformedCSVError.new(message, @lineno)
           elsif @unquoted_column_value and
                 (new_line = @scanner.scan(@line_end))
