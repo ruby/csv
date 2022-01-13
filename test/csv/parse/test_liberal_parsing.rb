@@ -29,11 +29,11 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
   end
 
   def test_endline_after_quoted_field_end
-    input = "A\n\"B\"\r\n"
+    input = "A\r\n\"B\"\n"
     error = assert_raise(CSV::MalformedCSVError) do
       CSV.parse(input, liberal_parsing: true)
     end
-    assert_equal('Illegal end-of-line sequence outside of a quoted field <"\r\n"> in line 2.',
+    assert_equal('Illegal end-of-line sequence outside of a quoted field <"\n"> in line 2.',
                  error.message)
   end
 
