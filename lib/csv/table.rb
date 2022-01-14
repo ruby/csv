@@ -999,9 +999,11 @@ class CSV
     # Omits the headers if option +write_headers+ is given as +false+
     # (see {Option +write_headers+}[../CSV.html#class-CSV-label-Option+write_headers]):
     #   table.to_csv(write_headers: false) # => "foo,0\nbar,1\nbaz,2\n"
-    def to_csv(write_headers: true, **options)
+    def to_csv(write_headers: true, limit: nil, **options)
       array = write_headers ? [headers.to_csv(**options)] : []
-      @table.each do |row|
+      limit ||= @table.size
+      limit = @table.size + 1 + limit if limit < 0
+      @table.first(limit).each do |row|
         array.push(row.fields.to_csv(**options)) unless row.header_row?
       end
 
@@ -1028,7 +1030,7 @@ class CSV
     end
 
     # :call-seq:
-    #   table.inspect() => string
+    #   table.inspect => string
     #
     # Returns a table with specified rows data with header
     #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
@@ -1037,16 +1039,11 @@ class CSV
     # Example:
     #   table.inspect() # => #<CSV::Row "Name":"foo" "Value":"0">, #<CSV::Row "Name":"bar" "Value":"1">
     #
-    def inspect()
-      row_counts = 5
-      array = [headers.to_csv]
-      if row_counts.nil?
-        return array.join("")
-      end
-      @table.first(row_counts).each do |row|
-        array.push(row.fields.to_csv) unless row.header_row?
-      end
-      array.join("")
+    def inspect
+      inspected = +"#<#{self.class} mode:#{@mode} row_count:#{to_a.size}>"
+      summary = to_csv(limit: 5)
+      inspected << "\n" << summary if summary.encoding.ascii_compatible?
+      inspected
     end
   end
 end
