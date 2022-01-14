@@ -824,8 +824,8 @@ class CSV
 
     SCANNER_TEST = (ENV["CSV_PARSER_SCANNER_TEST"] == "yes")
     if SCANNER_TEST
-      SCANANER_TEST_CHUNK_SIZE_NAME = "CSV_PARSER_SCANNER_TEST_CHUNK_SIZE"
-      SCANANER_TEST_CHUNK_SIZE_VALUE = ENV[SCANANER_TEST_CHUNK_SIZE_NAME]
+      SCANNER_TEST_CHUNK_SIZE_NAME = "CSV_PARSER_SCANNER_TEST_CHUNK_SIZE"
+      SCANNER_TEST_CHUNK_SIZE_VALUE = ENV[SCANNER_TEST_CHUNK_SIZE_NAME]
       def build_scanner
         inputs = @samples.collect do |sample|
           UnoptimizedStringIO.new(sample)
@@ -836,10 +836,10 @@ class CSV
           inputs << @input
         end
         begin
-          chunk_size_value = ENV[SCANANER_TEST_CHUNK_SIZE_NAME]
+          chunk_size_value = ENV[SCANNER_TEST_CHUNK_SIZE_NAME]
         rescue # Ractor::IsolationError
           # Ractor on Ruby 3.0 can't read ENV value.
-          chunk_size_value = SCANANER_TEST_CHUNK_SIZE_VALUE
+          chunk_size_value = SCANNER_TEST_CHUNK_SIZE_VALUE
         end
         chunk_size = Integer((chunk_size_value || "1"), 10)
         InputsScanner.new(inputs,
