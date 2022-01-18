@@ -567,22 +567,22 @@ A
                  @table.inspect.encoding],
                 "inspect() was not ASCII compatible." )
   end
-  
-  def test_inspect_nil
-    row_counts = nil
-    table = @table.inspect(row_counts)
-    assert_equal(<<-CSV, table)
-A,B,C
-    CSV
-  end
 
-  def test_inspect_limited_row
-    row_counts = 2
-    table = @table.inspect(row_counts)
-    assert_equal(<<-CSV, table)
+  def test_inspect_with_rows
+    additional_rows  = [ CSV::Row.new(%w{A B C}, [101, 102, 103]),
+                         CSV::Row.new(%w{A B C}, [104, 105, 106]),
+                         CSV::Row.new(%w{A B C}, [107, 108, 109]) ]
+    table = CSV::Table.new(@rows + additional_rows)
+    str_table = table.inspect
+
+    assert_equal(<<-CSV, str_table)
+#<CSV::Table mode:col_or_row row_count:7>
 A,B,C
 1,2,3
 4,5,6
+7,8,9
+101,102,103
+104,105,106
     CSV
   end
 
