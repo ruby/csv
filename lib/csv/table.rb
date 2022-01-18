@@ -1032,12 +1032,15 @@ class CSV
     # :call-seq:
     #   table.inspect => string
     #
-    # Returns a table with specified rows data with header
-    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
-    #   table = CSV.parse(source, headers: true)
+    # Returns a <tt>US-ASCII</tt>-encoded \String showing table:
+    # - Class: <tt>CSV::Table</tt>.
+    # - Access mode: <tt>:row</tt>, <tt>:col</tt>, or <tt>:col_or_row</tt>.
+    # - Size:  Row count, including the header row.
     #
     # Example:
-    #   table.inspect() # => #<CSV::Row "Name":"foo" "Value":"0">, #<CSV::Row "Name":"bar" "Value":"1">
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   table.inspect # => "#<CSV::Table mode:col_or_row row_count:4>\nName,Value\nfoo,0\nbar,1\nbaz,2\n"
     #
     def inspect
       inspected = +"#<#{self.class} mode:#{@mode} row_count:#{to_a.size}>"
