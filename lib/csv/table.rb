@@ -999,6 +999,16 @@ class CSV
     # Omits the headers if option +write_headers+ is given as +false+
     # (see {Option +write_headers+}[../CSV.html#class-CSV-label-Option+write_headers]):
     #   table.to_csv(write_headers: false) # => "foo,0\nbar,1\nbaz,2\n"
+    #
+    # Defaults option +limit+ to +nil+:
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, headers: true)
+    #   table.to_csv # => "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #
+    # Limit rows if option +limit+ is given like +2+
+    #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
+    #   table = CSV.parse(source, limit: 2, headers: true)
+    #   table.to_csv # => "Name,Value\nfoo,0\nbar,1\n"
     def to_csv(write_headers: true, limit: nil, **options)
       array = write_headers ? [headers.to_csv(**options)] : []
       limit ||= @table.size
