@@ -82,10 +82,10 @@ class CSV
     # +keep_end+, +keep_back+, +keep_drop+.
     #
     # CSV::InputsScanner.scan() tries to match with pattern at the current position.
-    # If there's a match, the scanner advances the “scan pointer” and returns the matched string.
+    # If there's a match, the scanner advances the "scan pointer" and returns the matched string.
     # Otherwise, the scanner returns nil.
     #
-    # CSV::InputsScanner.rest() returns the “rest” of the string (i.e. everything after the scan pointer).
+    # CSV::InputsScanner.rest() returns the "rest" of the string (i.e. everything after the scan pointer).
     # If there is no more data (eos? = true), it returns "".
     #
     class InputsScanner
