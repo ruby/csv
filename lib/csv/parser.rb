@@ -1027,7 +1027,9 @@ class CSV
         else
           if @quoted_column_value
             if liberal_parsing? and (new_line = @scanner.check(@line_end))
-              message = "Illegal end-of-line sequence outside of a quoted field " + "<#{new_line.inspect}>"
+              message =
+                "Illegal end-of-line sequence outside of a quoted field " +
+                "<#{new_line.inspect}>"
             else
               message = "Any value after quoted field isn't allowed"
             end
