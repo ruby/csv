@@ -229,7 +229,7 @@ class CSV
 
       def keep_drop
         _, _, buffer = @keeps.pop
-        # trace(__method__, :done, :emtpy) unless buffer
+        # trace(__method__, :done, :empty) unless buffer
         return unless buffer
 
         last_keep = @keeps.last
@@ -246,6 +246,10 @@ class CSV
 
       def rest
         @scanner.rest
+      end
+
+      def check(pattern)
+        @scanner.check(pattern)
       end
 
       private
@@ -1022,8 +1026,12 @@ class CSV
           break
         else
           if @quoted_column_value
+            if liberal_parsing? and (new_line = @scanner.check(@line_end))
+              message = "Illegal end-of-line sequence outside of a quoted field " + "<#{new_line.inspect}>"
+            else
+              message = "Any value after quoted field isn't allowed"
+            end
             ignore_broken_line
-            message = "Any value after quoted field isn't allowed"
             raise MalformedCSVError.new(message, @lineno)
           elsif @unquoted_column_value and
                 (new_line = @scanner.scan(@line_end))
