@@ -336,6 +336,77 @@ A,B,C
     assert_equal(csv, @header_table.to_csv)
   end
 
+  def test_to_csv_with_limit_set_to_less_than_the_number_of_rows
+    csv = <<-CSV
+A,B,C
+1,2,3
+4,5,6
+7,8,9
+    CSV
+
+    assert_equal(<<-CSV, @table.to_csv(limit: 2))
+A,B,C
+1,2,3
+4,5,6
+    CSV
+  end
+
+  def test_to_csv_with_limit_set_to_greater_than_the_number_of_rows
+    csv = <<-CSV
+A,B,C
+1,2,3
+4,5,6
+7,8,9
+    CSV
+
+    assert_equal(<<-CSV, @table.to_csv(limit: 5))
+A,B,C
+1,2,3
+4,5,6
+7,8,9
+    CSV
+  end
+
+  def test_to_csv_with_limit_set_to_zero
+    csv = <<-CSV
+A,B,C
+1,2,3
+4,5,6
+7,8,9
+    CSV
+
+    assert_equal(<<-CSV, @table.to_csv(limit: 0))
+A,B,C
+    CSV
+  end
+
+  def test_to_csv_with_limit_set_to_negative_and_less_than_the_number_of_rows
+    csv = <<-CSV
+A,B,C
+1,2,3
+4,5,6
+7,8,9
+    CSV
+
+    assert_equal(<<-CSV, @table.to_csv(limit: -2))
+A,B,C
+1,2,3
+4,5,6
+    CSV
+  end
+
+  def test_to_csv_with_limit_set_to_negative_and_greater_than_the_number_of_rows
+    csv = <<-CSV
+A,B,C
+1,2,3
+4,5,6
+7,8,9
+    CSV
+
+    assert_equal(<<-CSV, @table.to_csv(limit: -5))
+    CSV
+  end
+
   def test_append
     # verify that we can chain the call
     assert_equal(@table, @table << [10, 11, 12])
