@@ -1006,6 +1006,7 @@ class CSV
       array = write_headers ? [headers.to_csv(**options)] : []
       limit ||= @table.size
       limit = @table.size + 1 + limit if limit < 0
+      limit = 0 if limit < 0
       @table.first(limit).each do |row|
         array.push(row.fields.to_csv(**options)) unless row.header_row?
       end

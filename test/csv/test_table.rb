@@ -404,6 +404,7 @@ A,B,C
     CSV
 
     assert_equal(<<-CSV, @table.to_csv(limit: -5))
+A,B,C
     CSV
   end
 
