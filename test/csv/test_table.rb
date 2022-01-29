@@ -336,7 +336,7 @@ A,B,C
     assert_equal(csv, @header_table.to_csv)
   end
 
-  def test_to_csv_with_limit_set_to_less_than_the_number_of_rows
+  def test_to_csv_limit_positive
     csv = <<-CSV
 A,B,C
 1,2,3
@@ -351,7 +351,7 @@ A,B,C
     CSV
   end
 
-  def test_to_csv_with_limit_set_to_greater_than_the_number_of_rows
+  def test_to_csv_limit_positive_over
     csv = <<-CSV
 A,B,C
 1,2,3
@@ -367,7 +367,7 @@ A,B,C
     CSV
   end
 
-  def test_to_csv_with_limit_set_to_zero
+  def test_to_csv_limit_zero
     csv = <<-CSV
 A,B,C
 1,2,3
@@ -380,7 +380,7 @@ A,B,C
     CSV
   end
 
-  def test_to_csv_with_limit_set_to_negative_and_less_than_the_number_of_rows
+  def test_to_csv_limit_negative
     csv = <<-CSV
 A,B,C
 1,2,3
@@ -395,7 +395,7 @@ A,B,C
     CSV
   end
 
-  def test_to_csv_with_limit_set_to_negative_and_greater_than_the_number_of_rows
+  def test_to_csv_limit_negative_over
     csv = <<-CSV
 A,B,C
 1,2,3
