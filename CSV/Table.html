@@ -1593,7 +1593,7 @@
 
           
           <div class="method-source-code" id="dig-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 1021</span>
+            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 1022</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dig</span>(<span class="ruby-identifier">index_or_header</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">index_or_headers</span>)
   <span class="ruby-identifier">value</span> = <span class="ruby-keyword">self</span>[<span class="ruby-identifier">index_or_header</span>]
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
@@ -1792,7 +1792,7 @@
 
           
           <div class="method-source-code" id="inspect-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 1048</span>
+            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 1049</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
   <span class="ruby-identifier">inspected</span> = <span class="ruby-node">+&quot;#&lt;#{self.class} mode:#{@mode} row_count:#{to_a.size}&gt;&quot;</span>
   <span class="ruby-identifier">summary</span> = <span class="ruby-identifier">to_csv</span>(<span class="ruby-value">limit:</span> <span class="ruby-value">5</span>)
@@ -1952,6 +1952,7 @@
   <span class="ruby-identifier">array</span> = <span class="ruby-identifier">write_headers</span> <span class="ruby-operator">?</span> [<span class="ruby-identifier">headers</span>.<span class="ruby-identifier">to_csv</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)] <span class="ruby-operator">:</span> []
   <span class="ruby-identifier">limit</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">size</span>
   <span class="ruby-identifier">limit</span> = <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">limit</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">limit</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+  <span class="ruby-identifier">limit</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">limit</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
   <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">first</span>(<span class="ruby-identifier">limit</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">array</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">row</span>.<span class="ruby-identifier">fields</span>.<span class="ruby-identifier">to_csv</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">row</span>.<span class="ruby-identifier">header_row?</span>
   <span class="ruby-keyword">end</span>
