@@ -1567,7 +1567,7 @@ baz,2
 <p>With <code>write_headers</code>“:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file_path</span>,<span class="ruby-string">&#39;w&#39;</span>,
-    <span class="ruby-value">:write_headers</span><span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:write_headers</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
     <span class="ruby-value">:headers</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;Name&#39;</span>,<span class="ruby-string">&#39;Value&#39;</span>]
   ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;foo&#39;</span>, <span class="ruby-string">&#39;0&#39;</span>]
