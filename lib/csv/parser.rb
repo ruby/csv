@@ -916,7 +916,8 @@ class CSV
       return unless @field_size_limit
       return if field.size < @field_size_limit
       ignore_broken_line
-      raise MalformedCSVError.new("Field size exceeded", @lineno)
+      message = "Field size exceeded: #{field.size} >= #{@field_size_limit}"
+      raise MalformedCSVError.new(message, @lineno)
     end
 
     def parse_no_quote(&block)
