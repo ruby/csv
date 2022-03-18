@@ -347,7 +347,11 @@ class CSV
     end
 
     def field_size_limit
-      @field_size_limit
+      @max_field_size&.succ
+    end
+
+    def max_field_size
+      @max_field_size
     end
 
     def skip_lines
@@ -469,7 +473,7 @@ class CSV
         @backslash_quote = false
       end
       @unconverted_fields = @options[:unconverted_fields]
-      @field_size_limit = @options[:field_size_limit]
+      @max_field_size = @options[:max_field_size]
       @skip_blanks = @options[:skip_blanks]
       @fields_converter = @options[:fields_converter]
       @header_fields_converter = @options[:header_fields_converter]
@@ -913,10 +917,10 @@ class CSV
     end
 
     def validate_field_size(field)
-      return unless @field_size_limit
-      return if field.size < @field_size_limit
+      return unless @max_field_size
+      return if field.size <= @max_field_size
       ignore_broken_line
-      message = "Field size exceeded: #{field.size} >= #{@field_size_limit}"
+      message = "Field size exceeded: #{field.size} > #{@max_field_size}"
       raise MalformedCSVError.new(message, @lineno)
     end
 
@@ -932,7 +936,7 @@ class CSV
         else
           line = strip_value(line)
           row = line.split(@split_column_separator, -1)
-          if @field_size_limit
+          if @max_field_size
             row.each do |column|
               validate_field_size(column)
             end
