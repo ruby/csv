@@ -912,6 +912,13 @@ class CSV
       end
     end
 
+    def validate_field_size(field)
+      return unless @field_size_limit
+      return if field.size < @field_size_limit
+      ignore_broken_line
+      raise MalformedCSVError.new("Field size exceeded", @lineno)
+    end
+
     def parse_no_quote(&block)
       @scanner.each_line(@row_separator) do |line|
         next if @skip_lines and skip_line?(line)
@@ -924,6 +931,11 @@ class CSV
         else
           line = strip_value(line)
           row = line.split(@split_column_separator, -1)
+          if @field_size_limit
+            row.each do |column|
+              validate_field_size(column)
+            end
+          end
           n_columns = row.size
           i = 0
           while i < n_columns
@@ -979,6 +991,7 @@ class CSV
                 @need_robust_parsing = true
                 return parse_quotable_robust(&block)
               end
+              validate_field_size(row[i])
             end
             i += 1
           end
@@ -1002,10 +1015,7 @@ class CSV
         value = parse_column_value
         if value
           @scanner.scan_all(@strip_value) if @strip_value
-          if @field_size_limit and value.size >= @field_size_limit
-            ignore_broken_line
-            raise MalformedCSVError.new("Field size exceeded", @lineno)
-          end
+          validate_field_size(value)
         end
         if parse_column_end
           row << value

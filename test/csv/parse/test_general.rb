@@ -199,6 +199,25 @@ line,5,jkl
                              field_size_limit: 2048 )
   end
 
+  def test_field_size_limit_quote_simple
+    column = "abcde"
+    assert_parse_errors_out("\"#{column}\"",
+                            field_size_limit: column.size)
+  end
+
+  def test_field_size_limit_no_quote_implicitly
+    column = "abcde"
+    assert_parse_errors_out("#{column}",
+                            field_size_limit: column.size)
+  end
+
+  def test_field_size_limit_no_quote_explicitly
+    column = "abcde"
+    assert_parse_errors_out("#{column}",
+                            field_size_limit: column.size,
+                            quote_char: nil)
+  end
+
   def test_field_size_limit_in_extended_column_not_exceeding
     data = <<~DATA
       "a","b"
