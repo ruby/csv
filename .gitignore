@@ -5,5 +5,4 @@
 /pkg/
 /spec/reports/
 /tmp/
-.idea
-.idea/*
+/.idea/
