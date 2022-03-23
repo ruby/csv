@@ -929,7 +929,7 @@ class CSV
       h.encode(ConverterEncoding).downcase.gsub(/[^\s\w]+/, "").strip.
                                            gsub(/\s+/, "_").to_sym
     },
-    symbol_raw: lambda { |h| h.to_sym }
+    symbol_raw: lambda { |h| h.encode(ConverterEncoding).to_sym }
   }
 
   # Default values for method options.
