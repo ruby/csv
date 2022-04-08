@@ -61,6 +61,10 @@
 
   <ul class="link-list" role="directory">
     <li><a href="#label-News">News</a>
+    <li><a href="#label-3.2.3+-+2022-04-09">3.2.3 - 2022-04-09</a>
+    <li><a href="#label-Improvements">Improvements</a>
+    <li><a href="#label-Fixes">Fixes</a>
+    <li><a href="#label-Thanks">Thanks</a>
     <li><a href="#label-3.2.2+-+2021-12-24">3.2.2 - 2021-12-24</a>
     <li><a href="#label-Improvements">Improvements</a>
     <li><a href="#label-Fixes">Fixes</a>
@@ -181,6 +185,47 @@
 
 <h1 id="label-News">News<span><a href="#label-News">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
+<h2 id="label-3.2.3+-+2022-04-09">3.2.3 - 2022-04-09<span><a href="#label-3.2.3+-+2022-04-09">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Added contents summary to <code>CSV::Table#inspect</code>. [GitHub#229][Patch by Eriko Sugiyama] [GitHub#235][Patch by Sampat Badhe]</p>
+</li><li>
+<p>Suppressed <code>$INPUT_RECORD_SEPARATOR</code> deprecation warning by <code>Warning.warn</code>. [GitHub#233][Reported by Jean byroot Boussier]</p>
+</li><li>
+<p>Improved error message for liberal parsing with quoted values. [GitHub#231][Patch by Nikolay Rys]</p>
+</li><li>
+<p>Fixed typos in documentation. [GitHub#236][Patch by Sampat Badhe]</p>
+</li><li>
+<p>Added <code>:max_field_size</code> option and deprecated <code>:field_size_limit</code> option. [GitHub#238][Reported by Dan Buettner]</p>
+</li><li>
+<p>Added <code>:symbol_raw</code> to built-in header converters. [GitHub#237][Reported by taki] [GitHub#239][Patch by Eriko Sugiyama]</p>
+</li></ul>
+
+<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Fixed a bug that some texts may be dropped unexpectedly. [Bug #<a href="ruby-core:105587">18245]</a>[Reported by Hassan Abdul Rehman]</p>
+</li><li>
+<p>Fixed a bug that <code>:field_size_limit</code> doesn&#39;t work with not complex row. [GitHub#238][Reported by Dan Buettner]</p>
+</li></ul>
+
+<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Hassan Abdul Rehman</p>
+</li><li>
+<p>Eriko Sugiyama</p>
+</li><li>
+<p>Jean byroot Boussier</p>
+</li><li>
+<p>Nikolay Rys</p>
+</li><li>
+<p>Sampat Badhe</p>
+</li><li>
+<p>Dan Buettner</p>
+</li><li>
+<p>taki</p>
+</li></ul>
+
 <h2 id="label-3.2.2+-+2021-12-24">3.2.2 - 2021-12-24<span><a href="#label-3.2.2+-+2021-12-24">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -193,8 +238,6 @@
 <h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <ul><li>
 <p>Fixed a bug that all of <code>ARGF</code> contents may not be consumed. [GitHub#228][Reported by Rafael Navaza]</p>
-</li><li>
-<p>Fixed a bug that some texts may be dropped unexpectedly. [Bug #<a href="ruby-core:105587">18245]</a>[Reported by Hassan Abdul Rehman]</p>
 </li></ul>
 
 <h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -204,8 +247,6 @@
 <p>Eriko Sugiyama</p>
 </li><li>
 <p>Rafael Navaza</p>
-</li><li>
-<p>Hassan Abdul Rehman</p>
 </li></ul>
 
 <h2 id="label-3.2.1+-+2021-10-23">3.2.1 - 2021-10-23<span><a href="#label-3.2.1+-+2021-10-23">&para;</a> <a href="#top">&uarr;</a></span></h2>
