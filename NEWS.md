@@ -1,5 +1,54 @@
 # News
 
+## 3.2.3 - 2022-04-09
+
+### Improvements
+
+  * Added contents summary to `CSV::Table#inspect`.
+    [GitHub#229][Patch by Eriko Sugiyama]
+    [GitHub#235][Patch by Sampat Badhe]
+
+  * Suppressed `$INPUT_RECORD_SEPARATOR` deprecation warning by
+    `Warning.warn`.
+    [GitHub#233][Reported by Jean byroot Boussier]
+
+  * Improved error message for liberal parsing with quoted values.
+    [GitHub#231][Patch by Nikolay Rys]
+
+  * Fixed typos in documentation.
+    [GitHub#236][Patch by Sampat Badhe]
+
+  * Added `:max_field_size` option and deprecated `:field_size_limit` option.
+    [GitHub#238][Reported by Dan Buettner]
+
+  * Added `:symbol_raw` to built-in header converters.
+    [GitHub#237][Reported by taki]
+    [GitHub#239][Patch by Eriko Sugiyama]
+
+### Fixes
+
+  * Fixed a bug that some texts may be dropped unexpectedly.
+    [Bug #18245][ruby-core:105587][Reported by Hassan Abdul Rehman]
+
+  * Fixed a bug that `:field_size_limit` doesn't work with not complex row.
+    [GitHub#238][Reported by Dan Buettner]
+
+### Thanks
+
+  * Hassan Abdul Rehman
+
+  * Eriko Sugiyama
+
+  * Jean byroot Boussier
+
+  * Nikolay Rys
+
+  * Sampat Badhe
+
+  * Dan Buettner
+
+  * taki
+
 ## 3.2.2 - 2021-12-24
 
 ### Improvements
@@ -15,9 +64,6 @@
   * Fixed a bug that all of `ARGF` contents may not be consumed.
     [GitHub#228][Reported by Rafael Navaza]
 
-  * Fixed a bug that some texts may be dropped unexpectedly.
-    [Bug #18245][ruby-core:105587][Reported by Hassan Abdul Rehman]
-
 ### Thanks
 
   * adamroyjones
@@ -25,8 +71,6 @@
   * Eriko Sugiyama
 
   * Rafael Navaza
-
-  * Hassan Abdul Rehman
 
 ## 3.2.1 - 2021-10-23
 
