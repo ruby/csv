@@ -103,4 +103,19 @@ class TestCSVDataConverters < Test::Unit::TestCase
     assert_equal(datetime,
                  CSV::Converters[:date_time][iso8601_string])
   end
+
+  def test_builtin_date_time_converter_near_iso
+    [ "2018-01-14 22:25",
+      "2018-01-14 22:25:19",
+      "2018-01-14 22:25:19.1",
+      "2018-01-14 22:25:19.1+09:00",
+      "2018-01-14 22:25:19+09:00",
+      "2018-01-14 22:25:19Z",
+    ].each do |string|
+      datetime = DateTime.parse(string)
+      assert_equal(datetime,
+                   CSV::Converters[:date_time][string])
+    end
+  end
+
 end
