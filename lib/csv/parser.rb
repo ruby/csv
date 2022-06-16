@@ -1141,7 +1141,7 @@ class CSV
       if (n_quotes % 2).zero?
         quotes[0, (n_quotes - 2) / 2]
       else
-        value = quotes[0, (n_quotes - 1) / 2]
+        value = quotes[0, n_quotes / 2]
         while true
           quoted_value = @scanner.scan_all(@quoted_value)
           value << quoted_value if quoted_value
@@ -1165,11 +1165,9 @@ class CSV
           n_quotes = quotes.size
           if n_quotes == 1
             break
-          elsif (n_quotes % 2) == 1
-            value << quotes[0, (n_quotes - 1) / 2]
-            break
           else
             value << quotes[0, n_quotes / 2]
+            break if n_quotes % 2 == 1
           end
         end
         value
