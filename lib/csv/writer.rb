@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "input_record_separator"
-require_relative "match_p"
 require_relative "row"
-
-using CSV::MatchP if CSV.const_defined?(:MatchP)
 
 class CSV
   # Note: Don't use this class directly. This is an internal class.
