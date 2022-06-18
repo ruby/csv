@@ -2,14 +2,9 @@
 
 require "strscan"
 
-require_relative "delete_suffix"
 require_relative "input_record_separator"
-require_relative "match_p"
 require_relative "row"
 require_relative "table"
-
-using CSV::DeleteSuffix if CSV.const_defined?(:DeleteSuffix)
-using CSV::MatchP if CSV.const_defined?(:MatchP)
 
 class CSV
   # Note: Don't use this class directly. This is an internal class.

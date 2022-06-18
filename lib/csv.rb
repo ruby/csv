@@ -95,13 +95,10 @@ require "stringio"
 
 require_relative "csv/fields_converter"
 require_relative "csv/input_record_separator"
-require_relative "csv/match_p"
 require_relative "csv/parser"
 require_relative "csv/row"
 require_relative "csv/table"
 require_relative "csv/writer"
-
-using CSV::MatchP if CSV.const_defined?(:MatchP)
 
 # == \CSV
 #
