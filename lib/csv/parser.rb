@@ -1167,7 +1167,7 @@ class CSV
             break
           else
             value << quotes[0, n_quotes / 2]
-            break if n_quotes % 2 == 1
+            break if (n_quotes % 2) == 1
           end
         end
         value
