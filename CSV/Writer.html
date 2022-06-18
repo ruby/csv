@@ -168,7 +168,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/csv/writer.rb, line 19</span>
+            <pre><span class="ruby-comment"># File lib/csv/writer.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>)
   <span class="ruby-ivar">@output</span> = <span class="ruby-identifier">output</span>
   <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
@@ -217,7 +217,7 @@
 
           
           <div class="method-source-code" id="3C-3C-source">
-            <pre><span class="ruby-comment"># File lib/csv/writer.rb, line 34</span>
+            <pre><span class="ruby-comment"># File lib/csv/writer.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-identifier">row</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">row</span>
   <span class="ruby-keyword">when</span> <span class="ruby-constant">Row</span>
@@ -273,7 +273,7 @@
 
           
           <div class="method-source-code" id="rewind-source">
-            <pre><span class="ruby-comment"># File lib/csv/writer.rb, line 64</span>
+            <pre><span class="ruby-comment"># File lib/csv/writer.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
   <span class="ruby-ivar">@lineno</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@headers</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:headers</span>].<span class="ruby-identifier">nil?</span>

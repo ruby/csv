@@ -147,7 +147,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 47</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@keeps</span> = []
@@ -189,7 +189,7 @@
 
           
           <div class="method-source-code" id="each_line-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 52</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_line</span>(<span class="ruby-identifier">row_separator</span>)
   <span class="ruby-identifier">position</span> = <span class="ruby-identifier">pos</span>
   <span class="ruby-identifier">rest</span>.<span class="ruby-identifier">each_line</span>(<span class="ruby-identifier">row_separator</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
@@ -227,7 +227,7 @@
 
           
           <div class="method-source-code" id="keep_back-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 70</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_back</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pos</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
 <span class="ruby-keyword">end</span></pre>
@@ -260,7 +260,7 @@
 
           
           <div class="method-source-code" id="keep_drop-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 74</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_drop</span>
   <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
 <span class="ruby-keyword">end</span></pre>
@@ -293,7 +293,7 @@
 
           
           <div class="method-source-code" id="keep_end-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 65</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_end</span>
   <span class="ruby-identifier">start</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-identifier">string</span>.<span class="ruby-identifier">byteslice</span>(<span class="ruby-identifier">start</span>, <span class="ruby-identifier">pos</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">start</span>)
@@ -327,7 +327,7 @@
 
           
           <div class="method-source-code" id="keep_start-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 61</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_start</span>
   <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">pos</span>)
 <span class="ruby-keyword">end</span></pre>
