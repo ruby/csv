@@ -1197,20 +1197,12 @@ class CSV
     end
 
     def strip_value(value)
-      return value unless @strip
-      return nil if value.nil?
+      return value if not @strip or value.nil?
 
       case @strip
       when String
-        size = value.size
-        while value.start_with?(@strip)
-          size -= 1
-          value = value[1, size]
-        end
-        while value.end_with?(@strip)
-          size -= 1
-          value = value[0, size]
-        end
+        nil while value.delete_prefix!(@strip)
+        nil while value.delete_suffix!(@strip)
       else
         value.strip!
       end
