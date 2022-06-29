@@ -105,87 +105,87 @@ class TestCSVDataConverters < Test::Unit::TestCase
   end
 
   def test_builtin_date_time_converter_rfc3339_minute
-    iso8601_string = "2018-01-14 22:25"
+    rfc3339_string = "2018-01-14 22:25"
     datetime = DateTime.new(2018, 1, 14, 22, 25)
     assert_equal(datetime,
-                 CSV::Converters[:date_time][iso8601_string])
+                 CSV::Converters[:date_time][rfc3339_string])
   end
 
   def test_builtin_date_time_converter_rfc3339_second
-    iso8601_string = "2018-01-14 22:25:19"
+    rfc3339_string = "2018-01-14 22:25:19"
     datetime = DateTime.new(2018, 1, 14, 22, 25, 19)
     assert_equal(datetime,
-                 CSV::Converters[:date_time][iso8601_string])
+                 CSV::Converters[:date_time][rfc3339_string])
   end
 
   def test_builtin_date_time_converter_rfc3339_under_second
-    iso8601_string = "2018-01-14 22:25:19.1"
+    rfc3339_string = "2018-01-14 22:25:19.1"
     datetime = DateTime.new(2018, 1, 14, 22, 25, 19.1)
     assert_equal(datetime,
-                 CSV::Converters[:date_time][iso8601_string])
+                 CSV::Converters[:date_time][rfc3339_string])
   end
 
   def test_builtin_date_time_converter_rfc3339_under_second_offset
-    iso8601_string = "2018-01-14 22:25:19.1+09:00"
+    rfc3339_string = "2018-01-14 22:25:19.1+09:00"
     datetime = DateTime.new(2018, 1, 14, 22, 25, 19.1, "+9")
     assert_equal(datetime,
-                 CSV::Converters[:date_time][iso8601_string])
+                 CSV::Converters[:date_time][rfc3339_string])
   end
 
   def test_builtin_date_time_converter_rfc3339_offset
-    iso8601_string = "2018-01-14 22:25:19+09:00"
+    rfc3339_string = "2018-01-14 22:25:19+09:00"
     datetime = DateTime.new(2018, 1, 14, 22, 25, 19, "+9")
     assert_equal(datetime,
-                 CSV::Converters[:date_time][iso8601_string])
+                 CSV::Converters[:date_time][rfc3339_string])
   end
 
   def test_builtin_date_time_converter_rfc3339_utc
-    iso8601_string = "2018-01-14 22:25:19Z"
+    rfc3339_string = "2018-01-14 22:25:19Z"
     datetime = DateTime.new(2018, 1, 14, 22, 25, 19)
     assert_equal(datetime,
-                 CSV::Converters[:date_time][iso8601_string])
+                 CSV::Converters[:date_time][rfc3339_string])
   end
 
   def test_builtin_date_time_converter_rfc3339_tab_minute
-    iso8601_string = "2018-01-14\t22:25"
+    rfc3339_string = "2018-01-14\t22:25"
     datetime = DateTime.new(2018, 1, 14, 22, 25)
     assert_equal(datetime,
-                 CSV::Converters[:date_time][iso8601_string])
+                 CSV::Converters[:date_time][rfc3339_string])
   end
 
   def test_builtin_date_time_converter_rfc3339_tab_second
-    iso8601_string = "2018-01-14\t22:25:19"
+    rfc3339_string = "2018-01-14\t22:25:19"
     datetime = DateTime.new(2018, 1, 14, 22, 25, 19)
     assert_equal(datetime,
-                 CSV::Converters[:date_time][iso8601_string])
+                 CSV::Converters[:date_time][rfc3339_string])
   end
 
   def test_builtin_date_time_converter_rfc3339_tab_under_second
-    iso8601_string = "2018-01-14\t22:25:19.1"
+    rfc3339_string = "2018-01-14\t22:25:19.1"
     datetime = DateTime.new(2018, 1, 14, 22, 25, 19.1)
     assert_equal(datetime,
-                 CSV::Converters[:date_time][iso8601_string])
+                 CSV::Converters[:date_time][rfc3339_string])
   end
 
   def test_builtin_date_time_converter_rfc3339_tab_under_second_offset
-    iso8601_string = "2018-01-14\t22:25:19.1+09:00"
+    rfc3339_string = "2018-01-14\t22:25:19.1+09:00"
     datetime = DateTime.new(2018, 1, 14, 22, 25, 19.1, "+9")
     assert_equal(datetime,
-                 CSV::Converters[:date_time][iso8601_string])
+                 CSV::Converters[:date_time][rfc3339_string])
   end
 
   def test_builtin_date_time_converter_rfc3339_tab_offset
-    iso8601_string = "2018-01-14\t22:25:19+09:00"
+    rfc3339_string = "2018-01-14\t22:25:19+09:00"
     datetime = DateTime.new(2018, 1, 14, 22, 25, 19, "+9")
     assert_equal(datetime,
-                 CSV::Converters[:date_time][iso8601_string])
+                 CSV::Converters[:date_time][rfc3339_string])
   end
 
   def test_builtin_date_time_converter_rfc3339_tab_utc
-    iso8601_string = "2018-01-14\t22:25:19Z"
+    rfc3339_string = "2018-01-14\t22:25:19Z"
     datetime = DateTime.new(2018, 1, 14, 22, 25, 19)
     assert_equal(datetime,
-                 CSV::Converters[:date_time][iso8601_string])
+                 CSV::Converters[:date_time][rfc3339_string])
   end
 
 end
