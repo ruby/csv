@@ -187,5 +187,4 @@ class TestCSVDataConverters < Test::Unit::TestCase
     assert_equal(datetime,
                  CSV::Converters[:date_time][rfc3339_string])
   end
-
 end
