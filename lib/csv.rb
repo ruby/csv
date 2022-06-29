@@ -872,10 +872,9 @@ class CSV
   # A Regexp used to find and convert some common DateTime formats.
   DateTimeMatcher =
     / \A(?: (\w+,?\s+)?\w+\s+\d{1,2}\s+\d{1,2}:\d{1,2}:\d{1,2},?\s+\d{2,4} |
-            \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2} |
-            # ISO-8601
+            # ISO-8601 and RFC-3339 (space instead of T) recognized by DateTime.parse
             \d{4}-\d{2}-\d{2}
-              (?:T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?(?:[+-]\d{2}(?::\d{2})|Z)?)?)?
+              (?:[T\s]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?(?:[+-]\d{2}(?::\d{2})|Z)?)?)?
         )\z /x
 
   # The encoding used by all converters.
