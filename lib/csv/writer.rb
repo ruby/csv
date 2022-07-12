@@ -39,7 +39,7 @@ class CSV
       @headers ||= row if @use_headers
       @lineno += 1
 
-      row = @fields_converter.convert(row, nil, lineno) if @fields_converter
+      row = @fields_converter.convert(row, nil, lineno, []) if @fields_converter
 
       i = -1
       converted_row = row.collect do |field|
@@ -94,7 +94,7 @@ class CSV
       return unless @headers
 
       converter = @options[:header_fields_converter]
-      @headers = converter.convert(@headers, nil, 0)
+      @headers = converter.convert(@headers, nil, 0, [])
       @headers.each do |header|
         header.freeze if header.is_a?(String)
       end

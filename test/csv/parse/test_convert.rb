@@ -107,4 +107,45 @@ class TestCSVParseConvert < Test::Unit::TestCase
     assert_equal([nil, "empty", "a"],
                  CSV.parse_line(',"",a', empty_value: "empty"))
   end
+
+  sub_test_case("add quoted info") do
+    def setup
+      @preserving_converter = lambda do |field, info|
+        f = field.encode(CSV::ConverterEncoding)
+        return field if info.quoted?
+        return DateTime.parse(f) if f.match?(DateTimeMatcher) rescue
+        return Integer(f) rescue
+        return Float(f) rescue
+        field
+      end
+
+      @str = <<~CSV
+        "serial",value
+        "109",12
+        "10A",13
+      CSV
+    end
+
+    def test_custom_field_info_quoted_parse_line
+      row = CSV.parse_line('1,"2",3', converters: @preserving_converter)
+      assert_equal([1, "2", 3], row)
+    end
+
+    def test_custom_field_info_quoted_parse
+      expected = [["serial", "value"], ["109", 12], ["10A", 13]]
+      row = CSV.parse(@str, converters: @preserving_converter)
+      assert_equal(expected, row)
+    end
+
+    def test_custom_field_info_quoted_parse_header
+      quoted_header_converter = lambda do |field, info|
+        f = field.encode(CSV::ConverterEncoding)
+        return field if info.quoted?
+        field.to_sym
+      end
+      expected = [["serial", :value], ["109", "12"], ["10A", "13"]]
+      row = CSV.parse(@str, headers: true, header_converters: quoted_header_converter)
+      assert_equal(expected, row.to_a)
+    end
+  end
 end

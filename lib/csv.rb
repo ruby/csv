@@ -863,8 +863,9 @@ class CSV
   # <b><tt>index</tt></b>::  The zero-based index of the field in its row.
   # <b><tt>line</tt></b>::   The line of the data source this row is from.
   # <b><tt>header</tt></b>:: The header for the column, when available.
+  # <b><tt>quoted?</tt></b>:: True or false, whether the original value is quoted or not.
   #
-  FieldInfo = Struct.new(:index, :line, :header)
+  FieldInfo = Struct.new(:index, :line, :header, :quoted?)
 
   # A Regexp used to find and convert some common Date formats.
   DateMatcher     = / \A(?: (\w+,?\s+)?\w+\s+\d{1,2},?\s+\d{2,4} |
