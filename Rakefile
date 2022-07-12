@@ -30,7 +30,7 @@ end
 
 benchmark_tasks = []
 namespace :benchmark do
-  Dir.glob("benchmark/*.yaml") do |yaml|
+  Dir.glob("benchmark/*.yaml").sort.each do |yaml|
     name = File.basename(yaml, ".*")
     env = {
       "RUBYLIB" => nil,
