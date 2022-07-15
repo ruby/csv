@@ -1889,8 +1889,19 @@ class CSV
     raise ArgumentError.new("Cannot parse nil as CSV") if data.nil?
 
     if data.is_a?(String)
+      if encoding
+        if encoding.is_a?(String)
+          data_external_encoding, data_internal_encoding = encoding.split(":", 2)
+          if data_internal_encoding
+            data = data.encode(data_internal_encoding, data_external_encoding)
+          else
+            data = data.dup.force_encoding(data_external_encoding)
+          end
+        else
+          data = data.dup.force_encoding(encoding)
+        end
+      end
       @io = StringIO.new(data)
-      @io.set_encoding(encoding || data.encoding)
     else
       @io = data
     end
