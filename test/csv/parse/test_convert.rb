@@ -119,12 +119,6 @@ class TestCSVParseConvert < Test::Unit::TestCase
           f
         end
       end
-
-      @csv = <<~CSV
-        "serial",value
-        "109",12
-        "10A",13
-      CSV
     end
 
     def test_parse_line
@@ -133,8 +127,12 @@ class TestCSVParseConvert < Test::Unit::TestCase
     end
 
     def test_parse
-      expected = [["serial", "value"], ["109", 12], ["10A", 13]]
-      rows = CSV.parse(@csv, converters: @preserving_converter)
+      expected = [["serial", "value"], ["109", 1], ["10A", 2]]
+      rows = CSV.parse(<<~CSV, converters: @preserving_converter)
+        "serial",value
+        "109",1
+        "10A",2
+      CSV
       assert_equal(expected, rows)
     end
 
@@ -144,8 +142,12 @@ class TestCSVParseConvert < Test::Unit::TestCase
         return f if info.quoted?
         f.to_sym
       end
-      expected = [["serial", :value], ["109", "12"], ["10A", "13"]]
-      table = CSV.parse(@csv, headers: true, header_converters: quoted_header_converter)
+      expected = [["serial", :value], ["109", "1"], ["10A", "2"]]
+      table = CSV.parse(<<~CSV, headers: true, header_converters: quoted_header_converter)
+        "serial",value
+        "109",1
+        "10A",2
+      CSV
       assert_equal(expected, table.to_a)
     end
   end
