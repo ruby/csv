@@ -113,7 +113,11 @@ class TestCSVParseConvert < Test::Unit::TestCase
       @preserving_converter = lambda do |field, info|
         f = field.encode(CSV::ConverterEncoding)
         return f if info.quoted?
-        Integer(f, 10)
+        begin
+          Integer(f, 10)
+        rescue
+          f
+        end
       end
 
       @csv = <<~CSV
@@ -130,7 +134,7 @@ class TestCSVParseConvert < Test::Unit::TestCase
 
     def test_parse
       expected = [["serial", "value"], ["109", 12], ["10A", 13]]
-      rows = CSV.parse(@str, converters: @preserving_converter)
+      rows = CSV.parse(@csv, converters: @preserving_converter)
       assert_equal(expected, rows)
     end
 
@@ -141,7 +145,7 @@ class TestCSVParseConvert < Test::Unit::TestCase
         f.to_sym
       end
       expected = [["serial", :value], ["109", "12"], ["10A", "13"]]
-      table = CSV.parse(@str, headers: true, header_converters: quoted_header_converter)
+      table = CSV.parse(@csv, headers: true, header_converters: quoted_header_converter)
       assert_equal(expected, table.to_a)
     end
   end

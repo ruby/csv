@@ -770,7 +770,7 @@ class CSV
         @use_headers = true
       end
       if @raw_headers
-        @headers = adjust_headers(@raw_headers)
+        @headers = adjust_headers(@raw_headers, [])
       else
         @headers = nil
       end
