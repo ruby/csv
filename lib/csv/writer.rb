@@ -39,7 +39,10 @@ class CSV
       @headers ||= row if @use_headers
       @lineno += 1
 
-      row = @fields_converter.convert(row, nil, lineno, []) if @fields_converter
+      if @fields_converter
+        quoted_fields = [false] * row.size
+        row = @fields_converter.convert(row, nil, lineno, quoted_fields)
+      end
 
       i = -1
       converted_row = row.collect do |field|

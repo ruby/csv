@@ -783,7 +783,7 @@ class CSV
                      quote_char: @quote_character)
     end
 
-    def adjust_headers(headers, quoted_fields = nil)
+    def adjust_headers(headers, quoted_fields)
       quoted_fields = [] unless quoted_fields
       adjusted_headers = @header_fields_converter.convert(headers, nil, @lineno, quoted_fields)
       adjusted_headers.each {|h| h.freeze if h.is_a? String}
@@ -1028,11 +1028,13 @@ class CSV
         end
         if parse_column_end
           row << value
+          quoted_fields << @quoted_column_value
         elsif parse_row_end
           if row.empty? and value.nil?
             emit_row([], [], &block) unless @skip_blanks
           else
             row << value
+            quoted_fields << @quoted_column_value
             emit_row(row, quoted_fields, &block)
             row = []
             quoted_fields = []
@@ -1042,6 +1044,7 @@ class CSV
         elsif @scanner.eos?
           break if row.empty? and value.nil?
           row << value
+          quoted_fields << @quoted_column_value
           emit_row(row, quoted_fields, &block)
           break
         else
