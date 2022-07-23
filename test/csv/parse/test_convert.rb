@@ -150,5 +150,10 @@ class TestCSVParseConvert < Test::Unit::TestCase
       CSV
       assert_equal(expected, table.to_a)
     end
+
+    def test_alternating_quote
+      row = CSV.parse_line('"1",2,"3"', converters: @preserving_converter)
+      assert_equal(["1", 2, "3"], row)
+    end
   end
 end
