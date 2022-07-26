@@ -127,9 +127,9 @@ class TestCSVParseConvert < Test::Unit::TestCase
     end
 
     def test_parse
-      expected = [["serial", "value"], ["109", 1], ["10A", 2]]
+      expected = [["quoted", "unquoted"], ["109", 1], ["10A", 2]]
       rows = CSV.parse(<<~CSV, converters: @preserving_converter)
-        "serial",value
+        "quoted",unquoted
         "109",1
         "10A",2
       CSV
@@ -142,9 +142,9 @@ class TestCSVParseConvert < Test::Unit::TestCase
         return f if info.quoted?
         f.to_sym
       end
-      expected = [["serial", :value], ["109", "1"], ["10A", "2"]]
+      expected = [["quoted", :unquoted], ["109", "1"], ["10A", "2"]]
       table = CSV.parse(<<~CSV, headers: true, header_converters: quoted_header_converter)
-        "serial",value
+        "quoted",unquoted
         "109",1
         "10A",2
       CSV
