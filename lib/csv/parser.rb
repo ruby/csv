@@ -758,9 +758,10 @@ class CSV
       case headers
       when Array
         @raw_headers = headers
+        quoted_fields = [false] * @raw_headers.size
         @use_headers = true
       when String
-        @raw_headers = parse_headers(headers)
+        @raw_headers, quoted_fields = parse_headers(headers)
         @use_headers = true
       when nil, false
         @raw_headers = nil
@@ -770,21 +771,27 @@ class CSV
         @use_headers = true
       end
       if @raw_headers
-        @headers = adjust_headers(@raw_headers, [])
+        @headers = adjust_headers(@raw_headers, quoted_fields)
       else
         @headers = nil
       end
     end
 
     def parse_headers(row)
-      CSV.parse_line(row,
-                     col_sep:    @column_separator,
-                     row_sep:    @row_separator,
-                     quote_char: @quote_character)
+      quoted_fields = []
+      converter = lambda do |field, info|
+        quoted_fields << info.quoted?
+        field
+      end
+      headers = CSV.parse_line(row,
+                               col_sep:    @column_separator,
+                               row_sep:    @row_separator,
+                               quote_char: @quote_character,
+                               converters: [converter])
+      [headers, quoted_fields]
     end
 
     def adjust_headers(headers, quoted_fields)
-      quoted_fields = [] unless quoted_fields
       adjusted_headers = @header_fields_converter.convert(headers, nil, @lineno, quoted_fields)
       adjusted_headers.each {|h| h.freeze if h.is_a? String}
       adjusted_headers
@@ -933,7 +940,7 @@ class CSV
         else
           line = strip_value(line)
           row = line.split(@split_column_separator, -1)
-          quoted_fields = []
+          quoted_fields = [false] * row.size
           if @max_field_size
             row.each do |column|
               validate_field_size(column)
