@@ -1471,7 +1471,7 @@ class CSV
     # Returns the \String created by generating \CSV from
     # using the specified +options+.
     #
-    # Argument
+    # Argument +rows+ must be an \Array of row. Row is \Array of \String or \CSV::Row.
     #
     # Special options:
     # * Option <tt>:row_sep</tt> defaults to <tt>"\n"> on Ruby 3.0 or later
