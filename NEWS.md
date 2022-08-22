@@ -1,5 +1,46 @@
 # News
 
+## 3.2.4 - 2022-08-22
+
+### Improvements
+
+  * Cleaned up internal implementations.
+    [[GitHub#249](https://github.com/ruby/csv/pull/249)]
+    [[GitHub#250](https://github.com/ruby/csv/pull/250)]
+    [[GitHub#251](https://github.com/ruby/csv/pull/251)]
+    [Patch by Mau Magnaguagno]
+
+  * Added support for RFC 3339 style time.
+    [[GitHub#248](https://github.com/ruby/csv/pull/248)]
+    [Patch by Thierry Lambert]
+
+  * Added support for transcoding String CSV. Syntax is
+    `from-encoding:to-encoding`.
+    [[GitHub#254](https://github.com/ruby/csv/issues/254)]
+    [Reported by Richard Stueven]
+
+  * Added quoted information to `CSV::FieldInfo`.
+    [[GitHub#254](https://github.com/ruby/csv/pull/253)]
+    [Reported by Hirokazu SUZUKI]
+
+### Fixes
+
+  * Fixed a link in documents.
+    [[GitHub#244](https://github.com/ruby/csv/pull/244)]
+    [Patch by Peter Zhu]
+
+### Thanks
+
+  * Peter Zhu
+
+  * Mau Magnaguagno
+
+  * Thierry Lambert
+
+  * Richard Stueven
+
+  * Hirokazu SUZUKI
+
 ## 3.2.3 - 2022-04-09
 
 ### Improvements
