@@ -1488,7 +1488,7 @@ class CSV
     # ---
     #
     # Returns the \String generated from an
-    #   CSV.generate_lines(['foo', '0'],['bar', '1'],['baz', '2']) # => "foo,0\r\nbar,1\r|nbaz.2"
+    #   CSV.generate_lines(['foo', '0'], ['bar', '1'], ['baz', '2']) # => "foo,0\nbar,1\nbaz.2\n"
     #
     # ---
     #
