@@ -78,6 +78,13 @@ testrow
     LINE
   end
 
+  def test_generate_line_shortcut
+    line = ["1", "2", "3"].to_csv(col_sep: ";")
+    assert_equal(<<-LINE, line)
+1;2;3
+    LINE
+  end
+
   def test_generate_lines
     lines = CSV.generate_lines([["foo", "bar"], [1, 2], [3, 4]])
     assert_equal(<<-LINES, lines)
@@ -85,13 +92,6 @@ foo,bar
 1,2
 3,4
     LINES
-  end
-
-  def test_generate_line_shortcut
-    line = ["1", "2", "3"].to_csv(col_sep: ";")
-    assert_equal(<<-LINE, line)
-1;2;3
-    LINE
   end
 
   def test_headers_detection
