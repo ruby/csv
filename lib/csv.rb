@@ -1474,7 +1474,7 @@ class CSV
     # Argument +rows+ must be an \Array of row. Row is \Array of \String or \CSV::Row.
     #
     # Special options:
-    # * Option <tt>:row_sep</tt> defaults to <tt>"\n"> on Ruby 3.0 or later
+    # * Option <tt>:row_sep</tt> defaults to <tt>"\n"</tt> on Ruby 3.0 or later
     #   and <tt>$INPUT_RECORD_SEPARATOR</tt> (<tt>$/</tt>) otherwise.:
     #     $INPUT_RECORD_SEPARATOR # => "\n"
     # * This method accepts an additional option, <tt>:encoding</tt>, which sets the base
