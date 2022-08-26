@@ -1,5 +1,21 @@
 # News
 
+## 3.2.5 - 2022-08-26
+
+### Improvements
+
+  * Added `CSV.generate_lines`.
+    [[GitHub#255](https://github.com/ruby/csv/issues/255)]
+    [Reported by OKURA Masafumi]
+    [[GitHub#256](https://github.com/ruby/csv/pull/256)]
+    [Patch by Eriko Sugiyama]
+
+### Thanks
+
+  * OKURA Masafumi
+
+  * Eriko Sugiyama
+
 ## 3.2.4 - 2022-08-22
 
 ### Improvements
