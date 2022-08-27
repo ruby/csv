@@ -2936,13 +2936,13 @@ BAZ,-2</pre>
 
 <p>Returns the String generated from an</p>
 
-<pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate_lines</span>([<span class="ruby-string">&#39;foo&#39;</span>, <span class="ruby-string">&#39;0&#39;</span>], [<span class="ruby-string">&#39;bar&#39;</span>, <span class="ruby-string">&#39;1&#39;</span>], [<span class="ruby-string">&#39;baz&#39;</span>, <span class="ruby-string">&#39;2&#39;</span>]) <span class="ruby-comment"># =&gt; &quot;foo,0\nbar,1\nbaz.2\n&quot;</span>
+<pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate_lines</span>([[<span class="ruby-string">&#39;foo&#39;</span>, <span class="ruby-string">&#39;0&#39;</span>], [<span class="ruby-string">&#39;bar&#39;</span>, <span class="ruby-string">&#39;1&#39;</span>], [<span class="ruby-string">&#39;baz&#39;</span>, <span class="ruby-string">&#39;2&#39;</span>]]) <span class="ruby-comment"># =&gt; &quot;foo,0\nbar,1\nbaz,2\n&quot;</span>
 </pre>
 <hr>
 
 <p>Raises an exception</p>
 
-<pre class="ruby"><span class="ruby-comment"># Raises NoMethodError (undefined method `find&#39; for :foo:Symbol)</span>
+<pre class="ruby"><span class="ruby-comment"># Raises NoMethodError (undefined method `each&#39; for :foo:Symbol)</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate_lines</span>(<span class="ruby-value">:foo</span>)
 </pre>
           
