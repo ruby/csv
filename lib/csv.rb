@@ -1489,12 +1489,12 @@ class CSV
     # ---
     #
     # Returns the \String generated from an
-    #   CSV.generate_lines(['foo', '0'], ['bar', '1'], ['baz', '2']) # => "foo,0\nbar,1\nbaz.2\n"
+    #   CSV.generate_lines([['foo', '0'], ['bar', '1'], ['baz', '2']]) # => "foo,0\nbar,1\nbaz,2\n"
     #
     # ---
     #
     # Raises an exception
-    #   # Raises NoMethodError (undefined method `find' for :foo:Symbol)
+    #   # Raises NoMethodError (undefined method `each' for :foo:Symbol)
     #   CSV.generate_lines(:foo)
     #
     def generate_lines(rows, **options)
