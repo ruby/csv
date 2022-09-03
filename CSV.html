@@ -4775,7 +4775,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="header_row-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2624</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2631</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_row?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">header_row?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -4864,7 +4864,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="inspect-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2683</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2690</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
   <span class="ruby-identifier">str</span> = [<span class="ruby-string">&quot;#&lt;&quot;</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-string">&quot; io_type:&quot;</span>]
   <span class="ruby-comment"># show type of wrapped IO</span>
@@ -5313,7 +5313,14 @@ csv.read</pre>
           <div class="method-source-code" id="read-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2588</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read</span>
-  <span class="ruby-identifier">rows</span> = <span class="ruby-identifier">to_a</span>
+  <span class="ruby-identifier">rows</span> = []
+  <span class="ruby-identifier">enumerator</span> = <span class="ruby-identifier">parser_enumerator</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">while</span> <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">enumerator</span>.<span class="ruby-identifier">next</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StopIteration</span>
+  <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">use_headers?</span>
     <span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">rows</span>, <span class="ruby-value">headers:</span> <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">headers</span>)
   <span class="ruby-keyword">else</span>
@@ -5564,7 +5571,7 @@ csv.read</pre>
 
           
           <div class="method-source-code" id="shift-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2661</span>
+            <pre><span class="ruby-comment"># File lib/csv.rb, line 2668</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">shift</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eof_error</span>
     <span class="ruby-identifier">eof_error</span>, <span class="ruby-ivar">@eof_error</span> = <span class="ruby-ivar">@eof_error</span>, <span class="ruby-keyword">nil</span>
