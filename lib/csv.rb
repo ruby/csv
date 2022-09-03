@@ -2587,10 +2587,9 @@ class CSV
   #   csv.read
   def read
     rows = []
-    enumerator = parser_enumerator
     begin
       while true
-        rows << enumerator.next
+        rows << parser_enumerator.next
       end
     rescue StopIteration
     end
