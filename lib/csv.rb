@@ -1005,7 +1005,7 @@ class CSV
     def instance(data = $stdout, **options)
       # create a _signature_ for this method call, data object and options
       sig = [data.object_id] +
-            options.values_at(*DEFAULT_OPTIONS.keys.sort!)
+            options.values_at(*DEFAULT_OPTIONS.keys)
 
       # fetch or create the instance for this signature
       @@instances ||= Hash.new
