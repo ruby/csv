@@ -1202,7 +1202,7 @@ class CSV
       # parse options for input, output, or both
       in_options, out_options = Hash.new, {row_sep: InputRecordSeparator.value}
       options.each do |key, value|
-        case key.to_s
+        case key
         when /\Ain(?:put)?_(.+)\Z/
           in_options[$1.to_sym] = value
         when /\Aout(?:put)?_(.+)\Z/
