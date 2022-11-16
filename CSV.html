@@ -3055,7 +3055,7 @@ BAZ,-2</pre>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">instance</span>(<span class="ruby-identifier">data</span> = <span class="ruby-identifier">$stdout</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-comment"># create a _signature_ for this method call, data object and options</span>
   <span class="ruby-identifier">sig</span> = [<span class="ruby-identifier">data</span>.<span class="ruby-identifier">object_id</span>] <span class="ruby-operator">+</span>
-        <span class="ruby-identifier">options</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-operator">*</span><span class="ruby-constant">DEFAULT_OPTIONS</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">sym</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sym</span>.<span class="ruby-identifier">to_s</span> })
+        <span class="ruby-identifier">options</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-operator">*</span><span class="ruby-constant">DEFAULT_OPTIONS</span>.<span class="ruby-identifier">keys</span>)
 
   <span class="ruby-comment"># fetch or create the instance for this signature</span>
   <span class="ruby-identifier">@@instances</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
