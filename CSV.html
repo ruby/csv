@@ -2517,7 +2517,7 @@ BAZ,-2</pre>
   <span class="ruby-comment"># parse options for input, output, or both</span>
   <span class="ruby-identifier">in_options</span>, <span class="ruby-identifier">out_options</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>, {<span class="ruby-value">row_sep:</span> <span class="ruby-constant">InputRecordSeparator</span>.<span class="ruby-identifier">value</span>}
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">case</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">key</span>
     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\Ain(?:put)?_(.+)\Z/</span>
       <span class="ruby-identifier">in_options</span>[<span class="ruby-node">$1</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-identifier">value</span>
     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\Aout(?:put)?_(.+)\Z/</span>
