@@ -29,7 +29,7 @@ jobs:
           - { runs-on: windows-latest , ruby-version: mswin }
     runs-on: ${{ matrix.runs-on }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
@@ -62,7 +62,7 @@ jobs:
     env:
       CSV_PARSER_SCANNER_TEST: "yes"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
@@ -75,7 +75,7 @@ jobs:
     name: "Gem test"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7
@@ -94,7 +94,7 @@ jobs:
     name: "Document test"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7
@@ -102,7 +102,7 @@ jobs:
       - name: Build document
         run: |
           bundle exec rake warning:error rdoc
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         if: |
           github.event_name == 'push'
         with:
