@@ -1,5 +1,38 @@
 # News
 
+## 3.2.6 - 2022-12-08
+
+### Improvements
+
+  * `CSV#read` consumes the same lines with other methods like
+    `CSV#shift`.
+    [[GitHub#258](https://github.com/ruby/csv/issues/258)]
+    [Reported by Lhoussaine Ghallou]
+
+  * All `Enumerable` based methods consume the same lines with other
+    methods. This may have a performance penalty.
+    [[GitHub#260](https://github.com/ruby/csv/issues/260)]
+    [Reported by Lhoussaine Ghallou]
+
+  * Simplify some implementations.
+    [[GitHub#262](https://github.com/ruby/csv/pull/262)]
+    [[GitHub#263](https://github.com/ruby/csv/pull/263)]
+    [Patch by Mau Magnaguagno]
+
+### Fixes
+
+  * Fixed `CSV.generate_lines` document.
+    [[GitHub#257](https://github.com/ruby/csv/pull/257)]
+    [Patch by Sampat Badhe]
+
+### Thanks
+
+  * Sampat Badhe
+
+  * Lhoussaine Ghallou
+
+  * Mau Magnaguagno
+
 ## 3.2.5 - 2022-08-26
 
 ### Improvements
