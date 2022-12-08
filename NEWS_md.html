@@ -61,6 +61,10 @@
 
   <ul class="link-list" role="directory">
     <li><a href="#label-News">News</a>
+    <li><a href="#label-3.2.6+-+2022-12-08">3.2.6 - 2022-12-08</a>
+    <li><a href="#label-Improvements">Improvements</a>
+    <li><a href="#label-Fixes">Fixes</a>
+    <li><a href="#label-Thanks">Thanks</a>
     <li><a href="#label-3.2.5+-+2022-08-26">3.2.5 - 2022-08-26</a>
     <li><a href="#label-Improvements">Improvements</a>
     <li><a href="#label-Thanks">Thanks</a>
@@ -191,6 +195,31 @@
 <main role="main" aria-label="Page NEWS.md">
 
 <h1 id="label-News">News<span><a href="#label-News">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<h2 id="label-3.2.6+-+2022-12-08">3.2.6 - 2022-12-08<span><a href="#label-3.2.6+-+2022-12-08">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p><code>CSV#read</code> consumes the same lines with other methods like <code>CSV#shift</code>. [<a href="https://github.com/ruby/csv/issues/258">GitHub#258</a>] [Reported by Lhoussaine Ghallou]</p>
+</li><li>
+<p>All <code>Enumerable</code> based methods consume the same lines with other methods. This may have a performance penalty. [<a href="https://github.com/ruby/csv/issues/260">GitHub#260</a>] [Reported by Lhoussaine Ghallou]</p>
+</li><li>
+<p>Simplify some implementations. [<a href="https://github.com/ruby/csv/pull/262">GitHub#262</a>] [<a href="https://github.com/ruby/csv/pull/263">GitHub#263</a>] [Patch by Mau Magnaguagno]</p>
+</li></ul>
+
+<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Fixed <code>CSV.generate_lines</code> document. [<a href="https://github.com/ruby/csv/pull/257">GitHub#257</a>] [Patch by Sampat Badhe]</p>
+</li></ul>
+
+<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Sampat Badhe</p>
+</li><li>
+<p>Lhoussaine Ghallou</p>
+</li><li>
+<p>Mau Magnaguagno</p>
+</li></ul>
 
 <h2 id="label-3.2.5+-+2022-08-26">3.2.5 - 2022-08-26<span><a href="#label-3.2.5+-+2022-08-26">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
