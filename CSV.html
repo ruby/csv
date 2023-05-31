@@ -1246,14 +1246,14 @@ baz,2
 
 <h6 id="class-CSV-label-Option+liberal_parsing">Option <code>liberal_parsing</code><span><a href="#class-CSV-label-Option+liberal_parsing">&para;</a> <a href="#top">&uarr;</a></span></h6>
 
-<p>Specifies the boolean value that determines whether <a href="CSV.html"><code>CSV</code></a> will attempt to parse input not conformant with RFC 4180, such as double quotes in unquoted fields.</p>
+<p>Specifies the boolean or hash value that determines whether <a href="CSV.html"><code>CSV</code></a> will attempt to parse input not conformant with RFC 4180, such as double quotes in unquoted fields.</p>
 
 <p>Default value:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_OPTIONS</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:liberal_parsing</span>) <span class="ruby-comment"># =&gt; false</span>
 </pre>
 
-<p>For examples in this section:</p>
+<p>For the next two examples:</p>
 
 <pre class="ruby"><span class="ruby-identifier">str</span> = <span class="ruby-string">&#39;is,this &quot;three, or four&quot;,fields&#39;</span>
 </pre>
@@ -1268,6 +1268,28 @@ baz,2
 
 <pre class="ruby"><span class="ruby-identifier">ary</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">liberal_parsing:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">ary</span> <span class="ruby-comment"># =&gt; [&quot;is&quot;, &quot;this \&quot;three&quot;, &quot; or four\&quot;&quot;, &quot;fields&quot;]</span>
+</pre>
+
+<p>Use the <code>backslash_quote</code> sub-option to parse values that use a backslash to escape a double-quote character.  This causes the parser to treat <code>\&quot;</code> as if it were <code>&quot;&quot;</code>.</p>
+
+<p>For the next two examples:</p>
+
+<pre class="ruby"><span class="ruby-identifier">str</span> = <span class="ruby-string">&#39;Show,&quot;Harry \&quot;Handcuff\&quot; Houdini, the one and only&quot;,&quot;Tampa Theater&quot;&#39;</span>
+</pre>
+
+<p>With <code>liberal_parsing</code>, but without the <code>backslash_quote</code> sub-option:</p>
+
+<pre class="ruby"><span class="ruby-comment"># Incorrect interpretation of backslash; incorrectly interprets the quoted comma as a field separator.</span>
+<span class="ruby-identifier">ary</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">liberal_parsing:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-identifier">ary</span> <span class="ruby-comment"># =&gt; [&quot;Show&quot;, &quot;\&quot;Harry \\\&quot;Handcuff\\\&quot; Houdini&quot;, &quot; the one and only\&quot;&quot;, &quot;Tampa Theater&quot;]</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>] <span class="ruby-comment"># =&gt; &quot;Harry \&quot;Handcuff\&quot; Houdini</span>
+</pre>
+
+<p>With <code>liberal_parsing</code> and its <code>backslash_quote</code> sub-option:</p>
+
+<pre class="ruby"><span class="ruby-identifier">ary</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">liberal_parsing:</span> { <span class="ruby-value">backslash_quote:</span> <span class="ruby-keyword">true</span> })
+<span class="ruby-identifier">ary</span> <span class="ruby-comment"># =&gt; [&quot;Show&quot;, &quot;Harry \&quot;Handcuff\&quot; Houdini, the one and only&quot;, &quot;Tampa Theater&quot;]</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>] <span class="ruby-comment"># =&gt; Harry &quot;Handcuff&quot; Houdini, the one and only</span>
 </pre>
 
 <h6 id="class-CSV-label-Option+nil_value">Option <code>nil_value</code><span><a href="#class-CSV-label-Option+nil_value">&para;</a> <a href="#top">&uarr;</a></span></h6>
