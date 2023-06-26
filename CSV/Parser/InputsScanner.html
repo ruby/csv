@@ -201,7 +201,7 @@
 
           
           <div class="method-source-code" id="check-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 246</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 247</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check</span>(<span class="ruby-identifier">pattern</span>)
   <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">check</span>(<span class="ruby-identifier">pattern</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -309,7 +309,7 @@
 
           
           <div class="method-source-code" id="eos-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 169</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 170</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eos?</span>
   <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">eos?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -342,7 +342,7 @@
 
           
           <div class="method-source-code" id="keep_back-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 196</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 197</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_back</span>
   <span class="ruby-comment"># trace(__method__, :start)</span>
   <span class="ruby-identifier">scanner</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">buffer</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
@@ -400,7 +400,7 @@
 
           
           <div class="method-source-code" id="keep_drop-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 225</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 226</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_drop</span>
   <span class="ruby-identifier">_</span>, <span class="ruby-identifier">_</span>, <span class="ruby-identifier">buffer</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-comment"># trace(__method__, :done, :empty) unless buffer</span>
@@ -446,7 +446,7 @@
 
           
           <div class="method-source-code" id="keep_end-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 180</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 181</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_end</span>
   <span class="ruby-comment"># trace(__method__, :start)</span>
   <span class="ruby-identifier">scanner</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">buffer</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
@@ -491,7 +491,7 @@
 
           
           <div class="method-source-code" id="keep_start-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 173</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 174</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_start</span>
   <span class="ruby-comment"># trace(__method__, :start)</span>
   <span class="ruby-identifier">adjust_last_keep</span>
@@ -527,7 +527,7 @@
 
           
           <div class="method-source-code" id="rest-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 242</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 243</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rest</span>
   <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">rest</span>
 <span class="ruby-keyword">end</span></pre>
@@ -607,6 +607,7 @@
   <span class="ruby-comment"># trace(__method__, pattern, :done, :last, value) if @last_scanner</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">value</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@last_scanner</span>
 
+  <span class="ruby-comment"># trace(__method__, pattern, :done, :nil) if value.nil?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-keyword">while</span> <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">eos?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">read_chunk</span> <span class="ruby-keyword">and</span> (<span class="ruby-identifier">sub_value</span> = <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-identifier">pattern</span>))
     <span class="ruby-comment"># trace(__method__, pattern, :sub, sub_value)</span>
