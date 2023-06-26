@@ -1,5 +1,49 @@
 # News
 
+## 3.2.7 - 2023-06-26
+
+### Improvements
+
+  * Removed an unused internal variable.
+    [GH-273](https://github.com/ruby/csv/issues/273)
+    [Patch by Mau Magnaguagno]
+
+  * Changed to use `https://` instead of `http://` in documents.
+    [GH-274](https://github.com/ruby/csv/issues/274)
+    [Patch by Vivek Bharath Akupatni]
+
+  * Added prefix to a helper module in test.
+    [GH-278](https://github.com/ruby/csv/issues/278)
+    [Patch by Luke Gruber]
+
+  * Added a documentation for `liberal_parsing: {backslash_quotes: true}`.
+    [GH-280](https://github.com/ruby/csv/issues/280)
+    [Patch by Mark Schneider]
+
+### Fixes
+
+  * Fixed a wrong execution result in documents.
+    [GH-276](https://github.com/ruby/csv/issues/276)
+    [Patch by Yuki Tsujimoto]
+
+  * Fixed a bug that the same line is used multiple times.
+    [GH-279](https://github.com/ruby/csv/issues/279)
+    [Reported by Gabriel Nagy]
+
+### Thanks
+
+  * Mau Magnaguagno
+
+  * Vivek Bharath Akupatni
+
+  * Yuki Tsujimoto
+
+  * Luke Gruber
+
+  * Mark Schneider
+
+  * Gabriel Nagy
+
 ## 3.2.6 - 2022-12-08
 
 ### Improvements
