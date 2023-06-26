@@ -201,7 +201,7 @@
 
           
           <div class="method-source-code" id="check-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 247</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 248</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check</span>(<span class="ruby-identifier">pattern</span>)
   <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">check</span>(<span class="ruby-identifier">pattern</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -350,7 +350,8 @@
     <span class="ruby-comment"># trace(__method__, :rescan, start, buffer)</span>
     <span class="ruby-identifier">string</span> = <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">string</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">scanner</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@scanner</span>
-      <span class="ruby-identifier">keep</span> = <span class="ruby-identifier">string</span>.<span class="ruby-identifier">byteslice</span>(<span class="ruby-identifier">start</span>, <span class="ruby-identifier">string</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">start</span>)
+      <span class="ruby-identifier">keep</span> = <span class="ruby-identifier">string</span>.<span class="ruby-identifier">byteslice</span>(<span class="ruby-identifier">start</span>,
+                              <span class="ruby-identifier">string</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">pos</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">start</span>)
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">keep</span> = <span class="ruby-identifier">string</span>
     <span class="ruby-keyword">end</span>
@@ -400,7 +401,7 @@
 
           
           <div class="method-source-code" id="keep_drop-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 226</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 227</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_drop</span>
   <span class="ruby-identifier">_</span>, <span class="ruby-identifier">_</span>, <span class="ruby-identifier">buffer</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-comment"># trace(__method__, :done, :empty) unless buffer</span>
@@ -527,7 +528,7 @@
 
           
           <div class="method-source-code" id="rest-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 243</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 244</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rest</span>
   <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">rest</span>
 <span class="ruby-keyword">end</span></pre>
