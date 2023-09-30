@@ -102,14 +102,6 @@ require_relative "csv/writer"
 
 # == \CSV
 #
-# === In a Hurry?
-#
-# If you are familiar with \CSV data and have a particular task in mind,
-# you may want to go directly to the:
-# - {Recipes for CSV}[https://doc.rubylang.org/doc/csv/recipes/recipes_rdoc.html].
-#
-# Otherwise, read on here, about the API: classes, methods, and constants.
-#
 # === \CSV Data
 #
 # \CSV (comma-separated values) data is a text representation of a table:
