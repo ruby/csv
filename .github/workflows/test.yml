@@ -5,18 +5,20 @@ on:
   - pull_request
 
 jobs:
+  ruby-versions:
+    uses: ruby/actions/.github/workflows/ruby_versions.yml@master
+    with:
+      engine: cruby
+      min_version: 2.5
+      versions: '["debug"]'
+
   in-place:
+    needs: ruby-versions
     name: "In-place test: Ruby ${{ matrix.ruby-version }}: ${{ matrix.runs-on }}"
     strategy:
       fail-fast: false
       matrix:
-        ruby-version:
-          - "3.1"
-          - "3.0"
-          - "2.7"
-          - "2.6"
-          - "2.5"
-          - debug
+        ruby-version: ${{ fromJson(needs.ruby-versions.outputs.versions) }}
         runs-on:
           - macos-latest
           - ubuntu-latest
