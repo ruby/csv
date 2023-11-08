@@ -1,5 +1,19 @@
 # News
 
+## 3.2.8 - 2023-11-08
+
+### Improvements
+
+  * Added `CSV::InvalidEncodingError`.
+
+    Patch by Kosuke Shibata.
+
+    GH-287
+
+### Thanks
+
+  * Kosuke Shibata
+
 ## 3.2.7 - 2023-06-26
 
 ### Improvements
