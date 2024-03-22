@@ -1,5 +1,12 @@
 # News
 
+## 3.3.0 - 2024-03-22
+
+### Fixes
+
+  * Fixed a regression parse bug in 3.2.9 that parsing with
+    `:skip_lines` may cause wrong result.
+
 ## 3.2.9 - 2024-03-22
 
 ### Fixes
