@@ -1,5 +1,23 @@
 # News
 
+## 3.2.9 - 2024-03-22
+
+### Fixes
+
+  * Fixed a parse bug that wrong result may be happen when:
+
+    * `:skip_lines` is used
+    * `:row_separator` is `"\r\n"`
+    * There is a line that includes `\n` as a column value
+
+    Reported by Ryo Tsukamoto.
+
+    GH-296
+
+### Thanks
+
+  * Ryo Tsukamoto
+
 ## 3.2.8 - 2023-11-08
 
 ### Improvements
