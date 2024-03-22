@@ -14,6 +14,7 @@ class TestCSVParseSkipLines < Test::Unit::TestCase
   def parse(data, **options)
     # We use Tempfile here to use CSV::Parser::InputsScanner.
     Tempfile.open(["csv-", ".csv"]) do |file|
+      file.binmode
       file.print(data)
       file.close
       CSV.open(file, **options) do |csv|
