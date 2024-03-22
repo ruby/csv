@@ -20,6 +20,7 @@ jobs:
         exclude:
           - { runs-on: windows-latest , ruby-version: '3.0' }
     runs-on: ${{ matrix.runs-on }}
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
