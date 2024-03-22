@@ -901,18 +901,15 @@ class CSV
     def skip_needless_lines
       return unless @skip_lines
 
-      until @scanner.eos?
-        @scanner.keep_start
-        line = @scanner.scan_all(@not_line_end) || "".encode(@encoding)
+      @scanner.keep_start
+      @scanner.each_line(@row_separator) do |line|
         line << @row_separator if parse_row_end
-        if skip_line?(line)
-          @lineno += 1
-          @scanner.keep_drop
-        else
-          @scanner.keep_back
-          return
-        end
+        break unless skip_line?(line)
+        @lineno += 1
+        @scanner.keep_drop
+        @scanner.keep_start
       end
+      @scanner.keep_back
     end
 
     def skip_line?(line)
