@@ -3,6 +3,20 @@ require_relative "../helper"
 class TestCSVParseInputsScanner < Test::Unit::TestCase
   include CSVHelper
 
+  def test_scan_keep_nested_back
+    input = CSV::Parser::UnoptimizedStringIO.new("abcdef")
+    scanner = CSV::Parser::InputsScanner.new([input],
+                                             Encoding::UTF_8,
+                                             nil)
+    scanner.keep_start
+    assert_equal("abc", scanner.scan_all(/[a-c]+/))
+    scanner.keep_start
+    assert_equal("def", scanner.scan_all(/[d-f]+/))
+    scanner.keep_back
+    scanner.keep_back
+    assert_equal("abcdef", scanner.scan_all(/[a-f]+/))
+  end
+
   def test_scan_keep_over_chunks_nested_back
     input = CSV::Parser::UnoptimizedStringIO.new("abcdefghijklmnl")
     scanner = CSV::Parser::InputsScanner.new([input],

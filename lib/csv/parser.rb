@@ -220,6 +220,15 @@ class CSV
           end
           # trace(__method__, :repos, start, buffer)
           @scanner.pos = start
+          last_scanner, last_start, last_buffer = @keeps.last
+          # Drop the last buffer when the last buffer is the same data
+          # in the last keep. If we keep it, we have duplicated data
+          # by the next keep_back.
+          if last_scanner == @scanner and
+            last_buffer and
+            last_buffer == last_scanner.string.byteslice(last_start, start)
+            @keeps.last[2] = nil
+          end
         end
         read_chunk if @scanner.eos?
       end

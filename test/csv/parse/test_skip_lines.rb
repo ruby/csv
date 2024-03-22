@@ -11,6 +11,17 @@ class TestCSVParseSkipLines < Test::Unit::TestCase
     assert_nil(csv.skip_lines)
   end
 
+  def parse(data, **options)
+    # We use Tempfile here to use CSV::Parser::InputsScanner.
+    Tempfile.open(["csv-", ".csv"]) do |file|
+      file.print(data)
+      file.close
+      CSV.open(file, **options) do |csv|
+        csv.read
+      end
+    end
+  end
+
   def test_regexp
     csv = <<-CSV
 1
@@ -22,7 +33,7 @@ class TestCSVParseSkipLines < Test::Unit::TestCase
                    ["1"],
                    ["4"],
                  ],
-                 CSV.parse(csv, :skip_lines => /\A\s*#/))
+                 parse(csv, :skip_lines => /\A\s*#/))
   end
 
   def test_regexp_quoted
@@ -37,7 +48,7 @@ class TestCSVParseSkipLines < Test::Unit::TestCase
                    ["#3"],
                    ["4"],
                  ],
-                 CSV.parse(csv, :skip_lines => /\A\s*#/))
+                 parse(csv, :skip_lines => /\A\s*#/))
   end
 
   def test_string
@@ -51,7 +62,7 @@ class TestCSVParseSkipLines < Test::Unit::TestCase
                    ["1"],
                    ["4"],
                  ],
-                 CSV.parse(csv, :skip_lines => "."))
+                 parse(csv, :skip_lines => "."))
   end
 
   class RegexStub
@@ -88,7 +99,7 @@ class TestCSVParseSkipLines < Test::Unit::TestCase
                    ["1"],
                    ["3"],
                  ],
-                 CSV.parse(csv, :skip_lines => Matchable.new(/\A#/)))
+                 parse(csv, :skip_lines => Matchable.new(/\A#/)))
   end
 
   def test_multibyte_data
@@ -98,29 +109,36 @@ class TestCSVParseSkipLines < Test::Unit::TestCase
     value = "\u3042\u3044\u3046"
     with_chunk_size("5") do
       assert_equal([[value], [value]],
-                   CSV.parse("#{value}\n#{value}\n",
-                             :skip_lines => /\A#/))
+                   parse("#{value}\n#{value}\n",
+                         :skip_lines => /\A#/))
     end
   end
 
   def test_empty_line_and_liberal_parsing
     assert_equal([["a", "b"]],
-                 CSV.parse("a,b\n",
-                           :liberal_parsing => true,
-                           :skip_lines => /^$/))
+                 parse("a,b\n",
+                       :liberal_parsing => true,
+                       :skip_lines => /^$/))
   end
 
   def test_crlf
     assert_equal([["a", "b"]],
-                 CSV.parse("a,b\r\n,\r\n",
-                           :skip_lines => /^,+$/))
+                 parse("a,b\r\n,\r\n",
+                       :skip_lines => /^,+$/))
   end
 
   def test_crlf_strip_no_last_crlf
     assert_equal([["a"], ["b"]],
-                 CSV.parse("a\r\nb",
-                           row_sep: "\r\n",
-                           skip_lines: /^ *$/,
-                           strip: true))
+                 parse("a\r\nb",
+                       row_sep: "\r\n",
+                       skip_lines: /^ *$/,
+                       strip: true))
+  end
+
+  def test_crlf_quoted_lf
+    assert_equal([["\n", ""]],
+                 parse("\"\n\",\"\"\r\n",
+                       row_sep: "\r\n",
+                       skip_lines: /not matched/))
   end
 end
