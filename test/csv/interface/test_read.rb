@@ -32,12 +32,43 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
     assert_equal(@rows, rows)
   end
 
+  def test_foreach_stringio
+    s = StringIO.new
+    s << @data
+    s.rewind
+
+    rows = []
+    CSV.foreach(s, col_sep: "\t", row_sep: "\r\n") do |row|
+      rows << row
+    end
+    assert_equal(@rows, rows)
+  end
+
   if respond_to?(:ractor)
     ractor
     def test_foreach_in_ractor
       ractor = Ractor.new(@input.path) do |path|
         rows = []
         CSV.foreach(path, col_sep: "\t", row_sep: "\r\n") do |row|
+          rows << row
+        end
+        rows
+      end
+      rows = [
+        ["1", "2", "3"],
+        ["4", "5"],
+      ]
+      assert_equal(rows, ractor.take)
+    end
+
+    def test_foreach_stringio_in_ractor
+      s = StringIO.new
+      s << @data
+      s.rewind
+
+      ractor = Ractor.new(s) do |string_io|
+        rows = []
+        CSV.foreach(string_io, col_sep: "\t", row_sep: "\r\n") do |row|
           rows << row
         end
         rows
@@ -60,6 +91,14 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
 
   def test_foreach_enumerator
     rows = CSV.foreach(@input.path, col_sep: "\t", row_sep: "\r\n").to_a
+    assert_equal(@rows, rows)
+  end
+
+  def test_foreach_enumerator_stringio
+    s = StringIO.new
+    s << @data
+    s.rewind
+    rows = CSV.foreach(s, col_sep: "\t", row_sep: "\r\n").to_a
     assert_equal(@rows, rows)
   end
 

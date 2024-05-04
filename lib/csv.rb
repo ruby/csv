@@ -1508,10 +1508,8 @@ class CSV
 
     #
     # :call-seq:
-    #   open(file_path, mode = "rb", **options ) -> new_csv
-    #   open(io, mode = "rb", **options ) -> new_csv
-    #   open(file_path, mode = "rb", **options ) { |csv| ... } -> object
-    #   open(io, mode = "rb", **options ) { |csv| ... } -> object
+    #   open(path_or_io, mode = "rb", **options ) -> new_csv
+    #   open(path_or_io, mode = "rb", **options ) { |csv| ... } -> object
     #
     # possible options elements:
     #   keyword form:
@@ -1520,7 +1518,7 @@ class CSV
     #     :undef => :replace   # replace undefined conversion
     #     :replace => string   # replacement string ("?" or "\uFFFD" if not specified)
     #
-    # * Argument +path+, if given, must be the path to a file.
+    # * Argument +path_or_io+, must be a file path or an \IO stream.
     # :include: ../doc/csv/arguments/io.rdoc
     # * Argument +mode+, if given, must be a \File mode.
     #   See {Access Modes}[https://docs.ruby-lang.org/en/master/File.html#class-File-label-Access+Modes].
@@ -1544,6 +1542,10 @@ class CSV
     #   path = 't.csv'
     #   File.write(path, string)
     #
+    #   string_io = StringIO.new
+    #   string_io << "foo,0\nbar,1\nbaz,2\n"
+    #   string_io.rewind
+    #
     # ---
     #
     # With no block given, returns a new \CSV object.
@@ -1556,6 +1558,9 @@ class CSV
     #   csv = CSV.open(File.open(path))
     #   csv # => #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
     #
+    # Create a \CSV object using a \StringIO:
+    #   csv = CSV.open(string_io)
+    #   csv # => #<CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
     # ---
     #
     # With a block given, calls the block with the created \CSV object;
@@ -1573,12 +1578,17 @@ class CSV
     # Output:
     #   #<CSV io_type:File io_path:"t.csv" encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
     #
+    # Using a \StringIO:
+    #   csv = CSV.open(string_io) {|csv| p csv}
+    #   csv # => #<CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
+    # Output:
+    #   #<CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:"," row_sep:"\n" quote_char:"\"">
     # ---
     #
     # Raises an exception if the argument is not a \String object or \IO object:
     #   # Raises TypeError (no implicit conversion of Symbol into String)
     #   CSV.open(:foo)
-    def open(filename, mode="r", **options)
+    def open(filename_or_io, mode="r", **options)
       # wrap a File opened with the remaining +args+ with no newline
       # decorator
       file_opts = {}
@@ -1592,14 +1602,19 @@ class CSV
       options.delete(:replace)
       options.delete_if {|k, _| /newline\z/.match?(k)}
 
-      begin
-        f = File.open(filename, mode, **file_opts)
-      rescue ArgumentError => e
-        raise unless /needs binmode/.match?(e.message) and mode == "r"
-        mode = "rb"
-        file_opts = {encoding: Encoding.default_external}.merge(file_opts)
-        retry
+      if filename_or_io.is_a?(StringIO)
+        f = filename_or_io
+      else
+        begin
+          f = File.open(filename_or_io, mode, **file_opts)
+        rescue ArgumentError => e
+          raise unless /needs binmode/.match?(e.message) and mode == "r"
+          mode = "rb"
+          file_opts = {encoding: Encoding.default_external}.merge(file_opts)
+          retry
+        end
       end
+
       begin
         csv = new(f, **options)
       rescue Exception
@@ -1612,7 +1627,7 @@ class CSV
         begin
           yield csv
         ensure
-          csv.close
+          csv.close unless f.is_a?(StringIO)
         end
       else
         csv
