@@ -55,6 +55,4 @@ Gem::Specification.new do |spec|
   spec.extra_rdoc_files = rdoc_files
 
   spec.required_ruby_version = ">= 2.5.0"
-
-  # spec.add_dependency "stringio", ">= 0.1.3"
 end
