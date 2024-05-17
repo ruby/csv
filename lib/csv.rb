@@ -1581,7 +1581,14 @@ class CSV
     def open(filename, mode="r", **options)
       # wrap a File opened with the remaining +args+ with no newline
       # decorator
-      file_opts = options.dup
+      file_opts = {}
+      have_encoding_options = (options.key?(:encoding) or
+                               options.key?(:external_encoding) or
+                               mode.include?(":"))
+      if not have_encoding_options and Encoding.default_external == Encoding::UTF_8
+        file_opts[:encoding] = "bom|utf-8"
+      end
+      file_opts.merge!(options)
       unless file_opts.key?(:newline)
         file_opts[:universal_newline] ||= false
       end

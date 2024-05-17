@@ -215,6 +215,16 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
     end
   end
 
+  def test_open_with_bom
+    csv_data = @input.read
+    bom = "\ufeff" # U+FEFF ZERO WIDTH NO-BREAK SPACE
+    File.binwrite(@input.path, "#{bom}#{csv_data}")
+    @input.rewind
+    CSV.open(@input.path, col_sep: "\t") do |csv|
+      assert_equal(@rows, csv.to_a)
+    end
+  end
+
   def test_parse
     assert_equal(@rows,
                  CSV.parse(@data, col_sep: "\t", row_sep: "\r\n"))
