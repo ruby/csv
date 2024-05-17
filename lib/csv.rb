@@ -1729,6 +1729,23 @@ class CSV
     # Raises an exception if the argument is not a \String object or \IO object:
     #   # Raises NoMethodError (undefined method `close' for :foo:Symbol)
     #   CSV.parse(:foo)
+    #
+    # ---
+    #
+    # Please make sure if your text contains \BOM or not. CSV.parse will not remove
+    # \BOM automatically. You might want to remove \BOM before calling CSV.parse :
+    #   # remove BOM on calling File.open
+    #   File.open(path, encoding: 'bom|utf-8') do |file|
+    #     CSV.parse(file, headers: true) do |row|
+    #       # you can get value by column name because BOM is removed
+    #       p row['Name']
+    #     end
+    #   end
+    #
+    # Output:
+    #   # "foo"
+    #   # "bar"
+    #   # "baz"
     def parse(str, **options, &block)
       csv = new(str, **options)
 
