@@ -61,6 +61,7 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
       assert_equal(rows, ractor.take)
     end
 
+    ractor
     def test_foreach_stringio_in_ractor
       s = StringIO.new
       s << @data
