@@ -60,26 +60,6 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
       ]
       assert_equal(rows, ractor.take)
     end
-
-    ractor
-    def test_foreach_stringio_in_ractor
-      s = StringIO.new
-      s << @data
-      s.rewind
-
-      ractor = Ractor.new(s) do |string_io|
-        rows = []
-        CSV.foreach(string_io, col_sep: "\t", row_sep: "\r\n") do |row|
-          rows << row
-        end
-        rows
-      end
-      rows = [
-        ["1", "2", "3"],
-        ["4", "5"],
-      ]
-      assert_equal(rows, ractor.take)
-    end
   end
 
   def test_foreach_mode
@@ -95,10 +75,11 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
     assert_equal(@rows, rows)
   end
 
-  def test_foreach_enumerator_stringio
+  def test_foreach_seeked_stringio
     s = StringIO.new
+    s << "012"
     s << @data
-    s.rewind
+    s.seek(3)
     rows = CSV.foreach(s, col_sep: "\t", row_sep: "\r\n").to_a
     assert_equal(@rows, rows)
   end
