@@ -35,12 +35,19 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
   def test_foreach_stringio
     s = StringIO.new
     s << @data
-    s.rewind
 
     rows = []
     CSV.foreach(s, col_sep: "\t", row_sep: "\r\n") do |row|
       rows << row
     end
+    assert_equal(@rows, rows)
+  end
+
+  def test_foreach_stringio_with_bom
+    s = StringIO.new
+    s << "\ufeff" # U+FEFF ZERO WIDTH NO-BREAK SPACE
+    s << @data
+    rows = CSV.foreach(s, col_sep: "\t", row_sep: "\r\n").to_a
     assert_equal(@rows, rows)
   end
 
@@ -72,15 +79,6 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
 
   def test_foreach_enumerator
     rows = CSV.foreach(@input.path, col_sep: "\t", row_sep: "\r\n").to_a
-    assert_equal(@rows, rows)
-  end
-
-  def test_foreach_seeked_stringio
-    s = StringIO.new
-    s << "012"
-    s << @data
-    s.seek(3)
-    rows = CSV.foreach(s, col_sep: "\t", row_sep: "\r\n").to_a
     assert_equal(@rows, rows)
   end
 

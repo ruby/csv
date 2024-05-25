@@ -1544,7 +1544,6 @@ class CSV
     #
     #   string_io = StringIO.new
     #   string_io << "foo,0\nbar,1\nbaz,2\n"
-    #   string_io.rewind
     #
     # ---
     #
@@ -1603,9 +1602,7 @@ class CSV
       options.delete_if {|k, _| /newline\z/.match?(k)}
 
       if filename_or_io.is_a?(StringIO)
-        pos = filename_or_io.pos
-        f = StringIO.new(filename_or_io.read)
-        filename_or_io.seek(pos)
+        f = StringIO.new(filename_or_io.string, **file_opts)
       else
         begin
           f = File.open(filename_or_io, mode, **file_opts)
