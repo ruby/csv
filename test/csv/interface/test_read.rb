@@ -34,8 +34,6 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
 
   def test_foreach_stringio
     string_io = StringIO.new(@data)
-
-    rows = []
     rows = CSV.foreach(string_io, col_sep: "\t", row_sep: "\r\n").to_a
     assert_equal(@rows, rows)
   end
