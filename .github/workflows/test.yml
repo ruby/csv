@@ -57,7 +57,7 @@ jobs:
           - ubuntu-latest
           - windows-latest
         exclude:
-          - { runs-os: macos-latest, ruby: "2.5" }
+          - { runs-os: macos-latest, ruby-version: "2.5" }
           - { runs-on: windows-latest , ruby-version: "3.1" }
           - { runs-on: windows-latest , ruby-version: debug }
         include:
