@@ -36,9 +36,7 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
     string_io = StringIO.new(@data)
 
     rows = []
-    CSV.foreach(string_io, col_sep: "\t", row_sep: "\r\n") do |row|
-      rows << row
-    end
+    rows = CSV.foreach(string_io, col_sep: "\t", row_sep: "\r\n").to_a
     assert_equal(@rows, rows)
   end
 
