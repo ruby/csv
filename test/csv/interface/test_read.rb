@@ -216,6 +216,9 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
   end
 
   def test_open_with_bom
+    if /mingw|mswin/.match?(RUBY_PLATFORM)
+      omit("BOM detection on Windows may be buggy: Bug #20526")
+    end
     csv_data = @input.read
     bom = "\ufeff" # U+FEFF ZERO WIDTH NO-BREAK SPACE
     File.binwrite(@input.path, "#{bom}#{csv_data}")

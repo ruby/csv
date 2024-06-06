@@ -1582,12 +1582,7 @@ class CSV
       # wrap a File opened with the remaining +args+ with no newline
       # decorator
       file_opts = {}
-      have_encoding_options = (options.key?(:encoding) or
-                               options.key?(:external_encoding) or
-                               mode.include?(":"))
-      if not have_encoding_options and Encoding.default_external == Encoding::UTF_8
-        file_opts[:encoding] = "bom|utf-8"
-      end
+      may_enable_bom_deletection_automatically(mode, options, file_opts)
       file_opts.merge!(options)
       unless file_opts.key?(:newline)
         file_opts[:universal_newline] ||= false
@@ -1885,6 +1880,21 @@ class CSV
       }
       options = default_options.merge(options)
       read(path, **options)
+    end
+
+    ON_WINDOWS = /mingw|mswin/.match?(RUBY_PLATFORM)
+    private_constant :ON_WINDOWS
+
+    private
+    def may_enable_bom_deletection_automatically(mode, options, file_opts)
+      # "bom|utf-8" may be buggy on Windows:
+      # https://bugs.ruby-lang.org/issues/20526
+      return if ON_WINDOWS
+      return unless Encoding.default_external == Encoding::UTF_8
+      return if options.key?(:encoding)
+      return if options.key?(:external_encoding)
+      return if mode.include?(":")
+      file_opts[:encoding] = "bom|utf-8"
     end
   end
 
