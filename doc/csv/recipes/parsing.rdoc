@@ -110,7 +110,7 @@ You can parse \CSV data from a \File, with or without headers.
 
 ===== Recipe: Parse from \File with Headers
 
-Use class method CSV#read with option +headers+ to read a file all at once:
+Use class method CSV.read with option +headers+ to read a file all at once:
   string = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
   path = 't.csv'
   File.write(path, string)
