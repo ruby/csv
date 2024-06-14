@@ -1626,7 +1626,7 @@ class CSV
         begin
           yield csv
         ensure
-          csv.close unless f.is_a?(StringIO)
+          csv.close
         end
       else
         csv
