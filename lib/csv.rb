@@ -1591,7 +1591,10 @@ class CSV
       # wrap a File opened with the remaining +args+ with no newline
       # decorator
       file_opts = {}
-      may_enable_bom_deletection_automatically(mode, options, file_opts)
+      may_enable_bom_detection_automatically(filename_or_io,
+                                             mode,
+                                             options,
+                                             file_opts)
       file_opts.merge!(options)
       unless file_opts.key?(:newline)
         file_opts[:universal_newline] ||= false
@@ -1900,10 +1903,15 @@ class CSV
     private_constant :ON_WINDOWS
 
     private
-    def may_enable_bom_deletection_automatically(mode, options, file_opts)
-      # "bom|utf-8" may be buggy on Windows:
-      # https://bugs.ruby-lang.org/issues/20526
-      return if ON_WINDOWS
+    def may_enable_bom_detection_automatically(filename_or_io,
+                                               mode,
+                                               options,
+                                               file_opts)
+      unless filename_or_io.is_a?(StringIO)
+        # "bom|utf-8" may be buggy on Windows:
+        # https://bugs.ruby-lang.org/issues/20526
+        return if ON_WINDOWS
+      end
       return unless Encoding.default_external == Encoding::UTF_8
       return if options.key?(:encoding)
       return if options.key?(:external_encoding)
