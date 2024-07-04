@@ -40,8 +40,7 @@ class CSV
       @lineno += 1
 
       if @fields_converter
-        quoted_fields = [false] * row.size
-        row = @fields_converter.convert(row, nil, lineno, quoted_fields)
+        row = @fields_converter.convert(row, nil, lineno)
       end
 
       i = -1

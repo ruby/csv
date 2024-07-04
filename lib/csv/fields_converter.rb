@@ -4,6 +4,13 @@ class CSV
   # Note: Don't use this class directly. This is an internal class.
   class FieldsConverter
     include Enumerable
+
+    NO_QUOTED_FIELDS = [] # :nodoc:
+    def NO_QUOTED_FIELDS.[](_index)
+      false
+    end
+    NO_QUOTED_FIELDS.freeze
+
     #
     # A CSV::FieldsConverter is a data structure for storing the
     # fields converter properties to be passed as a parameter
@@ -44,7 +51,7 @@ class CSV
       @converters.empty?
     end
 
-    def convert(fields, headers, lineno, quoted_fields)
+    def convert(fields, headers, lineno, quoted_fields=NO_QUOTED_FIELDS)
       return fields unless need_convert?
 
       fields.collect.with_index do |field, index|
