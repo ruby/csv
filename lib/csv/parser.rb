@@ -409,13 +409,7 @@ class CSV
 
       begin
         @scanner ||= build_scanner
-        if quote_character.nil?
-          parse_no_quote(&block)
-        elsif @need_robust_parsing
-          parse_quotable_robust(&block)
-        else
-          parse_quotable_loose(&block)
-        end
+        __send__(@parse_method, &block)
       rescue InvalidEncoding
         if @scanner
           ignore_broken_line
@@ -459,7 +453,6 @@ class CSV
     end
 
     def prepare_variable
-      @need_robust_parsing = false
       @encoding = @options[:encoding]
       liberal_parsing = @options[:liberal_parsing]
       if liberal_parsing
@@ -472,7 +465,6 @@ class CSV
           @double_quote_outside_quote = false
           @backslash_quote = false
         end
-        @need_robust_parsing = true
       else
         @liberal_parsing = false
         @backslash_quote = false
@@ -554,7 +546,6 @@ class CSV
           @rstrip_value = Regexp.new(@escaped_strip +
                                      "+\\z".encode(@encoding))
         end
-        @need_robust_parsing = true
       elsif @strip
         strip_values = " \t\f\v"
         @escaped_strip = strip_values.encode(@encoding)
@@ -562,7 +553,6 @@ class CSV
           @strip_value = Regexp.new("[#{strip_values}]+".encode(@encoding))
           @rstrip_value = Regexp.new("[#{strip_values}]+\\z".encode(@encoding))
         end
-        @need_robust_parsing = true
       end
     end
 
@@ -808,6 +798,13 @@ class CSV
 
     def prepare_parser
       @may_quoted = may_quoted?
+      if @quote_character.nil?
+        @parse_method = :parse_no_quote
+      elsif @liberal_parsing or @strip
+        @parse_method = :parse_quotable_robust
+      else
+        @parse_method = :parse_quotable_loose
+      end
     end
 
     def may_quoted?
@@ -987,7 +984,7 @@ class CSV
           quoted_fields = []
         elsif line.include?(@cr) or line.include?(@lf)
           @scanner.keep_back
-          @need_robust_parsing = true
+          @parse_method = :parse_quotable_robust
           return parse_quotable_robust(&block)
         else
           row = line.split(@split_column_separator, -1)
@@ -1011,7 +1008,7 @@ class CSV
                 row[i] = column[1..-2]
               else
                 @scanner.keep_back
-                @need_robust_parsing = true
+                @parse_method = :parse_quotable_robust
                 return parse_quotable_robust(&block)
               end
               validate_field_size(row[i])
