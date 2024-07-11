@@ -514,13 +514,7 @@
 
   <span class="ruby-keyword">begin</span>
     <span class="ruby-ivar">@scanner</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">build_scanner</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">quote_character</span>.<span class="ruby-identifier">nil?</span>
-      <span class="ruby-identifier">parse_no_quote</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-    <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@need_robust_parsing</span>
-      <span class="ruby-identifier">parse_quotable_robust</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">parse_quotable_loose</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">__send__</span>(<span class="ruby-ivar">@parse_method</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">InvalidEncoding</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@scanner</span>
       <span class="ruby-identifier">ignore_broken_line</span>
@@ -768,7 +762,7 @@
 
           
           <div class="method-source-code" id="use_headers-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 440</span>
+            <pre><span class="ruby-comment"># File lib/csv/parser.rb, line 434</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">use_headers?</span>
   <span class="ruby-ivar">@use_headers</span>
 <span class="ruby-keyword">end</span></pre>
