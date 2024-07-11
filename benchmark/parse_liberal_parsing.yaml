@@ -2,6 +2,8 @@ loop_count: 100
 contexts:
   - gems:
       csv: 3.0.2
+  - gems:
+      csv: 3.3.0
   - name: "master"
     prelude: |
       $LOAD_PATH.unshift(File.expand_path("lib"))
