@@ -149,7 +149,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/csv/fields_converter.rb, line 13</span>
+            <pre><span class="ruby-comment"># File lib/csv/fields_converter.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">options</span>={})
   <span class="ruby-ivar">@converters</span> = []
   <span class="ruby-ivar">@nil_value</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:nil_value</span>]
@@ -196,7 +196,7 @@
 
           
           <div class="method-source-code" id="add_converter-source">
-            <pre><span class="ruby-comment"># File lib/csv/fields_converter.rb, line 23</span>
+            <pre><span class="ruby-comment"># File lib/csv/fields_converter.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_converter</span>(<span class="ruby-identifier">name</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">converter</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span>  <span class="ruby-comment"># custom converter</span>
     <span class="ruby-ivar">@converters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">converter</span>
@@ -226,7 +226,7 @@
         
         <div class="method-heading">
           <span class="method-name">convert</span><span
-            class="method-args">(fields, headers, lineno, quoted_fields)</span>
+            class="method-args">(fields, headers, lineno, quoted_fields=NO_QUOTED_FIELDS)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -241,8 +241,8 @@
 
           
           <div class="method-source-code" id="convert-source">
-            <pre><span class="ruby-comment"># File lib/csv/fields_converter.rb, line 47</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert</span>(<span class="ruby-identifier">fields</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">lineno</span>, <span class="ruby-identifier">quoted_fields</span>)
+            <pre><span class="ruby-comment"># File lib/csv/fields_converter.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert</span>(<span class="ruby-identifier">fields</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">lineno</span>, <span class="ruby-identifier">quoted_fields</span>=<span class="ruby-constant">NO_QUOTED_FIELDS</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">fields</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">need_convert?</span>
 
   <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">collect</span>.<span class="ruby-identifier">with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
@@ -298,7 +298,7 @@
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/csv/fields_converter.rb, line 39</span>
+            <pre><span class="ruby-comment"># File lib/csv/fields_converter.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@converters</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -331,7 +331,7 @@
 
           
           <div class="method-source-code" id="empty-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv/fields_converter.rb, line 43</span>
+            <pre><span class="ruby-comment"># File lib/csv/fields_converter.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">empty?</span>
   <span class="ruby-ivar">@converters</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
