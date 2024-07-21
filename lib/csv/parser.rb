@@ -757,7 +757,7 @@ class CSV
       case headers
       when Array
         @raw_headers = headers
-        quoted_fields = [false] * @raw_headers.size
+        quoted_fields = FieldsConverter::NO_QUOTED_FIELDS
         @use_headers = true
       when String
         @raw_headers, quoted_fields = parse_headers(headers)
@@ -941,11 +941,9 @@ class CSV
         if line.empty?
           next if @skip_blanks
           row = []
-          quoted_fields = []
         else
           line = strip_value(line)
           row = line.split(@split_column_separator, -1)
-          quoted_fields = [false] * row.size
           if @max_field_size
             row.each do |column|
               validate_field_size(column)
@@ -959,7 +957,7 @@ class CSV
           end
         end
         @last_line = original_line
-        emit_row(row, quoted_fields, &block)
+        emit_row(row, &block)
       end
     end
 
@@ -981,7 +979,7 @@ class CSV
             next
           end
           row = []
-          quoted_fields = []
+          quoted_fields = FieldsConverter::NO_QUOTED_FIELDS
         elsif line.include?(@cr) or line.include?(@lf)
           @scanner.keep_back
           @parse_method = :parse_quotable_robust
@@ -1043,13 +1041,13 @@ class CSV
           quoted_fields << @quoted_column_value
         elsif parse_row_end
           if row.empty? and value.nil?
-            emit_row([], [], &block) unless @skip_blanks
+            emit_row(row, &block) unless @skip_blanks
           else
             row << value
             quoted_fields << @quoted_column_value
             emit_row(row, quoted_fields, &block)
             row = []
-            quoted_fields = []
+            quoted_fields.clear
           end
           skip_needless_lines
           start_row
@@ -1254,7 +1252,7 @@ class CSV
       @scanner.keep_start
     end
 
-    def emit_row(row, quoted_fields, &block)
+    def emit_row(row, quoted_fields=FieldsConverter::NO_QUOTED_FIELDS, &block)
       @lineno += 1
 
       raw_row = row
