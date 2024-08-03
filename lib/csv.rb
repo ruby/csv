@@ -1605,7 +1605,11 @@ class CSV
       options.delete_if {|k, _| /newline\z/.match?(k)}
 
       if filename_or_io.is_a?(StringIO)
-        f = StringIO.new(filename_or_io.string, **file_opts)
+        f = if RUBY_VERSION >= "2.7"
+          StringIO.new(filename_or_io.string, **file_opts)
+        else
+          StringIO.new(filename_or_io.string)
+        end
       else
         begin
           f = File.open(filename_or_io, mode, **file_opts)
