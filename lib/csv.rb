@@ -1605,11 +1605,8 @@ class CSV
       options.delete_if {|k, _| /newline\z/.match?(k)}
 
       if filename_or_io.is_a?(StringIO)
-        f = if RUBY_VERSION >= "2.7"
-          StringIO.new(filename_or_io.string, **file_opts)
-        else
-          StringIO.new(filename_or_io.string)
-        end
+        filter_supported_stringio_open_opts!(file_opts)
+        f = StringIO.new(filename_or_io.string, **file_opts)
       else
         begin
           f = File.open(filename_or_io, mode, **file_opts)
@@ -1911,7 +1908,11 @@ class CSV
                                                mode,
                                                options,
                                                file_opts)
-      unless filename_or_io.is_a?(StringIO)
+      if filename_or_io.is_a?(StringIO)
+        # Support to StringIO was dropped for Ruby 2.6 and earlier without BOM support:
+        # https://github.com/ruby/stringio/pull/47
+        return if RUBY_VERSION < "2.7"
+      else
         # "bom|utf-8" may be buggy on Windows:
         # https://bugs.ruby-lang.org/issues/20526
         return if ON_WINDOWS
@@ -1921,6 +1922,16 @@ class CSV
       return if options.key?(:external_encoding)
       return if mode.include?(":")
       file_opts[:encoding] = "bom|utf-8"
+    end
+
+    if RUBY_VERSION < "2.7"
+      def filter_supported_stringio_open_opts!(opts)
+        opts.reject! { |k, _| k == :universal_newline || DEFAULT_OPTIONS.key?(k) }
+        raise ArgumentError, "Unsupported options parsing StringIO: #{opts.keys}" unless opts.empty?
+      end
+    else
+      def filter_supported_stringio_open_opts!(opts)
+      end
     end
   end
 
