@@ -1925,7 +1925,7 @@ class CSV
 
     if RUBY_VERSION < "2.7"
       def create_stringio(str, mode, opts)
-        opts.delete_if { |k, _| k == :universal_newline or DEFAULT_OPTIONS.key?(k) }
+        opts.delete_if {|k, _| k == :universal_newline or DEFAULT_OPTIONS.key?(k)}
         raise ArgumentError, "Unsupported options parsing StringIO: #{opts.keys}" unless opts.empty?
         StringIO.new(str, mode)
       end
