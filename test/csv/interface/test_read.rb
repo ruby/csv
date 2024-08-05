@@ -32,6 +32,24 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
     assert_equal(@rows, rows)
   end
 
+  def test_foreach_stringio
+    string_io = StringIO.new(@data)
+    rows = CSV.foreach(string_io, col_sep: "\t", row_sep: "\r\n").to_a
+    assert_equal(@rows, rows)
+  end
+
+  def test_foreach_stringio_with_bom
+    if RUBY_VERSION < "2.7"
+      # Support to StringIO was dropped for Ruby 2.6 and earlier without BOM support:
+      # https://github.com/ruby/stringio/pull/47
+      omit("StringIO's BOM support isn't available with Ruby < 2.7")
+    end
+
+    string_io = StringIO.new("\ufeff#{@data}") # U+FEFF ZERO WIDTH NO-BREAK SPACE
+    rows = CSV.foreach(string_io, col_sep: "\t", row_sep: "\r\n").to_a
+    assert_equal(@rows, rows)
+  end
+
   if respond_to?(:ractor)
     ractor
     def test_foreach_in_ractor
