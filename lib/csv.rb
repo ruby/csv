@@ -1605,7 +1605,7 @@ class CSV
       options.delete_if {|k, _| /newline\z/.match?(k)}
 
       if filename_or_io.is_a?(StringIO)
-        f = init_stringio!(filename_or_io.string, mode, **file_opts)
+        f = create_stringio(filename_or_io.string, mode, **file_opts)
       else
         begin
           f = File.open(filename_or_io, mode, **file_opts)
@@ -1924,13 +1924,13 @@ class CSV
     end
 
     if RUBY_VERSION < "2.7"
-      def init_stringio!(str, mode, opts)
-        opts.reject! { |k, _| k == :universal_newline || DEFAULT_OPTIONS.key?(k) }
+      def create_stringio(str, mode, opts)
+        opts.delete_if { |k, _| k == :universal_newline or DEFAULT_OPTIONS.key?(k) }
         raise ArgumentError, "Unsupported options parsing StringIO: #{opts.keys}" unless opts.empty?
-        StringIO.new(str)
+        StringIO.new(str, mode)
       end
     else
-      def init_stringio!(str, mode, opts)
+      def create_stringio(str, mode, opts)
         StringIO.new(str, mode, **opts)
       end
     end
