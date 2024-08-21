@@ -45,6 +45,7 @@ All code snippets on this page assume that the following has been executed:
     - {Recipe: Convert Fields to Numerics}[#label-Recipe-3A+Convert+Fields+to+Numerics]
     - {Recipe: Convert Fields to Dates}[#label-Recipe-3A+Convert+Fields+to+Dates]
     - {Recipe: Convert Fields to DateTimes}[#label-Recipe-3A+Convert+Fields+to+DateTimes]
+    - {Recipe: Convert Fields to Times}[#label-Recipe-3A+Convert+Fields+to+Times]
     - {Recipe: Convert Assorted Fields to Objects}[#label-Recipe-3A+Convert+Assorted+Fields+to+Objects]
     - {Recipe: Convert Fields to Other Objects}[#label-Recipe-3A+Convert+Fields+to+Other+Objects]
   - {Recipe: Filter Field Strings}[#label-Recipe-3A+Filter+Field+Strings]
@@ -339,6 +340,7 @@ There are built-in field converters for converting to objects of certain classes
 - \Integer
 - \Date
 - \DateTime
+- \Time
 
 Other built-in field converters include:
 - +:numeric+: converts to \Integer and \Float.
@@ -380,6 +382,13 @@ Convert fields to \DateTime objects using built-in converter +:date_time+:
   source = "Name,DateTime\nfoo,2001-02-03\nbar,2001-02-04\nbaz,2020-05-07T14:59:00-05:00\n"
   parsed = CSV.parse(source, headers: true, converters: :date_time)
   parsed.map {|row| row['DateTime'].class} # => [DateTime, DateTime, DateTime]
+
+===== Recipe: Convert Fields to Times
+
+Convert fields to \Time objects using built-in converter +:time+:
+  source = "Name,Time\nfoo,2001-02-03\nbar,2001-02-04\nbaz,2020-05-07T14:59:00-05:00\n"
+  parsed = CSV.parse(source, headers: true, converters: :time)
+  parsed.map {|row| row['Time'].class} # => [Time, Time, Time]
 
 ===== Recipe: Convert Assorted Fields to Objects
 

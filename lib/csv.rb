@@ -91,6 +91,7 @@
 
 require "forwardable"
 require "date"
+require "time"
 require "stringio"
 
 require_relative "csv/fields_converter"
@@ -521,6 +522,7 @@ require_relative "csv/writer"
 # - <tt>:float</tt>: converts each \String-embedded float into a true \Float.
 # - <tt>:date</tt>: converts each \String-embedded date into a true \Date.
 # - <tt>:date_time</tt>: converts each \String-embedded date-time into a true \DateTime
+# - <tt>:time</tt>: converts each \String-embedded time into a true \Time
 # .
 # This example creates a converter proc, then stores it:
 #   strip_converter = proc {|field| field.strip }
@@ -631,6 +633,7 @@ require_relative "csv/writer"
 #   [:numeric, [:integer, :float]]
 #   [:date, Proc]
 #   [:date_time, Proc]
+#   [:time, Proc]
 #   [:all, [:date_time, :numeric]]
 #
 # Each of these converters transcodes values to UTF-8 before attempting conversion.
@@ -674,6 +677,15 @@ require_relative "csv/writer"
 #   # With the converter
 #   csv = CSV.parse_line(data, converters: :date_time)
 #   csv # => [#<DateTime: 2020-05-07T14:59:00-05:00 ((2458977j,71940s,0n),-18000s,2299161j)>, "x"]
+#
+# Converter +time+ converts each field that Time::parse accepts:
+#   data = '2020-05-07T14:59:00-05:00,x'
+#   # Without the converter
+#   csv = CSV.parse_line(data)
+#   csv # => ["2020-05-07T14:59:00-05:00", "x"]
+#   # With the converter
+#   csv = CSV.parse_line(data, converters: :time)
+#   csv # => [2020-05-07 14:59:00 -0500, "x"]
 #
 # Converter +:numeric+ converts with both +:date_time+ and +:numeric+..
 #
@@ -871,10 +883,10 @@ class CSV
   # A Regexp used to find and convert some common Date formats.
   DateMatcher     = / \A(?: (\w+,?\s+)?\w+\s+\d{1,2},?\s+\d{2,4} |
                             \d{4}-\d{2}-\d{2} )\z /x
-  # A Regexp used to find and convert some common DateTime formats.
+  # A Regexp used to find and convert some common (Date)Time formats.
   DateTimeMatcher =
     / \A(?: (\w+,?\s+)?\w+\s+\d{1,2}\s+\d{1,2}:\d{1,2}:\d{1,2},?\s+\d{2,4} |
-            # ISO-8601 and RFC-3339 (space instead of T) recognized by DateTime.parse
+            # ISO-8601 and RFC-3339 (space instead of T) recognized by (Date)Time.parse
             \d{4}-\d{2}-\d{2}
               (?:[T\s]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?(?:[+-]\d{2}(?::\d{2})|Z)?)?)?
         )\z /x
@@ -909,6 +921,14 @@ class CSV
         e = f.encode(ConverterEncoding)
         e.match?(DateTimeMatcher) ? DateTime.parse(e) : f
       rescue  # encoding conversion or date parse errors
+        f
+      end
+    },
+    time: lambda { |f|
+      begin
+        e = f.encode(ConverterEncoding)
+        e.match?(DateTimeMatcher) ? Time.parse(e) : f
+      rescue  # encoding conversion or parse errors
         f
       end
     },
