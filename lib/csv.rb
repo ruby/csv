@@ -1254,7 +1254,7 @@ class CSV
     #
     # Another example (possibly surprising):
     #
-    #   CSV.filter(in_col_sep: ';', col_sep: '|') # '|' for both parsing and generating(!).
+    #   CSV.filter(in_col_sep: ';', col_sep: '|') # '|' for both parsing(!) and generating.
     #
     def filter(input=nil, output=nil, **options)
       # parse options for input, output, or both
