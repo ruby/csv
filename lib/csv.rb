@@ -2033,6 +2033,7 @@ class CSV
   #
   def initialize(data,
                  col_sep: ",",
+                 sep: nil,
                  row_sep: :auto,
                  quote_char: '"',
                  field_size_limit: nil,
@@ -2058,6 +2059,11 @@ class CSV
                  write_nil_value: nil,
                  write_empty_value: "")
     raise ArgumentError.new("Cannot parse nil as CSV") if data.nil?
+
+    if sep && col_sep != ","
+      raise ArgumentError, "Cannot specify both :sep and :col_sep"
+    end
+    actual_sep = sep || col_sep
 
     if data.is_a?(String)
       if encoding
@@ -2094,7 +2100,7 @@ class CSV
       max_field_size = field_size_limit - 1
     end
     @parser_options = {
-      column_separator: col_sep,
+      column_separator: actual_sep,
       row_separator: row_sep,
       quote_character: quote_char,
       max_field_size: max_field_size,
@@ -2128,6 +2134,93 @@ class CSV
     @writer = nil
     writer if @writer_options[:write_headers]
   end
+
+  class TSV < CSV
+    def initialize(data, **options)
+      options = options.dup
+      if !options.key?(:col_sep) && !options.key?(:sep)
+        options[:col_sep] = "\t"
+      end
+      super(data, **options)
+    end
+  
+    class << self
+      def foreach(path, mode="r", **options, &block)
+        options = options.dup
+        if !options.key?(:col_sep) && !options.key?(:sep)
+          options[:col_sep] = "\t"
+        end
+        CSV.foreach(path, mode, **options, &block)
+      end
+  
+      def read(path, **options)
+        options = options.dup
+        if !options.key?(:col_sep) && !options.key?(:sep)
+          options[:col_sep] = "\t"
+        end
+        CSV.read(path, **options)
+      end
+  
+      def parse(str, **options)
+        options = options.dup
+        if !options.key?(:col_sep) && !options.key?(:sep)
+          options[:col_sep] = "\t"
+        end
+        CSV.parse(str, **options)
+      end
+
+      def generate(str = nil, **options)
+        options = with_default_separator(options)
+        CSV.generate(str, **options)
+      end
+
+      def open(filename, mode="rb", **options, &block)
+        options = with_default_separator(options)
+        CSV.open(filename, mode, **options, &block)
+      end
+
+      def table(path, **options)
+        options = with_default_separator(options)
+        CSV.table(path, **options)
+      end
+
+      def parse_line(line, **options)
+        options = with_default_separator(options)
+        CSV.parse_line(line, **options)
+      end
+
+      def generate_line(row, **options)
+        options = with_default_separator(options)
+        CSV.generate_line(row, **options)
+      end
+
+      def instance(data = nil, **options, &block)
+        options = with_default_separator(options)
+        CSV.instance(data, **options, &block)
+      end
+
+      def filter(input=nil, output=nil, **options, &block)
+        options = with_default_separator(options)
+        CSV.filter(input, output, **options, &block)
+      end
+
+      def readlines(path, **options)
+        options = with_default_separator(options)
+        CSV.readlines(path, **options)
+      end
+
+      private
+
+      def with_default_separator(options)
+        options = options.dup
+        if !options.key?(:col_sep) && !options.key?(:sep)
+          options[:col_sep] = "\t"
+        end
+        options
+      end
+    end
+  end
+end
 
   # :call-seq:
   #   csv.col_sep -> string
