@@ -2033,6 +2033,7 @@ class CSV
   #
   def initialize(data,
                  col_sep: ",",
+                 sep: nil,
                  row_sep: :auto,
                  quote_char: '"',
                  field_size_limit: nil,
@@ -2058,6 +2059,11 @@ class CSV
                  write_nil_value: nil,
                  write_empty_value: "")
     raise ArgumentError.new("Cannot parse nil as CSV") if data.nil?
+
+    if sep && col_sep != ","
+      raise ArgumentError, "Cannot specify both :sep and :col_sep"
+    end
+    actual_sep = sep || col_sep
 
     if data.is_a?(String)
       if encoding
@@ -2094,7 +2100,7 @@ class CSV
       max_field_size = field_size_limit - 1
     end
     @parser_options = {
-      column_separator: col_sep,
+      column_separator: actual_sep,
       row_separator: row_sep,
       quote_character: quote_char,
       max_field_size: max_field_size,
