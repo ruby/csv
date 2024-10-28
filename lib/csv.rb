@@ -1218,7 +1218,44 @@ class CSV
     # * Argument +in_string_or_io+ must be a \String or an \IO stream.
     # * Argument +out_string_or_io+ must be a \String or an \IO stream.
     # * Arguments <tt>**options</tt> must be keyword options.
-    #   See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
+    #
+    #   - Each option defined as an {option for parsing}[#class-CSV-label-Options+for+Parsing]
+    #     is used for parsing the filter input.
+    #   - Each option defined as an {option for generating}[#class-CSV-label-Options+for+Generating]
+    #     is used for generator the filter input.
+    #
+    # However, there are three options that may be used for both parsing and generating:
+    # +col_sep+, +quote_char+, and +row_sep+.
+    #
+    # Therefore for method +filter+ (and method +filter+ only),
+    # there are special options that allow these parsing and generating options
+    # to be specified separately:
+    #
+    # - Options +input_col_sep+ and +output_col_sep+
+    #   (and their aliases +in_col_sep+ and +out_col_sep+)
+    #   specify the column separators for parsing and generating.
+    # - Options +input_quote_char+ and +output_quote_char+
+    #   (and their aliases +in_quote_char+ and +out_quote_char+)
+    #   specify the quote characters for parsing and generting.
+    # - Options +input_row_sep+ and +output_row_sep+
+    #   (and their aliases +in_row_sep+ and +out_row_sep+)
+    #   specify the row separators for parsing and generating.
+    #
+    # Example options (for column separators):
+    #
+    #   CSV.filter                                    # Default for both parsing and generating.
+    #   CSV.filter(in_col_sep: ';')                   # ';' for parsing, default for generating.
+    #   CSV.filter(out_col_sep: '|')                  # Default for parsing, '|' for generating.
+    #   CSV.filter(in_col_sep: ';', out_col_sep: '|') # ';' for parsing, '|' for generating.
+    #
+    # Note that for a special option (e.g., +input_col_sep+)
+    # and its corresponding "regular" option (e.g., +col_sep+),
+    # the two are mutually overriding.
+    #
+    # Another example (possibly surprising):
+    #
+    #   CSV.filter(in_col_sep: ';', col_sep: '|') # '|' for both parsing(!) and generating.
+    #
     def filter(input=nil, output=nil, **options)
       # parse options for input, output, or both
       in_options, out_options = Hash.new, {row_sep: InputRecordSeparator.value}
