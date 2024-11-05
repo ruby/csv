@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # frozen_string_literal: false
 
-require 'minitest/autorun'
-require 'csv'
-require 'tempfile'
-require 'shellwords'
+require_relative '../helper'
 
-class TestFilter < Minitest::Test
+require 'shellwords'
+require 'csv'
+
+class TestFilter < Test::Unit::TestCase
 
   # Names and aliases for options.
   CliOptionNames = {
@@ -70,6 +70,41 @@ class TestFilter < Minitest::Test
     %w[aaa bbb ccc],
     %w[ddd eee fff],
   ]
+
+  # Two methods copied from module Minitest::Assertions.
+
+  def _synchronize # :nodoc:
+    yield
+  end
+
+  def capture_subprocess_io
+    _synchronize do
+      begin
+        require "tempfile"
+
+        captured_stdout, captured_stderr = Tempfile.new("out"), Tempfile.new("err")
+
+        orig_stdout, orig_stderr = $stdout.dup, $stderr.dup
+        $stdout.reopen captured_stdout
+        $stderr.reopen captured_stderr
+
+        yield
+
+        $stdout.rewind
+        $stderr.rewind
+
+        return captured_stdout.read, captured_stderr.read
+      ensure
+        $stdout.reopen orig_stdout
+        $stderr.reopen orig_stderr
+
+        orig_stdout.close
+        orig_stderr.close
+        captured_stdout.close!
+        captured_stderr.close!
+      end
+    end
+  end
 
   def setup
     $TEST_DEBUG = false
@@ -289,7 +324,7 @@ class TestFilter < Minitest::Test
         Option.new(:field_size_limit, field_size_limit)
       ]
       begin
-        cli_out_s = verify_cli(csv_in_s, options)
+        verify_cli(csv_in_s, options)
       rescue CSV::MalformedCSVError => x
         assert_match('Field size exceeded', x.message)
       end
