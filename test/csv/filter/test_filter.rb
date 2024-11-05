@@ -159,7 +159,7 @@ class TestFilter < Test::Unit::TestCase
   # Return stdout and stderr from CLI execution.
   def execute_in_cli(filepath, cli_options_s = '')
     debug('cli_options_s', cli_options_s)
-    command = "cat #{filepath} | ruby bin/filter #{cli_options_s}"
+    command = "cat #{filepath} | ruby bin/csv-filter #{cli_options_s}"
     capture_subprocess_io do
       system(command)
     end
