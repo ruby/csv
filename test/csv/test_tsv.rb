@@ -2,7 +2,7 @@ require_relative "helper"
 
 class TestTSV < Test::Unit::TestCase
   def test_default_separator
-    tsv = TSV.new(String.new)
+    tsv = CSV::TSV.new(String.new)
     assert_equal("\t", tsv.col_sep)
   end
 
