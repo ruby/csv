@@ -78,10 +78,10 @@ parser.on('--converters=CONVERTERS',
 ) do |value|
   options[:converters] = parse_names(value)
 end
-parser.on('--empty_value STR',
-     'Value to be output for empty input field.') do |value|
-  options[:empty_value] = value
-end
+# parser.on('--empty_value STR',
+#      'Value to be output for empty input field.') do |value|
+#   options[:empty_value] = value
+# end
 parser.on('--field-size-limit=N', Integer,
      'Maximum field size (characters)') do |value|
   options[:field_size_limit] = value
@@ -102,31 +102,31 @@ parser.on('--liberal-parsing',
      'Attempt to parse non-conformant input.') do
   options[:liberal_parsing] = :no_argument
 end
-parser.on('--nil_value STR',
-     'Value to be substituted for nil input field.') do |value|
-  options[:nil_value] = value
-end
-parser.on('--return_headers',
-     'Method shift returns header row.') do
-  options[:return_headers] = :no_argument
-end
-parser.on('--skip_blanks',
-     'Ignore blank lines.') do
-  options[:skip_blanks] = :no_argument
-end
-parser.on('--skip_lines STR',
-     'Ignore comment lines;',
-     'STR is converted to a Regexp that identifies comment lines.') do |value|
-  options[:skip_lines] = Regexp.new(value)
-end
-parser.on('--strip',
-     'Strip whitespace from input fields.') do
-  options[:strip] = :no_argument
-end
-parser.on('--unconverted_fields',
-     'Define method unconverted_fields for each created CSV::Row object.') do
-  options[:unconverted_fields] = :no_argument
-end
+# parser.on('--nil_value STR',
+#      'Value to be substituted for nil input field.') do |value|
+#   options[:nil_value] = value
+# end
+# parser.on('--return_headers',
+#      'Method shift returns header row.') do
+#   options[:return_headers] = :no_argument
+# end
+# parser.on('--skip_blanks',
+#      'Ignore blank lines.') do
+#   options[:skip_blanks] = :no_argument
+# end
+# parser.on('--skip_lines STR',
+#      'Ignore comment lines;',
+#      'STR is converted to a Regexp that identifies comment lines.') do |value|
+#   options[:skip_lines] = Regexp.new(value)
+# end
+# parser.on('--strip',
+#      'Strip whitespace from input fields.') do
+#   options[:strip] = :no_argument
+# end
+# parser.on('--unconverted_fields',
+#      'Define method unconverted_fields for each created CSV::Row object.') do
+#   options[:unconverted_fields] = :no_argument
+# end
 
 parser.separator(nil)
 parser.separator(
@@ -134,34 +134,34 @@ parser.separator(
 )
 
 parser.separator(nil)
-parser.on('--force_quotes',
-     'Double-quote each output field.') do
-  options[:force_quotes] = :no_argument
-end
-parser.on('--quote_empty STR',
-     'Double-quote each empty output field;',
-     'STR is true or false.'
-) do
-  options[:quote_empty] = :no_argument
-end
-parser.on('--write_converters',
-     'Output field converters;',
-     'not implemented in CLI.'
-) do |value|
-  raise NotImplementedError.new('--write_converters is not implemented in the CLI.')
-end
-parser.on('--write_headers',
-     'Write headers to output.') do |value|
-  options[:write_headers] = :no_argument
-end
-parser.on('--write_empty_value STR',
-     'Value to be substituted for empty output field.') do |value|
-  options[:write_empty_value] = value
-end
-parser.on('--write_nil_value STR',
-     'Value to be substituted for nil output field.') do |value|
-  options[:write_nil_value] = value
-end
+# parser.on('--force_quotes',
+#      'Double-quote each output field.') do
+#   options[:force_quotes] = :no_argument
+# end
+# parser.on('--quote_empty STR',
+#      'Double-quote each empty output field;',
+#      'STR is true or false.'
+# ) do
+#   options[:quote_empty] = :no_argument
+# end
+# parser.on('--write_converters',
+#      'Output field converters;',
+#      'not implemented in CLI.'
+# ) do |value|
+#   raise NotImplementedError.new('--write_converters is not implemented in the CLI.')
+# end
+# parser.on('--write_headers',
+#      'Write headers to output.') do |value|
+#   options[:write_headers] = :no_argument
+# end
+# parser.on('--write_empty_value STR',
+#      'Value to be substituted for empty output field.') do |value|
+#   options[:write_empty_value] = value
+# end
+# parser.on('--write_nil_value STR',
+#      'Value to be substituted for nil output field.') do |value|
+#   options[:write_nil_value] = value
+# end
 
 parser.separator(nil)
 parser.separator(
@@ -218,7 +218,7 @@ parser.separator(nil)
 parser.separator('Generic Options')
 parser.separator(nil)
 
-parser.on('-h', '--help', 'Prints this helparser.') do
+parser.on('-h', '--help', 'Prints this help.') do
   puts parser
   exit
 end

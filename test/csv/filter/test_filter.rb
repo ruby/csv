@@ -304,17 +304,17 @@ class TestFilter < Test::Unit::TestCase
     end
   end
 
-  def test_option_empty_value
-    do_test(debugging: false) do
-      empty_value = 0
-      csv_in_s = 'a,"",b,"",c'
-      options = [
-        Option.new(:empty_value, empty_value)
-      ]
-      cli_out_s = verify_cli(csv_in_s, options)
-      refute_equal(csv_in_s, cli_out_s)
-    end
-  end
+  # def test_option_empty_value
+  #   do_test(debugging: false) do
+  #     empty_value = 0
+  #     csv_in_s = 'a,"",b,"",c'
+  #     options = [
+  #       Option.new(:empty_value, empty_value)
+  #     ]
+  #     cli_out_s = verify_cli(csv_in_s, options)
+  #     refute_equal(csv_in_s, cli_out_s)
+  #   end
+  # end
 
   def test_option_field_size_limit
     do_test(debugging: false) do
@@ -370,157 +370,157 @@ class TestFilter < Test::Unit::TestCase
     end
   end
 
-  def test_option_nil_value
-    do_test(debugging: false) do
-      nil_value = 0
-      csv_in_s = 'a,,b,,c'
-      options = [
-        Option.new(:nil_value, nil_value)
-      ]
-      cli_out_s = verify_cli(csv_in_s, options)
-      refute_equal(csv_in_s, cli_out_s)
-    end
-  end
+  # def test_option_nil_value
+  #   do_test(debugging: false) do
+  #     nil_value = 0
+  #     csv_in_s = 'a,,b,,c'
+  #     options = [
+  #       Option.new(:nil_value, nil_value)
+  #     ]
+  #     cli_out_s = verify_cli(csv_in_s, options)
+  #     refute_equal(csv_in_s, cli_out_s)
+  #   end
+  # end
 
-  def test_option_return_headers
-    do_test(debugging: false) do
-      return_headers = :no_argument
-      csv_in_s = make_csv_s
-      options = [
-        Option.new(:return_headers, return_headers)
-      ]
-      cli_out_s = verify_cli(csv_in_s, options)
-      assert_equal(csv_in_s, cli_out_s)
-    end
-  end
+  # def test_option_return_headers
+  #   do_test(debugging: false) do
+  #     return_headers = :no_argument
+  #     csv_in_s = make_csv_s
+  #     options = [
+  #       Option.new(:return_headers, return_headers)
+  #     ]
+  #     cli_out_s = verify_cli(csv_in_s, options)
+  #     assert_equal(csv_in_s, cli_out_s)
+  #   end
+  # end
 
-  def test_option_skip_blanks
-    do_test(debugging: false) do
-      skip_blanks = :no_argument
-      rows = Rows.dup
-      rows.insert(1, [])
-      csv_in_s = make_csv_s(rows: rows)
-      options = [
-        Option.new(:skip_blanks, skip_blanks)
-      ]
-      cli_out_s = verify_cli(csv_in_s, options)
-      refute_equal(csv_in_s, cli_out_s)
-    end
-  end
+  # def test_option_skip_blanks
+  #   do_test(debugging: false) do
+  #     skip_blanks = :no_argument
+  #     rows = Rows.dup
+  #     rows.insert(1, [])
+  #     csv_in_s = make_csv_s(rows: rows)
+  #     options = [
+  #       Option.new(:skip_blanks, skip_blanks)
+  #     ]
+  #     cli_out_s = verify_cli(csv_in_s, options)
+  #     refute_equal(csv_in_s, cli_out_s)
+  #   end
+  # end
 
-  def test_option_skip_lines
-    do_test(debugging: false) do
-      skip_lines = '#'
-      rows = Rows.dup
-      rows.insert(1, ['# Boo!'])
-      csv_in_s = make_csv_s(rows: rows)
-      options = [
-        Option.new(:skip_lines, skip_lines)
-      ]
-      cli_out_s = verify_cli(csv_in_s, options)
-      refute_equal(csv_in_s, cli_out_s)
-    end
-  end
+  # def test_option_skip_lines
+  #   do_test(debugging: false) do
+  #     skip_lines = '#'
+  #     rows = Rows.dup
+  #     rows.insert(1, ['# Boo!'])
+  #     csv_in_s = make_csv_s(rows: rows)
+  #     options = [
+  #       Option.new(:skip_lines, skip_lines)
+  #     ]
+  #     cli_out_s = verify_cli(csv_in_s, options)
+  #     refute_equal(csv_in_s, cli_out_s)
+  #   end
+  # end
 
-  def test_option_strip
-    do_test(debugging: false) do
-      strip = :no_argument
-      rows = Rows.map do |row|
-        row.map do |col|
-          " #{col} "
-        end
-      end
-      csv_in_s = make_csv_s(rows: rows)
-      options = [
-        Option.new(:strip, strip)
-      ]
-      cli_out_s = verify_cli(csv_in_s, options)
-      refute_equal(csv_in_s, cli_out_s)
-    end
-  end
+  # def test_option_strip
+  #   do_test(debugging: false) do
+  #     strip = :no_argument
+  #     rows = Rows.map do |row|
+  #       row.map do |col|
+  #         " #{col} "
+  #       end
+  #     end
+  #     csv_in_s = make_csv_s(rows: rows)
+  #     options = [
+  #       Option.new(:strip, strip)
+  #     ]
+  #     cli_out_s = verify_cli(csv_in_s, options)
+  #     refute_equal(csv_in_s, cli_out_s)
+  #   end
+  # end
 
-  def test_option_unconverted_fields
-    do_test(debugging: false) do
-      unconverted_fields = :no_argument
-      csv_in_s = make_csv_s
-      options = [
-        Option.new(:unconverted_fields, unconverted_fields)
-      ]
-      cli_out_s = verify_cli(csv_in_s, options)
-      assert_equal(csv_in_s, cli_out_s)
-    end
-  end
+  # def test_option_unconverted_fields
+  #   do_test(debugging: false) do
+  #     unconverted_fields = :no_argument
+  #     csv_in_s = make_csv_s
+  #     options = [
+  #       Option.new(:unconverted_fields, unconverted_fields)
+  #     ]
+  #     cli_out_s = verify_cli(csv_in_s, options)
+  #     assert_equal(csv_in_s, cli_out_s)
+  #   end
+  # end
 
   # Output options.
 
-  def test_option_force_quotes
-    do_test(debugging: false) do
-      force_quotes = :no_argument
-      csv_in_s = make_csv_s
-      options = [
-        Option.new(:force_quotes, force_quotes),
-      ]
-      cli_out_s = verify_cli(csv_in_s, options)
-      refute_equal(csv_in_s, cli_out_s)
-    end
-  end
+  # def test_option_force_quotes
+  #   do_test(debugging: false) do
+  #     force_quotes = :no_argument
+  #     csv_in_s = make_csv_s
+  #     options = [
+  #       Option.new(:force_quotes, force_quotes),
+  #     ]
+  #     cli_out_s = verify_cli(csv_in_s, options)
+  #     refute_equal(csv_in_s, cli_out_s)
+  #   end
+  # end
 
-  def test_option_quote_empty
-    do_test(debugging: false) do
-      quote_empty = true
-      csv_in_s = "\"\"\"\",\"\"\n"
-      options = [
-        Option.new(:quote_empty, quote_empty),
-      ]
-      cli_out_s = verify_cli(csv_in_s, options)
-      assert_equal(csv_in_s, cli_out_s)
-    end
-  end
+  # def test_option_quote_empty
+  #   do_test(debugging: false) do
+  #     quote_empty = true
+  #     csv_in_s = "\"\"\"\",\"\"\n"
+  #     options = [
+  #       Option.new(:quote_empty, quote_empty),
+  #     ]
+  #     cli_out_s = verify_cli(csv_in_s, options)
+  #     assert_equal(csv_in_s, cli_out_s)
+  #   end
+  # end
 
-  def test_option_write_converters
-    do_test(debugging: false) do
-      cli_out_s, cli_err_s = results_for_cli_option('--write_converters')
-      assert_empty(cli_out_s)
-      assert_match(/NotImplementedError/, cli_err_s)
-    end
-  end
+  # def test_option_write_converters
+  #   do_test(debugging: false) do
+  #     cli_out_s, cli_err_s = results_for_cli_option('--write_converters')
+  #     assert_empty(cli_out_s)
+  #     assert_match(/NotImplementedError/, cli_err_s)
+  #   end
+  # end
 
-  def test_option_write_headers
-    do_test(debugging: false) do
-      write_headers = :no_argument
-      csv_in_s = make_csv_s
-      options = [
-        Option.new(:write_headers, write_headers),
-        Option.new(:headers, true),
-      ]
-      cli_out_s = verify_cli(csv_in_s, options)
-      assert_equal(csv_in_s, cli_out_s)
-    end
-  end
+  # def test_option_write_headers
+  #   do_test(debugging: false) do
+  #     write_headers = :no_argument
+  #     csv_in_s = make_csv_s
+  #     options = [
+  #       Option.new(:write_headers, write_headers),
+  #       Option.new(:headers, true),
+  #     ]
+  #     cli_out_s = verify_cli(csv_in_s, options)
+  #     assert_equal(csv_in_s, cli_out_s)
+  #   end
+  # end
 
-  def test_option_write_empty_value
-    do_test(debugging: false) do
-      write_empty_value = 'x'
-      csv_in_s = "a,\"\",c,\"\"\n"
-      options = [
-        Option.new(:write_empty_value, write_empty_value),
-      ]
-      cli_out_s = verify_cli(csv_in_s, options)
-      refute_equal(csv_in_s, cli_out_s)
-    end
-  end
+  # def test_option_write_empty_value
+  #   do_test(debugging: false) do
+  #     write_empty_value = 'x'
+  #     csv_in_s = "a,\"\",c,\"\"\n"
+  #     options = [
+  #       Option.new(:write_empty_value, write_empty_value),
+  #     ]
+  #     cli_out_s = verify_cli(csv_in_s, options)
+  #     refute_equal(csv_in_s, cli_out_s)
+  #   end
+  # end
 
-  def test_option_write_nil_value
-    do_test(debugging: false) do
-      write_nil_value = 'x'
-      csv_in_s = "a,,c,\n"
-      options = [
-        Option.new(:write_nil_value, write_nil_value),
-      ]
-      cli_out_s = verify_cli(csv_in_s, options)
-      refute_equal(csv_in_s, cli_out_s)
-    end
-  end
+  # def test_option_write_nil_value
+  #   do_test(debugging: false) do
+  #     write_nil_value = 'x'
+  #     csv_in_s = "a,,c,\n"
+  #     options = [
+  #       Option.new(:write_nil_value, write_nil_value),
+  #     ]
+  #     cli_out_s = verify_cli(csv_in_s, options)
+  #     refute_equal(csv_in_s, cli_out_s)
+  #   end
+  # end
 
   # Input/output options.
 
@@ -728,22 +728,22 @@ class TestFilter < Test::Unit::TestCase
     end
   end
 
-  def test_option_output_quote_char
-    do_test(debugging: false) do
-      output_quote_char = "X"
-      rows = [
-        ['foo', 0],
-        ["'bar'", 1],
-        ['"baz"', 2],
-      ]
-      csv_in_s = make_csv_s(rows: rows)
-      options = [
-        Option.new(:output_quote_char, output_quote_char),
-        Option.new(:force_quotes, :no_argument)
-      ]
-      cli_out_s = verify_cli(csv_in_s, options)
-      refute_equal(csv_in_s, cli_out_s)
-    end
-  end
+  # def test_option_output_quote_char
+  #   do_test(debugging: false) do
+  #     output_quote_char = "X"
+  #     rows = [
+  #       ['foo', 0],
+  #       ["'bar'", 1],
+  #       ['"baz"', 2],
+  #     ]
+  #     csv_in_s = make_csv_s(rows: rows)
+  #     options = [
+  #       Option.new(:output_quote_char, output_quote_char),
+  #       Option.new(:force_quotes, :no_argument)
+  #     ]
+  #     cli_out_s = verify_cli(csv_in_s, options)
+  #     refute_equal(csv_in_s, cli_out_s)
+  #   end
+  # end
 
 end
