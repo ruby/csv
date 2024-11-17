@@ -3,33 +3,23 @@
 require 'optparse'
 require 'csv'
 
-# Returns an array of converter names.
-# \String +s+ contains a comma-separated list of converter names;
-# each optionally begins with a colon.
-def parse_converters(s)
-  converters = []
-  s.split(',').each do |name|
-    name.sub(/^:/, '')
-    sym = name.to_sym
-    converters.push(sym)
-  end
-  converters
+# Returns an array of names.
+# \String +s+ contains a comma-separated list of names.
+def parse_names(s)
+  s.split(",").collect(&:to_sym)
 end
 
 options = {}
 
 OptionParser.new do |p|
 
-  p.program_name = File.basename $0
   p.version = CSV::VERSION
-  p.release = nil
-  p.summary_indent = ' ' * 4
-  p.banner = <<-EOF
+  p.banner = <<-BANNER
 Usage: #{p.program_name} [options]
 
-  Reads and parses the CSV text content of $stdin' per the given input options.
+  Reads and parses the CSV text content of the standard input per the given input options.
   From that content, generates CSV text per the given output options and writes
-  that text to $stdout.
+  that text to the standard output.
 
   Three options are similar for input and output:
 
@@ -37,78 +27,78 @@ Usage: #{p.program_name} [options]
   
     - The input row separator is determined:
   
-      - By option --input_row_sep, if given.
-      - Otherwise, by option --row_sep, if given.
+      - By option --input-row-sep, if given.
+      - Otherwise, by option --row-sep, if given.
       - Otherwise, by auto-discovery.
   
     - The output row separator is determined:
   
-      - By option --output_row_sep if given.
-      - Otherwise, by option --row_sep if given.
+      - By option --output-row-sep if given.
+      - Otherwise, by option --row-sep if given.
       - Otherwise, as the newline character ("\\n").
   
   - Column separator:
   
     - The input column separator is determined:
   
-      - By option --input_col_sep, if given.
-      - Otherwise, by option --col_sep``, if given.
-      - Otherwise, as the comma character (',').
+      - By option --input-col-sep, if given.
+      - Otherwise, by option --col-sep, if given.
+      - Otherwise, as the comma character (",").
   
     - The output column separator is determined:
   
-      - By option --output_col_sep if given.
-      - Otherwise, by option --col_sep if given.
-      - Otherwise, as the comma character (',').
+      - By option --output-col-sep if given.
+      - Otherwise, by option --col-sep if given.
+      - Otherwise, as the comma character (",").
   
   - Quote character:
   
     - The input quote character is determined:
   
-      - By option --input_quote_char, if given.
-      - Otherwise, by option --quote_char, if given.
+      - By option --input-quote-char, if given.
+      - Otherwise, by option --quote-char, if given.
       - Otherwise, as the double-quote character ('"').
   
     - The output quote character is determined:
   
-      - By option --output_quote_char, if given.
-      - Otherwise, by option --quote_char, if given.
+      - By option --output-quote-char, if given.
+      - Otherwise, by option --quote-char, if given.
       - Otherwise, as the double-quote character ('"').
-EOF
+BANNER
 
   p.separator(nil)
   p.separator(
-    'Input Options: see https://docs.ruby-lang.org/en/3.3/CSV.html#class-CSV-label-Options+for+Parsing.'
+    'Input Options: see https://docs.ruby-lang.org/en/3.3/CSV.html#class-CSV-label-Options+for+Parsing'
   )
 
   p.separator(nil)
-  p.on('--converters STR',
+  p.on('--converters=CONVERTERS',
        'Input field converters;',
-       'STR is comma-separated converter names (leading colon optional).'
+       'CONVERTERS is comma-separated converter names (leading colon optional).'
        ) do |value|
-    options[:converters] = parse_converters(value)
+    options[:converters] = parse_names(value)
   end
   p.on('--empty_value STR',
        'Value to be output for empty input field.') do |value|
     options[:empty_value] = value
   end
-  p.on('--field_size_limit N',
+  p.on('--field-size-limit=N', Integer,
        'Maximum field size (characters)') do |value|
-    options[:field_size_limit] = value.to_i
+    options[:field_size_limit] = value
   end
-  p.on('--headers STR',
+  p.on('--headers=ARG',
        'Treat the first input row as headers;',
-       'STR is true or comma-separated headers.'
+       'ARG is true or comma-separated headers.'
        ) do |value|
-    options[:headers] = value == 'true' ? true : parse_converters(value)
+    options[:headers] = value == 'true' ? true : parse_names(value)
   end
-  p.on('--header_converters STR',
+  p.on('--header-converters=CONVERTERS',
        'Input header converters;',
-       'STR is comma-separated converter names (leading colon optional).'
+       'CONVERTERS is comma-separated converter names.'
   ) do |value|
-    options[:header_converters] = parse_converters(value)
+    options[:header_converters] = parse_names(value)
   end
-  p.on('--liberal_parsing',
+  p.on('--liberal-parsing',
        'Attempt to parse non-conformant input.') do
     options[:liberal_parsing] = :no_argument
   end
@@ -140,7 +130,7 @@ EOF
 
   p.separator(nil)
   p.separator(
-    'Output Options: see https://docs.ruby-lang.org/en/3.3/CSV.html#class-CSV-label-Options+for+Generating.'
+    'Output Options: see https://docs.ruby-lang.org/en/3.3/CSV.html#class-CSV-label-Options+for+Generating'
   )
 
   p.separator(nil)
@@ -175,33 +165,33 @@ EOF
 
   p.separator(nil)
   p.separator(
-    'Options only for CSV.filter: see https://docs.ruby-lang.org/en/3.3/CSV.html#method-c-filter.'
+    'Options only for CSV.filter: see https://docs.ruby-lang.org/en/3.3/CSV.html#method-c-filter'
   )
 
-  p.on('--input_col_sep STR',
-       'Input column separator (aliased as --in_col_sep).') do |value|
+  p.on('--input-col-sep=SEPARATOR',
+       'Input column separator string (aliased as --in-col-sep).') do |value|
     options[:input_col_sep] = value
   end
-  p.on('--input_quote_char CHAR',
-       'Input quote character (aliased as --in_quote_char.') do |value|
+  p.on('--input-quote-char=CHAR',
+       'Input quote character (aliased as --in-quote-char.') do |value|
     options[:input_quote_char] = value
   end
-  p.on('--input_row_sep STR',
-       'Input row separator (aliased as --in_row_sep).'
+  p.on('--input-row-sep=SEPARATOR',
+       'Input row separator string (aliased as --in-row-sep).'
   ) do |value|
     options[:input_row_sep] = value
   end
-  p.on('--output_col_sep STR',
-       'Output column separator (aliased as --out_col_sep).'
+  p.on('--output-col-sep=SEPARATOR',
+       'Output column separator string (aliased as --out-col-sep).'
   ) do |value|
     options[:output_col_sep] = value
   end
-  p.on('--output_quote_char CHAR',
-       'Output quote character (aliased as --out_quote_char).') do |value|
+  p.on('--output-quote-char=CHAR',
+       'Output quote character (aliased as --out-quote-char).') do |value|
     options[:output_quote_char] = value
   end
-  p.on('--output_row_sep STR',
-       'Output row separator (aliased as --out_row_sep).'
+  p.on('--output-row-sep=SEPARATOR',
+       'Output row separator string (aliased as --out-row-sep).'
   ) do |value|
     options[:output_row_sep] = value
   end
@@ -210,16 +200,16 @@ EOF
   p.separator('Input/Output Options')
 
   p.separator(nil)
-  p.on('-c', '--col_sep STR',
-       'Column separator.') do |value|
+  p.on('-c', '--col-sep=SEPARATOR',
+       'Column separator string.') do |value|
     options[:col_sep] = value
   end
-  p.on('-q', '--quote_char CHAR',
+  p.on('-q', '--quote-char=CHAR',
        'Quote character.') do |value|
     options[:quote_char] = value
   end
-  p.on('-r', '--row_sep STR',
-       'Row separator.'
+  p.on('-r', '--row-sep=SEPARATOR',
+       'Row separator string.'
   ) do |value|
     options[:row_sep] = value
   end
