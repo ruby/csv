@@ -11,11 +11,11 @@ end
 
 options = {}
 
-OptionParser.new do |p|
+parser = OptionParser.new
 
-  p.version = CSV::VERSION
-  p.banner = <<-BANNER
-Usage: #{p.program_name} [options]
+parser.version = CSV::VERSION
+parser.banner = <<-BANNER
+Usage: #{parser.program_name} [options]
 
   Reads and parses the CSV text content of the standard input per the given input options.
   From that content, generates CSV text per the given output options and writes
@@ -66,169 +66,169 @@ Usage: #{p.program_name} [options]
       - Otherwise, as the double-quote character ('"').
 BANNER
 
-  p.separator(nil)
-  p.separator(
-    'Input Options: see https://docs.ruby-lang.org/en/3.3/CSV.html#class-CSV-label-Options+for+Parsing'
-  )
+parser.separator(nil)
+parser.separator(
+  'Input Options: see https://docs.ruby-lang.org/en/3.3/CSV.html#class-CSV-label-Options+for+Parsing'
+)
 
-  p.separator(nil)
-  p.on('--converters=CONVERTERS',
-       'Input field converters;',
-       'CONVERTERS is comma-separated converter names (leading colon optional).'
-       ) do |value|
-    options[:converters] = parse_names(value)
-  end
-  p.on('--empty_value STR',
-       'Value to be output for empty input field.') do |value|
-    options[:empty_value] = value
-  end
-  p.on('--field-size-limit=N', Integer,
-       'Maximum field size (characters)') do |value|
-    options[:field_size_limit] = value
-  end
-  p.on('--headers=ARG',
-       'Treat the first input row as headers;',
-       'ARG is true or comma-separated headers.'
-       ) do |value|
-    options[:headers] = value == 'true' ? true : parse_names(value)
-  end
-  p.on('--header-converters=CONVERTERS',
-       'Input header converters;',
-       'CONVERTERS is comma-separated converter names.'
-  ) do |value|
-    options[:header_converters] = parse_names(value)
-  end
-  p.on('--liberal-parsing',
-       'Attempt to parse non-conformant input.') do
-    options[:liberal_parsing] = :no_argument
-  end
-  p.on('--nil_value STR',
-       'Value to be substituted for nil input field.') do |value|
-    options[:nil_value] = value
-  end
-  p.on('--return_headers',
-       'Method shift returns header row.') do
-    options[:return_headers] = :no_argument
-  end
-  p.on('--skip_blanks',
-       'Ignore blank lines.') do
-    options[:skip_blanks] = :no_argument
-  end
-  p.on('--skip_lines STR',
-       'Ignore comment lines;',
-       'STR is converted to a Regexp that identifies comment lines.') do |value|
-    options[:skip_lines] = Regexp.new(value)
-  end
-  p.on('--strip',
-       'Strip whitespace from input fields.') do
-    options[:strip] = :no_argument
-  end
-  p.on('--unconverted_fields',
-       'Define method unconverted_fields for each created CSV::Row object.') do
-    options[:unconverted_fields] = :no_argument
-  end
+parser.separator(nil)
+parser.on('--converters=CONVERTERS',
+     'Input field converters;',
+     'CONVERTERS is comma-separated converter names (leading colon optional).'
+) do |value|
+  options[:converters] = parse_names(value)
+end
+parser.on('--empty_value STR',
+     'Value to be output for empty input field.') do |value|
+  options[:empty_value] = value
+end
+parser.on('--field-size-limit=N', Integer,
+     'Maximum field size (characters)') do |value|
+  options[:field_size_limit] = value
+end
+parser.on('--headers=ARG',
+     'Treat the first input row as headers;',
+     'ARG is true or comma-separated headers.'
+) do |value|
+  options[:headers] = value == 'true' ? true : parse_names(value)
+end
+parser.on('--header-converters=CONVERTERS',
+     'Input header converters;',
+     'CONVERTERS is comma-separated converter names.'
+) do |value|
+  options[:header_converters] = parse_names(value)
+end
+parser.on('--liberal-parsing',
+     'Attempt to parse non-conformant input.') do
+  options[:liberal_parsing] = :no_argument
+end
+parser.on('--nil_value STR',
+     'Value to be substituted for nil input field.') do |value|
+  options[:nil_value] = value
+end
+parser.on('--return_headers',
+     'Method shift returns header row.') do
+  options[:return_headers] = :no_argument
+end
+parser.on('--skip_blanks',
+     'Ignore blank lines.') do
+  options[:skip_blanks] = :no_argument
+end
+parser.on('--skip_lines STR',
+     'Ignore comment lines;',
+     'STR is converted to a Regexp that identifies comment lines.') do |value|
+  options[:skip_lines] = Regexp.new(value)
+end
+parser.on('--strip',
+     'Strip whitespace from input fields.') do
+  options[:strip] = :no_argument
+end
+parser.on('--unconverted_fields',
+     'Define method unconverted_fields for each created CSV::Row object.') do
+  options[:unconverted_fields] = :no_argument
+end
 
-  p.separator(nil)
-  p.separator(
-    'Output Options: see https://docs.ruby-lang.org/en/3.3/CSV.html#class-CSV-label-Options+for+Generating'
-  )
+parser.separator(nil)
+parser.separator(
+  'Output Options: see https://docs.ruby-lang.org/en/3.3/CSV.html#class-CSV-label-Options+for+Generating'
+)
 
-  p.separator(nil)
-  p.on('--force_quotes',
-       'Double-quote each output field.') do
-    options[:force_quotes] = :no_argument
-  end
-  p.on('--quote_empty STR',
-       'Double-quote each empty output field;',
-       'STR is true or false.'
-  ) do
-    options[:quote_empty] = :no_argument
-  end
-  p.on('--write_converters',
-       'Output field converters;',
-       'not implemented in CLI.'
-  ) do |value|
-    raise NotImplementedError.new('--write_converters is not implemented in the CLI.')
-  end
-  p.on('--write_headers',
-       'Write headers to output.') do |value|
-    options[:write_headers] = :no_argument
-  end
-  p.on('--write_empty_value STR',
-       'Value to be substituted for empty output field.') do |value|
-    options[:write_empty_value] = value
-  end
-  p.on('--write_nil_value STR',
-       'Value to be substituted for nil output field.') do |value|
-    options[:write_nil_value] = value
-  end
+parser.separator(nil)
+parser.on('--force_quotes',
+     'Double-quote each output field.') do
+  options[:force_quotes] = :no_argument
+end
+parser.on('--quote_empty STR',
+     'Double-quote each empty output field;',
+     'STR is true or false.'
+) do
+  options[:quote_empty] = :no_argument
+end
+parser.on('--write_converters',
+     'Output field converters;',
+     'not implemented in CLI.'
+) do |value|
+  raise NotImplementedError.new('--write_converters is not implemented in the CLI.')
+end
+parser.on('--write_headers',
+     'Write headers to output.') do |value|
+  options[:write_headers] = :no_argument
+end
+parser.on('--write_empty_value STR',
+     'Value to be substituted for empty output field.') do |value|
+  options[:write_empty_value] = value
+end
+parser.on('--write_nil_value STR',
+     'Value to be substituted for nil output field.') do |value|
+  options[:write_nil_value] = value
+end
 
-  p.separator(nil)
-  p.separator(
-    'Options only for CSV.filter: see https://docs.ruby-lang.org/en/3.3/CSV.html#method-c-filter'
-  )
+parser.separator(nil)
+parser.separator(
+  'Options only for CSV.filter: see https://docs.ruby-lang.org/en/3.3/CSV.html#method-c-filter'
+)
 
-  p.on('--input-col-sep=SEPARATOR',
-       'Input column separator string (aliased as --in-col-sep).') do |value|
-    options[:input_col_sep] = value
-  end
-  p.on('--input-quote-char=CHAR',
-       'Input quote character (aliased as --in-quote-char.') do |value|
-    options[:input_quote_char] = value
-  end
-  p.on('--input-row-sep=SEPARATOR',
-       'Input row separator string (aliased as --in-row-sep).'
-  ) do |value|
-    options[:input_row_sep] = value
-  end
-  p.on('--output-col-sep=SEPARATOR',
-       'Output column separator string (aliased as --out-col-sep).'
-  ) do |value|
-    options[:output_col_sep] = value
-  end
-  p.on('--output-quote-char=CHAR',
-       'Output quote character (aliased as --out-quote-char).') do |value|
-    options[:output_quote_char] = value
-  end
-  p.on('--output-row-sep=SEPARATOR',
-       'Output row separator string (aliased as --out-row-sep).'
-  ) do |value|
-    options[:output_row_sep] = value
-  end
+parser.on('--input-col-sep=SEPARATOR',
+     'Input column separator string (aliased as --in-col-sep).') do |value|
+  options[:input_col_sep] = value
+end
+parser.on('--input-quote-char=CHAR',
+     'Input quote character (aliased as --in-quote-char.') do |value|
+  options[:input_quote_char] = value
+end
+parser.on('--input-row-sep=SEPARATOR',
+     'Input row separator string (aliased as --in-row-sep).'
+) do |value|
+  options[:input_row_sep] = value
+end
+parser.on('--output-col-sep=SEPARATOR',
+     'Output column separator string (aliased as --out-col-sep).'
+) do |value|
+  options[:output_col_sep] = value
+end
+parser.on('--output-quote-char=CHAR',
+     'Output quote character (aliased as --out-quote-char).') do |value|
+  options[:output_quote_char] = value
+end
+parser.on('--output-row-sep=SEPARATOR',
+     'Output row separator string (aliased as --out-row-sep).'
+) do |value|
+  options[:output_row_sep] = value
+end
 
-  p.separator(nil)
-  p.separator('Input/Output Options')
+parser.separator(nil)
+parser.separator('Input/Output Options')
 
-  p.separator(nil)
-  p.on('-c', '--col-sep=SEPARATOR',
-       'Column separator string.') do |value|
-    options[:col_sep] = value
-  end
-  p.on('-q', '--quote-char=CHAR',
-       'Quote character.') do |value|
-    options[:quote_char] = value
-  end
-  p.on('-r', '--row-sep=SEPARATOR',
-       'Row separator string.'
-  ) do |value|
-    options[:row_sep] = value
-  end
+parser.separator(nil)
+parser.on('-c', '--col-sep=SEPARATOR',
+     'Column separator string.') do |value|
+  options[:col_sep] = value
+end
+parser.on('-q', '--quote-char=CHAR',
+     'Quote character.') do |value|
+  options[:quote_char] = value
+end
+parser.on('-r', '--row-sep=SEPARATOR',
+     'Row separator string.'
+) do |value|
+  options[:row_sep] = value
+end
 
-  p.separator(nil)
-  p.separator('Generic Options')
-  p.separator(nil)
+parser.separator(nil)
+parser.separator('Generic Options')
+parser.separator(nil)
 
-  p.on('-h', '--help', 'Prints this help.') do
-    puts p
-    exit
-  end
+parser.on('-h', '--help', 'Prints this helparser.') do
+  puts parser
+  exit
+end
 
-  p.on('-v', '--version', 'Prints version.') do
-    puts CSV::VERSION
-    exit
-  end
+parser.on('-v', '--version', 'Prints version.') do
+  puts CSV::VERSION
+  exit
+end
 
-end.parse!
+parser.parse!
 
 CSV.filter(**options) do |row|
 end
