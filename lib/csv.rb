@@ -2129,6 +2129,12 @@ class CSV
     writer if @writer_options[:write_headers]
   end
 
+  class TSV < CSV
+    def initialize(data, **options)
+      super(data, **({col_sep: "\t"}.merge(options)))
+    end
+  end
+
   # :call-seq:
   #   csv.col_sep -> string
   #
