@@ -7,19 +7,19 @@ class TestTSV < Test::Unit::TestCase
   end
 
   def test_override_separator
-    tsv = TSV.new(String.new, col_sep: ",")
+    tsv = CSV::TSV.new(String.new, col_sep: ",")
     assert_equal(",", tsv.col_sep)
   end
 
   def test_read_tsv_data
     data = "a\tb\tc\n1\t2\t3"
-    result = TSV.parse(data)
+    result = CSV::TSV.parse(data)
     assert_equal([["a", "b", "c"], ["1", "2", "3"]], result.to_a)
   end
 
   def test_write_tsv_data
     output = String.new
-    TSV.generate(output) do |tsv|
+    CSV::TSV.generate(output) do |tsv|
       tsv << ["a", "b", "c"]
       tsv << ["1", "2", "3"]
     end
@@ -27,6 +27,6 @@ class TestTSV < Test::Unit::TestCase
   end
 
   def test_inheritance
-    assert_kind_of(CSV, TSV.new(String.new))
+    assert_kind_of(CSV, CSV::TSV.new(String.new))
   end
 end
