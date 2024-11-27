@@ -352,7 +352,7 @@
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-identifier">string</span>) <span class="ruby-comment"># =&gt; [&quot;foo&quot;, &quot;0&quot;]</span>
 </pre>
 
-<p>CSV extends class String with instance method String#parse_csv, which also returns only the first row:</p>
+<p>CSV extends class String with instance method <a href="String.html#method-i-parse_csv"><code>String#parse_csv</code></a>, which also returns only the first row:</p>
 
 <pre class="ruby"><span class="ruby-identifier">string</span>.<span class="ruby-identifier">parse_csv</span> <span class="ruby-comment"># =&gt; [&quot;foo&quot;, &quot;0&quot;]</span>
 </pre>
@@ -645,7 +645,7 @@
 </pre>
 <hr>
 
-<p>When <code>row_sep</code> is a String, that String becomes the row separator. The String will be transcoded into the data&#39;s Encoding before use.</p>
+<p>When <code>row_sep</code> is a String, that String becomes the row separator. The <a href="String.html"><code>String</code></a> will be transcoded into the data&#39;s Encoding before use.</p>
 
 <p>Using <code>&quot;\n&quot;</code>:</p>
 
@@ -805,7 +805,7 @@
 
 <h6 id="class-CSV-label-Option+quote_char">Option <code>quote_char</code><span><a href="#class-CSV-label-Option+quote_char">&para;</a> <a href="#top">&uarr;</a></span></h6>
 
-<p>Specifies the character (String of length 1) used used to quote fields in both parsing and generating. This String will be transcoded into the data&#39;s Encoding before use.</p>
+<p>Specifies the character (String of length 1) used used to quote fields in both parsing and generating. This <a href="String.html"><code>String</code></a> will be transcoded into the data&#39;s Encoding before use.</p>
 
 <p>Default value:</p>
 
@@ -1353,7 +1353,7 @@ baz,2
 </pre>
 <hr>
 
-<p>When <code>row_sep</code> is a String, that String becomes the row separator. The String will be transcoded into the data&#39;s Encoding before use.</p>
+<p>When <code>row_sep</code> is a String, that String becomes the row separator. The <a href="String.html"><code>String</code></a> will be transcoded into the data&#39;s Encoding before use.</p>
 
 <p>Using <code>&quot;\n&quot;</code>:</p>
 
@@ -1513,7 +1513,7 @@ baz,2
 
 <h6 id="class-CSV-label-Option+quote_char">Option <code>quote_char</code><span><a href="#class-CSV-label-Option+quote_char">&para;</a> <a href="#top">&uarr;</a></span></h6>
 
-<p>Specifies the character (String of length 1) used used to quote fields in both parsing and generating. This String will be transcoded into the data&#39;s Encoding before use.</p>
+<p>Specifies the character (String of length 1) used used to quote fields in both parsing and generating. This <a href="String.html"><code>String</code></a> will be transcoded into the data&#39;s Encoding before use.</p>
 
 <p>Default value:</p>
 
@@ -2183,15 +2183,15 @@ baz,2
 
 <h3 id="class-CSV-label-Character+Encodings+-28M17n+or+Multilingualization-29">Character Encodings (M17n or Multilingualization)<span><a href="#class-CSV-label-Character+Encodings+-28M17n+or+Multilingualization-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>This new <a href="CSV.html"><code>CSV</code></a> parser is m17n savvy.  The parser works in the Encoding of the IO or String object being read from or written to. Your data is never transcoded (unless you ask Ruby to transcode it for you) and will literally be parsed in the Encoding it is in. Thus <a href="CSV.html"><code>CSV</code></a> will return Arrays or Rows of Strings in the Encoding of your data. This is accomplished by transcoding the parser itself into your Encoding.</p>
+<p>This new <a href="CSV.html"><code>CSV</code></a> parser is m17n savvy.  The parser works in the Encoding of the IO or <a href="String.html"><code>String</code></a> object being read from or written to. Your data is never transcoded (unless you ask Ruby to transcode it for you) and will literally be parsed in the Encoding it is in. Thus <a href="CSV.html"><code>CSV</code></a> will return Arrays or Rows of Strings in the Encoding of your data. This is accomplished by transcoding the parser itself into your Encoding.</p>
 
 <p>Some transcoding must take place, of course, to accomplish this multiencoding support. For example, <code>:col_sep</code>, <code>:row_sep</code>, and <code>:quote_char</code> must be transcoded to match your data.  Hopefully this makes the entire process feel transparent, since CSV&#39;s defaults should just magically work for your data. However, you can set these values manually in the target Encoding to avoid the translation.</p>
 
 <p>It&#39;s also important to note that while all of CSV&#39;s core parser is now Encoding agnostic, some features are not. For example, the built-in converters will try to transcode data to UTF-8 before making conversions. Again, you can provide custom converters that are aware of your Encodings to avoid this translation. It&#39;s just too hard for me to support native conversions in all of Ruby&#39;s Encodings.</p>
 
-<p>Anyway, the practical side of this is simple: make sure IO and String objects passed into <a href="CSV.html"><code>CSV</code></a> have the proper Encoding set and everything should just work. <a href="CSV.html"><code>CSV</code></a> methods that allow you to open IO objects (<a href="CSV.html#method-c-foreach"><code>CSV::foreach()</code></a>, <a href="CSV.html#method-c-open"><code>CSV::open()</code></a>, <a href="CSV.html#method-c-read"><code>CSV::read()</code></a>, and <a href="CSV.html#method-c-readlines"><code>CSV::readlines()</code></a>) do allow you to specify the Encoding.</p>
+<p>Anyway, the practical side of this is simple: make sure IO and <a href="String.html"><code>String</code></a> objects passed into <a href="CSV.html"><code>CSV</code></a> have the proper Encoding set and everything should just work. <a href="CSV.html"><code>CSV</code></a> methods that allow you to open IO objects (<a href="CSV.html#method-c-foreach"><code>CSV::foreach()</code></a>, <a href="CSV.html#method-c-open"><code>CSV::open()</code></a>, <a href="CSV.html#method-c-read"><code>CSV::read()</code></a>, and <a href="CSV.html#method-c-readlines"><code>CSV::readlines()</code></a>) do allow you to specify the Encoding.</p>
 
-<p>One minor exception comes when generating <a href="CSV.html"><code>CSV</code></a> into a String with an Encoding that is not ASCII compatible. There&#39;s no existing data for <a href="CSV.html"><code>CSV</code></a> to use to prepare itself and thus you will probably need to manually specify the desired Encoding for most of those cases. It will try to guess using the fields in a row of output though, when using <a href="CSV.html#method-c-generate_line"><code>CSV::generate_line()</code></a> or Array#to_csv().</p>
+<p>One minor exception comes when generating <a href="CSV.html"><code>CSV</code></a> into a <a href="String.html"><code>String</code></a> with an Encoding that is not ASCII compatible. There&#39;s no existing data for <a href="CSV.html"><code>CSV</code></a> to use to prepare itself and thus you will probably need to manually specify the desired Encoding for most of those cases. It will try to guess using the fields in a row of output though, when using <a href="CSV.html#method-c-generate_line"><code>CSV::generate_line()</code></a> or <a href="Array.html#method-i-to_csv"><code>Array#to_csv()</code></a>.</p>
 
 <p>I try to point out any other Encoding issues in the documentation of methods as they come up.</p>
 
