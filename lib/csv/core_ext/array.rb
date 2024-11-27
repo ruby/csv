@@ -1,4 +1,4 @@
-class Array # :nodoc:
+class Array
   # Equivalent to CSV::generate_line(self, options)
   #
   #   ["CSV", "data"].to_csv

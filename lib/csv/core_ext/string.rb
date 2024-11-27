@@ -1,4 +1,4 @@
-class String # :nodoc:
+class String
   # Equivalent to CSV::parse_line(self, options)
   #
   #   "CSV,data".parse_csv
