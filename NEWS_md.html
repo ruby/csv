@@ -61,6 +61,9 @@
 
   <ul class="link-list" role="directory">
     <li><a href="#label-News">News</a>
+    <li><a href="#label-3.3.1+-+2024-12-15">3.3.1 - 2024-12-15</a>
+    <li><a href="#label-Improvements">Improvements</a>
+    <li><a href="#label-Thanks">Thanks</a>
     <li><a href="#label-3.3.0+-+2024-03-22">3.3.0 - 2024-03-22</a>
     <li><a href="#label-Fixes">Fixes</a>
     <li><a href="#label-3.2.9+-+2024-03-22">3.2.9 - 2024-03-22</a>
@@ -207,6 +210,73 @@
 <main role="main" aria-label="Page NEWS.md">
 
 <h1 id="label-News">News<span><a href="#label-News">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<h2 id="label-3.3.1+-+2024-12-15">3.3.1 - 2024-12-15<span><a href="#label-3.3.1+-+2024-12-15">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p><code>CSV.open</code>: Changed to detect BOM by default. Note that this isn&#39;t enabled on Windows because Ruby may have a bug. See also: <a href="https://bugs.ruby-lang.org/issues/20526">bugs.ruby-lang.org/issues/20526</a></p>
+<ul><li>
+<p>GH-301</p>
+</li><li>
+<p>Reported by Junichi Ito</p>
+</li><li>
+<p>GH-301</p>
+</li><li>
+<p>Reported by Junichi Ito</p>
+</li></ul>
+</li><li>
+<p>Improved performance.</p>
+<ul><li>
+<p>GH-311</p>
+</li><li>
+<p>GH-312</p>
+</li><li>
+<p>Patch by Vladimir Kochnev</p>
+</li></ul>
+</li><li>
+<p><code>CSV.open</code>: Added support for <code>StringIO</code> as an input.</p>
+<ul><li>
+<p>GH-300</p>
+</li><li>
+<p>GH-302</p>
+</li><li>
+<p>Patch by Marcelo</p>
+</li></ul>
+</li><li>
+<p>Added a built-in time converter. You can use it by <code>converters: :time</code>.</p>
+<ul><li>
+<p>GH-313</p>
+</li><li>
+<p>Patch by Bart de Water</p>
+</li></ul>
+</li><li>
+<p>Added <code>CSV::TSV</code> for tab-separated values.</p>
+<ul><li>
+<p>GH-272</p>
+</li><li>
+<p>GH-319</p>
+</li><li>
+<p>Reported by kojix2</p>
+</li><li>
+<p>Patch by Jas</p>
+</li></ul>
+</li></ul>
+
+<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Junichi Ito</p>
+</li><li>
+<p>Vladimir Kochnev</p>
+</li><li>
+<p>Marcelo</p>
+</li><li>
+<p>Bart de Water</p>
+</li><li>
+<p>kojix2</p>
+</li><li>
+<p>Jas</p>
+</li></ul>
 
 <h2 id="label-3.3.0+-+2024-03-22">3.3.0 - 2024-03-22<span><a href="#label-3.3.0+-+2024-03-22">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
