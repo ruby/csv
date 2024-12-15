@@ -1,5 +1,50 @@
 # News
 
+## 3.3.1 - 2024-12-15
+
+### Improvements
+
+  * `CSV.open`: Changed to detect BOM by default. Note that this isn't
+    enabled on Windows because Ruby may have a bug. See also:
+    https://bugs.ruby-lang.org/issues/20526
+    * GH-301
+    * Reported by Junichi Ito
+
+  * Improved performance.
+    * GH-311
+    * GH-312
+    * Patch by Vladimir Kochnev
+
+  * `CSV.open`: Added support for `StringIO` as an input.
+    * GH-300
+    * GH-302
+    * Patch by Marcelo
+
+  * Added a built-in time converter. You can use it by `converters:
+    :time`.
+    * GH-313
+    * Patch by Bart de Water
+
+  * Added `CSV::TSV` for tab-separated values.
+    * GH-272
+    * GH-319
+    * Reported by kojix2
+    * Patch by Jas
+
+### Thanks
+
+  * Junichi Ito
+
+  * Vladimir Kochnev
+
+  * Marcelo
+
+  * Bart de Water
+
+  * kojix2
+
+  * Jas
+
 ## 3.3.0 - 2024-03-22
 
 ### Fixes
