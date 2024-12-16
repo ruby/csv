@@ -30,14 +30,14 @@ class TestFilter < Test::Unit::TestCase
   end
 
   # Return stdout and stderr from CLI execution.
-  def run_csv_filter(filepath, cli_options_s = '')
+  def run_csv_filter(filepath, cli_option_names = [])
     top_dir = File.join(__dir__, "..", "..", "..")
     command_line_s = [
       Gem.ruby,
       "-I",
       File.join(top_dir, "lib"), 
       File.join(top_dir, "bin", "csv-filter"),
-      cli_options_s,
+      * cli_option_names,
       filepath,
     ].join(' ')
     Tempfile.create("stdout", mode: File::RDWR) do |stdout|
@@ -57,7 +57,7 @@ class TestFilter < Test::Unit::TestCase
     Dir.mktmpdir do |dirpath|
       sym = option_name.to_sym
       filepath = csv_filepath('', dirpath, sym)
-      cli_out_s, cli_err_s = run_csv_filter(filepath, option_name)
+      cli_out_s, cli_err_s = run_csv_filter(filepath, [option_name])
     end
     [cli_out_s, cli_err_s]
   end
