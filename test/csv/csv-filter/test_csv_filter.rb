@@ -70,9 +70,22 @@ class TestFilter < Test::Unit::TestCase
   # Return stdout and stderr from CLI execution.
   def execute_in_cli(filepath, cli_options_s = '')
     debug('cli_options_s', cli_options_s)
-    command = "cat #{filepath} | ruby bin/csv-filter #{cli_options_s}"
-    capture_subprocess_io do
-      system(command)
+    top_dir = File.join(__dir__, "..", "..", "..")
+    command_line = [
+      Gem.ruby,
+      "-I",
+      File.join(top_dir, "lib"), 
+      File.join(top_dir, "bin", "csv-filter"),
+      *options,
+      filepath,
+    ]
+    Tempfile.create("stdout", mode: "rw") do |stdout|
+      Tempfile.create("stderr", mode: "rw") do |stderr|
+        status = system(*command_line, {1 => stdout, 2 => stderr})
+        stdout.rewind
+        stderr.rewind
+        [status, stdout.read, stderr.read]
+      end
     end
   end
 
