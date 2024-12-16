@@ -20,16 +20,6 @@ BANNER
 parser.separator('Generic Options')
 parser.separator(nil)
 
-parser.on('-h', '--help', 'Prints this help.') do
-  puts parser
-  exit
-end
-
-parser.on('-v', '--version', 'Prints version.') do
-  puts CSV::VERSION
-  exit
-end
-
 parser.parse!
 
 CSV.filter(**options) do |row|
