@@ -101,7 +101,7 @@ class TestFilter < Test::Unit::TestCase
     do_test(debugging: false) do
       %w[-Z --ZZZ].each do |option_name|
         cli_out_s, cli_err_s = results_for_cli_option(option_name)
-        assert_empty(cli_out_s)
+        assert_equal("", cli_out_s)
         assert_match(/OptionParser::InvalidOption/, cli_err_s)
       end
     end
