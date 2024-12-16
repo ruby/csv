@@ -52,12 +52,11 @@ class TestFilter < Test::Unit::TestCase
 
   # Return CSV string generated from rows array and options.
   def make_csv_s(rows: Rows, **options)
-    csv_s = CSV.generate(**options) do|csv|
+    CSV.generate(**options) do|csv|
       rows.each do |row|
         csv << row
       end
     end
-    csv_s
   end
 
   # Return filepath of file containing CSV data.
