@@ -6,11 +6,12 @@ require 'csv'
 
 class TestFilter < Test::Unit::TestCase
 
-  # Some rows data (useful as default).
-  Rows = [
-    %w[aaa bbb ccc],
-    %w[ddd eee fff],
-  ]
+  def setup
+    @rows = [
+      %w[aaa bbb ccc],
+      %w[ddd eee fff],
+    ]
+  end
 
   # Return CSV string generated from rows array and options.
   def make_csv_s(rows: Rows, **options)
