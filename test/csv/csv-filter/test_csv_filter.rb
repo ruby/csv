@@ -33,7 +33,7 @@ class TestFilter < Test::Unit::TestCase
     ].join(" ")
     Tempfile.create("stdout", mode: File::RDWR) do |stdout|
       Tempfile.create("stderr", mode: File::RDWR) do |stderr|
-        status = system(command_line, {1 => stdout, 2 => stderr})
+        system(command_line, {1 => stdout, 2 => stderr})
         stdout.rewind
         stderr.rewind
         [stdout.read, stderr.read]
