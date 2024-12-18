@@ -1,14 +1,14 @@
 # frozen_string_literal: false
 
-require_relative '../helper'
+require_relative "../helper"
 
 class TestFilter < Test::Unit::TestCase
 
   def setup
     @input = [
-      %w[aaa bbb ccc].join(','),
-      %w[ddd eee fff].join(','),
-      '' # Force trailing newline.
+      %w[aaa bbb ccc].join(","),
+      %w[ddd eee fff].join(","),
+      "" # Force trailing newline.
     ].join("\n")
   end
 
@@ -30,7 +30,7 @@ class TestFilter < Test::Unit::TestCase
       File.join(top_dir, "bin", "csv-filter"),
       *cli_option_names,
       filepath,
-    ].join(' ')
+    ].join(" ")
     Tempfile.create("stdout", mode: File::RDWR) do |stdout|
       Tempfile.create("stderr", mode: File::RDWR) do |stderr|
         status = system(command_line, {1 => stdout, 2 => stderr})
@@ -43,11 +43,11 @@ class TestFilter < Test::Unit::TestCase
 
   # Return results for CLI-only option (or invalid option).
   def results_for_cli_option(option_name)
-    output = ''
-    error = ''
+    output = ""
+    error = ""
     Dir.mktmpdir do |dirpath|
       sym = option_name.to_sym
-      filepath = csv_filepath('', dirpath, sym)
+      filepath = csv_filepath("", dirpath, sym)
       output, error = run_csv_filter(filepath, [option_name])
     end
     [output, error]
@@ -55,7 +55,7 @@ class TestFilter < Test::Unit::TestCase
 
   # Get and return the actual output from the API.
   def api_output(input, **api_options)
-    output = ''
+    output = ""
     CSV.filter(input, output, **api_options) {|row| }
     output
   end
@@ -63,7 +63,7 @@ class TestFilter < Test::Unit::TestCase
   # Test for invalid option.
 
   def test_invalid_option
-    output, error = results_for_cli_option('-Z')
+    output, error = results_for_cli_option("-Z")
     assert_equal("", output)
     assert_match(/OptionParser::InvalidOption/, error)
   end
@@ -78,15 +78,15 @@ class TestFilter < Test::Unit::TestCase
   # Tests for general options.
 
   def test_option_h
-    output, error = results_for_cli_option('-h')
+    output, error = results_for_cli_option("-h")
     assert_equal("Usage: csv-filter [options]\n", output.lines.first)
-    assert_equal('', error)
+    assert_equal("", error)
   end
 
   def test_option_v
-    output, error = results_for_cli_option('-v')
+    output, error = results_for_cli_option("-v")
     assert_match(/\d+\.\d+\.\d+/, output)
-    assert_equal('', error)
+    assert_equal("", error)
   end
 
 end
