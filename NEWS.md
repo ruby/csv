@@ -1,5 +1,18 @@
 # News
 
+## 3.3.2 - 2024-12-21
+
+### Fixes
+
+  * Fixed a parse bug with a quoted line with `col_sep` and an empty
+    line. This was introduced in 3.3.1.
+    * GH-324
+    * Reported by stoodfarback
+
+### Thanks
+
+  * stoodfarback
+
 ## 3.3.1 - 2024-12-15
 
 ### Improvements
