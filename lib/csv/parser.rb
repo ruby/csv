@@ -1041,7 +1041,7 @@ class CSV
           quoted_fields << @quoted_column_value
         elsif parse_row_end
           if row.empty? and value.nil?
-            emit_row(row, &block) unless @skip_blanks
+            emit_row([], &block) unless @skip_blanks
           else
             row << value
             quoted_fields << @quoted_column_value

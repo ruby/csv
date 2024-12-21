@@ -322,6 +322,15 @@ line,5,jkl
                  CSV.new(input_with_bom).each.to_a)
   end
 
+  def test_quoted_col_sep_and_empty_line
+    assert_equal([["one,"], [], ["three"]],
+                 CSV.parse(<<-CSV))
+"one,"
+
+"three"
+                 CSV
+  end
+
   private
 
   {
