@@ -56,5 +56,5 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 2.5.0"
 
-  spec.metadata["changelog_uri"] = spec.homepage + "/releases"
+  spec.metadata["changelog_uri"] = "#{spec.homepage}/releases/tag/v#{spec.version}"
 end
