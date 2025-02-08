@@ -20,7 +20,7 @@ class TestFilter < Test::Unit::TestCase
   end
 
   # Return stdout and stderr from CLI execution.
-  def run_csv_filter(filepath, *cli_option_names)
+  def run_csv_filter(filepath, *options)
     top_dir = File.join(__dir__, "..", "..", "..")
     command_line = [
       Gem.ruby,
