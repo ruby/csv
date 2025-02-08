@@ -81,7 +81,7 @@ class TestFilter < Test::Unit::TestCase
 
   def test_option_v
     output, error = results_for_cli_option("-v")
-    assert_match(/\d+\.\d+\.\d+/, output)
+    assert_equal("${CSV::VERSION}\n", output)
     assert_equal("", error)
   end
 end
