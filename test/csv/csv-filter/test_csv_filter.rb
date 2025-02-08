@@ -30,7 +30,7 @@ class TestFilter < Test::Unit::TestCase
       File.join(top_dir, "bin", "csv-filter"),
       *cli_option_names,
       filepath,
-    ].join(" ")
+    ]
     Tempfile.create("stdout", mode: File::RDWR) do |stdout|
       Tempfile.create("stderr", mode: File::RDWR) do |stderr|
         system(command_line, {1 => stdout, 2 => stderr})
