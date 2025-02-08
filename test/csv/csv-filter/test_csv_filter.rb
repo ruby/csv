@@ -87,5 +87,4 @@ class TestFilter < Test::Unit::TestCase
     assert_match(/\d+\.\d+\.\d+/, output)
     assert_equal("", error)
   end
-
 end
