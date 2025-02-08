@@ -27,9 +27,9 @@ class TestFilter < Test::Unit::TestCase
       "-I",
       File.join(top_dir, "lib"), 
       File.join(top_dir, "bin", "csv-filter"),
-      *cli_option_names,
+      *options,
       filepath,
-    ]
+    ].join(' ')
     Tempfile.create("stdout", mode: File::RDWR) do |stdout|
       Tempfile.create("stderr", mode: File::RDWR) do |stderr|
         system(command_line, out: stdout, err: stderr)
@@ -52,7 +52,7 @@ class TestFilter < Test::Unit::TestCase
   # Get and return the actual output from the API.
   def filter(input, **options)
     output = ""
-    CSV.filter(input, output, **api_options) {|row| }
+    CSV.filter(input, output, **options) {|row| }
     output
   end
 
@@ -67,7 +67,7 @@ class TestFilter < Test::Unit::TestCase
   # Test for no options.
 
   def test_no_options
-    output = api_output(@input)
+    output = filter(@input)
     assert_equal(@input, output)
   end
 
@@ -81,7 +81,7 @@ class TestFilter < Test::Unit::TestCase
 
   def test_option_v
     output, error = results_for_cli_option("-v")
-    assert_equal("${CSV::VERSION}\n", output)
+    assert_equal("#{CSV::VERSION}\n", output)
     assert_equal("", error)
   end
 end
