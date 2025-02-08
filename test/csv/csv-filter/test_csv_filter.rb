@@ -75,8 +75,8 @@ class TestFilter < Test::Unit::TestCase
 
   def test_option_h
     output, error = results_for_cli_option("-h")
-    assert_equal("Usage: csv-filter [options]\n", output.lines.first)
-    assert_equal("", error)
+    assert_equal(["Usage: csv-filter [options]\n", ""],
+                            [output.lines.first, error])
   end
 
   def test_option_v
