@@ -50,7 +50,7 @@ class TestFilter < Test::Unit::TestCase
   end
 
   # Get and return the actual output from the API.
-  def api_output(input, **api_options)
+  def filter(input, **options)
     output = ""
     CSV.filter(input, output, **api_options) {|row| }
     output
