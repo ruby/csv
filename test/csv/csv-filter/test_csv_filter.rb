@@ -42,14 +42,11 @@ class TestFilter < Test::Unit::TestCase
 
   # Return results for CLI-only option (or invalid option).
   def results_for_cli_option(option_name)
-    output = ""
-    error = ""
-    Dir.mktmpdir do |dirpath|
-      sym = option_name.to_sym
-      filepath = csv_filepath("", dirpath, sym)
-      output, error = run_csv_filter(filepath, [option_name])
+    Tempfile.create(["csv-filter", ".csv"]) do |file|
+      file.write(@input)
+      file.close
+      run_csv_filter(file.path, option_name)
     end
-    [output, error]
   end
 
   # Get and return the actual output from the API.
