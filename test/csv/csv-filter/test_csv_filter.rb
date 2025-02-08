@@ -3,7 +3,6 @@
 require_relative "../helper"
 
 class TestFilter < Test::Unit::TestCase
-
   def setup
     @input = [
       %w[aaa bbb ccc].join(","),
