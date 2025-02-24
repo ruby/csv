@@ -13,13 +13,25 @@ ddd,eee,fff
   # Return stdout and stderr from CLI execution.
   def run_csv_filter(csv, *options)
     top_dir = File.join(__dir__, "..", "..")
-    command_line = [
-      Gem.ruby,
-      "-I",
-      File.join(top_dir, "lib"),
-      File.join(top_dir, "bin", "csv-filter"),
-      *options,
-    ]
+    csv_filter = File.join(top_dir, "bin", "csv-filter")
+    if File.exist?(csv_filter)
+      # Test in source
+      command_line = [
+        Gem.ruby,
+        "-I",
+        File.join(top_dir, "lib"),
+        csv_filter,
+        *options,
+      ]
+    else
+      # Test installed csv gem
+      command_line = [
+        Gem.ruby,
+        "-S",
+        "csv-filter",
+        *options,
+      ]
+    end
     Tempfile.create("stdout", mode: File::RDWR) do |stdout|
       Tempfile.create("stderr", mode: File::RDWR) do |stderr|
         Tempfile.create(["csv-filter", ".csv"]) do |input|
