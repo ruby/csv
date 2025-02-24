@@ -4275,10 +4275,11 @@ BAZ,-2</pre>
 
 <p>Raises a parse-time exception if <code>converter_name</code> is not the name of a built-in field converter:</p>
 
-<pre>csv = CSV.open(path)
-csv.convert(:nosuch) =&gt; [nil]
-# Raises NoMethodError (undefined method `arity&#39; for nil:NilClass)
-csv.read</pre>
+<pre class="ruby"><span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>)
+<span class="ruby-identifier">csv</span>.<span class="ruby-identifier">convert</span>(<span class="ruby-value">:nosuch</span>) <span class="ruby-operator">=&gt;</span> [<span class="ruby-keyword">nil</span>]
+<span class="ruby-comment"># Raises NoMethodError (undefined method `arity&#39; for nil:NilClass)</span>
+<span class="ruby-identifier">csv</span>.<span class="ruby-identifier">read</span>
+</pre>
         </div>
 
 
