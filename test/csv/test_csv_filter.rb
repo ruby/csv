@@ -15,7 +15,7 @@ ddd,eee,fff
     top_dir = File.join(__dir__, "..", "..")
     csv_filter = File.join(top_dir, "bin", "csv-filter")
     if File.exist?(csv_filter)
-      # Test in source
+      # In-place test
       command_line = [
         Gem.ruby,
         "-I",
@@ -24,7 +24,7 @@ ddd,eee,fff
         *options,
       ]
     else
-      # Test installed csv gem
+      # Gem test
       command_line = [
         Gem.ruby,
         "-S",
