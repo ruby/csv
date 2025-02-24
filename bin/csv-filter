@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'csv'
+
+options = {}
+
+parser = OptionParser.new
+
+parser.version = CSV::VERSION
+parser.banner = <<-BANNER
+Usage: #{parser.program_name} [options]
+
+  Reads and parses the CSV text content of the standard input per the given input options.
+  From that content, generates CSV text per the given output options
+  and writes that text to the standard output.
+BANNER
+
+begin
+  parser.parse!
+rescue OptionParser::InvalidOption
+  $stderr.puts($!.message)
+  $stderr.puts(parser)
+  exit(false)
+end
+
+CSV.filter(**options) do |row|
+end
