@@ -18,6 +18,19 @@ class CSV
     # into your Encoding.
     #
 
+    class << self
+      ARGF_OBJECT_ID = ARGF.object_id
+      # Convenient method to check whether the give input reached EOF
+      # or not.
+      def eof?(input)
+        # We can't use input != ARGF in Ractor. Because ARGF isn't a
+        # shareable object.
+        input.object_id != ARGF_OBJECT_ID and
+          input.respond_to?(:eof) and
+          input.eof?
+      end
+    end
+
     # Raised when encoding is invalid.
     class InvalidEncoding < StandardError
     end
@@ -312,7 +325,7 @@ class CSV
             raise InvalidEncoding unless chunk.valid_encoding?
             # trace(__method__, :chunk, chunk)
             @scanner = StringScanner.new(chunk)
-            if input.respond_to?(:eof?) and input.eof?
+            if Parser.eof?(input)
               @inputs.shift
               @last_scanner = @inputs.empty?
             end
@@ -869,10 +882,7 @@ class CSV
         string = nil
         if @samples.empty? and @input.is_a?(StringIO)
           string = @input.read
-        elsif @samples.size == 1 and
-              @input != ARGF and
-              @input.respond_to?(:eof?) and
-              @input.eof?
+        elsif @samples.size == 1 and Parser.eof?(@input)
           string = @samples[0]
         end
         if string
