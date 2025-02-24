@@ -3,8 +3,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <title>generating - RDoc Documentation</title>
+
+  <meta name="keywords" content="ruby,documentation,generating">
+  <meta name="description" content="generating: Recipes for Generating \CSV These recipes are specific code examples for specific \CSV generating tasks. For other recipes, see {Recipes for CSV}[.">
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../../";
@@ -21,10 +25,13 @@
 <link href="../../../css/rdoc.css" rel="stylesheet">
 
 
-
-
 <body id="top" role="document" class="file">
-<nav role="navigation">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
   <h2>
@@ -43,7 +50,7 @@
     <div id="search-field-wrapper">
       <input id="search-field" role="combobox" aria-label="Search"
              aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search" spellcheck="false"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
              title="Type to search, Up and Down to navigate, Enter to load">
     </div>
 
@@ -59,62 +66,145 @@
 <div class="nav-section">
   <h3>Table of Contents</h3>
 
+
+
   <ul class="link-list" role="directory">
-    <li><a href="#label-Recipes+for+Generating+CSV">Recipes for Generating CSV</a>
-    <li><a href="#label-Contents">Contents</a>
-    <li><a href="#label-Output+Formats">Output Formats</a>
-    <li><a href="#label-Generating+to+a+String">Generating to a String</a>
-    <li><a href="#label-Recipe-3A+Generate+to+String+with+Headers">Recipe: Generate to String with Headers</a>
-    <li><a href="#label-Recipe-3A+Generate+to+String+Without+Headers">Recipe: Generate to String Without Headers</a>
-    <li><a href="#label-Generating+to+a+File">Generating to a File</a>
-    <li><a href="#label-Recipe-3A+Generate+to+File+with+Headers">Recipe: Generate to File with Headers</a>
-    <li><a href="#label-Recipe-3A+Generate+to+File+Without+Headers">Recipe: Generate to File Without Headers</a>
-    <li><a href="#label-Generating+to+an+IO+Stream">Generating to an IO Stream</a>
-    <li><a href="#label-Recipe-3A+Generate+to+IO+Stream+with+Headers">Recipe: Generate to IO Stream with Headers</a>
-    <li><a href="#label-Recipe-3A+Generate+to+IO+Stream+Without+Headers">Recipe: Generate to IO Stream Without Headers</a>
-    <li><a href="#label-Converting+Fields">Converting Fields</a>
-    <li><a href="#label-Recipe-3A+Filter+Generated+Field+Strings">Recipe: Filter Generated Field Strings</a>
-    <li><a href="#label-Recipe-3A+Specify+Multiple+Write+Converters">Recipe: Specify Multiple Write Converters</a>
-    <li><a href="#label-RFC+4180+Compliance">RFC 4180 Compliance</a>
-    <li><a href="#label-Row+Separator">Row Separator</a>
-    <li><a href="#label-Recipe-3A+Generate+Compliant+Row+Separator">Recipe: Generate Compliant Row Separator</a>
-    <li><a href="#label-Recipe-3A+Generate+Non-Compliant+Row+Separator">Recipe: Generate Non-Compliant Row Separator</a>
-    <li><a href="#label-Column+Separator">Column Separator</a>
-    <li><a href="#label-Recipe-3A+Generate+Compliant+Column+Separator">Recipe: Generate Compliant Column Separator</a>
-    <li><a href="#label-Recipe-3A+Generate+Non-Compliant+Column+Separator">Recipe: Generate Non-Compliant Column Separator</a>
-    <li><a href="#label-Quotes">Quotes</a>
-    <li><a href="#label-Recipe-3A+Quote+All+Fields">Recipe: Quote All Fields</a>
-    <li><a href="#label-Recipe-3A+Quote+Empty+Fields">Recipe: Quote Empty Fields</a>
-    <li><a href="#label-Recipe-3A+Generate+Compliant+Quote+Character">Recipe: Generate Compliant Quote Character</a>
-    <li><a href="#label-Recipe-3A+Generate+Non-Compliant+Quote+Character">Recipe: Generate Non-Compliant Quote Character</a>
+              <li>
+            <details open>
+              <summary>      <a href="#label-Recipes+for+Generating+CSV">Recipes for Generating CSV</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#label-Contents">Contents</a>
+          <li>
+            <details open>
+              <summary>      <a href="#label-Output+Formats">Output Formats</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>
+            <details open>
+              <summary>      <a href="#label-Generating+to+a+String">Generating to a String</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#label-Recipe-3A+Generate+to+String+with+Headers">Recipe: Generate to String with Headers</a>
+          <li>      <a href="#label-Recipe-3A+Generate+to+String+Without+Headers">Recipe: Generate to String Without Headers</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary>      <a href="#label-Generating+to+a+File">Generating to a File</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#label-Recipe-3A+Generate+to+File+with+Headers">Recipe: Generate to File with Headers</a>
+          <li>      <a href="#label-Recipe-3A+Generate+to+File+Without+Headers">Recipe: Generate to File Without Headers</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>      <a href="#label-Generating+to+an+IO+Stream">Generating to an IO Stream</a>
+          <li>
+            <details open>
+              <summary>      <a href="#label-Recipe-3A+Generate+to+IO+Stream+with+Headers">Recipe: Generate to IO Stream with Headers</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#label-Recipe-3A+Generate+to+IO+Stream+Without+Headers">Recipe: Generate to IO Stream Without Headers</a>
+
+              </ul>
+            </details>
+          </li>
+
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary>      <a href="#label-Converting+Fields">Converting Fields</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#label-Recipe-3A+Filter+Generated+Field+Strings">Recipe: Filter Generated Field Strings</a>
+          <li>      <a href="#label-Recipe-3A+Specify+Multiple+Write+Converters">Recipe: Specify Multiple Write Converters</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary>      <a href="#label-RFC+4180+Compliance">RFC 4180 Compliance</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>
+            <details open>
+              <summary>      <a href="#label-Row+Separator">Row Separator</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#label-Recipe-3A+Generate+Compliant+Row+Separator">Recipe: Generate Compliant Row Separator</a>
+          <li>      <a href="#label-Recipe-3A+Generate+Non-Compliant+Row+Separator">Recipe: Generate Non-Compliant Row Separator</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary>      <a href="#label-Column+Separator">Column Separator</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#label-Recipe-3A+Generate+Compliant+Column+Separator">Recipe: Generate Compliant Column Separator</a>
+          <li>      <a href="#label-Recipe-3A+Generate+Non-Compliant+Column+Separator">Recipe: Generate Non-Compliant Column Separator</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary>      <a href="#label-Quotes">Quotes</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#label-Recipe-3A+Quote+All+Fields">Recipe: Quote All Fields</a>
+          <li>      <a href="#label-Recipe-3A+Quote+Empty+Fields">Recipe: Quote Empty Fields</a>
+          <li>      <a href="#label-Recipe-3A+Generate+Compliant+Quote+Character">Recipe: Generate Compliant Quote Character</a>
+          <li>      <a href="#label-Recipe-3A+Generate+Non-Compliant+Quote+Character">Recipe: Generate Non-Compliant Quote Character</a>
+
+              </ul>
+            </details>
+          </li>
+
+              </ul>
+            </details>
+          </li>
+
+              </ul>
+            </details>
+          </li>
+
   </ul>
 </div>
 
-
-  <div id="project-metadata">
-    <div id="fileindex-section" class="nav-section">
+  
+<div id="fileindex-section" class="nav-section">
   <h3>Pages</h3>
 
   <ul class="link-list">
-  
     <li><a href="../../../LICENSE_txt.html">LICENSE</a>
-  
     <li><a href="../../../NEWS_md.html">NEWS</a>
-  
     <li><a href="../../../README_md.html">README</a>
-  
-    <li><a href="../../../doc/csv/recipes/filtering_rdoc.html">filtering</a>
-  
-    <li><a href="../../../doc/csv/recipes/generating_rdoc.html">generating</a>
-  
-    <li><a href="../../../doc/csv/recipes/parsing_rdoc.html">parsing</a>
-  
-    <li><a href="../../../doc/csv/recipes/recipes_rdoc.html">recipes</a>
-  
+    <li><details open><summary>doc</summary>
+    <ul class="link-list">
+      <li><a href="../../../doc/csv/recipes/filtering_rdoc.html">filtering</a>
+      <li><a href="../../../doc/csv/recipes/generating_rdoc.html">generating</a>
+      <li><a href="../../../doc/csv/recipes/parsing_rdoc.html">parsing</a>
+      <li><a href="../../../doc/csv/recipes/recipes_rdoc.html">recipes</a>
+    </ul></details>
   </ul>
 </div>
 
-  </div>
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.12.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
 </nav>
 
 <main role="main" aria-label="Page doc/csv/recipes/generating.rdoc">
@@ -204,7 +294,7 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-generate"><code>CSV.generate</code></a> with option <code>headers</code> to generate to a String.</p>
 
-<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#<<</code></a> to append the rows that are to be generated:</p>
+<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
 <pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">headers:</span> [<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], <span class="ruby-value">write_headers:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
@@ -218,7 +308,7 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-generate"><code>CSV.generate</code></a> without option <code>headers</code> to generate to a String.</p>
 
-<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#<<</code></a> to append the rows that are to be generated:</p>
+<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
 <pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
@@ -236,7 +326,7 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-open"><code>CSV.open</code></a> with option <code>headers</code> generate to a File.</p>
 
-<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#<<</code></a> to append the rows that are to be generated:</p>
+<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
 <pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;w&#39;</span>, <span class="ruby-value">headers:</span> [<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], <span class="ruby-value">write_headers:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
@@ -251,7 +341,7 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-open"><code>CSV.open</code></a> without option <code>headers</code> to generate to a File.</p>
 
-<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#<<</code></a> to append the rows that are to be generated:</p>
+<p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
 <pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
@@ -478,12 +568,4 @@
 </pre>
 
 </main>
-
-
-
-<footer id="validator-badges" role="contentinfo">
-  <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.1.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
-</footer>
 
