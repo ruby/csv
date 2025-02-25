@@ -6,26 +6,21 @@ on:
 
 jobs:
   benchmark:
-    name: "Benchmark: Ruby ${{ matrix.ruby-version }}: ${{ matrix.runs-on }}"
+    name: "Benchmark: ${{ matrix.runs-on }}"
     strategy:
       fail-fast: false
       matrix:
-        ruby-version:
-          - 2.7
-          - '3.0'
         runs-on:
           - macos-latest
           - ubuntu-latest
           - windows-latest
-        exclude:
-          - { runs-on: windows-latest , ruby-version: '3.0' }
     runs-on: ${{ matrix.runs-on }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby-version }}
+          ruby-version: ruby
       - name: Install dependencies
         run: |
           bundle install
