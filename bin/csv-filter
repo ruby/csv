@@ -16,6 +16,12 @@ Usage: #{parser.program_name} [options]
   and writes that text to the standard output.
 BANNER
 
+
+parser.on('--input-col-sep=SEPARATOR',
+          'Input column separator string.') do |value|
+  options[:input_col_sep] = value
+end
+
 begin
   parser.parse!
 rescue OptionParser::InvalidOption
