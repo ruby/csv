@@ -77,4 +77,10 @@ ddd,eee,fff
     assert_equal(["aaa,bbb,ccc\nddd,eee,fff\n", ""],
                  run_csv_filter(csv, "--input-col-sep=:"))
   end
+
+  def test_option_input_row_sep
+    csv = "aaa,bbb,ccc:ddd,eee,fff:"
+    assert_equal(["aaa,bbb,ccc\nddd,eee,fff\n", ""],
+                 run_csv_filter(csv, "--input-row-sep=:"))
+  end
 end
