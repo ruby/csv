@@ -27,6 +27,11 @@ parser.on('--input-row-sep=SEPARATOR',
   options[:input_row_sep] = value
 end
 
+parser.on('--output-col-sep=SEPARATOR',
+          'Output column separator string.') do |value|
+  options[:output_col_sep] = value
+end
+
 begin
   parser.parse!
 rescue OptionParser::InvalidOption
