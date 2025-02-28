@@ -32,6 +32,11 @@ parser.on('--output-col-sep=SEPARATOR',
   options[:output_col_sep] = value
 end
 
+parser.on('--output-quote_char=SEPARATOR',
+          'Output quote character.') do |value|
+  options[:output_quote_char] = value
+end
+
 parser.on('--output-row-sep=SEPARATOR',
           'Output row separator string.') do |value|
   options[:output_row_sep] = value

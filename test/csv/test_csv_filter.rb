@@ -90,6 +90,17 @@ ddd,eee,fff
                  run_csv_filter(csv, "--output-col-sep=:"))
   end
 
+  def test_option_output_quote_char
+    output_quote_char = "'"
+    str = CSV.generate do |csv|
+      csv << ['foo', 0]
+      csv << ["'bar'", 1]
+      csv << ['"baz"', 2]
+    end
+    assert_equal(["foo,0\n" + "'''bar''',1\n" + "\"baz\",2\n", ""],
+                 run_csv_filter(str, "--output-quote_char=#{output_quote_char}"))
+  end
+
   def test_option_output_row_sep
     csv = "aaa,bbb,ccc\nddd,eee,fff\n"
     assert_equal(["aaa,bbb,ccc:ddd,eee,fff:", ""],
