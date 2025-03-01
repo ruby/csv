@@ -85,8 +85,11 @@ ddd,eee,fff
       csv << ["'bar'", 1]
       csv << ['"baz"', 2]
     end
-    assert_equal(["foo,0\n" + "'bar',1\n" + "\"\"\"baz\"\"\",2\n", ""],
-                 run_csv_filter(str, "--input-quote-char=#{input_quote_char}"))
+    assert_equal([<<-OUTPUT, ""], run_csv_filter(str, "--input-quote-char=#{input_quote_char}"))
+foo,0
+'bar',1
+"""baz""",2
+    OUTPUT
   end
 
   def test_option_input_row_sep
