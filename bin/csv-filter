@@ -32,7 +32,7 @@ parser.on('--output-col-sep=SEPARATOR',
   options[:output_col_sep] = value
 end
 
-parser.on('--output-quote_char=SEPARATOR',
+parser.on('--output-quote-char=SEPARATOR',
           'Output quote character.') do |value|
   options[:output_quote_char] = value
 end
