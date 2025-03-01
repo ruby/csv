@@ -80,7 +80,7 @@ ddd,eee,fff
 
   def test_option_input_quote_char
     input_quote_char = "'"
-    str = CSV.generate(quote_char: input_quote_char) do |csv|
+    csv_text = CSV.generate(quote_char: input_quote_char) do |csv|
       csv << ['foo', 0]
       csv << ["'bar'", 1]
       csv << ['"baz"', 2]
