@@ -22,7 +22,7 @@ parser.on('--input-col-sep=SEPARATOR',
   options[:input_col_sep] = value
 end
 
-parser.on('--input-quote_char=SEPARATOR',
+parser.on('--input-quote-char=SEPARATOR',
           'Input quote character.') do |value|
   options[:input_quote_char] = value
 end
