@@ -38,8 +38,7 @@ parser.on('--output-row-sep=SEPARATOR',
 end
 
 parser.on('-r', '--row-sep=SEPARATOR',
-          'Row separator string.'
-) do |value|
+          'Row separator string.') do |value|
   options[:row_sep] = value
   end
 
