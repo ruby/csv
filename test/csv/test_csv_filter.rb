@@ -110,4 +110,14 @@ foo,0
     assert_equal(["aaa,bbb,ccc:ddd,eee,fff:", ""],
                  run_csv_filter(csv, "--output-row-sep=:"))
   end
+
+  def test_option_row_sep
+    csv = "aaa,bbb,ccc:ddd,eee,fff:"
+    assert_equal(["aaa,bbb,ccc:ddd,eee,fff:", ""],
+                 run_csv_filter(csv, "--row-sep=:"))
+    assert_equal(["aaa,bbb,ccc.ddd,eee,fff.", ""],
+                 run_csv_filter(csv, "--row-sep=.", "--input-row-sep=:"))
+    assert_equal(["aaa,bbb,ccc.ddd,eee,fff.", ""],
+                 run_csv_filter(csv, "--row-sep=:", "--output-row-sep=."))
+  end
 end
