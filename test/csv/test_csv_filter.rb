@@ -97,7 +97,7 @@ ddd,eee,fff
       csv << ["'bar'", 1]
       csv << ['"baz"', 2]
     end
-    assert_equal(["foo,0\n" + "'''bar''',1\n" + "\"baz\",2\n", ""],
+    assert_equal(["foo,0\n'''bar''',1\n\"baz\",2\n", ""],
                  run_csv_filter(str, "--output-quote_char=#{output_quote_char}"))
   end
 
