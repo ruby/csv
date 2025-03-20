@@ -1,5 +1,30 @@
 # News
 
+## 3.3.3 - 2025-03-20
+
+### Improvements
+
+  * `csv-filter`: Add an experimental command line tool to filter a CSV.
+    * Patch by Burdette Lamar
+
+### Fixes
+
+  * Fixed wrong EOF detection for `ARGF`
+    * GH-328
+    * Reported by Takeshi Nishimatsu
+
+  * Fixed a regression bug that `CSV.open` rejects integer mode.
+    * GH-336
+    * Reported by Dave Burgess
+
+### Thanks
+
+  * Takeshi Nishimatsu
+
+  * Burdette Lamar
+
+  * Dave Burgess
+
 ## 3.3.2 - 2024-12-21
 
 ### Fixes
