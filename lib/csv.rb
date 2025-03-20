@@ -1976,7 +1976,7 @@ class CSV
       return unless Encoding.default_external == Encoding::UTF_8
       return if options.key?(:encoding)
       return if options.key?(:external_encoding)
-      return if mode.include?(":")
+      return if mode.is_a?(String) and mode.include?(":")
       file_opts[:encoding] = "bom|utf-8"
     end
 

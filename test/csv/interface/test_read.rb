@@ -112,6 +112,12 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
     assert_equal("Return value.", return_value)
   end
 
+  def test_open_mode_integer
+    CSV.open(@input.path, File::RDONLY, col_sep: "\t") do |csv|
+      assert_equal(@rows, csv.read)
+    end
+  end
+
   def test_open_encoding_valid
     # U+1F600 GRINNING FACE
     # U+1F601 GRINNING FACE WITH SMILING EYES
