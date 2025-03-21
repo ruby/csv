@@ -93,7 +93,7 @@ ddd,eee,fff
   def test_option_output_quote_char
     output_quote_char = "'"
     csv = "foo,0\n'bar',1\n\"baz\",2\n"
-    assert_equal(["foo,0\n'''bar''',1\n\"baz\",2\n", ""],
+    assert_equal(["foo,0\n" + "'''bar''',1\n" + "baz,2\n", ""],
                  run_csv_filter(csv, "--output-quote_char=#{output_quote_char}"))
   end
 
