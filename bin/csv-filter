@@ -17,7 +17,7 @@ Usage: #{parser.program_name} [options]
 BANNER
 
 
-parser.on('--input-col-sep=SEPARATOR',
+parser.on('--input-col-sep=SEP',
           'Input column separator string.') do |value|
   options[:input_col_sep] = value
 end
@@ -27,12 +27,12 @@ parser.on('--input-quote-char=CHAR',
   options[:input_quote_char] = value
 end
 
-parser.on('--input-row-sep=SEPARATOR',
+parser.on('--input-row-sep=SEP',
           'Input row separator string.') do |value|
   options[:input_row_sep] = value
 end
 
-parser.on('--output-col-sep=SEPARATOR',
+parser.on('--output-col-sep=SEP',
           'Output column separator string.') do |value|
   options[:output_col_sep] = value
 end
@@ -42,17 +42,17 @@ parser.on('--output-quote-char=CHAR',
   options[:output_quote_char] = value
 end
 
-parser.on('--output-row-sep=SEPARATOR',
+parser.on('--output-row-sep=SEP',
           'Output row separator string.') do |value|
   options[:output_row_sep] = value
 end
 
-parser.on('-r', '--row-sep=SEPARATOR',
+parser.on('-r', '--row-sep=SEP',
           'Row separator string.') do |value|
   options[:row_sep] = value
 end
 
-parser.on('-c', '--col-sep=SEPARATOR',
+parser.on('-c', '--col-sep=SEP',
           'Column separator string.') do |value|
   options[:col_sep] = value
 end
