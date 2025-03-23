@@ -132,9 +132,9 @@ foo,0
     csv = "aaa:bbb:ccc\nddd:eee:fff\n"
     assert_equal(["aaa:bbb:ccc\nddd:eee:fff\n", ""],
                  run_csv_filter(csv, "--col-sep=:"))
-    assert_equal(["aaa.bbb.ccc\n" + "ddd.eee.fff\n", ""],
+    assert_equal(["aaa.bbb.ccc\nddd.eee.fff\n", ""],
                  run_csv_filter(csv, "--col-sep=.", "--input-col-sep=:"))
-    assert_equal(["aaa.bbb.ccc\n" + "ddd.eee.fff\n", ""],
+    assert_equal(["aaa.bbb.ccc\nddd.eee.fff\n", ""],
                  run_csv_filter(csv, "--col-sep=:", "--output-col-sep=."))
   end
 end
