@@ -137,4 +137,19 @@ foo,0
     assert_equal(["aaa.bbb.ccc\nddd.eee.fff\n", ""],
                  run_csv_filter(csv, "--col-sep=:", "--output-col-sep=."))
   end
+
+  def test_option_quote_char
+    quote_char = "'"
+    csv = CSV.generate(quote_char: quote_char) do |csv|
+      csv << ['foo', 0]
+      csv << ["'bar'", 1]
+      csv << ['"baz"', 2]
+    end
+    assert_equal(["foo,0\n'''bar''',1\n\"baz\",2\n", ""],
+                 run_csv_filter(csv, "--quote-char=:"))
+    assert_equal(["foo,0\n'''bar''',1\n\"\"\"baz\"\"\",2\n", ""],
+                 run_csv_filter(csv, "--input-quote-char=:"))
+    assert_equal(["foo,0\n'''bar''',1\nbaz,2\n", ""],
+                 run_csv_filter(csv, "--output-quote-char=:"))
+  end
 end

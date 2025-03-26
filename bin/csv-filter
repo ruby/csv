@@ -57,6 +57,11 @@ parser.on('-c', '--col-sep=SEPARATOR',
   options[:col_sep] = value
 end
 
+parser.on('-q', '--quote-char=CHAR',
+          'Quote character.') do |value|
+  options[:quote_char] = value
+end
+
 begin
   parser.parse!
 rescue OptionParser::InvalidOption
