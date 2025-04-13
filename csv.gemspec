@@ -38,7 +38,6 @@ Gem::Specification.new do |spec|
     end
   end
   spec.files = files
-  spec.executables = ["csv-filter"]
   spec.rdoc_options.concat(["--main", "README.md"])
   rdoc_files = [
     "LICENSE.txt",
