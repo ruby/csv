@@ -47,7 +47,7 @@ class CSV
     # Uses StringScanner (the official strscan gem). Strscan provides lexical
     # scanning operations on a String. We inherit its object and take advantage
     # on the methods. For more information, please visit:
-    # https://ruby-doc.org/stdlib-2.6.1/libdoc/strscan/rdoc/StringScanner.html
+    # https://docs.ruby-lang.org/en/master/StringScanner.html
     #
     class Scanner < StringScanner
       alias_method :scan_all, :scan
