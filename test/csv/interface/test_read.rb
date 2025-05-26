@@ -64,7 +64,7 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
         ["1", "2", "3"],
         ["4", "5"],
       ]
-      assert_equal(rows, ractor.take)
+      assert_equal(rows, ractor.value)
     end
   end
 
@@ -315,7 +315,7 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
         ["1", "2", "3"],
         ["4", "5"],
       ]
-      assert_equal(rows, ractor.take)
+      assert_equal(rows, ractor.value)
     end
   end
 

@@ -33,7 +33,7 @@ class TestCSVInterfaceWrite < Test::Unit::TestCase
           csv << [1, 2, 3] << [4, nil, 5]
         end
       end
-      assert_equal(<<-CSV, ractor.take)
+      assert_equal(<<-CSV, ractor.value)
 1,2,3
 4,,5
       CSV
@@ -125,7 +125,6 @@ a,b,c
     CSV
   end
 
-
   if respond_to?(:ractor)
     ractor
     def test_append_row_in_ractor
@@ -136,7 +135,7 @@ a,b,c
             CSV::Row.new([], ["a", "b", "c"])
         end
       end
-      ractor.take
+      ractor.value
       assert_equal(<<-CSV, File.read(@output.path, mode: "rb"))
 1,2,3
 a,b,c

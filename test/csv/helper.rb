@@ -40,3 +40,7 @@ module CSVHelper
     end
   end
 end
+
+class Ractor
+  alias value take unless method_defined? :value
+end if defined?(Ractor)
