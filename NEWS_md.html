@@ -8,7 +8,7 @@
 <title>NEWS - RDoc Documentation</title>
 
   <meta name="keywords" content="ruby,documentation,NEWS">
-  <meta name="description" content="NEWS: News ## 3. Removed an experimental command line tool.">
+  <meta name="description" content="NEWS: News ## 3. Fixed `StringScanner` document URL.">
 
 
 <script type="text/javascript">
@@ -76,6 +76,17 @@
 </summary>
               <ul class="link-list" role="directory">
                           <li>
+            <details open>
+              <summary>      <a href="#label-3.3.5+-+2025-06-01">3.3.5 - 2025-06-01</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#label-Improvements">Improvements</a>
+          <li>      <a href="#label-Thanks">Thanks</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>
             <details open>
               <summary>      <a href="#label-3.3.4+-+2025-04-13">3.3.4 - 2025-04-13</a>
 </summary>
@@ -535,6 +546,23 @@
 
 <h1 id="label-News">News<span><a href="#label-News">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
+<h2 id="label-3.3.5+-+2025-06-01">3.3.5 - 2025-06-01<span><a href="#label-3.3.5+-+2025-06-01">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>docs: Fixed <code>StringScanner</code> document URL.</p>
+<ul><li>
+<p>GH-343</p>
+</li><li>
+<p>Patch by Petrik de Heus</p>
+</li></ul>
+</li></ul>
+
+<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Petrik de Heus</p>
+</li></ul>
+
 <h2 id="label-3.3.4+-+2025-04-13">3.3.4 - 2025-04-13<span><a href="#label-3.3.4+-+2025-04-13">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -841,7 +869,7 @@
 <ul><li>
 <p>Fixed a bug that some texts may be dropped unexpectedly. [Bug #<a href="ruby-core:105587">18245]</a>[Reported by Hassan Abdul Rehman]</p>
 </li><li>
-<p>Fixed a bug that <code>:field_size_limit</code> doesn't work with not complex row. [GitHub#238][Reported by Dan Buettner]</p>
+<p>Fixed a bug that <code>:field_size_limit</code> doesn’t work with not complex row. [GitHub#238][Reported by Dan Buettner]</p>
 </li></ul>
 
 <h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -1036,7 +1064,7 @@
 
 <h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <ul><li>
-<p>Fixed a bug that <code>:write_nil_value</code> or <code>:write_empty_value</code> don't work with non <a href="String.html"><code>String</code></a> objects. [GitHub#123][Reported by asm256]</p>
+<p>Fixed a bug that <code>:write_nil_value</code> or <code>:write_empty_value</code> don’t work with non <a href="String.html"><code>String</code></a> objects. [GitHub#123][Reported by asm256]</p>
 </li></ul>
 
 <h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -1096,7 +1124,7 @@
 </li><li>
 <p>Fixed typos in documentation. [GitHub#100][Patch by Vitor Oliveira]</p>
 </li><li>
-<p>Fixed a bug that seeked <code>StringIO</code> isn't accepted. [GitHub#98][Patch by MATSUMOTO Katsuyoshi]</p>
+<p>Fixed a bug that seeked <code>StringIO</code> isn’t accepted. [GitHub#98][Patch by MATSUMOTO Katsuyoshi]</p>
 </li><li>
 <p>Fixed a bug that <a href="CSV.html#method-c-generate_line"><code>CSV.generate_line</code></a> doesn’t work with <code>Encoding.default_internal</code>. [GitHub#105][Reported by David Rodríguez]</p>
 </li></ul>
@@ -1166,7 +1194,7 @@
 
 <h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <ul><li>
-<p>Fixed a bug that <code>strip: String</code> doesn't work.</p>
+<p>Fixed a bug that <code>strip: String</code> doesn’t work.</p>
 </li></ul>
 
 <h2 id="label-3.0.7+-+2019-04-08">3.0.7 - 2019-04-08<span><a href="#label-3.0.7+-+2019-04-08">&para;</a> <a href="#top">&uarr;</a></span></h2>
@@ -1215,13 +1243,13 @@
 
 <h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <ul><li>
-<p>Fixed a compatibility bug that <a href="CSV.html#method-i-each"><code>CSV#each</code></a> doesn't care <a href="CSV.html#method-i-shift"><code>CSV#shift</code></a>. [GitHub#76][Patch by Alyssa Ross]</p>
+<p>Fixed a compatibility bug that <a href="CSV.html#method-i-each"><code>CSV#each</code></a> doesn’t care <a href="CSV.html#method-i-shift"><code>CSV#shift</code></a>. [GitHub#76][Patch by Alyssa Ross]</p>
 </li><li>
-<p>Fixed a compatibility bug that <a href="CSV.html#method-i-eof-3F"><code>CSV#eof?</code></a> doesn't care <a href="CSV.html#method-i-each"><code>CSV#each</code></a> and <a href="CSV.html#method-i-shift"><code>CSV#shift</code></a>. [GitHub#77][Reported by Chi Leung]</p>
+<p>Fixed a compatibility bug that <a href="CSV.html#method-i-eof-3F"><code>CSV#eof?</code></a> doesn’t care <a href="CSV.html#method-i-each"><code>CSV#each</code></a> and <a href="CSV.html#method-i-shift"><code>CSV#shift</code></a>. [GitHub#77][Reported by Chi Leung]</p>
 </li><li>
-<p>Fixed a compatibility bug that invalid line isn't ignored. [GitHub#82][Reported by krororo]</p>
+<p>Fixed a compatibility bug that invalid line isn’t ignored. [GitHub#82][Reported by krororo]</p>
 </li><li>
-<p>Fixed a bug that <code>:skip_lines</code> doesn't work with multibyte characters data. [GitHub#83][Reported by ff2248]</p>
+<p>Fixed a bug that <code>:skip_lines</code> doesn’t work with multibyte characters data. [GitHub#83][Reported by ff2248]</p>
 </li></ul>
 
 <h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
@@ -1283,9 +1311,9 @@
 <ul><li>
 <p>Fixed a compatibility bug that <a href="CSV.html#method-c-generate"><code>CSV.generate</code></a> always return <code>ASCII-8BIT</code> encoding string. [GitHub#63][Patch by Watson]</p>
 </li><li>
-<p>Fixed a compatibility bug that <a href="CSV.html#method-c-parse"><code>CSV.parse(&quot;&quot;, headers: true)</code></a> doesn't return <a href="CSV/Table.html"><code>CSV::Table</code></a>. [GitHub#64][Reported by Watson][Patch by 284km]</p>
+<p>Fixed a compatibility bug that <a href="CSV.html#method-c-parse"><code>CSV.parse(&quot;&quot;, headers: true)</code></a> doesn’t return <a href="CSV/Table.html"><code>CSV::Table</code></a>. [GitHub#64][Reported by Watson][Patch by 284km]</p>
 </li><li>
-<p>Fixed a compatibility bug that multiple-characters column separator doesn't work. [GitHub#67][Reported by Jesse Reiss]</p>
+<p>Fixed a compatibility bug that multiple-characters column separator doesn’t work. [GitHub#67][Reported by Jesse Reiss]</p>
 </li><li>
 <p>Fixed a compatibility bug that double each parse twice. [GitHub#68][Reported by Max Schwenk]</p>
 </li></ul>
@@ -1379,7 +1407,7 @@
 
 <h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <ul><li>
-<p>Fixed a bug that header isn't returned for empty row. [GitHub#37][Patch by Grace Lee]</p>
+<p>Fixed a bug that header isn’t returned for empty row. [GitHub#37][Patch by Grace Lee]</p>
 </li></ul>
 
 <h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
