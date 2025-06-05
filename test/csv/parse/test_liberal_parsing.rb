@@ -80,6 +80,15 @@ class TestCSVParseLiberalParsing < Test::Unit::TestCase
                  CSV.parse(input, liberal_parsing: true))
   end
 
+  def test_unquoted_cr_with_custom_row_separator
+    data = "field1,field\rwith\rcr,field3|row2,data,here|"
+    expected = [
+      ["field1", "field\rwith\rcr", "field3"],
+      ["row2", "data", "here"]
+    ]
+    assert_equal(expected, CSV.parse(data, row_sep: "|", liberal_parsing: true))
+  end
+
   def test_double_quote_outside_quote
     data = %Q{a,""b""}
     error = assert_raise(CSV::MalformedCSVError) do
