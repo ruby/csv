@@ -24,12 +24,10 @@ class TestCSVParseUnquotedCR < Test::Unit::TestCase
   end
 
   def test_unquoted_cr_with_crlf_row_separator
-    data = "field1,field2,field3\r\nrow2,data,here\r\n"
-    expected = [
-      ["field1", "field2", "field3"],
-      ["row2", "data", "here"]
-    ]
-    assert_equal(expected, CSV.parse(data, row_sep: "\r\n"))
+    data = "field1\r,field2,field3\r\nrow2,data,here\r\n"
+    assert_raise(CSV::MalformedCSVError) do
+      CSV.parse(data, row_sep: "\r\n")
+    end
   end
 
   def test_unquoted_cr_rejected_when_included_in_row_separator
