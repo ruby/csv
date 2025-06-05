@@ -139,8 +139,53 @@ class TestCSVParseGeneral < Test::Unit::TestCase
   end
 
   def test_unquoted_cr_with_lf_row_separator
-    result = CSV.parse_line("1,2\r,3", row_sep: "\n")
-    assert_equal(["1", "2\r", "3"], result)
+    data = "field1,field\rwith\rcr,field3\nrow2,data,here\n"
+    expected = [
+      ["field1", "field\rwith\rcr", "field3"],
+      ["row2", "data", "here"]
+    ]
+    assert_equal(expected, CSV.parse(data, row_sep: "\n"))
+  end
+
+  def test_unquoted_cr_with_custom_row_separator
+    data = "field1,field\rwith\rcr,field3|row2,data,here|"
+    expected = [
+      ["field1", "field\rwith\rcr", "field3"],
+      ["row2", "data", "here"]
+    ]
+    assert_equal(expected, CSV.parse(data, row_sep: "|"))
+  end
+
+  def test_unquoted_cr_with_crlf_row_separator
+    data = "field1\r,field2,field3\r\nrow2,data,here\r\n"
+    assert_raise(CSV::MalformedCSVError) do
+      CSV.parse(data, row_sep: "\r\n")
+    end
+  end
+
+  def test_unquoted_cr_rejected_when_included_in_row_separator
+    data = "field1,field\r2,field3\r\nrow2,data,here\r\n"
+    assert_raise(CSV::MalformedCSVError) do
+      CSV.parse(data, row_sep: "\r\n")
+    end
+  end
+
+  def test_liberal_parsing_with_unquoted_cr_and_custom_row_separator
+    data = "field1,field\rwith\rcr,field3|row2,data,here|"
+    expected = [
+      ["field1", "field\rwith\rcr", "field3"],
+      ["row2", "data", "here"]
+    ]
+    assert_equal(expected, CSV.parse(data, row_sep: "|", liberal_parsing: true))
+  end
+
+  def test_quoted_cr_with_custom_row_separator
+    data = "field1,\"field\rwith\rcr\",field3|row2,data,here|"
+    expected = [
+      ["field1", "field\rwith\rcr", "field3"],
+      ["row2", "data", "here"]
+    ]
+    assert_equal(expected, CSV.parse(data, row_sep: "|"))
   end
 
   def test_unquoted_cr_in_middle_line
