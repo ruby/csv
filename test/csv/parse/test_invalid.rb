@@ -3,8 +3,6 @@
 require_relative "../helper"
 
 class TestCSVParseInvalid < Test::Unit::TestCase
-
-
   def test_ignore_invalid_line
     csv = CSV.new(<<-CSV, headers: true, return_headers: true)
 head1,head2,head3
