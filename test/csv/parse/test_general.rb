@@ -139,27 +139,24 @@ class TestCSVParseGeneral < Test::Unit::TestCase
   end
 
   def test_malformed_csv_cr_first_line
-    error = assert_raise(CSV::MalformedCSVError) do
-      CSV.parse_line("1,2\r,3", row_sep: "\n")
-    end
-    assert_equal("Unquoted fields do not allow new line <\"\\r\"> in line 1.",
-                 error.message)
+    # With the fix for accepting \r without quote when row separator doesn't include \r,
+    # this should now parse successfully when row_sep is "\n"
+    result = CSV.parse_line("1,2\r,3", row_sep: "\n")
+    assert_equal(["1", "2\r", "3"], result)
   end
 
   def test_malformed_csv_cr_middle_line
-    csv = <<-CSV
-line,1,abc
-line,2,"def\nghi"
-
-line,4,some\rjunk
-line,5,jkl
-    CSV
-
-    error = assert_raise(CSV::MalformedCSVError) do
-      CSV.parse(csv)
-    end
-    assert_equal("Unquoted fields do not allow new line <\"\\r\"> in line 4.",
-                 error.message)
+    # With the fix for accepting \r without quote when row separator doesn't include \r,
+    # this should now parse successfully (default row_sep is "\n")
+    csv = "line,1,abc\nline,2,\"def\nghi\"\nline,4,some\rjunk\nline,5,jkl\n"
+    result = CSV.parse(csv)
+    expected = [
+      ["line", "1", "abc"],
+      ["line", "2", "def\nghi"],
+      ["line", "4", "some\rjunk"],
+      ["line", "5", "jkl"]
+    ]
+    assert_equal(expected, result)
   end
 
   def test_malformed_csv_unclosed_quote
