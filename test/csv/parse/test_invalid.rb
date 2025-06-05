@@ -5,12 +5,11 @@ require_relative "../helper"
 
 class TestCSVParseInvalid < Test::Unit::TestCase
   def test_no_column_mixed_new_lines
-    error = assert_raise(CSV::MalformedCSVError) do
-      CSV.parse("\n" +
-                "\r")
-    end
-    assert_equal("New line must be <\"\\n\"> not <\"\\r\"> in line 2.",
-                 error.message)
+    # With the fix for accepting \r without quote when row separator doesn't include \r,
+    # this should now parse successfully (default row_sep is "\n")
+    result = CSV.parse("\n" + "\r")
+    # This should parse as an empty first row and a second row with just "\r"
+    assert_equal([[], ["\r"]], result)
   end
 
   def test_ignore_invalid_line
