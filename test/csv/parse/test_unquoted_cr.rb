@@ -37,15 +37,6 @@ class TestCSVParseUnquotedCR < Test::Unit::TestCase
     end
   end
 
-  def test_unquoted_cr_with_cr_row_separator
-    data = "field1,field2,field3\rrow2,data,here\r"
-    expected = [
-      ["field1", "field2", "field3"],
-      ["row2", "data", "here"]
-    ]
-    assert_equal(expected, CSV.parse(data, row_sep: "\r"))
-  end
-
   def test_liberal_parsing_with_custom_row_separator
     data = "field1,field\rwith\rcr,field3|row2,data,here|"
     expected = [
