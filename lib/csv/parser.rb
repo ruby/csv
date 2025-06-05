@@ -677,8 +677,7 @@ class CSV
 
       # Only exclude characters that are actually part of the row separator
       # instead of hardcoding "\r\n"
-      row_separator_chars = @row_separator.chars.map { |c| Regexp.escape(c) }.join
-      no_unquoted_values = row_separator_chars.encode(@encoding)
+      no_unquoted_values = Regexp.escape(@row_separator).encode(@encoding)
       no_unquoted_values << @escaped_first_column_separator
       unless @liberal_parsing
         no_unquoted_values << @escaped_quote_character
