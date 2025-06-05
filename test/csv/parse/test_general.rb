@@ -138,16 +138,12 @@ class TestCSVParseGeneral < Test::Unit::TestCase
     end
   end
 
-  def test_malformed_csv_cr_first_line
-    # With the fix for accepting \r without quote when row separator doesn't include \r,
-    # this should now parse successfully when row_sep is "\n"
+  def test_unquoted_cr_with_lf_row_separator
     result = CSV.parse_line("1,2\r,3", row_sep: "\n")
     assert_equal(["1", "2\r", "3"], result)
   end
 
-  def test_malformed_csv_cr_middle_line
-    # With the fix for accepting \r without quote when row separator doesn't include \r,
-    # this should now parse successfully (default row_sep is "\n")
+  def test_unquoted_cr_in_middle_line
     csv = "line,1,abc\nline,2,\"def\nghi\"\nline,4,some\rjunk\nline,5,jkl\n"
     result = CSV.parse(csv)
     expected = [
@@ -157,6 +153,11 @@ class TestCSVParseGeneral < Test::Unit::TestCase
       ["line", "5", "jkl"]
     ]
     assert_equal(expected, result)
+  end
+
+  def test_empty_rows_with_cr
+    result = CSV.parse("\n" + "\r")
+    assert_equal([[], ["\r"]], result)
   end
 
   def test_malformed_csv_unclosed_quote
