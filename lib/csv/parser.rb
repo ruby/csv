@@ -675,7 +675,7 @@ class CSV
     def prepare_unquoted
       return if @quote_character.nil?
 
-      no_unquoted_values = "\r\n".encode(@encoding)
+      no_unquoted_values = Regexp.escape(@row_separator).encode(@encoding)
       no_unquoted_values << @escaped_first_column_separator
       unless @liberal_parsing
         no_unquoted_values << @escaped_quote_character
