@@ -25,6 +25,8 @@ jobs:
           - windows-latest
         exclude:
           - { runs-on: macos-latest, ruby-version: "2.5" }
+          # Can't mix newer Psych and old RubyGems/Bundler
+          - { runs-on: ubuntu-latest, ruby-version: "2.5" }
           - { runs-on: windows-latest, ruby-version: "3.1" }
           - { runs-on: windows-latest, ruby-version: debug }
         include:
@@ -55,6 +57,8 @@ jobs:
           - windows-latest
         exclude:
           - { runs-on: macos-latest, ruby-version: "2.5" }
+          # Can't mix newer Psych and old RubyGems/Bundler
+          - { runs-on: ubuntu-latest, ruby-version: "2.5" }
           - { runs-on: windows-latest, ruby-version: "3.1" }
           - { runs-on: windows-latest, ruby-version: debug }
         include:
