@@ -156,11 +156,13 @@ class TestCSVParseGeneral < Test::Unit::TestCase
     assert_equal(expected, CSV.parse(data, row_sep: "|"))
   end
 
-  def test_unquoted_cr_rejected_when_included_in_row_separator
+  def test_unquoted_cr_with_crlf_row_separator
     data = "field1,field\r2,field3\r\nrow2,data,here\r\n"
-    assert_raise(CSV::MalformedCSVError) do
+    error = assert_raise(CSV::MalformedCSVError) do
       CSV.parse(data, row_sep: "\r\n")
     end
+    assert_equal("Unquoted fields do not allow new line <\"\\r\"> in line 1.",
+                 error.message)
   end
 
   def test_quoted_cr_with_custom_row_separator
