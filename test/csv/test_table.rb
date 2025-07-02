@@ -373,6 +373,15 @@ A,B,C
     CSV
   end
 
+  def test_to_csv_encoding
+    rows  = [ CSV::Row.new(%w{A}, ["\x00\xac".force_encoding("ASCII-8BIT")]),
+              CSV::Row.new(%w{A}, ["\x00\xac"]) ]
+    table = CSV::Table.new(rows)
+
+    assert_equal('UTF-8', table.to_csv(encoding: 'UTF-8').encoding.to_s)
+    assert_raises(Encoding::CompatibilityError) {table.to_csv}
+  end
+
   def test_append
     # verify that we can chain the call
     assert_equal(@table, @table << [10, 11, 12])
