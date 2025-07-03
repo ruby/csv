@@ -1,5 +1,6 @@
 require "rbconfig"
 require "rdoc/task"
+require "yaml"
 
 require "bundler/gem_tasks"
 
@@ -59,6 +60,22 @@ namespace :benchmark do
           puts("```")
         end
         benchmark_tasks << "benchmark:#{name}:small"
+      end
+    end
+  end
+
+  namespace :old_versions do
+    desc "Install used old versions"
+    task :install do
+      old_versions = []
+      Dir.glob("benchmark/*.yaml") do |yaml|
+        YAML.load_file(yaml)["contexts"].each do |context|
+          old_version = (context["gems"] || {})["csv"]
+          old_versions << old_version if old_version
+        end
+      end
+      old_versions.uniq.sort.each do |old_version|
+        ruby("-S", "gem", "install", "csv", "-v", old_version)
       end
     end
   end

@@ -4,9 +4,10 @@ source 'https://rubygems.org'
 gemspec
 
 group :development do
+  gem "benchmark_driver"
   gem "bundler"
+  gem "psych"
   gem "rake"
   gem "rdoc"
-  gem "benchmark_driver"
   gem "test-unit", ">= 3.4.8"
 end
