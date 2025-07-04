@@ -15,7 +15,7 @@ jobs:
           - ubuntu-latest
           - windows-latest
     runs-on: ${{ matrix.runs-on }}
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -24,8 +24,9 @@ jobs:
       - name: Install dependencies
         run: |
           bundle install
-          gem install csv -v 3.0.1
-          gem install csv -v 3.0.2
+      - name: Install old versions
+        run: |
+          rake benchmark:old_versions:install
       - name: Benchmark
         run: |
           rake benchmark
