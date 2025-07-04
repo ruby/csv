@@ -378,7 +378,7 @@ A,B,C
               CSV::Row.new(%w{A}, ["\x00\xac"]) ]
     table = CSV::Table.new(rows)
 
-    assert_equal('UTF-8', table.to_csv(encoding: 'UTF-8').encoding.to_s)
+    assert_equal(Encoding::UTF_8, table.to_csv(encoding: 'UTF-8').encoding)
     assert_raises(Encoding::CompatibilityError) {table.to_csv}
   end
 
