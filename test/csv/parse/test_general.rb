@@ -138,28 +138,57 @@ class TestCSVParseGeneral < Test::Unit::TestCase
     end
   end
 
-  def test_malformed_csv_cr_first_line
+  def test_unquoted_cr_with_lf_row_separator
+    data = "field1,field\rwith\rcr,field3\nrow2,data,here\n"
+    expected = [
+      ["field1", "field\rwith\rcr", "field3"],
+      ["row2", "data", "here"]
+    ]
+    assert_equal(expected, CSV.parse(data, row_sep: "\n"))
+  end
+
+  def test_unquoted_cr_with_custom_row_separator
+    data = "field1,field\rwith\rcr,field3|row2,data,here|"
+    expected = [
+      ["field1", "field\rwith\rcr", "field3"],
+      ["row2", "data", "here"]
+    ]
+    assert_equal(expected, CSV.parse(data, row_sep: "|"))
+  end
+
+  def test_unquoted_cr_with_crlf_row_separator
+    data = "field1,field\r2,field3\r\nrow2,data,here\r\n"
     error = assert_raise(CSV::MalformedCSVError) do
-      CSV.parse_line("1,2\r,3", row_sep: "\n")
+      CSV.parse(data, row_sep: "\r\n")
     end
     assert_equal("Unquoted fields do not allow new line <\"\\r\"> in line 1.",
                  error.message)
   end
 
-  def test_malformed_csv_cr_middle_line
-    csv = <<-CSV
-line,1,abc
-line,2,"def\nghi"
+  def test_quoted_cr_with_custom_row_separator
+    data = "field1,\"field\rwith\rcr\",field3|row2,data,here|"
+    expected = [
+      ["field1", "field\rwith\rcr", "field3"],
+      ["row2", "data", "here"]
+    ]
+    assert_equal(expected, CSV.parse(data, row_sep: "|"))
+  end
 
-line,4,some\rjunk
-line,5,jkl
-    CSV
+  def test_unquoted_cr_in_middle_line
+    csv = "line,1,abc\nline,2,\"def\nghi\"\nline,4,some\rjunk\nline,5,jkl\n"
+    result = CSV.parse(csv)
+    expected = [
+      ["line", "1", "abc"],
+      ["line", "2", "def\nghi"],
+      ["line", "4", "some\rjunk"],
+      ["line", "5", "jkl"]
+    ]
+    assert_equal(expected, result)
+  end
 
-    error = assert_raise(CSV::MalformedCSVError) do
-      CSV.parse(csv)
-    end
-    assert_equal("Unquoted fields do not allow new line <\"\\r\"> in line 4.",
-                 error.message)
+  def test_empty_rows_with_cr
+    result = CSV.parse("\n" + "\r")
+    assert_equal([[], ["\r"]], result)
   end
 
   def test_malformed_csv_unclosed_quote
