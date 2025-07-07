@@ -2327,7 +2327,7 @@ class CSV
   attr_reader :encoding
 
   # :call-seq:
-  #   csv.line_no -> integer
+  #   csv.lineno -> integer
   #
   # Returns the count of the rows parsed or generated.
   #
