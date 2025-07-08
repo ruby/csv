@@ -1,0 +1,27 @@
+loop_count: 100
+contexts:
+  - gems:
+      csv: 3.3.0
+  - name: "master"
+    prelude: |
+      $LOAD_PATH.unshift(File.expand_path("lib"))
+      require "csv"
+prelude: |-
+  n_columns = Integer(ENV.fetch("N_COLUMNS", "5"), 10)
+  n_rows = Integer(ENV.fetch("N_ROWS", "100"), 10)
+  fields = ["AAAAA"] * n_columns
+  headers = n_columns.times.collect do |i|
+    "header#{i}"
+  end
+  row = CSV::Row.new(headers, fields)
+  rows = [row] * n_rows
+  table = CSV::Table.new(rows)
+  rows = [row] * n_rows * 10
+  large_table = CSV::Table.new(rows)
+benchmark:
+  "to_csv: no encoding": |-
+    table.to_csv
+  "to_csv: encoding": |-
+    table.to_csv(encoding: 'UTF-8')
+  "to_csv: encoding - 10 x rows": |-
+    large_table.to_csv(encoding: 'UTF-8')
