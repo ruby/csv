@@ -35,7 +35,7 @@ jobs:
     runs-on: ${{ matrix.runs-on }}
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
@@ -69,7 +69,7 @@ jobs:
     env:
       CSV_PARSER_SCANNER_TEST: "yes"
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
@@ -83,7 +83,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ruby
@@ -103,7 +103,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ruby
@@ -111,7 +111,7 @@ jobs:
       - name: Build document
         run: |
           bundle exec rake warning:error rdoc
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         if: |
           github.event_name == 'push'
         with:
