@@ -3,12 +3,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>parsing - RDoc Documentation</title>
 
+
   <meta name="keywords" content="ruby,documentation,parsing">
   <meta name="description" content="parsing: Recipes for Parsing \CSV These recipes are specific code examples for specific \CSV parsing tasks. For other recipes, see {Recipes for CSV}[.">
+
+
 
 
 <script type="text/javascript">
@@ -24,6 +27,7 @@
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="file">
@@ -69,235 +73,642 @@
 
 
 
+
+
   <ul class="link-list" role="directory">
-              <li>
-            <details open>
-              <summary>      <a href="#label-Recipes+for+Parsing+CSV">Recipes for Parsing CSV</a>
-</summary>
-              <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Contents">Contents</a>
+    
+
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#label-Source+Formats">Source Formats</a>
+              <summary>
+      <a href="#label-Recipes+for+Parsing+CSV">Recipes for Parsing CSV</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>
-            <details open>
-              <summary>      <a href="#label-Parsing+from+a+String">Parsing from a String</a>
-</summary>
-              <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Recipe-3A+Parse+from+String+with+Headers">Recipe: Parse from String with Headers</a>
-          <li>      <a href="#label-Recipe-3A+Parse+from+String+Without+Headers">Recipe: Parse from String Without Headers</a>
+                
 
-              </ul>
-            </details>
-          </li>
+
+
+
+          <li>
+      <a href="#label-Contents">Contents</a>
+</li>
+
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#label-Parsing+from+a+File">Parsing from a File</a>
+              <summary>
+      <a href="#label-Source+Formats">Source Formats</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Recipe-3A+Parse+from+File+with+Headers">Recipe: Parse from File with Headers</a>
-          <li>      <a href="#label-Recipe-3A+Parse+from+File+Without+Headers">Recipe: Parse from File Without Headers</a>
+                
 
-              </ul>
-            </details>
-          </li>
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#label-Parsing+from+an+IO+Stream">Parsing from an IO Stream</a>
+              <summary>
+      <a href="#label-Parsing+from+a+String">Parsing from a String</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Recipe-3A+Parse+from+IO+Stream+with+Headers">Recipe: Parse from IO Stream with Headers</a>
-          <li>      <a href="#label-Recipe-3A+Parse+from+IO+Stream+Without+Headers">Recipe: Parse from IO Stream Without Headers</a>
+                
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Parse+from+String+with+Headers">Recipe: Parse from String with Headers</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Parse+from+String+Without+Headers">Recipe: Parse from String Without Headers</a>
+</li>
+
+
 
               </ul>
             </details>
           </li>
 
-              </ul>
-            </details>
-          </li>
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#label-RFC+4180+Compliance">RFC 4180 Compliance</a>
+              <summary>
+      <a href="#label-Parsing+from+a+File">Parsing from a File</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>
-            <details open>
-              <summary>      <a href="#label-Row+Separator">Row Separator</a>
-</summary>
-              <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Recipe-3A+Handle+Compliant+Row+Separator">Recipe: Handle Compliant Row Separator</a>
-          <li>      <a href="#label-Recipe-3A+Handle+Non-Compliant+Row+Separator">Recipe: Handle Non-Compliant Row Separator</a>
+                
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Parse+from+File+with+Headers">Recipe: Parse from File with Headers</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Parse+from+File+Without+Headers">Recipe: Parse from File Without Headers</a>
+</li>
+
+
 
               </ul>
             </details>
           </li>
+
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#label-Column+Separator">Column Separator</a>
+              <summary>
+      <a href="#label-Parsing+from+an+IO+Stream">Parsing from an IO Stream</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Recipe-3A+Handle+Compliant+Column+Separator">Recipe: Handle Compliant Column Separator</a>
-          <li>      <a href="#label-Recipe-3A+Handle+Non-Compliant+Column+Separator">Recipe: Handle Non-Compliant Column Separator</a>
+                
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Parse+from+IO+Stream+with+Headers">Recipe: Parse from IO Stream with Headers</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Parse+from+IO+Stream+Without+Headers">Recipe: Parse from IO Stream Without Headers</a>
+</li>
+
+
 
               </ul>
             </details>
           </li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#label-Quote+Character">Quote Character</a>
+              <summary>
+      <a href="#label-RFC+4180+Compliance">RFC 4180 Compliance</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Recipe-3A+Handle+Compliant+Quote+Character">Recipe: Handle Compliant Quote Character</a>
-          <li>      <a href="#label-Recipe-3A+Handle+Non-Compliant+Quote+Character">Recipe: Handle Non-Compliant Quote Character</a>
+                
 
-              </ul>
-            </details>
-          </li>
-          <li>      <a href="#label-Recipe-3A+Allow+Liberal+Parsing">Recipe: Allow Liberal Parsing</a>
 
-              </ul>
-            </details>
-          </li>
+
+
           <li>
             <details open>
-              <summary>      <a href="#label-Special+Handling">Special Handling</a>
+              <summary>
+      <a href="#label-Row+Separator">Row Separator</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>
-            <details open>
-              <summary>      <a href="#label-Special+Line+Handling">Special Line Handling</a>
-</summary>
-              <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Recipe-3A+Ignore+Blank+Lines">Recipe: Ignore Blank Lines</a>
-          <li>      <a href="#label-Recipe-3A+Ignore+Selected+Lines">Recipe: Ignore Selected Lines</a>
+                
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Handle+Compliant+Row+Separator">Recipe: Handle Compliant Row Separator</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Handle+Non-Compliant+Row+Separator">Recipe: Handle Non-Compliant Row Separator</a>
+</li>
+
+
 
               </ul>
             </details>
           </li>
+
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#label-Special+Field+Handling">Special Field Handling</a>
+              <summary>
+      <a href="#label-Column+Separator">Column Separator</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Recipe-3A+Strip+Fields">Recipe: Strip Fields</a>
-          <li>      <a href="#label-Recipe-3A+Handle+Null+Fields">Recipe: Handle Null Fields</a>
-          <li>      <a href="#label-Recipe-3A+Handle+Empty+Fields">Recipe: Handle Empty Fields</a>
+                
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Handle+Compliant+Column+Separator">Recipe: Handle Compliant Column Separator</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Handle+Non-Compliant+Column+Separator">Recipe: Handle Non-Compliant Column Separator</a>
+</li>
+
+
 
               </ul>
             </details>
           </li>
 
-              </ul>
-            </details>
-          </li>
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#label-Converting+Fields">Converting Fields</a>
+              <summary>
+      <a href="#label-Quote+Character">Quote Character</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>
-            <details open>
-              <summary>      <a href="#label-Converting+Fields+to+Objects">Converting Fields to Objects</a>
-</summary>
-              <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Recipe-3A+Convert+Fields+to+Integers">Recipe: Convert Fields to Integers</a>
-          <li>      <a href="#label-Recipe-3A+Convert+Fields+to+Floats">Recipe: Convert Fields to Floats</a>
-          <li>      <a href="#label-Recipe-3A+Convert+Fields+to+Numerics">Recipe: Convert Fields to Numerics</a>
-          <li>      <a href="#label-Recipe-3A+Convert+Fields+to+Dates">Recipe: Convert Fields to Dates</a>
-          <li>      <a href="#label-Recipe-3A+Convert+Fields+to+DateTimes">Recipe: Convert Fields to DateTimes</a>
-          <li>      <a href="#label-Recipe-3A+Convert+Fields+to+Times">Recipe: Convert Fields to Times</a>
-          <li>      <a href="#label-Recipe-3A+Convert+Assorted+Fields+to+Objects">Recipe: Convert Assorted Fields to Objects</a>
-          <li>      <a href="#label-Recipe-3A+Convert+Fields+to+Other+Objects">Recipe: Convert Fields to Other Objects</a>
+                
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Handle+Compliant+Quote+Character">Recipe: Handle Compliant Quote Character</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Handle+Non-Compliant+Quote+Character">Recipe: Handle Non-Compliant Quote Character</a>
+</li>
+
+
 
               </ul>
             </details>
           </li>
-          <li>      <a href="#label-Recipe-3A+Filter+Field+Strings">Recipe: Filter Field Strings</a>
-          <li>      <a href="#label-Recipe-3A+Register+Field+Converters">Recipe: Register Field Converters</a>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Allow+Liberal+Parsing">Recipe: Allow Liberal Parsing</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#label-Using+Multiple+Field+Converters">Using Multiple Field Converters</a>
+              <summary>
+      <a href="#label-Special+Handling">Special Handling</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Recipe-3A+Specify+Multiple+Field+Converters+in+Option+-3Aconverters">Recipe: Specify Multiple Field Converters in Option <code>:converters</code></a>
-          <li>      <a href="#label-Recipe-3A+Specify+Multiple+Field+Converters+in+a+Custom+Converter+List">Recipe: Specify Multiple Field Converters in a Custom Converter List</a>
+                
 
-              </ul>
-            </details>
-          </li>
 
-              </ul>
-            </details>
-          </li>
+
+
           <li>
             <details open>
-              <summary>      <a href="#label-Converting+Headers">Converting Headers</a>
+              <summary>
+      <a href="#label-Special+Line+Handling">Special Line Handling</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Recipe-3A+Convert+Headers+to+Lowercase">Recipe: Convert Headers to Lowercase</a>
-          <li>      <a href="#label-Recipe-3A+Convert+Headers+to+Symbols">Recipe: Convert Headers to Symbols</a>
-          <li>      <a href="#label-Recipe-3A+Filter+Header+Strings">Recipe: Filter Header Strings</a>
-          <li>      <a href="#label-Recipe-3A+Register+Header+Converters">Recipe: Register Header Converters</a>
+                
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Ignore+Blank+Lines">Recipe: Ignore Blank Lines</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Ignore+Selected+Lines">Recipe: Ignore Selected Lines</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#label-Using+Multiple+Header+Converters">Using Multiple Header Converters</a>
+              <summary>
+      <a href="#label-Special+Field+Handling">Special Field Handling</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Recipe-3A+Specify+Multiple+Header+Converters+in+Option+-3Aheader_converters">Recipe: Specify Multiple Header Converters in Option :header_converters</a>
-          <li>      <a href="#label-Recipe-3A+Specify+Multiple+Header+Converters+in+a+Custom+Header+Converter+List">Recipe: Specify Multiple Header Converters in a Custom Header Converter List</a>
+                
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Strip+Fields">Recipe: Strip Fields</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Handle+Null+Fields">Recipe: Handle Null Fields</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Handle+Empty+Fields">Recipe: Handle Empty Fields</a>
+</li>
+
+
 
               </ul>
             </details>
           </li>
 
+
+
               </ul>
             </details>
           </li>
+
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#label-Diagnostics">Diagnostics</a>
+              <summary>
+      <a href="#label-Converting+Fields">Converting Fields</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>      <a href="#label-Recipe-3A+Capture+Unconverted+Fields">Recipe: Capture Unconverted Fields</a>
-          <li>      <a href="#label-Recipe-3A+Capture+Field+Info">Recipe: Capture Field Info</a>
+                
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#label-Converting+Fields+to+Objects">Converting Fields to Objects</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Convert+Fields+to+Integers">Recipe: Convert Fields to Integers</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Convert+Fields+to+Floats">Recipe: Convert Fields to Floats</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Convert+Fields+to+Numerics">Recipe: Convert Fields to Numerics</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Convert+Fields+to+Dates">Recipe: Convert Fields to Dates</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Convert+Fields+to+DateTimes">Recipe: Convert Fields to DateTimes</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Convert+Fields+to+Times">Recipe: Convert Fields to Times</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Convert+Assorted+Fields+to+Objects">Recipe: Convert Assorted Fields to Objects</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Convert+Fields+to+Other+Objects">Recipe: Convert Fields to Other Objects</a>
+</li>
+
+
 
               </ul>
             </details>
           </li>
 
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Filter+Field+Strings">Recipe: Filter Field Strings</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Register+Field+Converters">Recipe: Register Field Converters</a>
+</li>
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#label-Using+Multiple+Field+Converters">Using Multiple Field Converters</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Specify+Multiple+Field+Converters+in+Option+-3Aconverters">Recipe: Specify Multiple Field Converters in Option <code>:converters</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Specify+Multiple+Field+Converters+in+a+Custom+Converter+List">Recipe: Specify Multiple Field Converters in a Custom Converter List</a>
+</li>
+
+
+
               </ul>
             </details>
           </li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#label-Converting+Headers">Converting Headers</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Convert+Headers+to+Lowercase">Recipe: Convert Headers to Lowercase</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Convert+Headers+to+Symbols">Recipe: Convert Headers to Symbols</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Filter+Header+Strings">Recipe: Filter Header Strings</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Register+Header+Converters">Recipe: Register Header Converters</a>
+</li>
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#label-Using+Multiple+Header+Converters">Using Multiple Header Converters</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Specify+Multiple+Header+Converters+in+Option+-3Aheader_converters">Recipe: Specify Multiple Header Converters in Option :header_converters</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Specify+Multiple+Header+Converters+in+a+Custom+Header+Converter+List">Recipe: Specify Multiple Header Converters in a Custom Header Converter List</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#label-Diagnostics">Diagnostics</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Capture+Unconverted+Fields">Recipe: Capture Unconverted Fields</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Recipe-3A+Capture+Field+Info">Recipe: Capture Field Info</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
 
   </ul>
 </div>
 
+
   
+
+
+
+
 <div id="fileindex-section" class="nav-section">
   <h3>Pages</h3>
 
   <ul class="link-list">
-    <li><a href="../../../LICENSE_txt.html">LICENSE</a>
-    <li><a href="../../../NEWS_md.html">NEWS</a>
-    <li><a href="../../../README_md.html">README</a>
+
+
+
+    <li><a href="../../../LICENSE_txt.html">LICENSE</a></li>
+
+
+
+    <li><a href="../../../NEWS_md.html">NEWS</a></li>
+
+
+
+    <li><a href="../../../README_md.html">README</a></li>
+
+
+
     <li><details open><summary>doc</summary>
     <ul class="link-list">
-      <li><a href="../../../doc/csv/recipes/filtering_rdoc.html">filtering</a>
-      <li><a href="../../../doc/csv/recipes/generating_rdoc.html">generating</a>
-      <li><a href="../../../doc/csv/recipes/parsing_rdoc.html">parsing</a>
-      <li><a href="../../../doc/csv/recipes/recipes_rdoc.html">recipes</a>
-    </ul></details>
+
+      <li><a href="../../../doc/csv/recipes/filtering_rdoc.html">filtering</a></li>
+
+      <li><a href="../../../doc/csv/recipes/generating_rdoc.html">generating</a></li>
+
+      <li><a href="../../../doc/csv/recipes/parsing_rdoc.html">parsing</a></li>
+
+      <li><a href="../../../doc/csv/recipes/recipes_rdoc.html">recipes</a></li>
+
+    </ul></details></li>
+
   </ul>
 </div>
 
 
+
   <footer id="validator-badges" role="contentinfo">
-  <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.14.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.15.1.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
 </footer>
 
 </nav>
@@ -1047,4 +1458,5 @@ baz,2
 </pre>
 
 </main>
+</body>
 

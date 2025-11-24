@@ -3,13 +3,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>class CSV - RDoc Documentation</title>
 
+
   <meta name="keywords" content="ruby,class,CSV">
 
+
     <meta name="description" content="class CSV: A _row_ _separator_ delimits table rows. tt&gt;.">
+
+
+
 
 
 <script type="text/javascript">
@@ -25,6 +30,7 @@
 
 <link href="./css/fonts.css" rel="stylesheet">
 <link href="./css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -70,202 +76,583 @@
 
 
 
+
+
   <ul class="link-list" role="directory">
-              <li>
-            <details open>
-              <summary>      <a href="#class-CSV-label-CSV">CSV</a>
-</summary>
-              <ul class="link-list" role="directory">
-                          <li>      <a href="#class-CSV-label-CSV+Data">CSV Data</a>
+    
 
-              </ul>
-            </details>
-          </li>
-          <li>      <a href="#class-CSV-label-Class+CSV">Class CSV</a>
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#class-CSV-label-Keeping+It+Simple">Keeping It Simple</a>
+              <summary>
+      <a href="#class-CSV-label-CSV">CSV</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>
-            <details open>
-              <summary>      <a href="#class-CSV-label-Simple+Parsing">Simple Parsing</a>
-</summary>
-              <ul class="link-list" role="directory">
-                          <li>      <a href="#class-CSV-label-Parsing+a+String">Parsing a String</a>
-          <li>      <a href="#class-CSV-label-Parsing+Via+a+File+Path">Parsing Via a File Path</a>
-          <li>      <a href="#class-CSV-label-Parsing+from+an+Open+IO+Stream">Parsing from an Open IO Stream</a>
+                
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-CSV+Data">CSV Data</a>
+</li>
+
+
 
               </ul>
             </details>
           </li>
-          <li>      <a href="#class-CSV-label-Simple+Generating">Simple Generating</a>
-          <li>      <a href="#class-CSV-label-22Filtering-22+CSV">“Filtering” CSV</a>
 
-              </ul>
-            </details>
-          </li>
+
+
+
+          <li>
+      <a href="#class-CSV-label-Class+CSV">Class CSV</a>
+</li>
+
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#class-CSV-label-CSV+Objects">CSV Objects</a>
+              <summary>
+      <a href="#class-CSV-label-Keeping+It+Simple">Keeping It Simple</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>
-            <details open>
-              <summary>      <a href="#class-CSV-label-Instance+Methods">Instance Methods</a>
-</summary>
-              <ul class="link-list" role="directory">
-                          <li>      <a href="#class-CSV-label-Delegated+Methods">Delegated Methods</a>
+                
 
-              </ul>
-            </details>
-          </li>
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#class-CSV-label-Options">Options</a>
+              <summary>
+      <a href="#class-CSV-label-Simple+Parsing">Simple Parsing</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>
-            <details open>
-              <summary>      <a href="#class-CSV-label-Options+for+Parsing">Options for Parsing</a>
-</summary>
-              <ul class="link-list" role="directory">
-                          <li>      <a href="#class-CSV-label-Option+row_sep">Option <code>row_sep</code></a>
-          <li>      <a href="#class-CSV-label-Option+col_sep">Option <code>col_sep</code></a>
-          <li>      <a href="#class-CSV-label-Option+quote_char">Option <code>quote_char</code></a>
-          <li>      <a href="#class-CSV-label-Option+field_size_limit">Option <code>field_size_limit</code></a>
-          <li>      <a href="#class-CSV-label-Option+converters">Option <code>converters</code></a>
-          <li>      <a href="#class-CSV-label-Option+unconverted_fields">Option <code>unconverted_fields</code></a>
-          <li>      <a href="#class-CSV-label-Option+headers">Option <code>headers</code></a>
-          <li>      <a href="#class-CSV-label-Option+return_headers">Option <code>return_headers</code></a>
-          <li>      <a href="#class-CSV-label-Option+header_converters">Option <code>header_converters</code></a>
-          <li>      <a href="#class-CSV-label-Option+skip_blanks">Option <code>skip_blanks</code></a>
-          <li>      <a href="#class-CSV-label-Option+skip_lines">Option <code>skip_lines</code></a>
-          <li>      <a href="#class-CSV-label-Option+strip">Option <code>strip</code></a>
-          <li>      <a href="#class-CSV-label-Option+liberal_parsing">Option <code>liberal_parsing</code></a>
-          <li>      <a href="#class-CSV-label-Option+nil_value">Option <code>nil_value</code></a>
-          <li>      <a href="#class-CSV-label-Option+empty_value">Option <code>empty_value</code></a>
+                
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Parsing+a+String">Parsing a String</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Parsing+Via+a+File+Path">Parsing Via a File Path</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Parsing+from+an+Open+IO+Stream">Parsing from an Open IO Stream</a>
+</li>
+
+
 
               </ul>
             </details>
           </li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Simple+Generating">Simple Generating</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-22Filtering-22+CSV">“Filtering” CSV</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#class-CSV-label-Options+for+Generating">Options for Generating</a>
+              <summary>
+      <a href="#class-CSV-label-CSV+Objects">CSV Objects</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>      <a href="#class-CSV-label-Option+row_sep">Option <code>row_sep</code></a>
-          <li>      <a href="#class-CSV-label-Option+col_sep">Option <code>col_sep</code></a>
-          <li>      <a href="#class-CSV-label-Option+quote_char">Option <code>quote_char</code></a>
-          <li>      <a href="#class-CSV-label-Option+write_headers">Option <code>write_headers</code></a>
-          <li>      <a href="#class-CSV-label-Option+force_quotes">Option <code>force_quotes</code></a>
-          <li>      <a href="#class-CSV-label-Option+quote_empty">Option <code>quote_empty</code></a>
-          <li>      <a href="#class-CSV-label-Option+write_converters">Option <code>write_converters</code></a>
-          <li>      <a href="#class-CSV-label-Option+write_nil_value">Option <code>write_nil_value</code></a>
-          <li>      <a href="#class-CSV-label-Option+write_empty_value">Option <code>write_empty_value</code></a>
+                
 
-              </ul>
-            </details>
-          </li>
 
-              </ul>
-            </details>
-          </li>
-          <li>      <a href="#class-CSV-label-CSV+with+Headers">CSV with Headers</a>
+
+
           <li>
             <details open>
-              <summary>      <a href="#class-CSV-label-Converters">Converters</a>
+              <summary>
+      <a href="#class-CSV-label-Instance+Methods">Instance Methods</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>
-            <details open>
-              <summary>      <a href="#class-CSV-label-Specifying+Converters">Specifying Converters</a>
-</summary>
-              <ul class="link-list" role="directory">
-                          <li>      <a href="#class-CSV-label-Converter+Procs">Converter Procs</a>
-          <li>      <a href="#class-CSV-label-Stored+Converters">Stored Converters</a>
-          <li>      <a href="#class-CSV-label-Converter+Lists">Converter Lists</a>
+                
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Delegated+Methods">Delegated Methods</a>
+</li>
+
+
 
               </ul>
             </details>
           </li>
+
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#class-CSV-label-Field+Converters">Field Converters</a>
+              <summary>
+      <a href="#class-CSV-label-Options">Options</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>      <a href="#class-CSV-label-Built-In+Field+Converters">Built-In Field Converters</a>
-          <li>      <a href="#class-CSV-label-Custom+Field+Converters">Custom Field Converters</a>
+                
 
-              </ul>
-            </details>
-          </li>
+
+
+
           <li>
             <details open>
-              <summary>      <a href="#class-CSV-label-Header+Converters">Header Converters</a>
+              <summary>
+      <a href="#class-CSV-label-Options+for+Parsing">Options for Parsing</a>
 </summary>
               <ul class="link-list" role="directory">
-                          <li>      <a href="#class-CSV-label-Built-In+Header+Converters">Built-In Header Converters</a>
-          <li>      <a href="#class-CSV-label-Custom+Header+Converters">Custom Header Converters</a>
-          <li>      <a href="#class-CSV-label-Write+Converters">Write Converters</a>
+                
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+row_sep">Option <code>row_sep</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+col_sep">Option <code>col_sep</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+quote_char">Option <code>quote_char</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+field_size_limit">Option <code>field_size_limit</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+converters">Option <code>converters</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+unconverted_fields">Option <code>unconverted_fields</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+headers">Option <code>headers</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+return_headers">Option <code>return_headers</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+header_converters">Option <code>header_converters</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+skip_blanks">Option <code>skip_blanks</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+skip_lines">Option <code>skip_lines</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+strip">Option <code>strip</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+liberal_parsing">Option <code>liberal_parsing</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+nil_value">Option <code>nil_value</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+empty_value">Option <code>empty_value</code></a>
+</li>
+
+
 
               </ul>
             </details>
           </li>
 
-              </ul>
-            </details>
-          </li>
-          <li>      <a href="#class-CSV-label-Character+Encodings+-28M17n+or+Multilingualization-29">Character Encodings (M17n or Multilingualization)</a>
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#class-CSV-label-Options+for+Generating">Options for Generating</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+row_sep">Option <code>row_sep</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+col_sep">Option <code>col_sep</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+quote_char">Option <code>quote_char</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+write_headers">Option <code>write_headers</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+force_quotes">Option <code>force_quotes</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+quote_empty">Option <code>quote_empty</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+write_converters">Option <code>write_converters</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+write_nil_value">Option <code>write_nil_value</code></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Option+write_empty_value">Option <code>write_empty_value</code></a>
+</li>
+
+
 
               </ul>
             </details>
           </li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-CSV+with+Headers">CSV with Headers</a>
+</li>
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#class-CSV-label-Converters">Converters</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#class-CSV-label-Specifying+Converters">Specifying Converters</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Converter+Procs">Converter Procs</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Stored+Converters">Stored Converters</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Converter+Lists">Converter Lists</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#class-CSV-label-Field+Converters">Field Converters</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Built-In+Field+Converters">Built-In Field Converters</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Custom+Field+Converters">Custom Field Converters</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#class-CSV-label-Header+Converters">Header Converters</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Built-In+Header+Converters">Built-In Header Converters</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Custom+Header+Converters">Custom Header Converters</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Write+Converters">Write Converters</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
+          <li>
+      <a href="#class-CSV-label-Character+Encodings+-28M17n+or+Multilingualization-29">Character Encodings (M17n or Multilingualization)</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
 
   </ul>
 </div>
 
+
   
-  <div id="parent-class-section" class="nav-section">
+
+  
+<div id="parent-class-section" class="nav-section">
   <h3>Ancestors</h3>
   <ul><li><a href="Object.html">Object</a><ul><li>BasicObject</li></ul></li></ul>
 </div>
+
 
   
 <div id="includes-section" class="nav-section">
   <h3>Included Modules</h3>
 
   <ul class="link-list">
-    <li><span class="include">Enumerable</span>
+
+
+    <li><span class="include">Enumerable</span></li>
+
+
   </ul>
 </div>
+
 
   
 <div id="extends-section" class="nav-section">
   <h3>Extended With Modules</h3>
 
   <ul class="link-list">
-    <li><span class="extend">Forwardable</span>
+
+
+    <li><span class="extend">Forwardable</span></li>
+
+
   </ul>
 </div>
+
 
   
   <div class="nav-section">
     <h3>Class Methods</h3>
     <ul class="link-list" role="directory">
+
       <li ><a href="#method-c-filter">filter</a></li>
+
       <li ><a href="#method-c-foreach">foreach</a></li>
+
       <li ><a href="#method-c-generate">generate</a></li>
+
       <li ><a href="#method-c-generate_line">generate_line</a></li>
+
       <li ><a href="#method-c-generate_lines">generate_lines</a></li>
+
       <li ><a href="#method-c-instance">instance</a></li>
+
       <li ><a href="#method-c-new">new</a></li>
+
       <li ><a href="#method-c-open">open</a></li>
+
       <li ><a href="#method-c-parse">parse</a></li>
+
       <li ><a href="#method-c-parse_line">parse_line</a></li>
+
       <li ><a href="#method-c-read">read</a></li>
+
       <li ><a href="#method-c-readlines">readlines</a></li>
+
       <li ><a href="#method-c-table">table</a></li>
+
     </ul>
   </div>
 
@@ -274,55 +661,96 @@
   <div class="nav-section">
     <h3>Instance Methods</h3>
     <ul class="link-list" role="directory">
+
       <li ><a href="#method-i-3C-3C">&lt;&lt;</a></li>
+
       <li ><a href="#method-i-add_row">add_row</a></li>
+
       <li ><a href="#method-i-binmode-3F">binmode?</a></li>
+
       <li ><a href="#method-i-col_sep">col_sep</a></li>
+
       <li ><a href="#method-i-convert">convert</a></li>
+
       <li ><a href="#method-i-converters">converters</a></li>
+
       <li ><a href="#method-i-each">each</a></li>
+
       <li ><a href="#method-i-eof">eof</a></li>
+
       <li ><a href="#method-i-eof-3F">eof?</a></li>
+
       <li ><a href="#method-i-field_size_limit">field_size_limit</a></li>
+
       <li ><a href="#method-i-flock">flock</a></li>
+
       <li ><a href="#method-i-force_quotes-3F">force_quotes?</a></li>
+
       <li ><a href="#method-i-gets">gets</a></li>
+
       <li ><a href="#method-i-header_convert">header_convert</a></li>
+
       <li ><a href="#method-i-header_converters">header_converters</a></li>
+
       <li ><a href="#method-i-header_row-3F">header_row?</a></li>
+
       <li ><a href="#method-i-headers">headers</a></li>
+
       <li ><a href="#method-i-inspect">inspect</a></li>
+
       <li ><a href="#method-i-ioctl">ioctl</a></li>
+
       <li ><a href="#method-i-liberal_parsing-3F">liberal_parsing?</a></li>
+
       <li ><a href="#method-i-line">line</a></li>
+
       <li ><a href="#method-i-lineno">lineno</a></li>
+
       <li ><a href="#method-i-max_field_size">max_field_size</a></li>
+
       <li ><a href="#method-i-path">path</a></li>
+
       <li ><a href="#method-i-puts">puts</a></li>
+
       <li ><a href="#method-i-quote_char">quote_char</a></li>
+
       <li ><a href="#method-i-read">read</a></li>
+
       <li ><a href="#method-i-readline">readline</a></li>
+
       <li ><a href="#method-i-readlines">readlines</a></li>
+
       <li ><a href="#method-i-return_headers-3F">return_headers?</a></li>
+
       <li ><a href="#method-i-rewind">rewind</a></li>
+
       <li ><a href="#method-i-row_sep">row_sep</a></li>
+
       <li ><a href="#method-i-shift">shift</a></li>
+
       <li ><a href="#method-i-skip_blanks-3F">skip_blanks?</a></li>
+
       <li ><a href="#method-i-skip_lines">skip_lines</a></li>
+
       <li ><a href="#method-i-stat">stat</a></li>
+
       <li ><a href="#method-i-to_i">to_i</a></li>
+
       <li ><a href="#method-i-to_io">to_io</a></li>
+
       <li ><a href="#method-i-unconverted_fields-3F">unconverted_fields?</a></li>
+
       <li ><a href="#method-i-write_headers-3F">write_headers?</a></li>
+
     </ul>
   </div>
 
 
 
   <footer id="validator-badges" role="contentinfo">
-  <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.15.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.15.1.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
 </footer>
 
 </nav>
@@ -2259,7 +2687,11 @@ baz,2
 
   </section>
 
+
   <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
 
 
     <section class="constants-list">
@@ -2267,25 +2699,53 @@ baz,2
         <h3>Constants</h3>
       </header>
       <dl>
-        <dt id="ConverterEncoding">ConverterEncoding
+
+        <dt id="ConverterEncoding">ConverterEncoding</dt>
+
         <dd>
+
           <p>The encoding used by all converters.</p>
-        <dt id="Converters">Converters
+        </dd>
+
+
+        <dt id="Converters">Converters</dt>
+
         <dd>
+
           <p>A Hash containing the names and Procs for the built-in field converters. See <a href="#class-CSV-label-Built-In+Field+Converters">Built-In Field Converters</a>.</p>
 
 <p>This Hash is intentionally left unfrozen, and may be extended with custom field converters. See <a href="#class-CSV-label-Custom+Field+Converters">Custom Field Converters</a>.</p>
-        <dt id="DEFAULT_OPTIONS">DEFAULT_OPTIONS
+        </dd>
+
+
+        <dt id="DEFAULT_OPTIONS">DEFAULT_OPTIONS</dt>
+
         <dd>
+
           <p>Default values for method options.</p>
-        <dt id="DateMatcher">DateMatcher
+        </dd>
+
+
+        <dt id="DateMatcher">DateMatcher</dt>
+
         <dd>
+
           <p>A Regexp used to find and convert some common Date formats.</p>
-        <dt id="DateTimeMatcher">DateTimeMatcher
+        </dd>
+
+
+        <dt id="DateTimeMatcher">DateTimeMatcher</dt>
+
         <dd>
+
           <p>A Regexp used to find and convert some common (Date)Time formats.</p>
-        <dt id="FieldInfo">FieldInfo
+        </dd>
+
+
+        <dt id="FieldInfo">FieldInfo</dt>
+
         <dd>
+
           <p>A <a href="CSV.html#FieldInfo"><code>FieldInfo</code></a> Struct contains details about a field’s position in the data source it was read from.  <a href="CSV.html"><code>CSV</code></a> will pass this Struct to some blocks that make decisions based on field structure.  See CSV.convert_fields() for an example.</p>
 <dl class="rdoc-list note-list"><dt><strong><code>index</code></strong></dt>
 <dd>
@@ -2300,21 +2760,37 @@ baz,2
 <dd>
 <p>True or false, whether the original value is quoted or not.</p>
 </dd></dl>
-        <dt id="HeaderConverters">HeaderConverters
+        </dd>
+
+
+        <dt id="HeaderConverters">HeaderConverters</dt>
+
         <dd>
+
           <p>A Hash containing the names and Procs for the built-in header converters. See <a href="#class-CSV-label-Built-In+Header+Converters">Built-In Header Converters</a>.</p>
 
 <p>This Hash is intentionally left unfrozen, and may be extended with custom field converters. See <a href="#class-CSV-label-Custom+Header+Converters">Custom Header Converters</a>.</p>
-        <dt id="VERSION">VERSION
+        </dd>
+
+
+        <dt id="VERSION">VERSION</dt>
+
         <dd>
+
           <p>The version of the installed library.</p>
+        </dd>
+
+
       </dl>
     </section>
 
-    <section class="attribute-method-details" class="method-section">
+
+
+    <section class="attribute-method-details method-section">
       <header>
         <h3>Attributes</h3>
       </header>
+
 
       <div id="attribute-i-encoding" class="method-detail anchor-link">
         <div class="method-heading attribute-method-heading">
@@ -2325,6 +2801,8 @@ baz,2
         </div>
 
         <div class="method-description">
+
+
         <p>:call-seq:</p>
 
 <pre>csv.encoding -&gt; encoding</pre>
@@ -2333,9 +2811,12 @@ baz,2
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">encoding</span> <span class="ruby-comment"># =&gt; #&lt;Encoding:UTF-8&gt;</span>
 </pre>
+
         </div>
       </div>
+
     </section>
+
 
 
      <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
@@ -2343,8 +2824,11 @@ baz,2
          <h3>Public Class Methods</h3>
        </header>
 
+
       <div id="method-c-filter" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-c-filter" title="Link to this method">
                   <span class="method-callseq">
@@ -2352,6 +2836,7 @@ baz,2
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-filter" title="Link to this method">
                   <span class="method-callseq">
@@ -2359,6 +2844,7 @@ baz,2
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-filter" title="Link to this method">
                   <span class="method-callseq">
@@ -2366,7 +2852,10 @@ baz,2
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -2374,7 +2863,10 @@ baz,2
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="filter-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1259</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter</span>(<span class="ruby-identifier">input</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">output</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
@@ -2421,6 +2913,9 @@ baz,2
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <ul><li>
 <p>Parses CSV from a source (String, IO stream, or ARGF).</p>
 </li><li>
@@ -2645,13 +3140,21 @@ BAZ,-2</pre>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">filter</span>(<span class="ruby-value">in_col_sep:</span> <span class="ruby-string">&#39;;&#39;</span>, <span class="ruby-value">col_sep:</span> <span class="ruby-string">&#39;|&#39;</span>) <span class="ruby-comment"># &#39;|&#39; for both parsing(!) and generating.</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-c-foreach" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-c-foreach" title="Link to this method">
                   <span class="method-callseq">
@@ -2659,6 +3162,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-foreach" title="Link to this method">
                   <span class="method-callseq">
@@ -2666,7 +3170,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -2674,7 +3181,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="foreach-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1389</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">foreach</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>=<span class="ruby-string">&quot;r&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -2684,6 +3194,9 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Calls the block with each row read from source <code>path_or_io</code>.</p>
 
 <p>Path input without headers:</p>
@@ -2770,13 +3283,21 @@ BAZ,-2</pre>
 
 <p>would read <code>UTF-32BE</code> data from the file but transcode it to <code>UTF-8</code> before parsing.</p>
 </li></ul>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-c-generate" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-c-generate" title="Link to this method">
                   <span class="method-callseq">
@@ -2784,6 +3305,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-generate" title="Link to this method">
                   <span class="method-callseq">
@@ -2791,7 +3313,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -2799,7 +3324,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="generate-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1455</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">str</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
@@ -2818,6 +3346,9 @@ BAZ,-2</pre>
   <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">string</span>        <span class="ruby-comment"># return final String</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <ul><li>
 <p>Argument <code>csv_string</code>, if given, must be a String object; defaults to a new empty String.</p>
 </li><li>
@@ -2872,13 +3403,21 @@ BAZ,-2</pre>
 <pre class="ruby"><span class="ruby-comment"># Raises TypeError (no implicit conversion of Integer into String)</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-value">0</span>)
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-c-generate_line" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-c-generate_line" title="Link to this method">
                   <span class="method-callseq">
@@ -2886,6 +3425,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-generate_line" title="Link to this method">
                   <span class="method-callseq">
@@ -2893,7 +3433,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -2901,7 +3444,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="generate_line-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1503</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_line</span>(<span class="ruby-identifier">row</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
@@ -2927,6 +3473,9 @@ BAZ,-2</pre>
   (<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">row</span>).<span class="ruby-identifier">string</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the String created by generating CSV from <code>ary</code> using the specified <code>options</code>.</p>
 
 <p>Argument <code>ary</code> must be an Array.</p>
@@ -2955,13 +3504,21 @@ BAZ,-2</pre>
 <pre class="ruby"><span class="ruby-comment"># Raises NoMethodError (undefined method `find&#39; for :foo:Symbol)</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate_line</span>(<span class="ruby-value">:foo</span>)
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-c-generate_lines" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-c-generate_lines" title="Link to this method">
                   <span class="method-callseq">
@@ -2969,6 +3526,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-generate_lines" title="Link to this method">
                   <span class="method-callseq">
@@ -2976,7 +3534,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -2984,7 +3545,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="generate_lines-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1558</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_lines</span>(<span class="ruby-identifier">rows</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
@@ -2995,6 +3559,9 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the String created by generating CSV from using the specified <code>options</code>.</p>
 
 <p>Argument <code>rows</code> must be an Array of row. <a href="CSV/Row.html"><code>Row</code></a> is Array of String or CSV::Row.</p>
@@ -3023,13 +3590,21 @@ BAZ,-2</pre>
 <pre class="ruby"><span class="ruby-comment"># Raises NoMethodError (undefined method `each&#39; for :foo:Symbol)</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate_lines</span>(<span class="ruby-value">:foo</span>)
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-c-instance" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-c-instance" title="Link to this method">
                   <span class="method-callseq">
@@ -3037,6 +3612,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-instance" title="Link to this method">
                   <span class="method-callseq">
@@ -3044,6 +3620,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-instance" title="Link to this method">
                   <span class="method-callseq">
@@ -3051,6 +3628,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-instance" title="Link to this method">
                   <span class="method-callseq">
@@ -3058,7 +3636,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -3066,7 +3647,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="instance-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1026</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">instance</span>(<span class="ruby-identifier">data</span> = <span class="ruby-identifier">$stdout</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
@@ -3085,6 +3669,9 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Creates or retrieves cached CSV objects. For arguments and options, see <a href="CSV.html#method-c-new"><code>CSV.new</code></a>.</p>
 
 <p>This API is not Ractor-safe.</p>
@@ -3126,13 +3713,21 @@ BAZ,-2</pre>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">instance</span>(<span class="ruby-identifier">s0</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span> <span class="ruby-value">:foo</span> } <span class="ruby-comment"># =&gt; :foo</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-c-new" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-c-new" title="Link to this method">
                   <span class="method-callseq">
@@ -3140,6 +3735,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-new" title="Link to this method">
                   <span class="method-callseq">
@@ -3147,6 +3743,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-new" title="Link to this method">
                   <span class="method-callseq">
@@ -3154,6 +3751,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-new" title="Link to this method">
                   <span class="method-callseq">
@@ -3161,7 +3759,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -3169,7 +3770,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2034</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">data</span>,
@@ -3270,6 +3874,9 @@ BAZ,-2</pre>
   <span class="ruby-identifier">writer</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@writer_options</span>[<span class="ruby-value">:write_headers</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the new CSV object created using <code>string</code> or <code>io</code> and the specified <code>options</code>.</p>
 <ul><li>
 <p>Argument <code>string</code> should be a String object; it will be put into a new StringIO object positioned at the beginning.</p>
@@ -3313,13 +3920,21 @@ BAZ,-2</pre>
 <pre class="ruby"><span class="ruby-comment"># Raises ArgumentError (Cannot parse nil as CSV):</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>)
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-c-open" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-c-open" title="Link to this method">
                   <span class="method-callseq">
@@ -3327,6 +3942,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-open" title="Link to this method">
                   <span class="method-callseq">
@@ -3334,7 +3950,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -3342,7 +3961,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="open-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1647</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open</span>(<span class="ruby-identifier">filename_or_io</span>, <span class="ruby-identifier">mode</span>=<span class="ruby-string">&quot;r&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
@@ -3394,6 +4016,9 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>possible options elements:</p>
 
 <pre>keyword form:
@@ -3496,13 +4121,21 @@ BAZ,-2</pre>
 <pre class="ruby"><span class="ruby-comment"># Raises TypeError (no implicit conversion of Symbol into String)</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-value">:foo</span>)
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-c-parse" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-c-parse" title="Link to this method">
                   <span class="method-callseq">
@@ -3510,6 +4143,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-parse" title="Link to this method">
                   <span class="method-callseq">
@@ -3517,6 +4151,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-parse" title="Link to this method">
                   <span class="method-callseq">
@@ -3524,6 +4159,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-parse" title="Link to this method">
                   <span class="method-callseq">
@@ -3531,6 +4167,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-parse" title="Link to this method">
                   <span class="method-callseq">
@@ -3538,6 +4175,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-parse" title="Link to this method">
                   <span class="method-callseq">
@@ -3545,7 +4183,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -3553,7 +4194,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="parse-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1825</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -3569,6 +4213,9 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Parses <code>string</code> or <code>io</code> using the specified <code>options</code>.</p>
 <ul><li>
 <p>Argument <code>string</code> should be a String object; it will be put into a new StringIO object positioned at the beginning.</p>
@@ -3722,13 +4369,21 @@ BAZ,-2</pre>
 <span class="ruby-comment"># &quot;bar&quot;</span>
 <span class="ruby-comment"># &quot;baz&quot;</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-c-parse_line" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-c-parse_line" title="Link to this method">
                   <span class="method-callseq">
@@ -3736,6 +4391,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-parse_line" title="Link to this method">
                   <span class="method-callseq">
@@ -3743,6 +4399,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-parse_line" title="Link to this method">
                   <span class="method-callseq">
@@ -3750,6 +4407,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-parse_line" title="Link to this method">
                   <span class="method-callseq">
@@ -3757,6 +4415,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-parse_line" title="Link to this method">
                   <span class="method-callseq">
@@ -3764,6 +4423,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-parse_line" title="Link to this method">
                   <span class="method-callseq">
@@ -3771,7 +4431,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -3779,13 +4442,19 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="parse_line-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1898</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>).<span class="ruby-identifier">each</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the data created by parsing the first line of <code>string</code> or <code>io</code> using the specified <code>options</code>.</p>
 <ul><li>
 <p>Argument <code>string</code> should be a String object; it will be put into a new StringIO object positioned at the beginning.</p>
@@ -3857,13 +4526,21 @@ BAZ,-2</pre>
 <pre class="ruby"><span class="ruby-comment"># Raises ArgumentError (Cannot parse nil as CSV):</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-keyword">nil</span>)
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-c-read" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-c-read" title="Link to this method">
                   <span class="method-callseq">
@@ -3871,6 +4548,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-c-read" title="Link to this method">
                   <span class="method-callseq">
@@ -3878,7 +4556,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -3886,13 +4567,19 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="read-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1922</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">read</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Opens the given <code>source</code> with the given <code>options</code> (see <a href="CSV.html#method-c-open"><code>CSV.open</code></a>), reads the source (see <a href="CSV.html#method-i-read"><code>CSV#read</code></a>), and returns the result, which will be either an Array of Arrays or a <a href="CSV/Table.html"><code>CSV::Table</code></a>.</p>
 
 <p>Without headers:</p>
@@ -3910,13 +4597,21 @@ BAZ,-2</pre>
 <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">string</span>)
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>) <span class="ruby-comment"># =&gt; #&lt;CSV::Table mode:col_or_row row_count:4&gt;</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-c-readlines" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-c-readlines" title="Link to this method">
                   <span class="method-callseq">
@@ -3924,7 +4619,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -3932,21 +4630,35 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="readlines-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1930</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">readlines</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Alias for <a href="CSV.html#method-c-read"><code>CSV.read</code></a>.</p>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-c-table" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-c-table" title="Link to this method">
                   <span class="method-callseq">
@@ -3954,7 +4666,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -3962,7 +4677,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="table-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 1949</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">table</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
@@ -3975,6 +4693,9 @@ BAZ,-2</pre>
   <span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Calls <a href="CSV.html#method-c-read"><code>CSV.read</code></a> with <code>source</code>, <code>options</code>, and certain default options:</p>
 <ul><li>
 <p><code>headers</code>: <code>true</code></p>
@@ -3993,10 +4714,16 @@ BAZ,-2</pre>
 <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">string</span>)
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">table</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; #&lt;CSV::Table mode:col_or_row row_count:4&gt;</span>
 </pre>
+
+
         </div>
 
 
+
+
+
       </div>
+
 
     </section>
 
@@ -4005,8 +4732,11 @@ BAZ,-2</pre>
          <h3>Public Instance Methods</h3>
        </header>
 
+
       <div id="method-i-3C-3C" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-3C-3C" title="Link to this method">
                   <span class="method-callseq">
@@ -4014,7 +4744,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4022,7 +4755,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="3C-3C-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2507</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-identifier">row</span>)
@@ -4030,6 +4766,9 @@ BAZ,-2</pre>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Appends a row to <code>self</code>.</p>
 <ul><li>
 <p>Argument <code>row</code> must be an Array object or a <a href="CSV/Row.html"><code>CSV::Row</code></a> object.</p>
@@ -4087,22 +4826,35 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span>
 </pre>
+
+
         </div>
+
+
 
         <div class="aliases">
           Also aliased as: <a href="CSV.html#method-i-add_row">add_row</a>, <a href="CSV.html#method-i-puts">puts</a>
         </div>
 
+
+
       </div>
+
 
       <div id="method-i-add_row" class="method-detail anchor-link method-alias">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-add_row" title="Link to this method">
                 <span class="method-name">add_row</span>
               </a>
             </div>
+
         </div>
+
+
+
+
 
 
 
@@ -4110,17 +4862,22 @@ BAZ,-2</pre>
         <div class="aliases">
           Alias for: <a href="CSV.html#method-i-3C-3C">&lt;&lt;</a>
         </div>
+
       </div>
+
 
       <div id="method-i-binmode-3F" class="method-detail anchor-link ">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-binmode-3F" title="Link to this method">
                 <span class="method-name">binmode?</span>
                 <span class="method-args">()</span>
               </a>
             </div>
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4128,7 +4885,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="binmode-3F-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2396</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">binmode?</span>
@@ -4139,14 +4899,25 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-col_sep" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-col_sep" title="Link to this method">
                   <span class="method-callseq">
@@ -4154,7 +4925,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4162,24 +4936,38 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="col_sep-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">col_sep</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">column_separator</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the encoded column separator; used for parsing and writing; see <a href="#class-CSV-label-Option+col_sep">Option <code>col_sep</code></a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">col_sep</span> <span class="ruby-comment"># =&gt; &quot;,&quot;</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-convert" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-convert" title="Link to this method">
                   <span class="method-callseq">
@@ -4187,6 +4975,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-i-convert" title="Link to this method">
                   <span class="method-callseq">
@@ -4194,7 +4983,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4202,13 +4994,19 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="convert-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2578</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">converter</span>)
   <span class="ruby-identifier">parser_fields_converter</span>.<span class="ruby-identifier">add_converter</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">converter</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <ul><li>
 <p>With no block, installs a field converter (a Proc).</p>
 </li><li>
@@ -4284,13 +5082,21 @@ BAZ,-2</pre>
 <span class="ruby-comment"># Raises NoMethodError (undefined method `arity&#39; for nil:NilClass)</span>
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">read</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-converters" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-converters" title="Link to this method">
                   <span class="method-callseq">
@@ -4298,7 +5104,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4306,7 +5115,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="converters-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2217</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">converters</span>
@@ -4316,6 +5128,9 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns an Array containing field converters; see <a href="#class-CSV-label-Field+Converters">Field Converters</a>:</p>
 
 <pre class="ruby"><span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>)
@@ -4327,13 +5142,21 @@ BAZ,-2</pre>
 </pre>
 
 <p>Notes that you need to call +Ractor.make_shareable(<a href="CSV.html#Converters"><code>CSV::Converters</code></a>)+ on the main Ractor to use this method.</p>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-each" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-each" title="Link to this method">
                   <span class="method-callseq">
@@ -4341,6 +5164,7 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
               <div class="method-heading">
                 <a href="#method-i-each" title="Link to this method">
                   <span class="method-callseq">
@@ -4348,7 +5172,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4356,7 +5183,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="each-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2689</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -4369,6 +5199,9 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Calls the block with each successive row. The data source must be opened for reading.</p>
 
 <p>Without headers:</p>
@@ -4413,41 +5246,64 @@ BAZ,-2</pre>
   <span class="ruby-identifier">p</span> <span class="ruby-identifier">row</span>
 <span class="ruby-keyword">end</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-eof" class="method-detail anchor-link method-alias">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-eof" title="Link to this method">
                 <span class="method-name">eof</span>
                 <span class="method-args">()</span>
               </a>
             </div>
+
         </div>
+
+
 
 
         <div class="method-description">
+
+
+
           
+
+
         </div>
+
+
+
 
 
         <div class="aliases">
           Alias for: <a href="CSV.html#method-i-eof-3F">eof?</a>
         </div>
+
       </div>
+
 
       <div id="method-i-eof-3F" class="method-detail anchor-link ">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-eof-3F" title="Link to this method">
                 <span class="method-name">eof?</span>
                 <span class="method-args">()</span>
               </a>
             </div>
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4455,7 +5311,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="eof-3F-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2432</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eof?</span>
@@ -4471,17 +5330,29 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           
+
+
         </div>
+
+
 
         <div class="aliases">
           Also aliased as: <a href="CSV.html#method-i-eof">eof</a>
         </div>
 
+
+
       </div>
+
 
       <div id="method-i-field_size_limit" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-field_size_limit" title="Link to this method">
                   <span class="method-callseq">
@@ -4489,7 +5360,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4497,33 +5371,48 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="field_size_limit-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field_size_limit</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">field_size_limit</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the limit for field size; used for parsing; see <a href="#class-CSV-label-Option+field_size_limit">Option <code>field_size_limit</code></a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">field_size_limit</span> <span class="ruby-comment"># =&gt; nil</span>
 </pre>
 
 <p>Deprecated since 3.2.3. Use <a href="CSV.html#method-i-max_field_size"><code>max_field_size</code></a> instead.</p>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-flock" class="method-detail anchor-link ">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-flock" title="Link to this method">
                 <span class="method-name">flock</span>
                 <span class="method-args">(*args)</span>
               </a>
             </div>
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4531,7 +5420,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="flock-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2404</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">flock</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
@@ -4539,14 +5431,25 @@ BAZ,-2</pre>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">flock</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-force_quotes-3F" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-force_quotes-3F" title="Link to this method">
                   <span class="method-callseq">
@@ -4554,7 +5457,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4562,30 +5468,48 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="force_quotes-3F-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2307</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">force_quotes?</span>
   <span class="ruby-ivar">@writer_options</span>[<span class="ruby-value">:force_quotes</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the value that determines whether all output fields are to be quoted; used for generating; see <a href="#class-CSV-label-Option+force_quotes">Option <code>force_quotes</code></a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">force_quotes?</span> <span class="ruby-comment"># =&gt; false</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-gets" class="method-detail anchor-link method-alias">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-gets" title="Link to this method">
                 <span class="method-name">gets</span>
               </a>
             </div>
+
         </div>
+
+
+
+
 
 
 
@@ -4593,17 +5517,22 @@ BAZ,-2</pre>
         <div class="aliases">
           Alias for: <a href="CSV.html#method-i-shift">shift</a>
         </div>
+
       </div>
+
 
       <div id="method-i-header_convert" class="method-detail anchor-link ">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-header_convert" title="Link to this method">
                 <span class="method-name">header_convert</span>
                 <span class="method-args">(name = nil, &amp;converter)</span>
               </a>
             </div>
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4611,13 +5540,19 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="header_convert-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2644</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_convert</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">converter</span>)
   <span class="ruby-identifier">header_fields_converter</span>.<span class="ruby-identifier">add_converter</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">converter</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>The block need not return a String object:</p>
 
 <pre class="ruby"><span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
@@ -4642,13 +5577,21 @@ BAZ,-2</pre>
 <span class="ruby-comment"># Raises NoMethodError (undefined method `arity&#39; for nil:NilClass)</span>
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">read</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-header_converters" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-header_converters" title="Link to this method">
                   <span class="method-callseq">
@@ -4656,7 +5599,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4664,7 +5610,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="header_converters-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2283</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_converters</span>
@@ -4674,19 +5623,30 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns an Array containing header converters; used for parsing; see <a href="#class-CSV-label-Header+Converters">Header Converters</a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">header_converters</span> <span class="ruby-comment"># =&gt; []</span>
 </pre>
 
 <p>Notes that you need to call +Ractor.make_shareable(<a href="CSV.html#HeaderConverters"><code>CSV::HeaderConverters</code></a>)+ on the main Ractor to use this method.</p>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-header_row-3F" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-header_row-3F" title="Link to this method">
                   <span class="method-callseq">
@@ -4694,7 +5654,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4702,13 +5665,19 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="header_row-3F-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2766</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_row?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">header_row?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns <code>true</code> if the next row to be read is a header row; <code>false</code> otherwise.</p>
 
 <p>Without headers:</p>
@@ -4736,13 +5705,21 @@ BAZ,-2</pre>
 <span class="ruby-comment"># Raises IOError (not opened for reading)</span>
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">header_row?</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-headers" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-headers" title="Link to this method">
                   <span class="method-callseq">
@@ -4750,7 +5727,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4758,7 +5738,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="headers-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2241</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">headers</span>
@@ -4773,17 +5756,28 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the value that determines whether headers are used; used for parsing; see <a href="#class-CSV-label-Option+headers">Option <code>headers</code></a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; nil</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-inspect" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-inspect" title="Link to this method">
                   <span class="method-callseq">
@@ -4791,7 +5785,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4799,7 +5796,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="inspect-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2825</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
@@ -4840,6 +5840,9 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns a String showing certain properties of <code>self</code>:</p>
 
 <pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
@@ -4847,20 +5850,29 @@ BAZ,-2</pre>
 <span class="ruby-identifier">s</span> = <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">inspect</span>
 <span class="ruby-identifier">s</span> <span class="ruby-comment"># =&gt; &quot;#&lt;CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:\&quot;,\&quot; row_sep:\&quot;\\n\&quot; quote_char:\&quot;\\\&quot;\&quot; headers:true&gt;&quot;</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-ioctl" class="method-detail anchor-link ">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-ioctl" title="Link to this method">
                 <span class="method-name">ioctl</span>
                 <span class="method-args">(*args)</span>
               </a>
             </div>
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4868,7 +5880,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="ioctl-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2409</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ioctl</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
@@ -4876,14 +5891,25 @@ BAZ,-2</pre>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">ioctl</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-liberal_parsing-3F" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-liberal_parsing-3F" title="Link to this method">
                   <span class="method-callseq">
@@ -4891,7 +5917,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4899,24 +5928,38 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="liberal_parsing-3F-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2317</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">liberal_parsing?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">liberal_parsing?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the value that determines whether illegal input is to be handled; used for parsing; see <a href="#class-CSV-label-Option+liberal_parsing">Option <code>liberal_parsing</code></a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">liberal_parsing?</span> <span class="ruby-comment"># =&gt; false</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-line" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-line" title="Link to this method">
                   <span class="method-callseq">
@@ -4924,7 +5967,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4932,13 +5978,19 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="line-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2382</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">line</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">line</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the line most recently read:</p>
 
 <pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;foo,0\nbar,1\nbaz,2\n&quot;</span>
@@ -4957,13 +6009,21 @@ BAZ,-2</pre>
 [<span class="ruby-value">2</span>, <span class="ruby-string">&quot;bar,1\n&quot;</span>]
 [<span class="ruby-value">3</span>, <span class="ruby-string">&quot;baz,2\n&quot;</span>]
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-lineno" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-lineno" title="Link to this method">
                   <span class="method-callseq">
@@ -4971,7 +6031,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -4979,7 +6042,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="lineno-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2358</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lineno</span>
@@ -4990,6 +6056,9 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the count of the rows parsed or generated.</p>
 
 <p>Parsing:</p>
@@ -5026,13 +6095,21 @@ BAZ,-2</pre>
 <span class="ruby-value">1</span>
 <span class="ruby-value">2</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-max_field_size" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-max_field_size" title="Link to this method">
                   <span class="method-callseq">
@@ -5040,7 +6117,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5048,33 +6128,48 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="max_field_size-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2188</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">max_field_size</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">max_field_size</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the limit for field size; used for parsing; see <a href="#class-CSV-label-Option+max_field_size">Option <code>max_field_size</code></a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">max_field_size</span> <span class="ruby-comment"># =&gt; nil</span>
 </pre>
 
 <p>Since 3.2.3.</p>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-path" class="method-detail anchor-link ">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-path" title="Link to this method">
                 <span class="method-name">path</span>
                 <span class="method-args">()</span>
               </a>
             </div>
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5082,27 +6177,45 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="path-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2414</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">path</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:path</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-puts" class="method-detail anchor-link method-alias">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-puts" title="Link to this method">
                 <span class="method-name">puts</span>
               </a>
             </div>
+
         </div>
+
+
+
+
 
 
 
@@ -5110,10 +6223,14 @@ BAZ,-2</pre>
         <div class="aliases">
           Alias for: <a href="CSV.html#method-i-3C-3C">&lt;&lt;</a>
         </div>
+
       </div>
+
 
       <div id="method-i-quote_char" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-quote_char" title="Link to this method">
                   <span class="method-callseq">
@@ -5121,7 +6238,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5129,24 +6249,38 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="quote_char-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quote_char</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">quote_character</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the encoded quote character; used for parsing and writing; see <a href="#class-CSV-label-Option+quote_char">Option <code>quote_char</code></a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">quote_char</span> <span class="ruby-comment"># =&gt; &quot;\&quot;&quot;</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-read" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-read" title="Link to this method">
                   <span class="method-callseq">
@@ -5154,7 +6288,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5162,7 +6299,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="read-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2730</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read</span>
@@ -5174,6 +6314,9 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Forms the remaining rows from <code>self</code> into:</p>
 <ul><li>
 <p>A <a href="CSV/Table.html"><code>CSV::Table</code></a> object, if headers are in use.</p>
@@ -5210,22 +6353,35 @@ BAZ,-2</pre>
 <span class="ruby-comment"># Raises IOError (not opened for reading)</span>
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">read</span>
 </pre>
+
+
         </div>
+
+
 
         <div class="aliases">
           Also aliased as: <a href="CSV.html#method-i-readlines">readlines</a>
         </div>
 
+
+
       </div>
+
 
       <div id="method-i-readline" class="method-detail anchor-link method-alias">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-readline" title="Link to this method">
                 <span class="method-name">readline</span>
               </a>
             </div>
+
         </div>
+
+
+
+
 
 
 
@@ -5233,16 +6389,24 @@ BAZ,-2</pre>
         <div class="aliases">
           Alias for: <a href="CSV.html#method-i-shift">shift</a>
         </div>
+
       </div>
+
 
       <div id="method-i-readlines" class="method-detail anchor-link method-alias">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-readlines" title="Link to this method">
                 <span class="method-name">readlines</span>
               </a>
             </div>
+
         </div>
+
+
+
+
 
 
 
@@ -5250,10 +6414,14 @@ BAZ,-2</pre>
         <div class="aliases">
           Alias for: <a href="CSV.html#method-i-read">read</a>
         </div>
+
       </div>
+
 
       <div id="method-i-return_headers-3F" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-return_headers-3F" title="Link to this method">
                   <span class="method-callseq">
@@ -5261,7 +6429,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5269,31 +6440,46 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="return_headers-3F-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2259</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">return_headers?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">return_headers?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the value that determines whether headers are to be returned; used for parsing; see <a href="#class-CSV-label-Option+return_headers">Option <code>return_headers</code></a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">return_headers?</span> <span class="ruby-comment"># =&gt; false</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-rewind" class="method-detail anchor-link ">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-rewind" title="Link to this method">
                 <span class="method-name">rewind</span>
                 <span class="method-args">()</span>
               </a>
             </div>
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5301,7 +6487,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="rewind-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2447</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
@@ -5312,14 +6501,25 @@ BAZ,-2</pre>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">rewind</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Rewinds the underlying IO object and resets CSV’s lineno() counter.</p>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-row_sep" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-row_sep" title="Link to this method">
                   <span class="method-callseq">
@@ -5327,7 +6527,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5335,24 +6538,38 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="row_sep-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2154</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">row_sep</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">row_separator</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the encoded row separator; used for parsing and writing; see <a href="#class-CSV-label-Option+row_sep">Option <code>row_sep</code></a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">row_sep</span> <span class="ruby-comment"># =&gt; &quot;\n&quot;</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-shift" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-shift" title="Link to this method">
                   <span class="method-callseq">
@@ -5360,7 +6577,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5368,7 +6588,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="shift-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2803</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">shift</span>
@@ -5383,6 +6606,9 @@ BAZ,-2</pre>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the next row of data as:</p>
 <ul><li>
 <p>An Array if no headers are used.</p>
@@ -5421,16 +6647,25 @@ BAZ,-2</pre>
 <span class="ruby-comment"># Raises IOError (not opened for reading)</span>
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">shift</span>
 </pre>
+
+
         </div>
+
+
 
         <div class="aliases">
           Also aliased as: <a href="CSV.html#method-i-gets">gets</a>, <a href="CSV.html#method-i-readline">readline</a>
         </div>
 
+
+
       </div>
+
 
       <div id="method-i-skip_blanks-3F" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-skip_blanks-3F" title="Link to this method">
                   <span class="method-callseq">
@@ -5438,7 +6673,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5446,24 +6684,38 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="skip_blanks-3F-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2296</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_blanks?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">skip_blanks?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the value that determines whether blank lines are to be ignored; used for parsing; see <a href="#class-CSV-label-Option+skip_blanks">Option <code>skip_blanks</code></a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">skip_blanks?</span> <span class="ruby-comment"># =&gt; false</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-skip_lines" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-skip_lines" title="Link to this method">
                   <span class="method-callseq">
@@ -5471,7 +6723,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5479,31 +6734,46 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="skip_lines-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2198</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_lines</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">skip_lines</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the Regexp used to identify comment lines; used for parsing; see <a href="#class-CSV-label-Option+skip_lines">Option <code>skip_lines</code></a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">skip_lines</span> <span class="ruby-comment"># =&gt; nil</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-stat" class="method-detail anchor-link ">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-stat" title="Link to this method">
                 <span class="method-name">stat</span>
                 <span class="method-args">(*args)</span>
               </a>
             </div>
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5511,7 +6781,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="stat-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2418</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stat</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
@@ -5519,21 +6792,33 @@ BAZ,-2</pre>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">stat</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-to_i" class="method-detail anchor-link ">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-to_i" title="Link to this method">
                 <span class="method-name">to_i</span>
                 <span class="method-args">()</span>
               </a>
             </div>
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5541,7 +6826,10 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="to_i-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2423</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_i</span>
@@ -5549,21 +6837,33 @@ BAZ,-2</pre>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">to_i</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-to_io" class="method-detail anchor-link ">
         <div class="method-header">
+
             <div class="method-heading">
               <a href="#method-i-to_io" title="Link to this method">
                 <span class="method-name">to_io</span>
                 <span class="method-args">()</span>
               </a>
             </div>
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5571,21 +6871,35 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="to_io-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2428</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_io</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_io</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">to_io</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@io</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-unconverted_fields-3F" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-unconverted_fields-3F" title="Link to this method">
                   <span class="method-callseq">
@@ -5593,7 +6907,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5601,24 +6918,38 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="unconverted_fields-3F-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2231</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unconverted_fields?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">unconverted_fields?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the value that determines whether unconverted fields are to be available; used for parsing; see <a href="#class-CSV-label-Option+unconverted_fields">Option <code>unconverted_fields</code></a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">unconverted_fields?</span> <span class="ruby-comment"># =&gt; nil</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
       <div id="method-i-write_headers-3F" class="method-detail anchor-link ">
         <div class="method-header">
+
+
               <div class="method-heading">
                 <a href="#method-i-write_headers-3F" title="Link to this method">
                   <span class="method-callseq">
@@ -5626,7 +6957,10 @@ BAZ,-2</pre>
                   </span>
                 </a>
               </div>
+
+
         </div>
+
 
           <div class="method-controls">
             <details class="method-source-toggle">
@@ -5634,24 +6968,38 @@ BAZ,-2</pre>
             </details>
           </div>
 
+
+
         <div class="method-description">
+
           <div class="method-source-code" id="write_headers-3F-source">
             <pre><span class="ruby-comment"># File lib/csv.rb, line 2269</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">write_headers?</span>
   <span class="ruby-ivar">@writer_options</span>[<span class="ruby-value">:write_headers</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
+
+
+
           <p>Returns the value that determines whether headers are to be written; used for generating; see <a href="#class-CSV-label-Option+write_headers">Option <code>write_headers</code></a>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">write_headers?</span> <span class="ruby-comment"># =&gt; nil</span>
 </pre>
+
+
         </div>
+
+
+
 
 
       </div>
 
+
     </section>
 
   </section>
+
 </main>
+</body>
 
