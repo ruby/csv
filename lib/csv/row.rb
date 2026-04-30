@@ -652,7 +652,8 @@ class CSV
     #   row.to_h # => {"Name"=>"Foo"}
     def to_h
       hash = {}
-      each do |key, value|
+      each do |key, _value|
+        value = self[key]
         key, value = yield(key, value) if block_given?
 
         hash[key] = value unless hash.key?(key)
