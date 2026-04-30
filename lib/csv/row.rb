@@ -637,6 +637,7 @@ class CSV
 
     # :call-seq:
     #   row.to_h -> hash
+    #   row.to_h {|key, value| ... } -> hash
     #
     # Returns the new \Hash formed by adding each header-value pair in +self+
     # as a key-value pair in the \Hash.
