@@ -653,12 +653,9 @@ class CSV
     def to_h
       hash = {}
       each do |key, value|
-        new_key, new_value = if block_given?
-          yield(key, value)
-        else
-          [key, value]
-        end
-        hash[new_key] = new_value unless hash.key?(new_key)
+        key, value = yield(key, value) if block_given?
+
+        hash[key] = value unless hash.key?(key)
       end
       hash
     end
