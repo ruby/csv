@@ -339,9 +339,12 @@ class TestCSVRow < Test::Unit::TestCase
       assert_predicate(string_key, :frozen?)
       assert_same(string_key, @row.headers[h])
     end
-    row2 =  CSV::Row.new(%w{A B C}, [1, 2, 3])
-    hash2 = row2.to_hash { |k, v| [k, v ** 2] }
-    assert_equal({"A" => 1, "B" => 4, "C" => 9}, hash2)
+  end
+
+  def test_to_hash_with_block
+    row =  CSV::Row.new(%w{A B C}, [1, 2, 3])
+    hash = row.to_hash { |k, v| [k, v ** 2] }
+    assert_equal({"A" => 1, "B" => 4, "C" => 9}, hash)
   end
 
   def test_to_csv
