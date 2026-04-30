@@ -342,8 +342,8 @@ class TestCSVRow < Test::Unit::TestCase
   end
 
   def test_to_hash_with_block
-    row =  CSV::Row.new(%w{A B C}, [1, 2, 3])
-    hash = row.to_hash { |k, v| [k, v ** 2] }
+    row =  CSV::Row.new(%w{A A B C}, [1, 2, 2, 3])
+    hash = row.to_hash { |k, v| [k, v**2] }
     assert_equal({"A" => 1, "B" => 4, "C" => 9}, hash)
   end
 

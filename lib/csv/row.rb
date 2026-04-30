@@ -650,13 +650,21 @@ class CSV
     #   table = CSV.parse(source, headers: true)
     #   row = table[0]
     #   row.to_h # => {"Name"=>"Foo"}
+    #
+    # If a block is given, will call it with (key, value) arguments and use result as a hash entry:
+    #   source = "Name,Value\nfoo,1\nbar,2\nbaz,3\n"
+    #   table = CSV.parse(source, headers: true)
+    #   row = table[0]
+    #   row.to_h { |key, value| [key, value.to_i * 2] } # => {"Name"=>"foo", "Value"=>2}
     def to_h
       hash = {}
       each do |key, _value|
+        next if hash.key?(key)
+
         value = self[key]
         key, value = yield(key, value) if block_given?
 
-        hash[key] = value unless hash.key?(key)
+        hash[key] = value
       end
       hash
     end
