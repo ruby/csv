@@ -659,14 +659,22 @@ class CSV
     #   row.to_h { |key, value| [key, value.to_i * 2] } # => {"Name"=>"foo", "Value"=>2}
     def to_h
       hash = {}
-      each do |key, _value|
-        next if hash.key?(key)
 
-        value = self[key]
-        key, value = yield(key, value) if block_given?
+      if block_given?
+        each do |key, _value|
+          result = yield(key, self[key])
+          raise TypeError, "wrong element type #{result.class} (expected array)" unless result.is_a?(Array)
+          raise ArgumentError, "wrong array length (expected 2, was #{result.size})" unless result.size == 2
 
-        hash[key] = value
+          key, value = result
+          hash[key] = value unless hash.key?(key)
+        end
+      else
+        each do |key, _value|
+          hash[key] = self[key] unless hash.key?(key)
+        end
       end
+
       hash
     end
     alias_method :to_hash, :to_h
