@@ -346,7 +346,7 @@ class TestCSVRow < Test::Unit::TestCase
     new_keys_map = {"A" => "A", "B" => "B", "C" => "B"}
     hash = row.to_hash { |k, v| [new_keys_map[k], v**2] }
     assert_equal({"A" => 1, "B" => 4}, hash)
-    hash.keys.each_with_index do |string_key, h|
+    hash.each_key do |string_key|
       assert_predicate(string_key, :frozen?)
     end
 

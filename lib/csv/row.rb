@@ -662,11 +662,12 @@ class CSV
 
       if block_given?
         each do |key, _value|
-          result = yield(key, self[key])
-          raise TypeError, "wrong element type #{result.class} (expected array)" unless result.is_a?(Array)
+          result = Array.try_convert(yield(key, self[key]))
+          raise TypeError, "wrong element type #{result.class} (expected array)" if result.nil?
           raise ArgumentError, "wrong array length (expected 2, was #{result.size})" unless result.size == 2
 
           key, value = result
+          key.freeze if key.is_a?(String) && !key.frozen?
           hash[key] = value unless hash.key?(key)
         end
       else
