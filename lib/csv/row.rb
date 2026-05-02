@@ -668,8 +668,10 @@ class CSV
           raise ArgumentError, "wrong array length (expected 2, was #{result_array.size})" unless result_array.size == 2
 
           key, value = result_array
-          key.freeze if key.is_a?(String)
-          hash[key] = value unless hash.key?(key)
+          next if hash.key?(key)
+
+          key.freeze if key.is_a?(String) && !key.frozen?
+          hash[key] = value
         end
       else
         each do |key, _value|

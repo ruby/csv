@@ -343,10 +343,16 @@ class TestCSVRow < Test::Unit::TestCase
 
   def test_to_hash_with_block
     row = CSV::Row.new(%w{A A B C}, [1, 2, 2, 3])
+    hash1 = row.to_hash { |k, v| [k, v**2] }
+    assert_equal({"A" => 1, "B" => 4, "C" => 9}, hash1)
+    hash1.each_key do |string_key|
+      assert_predicate(string_key, :frozen?)
+    end
+
     new_keys_map = {"A" => "A", "B" => "B", "C" => "B"}
-    hash = row.to_hash { |k, v| [new_keys_map[k], v**2] }
-    assert_equal({"A" => 1, "B" => 4}, hash)
-    hash.each_key do |string_key|
+    hash2 = row.to_hash { |k, v| [new_keys_map[k], v**2] }
+    assert_equal({"A" => 1, "B" => 4}, hash2)
+    hash2.each_key do |string_key|
       assert_predicate(string_key, :frozen?)
     end
 
