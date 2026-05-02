@@ -656,18 +656,19 @@ class CSV
     #   source = "Name,Value\nfoo,1\nbar,2\nbaz,3\n"
     #   table = CSV.parse(source, headers: true)
     #   row = table[0]
-    #   row.to_h { |key, value| [key, value.to_i * 2] } # => {"Name"=>"foo", "Value"=>2}
+    #   row.to_h { |key, value| [key, "#{key}-#{value}"] } # => {"Name"=>"Name-foo", "Value"=>"Value-1"}
     def to_h
       hash = {}
 
       if block_given?
         each do |key, _value|
-          result = Array.try_convert(yield(key, self[key]))
-          raise TypeError, "wrong element type #{result.class} (expected array)" if result.nil?
-          raise ArgumentError, "wrong array length (expected 2, was #{result.size})" unless result.size == 2
+          result = yield(key, self[key])
+          result_array = Array.try_convert(result)
+          raise TypeError, "wrong element type #{result.class} (expected array)" if result_array.nil?
+          raise ArgumentError, "wrong array length (expected 2, was #{result_array.size})" unless result_array.size == 2
 
-          key, value = result
-          key.freeze if key.is_a?(String) && !key.frozen?
+          key, value = result_array
+          key.freeze if key.is_a?(String)
           hash[key] = value unless hash.key?(key)
         end
       else
