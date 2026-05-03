@@ -341,6 +341,29 @@ class TestCSVRow < Test::Unit::TestCase
     end
   end
 
+  def test_to_hash_with_block_transform_values
+    hash = @row.to_hash { |k, v| [k, v**2] }
+    assert_equal({"A" => 1, "B" => 4, "C" => 9}, hash)
+    hash.each_key do |string_key|
+      assert_predicate(string_key, :frozen?)
+    end
+    assert_raise TypeError do
+      @row.to_hash { "foo" }
+    end
+    assert_raise ArgumentError do
+      @row.to_hash { [1] }
+    end
+  end
+
+  def test_to_hash_with_block_transform_entries
+    new_keys_map = {"A" => "A", "B" => "B", "C" => "B"}
+    hash = @row.to_hash { |k, v| [new_keys_map[k], v**2] }
+    assert_equal({"A" => 1, "B" => 4}, hash)
+    hash.each_key do |string_key|
+      assert_predicate(string_key, :frozen?)
+    end
+  end
+
   def test_to_csv
     # normal conversion
     assert_equal("1,2,3,4,\n", @row.to_csv)

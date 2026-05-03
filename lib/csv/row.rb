@@ -637,6 +637,7 @@ class CSV
 
     # :call-seq:
     #   row.to_h -> hash
+    #   row.to_h {|key, value| ... } -> hash
     #
     # Returns the new \Hash formed by adding each header-value pair in +self+
     # as a key-value pair in the \Hash.
@@ -650,11 +651,34 @@ class CSV
     #   table = CSV.parse(source, headers: true)
     #   row = table[0]
     #   row.to_h # => {"Name"=>"Foo"}
+    #
+    # If a block is given, will call it with (key, value) arguments and use result as a hash entry:
+    #   source = "Name,Value\nfoo,1\nbar,2\nbaz,3\n"
+    #   table = CSV.parse(source, headers: true)
+    #   row = table[0]
+    #   row.to_h { |key, value| [key, "#{key}-#{value}"] } # => {"Name"=>"Name-foo", "Value"=>"Value-1"}
     def to_h
       hash = {}
-      each do |key, _value|
-        hash[key] = self[key] unless hash.key?(key)
+
+      if block_given?
+        each do |key, _value|
+          result = yield(key, self[key])
+          result_array = Array.try_convert(result)
+          raise TypeError, "wrong element type #{result.class} (expected array)" if result_array.nil?
+          raise ArgumentError, "wrong array length (expected 2, was #{result_array.size})" unless result_array.size == 2
+
+          key, value = result_array
+          next if hash.key?(key)
+
+          key.freeze if key.is_a?(String) && !key.frozen?
+          hash[key] = value
+        end
+      else
+        each do |key, _value|
+          hash[key] = self[key] unless hash.key?(key)
+        end
       end
+
       hash
     end
     alias_method :to_hash, :to_h
