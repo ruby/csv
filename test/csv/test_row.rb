@@ -341,27 +341,26 @@ class TestCSVRow < Test::Unit::TestCase
     end
   end
 
-  def test_to_hash_with_block
-    row = CSV::Row.new(%w{A A B C}, [1, 2, 2, 3])
-    hash1 = row.to_hash { |k, v| [k, v**2] }
-    assert_equal({"A" => 1, "B" => 4, "C" => 9}, hash1)
-    hash1.each_key do |string_key|
+  def test_to_hash_with_block_transform_values
+    hash = @row.to_hash { |k, v| [k, v**2] }
+    assert_equal({"A" => 1, "B" => 4, "C" => 9}, hash)
+    hash.each_key do |string_key|
       assert_predicate(string_key, :frozen?)
     end
-
-    new_keys_map = {"A" => "A", "B" => "B", "C" => "B"}
-    hash2 = row.to_hash { |k, v| [new_keys_map[k], v**2] }
-    assert_equal({"A" => 1, "B" => 4}, hash2)
-    hash2.each_key do |string_key|
-      assert_predicate(string_key, :frozen?)
-    end
-
     assert_raise TypeError do
-      row.to_hash { "foo" }
+      @row.to_hash { "foo" }
     end
-
     assert_raise ArgumentError do
-      row.to_hash { [1] }
+      @row.to_hash { [1] }
+    end
+  end
+
+  def test_to_hash_with_block_transform_entries
+    new_keys_map = {"A" => "A", "B" => "B", "C" => "B"}
+    hash = @row.to_hash { |k, v| [new_keys_map[k], v**2] }
+    assert_equal({"A" => 1, "B" => 4}, hash)
+    hash.each_key do |string_key|
+      assert_predicate(string_key, :frozen?)
     end
   end
 
