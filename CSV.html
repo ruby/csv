@@ -8,12 +8,39 @@
 <title>class CSV - RDoc Documentation</title>
 
 
-  <meta name="keywords" content="ruby,class,CSV">
+  <meta
+    name="keywords"
+    content="ruby,class,CSV"
+  >
+
+    <meta
+      name="description"
+      content="class CSV: A _row_ _separator_ delimits table rows. tt&gt;."
+    >
 
 
-    <meta name="description" content="class CSV: A _row_ _separator_ delimits table rows. tt&gt;.">
 
 
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="class CSV - RDoc Documentation">
+
+
+
+    <meta property="og:description" content="A _row_ _separator_ delimits table rows. tt&gt;.">
+
+
+
+
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="class CSV - RDoc Documentation">
+
+
+
+    <meta name="twitter:description" content="A _row_ _separator_ delimits table rows. tt&gt;.">
 
 
 
@@ -22,752 +49,673 @@
   var index_rel_prefix = "./";
 </script>
 
-<script src="./js/navigation.js" defer></script>
-<script src="./js/search.js" defer></script>
-<script src="./js/search_index.js" defer></script>
-<script src="./js/searcher.js" defer></script>
-<script src="./js/darkfish.js" defer></script>
+<script
+  src="./js/theme-toggle.js?v=7.2.0"
+></script>
 
-<link href="./css/fonts.css" rel="stylesheet">
-<link href="./css/rdoc.css" rel="stylesheet">
+<script
+  src="./js/search_navigation.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/search_data.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/search_ranker.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/search_controller.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/c_highlighter.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/bash_highlighter.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/aliki.js?v=7.2.0"
+  defer
+></script>
+
+<link
+  href="./css/rdoc.css?v=7.2.0"
+  rel="stylesheet"
+>
 
 
 
-<body id="top" role="document" class="class">
+
+<body role="document" class="class has-toc">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <!-- Chevron (right arrow) - used for expand/collapse -->
+  <symbol
+    id="icon-chevron"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </symbol>
+
+  <!-- File/Document - Pages section -->
+  <symbol
+    id="icon-file"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path
+      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+    ></path>
+
+    <polyline points="14 2 14 8 20 8"></polyline>
+  </symbol>
+
+  <!-- Layers/Stack - Classes and Modules section -->
+  <symbol
+    id="icon-layers"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+    <polyline points="2 17 12 22 22 17"></polyline>
+    <polyline points="2 12 12 17 22 12"></polyline>
+  </symbol>
+
+  <!-- Curly braces with C - Class Methods section -->
+  <symbol
+    id="icon-class-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      C
+    </text>
+  </symbol>
+
+  <!-- Curly braces with I - Instance Methods section -->
+  <symbol
+    id="icon-instance-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      I
+    </text>
+  </symbol>
+
+  <!-- Double chevrons up - Ancestors section -->
+  <symbol
+    id="icon-ancestors"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="17 11 12 6 7 11"></polyline>
+    <polyline points="17 18 12 13 7 18"></polyline>
+  </symbol>
+
+  <!-- User with plus - Included Modules section -->
+  <symbol
+    id="icon-includes"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+
+    <line
+      x1="20"
+      y1="8"
+      x2="20"
+      y2="14"
+    ></line>
+
+    <line
+      x1="23"
+      y1="11"
+      x2="17"
+      y2="11"
+    ></line>
+  </symbol>
+
+  <!-- User with check - Extended Modules section -->
+  <symbol
+    id="icon-extends"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+    <polyline points="17 11 19 13 23 9"></polyline>
+  </symbol>
+
+  <!-- List - Sections section -->
+  <symbol
+    id="icon-list"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <line
+      x1="8"
+      y1="6"
+      x2="21"
+      y2="6"
+    ></line>
+
+    <line
+      x1="8"
+      y1="12"
+      x2="21"
+      y2="12"
+    ></line>
+
+    <line
+      x1="8"
+      y1="18"
+      x2="21"
+      y2="18"
+    ></line>
+
+    <line
+      x1="3"
+      y1="6"
+      x2="3.01"
+      y2="6"
+    ></line>
+
+    <line
+      x1="3"
+      y1="12"
+      x2="3.01"
+      y2="12"
+    ></line>
+
+    <line
+      x1="3"
+      y1="18"
+      x2="3.01"
+      y2="18"
+    ></line>
+  </symbol>
+</svg>
+
+<header class="top-navbar">
+  <a href="./index.html" class="navbar-brand">
+    RDoc Documentation
+  </a>
+
+  <!-- Desktop search bar -->
+  <div class="navbar-search navbar-search-desktop" role="search">
+    <form action="#" method="get" accept-charset="utf-8">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results-desktop"
+             type="text" name="search" placeholder="Search (/) for a class, method..."
+             spellcheck="false" autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+      <ul id="search-results-desktop" aria-label="Search Results"
+          aria-busy="false" aria-expanded="false"
+          aria-atomic="false" class="initially-hidden search-results"></ul>
+    </form>
+  </div>
+
+  <!-- Mobile search icon button -->
+  <button id="search-toggle" class="navbar-search-mobile" aria-label="Open search" type="button">
+    <span aria-hidden="true">🔍</span>
+  </button>
+
+  <!-- Theme toggle button -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" type="button">
+    <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+  </button>
+</header>
+
+<!-- Search Modal (Mobile) -->
+<div id="search-modal" class="search-modal" hidden aria-modal="true" role="dialog" aria-label="Search">
+  <div class="search-modal-backdrop"></div>
+  <div class="search-modal-content">
+    <div class="search-modal-header">
+      <form class="search-modal-form" action="#" method="get" accept-charset="utf-8">
+        <span class="search-modal-icon" aria-hidden="true">🔍</span>
+        <input id="search-field-mobile" role="combobox" aria-label="Search"
+               aria-autocomplete="list" aria-controls="search-results-mobile"
+               type="text" name="search" placeholder="Search documentation"
+               spellcheck="false" autocomplete="off">
+        <button type="button" class="search-modal-close" aria-label="Close search" id="search-modal-close">
+          <span aria-hidden="true">esc</span>
+        </button>
+      </form>
+    </div>
+    <div class="search-modal-body">
+      <ul id="search-results-mobile" aria-label="Search Results"
+          aria-busy="false" aria-expanded="false"
+          aria-atomic="false" class="search-results search-modal-results initially-hidden"></ul>
+      <div class="search-modal-empty">
+        <p>No recent searches</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
   <span aria-hidden="true">&#9776;</span>
 </div>
 
 
-<nav id="navigation" role="navigation">
-  <div id="project-navigation">
-    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
-  <h2>
-    <a href="./index.html" rel="home">Home</a>
-  </h2>
-
-  <div id="table-of-contents-navigation">
-    <a href="./table_of_contents.html#pages">Pages</a>
-    <a href="./table_of_contents.html#classes">Classes</a>
-    <a href="./table_of_contents.html#methods">Methods</a>
-  </div>
-</div>
-
-    <div id="search-section" role="search" class="project-section initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <div id="search-field-wrapper">
-      <input id="search-field" role="combobox" aria-label="Search"
-             aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </div>
-
-    <ul id="search-results" aria-label="Search Results"
-        aria-busy="false" aria-expanded="false"
-        aria-atomic="false" class="initially-hidden"></ul>
-  </form>
-</div>
-
-  </div>
-
+<nav id="navigation" role="navigation" hidden>
   
-<div class="nav-section">
-  <h3>Table of Contents</h3>
+
+
+
+
+  <div id="fileindex-section" class="nav-section">
+    <details class="nav-section-collapsible" >
+      <summary class="nav-section-header">
+        <span class="nav-section-icon">
+          <svg>
+            <use href="#icon-file"></use>
+          </svg>
+        </span>
+
+        <span class="nav-section-title">Pages</span>
+
+        <span class="nav-section-chevron">
+          <svg>
+            <use href="#icon-chevron"></use>
+          </svg>
+        </span>
+      </summary>
+
+      <ul class="nav-list">
 
 
 
 
 
-  <ul class="link-list" role="directory">
-    
+
+            <li>
+              <a href="./LICENSE_txt.html">
+                LICENSE
+              </a>
+            </li>
+
+
+
+
+            <li>
+              <a href="./NEWS_md.html">
+                NEWS
+              </a>
+            </li>
+
+
+
+
+            <li>
+              <a href="./README_md.html">
+                README
+              </a>
+            </li>
+
 
 
 
 
           <li>
-            <details open>
+            <details >
               <summary>
-      <a href="#class-CSV-label-CSV">CSV</a>
-</summary>
-              <ul class="link-list" role="directory">
                 
+                  doc
+                  
+                
+              </summary>
 
+              <ul class="link-list">
 
+                  <li>
+                    <a href="./doc/csv/recipes/filtering_rdoc.html">
+                      filtering
+                    </a>
+                  </li>
 
+                  <li>
+                    <a href="./doc/csv/recipes/generating_rdoc.html">
+                      generating
+                    </a>
+                  </li>
 
-          <li>
-      <a href="#class-CSV-label-CSV+Data">CSV Data</a>
-</li>
+                  <li>
+                    <a href="./doc/csv/recipes/parsing_rdoc.html">
+                      parsing
+                    </a>
+                  </li>
 
-
+                  <li>
+                    <a href="./doc/csv/recipes/recipes_rdoc.html">
+                      recipes
+                    </a>
+                  </li>
 
               </ul>
             </details>
           </li>
 
-
-
-
-          <li>
-      <a href="#class-CSV-label-Class+CSV">Class CSV</a>
-</li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#class-CSV-label-Keeping+It+Simple">Keeping It Simple</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#class-CSV-label-Simple+Parsing">Simple Parsing</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Parsing+a+String">Parsing a String</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Parsing+Via+a+File+Path">Parsing Via a File Path</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Parsing+from+an+Open+IO+Stream">Parsing from an Open IO Stream</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Simple+Generating">Simple Generating</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-22Filtering-22+CSV">“Filtering” CSV</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#class-CSV-label-CSV+Objects">CSV Objects</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#class-CSV-label-Instance+Methods">Instance Methods</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Delegated+Methods">Delegated Methods</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#class-CSV-label-Options">Options</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#class-CSV-label-Options+for+Parsing">Options for Parsing</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+row_sep">Option <code>row_sep</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+col_sep">Option <code>col_sep</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+quote_char">Option <code>quote_char</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+field_size_limit">Option <code>field_size_limit</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+converters">Option <code>converters</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+unconverted_fields">Option <code>unconverted_fields</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+headers">Option <code>headers</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+return_headers">Option <code>return_headers</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+header_converters">Option <code>header_converters</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+skip_blanks">Option <code>skip_blanks</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+skip_lines">Option <code>skip_lines</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+strip">Option <code>strip</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+liberal_parsing">Option <code>liberal_parsing</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+nil_value">Option <code>nil_value</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+empty_value">Option <code>empty_value</code></a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#class-CSV-label-Options+for+Generating">Options for Generating</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+row_sep">Option <code>row_sep</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+col_sep">Option <code>col_sep</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+quote_char">Option <code>quote_char</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+write_headers">Option <code>write_headers</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+force_quotes">Option <code>force_quotes</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+quote_empty">Option <code>quote_empty</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+write_converters">Option <code>write_converters</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+write_nil_value">Option <code>write_nil_value</code></a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Option+write_empty_value">Option <code>write_empty_value</code></a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-CSV+with+Headers">CSV with Headers</a>
-</li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#class-CSV-label-Converters">Converters</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#class-CSV-label-Specifying+Converters">Specifying Converters</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Converter+Procs">Converter Procs</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Stored+Converters">Stored Converters</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Converter+Lists">Converter Lists</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#class-CSV-label-Field+Converters">Field Converters</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Built-In+Field+Converters">Built-In Field Converters</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Custom+Field+Converters">Custom Field Converters</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#class-CSV-label-Header+Converters">Header Converters</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Built-In+Header+Converters">Built-In Header Converters</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Custom+Header+Converters">Custom Header Converters</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Write+Converters">Write Converters</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-      <a href="#class-CSV-label-Character+Encodings+-28M17n+or+Multilingualization-29">Character Encodings (M17n or Multilingualization)</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-  </ul>
-</div>
+      </ul>
+    </details>
+  </div>
 
 
   
 
   
 <div id="parent-class-section" class="nav-section">
-  <h3>Ancestors</h3>
-  <ul><li><a href="Object.html">Object</a><ul><li>BasicObject</li></ul></li></ul>
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-ancestors"></use></svg>
+      </span>
+      <span class="nav-section-title">Ancestors</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
+    <ul><li><a href="Object.html">Object</a><ul><li>BasicObject</li></ul></li></ul>
+  </details>
 </div>
 
 
   
 <div id="includes-section" class="nav-section">
-  <h3>Included Modules</h3>
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-includes"></use></svg>
+      </span>
+      <span class="nav-section-title">Included Modules</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
 
-  <ul class="link-list">
+    <ul class="nav-list">
 
 
-    <li><span class="include">Enumerable</span></li>
+      <li><span class="include">Enumerable</span></li>
 
 
-  </ul>
+    </ul>
+  </details>
 </div>
 
 
   
 <div id="extends-section" class="nav-section">
-  <h3>Extended With Modules</h3>
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-extends"></use></svg>
+      </span>
+      <span class="nav-section-title">Extended With Modules</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
 
-  <ul class="link-list">
+    <ul class="nav-list">
 
 
-    <li><span class="extend">Forwardable</span></li>
+      <li><span class="extend">Forwardable</span></li>
 
 
-  </ul>
+    </ul>
+  </details>
 </div>
 
 
   
   <div class="nav-section">
-    <h3>Class Methods</h3>
-    <ul class="link-list" role="directory">
+    <details class="nav-section-collapsible" open>
+      <summary class="nav-section-header">
+        <span class="nav-section-icon">
+          <svg><use href="#icon-class-methods"></use></svg>
+        </span>
+        <span class="nav-section-title">Class Methods</span>
+        <span class="nav-section-chevron">
+          <svg><use href="#icon-chevron"></use></svg>
+        </span>
+      </summary>
+      <ul class="nav-list" role="directory">
 
-      <li ><a href="#method-c-filter">filter</a></li>
+        <li ><a href="#method-c-filter">filter</a></li>
 
-      <li ><a href="#method-c-foreach">foreach</a></li>
+        <li ><a href="#method-c-foreach">foreach</a></li>
 
-      <li ><a href="#method-c-generate">generate</a></li>
+        <li ><a href="#method-c-generate">generate</a></li>
 
-      <li ><a href="#method-c-generate_line">generate_line</a></li>
+        <li ><a href="#method-c-generate_line">generate_line</a></li>
 
-      <li ><a href="#method-c-generate_lines">generate_lines</a></li>
+        <li ><a href="#method-c-generate_lines">generate_lines</a></li>
 
-      <li ><a href="#method-c-instance">instance</a></li>
+        <li ><a href="#method-c-instance">instance</a></li>
 
-      <li ><a href="#method-c-new">new</a></li>
+        <li ><a href="#method-c-new">new</a></li>
 
-      <li ><a href="#method-c-open">open</a></li>
+        <li ><a href="#method-c-open">open</a></li>
 
-      <li ><a href="#method-c-parse">parse</a></li>
+        <li ><a href="#method-c-parse">parse</a></li>
 
-      <li ><a href="#method-c-parse_line">parse_line</a></li>
+        <li ><a href="#method-c-parse_line">parse_line</a></li>
 
-      <li ><a href="#method-c-read">read</a></li>
+        <li ><a href="#method-c-read">read</a></li>
 
-      <li ><a href="#method-c-readlines">readlines</a></li>
+        <li ><a href="#method-c-readlines">readlines</a></li>
 
-      <li ><a href="#method-c-table">table</a></li>
+        <li ><a href="#method-c-table">table</a></li>
 
-    </ul>
+      </ul>
+    </details>
   </div>
 
 
 
   <div class="nav-section">
-    <h3>Instance Methods</h3>
-    <ul class="link-list" role="directory">
+    <details class="nav-section-collapsible" open>
+      <summary class="nav-section-header">
+        <span class="nav-section-icon">
+          <svg><use href="#icon-instance-methods"></use></svg>
+        </span>
+        <span class="nav-section-title">Instance Methods</span>
+        <span class="nav-section-chevron">
+          <svg><use href="#icon-chevron"></use></svg>
+        </span>
+      </summary>
+      <ul class="nav-list" role="directory">
 
-      <li ><a href="#method-i-3C-3C">&lt;&lt;</a></li>
+        <li ><a href="#method-i-3C-3C">&lt;&lt;</a></li>
 
-      <li ><a href="#method-i-add_row">add_row</a></li>
+        <li ><a href="#method-i-add_row">add_row</a></li>
 
-      <li ><a href="#method-i-binmode-3F">binmode?</a></li>
+        <li ><a href="#method-i-binmode-3F">binmode?</a></li>
 
-      <li ><a href="#method-i-col_sep">col_sep</a></li>
+        <li ><a href="#method-i-col_sep">col_sep</a></li>
 
-      <li ><a href="#method-i-convert">convert</a></li>
+        <li ><a href="#method-i-convert">convert</a></li>
 
-      <li ><a href="#method-i-converters">converters</a></li>
+        <li ><a href="#method-i-converters">converters</a></li>
 
-      <li ><a href="#method-i-each">each</a></li>
+        <li ><a href="#method-i-each">each</a></li>
 
-      <li ><a href="#method-i-eof">eof</a></li>
+        <li ><a href="#method-i-eof">eof</a></li>
 
-      <li ><a href="#method-i-eof-3F">eof?</a></li>
+        <li ><a href="#method-i-eof-3F">eof?</a></li>
 
-      <li ><a href="#method-i-field_size_limit">field_size_limit</a></li>
+        <li ><a href="#method-i-field_size_limit">field_size_limit</a></li>
 
-      <li ><a href="#method-i-flock">flock</a></li>
+        <li ><a href="#method-i-flock">flock</a></li>
 
-      <li ><a href="#method-i-force_quotes-3F">force_quotes?</a></li>
+        <li ><a href="#method-i-force_quotes-3F">force_quotes?</a></li>
 
-      <li ><a href="#method-i-gets">gets</a></li>
+        <li ><a href="#method-i-gets">gets</a></li>
 
-      <li ><a href="#method-i-header_convert">header_convert</a></li>
+        <li ><a href="#method-i-header_convert">header_convert</a></li>
 
-      <li ><a href="#method-i-header_converters">header_converters</a></li>
+        <li ><a href="#method-i-header_converters">header_converters</a></li>
 
-      <li ><a href="#method-i-header_row-3F">header_row?</a></li>
+        <li ><a href="#method-i-header_row-3F">header_row?</a></li>
 
-      <li ><a href="#method-i-headers">headers</a></li>
+        <li ><a href="#method-i-headers">headers</a></li>
 
-      <li ><a href="#method-i-inspect">inspect</a></li>
+        <li ><a href="#method-i-inspect">inspect</a></li>
 
-      <li ><a href="#method-i-ioctl">ioctl</a></li>
+        <li ><a href="#method-i-ioctl">ioctl</a></li>
 
-      <li ><a href="#method-i-liberal_parsing-3F">liberal_parsing?</a></li>
+        <li ><a href="#method-i-liberal_parsing-3F">liberal_parsing?</a></li>
 
-      <li ><a href="#method-i-line">line</a></li>
+        <li ><a href="#method-i-line">line</a></li>
 
-      <li ><a href="#method-i-lineno">lineno</a></li>
+        <li ><a href="#method-i-lineno">lineno</a></li>
 
-      <li ><a href="#method-i-max_field_size">max_field_size</a></li>
+        <li ><a href="#method-i-max_field_size">max_field_size</a></li>
 
-      <li ><a href="#method-i-path">path</a></li>
+        <li ><a href="#method-i-path">path</a></li>
 
-      <li ><a href="#method-i-puts">puts</a></li>
+        <li ><a href="#method-i-puts">puts</a></li>
 
-      <li ><a href="#method-i-quote_char">quote_char</a></li>
+        <li ><a href="#method-i-quote_char">quote_char</a></li>
 
-      <li ><a href="#method-i-read">read</a></li>
+        <li ><a href="#method-i-read">read</a></li>
 
-      <li ><a href="#method-i-readline">readline</a></li>
+        <li ><a href="#method-i-readline">readline</a></li>
 
-      <li ><a href="#method-i-readlines">readlines</a></li>
+        <li ><a href="#method-i-readlines">readlines</a></li>
 
-      <li ><a href="#method-i-return_headers-3F">return_headers?</a></li>
+        <li ><a href="#method-i-return_headers-3F">return_headers?</a></li>
 
-      <li ><a href="#method-i-rewind">rewind</a></li>
+        <li ><a href="#method-i-rewind">rewind</a></li>
 
-      <li ><a href="#method-i-row_sep">row_sep</a></li>
+        <li ><a href="#method-i-row_sep">row_sep</a></li>
 
-      <li ><a href="#method-i-shift">shift</a></li>
+        <li ><a href="#method-i-shift">shift</a></li>
 
-      <li ><a href="#method-i-skip_blanks-3F">skip_blanks?</a></li>
+        <li ><a href="#method-i-skip_blanks-3F">skip_blanks?</a></li>
 
-      <li ><a href="#method-i-skip_lines">skip_lines</a></li>
+        <li ><a href="#method-i-skip_lines">skip_lines</a></li>
 
-      <li ><a href="#method-i-stat">stat</a></li>
+        <li ><a href="#method-i-stat">stat</a></li>
 
-      <li ><a href="#method-i-to_i">to_i</a></li>
+        <li ><a href="#method-i-to_i">to_i</a></li>
 
-      <li ><a href="#method-i-to_io">to_io</a></li>
+        <li ><a href="#method-i-to_io">to_io</a></li>
 
-      <li ><a href="#method-i-unconverted_fields-3F">unconverted_fields?</a></li>
+        <li ><a href="#method-i-unconverted_fields-3F">unconverted_fields?</a></li>
 
-      <li ><a href="#method-i-write_headers-3F">write_headers?</a></li>
+        <li ><a href="#method-i-write_headers-3F">write_headers?</a></li>
 
-    </ul>
+      </ul>
+    </details>
   </div>
 
 
+  <div id="classindex-section" class="nav-section">
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-layers"></use></svg>
+      </span>
+      <span class="nav-section-title">Classes and Modules</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
 
-  <footer id="validator-badges" role="contentinfo">
-  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.15.1.</p>
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
-</footer>
+    <ul class="link-list nav-list"><li><code><a href="./Array.html">Array</a></code></li><li><details><summary><code><a href="./CSV.html">CSV</a></code></summary><ul class="link-list nav-list"><li><code><a href="./CSV/FieldsConverter.html">FieldsConverter</a></code></li><li><code><a href="./CSV/InputRecordSeparator.html">InputRecordSeparator</a></code></li><li><code><a href="./CSV/InvalidEncodingError.html">InvalidEncodingError</a></code></li><li><code><a href="./CSV/MalformedCSVError.html">MalformedCSVError</a></code></li><li><details><summary><code><a href="./CSV/Parser.html">Parser</a></code></summary><ul class="link-list nav-list"><li><code><a href="./CSV/Parser/InputsScanner.html">InputsScanner</a></code></li><li><code><a href="./CSV/Parser/InvalidEncoding.html">InvalidEncoding</a></code></li><li><code><a href="./CSV/Parser/Scanner.html">Scanner</a></code></li><li><code><a href="./CSV/Parser/UnexpectedError.html">UnexpectedError</a></code></li></ul></details></li><li><code><a href="./CSV/Row.html">Row</a></code></li><li><code><a href="./CSV/TSV.html">TSV</a></code></li><li><code><a href="./CSV/Table.html">Table</a></code></li><li><code><a href="./CSV/Writer.html">Writer</a></code></li></ul></details></li><li><code><a href="./Object.html">Object</a></code></li><li><code><a href="./String.html">String</a></code></li></ul>
+  </details>
+</div>
 
 </nav>
 
-<main role="main" aria-labelledby="class-CSV">
+<main role="main" aria-labelledby="class-csv">
   
   
 
-  <h1 id="class-CSV" class="anchor-link class">
+  <span id="class-CSV" class="legacy-anchor"></span>
+  <h1 id="class-csv" class="anchor-link class">
     class CSV
   </h1>
 
   <section class="description">
     
-<h2 id="class-CSV-label-CSV">CSV<span><a href="#class-CSV-label-CSV">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="class-CSV-label-CSV" class="legacy-anchor"></span>
+<h2 id="class-csv-csv"><a href="#class-csv-csv">CSV</a></h2>
 
-<h3 id="class-CSV-label-CSV+Data">CSV Data<span><a href="#class-CSV-label-CSV+Data">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="class-CSV-label-CSV+Data" class="legacy-anchor"></span>
+<h3 id="class-csv-csv-data"><a href="#class-csv-csv-data">CSV Data</a></h3>
 
 <p>CSV (comma-separated values) data is a text representation of a table:</p>
 <ul><li>
@@ -785,7 +733,8 @@
 
 <p>For more about tables, see the Wikipedia article “<a href="https://en.wikipedia.org/wiki/Table_(information)">Table (information)</a>”, especially its section “<a href="https://en.wikipedia.org/wiki/Table_(information)#Simple_table">Simple table</a>”</p>
 
-<h2 id="class-CSV-label-Class+CSV">Class CSV<span><a href="#class-CSV-label-Class+CSV">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="class-CSV-label-Class+CSV" class="legacy-anchor"></span>
+<h2 id="class-csv-class-csv"><a href="#class-csv-class-csv">Class CSV</a></h2>
 
 <p>Class CSV provides methods for:</p>
 <ul><li>
@@ -801,13 +750,15 @@
 
 <p>All examples here assume that this has been done.</p>
 
-<h2 id="class-CSV-label-Keeping+It+Simple">Keeping It Simple<span><a href="#class-CSV-label-Keeping+It+Simple">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="class-CSV-label-Keeping+It+Simple" class="legacy-anchor"></span>
+<h2 id="class-csv-keeping-it-simple"><a href="#class-csv-keeping-it-simple">Keeping It Simple</a></h2>
 
 <p>A CSV object has dozens of instance methods that offer fine-grained control of parsing and generating CSV data. For many needs, though, simpler approaches will do.</p>
 
 <p>This section summarizes the singleton methods in CSV that allow you to parse and generate without explicitly creating CSV objects. For details, follow the links.</p>
 
-<h3 id="class-CSV-label-Simple+Parsing">Simple Parsing<span><a href="#class-CSV-label-Simple+Parsing">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="class-CSV-label-Simple+Parsing" class="legacy-anchor"></span>
+<h3 id="class-csv-simple-parsing"><a href="#class-csv-simple-parsing">Simple Parsing</a></h3>
 
 <p>Parsing methods commonly return either of:</p>
 <ul><li>
@@ -823,7 +774,8 @@
 <p>A <a href="CSV/Table.html"><code>CSV::Table</code></a> object.  For details, see <a href="#class-CSV-label-CSV+with+Headers">CSV with Headers</a>.</p>
 </li></ul>
 
-<h4 id="class-CSV-label-Parsing+a+String">Parsing a String<span><a href="#class-CSV-label-Parsing+a+String">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="class-CSV-label-Parsing+a+String" class="legacy-anchor"></span>
+<h4 id="class-csv-parsing-a-string"><a href="#class-csv-parsing-a-string">Parsing a String</a></h4>
 
 <p>The input to be parsed can be a string:</p>
 
@@ -845,7 +797,8 @@
 <pre class="ruby"><span class="ruby-identifier">string</span>.<span class="ruby-identifier">parse_csv</span> <span class="ruby-comment"># =&gt; [&quot;foo&quot;, &quot;0&quot;]</span>
 </pre>
 
-<h4 id="class-CSV-label-Parsing+Via+a+File+Path">Parsing Via a File Path<span><a href="#class-CSV-label-Parsing+Via+a+File+Path">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="class-CSV-label-Parsing+Via+a+File+Path" class="legacy-anchor"></span>
+<h4 id="class-csv-parsing-via-a-file-path"><a href="#class-csv-parsing-via-a-file-path">Parsing Via a File Path</a></h4>
 
 <p>The input to be parsed can be in a file:</p>
 
@@ -878,7 +831,8 @@
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">table</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; #&lt;CSV::Table mode:col_or_row row_count:3&gt;</span>
 </pre>
 
-<h4 id="class-CSV-label-Parsing+from+an+Open+IO+Stream">Parsing from an Open IO Stream<span><a href="#class-CSV-label-Parsing+from+an+Open+IO+Stream">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="class-CSV-label-Parsing+from+an+Open+IO+Stream" class="legacy-anchor"></span>
+<h4 id="class-csv-parsing-from-an-open-io-stream"><a href="#class-csv-parsing-from-an-open-io-stream">Parsing from an Open IO Stream</a></h4>
 
 <p>The input to be parsed can be in an open IO stream:</p>
 
@@ -926,7 +880,8 @@
 <span class="ruby-keyword">end</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Table mode:col_or_row row_count:3&gt;</span>
 </pre>
 
-<h3 id="class-CSV-label-Simple+Generating">Simple Generating<span><a href="#class-CSV-label-Simple+Generating">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="class-CSV-label-Simple+Generating" class="legacy-anchor"></span>
+<h3 id="class-csv-simple-generating"><a href="#class-csv-simple-generating">Simple Generating</a></h3>
 
 <p>Method <a href="CSV.html#method-c-generate"><code>CSV.generate</code></a> returns a String; this example uses method <a href="CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
@@ -948,7 +903,8 @@
 <pre class="ruby">[<span class="ruby-string">&#39;foo&#39;</span>, <span class="ruby-string">&#39;0&#39;</span>].<span class="ruby-identifier">to_csv</span> <span class="ruby-comment"># =&gt; &quot;foo,0\n&quot;</span>
 </pre>
 
-<h3 id="class-CSV-label-22Filtering-22+CSV">“Filtering” CSV<span><a href="#class-CSV-label-22Filtering-22+CSV">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="class-CSV-label-22Filtering-22+CSV" class="legacy-anchor"></span>
+<h3 id="class-csv-filtering-csv"><a href="#class-csv-filtering-csv">“Filtering” CSV</a></h3>
 
 <p>Method <a href="CSV.html#method-c-filter"><code>CSV.filter</code></a> provides a Unix-style filter for CSV data. The input data is processed to form the output data:</p>
 
@@ -961,7 +917,8 @@
 <span class="ruby-identifier">out_string</span> <span class="ruby-comment"># =&gt; &quot;FOO,0000\nBAR,1111\nBAZ,2222\n&quot;</span>
 </pre>
 
-<h2 id="class-CSV-label-CSV+Objects">CSV Objects<span><a href="#class-CSV-label-CSV+Objects">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="class-CSV-label-CSV+Objects" class="legacy-anchor"></span>
+<h2 id="class-csv-csv-objects"><a href="#class-csv-csv-objects">CSV Objects</a></h2>
 
 <p>There are three ways to create a CSV object:</p>
 <ul><li>
@@ -972,7 +929,8 @@
 <p>Method CSV() also returns a new or cached CSV object.</p>
 </li></ul>
 
-<h3 id="class-CSV-label-Instance+Methods">Instance Methods<span><a href="#class-CSV-label-Instance+Methods">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="class-CSV-label-Instance+Methods" class="legacy-anchor"></span>
+<h3 id="class-csv-instance-methods"><a href="#class-csv-instance-methods">Instance Methods</a></h3>
 
 <p>CSV has three groups of instance methods:</p>
 <ul><li>
@@ -983,7 +941,8 @@
 <p>Methods delegated to class IO. See below.</p>
 </li></ul>
 
-<h4 id="class-CSV-label-Delegated+Methods">Delegated Methods<span><a href="#class-CSV-label-Delegated+Methods">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="class-CSV-label-Delegated+Methods" class="legacy-anchor"></span>
+<h4 id="class-csv-delegated-methods"><a href="#class-csv-delegated-methods">Delegated Methods</a></h4>
 
 <p>For convenience, a <a href="CSV.html"><code>CSV</code></a> object will delegate to many methods in class IO. (A few have wrapper “guard code” in CSV.) You may call:</p>
 <ul><li>
@@ -1054,7 +1013,8 @@
 <p>IO#tty?</p>
 </li></ul>
 
-<h3 id="class-CSV-label-Options">Options<span><a href="#class-CSV-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="class-CSV-label-Options" class="legacy-anchor"></span>
+<h3 id="class-csv-options"><a href="#class-csv-options">Options</a></h3>
 
 <p>The default values for options are:</p>
 
@@ -1086,7 +1046,8 @@
 }
 </pre>
 
-<h4 id="class-CSV-label-Options+for+Parsing">Options for Parsing<span><a href="#class-CSV-label-Options+for+Parsing">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="class-CSV-label-Options+for+Parsing" class="legacy-anchor"></span>
+<h4 id="class-csv-options-for-parsing"><a href="#class-csv-options-for-parsing">Options for Parsing</a></h4>
 
 <p>Options for parsing, described in detail below, include:</p>
 <ul><li>
@@ -1123,7 +1084,8 @@
 <p><code>empty_value</code>: Specifies the object that is to be substituted for each empty field.</p>
 </li></ul>
 
-<h6 id="class-CSV-label-Option+row_sep">Option <a href="CSV.html#method-i-row_sep"><code>row_sep</code></a><span><a href="#class-CSV-label-Option+row_sep">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+row_sep" class="legacy-anchor"></span>
+<h6 id="class-csv-option-rowsep"><a href="#class-csv-option-rowsep">Option <a href="CSV.html#method-i-row_sep"><code>row_sep</code></a></a></h6>
 
 <p>Specifies the row separator, a String or the Symbol <code>:auto</code> (see below), to be used for both parsing and generating.</p>
 
@@ -1200,7 +1162,7 @@
 
 <p>Parsing, on the other hand, invokes auto-discovery of the row separator.</p>
 
-<p>Auto-discovery reads ahead in the data looking for the next <code>\r\n</code>, <code>\n</code>, or <code>\r</code> sequence. The sequence will be selected even if it occurs in a quoted field, assuming that you would have the same line endings there.</p>
+<p>Auto-discovery reads ahead in the data looking for the next <code>\r\n</code>, +\n+, or +\r+ sequence. The sequence will be selected even if it occurs in a quoted field, assuming that you would have the same line endings there.</p>
 
 <p>Example:</p>
 
@@ -1225,7 +1187,8 @@
 
 <p>Obviously, discovery takes a little time. Set manually if speed is important. Also note that IO objects should be opened in binary mode on Windows if this feature will be used as the line-ending translation can cause problems with resetting the document position to where it was before the read ahead.</p>
 
-<h6 id="class-CSV-label-Option+col_sep">Option <a href="CSV.html#method-i-col_sep"><code>col_sep</code></a><span><a href="#class-CSV-label-Option+col_sep">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+col_sep" class="legacy-anchor"></span>
+<h6 id="class-csv-option-colsep"><a href="#class-csv-option-colsep">Option <a href="CSV.html#method-i-col_sep"><code>col_sep</code></a></a></h6>
 
 <p>Specifies the String column separator to be used for both parsing and generating. The String will be transcoded into the data’s Encoding before use.</p>
 
@@ -1291,7 +1254,8 @@
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&quot;foo0\nbar1\nbaz2\n&quot;</span>, <span class="ruby-value">col_sep:</span> <span class="ruby-identifier">col_sep</span>)
 </pre>
 
-<h6 id="class-CSV-label-Option+quote_char">Option <a href="CSV.html#method-i-quote_char"><code>quote_char</code></a><span><a href="#class-CSV-label-Option+quote_char">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+quote_char" class="legacy-anchor"></span>
+<h6 id="class-csv-option-quotechar"><a href="#class-csv-option-quotechar">Option <a href="CSV.html#method-i-quote_char"><code>quote_char</code></a></a></h6>
 
 <p>Specifies the character (String of length 1) used used to quote fields in both parsing and generating. This <a href="String.html"><code>String</code></a> will be transcoded into the data’s Encoding before use.</p>
 
@@ -1340,7 +1304,8 @@
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">quote_char:</span> <span class="ruby-value">:foo</span>)
 </pre>
 
-<h6 id="class-CSV-label-Option+field_size_limit">Option <a href="CSV.html#method-i-field_size_limit"><code>field_size_limit</code></a><span><a href="#class-CSV-label-Option+field_size_limit">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+field_size_limit" class="legacy-anchor"></span>
+<h6 id="class-csv-option-fieldsizelimit"><a href="#class-csv-option-fieldsizelimit">Option <a href="CSV.html#method-i-field_size_limit"><code>field_size_limit</code></a></a></h6>
 
 <p>Specifies the Integer field size limit.</p>
 
@@ -1357,8 +1322,8 @@
 <span class="ruby-value">  &quot;a&quot;,&quot;b&quot;
   &quot;
   2345
-  &quot;,&quot;&quot;
-</span><span class="ruby-identifier">EOT</span>
+  &quot;,&quot;&quot;</span>
+<span class="ruby-identifier">EOT</span>
 <span class="ruby-identifier">str</span> <span class="ruby-comment"># =&gt; &quot;\&quot;a\&quot;,\&quot;b\&quot;\n\&quot;\n2345\n\&quot;,\&quot;\&quot;\n&quot;</span>
 </pre>
 
@@ -1383,7 +1348,8 @@
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&#39;valid,fields,&quot;&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">big_str</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;&quot;&#39;</span>, <span class="ruby-value">field_size_limit:</span> <span class="ruby-value">2048</span>)
 </pre>
 
-<h6 id="class-CSV-label-Option+converters">Option <code>converters</code><span><a href="#class-CSV-label-Option+converters">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+converters" class="legacy-anchor"></span>
+<h6 id="class-csv-option-converters"><a href="#class-csv-option-converters">Option <code>converters</code></a></h6>
 
 <p>Specifies converters to be used in parsing fields. See <a href="#class-CSV-label-Field+Converters">Field Converters</a></p>
 
@@ -1435,7 +1401,8 @@
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">converters:</span> <span class="ruby-value">:foo</span>)
 </pre>
 
-<h6 id="class-CSV-label-Option+unconverted_fields">Option <code>unconverted_fields</code><span><a href="#class-CSV-label-Option+unconverted_fields">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+unconverted_fields" class="legacy-anchor"></span>
+<h6 id="class-csv-option-unconvertedfields"><a href="#class-csv-option-unconvertedfields">Option <code>unconverted_fields</code></a></h6>
 
 <p>Specifies the boolean that determines whether unconverted field values are to be available.</p>
 
@@ -1451,8 +1418,8 @@
 <pre class="ruby"><span class="ruby-identifier">str</span> = <span class="ruby-identifier">&lt;&lt;-EOT</span>
 <span class="ruby-value">foo,0
 bar,1
-baz,2
-</span><span class="ruby-identifier">EOT</span>
+baz,2</span>
+<span class="ruby-identifier">EOT</span>
 <span class="ruby-comment"># Without unconverted_fields</span>
 <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">converters:</span> <span class="ruby-value">:integer</span>)
 <span class="ruby-identifier">csv</span> <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, 0], [&quot;bar&quot;, 1], [&quot;baz&quot;, 2]]</span>
@@ -1464,7 +1431,8 @@ baz,2
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">unconverted_fields</span> <span class="ruby-comment"># =&gt; [&quot;foo&quot;, &quot;0&quot;]</span>
 </pre>
 
-<h6 id="class-CSV-label-Option+headers">Option <code>headers</code><span><a href="#class-CSV-label-Option+headers">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+headers" class="legacy-anchor"></span>
+<h6 id="class-csv-option-headers"><a href="#class-csv-option-headers">Option <code>headers</code></a></h6>
 
 <p>Specifies a boolean, Symbol, Array, or String to be used to define column headers.</p>
 
@@ -1480,8 +1448,8 @@ baz,2
 <span class="ruby-value">Name,Count
 foo,0
 bar,1
-bax,2
-</span><span class="ruby-identifier">EOT</span>
+bax,2</span>
+<span class="ruby-identifier">EOT</span>
 <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
 <span class="ruby-identifier">csv</span> <span class="ruby-comment"># =&gt; #&lt;CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:&quot;,&quot; row_sep:&quot;\n&quot; quote_char:&quot;\&quot;&quot;&gt;</span>
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; nil</span>
@@ -1495,8 +1463,8 @@ bax,2
 <span class="ruby-value">Name,Count
 foo,0
 bar,1
-bax,2
-</span><span class="ruby-identifier">EOT</span>
+bax,2</span>
+<span class="ruby-identifier">EOT</span>
 <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">csv</span> <span class="ruby-comment"># =&gt; #&lt;CSV io_type:StringIO encoding:UTF-8 lineno:2 col_sep:&quot;,&quot; row_sep:&quot;\n&quot; quote_char:&quot;\&quot;&quot; headers:[&quot;Name&quot;, &quot;Count&quot;]&gt;</span>
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Count&quot;]</span>
@@ -1509,8 +1477,8 @@ bax,2
 <pre class="ruby"><span class="ruby-identifier">str</span> = <span class="ruby-identifier">&lt;&lt;-EOT</span>
 <span class="ruby-value">foo,0
 bar,1
-bax,2
-</span><span class="ruby-identifier">EOT</span>
+bax,2</span>
+<span class="ruby-identifier">EOT</span>
 <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">headers:</span> [<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Count&#39;</span>])
 <span class="ruby-identifier">csv</span>
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Count&quot;]</span>
@@ -1523,15 +1491,16 @@ bax,2
 <pre class="ruby"><span class="ruby-identifier">str</span> = <span class="ruby-identifier">&lt;&lt;-EOT</span>
 <span class="ruby-value">foo,0
 bar,1
-bax,2
-</span><span class="ruby-identifier">EOT</span>
+bax,2</span>
+<span class="ruby-identifier">EOT</span>
 <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">headers:</span> <span class="ruby-string">&#39;Name,Count&#39;</span>)
 <span class="ruby-identifier">csv</span>
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Count&quot;]</span>
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">shift</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;bar&quot; &quot;Count&quot;:&quot;1&quot;&gt;</span>
 </pre>
 
-<h6 id="class-CSV-label-Option+return_headers">Option <code>return_headers</code><span><a href="#class-CSV-label-Option+return_headers">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+return_headers" class="legacy-anchor"></span>
+<h6 id="class-csv-option-returnheaders"><a href="#class-csv-option-returnheaders">Option <code>return_headers</code></a></h6>
 
 <p>Specifies the boolean that determines whether method <a href="CSV.html#method-i-shift"><code>shift</code></a> returns or ignores the header row.</p>
 
@@ -1546,8 +1515,8 @@ bax,2
 <span class="ruby-value">Name,Count
 foo,0
 bar,1
-bax,2
-</span><span class="ruby-identifier">EOT</span>
+bax,2</span>
+<span class="ruby-identifier">EOT</span>
 <span class="ruby-comment"># Without return_headers first row is str.</span>
 <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">shift</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;foo&quot; &quot;Count&quot;:&quot;0&quot;&gt;</span>
@@ -1556,7 +1525,8 @@ bax,2
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">shift</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;Name&quot; &quot;Count&quot;:&quot;Count&quot;&gt;</span>
 </pre>
 
-<h6 id="class-CSV-label-Option+header_converters">Option <a href="CSV.html#method-i-header_converters"><code>header_converters</code></a><span><a href="#class-CSV-label-Option+header_converters">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+header_converters" class="legacy-anchor"></span>
+<h6 id="class-csv-option-headerconverters"><a href="#class-csv-option-headerconverters">Option <a href="CSV.html#method-i-header_converters"><code>header_converters</code></a></a></h6>
 
 <p>Specifies converters to be used in parsing headers. See <a href="#class-CSV-label-Header+Converters">Header Converters</a></p>
 
@@ -1578,8 +1548,8 @@ bax,2
 <span class="ruby-value">Name,Value
 foo,0
 bar,1
-baz,2
-</span><span class="ruby-identifier">EOT</span>
+baz,2</span>
+<span class="ruby-identifier">EOT</span>
 <span class="ruby-comment"># With no header converter</span>
 <span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">table</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Value&quot;]</span>
@@ -1607,7 +1577,8 @@ baz,2
 
 <p>See also <a href="#class-CSV-label-Custom+Header+Converters">Custom Header Converters</a></p>
 
-<h6 id="class-CSV-label-Option+skip_blanks">Option <code>skip_blanks</code><span><a href="#class-CSV-label-Option+skip_blanks">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+skip_blanks" class="legacy-anchor"></span>
+<h6 id="class-csv-option-skipblanks"><a href="#class-csv-option-skipblanks">Option <code>skip_blanks</code></a></h6>
 
 <p>Specifies a boolean that determines whether blank lines in the input will be ignored; a line that contains a column separator is not considered to be blank.</p>
 
@@ -1626,8 +1597,8 @@ baz,2
 bar,1
 baz,2
 
-,
-</span><span class="ruby-identifier">EOT</span>
+,</span>
+<span class="ruby-identifier">EOT</span>
 </pre>
 
 <p>Using the default, <code>false</code>:</p>
@@ -1648,7 +1619,8 @@ baz,2
 <span class="ruby-identifier">ary</span> <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;0&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;], [nil, nil]]</span>
 </pre>
 
-<h6 id="class-CSV-label-Option+skip_lines">Option <a href="CSV.html#method-i-skip_lines"><code>skip_lines</code></a><span><a href="#class-CSV-label-Option+skip_lines">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+skip_lines" class="legacy-anchor"></span>
+<h6 id="class-csv-option-skiplines"><a href="#class-csv-option-skiplines">Option <a href="CSV.html#method-i-skip_lines"><code>skip_lines</code></a></a></h6>
 
 <p>Specifies an object to use in identifying comment lines in the input that are to be ignored:</p>
 <ul><li>
@@ -1671,8 +1643,8 @@ baz,2
 foo,0
 bar,1
 baz,2
-# Another comment
-</span><span class="ruby-identifier">EOT</span>
+# Another comment</span>
+<span class="ruby-identifier">EOT</span>
 <span class="ruby-identifier">str</span> <span class="ruby-comment"># =&gt; &quot;# Comment\nfoo,0\nbar,1\nbaz,2\n# Another comment\n&quot;</span>
 </pre>
 
@@ -1701,7 +1673,8 @@ baz,2
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">skip_lines:</span> <span class="ruby-value">0</span>)
 </pre>
 
-<h6 id="class-CSV-label-Option+strip">Option <code>strip</code><span><a href="#class-CSV-label-Option+strip">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+strip" class="legacy-anchor"></span>
+<h6 id="class-csv-option-strip"><a href="#class-csv-option-strip">Option <code>strip</code></a></h6>
 
 <p>Specifies the boolean value that determines whether whitespace is stripped from each input field.</p>
 
@@ -1722,7 +1695,8 @@ baz,2
 <span class="ruby-identifier">ary</span> <span class="ruby-comment"># =&gt; [&quot;a&quot;, &quot;b&quot;]</span>
 </pre>
 
-<h6 id="class-CSV-label-Option+liberal_parsing">Option <code>liberal_parsing</code><span><a href="#class-CSV-label-Option+liberal_parsing">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+liberal_parsing" class="legacy-anchor"></span>
+<h6 id="class-csv-option-liberalparsing"><a href="#class-csv-option-liberalparsing">Option <code>liberal_parsing</code></a></h6>
 
 <p>Specifies the boolean or hash value that determines whether <a href="CSV.html"><code>CSV</code></a> will attempt to parse input not conformant with RFC 4180, such as double quotes in unquoted fields.</p>
 
@@ -1770,7 +1744,8 @@ baz,2
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>] <span class="ruby-comment"># =&gt; Harry &quot;Handcuff&quot; Houdini, the one and only</span>
 </pre>
 
-<h6 id="class-CSV-label-Option+nil_value">Option <code>nil_value</code><span><a href="#class-CSV-label-Option+nil_value">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+nil_value" class="legacy-anchor"></span>
+<h6 id="class-csv-option-nilvalue"><a href="#class-csv-option-nilvalue">Option <code>nil_value</code></a></h6>
 
 <p>Specifies the object that is to be substituted for each null (no-text) field.</p>
 
@@ -1789,7 +1764,8 @@ baz,2
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-string">&#39;a,,b,,c&#39;</span>, <span class="ruby-value">nil_value:</span> <span class="ruby-value">0</span>) <span class="ruby-comment"># =&gt; [&quot;a&quot;, 0, &quot;b&quot;, 0, &quot;c&quot;]</span>
 </pre>
 
-<h6 id="class-CSV-label-Option+empty_value">Option <code>empty_value</code><span><a href="#class-CSV-label-Option+empty_value">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+empty_value" class="legacy-anchor"></span>
+<h6 id="class-csv-option-emptyvalue"><a href="#class-csv-option-emptyvalue">Option <code>empty_value</code></a></h6>
 
 <p>Specifies the object that is to be substituted for each field that has an empty String.</p>
 
@@ -1808,7 +1784,8 @@ baz,2
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-string">&#39;a,&quot;&quot;,b,&quot;&quot;,c&#39;</span>, <span class="ruby-value">empty_value:</span> <span class="ruby-string">&#39;x&#39;</span>) <span class="ruby-comment"># =&gt; [&quot;a&quot;, &quot;x&quot;, &quot;b&quot;, &quot;x&quot;, &quot;c&quot;]</span>
 </pre>
 
-<h4 id="class-CSV-label-Options+for+Generating">Options for Generating<span><a href="#class-CSV-label-Options+for+Generating">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="class-CSV-label-Options+for+Generating" class="legacy-anchor"></span>
+<h4 id="class-csv-options-for-generating"><a href="#class-csv-options-for-generating">Options for Generating</a></h4>
 
 <p>Options for generating, described in detail below, include:</p>
 <ul><li>
@@ -1831,7 +1808,8 @@ baz,2
 <p><code>write_empty_value</code>: Specifies the object that is to be substituted for each empty field.</p>
 </li></ul>
 
-<h6 id="class-CSV-label-Option+row_sep">Option <a href="CSV.html#method-i-row_sep"><code>row_sep</code></a><span><a href="#class-CSV-label-Option+row_sep">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+row_sep-1" class="legacy-anchor"></span>
+<h6 id="class-csv-option-rowsep-1"><a href="#class-csv-option-rowsep-1">Option <a href="CSV.html#method-i-row_sep"><code>row_sep</code></a></a></h6>
 
 <p>Specifies the row separator, a String or the Symbol <code>:auto</code> (see below), to be used for both parsing and generating.</p>
 
@@ -1908,7 +1886,7 @@ baz,2
 
 <p>Parsing, on the other hand, invokes auto-discovery of the row separator.</p>
 
-<p>Auto-discovery reads ahead in the data looking for the next <code>\r\n</code>, <code>\n</code>, or <code>\r</code> sequence. The sequence will be selected even if it occurs in a quoted field, assuming that you would have the same line endings there.</p>
+<p>Auto-discovery reads ahead in the data looking for the next <code>\r\n</code>, +\n+, or +\r+ sequence. The sequence will be selected even if it occurs in a quoted field, assuming that you would have the same line endings there.</p>
 
 <p>Example:</p>
 
@@ -1933,7 +1911,8 @@ baz,2
 
 <p>Obviously, discovery takes a little time. Set manually if speed is important. Also note that IO objects should be opened in binary mode on Windows if this feature will be used as the line-ending translation can cause problems with resetting the document position to where it was before the read ahead.</p>
 
-<h6 id="class-CSV-label-Option+col_sep">Option <a href="CSV.html#method-i-col_sep"><code>col_sep</code></a><span><a href="#class-CSV-label-Option+col_sep">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+col_sep-1" class="legacy-anchor"></span>
+<h6 id="class-csv-option-colsep-1"><a href="#class-csv-option-colsep-1">Option <a href="CSV.html#method-i-col_sep"><code>col_sep</code></a></a></h6>
 
 <p>Specifies the String column separator to be used for both parsing and generating. The String will be transcoded into the data’s Encoding before use.</p>
 
@@ -1999,7 +1978,8 @@ baz,2
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&quot;foo0\nbar1\nbaz2\n&quot;</span>, <span class="ruby-value">col_sep:</span> <span class="ruby-identifier">col_sep</span>)
 </pre>
 
-<h6 id="class-CSV-label-Option+quote_char">Option <a href="CSV.html#method-i-quote_char"><code>quote_char</code></a><span><a href="#class-CSV-label-Option+quote_char">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+quote_char-1" class="legacy-anchor"></span>
+<h6 id="class-csv-option-quotechar-1"><a href="#class-csv-option-quotechar-1">Option <a href="CSV.html#method-i-quote_char"><code>quote_char</code></a></a></h6>
 
 <p>Specifies the character (String of length 1) used used to quote fields in both parsing and generating. This <a href="String.html"><code>String</code></a> will be transcoded into the data’s Encoding before use.</p>
 
@@ -2048,7 +2028,8 @@ baz,2
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">quote_char:</span> <span class="ruby-value">:foo</span>)
 </pre>
 
-<h6 id="class-CSV-label-Option+write_headers">Option <code>write_headers</code><span><a href="#class-CSV-label-Option+write_headers">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+write_headers" class="legacy-anchor"></span>
+<h6 id="class-csv-option-writeheaders"><a href="#class-csv-option-writeheaders">Option <code>write_headers</code></a></h6>
 
 <p>Specifies the boolean that determines whether a header row is included in the output; ignored if there are no headers.</p>
 
@@ -2083,7 +2064,8 @@ baz,2
 <span class="ruby-keyword">end</span> <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Value&quot;]</span>
 </pre>
 
-<h6 id="class-CSV-label-Option+force_quotes">Option <code>force_quotes</code><span><a href="#class-CSV-label-Option+force_quotes">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+force_quotes" class="legacy-anchor"></span>
+<h6 id="class-csv-option-forcequotes"><a href="#class-csv-option-forcequotes">Option <code>force_quotes</code></a></h6>
 
 <p>Specifies the boolean that determines whether each output field is to be double-quoted.</p>
 
@@ -2109,7 +2091,8 @@ baz,2
 <span class="ruby-identifier">str</span> <span class="ruby-comment"># =&gt; &quot;\&quot;foo\&quot;,\&quot;0\&quot;,\&quot;\&quot;\n&quot;</span>
 </pre>
 
-<h6 id="class-CSV-label-Option+quote_empty">Option <code>quote_empty</code><span><a href="#class-CSV-label-Option+quote_empty">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+quote_empty" class="legacy-anchor"></span>
+<h6 id="class-csv-option-quoteempty"><a href="#class-csv-option-quoteempty">Option <code>quote_empty</code></a></h6>
 
 <p>Specifies the boolean that determines whether an empty value is to be double-quoted.</p>
 
@@ -2128,7 +2111,8 @@ baz,2
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate_line</span>([<span class="ruby-string">&#39;&quot;&#39;</span>, <span class="ruby-string">&quot;&quot;</span>], <span class="ruby-value">quote_empty:</span> <span class="ruby-keyword">false</span>) <span class="ruby-comment"># =&gt; &quot;\&quot;\&quot;\&quot;\&quot;,\n&quot;</span>
 </pre>
 
-<h6 id="class-CSV-label-Option+write_converters">Option <code>write_converters</code><span><a href="#class-CSV-label-Option+write_converters">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+write_converters" class="legacy-anchor"></span>
+<h6 id="class-csv-option-writeconverters"><a href="#class-csv-option-writeconverters">Option <code>write_converters</code></a></h6>
 
 <p>Specifies converters to be used in generating fields. See <a href="#class-CSV-label-Write+Converters">Write Converters</a></p>
 
@@ -2161,7 +2145,8 @@ baz,2
 
 <p>See also <a href="#class-CSV-label-Write+Converters">Write Converters</a></p>
 
-<h6 id="class-CSV-label-Option+write_nil_value">Option <code>write_nil_value</code><span><a href="#class-CSV-label-Option+write_nil_value">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+write_nil_value" class="legacy-anchor"></span>
+<h6 id="class-csv-option-writenilvalue"><a href="#class-csv-option-writenilvalue">Option <code>write_nil_value</code></a></h6>
 
 <p>Specifies the object that is to be substituted for each <code>nil</code>-valued field.</p>
 
@@ -2182,7 +2167,8 @@ baz,2
 <span class="ruby-identifier">str</span> <span class="ruby-comment"># =&gt; &quot;a,x,c,x\n&quot;</span>
 </pre>
 
-<h6 id="class-CSV-label-Option+write_empty_value">Option <code>write_empty_value</code><span><a href="#class-CSV-label-Option+write_empty_value">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="class-CSV-label-Option+write_empty_value" class="legacy-anchor"></span>
+<h6 id="class-csv-option-writeemptyvalue"><a href="#class-csv-option-writeemptyvalue">Option <code>write_empty_value</code></a></h6>
 
 <p>Specifies the object that is to be substituted for each field that has an empty String.</p>
 
@@ -2203,7 +2189,8 @@ baz,2
 <span class="ruby-identifier">str</span> <span class="ruby-comment"># =&gt; &quot;a,x,c,x\n&quot;</span>
 </pre>
 
-<h3 id="class-CSV-label-CSV+with+Headers">CSV with Headers<span><a href="#class-CSV-label-CSV+with+Headers">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="class-CSV-label-CSV+with+Headers" class="legacy-anchor"></span>
+<h3 id="class-csv-csv-with-headers"><a href="#class-csv-csv-with-headers">CSV with Headers</a></h3>
 
 <p><a href="CSV.html"><code>CSV</code></a> allows to specify column names of <a href="CSV.html"><code>CSV</code></a> file, whether they are in data, or provided separately. If headers are specified, reading methods return an instance of <a href="CSV/Table.html"><code>CSV::Table</code></a>, consisting of <a href="CSV/Row.html"><code>CSV::Row</code></a>.</p>
 
@@ -2212,8 +2199,8 @@ baz,2
 <span class="ruby-value">  Name,Department,Salary
   Bob,Engineering,1000
   Jane,Sales,2000
-  John,Management,5000
-</span><span class="ruby-identifier">ROWS</span>
+  John,Management,5000</span>
+<span class="ruby-identifier">ROWS</span>
 
 <span class="ruby-identifier">data</span>.<span class="ruby-identifier">class</span>      <span class="ruby-comment">#=&gt; CSV::Table</span>
 <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span>      <span class="ruby-comment">#=&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;Bob&quot; &quot;Department&quot;:&quot;Engineering&quot; &quot;Salary&quot;:&quot;1000&quot;&gt;</span>
@@ -2224,7 +2211,8 @@ baz,2
 <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span>      <span class="ruby-comment">#=&gt; #&lt;CSV::Row name:&quot;Bob&quot; department:&quot;Engineering&quot; salary:&quot;1000&quot;&gt;</span>
 </pre>
 
-<h3 id="class-CSV-label-Converters">Converters<span><a href="#class-CSV-label-Converters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="class-CSV-label-Converters" class="legacy-anchor"></span>
+<h3 id="class-csv-converters"><a href="#class-csv-converters">Converters</a></h3>
 
 <p>By default, each value (field or header) parsed by CSV is formed into a String. You can use a <em>field</em> <em>converter</em> or  <em>header</em> <em>converter</em> to intercept and modify the parsed values:</p>
 <ul><li>
@@ -2238,7 +2226,8 @@ baz,2
 <p>See <a href="#class-CSV-label-Write+Converters">Write Converters</a>.</p>
 </li></ul>
 
-<h4 id="class-CSV-label-Specifying+Converters">Specifying Converters<span><a href="#class-CSV-label-Specifying+Converters">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="class-CSV-label-Specifying+Converters" class="legacy-anchor"></span>
+<h4 id="class-csv-specifying-converters"><a href="#class-csv-specifying-converters">Specifying Converters</a></h4>
 
 <p>You can specify converters for parsing or generating in the <code>options</code> argument to various CSV methods:</p>
 <ul><li>
@@ -2258,7 +2247,8 @@ baz,2
 <p>A converter list: an array of converter procs, converter names, and converter lists.</p>
 </li></ul>
 
-<h5 id="class-CSV-label-Converter+Procs">Converter Procs<span><a href="#class-CSV-label-Converter+Procs">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="class-CSV-label-Converter+Procs" class="legacy-anchor"></span>
+<h5 id="class-csv-converter-procs"><a href="#class-csv-converter-procs">Converter Procs</a></h5>
 
 <p>This converter proc, <code>strip_converter</code>, accepts a value <code>field</code> and returns <code>field.strip</code>:</p>
 
@@ -2308,7 +2298,8 @@ baz,2
 <p>The field header, if any.</p>
 </li></ul>
 
-<h5 id="class-CSV-label-Stored+Converters">Stored Converters<span><a href="#class-CSV-label-Stored+Converters">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="class-CSV-label-Stored+Converters" class="legacy-anchor"></span>
+<h5 id="class-csv-stored-converters"><a href="#class-csv-stored-converters">Stored Converters</a></h5>
 
 <p>A converter may be given a name and stored in a structure where the parsing methods can find it by name.</p>
 
@@ -2349,7 +2340,8 @@ baz,2
 
 <p>In order for the parsing methods to access stored converters in non-main-Ractors, the storage structure must be made shareable first. Therefore, <code>Ractor.make_shareable(CSV::Converters)</code> and <code>Ractor.make_shareable(CSV::HeaderConverters)</code> must be called before the creation of Ractors that use the converters stored in these structures. (Since making the storage structures shareable involves freezing them, any custom converters that are to be used must be added first.)</p>
 
-<h5 id="class-CSV-label-Converter+Lists">Converter Lists<span><a href="#class-CSV-label-Converter+Lists">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="class-CSV-label-Converter+Lists" class="legacy-anchor"></span>
+<h5 id="class-csv-converter-lists"><a href="#class-csv-converter-lists">Converter Lists</a></h5>
 
 <p>A <em>converter</em> <em>list</em> is an Array that may include any assortment of:</p>
 <ul><li>
@@ -2380,7 +2372,8 @@ baz,2
 <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Converters</span>[<span class="ruby-value">:all</span>] <span class="ruby-comment"># =&gt; [:date_time, :numeric]</span>
 </pre>
 
-<h4 id="class-CSV-label-Field+Converters">Field Converters<span><a href="#class-CSV-label-Field+Converters">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="class-CSV-label-Field+Converters" class="legacy-anchor"></span>
+<h4 id="class-csv-field-converters"><a href="#class-csv-field-converters">Field Converters</a></h4>
 
 <p>With no conversion, all parsed fields in all rows become Strings:</p>
 
@@ -2391,7 +2384,7 @@ baz,2
 
 <p>When you specify a field converter, each parsed field is passed to the converter; its return value becomes the stored value for the field. A converter might, for example, convert an integer embedded in a String into a true Integer. (In fact, that’s what built-in field converter <code>:integer</code> does.)</p>
 
-<p>There are three ways to use field converters.</p>
+<p>There are three ways to use field \converters.</p>
 <ul><li>
 <p>Using option <a href="#class-CSV-label-Option+converters">converters</a> with a parsing method:</p>
 
@@ -2427,9 +2420,10 @@ baz,2
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">read</span> <span class="ruby-comment"># =&gt; [[&quot;bar&quot;, 1], [&quot;baz&quot;, 2]]</span>
 </pre>
 
-<p>There are additional built-in converters, and custom converters are also supported.</p>
+<p>There are additional built-in \converters, and custom \converters are also supported.</p>
 
-<h5 id="class-CSV-label-Built-In+Field+Converters">Built-In Field Converters<span><a href="#class-CSV-label-Built-In+Field+Converters">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="class-CSV-label-Built-In+Field+Converters" class="legacy-anchor"></span>
+<h5 id="class-csv-built-in-field-converters"><a href="#class-csv-built-in-field-converters">Built-In Field Converters</a></h5>
 
 <p>The built-in field converters are in Hash <a href="CSV.html#Converters"><code>CSV::Converters</code></a>:</p>
 <ul><li>
@@ -2526,7 +2520,7 @@ baz,2
 
 <p>Converter <code>:numeric</code> converts with both <code>:date_time</code> and <code>:numeric</code>..</p>
 
-<p>As seen above, method <a href="CSV.html#method-i-convert"><code>convert</code></a> adds converters to a CSV instance, and method <a href="CSV.html#method-i-converters"><code>converters</code></a> returns an Array of the converters in effect:</p>
+<p>As seen above, method <a href="CSV.html#method-i-convert"><code>convert</code></a> adds \converters to a CSV instance, and method <a href="CSV.html#method-i-converters"><code>converters</code></a> returns an Array of the \converters in effect:</p>
 
 <pre class="ruby"><span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;0,1,2&#39;</span>)
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">converters</span> <span class="ruby-comment"># =&gt; []</span>
@@ -2536,7 +2530,8 @@ baz,2
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">converters</span> <span class="ruby-comment"># =&gt; [:integer, :date]</span>
 </pre>
 
-<h5 id="class-CSV-label-Custom+Field+Converters">Custom Field Converters<span><a href="#class-CSV-label-Custom+Field+Converters">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="class-CSV-label-Custom+Field+Converters" class="legacy-anchor"></span>
+<h5 id="class-csv-custom-field-converters"><a href="#class-csv-custom-field-converters">Custom Field Converters</a></h5>
 
 <p>You can define a custom field converter:</p>
 
@@ -2554,11 +2549,12 @@ baz,2
 <span class="ruby-identifier">array</span> <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;0&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
 </pre>
 
-<h4 id="class-CSV-label-Header+Converters">Header Converters<span><a href="#class-CSV-label-Header+Converters">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="class-CSV-label-Header+Converters" class="legacy-anchor"></span>
+<h4 id="class-csv-header-converters"><a href="#class-csv-header-converters">Header Converters</a></h4>
 
 <p>Header converters operate only on headers (and not on other rows).</p>
 
-<p>There are three ways to use header converters; these examples use built-in header converter <code>:downcase</code>, which downcases each parsed header.</p>
+<p>There are three ways to use header \converters; these examples use built-in header converter <code>:downcase</code>, which downcases each parsed header.</p>
 <ul><li>
 <p>Option <a href="CSV.html#method-i-header_converters"><code>header_converters</code></a> with a singleton parsing method:</p>
 
@@ -2588,9 +2584,10 @@ baz,2
 </pre>
 </li></ul>
 
-<h5 id="class-CSV-label-Built-In+Header+Converters">Built-In Header Converters<span><a href="#class-CSV-label-Built-In+Header+Converters">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="class-CSV-label-Built-In+Header+Converters" class="legacy-anchor"></span>
+<h5 id="class-csv-built-in-header-converters"><a href="#class-csv-built-in-header-converters">Built-In Header Converters</a></h5>
 
-<p>The built-in header converters are in Hash <a href="CSV.html#HeaderConverters"><code>CSV::HeaderConverters</code></a>. The keys there are the names of the converters:</p>
+<p>The built-in header \converters are in Hash <a href="CSV.html#HeaderConverters"><code>CSV::HeaderConverters</code></a>. The keys there are the names of the \converters:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">HeaderConverters</span>.<span class="ruby-identifier">keys</span> <span class="ruby-comment"># =&gt; [:downcase, :symbol]</span>
 </pre>
@@ -2623,7 +2620,8 @@ baz,2
 <p>Makes the string into a Symbol.</p>
 </li></ul>
 
-<h5 id="class-CSV-label-Custom+Header+Converters">Custom Header Converters<span><a href="#class-CSV-label-Custom+Header+Converters">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="class-CSV-label-Custom+Header+Converters" class="legacy-anchor"></span>
+<h5 id="class-csv-custom-header-converters"><a href="#class-csv-custom-header-converters">Custom Header Converters</a></h5>
 
 <p>You can define a custom header converter:</p>
 
@@ -2642,7 +2640,8 @@ baz,2
 <span class="ruby-identifier">table</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;NAME&quot;, &quot;VALUE&quot;]</span>
 </pre>
 
-<h5 id="class-CSV-label-Write+Converters">Write Converters<span><a href="#class-CSV-label-Write+Converters">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="class-CSV-label-Write+Converters" class="legacy-anchor"></span>
+<h5 id="class-csv-write-converters"><a href="#class-csv-write-converters">Write Converters</a></h5>
 
 <p>When you specify a write converter for generating CSV, each field to be written is passed to the converter; its return value becomes the new value for the field. A converter might, for example, strip whitespace from a field.</p>
 
@@ -2669,7 +2668,8 @@ baz,2
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;FOO,0\nBAR,1\nBAZ,2\n&quot;</span>
 </pre>
 
-<h3 id="class-CSV-label-Character+Encodings+-28M17n+or+Multilingualization-29">Character Encodings (M17n or Multilingualization)<span><a href="#class-CSV-label-Character+Encodings+-28M17n+or+Multilingualization-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="class-CSV-label-Character+Encodings+-28M17n+or+Multilingualization-29" class="legacy-anchor"></span>
+<h3 id="class-csv-character-encodings-m17n-or-multilingualization"><a href="#class-csv-character-encodings-m17n-or-multilingualization">Character Encodings (M17n or Multilingualization)</a></h3>
 
 <p>This new <a href="CSV.html"><code>CSV</code></a> parser is m17n savvy.  The parser works in the Encoding of the IO or <a href="String.html"><code>String</code></a> object being read from or written to. Your data is never transcoded (unless you ask Ruby to transcode it for you) and will literally be parsed in the Encoding it is in. Thus <a href="CSV.html"><code>CSV</code></a> will return Arrays or Rows of Strings in the Encoding of your data. This is accomplished by transcoding the parser itself into your Encoding.</p>
 
@@ -2688,7 +2688,8 @@ baz,2
   </section>
 
 
-  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+  <span id="5Buntitled-5D" class="legacy-anchor"></span>
+  <section class="documentation-section anchor-link">
 
 
 
@@ -2696,7 +2697,7 @@ baz,2
 
     <section class="constants-list">
       <header>
-        <h3>Constants</h3>
+        <h3 id="untitled-constants"><a href="#untitled-constants">Constants</a></h3>
       </header>
       <dl>
 
@@ -2788,7 +2789,7 @@ baz,2
 
     <section class="attribute-method-details method-section">
       <header>
-        <h3>Attributes</h3>
+        <h3 id="untitled-attributes"><a href="#untitled-attributes">Attributes</a></h3>
       </header>
 
 
@@ -2819,9 +2820,12 @@ baz,2
 
 
 
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
+
+
+
+     <section id="public-class-untitled-method-details" class="method-section anchor-link">
        <header>
-         <h3>Public Class Methods</h3>
+         <h3 id="public-class-untitled-methods"><a href="#public-class-untitled-methods">Public Class Methods</a></h3>
        </header>
 
 
@@ -2862,13 +2866,8 @@ baz,2
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="filter-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1259</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1259</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter</span>(<span class="ruby-identifier">input</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">output</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-comment"># parse options for input, output, or both</span>
   <span class="ruby-identifier">in_options</span>, <span class="ruby-identifier">out_options</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>, {<span class="ruby-value">row_sep:</span> <span class="ruby-constant">InputRecordSeparator</span>.<span class="ruby-identifier">value</span>}
@@ -2914,6 +2913,9 @@ baz,2
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <ul><li>
@@ -3062,8 +3064,8 @@ BAZ,-2</pre>
   CSV.filter do |row|
     row[0].upcase!
     row[1] = - row[1].to_i
-  end
-</span><span class="ruby-identifier">EOT</span>
+  end</span>
+<span class="ruby-identifier">EOT</span>
 <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-string">&#39;t.rb&#39;</span>, <span class="ruby-identifier">ruby</span>)
 <span class="ruby-comment"># Put some CSV into a file.</span>
 <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-string">&#39;t.csv&#39;</span>, <span class="ruby-string">&quot;foo,0\nbar,1\nbaz,2&quot;</span>)
@@ -3085,8 +3087,8 @@ BAZ,-2</pre>
   CSV.filter(headers: true) do |row|
     row[0].upcase!
     row[1] = - row[1].to_i
-  end
-</span><span class="ruby-identifier">EOT</span>
+  end</span>
+<span class="ruby-identifier">EOT</span>
 <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-string">&#39;t.rb&#39;</span>, <span class="ruby-identifier">ruby</span>)
 <span class="ruby-comment"># Put some CSV into a file.</span>
 <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-string">&#39;t.csv&#39;</span>, <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2&quot;</span>)
@@ -3180,13 +3182,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="foreach-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1389</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1389</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">foreach</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>=<span class="ruby-string">&quot;r&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-identifier">__method__</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
@@ -3195,6 +3192,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Calls the block with each row read from source <code>path_or_io</code>.</p>
@@ -3323,13 +3323,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1455</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1455</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">str</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">encoding</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:encoding</span>]
   <span class="ruby-comment"># add a default empty String, if none was given</span>
@@ -3347,6 +3342,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <ul><li>
@@ -3443,13 +3441,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="generate_line-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1503</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1503</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_line</span>(<span class="ruby-identifier">row</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">options</span> = {<span class="ruby-value">row_sep:</span> <span class="ruby-constant">InputRecordSeparator</span>.<span class="ruby-identifier">value</span>}.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">str</span> = <span class="ruby-string">+&quot;&quot;</span>
@@ -3474,6 +3467,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the String created by generating CSV from <code>ary</code> using the specified <code>options</code>.</p>
@@ -3544,13 +3540,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="generate_lines-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1558</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1558</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_lines</span>(<span class="ruby-identifier">rows</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
@@ -3560,6 +3551,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the String created by generating CSV from using the specified <code>options</code>.</p>
@@ -3646,13 +3640,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="instance-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1026</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1026</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">instance</span>(<span class="ruby-identifier">data</span> = <span class="ruby-identifier">$stdout</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-comment"># create a _signature_ for this method call, data object and options</span>
   <span class="ruby-identifier">sig</span> = [<span class="ruby-identifier">data</span>.<span class="ruby-identifier">object_id</span>] <span class="ruby-operator">+</span>
@@ -3670,6 +3659,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Creates or retrieves cached CSV objects. For arguments and options, see <a href="CSV.html#method-c-new"><code>CSV.new</code></a>.</p>
@@ -3769,13 +3761,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2034</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2034</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">data</span>,
                <span class="ruby-value">col_sep:</span> <span class="ruby-string">&quot;,&quot;</span>,
                <span class="ruby-value">row_sep:</span> <span class="ruby-value">:auto</span>,
@@ -3877,6 +3864,9 @@ BAZ,-2</pre>
 
 
 
+        <div class="method-description">
+
+
           <p>Returns the new CSV object created using <code>string</code> or <code>io</code> and the specified <code>options</code>.</p>
 <ul><li>
 <p>Argument <code>string</code> should be a String object; it will be put into a new StringIO object positioned at the beginning.</p>
@@ -3960,13 +3950,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="open-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1647</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1647</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open</span>(<span class="ruby-identifier">filename_or_io</span>, <span class="ruby-identifier">mode</span>=<span class="ruby-string">&quot;r&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-comment"># wrap a File opened with the remaining +args+ with no newline</span>
   <span class="ruby-comment"># decorator</span>
@@ -4017,6 +4002,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>possible options elements:</p>
@@ -4193,13 +4181,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1825</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1825</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">csv</span> = <span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 
@@ -4216,6 +4199,9 @@ BAZ,-2</pre>
 
 
 
+        <div class="method-description">
+
+
           <p>Parses <code>string</code> or <code>io</code> using the specified <code>options</code>.</p>
 <ul><li>
 <p>Argument <code>string</code> should be a String object; it will be put into a new StringIO object positioned at the beginning.</p>
@@ -4230,7 +4216,8 @@ BAZ,-2</pre>
 <p>Argument <code>options</code>: see <a href="#class-CSV-label-Options+for+Parsing">Options for Parsing</a></p>
 </li></ul>
 
-<h6 id="method-c-parse-label-Without+Option+headers">Without Option <code>headers</code><span><a href="#method-c-parse-label-Without+Option+headers">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="method-c-parse-label-Without+Option+headers" class="legacy-anchor"></span>
+<h6 id="method-c-parse-without-option-headers"><a href="#method-c-parse-without-option-headers">Without Option <code>headers</code></a></h6>
 
 <p>Without <a href="#class-CSV-label-Option+headers">option <code>headers</code></a> case.</p>
 
@@ -4287,7 +4274,8 @@ BAZ,-2</pre>
 [<span class="ruby-string">&quot;baz&quot;</span>, <span class="ruby-string">&quot;2&quot;</span>]
 </pre>
 
-<h6 id="method-c-parse-label-With+Option+headers">With Option <code>headers</code><span><a href="#method-c-parse-label-With+Option+headers">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="method-c-parse-label-With+Option+headers" class="legacy-anchor"></span>
+<h6 id="method-c-parse-with-option-headers"><a href="#method-c-parse-with-option-headers">With Option <code>headers</code></a></h6>
 
 <p>With <a href="#class-CSV-label-Option+headers">option <code>headers</code></a> case.</p>
 
@@ -4441,18 +4429,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="parse_line-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1898</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1898</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_line</span>(<span class="ruby-identifier">line</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>).<span class="ruby-identifier">each</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the data created by parsing the first line of <code>string</code> or <code>io</code> using the specified <code>options</code>.</p>
@@ -4469,7 +4455,8 @@ BAZ,-2</pre>
 <p>Argument <code>options</code>: see <a href="#class-CSV-label-Options+for+Parsing">Options for Parsing</a></p>
 </li></ul>
 
-<h6 id="method-c-parse_line-label-Without+Option+headers">Without Option <code>headers</code><span><a href="#method-c-parse_line-label-Without+Option+headers">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="method-c-parse_line-label-Without+Option+headers" class="legacy-anchor"></span>
+<h6 id="method-c-parse_line-without-option-headers"><a href="#method-c-parse_line-without-option-headers">Without Option <code>headers</code></a></h6>
 
 <p>Without option <code>headers</code>, returns the first row as a new Array.</p>
 
@@ -4497,7 +4484,8 @@ BAZ,-2</pre>
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-comment"># =&gt; nil</span>
 </pre>
 
-<h6 id="method-c-parse_line-label-With+Option+headers">With Option <code>headers</code><span><a href="#method-c-parse_line-label-With+Option+headers">&para;</a> <a href="#top">&uarr;</a></span></h6>
+<span id="method-c-parse_line-label-With+Option+headers" class="legacy-anchor"></span>
+<h6 id="method-c-parse_line-with-option-headers"><a href="#method-c-parse_line-with-option-headers">With Option <code>headers</code></a></h6>
 
 <p>With <a href="#class-CSV-label-Option+headers">option <code>headers</code></a>, returns the first row as a <a href="CSV/Row.html"><code>CSV::Row</code></a> object.</p>
 
@@ -4566,18 +4554,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="read-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1922</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1922</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">read</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Opens the given <code>source</code> with the given <code>options</code> (see <a href="CSV.html#method-c-open"><code>CSV.open</code></a>), reads the source (see <a href="CSV.html#method-i-read"><code>CSV#read</code></a>), and returns the result, which will be either an Array of Arrays or a <a href="CSV/Table.html"><code>CSV::Table</code></a>.</p>
@@ -4629,18 +4615,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="readlines-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1930</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1930</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">readlines</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Alias for <a href="CSV.html#method-c-read"><code>CSV.read</code></a>.</p>
@@ -4676,13 +4660,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="table-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 1949</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1949</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">table</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">default_options</span> = {
     <span class="ruby-value">headers:</span>           <span class="ruby-keyword">true</span>,
@@ -4694,6 +4673,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Calls <a href="CSV.html#method-c-read"><code>CSV.read</code></a> with <code>source</code>, <code>options</code>, and certain default options:</p>
@@ -4727,9 +4709,15 @@ BAZ,-2</pre>
 
     </section>
 
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+
+
+
+
+
+
+     <section id="public-instance-untitled-method-details" class="method-section anchor-link">
        <header>
-         <h3>Public Instance Methods</h3>
+         <h3 id="public-instance-untitled-methods"><a href="#public-instance-untitled-methods">Public Instance Methods</a></h3>
        </header>
 
 
@@ -4754,19 +4742,17 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="3C-3C-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2507</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2507</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-identifier">row</span>)
   <span class="ruby-identifier">writer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">row</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Appends a row to <code>self</code>.</p>
@@ -4884,13 +4870,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="binmode-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2396</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2396</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">binmode?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:binmode?</span>)
     <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">binmode?</span>
@@ -4900,6 +4881,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           
@@ -4935,18 +4919,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="col_sep-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2144</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">col_sep</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">column_separator</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the encoded column separator; used for parsing and writing; see <a href="#class-CSV-label-Option+col_sep">Option <code>col_sep</code></a>:</p>
@@ -4993,18 +4975,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="convert-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2578</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2578</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">converter</span>)
   <span class="ruby-identifier">parser_fields_converter</span>.<span class="ruby-identifier">add_converter</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">converter</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <ul><li>
@@ -5114,13 +5094,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="converters-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2217</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2217</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">converters</span>
   <span class="ruby-identifier">parser_fields_converter</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">converter</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">name</span> = <span class="ruby-constant">Converters</span>.<span class="ruby-identifier">rassoc</span>(<span class="ruby-identifier">converter</span>)
@@ -5129,6 +5104,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns an Array containing field converters; see <a href="#class-CSV-label-Field+Converters">Field Converters</a>:</p>
@@ -5182,13 +5160,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2689</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2689</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-identifier">__method__</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-keyword">begin</span>
@@ -5200,6 +5173,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Calls the block with each successive row. The data source must be opened for reading.</p>
@@ -5275,7 +5251,6 @@ BAZ,-2</pre>
         <div class="method-description">
 
 
-
           
 
 
@@ -5310,13 +5285,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="eof-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2432</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2432</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eof?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eof_error</span>
   <span class="ruby-keyword">begin</span>
@@ -5331,6 +5301,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           
@@ -5370,18 +5343,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="field_size_limit-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2176</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field_size_limit</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">field_size_limit</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the limit for field size; used for parsing; see <a href="#class-CSV-label-Option+field_size_limit">Option <code>field_size_limit</code></a>:</p>
@@ -5419,19 +5390,17 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="flock-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2404</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2404</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">flock</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:flock</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">flock</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           
@@ -5467,18 +5436,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="force_quotes-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2307</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2307</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">force_quotes?</span>
   <span class="ruby-ivar">@writer_options</span>[<span class="ruby-value">:force_quotes</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the value that determines whether all output fields are to be quoted; used for generating; see <a href="#class-CSV-label-Option+force_quotes">Option <code>force_quotes</code></a>:</p>
@@ -5539,18 +5506,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="header_convert-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2644</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2644</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_convert</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">converter</span>)
   <span class="ruby-identifier">header_fields_converter</span>.<span class="ruby-identifier">add_converter</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">converter</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>The block need not return a String object:</p>
@@ -5609,13 +5574,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="header_converters-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2283</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2283</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_converters</span>
   <span class="ruby-identifier">header_fields_converter</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">converter</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">name</span> = <span class="ruby-constant">HeaderConverters</span>.<span class="ruby-identifier">rassoc</span>(<span class="ruby-identifier">converter</span>)
@@ -5624,6 +5584,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns an Array containing header converters; used for parsing; see <a href="#class-CSV-label-Header+Converters">Header Converters</a>:</p>
@@ -5664,13 +5627,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="header_row-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2766</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2766</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_row?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">header_row?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -5678,7 +5636,10 @@ BAZ,-2</pre>
 
 
 
-          <p>Returns <code>true</code> if the next row to be read is a header row; <code>false</code> otherwise.</p>
+        <div class="method-description">
+
+
+          <p>Returns <code>true</code> if the next row to be read is a header row\; <code>false</code> otherwise.</p>
 
 <p>Without headers:</p>
 
@@ -5737,13 +5698,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="headers-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2241</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2241</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">headers</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@writer</span>
     <span class="ruby-ivar">@writer</span>.<span class="ruby-identifier">headers</span>
@@ -5757,6 +5713,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the value that determines whether headers are used; used for parsing; see <a href="#class-CSV-label-Option+headers">Option <code>headers</code></a>:</p>
@@ -5795,13 +5754,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="inspect-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2825</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2825</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
   <span class="ruby-identifier">str</span> = [<span class="ruby-string">&quot;#&lt;&quot;</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-string">&quot; io_type:&quot;</span>]
   <span class="ruby-comment"># show type of wrapped IO</span>
@@ -5843,6 +5797,9 @@ BAZ,-2</pre>
 
 
 
+        <div class="method-description">
+
+
           <p>Returns a String showing certain properties of <code>self</code>:</p>
 
 <pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
@@ -5879,19 +5836,17 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="ioctl-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2409</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2409</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ioctl</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:ioctl</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">ioctl</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           
@@ -5927,18 +5882,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="liberal_parsing-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2317</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2317</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">liberal_parsing?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">liberal_parsing?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the value that determines whether illegal input is to be handled; used for parsing; see <a href="#class-CSV-label-Option+liberal_parsing">Option <code>liberal_parsing</code></a>:</p>
@@ -5977,18 +5930,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="line-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2382</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2382</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">line</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">line</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the line most recently read:</p>
@@ -6041,13 +5992,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="lineno-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2358</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2358</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lineno</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@writer</span>
     <span class="ruby-ivar">@writer</span>.<span class="ruby-identifier">lineno</span>
@@ -6057,6 +6003,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the count of the rows parsed or generated.</p>
@@ -6127,18 +6076,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="max_field_size-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2188</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2188</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">max_field_size</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">max_field_size</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the limit for field size; used for parsing; see <a href="#class-CSV-label-Option+max_field_size">Option <code>max_field_size</code></a>:</p>
@@ -6176,18 +6123,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="path-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2414</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2414</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">path</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:path</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           
@@ -6248,18 +6193,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="quote_char-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2164</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quote_char</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">quote_character</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the encoded quote character; used for parsing and writing; see <a href="#class-CSV-label-Option+quote_char">Option <code>quote_char</code></a>:</p>
@@ -6298,13 +6241,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="read-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2730</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2730</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read</span>
   <span class="ruby-identifier">rows</span> = <span class="ruby-identifier">to_a</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">use_headers?</span>
@@ -6315,6 +6253,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Forms the remaining rows from <code>self</code> into:</p>
@@ -6439,18 +6380,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="return_headers-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2259</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2259</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">return_headers?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">return_headers?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the value that determines whether headers are to be returned; used for parsing; see <a href="#class-CSV-label-Option+return_headers">Option <code>return_headers</code></a>:</p>
@@ -6486,13 +6425,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="rewind-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2447</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2447</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
   <span class="ruby-ivar">@parser</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@parser_enumerator</span> = <span class="ruby-keyword">nil</span>
@@ -6502,6 +6436,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Rewinds the underlying IO object and resets CSV’s lineno() counter.</p>
@@ -6537,18 +6474,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="row_sep-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2154</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2154</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">row_sep</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">row_separator</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the encoded row separator; used for parsing and writing; see <a href="#class-CSV-label-Option+row_sep">Option <code>row_sep</code></a>:</p>
@@ -6587,13 +6522,8 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="shift-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2803</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2803</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">shift</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eof_error</span>
     <span class="ruby-identifier">eof_error</span>, <span class="ruby-ivar">@eof_error</span> = <span class="ruby-ivar">@eof_error</span>, <span class="ruby-keyword">nil</span>
@@ -6607,6 +6537,9 @@ BAZ,-2</pre>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the next row of data as:</p>
@@ -6683,18 +6616,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="skip_blanks-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2296</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2296</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_blanks?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">skip_blanks?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the value that determines whether blank lines are to be ignored; used for parsing; see <a href="#class-CSV-label-Option+skip_blanks">Option <code>skip_blanks</code></a>:</p>
@@ -6733,18 +6664,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="skip_lines-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2198</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2198</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_lines</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">skip_lines</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the Regexp used to identify comment lines; used for parsing; see <a href="#class-CSV-label-Option+skip_lines">Option <code>skip_lines</code></a>:</p>
@@ -6780,19 +6709,17 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="stat-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2418</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2418</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stat</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:stat</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">stat</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           
@@ -6825,19 +6752,17 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="to_i-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2423</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2423</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_i</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_i</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">to_i</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           
@@ -6870,18 +6795,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="to_io-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2428</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2428</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_io</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_io</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">to_io</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@io</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           
@@ -6917,18 +6840,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="unconverted_fields-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2231</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2231</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unconverted_fields?</span>
   <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">unconverted_fields?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the value that determines whether unconverted fields are to be available; used for parsing; see <a href="#class-CSV-label-Option+unconverted_fields">Option <code>unconverted_fields</code></a>:</p>
@@ -6967,18 +6888,16 @@ BAZ,-2</pre>
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="write_headers-3F-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 2269</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2269</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">write_headers?</span>
   <span class="ruby-ivar">@writer_options</span>[<span class="ruby-value">:write_headers</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the value that determines whether headers are to be written; used for generating; see <a href="#class-CSV-label-Option+write_headers">Option <code>write_headers</code></a>:</p>
@@ -6998,8 +6917,33 @@ BAZ,-2</pre>
 
     </section>
 
+
+
+
   </section>
 
 </main>
+
+<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+  <div class="toc-sticky">
+    <h3 class="toc-heading">On This Page</h3>
+    <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
+      <!-- Generated by JavaScript based on page headings -->
+    </nav>
+  </div>
+</aside>
+
+
+<footer class="site-footer">
+  
+
+  <div class="footer-bottom">
+    <p>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
+    </p>
+  </div>
+</footer>
+
 </body>
 

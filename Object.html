@@ -8,12 +8,45 @@
 <title>class Object - RDoc Documentation</title>
 
 
-  <meta name="keywords" content="ruby,class,Object">
+  <meta
+    name="keywords"
+    content="ruby,class,Object"
+  >
+
+    <meta
+      name="description"
+      content="Documentation for the Object class"
+    >
 
 
-    <meta name="description" content="Documentation for the Object class">
 
 
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="class Object - RDoc Documentation">
+
+
+
+    <meta
+      property="og:description"
+      content="Documentation for Object class - API reference and code examples"
+    >
+
+
+
+
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="class Object - RDoc Documentation">
+
+
+
+    <meta
+      name="twitter:description"
+      content="Documentation for Object class - API reference and code examples"
+    >
 
 
 
@@ -22,62 +55,444 @@
   var index_rel_prefix = "./";
 </script>
 
-<script src="./js/navigation.js" defer></script>
-<script src="./js/search.js" defer></script>
-<script src="./js/search_index.js" defer></script>
-<script src="./js/searcher.js" defer></script>
-<script src="./js/darkfish.js" defer></script>
+<script
+  src="./js/theme-toggle.js?v=7.2.0"
+></script>
 
-<link href="./css/fonts.css" rel="stylesheet">
-<link href="./css/rdoc.css" rel="stylesheet">
+<script
+  src="./js/search_navigation.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/search_data.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/search_ranker.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/search_controller.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/c_highlighter.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/bash_highlighter.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/aliki.js?v=7.2.0"
+  defer
+></script>
+
+<link
+  href="./css/rdoc.css?v=7.2.0"
+  rel="stylesheet"
+>
 
 
 
-<body id="top" role="document" class="class">
+
+<body role="document" class="class has-toc">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <!-- Chevron (right arrow) - used for expand/collapse -->
+  <symbol
+    id="icon-chevron"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </symbol>
+
+  <!-- File/Document - Pages section -->
+  <symbol
+    id="icon-file"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path
+      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+    ></path>
+
+    <polyline points="14 2 14 8 20 8"></polyline>
+  </symbol>
+
+  <!-- Layers/Stack - Classes and Modules section -->
+  <symbol
+    id="icon-layers"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+    <polyline points="2 17 12 22 22 17"></polyline>
+    <polyline points="2 12 12 17 22 12"></polyline>
+  </symbol>
+
+  <!-- Curly braces with C - Class Methods section -->
+  <symbol
+    id="icon-class-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      C
+    </text>
+  </symbol>
+
+  <!-- Curly braces with I - Instance Methods section -->
+  <symbol
+    id="icon-instance-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      I
+    </text>
+  </symbol>
+
+  <!-- Double chevrons up - Ancestors section -->
+  <symbol
+    id="icon-ancestors"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="17 11 12 6 7 11"></polyline>
+    <polyline points="17 18 12 13 7 18"></polyline>
+  </symbol>
+
+  <!-- User with plus - Included Modules section -->
+  <symbol
+    id="icon-includes"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+
+    <line
+      x1="20"
+      y1="8"
+      x2="20"
+      y2="14"
+    ></line>
+
+    <line
+      x1="23"
+      y1="11"
+      x2="17"
+      y2="11"
+    ></line>
+  </symbol>
+
+  <!-- User with check - Extended Modules section -->
+  <symbol
+    id="icon-extends"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+    <polyline points="17 11 19 13 23 9"></polyline>
+  </symbol>
+
+  <!-- List - Sections section -->
+  <symbol
+    id="icon-list"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <line
+      x1="8"
+      y1="6"
+      x2="21"
+      y2="6"
+    ></line>
+
+    <line
+      x1="8"
+      y1="12"
+      x2="21"
+      y2="12"
+    ></line>
+
+    <line
+      x1="8"
+      y1="18"
+      x2="21"
+      y2="18"
+    ></line>
+
+    <line
+      x1="3"
+      y1="6"
+      x2="3.01"
+      y2="6"
+    ></line>
+
+    <line
+      x1="3"
+      y1="12"
+      x2="3.01"
+      y2="12"
+    ></line>
+
+    <line
+      x1="3"
+      y1="18"
+      x2="3.01"
+      y2="18"
+    ></line>
+  </symbol>
+</svg>
+
+<header class="top-navbar">
+  <a href="./index.html" class="navbar-brand">
+    RDoc Documentation
+  </a>
+
+  <!-- Desktop search bar -->
+  <div class="navbar-search navbar-search-desktop" role="search">
+    <form action="#" method="get" accept-charset="utf-8">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results-desktop"
+             type="text" name="search" placeholder="Search (/) for a class, method..."
+             spellcheck="false" autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+      <ul id="search-results-desktop" aria-label="Search Results"
+          aria-busy="false" aria-expanded="false"
+          aria-atomic="false" class="initially-hidden search-results"></ul>
+    </form>
+  </div>
+
+  <!-- Mobile search icon button -->
+  <button id="search-toggle" class="navbar-search-mobile" aria-label="Open search" type="button">
+    <span aria-hidden="true">🔍</span>
+  </button>
+
+  <!-- Theme toggle button -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" type="button">
+    <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+  </button>
+</header>
+
+<!-- Search Modal (Mobile) -->
+<div id="search-modal" class="search-modal" hidden aria-modal="true" role="dialog" aria-label="Search">
+  <div class="search-modal-backdrop"></div>
+  <div class="search-modal-content">
+    <div class="search-modal-header">
+      <form class="search-modal-form" action="#" method="get" accept-charset="utf-8">
+        <span class="search-modal-icon" aria-hidden="true">🔍</span>
+        <input id="search-field-mobile" role="combobox" aria-label="Search"
+               aria-autocomplete="list" aria-controls="search-results-mobile"
+               type="text" name="search" placeholder="Search documentation"
+               spellcheck="false" autocomplete="off">
+        <button type="button" class="search-modal-close" aria-label="Close search" id="search-modal-close">
+          <span aria-hidden="true">esc</span>
+        </button>
+      </form>
+    </div>
+    <div class="search-modal-body">
+      <ul id="search-results-mobile" aria-label="Search Results"
+          aria-busy="false" aria-expanded="false"
+          aria-atomic="false" class="search-results search-modal-results initially-hidden"></ul>
+      <div class="search-modal-empty">
+        <p>No recent searches</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
   <span aria-hidden="true">&#9776;</span>
 </div>
 
 
-<nav id="navigation" role="navigation">
-  <div id="project-navigation">
-    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
-  <h2>
-    <a href="./index.html" rel="home">Home</a>
-  </h2>
-
-  <div id="table-of-contents-navigation">
-    <a href="./table_of_contents.html#pages">Pages</a>
-    <a href="./table_of_contents.html#classes">Classes</a>
-    <a href="./table_of_contents.html#methods">Methods</a>
-  </div>
-</div>
-
-    <div id="search-section" role="search" class="project-section initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <div id="search-field-wrapper">
-      <input id="search-field" role="combobox" aria-label="Search"
-             aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </div>
-
-    <ul id="search-results" aria-label="Search Results"
-        aria-busy="false" aria-expanded="false"
-        aria-atomic="false" class="initially-hidden"></ul>
-  </form>
-</div>
-
-  </div>
-
+<nav id="navigation" role="navigation" hidden>
   
+
+
+
+
+  <div id="fileindex-section" class="nav-section">
+    <details class="nav-section-collapsible" >
+      <summary class="nav-section-header">
+        <span class="nav-section-icon">
+          <svg>
+            <use href="#icon-file"></use>
+          </svg>
+        </span>
+
+        <span class="nav-section-title">Pages</span>
+
+        <span class="nav-section-chevron">
+          <svg>
+            <use href="#icon-chevron"></use>
+          </svg>
+        </span>
+      </summary>
+
+      <ul class="nav-list">
+
+
+
+
+
+
+            <li>
+              <a href="./LICENSE_txt.html">
+                LICENSE
+              </a>
+            </li>
+
+
+
+
+            <li>
+              <a href="./NEWS_md.html">
+                NEWS
+              </a>
+            </li>
+
+
+
+
+            <li>
+              <a href="./README_md.html">
+                README
+              </a>
+            </li>
+
+
+
+
+
+          <li>
+            <details >
+              <summary>
+                
+                  doc
+                  
+                
+              </summary>
+
+              <ul class="link-list">
+
+                  <li>
+                    <a href="./doc/csv/recipes/filtering_rdoc.html">
+                      filtering
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="./doc/csv/recipes/generating_rdoc.html">
+                      generating
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="./doc/csv/recipes/parsing_rdoc.html">
+                      parsing
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="./doc/csv/recipes/recipes_rdoc.html">
+                      recipes
+                    </a>
+                  </li>
+
+              </ul>
+            </details>
+          </li>
+
+      </ul>
+    </details>
+  </div>
+
 
   
 
   
 <div id="parent-class-section" class="nav-section">
-  <h3>Ancestors</h3>
-  <ul><li>BasicObject</li></ul>
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-ancestors"></use></svg>
+      </span>
+      <span class="nav-section-title">Ancestors</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
+    <ul><li>BasicObject</li></ul>
+  </details>
 </div>
 
 
@@ -89,29 +504,49 @@
 
 
   <div class="nav-section">
-    <h3>Instance Methods</h3>
-    <ul class="link-list" role="directory">
+    <details class="nav-section-collapsible" open>
+      <summary class="nav-section-header">
+        <span class="nav-section-icon">
+          <svg><use href="#icon-instance-methods"></use></svg>
+        </span>
+        <span class="nav-section-title">Instance Methods</span>
+        <span class="nav-section-chevron">
+          <svg><use href="#icon-chevron"></use></svg>
+        </span>
+      </summary>
+      <ul class="nav-list" role="directory">
 
-      <li ><a href="#method-i-CSV">CSV</a></li>
+        <li ><a href="#method-i-CSV">CSV</a></li>
 
-    </ul>
+      </ul>
+    </details>
   </div>
 
 
+  <div id="classindex-section" class="nav-section">
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-layers"></use></svg>
+      </span>
+      <span class="nav-section-title">Classes and Modules</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
 
-  <footer id="validator-badges" role="contentinfo">
-  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.15.1.</p>
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
-</footer>
+    <ul class="link-list nav-list"><li><code><a href="./Array.html">Array</a></code></li><li><details><summary><code><a href="./CSV.html">CSV</a></code></summary><ul class="link-list nav-list"><li><code><a href="./CSV/FieldsConverter.html">FieldsConverter</a></code></li><li><code><a href="./CSV/InputRecordSeparator.html">InputRecordSeparator</a></code></li><li><code><a href="./CSV/InvalidEncodingError.html">InvalidEncodingError</a></code></li><li><code><a href="./CSV/MalformedCSVError.html">MalformedCSVError</a></code></li><li><details><summary><code><a href="./CSV/Parser.html">Parser</a></code></summary><ul class="link-list nav-list"><li><code><a href="./CSV/Parser/InputsScanner.html">InputsScanner</a></code></li><li><code><a href="./CSV/Parser/InvalidEncoding.html">InvalidEncoding</a></code></li><li><code><a href="./CSV/Parser/Scanner.html">Scanner</a></code></li><li><code><a href="./CSV/Parser/UnexpectedError.html">UnexpectedError</a></code></li></ul></details></li><li><code><a href="./CSV/Row.html">Row</a></code></li><li><code><a href="./CSV/TSV.html">TSV</a></code></li><li><code><a href="./CSV/Table.html">Table</a></code></li><li><code><a href="./CSV/Writer.html">Writer</a></code></li></ul></details></li><li><code><a href="./Object.html">Object</a></code></li><li><code><a href="./String.html">String</a></code></li></ul>
+  </details>
+</div>
 
 </nav>
 
-<main role="main" aria-labelledby="class-Object">
+<main role="main" aria-labelledby="class-object">
   
   
 
-  <h1 id="class-Object" class="anchor-link class">
+  <span id="class-Object" class="legacy-anchor"></span>
+  <h1 id="class-object" class="anchor-link class">
     class Object
   </h1>
 
@@ -120,7 +555,8 @@
   </section>
 
 
-  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+  <span id="5Buntitled-5D" class="legacy-anchor"></span>
+  <section class="documentation-section anchor-link">
 
 
 
@@ -130,9 +566,18 @@
 
 
 
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+
+
+
+
+
+
+
+
+
+     <section id="public-instance-untitled-method-details" class="method-section anchor-link">
        <header>
-         <h3>Public Instance Methods</h3>
+         <h3 id="public-instance-untitled-methods"><a href="#public-instance-untitled-methods">Public Instance Methods</a></h3>
        </header>
 
 
@@ -154,18 +599,16 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="CSV-source">
-            <pre><span class="ruby-comment"># File lib/csv.rb, line 3011</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 3011</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">CSV</span>(<span class="ruby-operator">*</span><span class="ruby-identifier ruby-title">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">instance</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Passes <code>args</code> to <a href="CSV.html#method-c-instance"><code>CSV::instance</code></a>.</p>
@@ -205,8 +648,33 @@
 
     </section>
 
+
+
+
   </section>
 
 </main>
+
+<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+  <div class="toc-sticky">
+    <h3 class="toc-heading">On This Page</h3>
+    <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
+      <!-- Generated by JavaScript based on page headings -->
+    </nav>
+  </div>
+</aside>
+
+
+<footer class="site-footer">
+  
+
+  <div class="footer-bottom">
+    <p>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
+    </p>
+  </div>
+</footer>
+
 </body>
 

@@ -9,8 +9,33 @@
 
 
   <meta name="keywords" content="ruby,documentation,generating">
-  <meta name="description" content="generating: Recipes for Generating \CSV These recipes are specific code examples for specific \CSV generating tasks. For other recipes, see {Recipes for CSV}[.">
+  <meta
+    name="description"
+    content="generating: Recipes for Generating \CSV These recipes are specific code examples for specific \CSV generating tasks. For other recipes, see {Recipes for CSV}[."
+  >
 
+
+
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="generating - RDoc Documentation">
+
+
+
+    <meta property="og:description" content="Recipes for Generating \CSV These recipes are specific code examples for specific \CSV generating tasks. For other recipes, see {Recipes for CSV}[.">
+
+
+
+
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="generating - RDoc Documentation">
+
+
+
+    <meta name="twitter:description" content="Recipes for Generating \CSV These recipes are specific code examples for specific \CSV generating tasks. For other recipes, see {Recipes for CSV}[.">
 
 
 
@@ -19,413 +44,452 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/navigation.js" defer></script>
-<script src="../../../js/search.js" defer></script>
-<script src="../../../js/search_index.js" defer></script>
-<script src="../../../js/searcher.js" defer></script>
-<script src="../../../js/darkfish.js" defer></script>
+<script
+  src="../../../js/theme-toggle.js?v=7.2.0"
+></script>
 
-<link href="../../../css/fonts.css" rel="stylesheet">
-<link href="../../../css/rdoc.css" rel="stylesheet">
+<script
+  src="../../../js/search_navigation.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="../../../js/search_data.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="../../../js/search_ranker.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="../../../js/search_controller.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="../../../js/c_highlighter.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="../../../js/bash_highlighter.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="../../../js/aliki.js?v=7.2.0"
+  defer
+></script>
+
+<link
+  href="../../../css/rdoc.css?v=7.2.0"
+  rel="stylesheet"
+>
 
 
 
-<body id="top" role="document" class="file">
+
+<body role="document" class="file has-toc">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <!-- Chevron (right arrow) - used for expand/collapse -->
+  <symbol
+    id="icon-chevron"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </symbol>
+
+  <!-- File/Document - Pages section -->
+  <symbol
+    id="icon-file"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path
+      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+    ></path>
+
+    <polyline points="14 2 14 8 20 8"></polyline>
+  </symbol>
+
+  <!-- Layers/Stack - Classes and Modules section -->
+  <symbol
+    id="icon-layers"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+    <polyline points="2 17 12 22 22 17"></polyline>
+    <polyline points="2 12 12 17 22 12"></polyline>
+  </symbol>
+
+  <!-- Curly braces with C - Class Methods section -->
+  <symbol
+    id="icon-class-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      C
+    </text>
+  </symbol>
+
+  <!-- Curly braces with I - Instance Methods section -->
+  <symbol
+    id="icon-instance-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      I
+    </text>
+  </symbol>
+
+  <!-- Double chevrons up - Ancestors section -->
+  <symbol
+    id="icon-ancestors"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="17 11 12 6 7 11"></polyline>
+    <polyline points="17 18 12 13 7 18"></polyline>
+  </symbol>
+
+  <!-- User with plus - Included Modules section -->
+  <symbol
+    id="icon-includes"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+
+    <line
+      x1="20"
+      y1="8"
+      x2="20"
+      y2="14"
+    ></line>
+
+    <line
+      x1="23"
+      y1="11"
+      x2="17"
+      y2="11"
+    ></line>
+  </symbol>
+
+  <!-- User with check - Extended Modules section -->
+  <symbol
+    id="icon-extends"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+    <polyline points="17 11 19 13 23 9"></polyline>
+  </symbol>
+
+  <!-- List - Sections section -->
+  <symbol
+    id="icon-list"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <line
+      x1="8"
+      y1="6"
+      x2="21"
+      y2="6"
+    ></line>
+
+    <line
+      x1="8"
+      y1="12"
+      x2="21"
+      y2="12"
+    ></line>
+
+    <line
+      x1="8"
+      y1="18"
+      x2="21"
+      y2="18"
+    ></line>
+
+    <line
+      x1="3"
+      y1="6"
+      x2="3.01"
+      y2="6"
+    ></line>
+
+    <line
+      x1="3"
+      y1="12"
+      x2="3.01"
+      y2="12"
+    ></line>
+
+    <line
+      x1="3"
+      y1="18"
+      x2="3.01"
+      y2="18"
+    ></line>
+  </symbol>
+</svg>
+
+<header class="top-navbar">
+  <a href="../../../index.html" class="navbar-brand">
+    RDoc Documentation
+  </a>
+
+  <!-- Desktop search bar -->
+  <div class="navbar-search navbar-search-desktop" role="search">
+    <form action="#" method="get" accept-charset="utf-8">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results-desktop"
+             type="text" name="search" placeholder="Search (/) for a class, method..."
+             spellcheck="false" autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+      <ul id="search-results-desktop" aria-label="Search Results"
+          aria-busy="false" aria-expanded="false"
+          aria-atomic="false" class="initially-hidden search-results"></ul>
+    </form>
+  </div>
+
+  <!-- Mobile search icon button -->
+  <button id="search-toggle" class="navbar-search-mobile" aria-label="Open search" type="button">
+    <span aria-hidden="true">🔍</span>
+  </button>
+
+  <!-- Theme toggle button -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" type="button">
+    <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+  </button>
+</header>
+
+<!-- Search Modal (Mobile) -->
+<div id="search-modal" class="search-modal" hidden aria-modal="true" role="dialog" aria-label="Search">
+  <div class="search-modal-backdrop"></div>
+  <div class="search-modal-content">
+    <div class="search-modal-header">
+      <form class="search-modal-form" action="#" method="get" accept-charset="utf-8">
+        <span class="search-modal-icon" aria-hidden="true">🔍</span>
+        <input id="search-field-mobile" role="combobox" aria-label="Search"
+               aria-autocomplete="list" aria-controls="search-results-mobile"
+               type="text" name="search" placeholder="Search documentation"
+               spellcheck="false" autocomplete="off">
+        <button type="button" class="search-modal-close" aria-label="Close search" id="search-modal-close">
+          <span aria-hidden="true">esc</span>
+        </button>
+      </form>
+    </div>
+    <div class="search-modal-body">
+      <ul id="search-results-mobile" aria-label="Search Results"
+          aria-busy="false" aria-expanded="false"
+          aria-atomic="false" class="search-results search-modal-results initially-hidden"></ul>
+      <div class="search-modal-empty">
+        <p>No recent searches</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
   <span aria-hidden="true">&#9776;</span>
 </div>
 
 
-<nav id="navigation" role="navigation">
-  <div id="project-navigation">
-    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
-  <h2>
-    <a href="../../../index.html" rel="home">Home</a>
-  </h2>
-
-  <div id="table-of-contents-navigation">
-    <a href="../../../table_of_contents.html#pages">Pages</a>
-    <a href="../../../table_of_contents.html#classes">Classes</a>
-    <a href="../../../table_of_contents.html#methods">Methods</a>
-  </div>
-</div>
-
-    <div id="search-section" role="search" class="project-section initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <div id="search-field-wrapper">
-      <input id="search-field" role="combobox" aria-label="Search"
-             aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </div>
-
-    <ul id="search-results" aria-label="Search Results"
-        aria-busy="false" aria-expanded="false"
-        aria-atomic="false" class="initially-hidden"></ul>
-  </form>
-</div>
-
-  </div>
-
-  
-<div class="nav-section">
-  <h3>Table of Contents</h3>
-
-
-
-
-
-  <ul class="link-list" role="directory">
-    
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-Recipes+for+Generating+CSV">Recipes for Generating CSV</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Contents">Contents</a>
-</li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-Output+Formats">Output Formats</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-Generating+to+a+String">Generating to a String</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Generate+to+String+with+Headers">Recipe: Generate to String with Headers</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Generate+to+String+Without+Headers">Recipe: Generate to String Without Headers</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-Generating+to+a+File">Generating to a File</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Generate+to+File+with+Headers">Recipe: Generate to File with Headers</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Generate+to+File+Without+Headers">Recipe: Generate to File Without Headers</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-      <a href="#label-Generating+to+an+IO+Stream">Generating to an IO Stream</a>
-</li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-Recipe-3A+Generate+to+IO+Stream+with+Headers">Recipe: Generate to IO Stream with Headers</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Generate+to+IO+Stream+Without+Headers">Recipe: Generate to IO Stream Without Headers</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-Converting+Fields">Converting Fields</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Filter+Generated+Field+Strings">Recipe: Filter Generated Field Strings</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Specify+Multiple+Write+Converters">Recipe: Specify Multiple Write Converters</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-RFC+4180+Compliance">RFC 4180 Compliance</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-Row+Separator">Row Separator</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Generate+Compliant+Row+Separator">Recipe: Generate Compliant Row Separator</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Generate+Non-Compliant+Row+Separator">Recipe: Generate Non-Compliant Row Separator</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-Column+Separator">Column Separator</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Generate+Compliant+Column+Separator">Recipe: Generate Compliant Column Separator</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Generate+Non-Compliant+Column+Separator">Recipe: Generate Non-Compliant Column Separator</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-Quotes">Quotes</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Quote+All+Fields">Recipe: Quote All Fields</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Quote+Empty+Fields">Recipe: Quote Empty Fields</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Generate+Compliant+Quote+Character">Recipe: Generate Compliant Quote Character</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Recipe-3A+Generate+Non-Compliant+Quote+Character">Recipe: Generate Non-Compliant Quote Character</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-  </ul>
-</div>
-
-
+<nav id="navigation" role="navigation" hidden>
   
 
 
 
 
-<div id="fileindex-section" class="nav-section">
-  <h3>Pages</h3>
-
-  <ul class="link-list">
 
 
+  <div id="fileindex-section" class="nav-section">
+    <details class="nav-section-collapsible" open>
+      <summary class="nav-section-header">
+        <span class="nav-section-icon">
+          <svg>
+            <use href="#icon-file"></use>
+          </svg>
+        </span>
 
-    <li><a href="../../../LICENSE_txt.html">LICENSE</a></li>
+        <span class="nav-section-title">Pages</span>
+
+        <span class="nav-section-chevron">
+          <svg>
+            <use href="#icon-chevron"></use>
+          </svg>
+        </span>
+      </summary>
+
+      <ul class="nav-list">
 
 
 
-    <li><a href="../../../NEWS_md.html">NEWS</a></li>
 
 
 
-    <li><a href="../../../README_md.html">README</a></li>
+            <li>
+              <a href="../../../LICENSE_txt.html">
+                LICENSE
+              </a>
+            </li>
 
 
 
-    <li><details open><summary>doc</summary>
-    <ul class="link-list">
 
-      <li><a href="../../../doc/csv/recipes/filtering_rdoc.html">filtering</a></li>
+            <li>
+              <a href="../../../NEWS_md.html">
+                NEWS
+              </a>
+            </li>
 
-      <li><a href="../../../doc/csv/recipes/generating_rdoc.html">generating</a></li>
 
-      <li><a href="../../../doc/csv/recipes/parsing_rdoc.html">parsing</a></li>
 
-      <li><a href="../../../doc/csv/recipes/recipes_rdoc.html">recipes</a></li>
 
-    </ul></details></li>
+            <li>
+              <a href="../../../README_md.html">
+                README
+              </a>
+            </li>
 
-  </ul>
+
+
+
+
+          <li>
+            <details  open>
+              <summary>
+                
+                  doc
+                  
+                
+              </summary>
+
+              <ul class="link-list">
+
+                  <li>
+                    <a href="../../../doc/csv/recipes/filtering_rdoc.html">
+                      filtering
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="../../../doc/csv/recipes/generating_rdoc.html">
+                      generating
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="../../../doc/csv/recipes/parsing_rdoc.html">
+                      parsing
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="../../../doc/csv/recipes/recipes_rdoc.html">
+                      recipes
+                    </a>
+                  </li>
+
+              </ul>
+            </details>
+          </li>
+
+      </ul>
+    </details>
+  </div>
+
+
+  <div id="classindex-section" class="nav-section">
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-layers"></use></svg>
+      </span>
+      <span class="nav-section-title">Classes and Modules</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
+
+    <ul class="link-list nav-list"><li><code><a href="../../../Array.html">Array</a></code></li><li><details><summary><code><a href="../../../CSV.html">CSV</a></code></summary><ul class="link-list nav-list"><li><code><a href="../../../CSV/FieldsConverter.html">FieldsConverter</a></code></li><li><code><a href="../../../CSV/InputRecordSeparator.html">InputRecordSeparator</a></code></li><li><code><a href="../../../CSV/InvalidEncodingError.html">InvalidEncodingError</a></code></li><li><code><a href="../../../CSV/MalformedCSVError.html">MalformedCSVError</a></code></li><li><details><summary><code><a href="../../../CSV/Parser.html">Parser</a></code></summary><ul class="link-list nav-list"><li><code><a href="../../../CSV/Parser/InputsScanner.html">InputsScanner</a></code></li><li><code><a href="../../../CSV/Parser/InvalidEncoding.html">InvalidEncoding</a></code></li><li><code><a href="../../../CSV/Parser/Scanner.html">Scanner</a></code></li><li><code><a href="../../../CSV/Parser/UnexpectedError.html">UnexpectedError</a></code></li></ul></details></li><li><code><a href="../../../CSV/Row.html">Row</a></code></li><li><code><a href="../../../CSV/TSV.html">TSV</a></code></li><li><code><a href="../../../CSV/Table.html">Table</a></code></li><li><code><a href="../../../CSV/Writer.html">Writer</a></code></li></ul></details></li><li><code><a href="../../../Object.html">Object</a></code></li><li><code><a href="../../../String.html">String</a></code></li></ul>
+  </details>
 </div>
-
-
-
-  <footer id="validator-badges" role="contentinfo">
-  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.15.1.</p>
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
-</footer>
 
 </nav>
 
 <main role="main" aria-label="Page doc/csv/recipes/generating.rdoc">
 
-<h2 id="label-Recipes+for+Generating+CSV">Recipes for Generating CSV<span><a href="#label-Recipes+for+Generating+CSV">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-Recipes+for+Generating+CSV" class="legacy-anchor"></span>
+<h2 id="recipes-for-generating-csv"><a href="#recipes-for-generating-csv">Recipes for Generating CSV</a></h2>
 
 <p>These recipes are specific code examples for specific CSV generating tasks.</p>
 
@@ -436,7 +500,8 @@
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;csv&#39;</span>
 </pre>
 
-<h3 id="label-Contents">Contents<span><a href="#label-Contents">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Contents" class="legacy-anchor"></span>
+<h3 id="contents"><a href="#contents">Contents</a></h3>
 <ul><li>
 <p><a href="#label-Output+Formats">Output Formats</a></p>
 <ul><li>
@@ -498,15 +563,18 @@
 </li></ul>
 </li></ul>
 
-<h3 id="label-Output+Formats">Output Formats<span><a href="#label-Output+Formats">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Output+Formats" class="legacy-anchor"></span>
+<h3 id="output-formats"><a href="#output-formats">Output Formats</a></h3>
 
 <p>You can generate CSV output to a String, to a File (via its path), or to an IO stream.</p>
 
-<h4 id="label-Generating+to+a+String">Generating to a String<span><a href="#label-Generating+to+a+String">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="label-Generating+to+a+String" class="legacy-anchor"></span>
+<h4 id="generating-to-a-string"><a href="#generating-to-a-string">Generating to a String</a></h4>
 
 <p>You can generate CSV output to a String, with or without headers.</p>
 
-<h5 id="label-Recipe-3A+Generate+to+String+with+Headers">Recipe: Generate to String with Headers<span><a href="#label-Recipe-3A+Generate+to+String+with+Headers">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="label-Recipe-3A+Generate+to+String+with+Headers" class="legacy-anchor"></span>
+<h5 id="recipe-generate-to-string-with-headers"><a href="#recipe-generate-to-string-with-headers">Recipe: Generate to String with Headers</a></h5>
 
 <p>Use class method <a href="../../../CSV.html#method-c-generate"><code>CSV.generate</code></a> with option <code>headers</code> to generate to a String.</p>
 
@@ -520,7 +588,8 @@
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Name,Value\nFoo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
 
-<h5 id="label-Recipe-3A+Generate+to+String+Without+Headers">Recipe: Generate to String Without Headers<span><a href="#label-Recipe-3A+Generate+to+String+Without+Headers">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="label-Recipe-3A+Generate+to+String+Without+Headers" class="legacy-anchor"></span>
+<h5 id="recipe-generate-to-string-without-headers"><a href="#recipe-generate-to-string-without-headers">Recipe: Generate to String Without Headers</a></h5>
 
 <p>Use class method <a href="../../../CSV.html#method-c-generate"><code>CSV.generate</code></a> without option <code>headers</code> to generate to a String.</p>
 
@@ -534,11 +603,13 @@
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
 
-<h4 id="label-Generating+to+a+File">Generating to a File<span><a href="#label-Generating+to+a+File">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="label-Generating+to+a+File" class="legacy-anchor"></span>
+<h4 id="generating-to-a-file"><a href="#generating-to-a-file">Generating to a File</a></h4>
 
 <p>You can generate /CSV data to a File, with or without headers.</p>
 
-<h5 id="label-Recipe-3A+Generate+to+File+with+Headers">Recipe: Generate to File with Headers<span><a href="#label-Recipe-3A+Generate+to+File+with+Headers">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="label-Recipe-3A+Generate+to+File+with+Headers" class="legacy-anchor"></span>
+<h5 id="recipe-generate-to-file-with-headers"><a href="#recipe-generate-to-file-with-headers">Recipe: Generate to File with Headers</a></h5>
 
 <p>Use class method <a href="../../../CSV.html#method-c-open"><code>CSV.open</code></a> with option <code>headers</code> generate to a File.</p>
 
@@ -553,7 +624,8 @@
 <span class="ruby-identifier">p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; &quot;Name,Value\nFoo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
 
-<h5 id="label-Recipe-3A+Generate+to+File+Without+Headers">Recipe: Generate to File Without Headers<span><a href="#label-Recipe-3A+Generate+to+File+Without+Headers">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="label-Recipe-3A+Generate+to+File+Without+Headers" class="legacy-anchor"></span>
+<h5 id="recipe-generate-to-file-without-headers"><a href="#recipe-generate-to-file-without-headers">Recipe: Generate to File Without Headers</a></h5>
 
 <p>Use class method <a href="../../../CSV.html#method-c-open"><code>CSV.open</code></a> without option <code>headers</code> to generate to a File.</p>
 
@@ -568,11 +640,13 @@
 <span class="ruby-identifier">p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
 
-<h4 id="label-Generating+to+an+IO+Stream">Generating to an IO Stream<span><a href="#label-Generating+to+an+IO+Stream">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="label-Generating+to+an+IO+Stream" class="legacy-anchor"></span>
+<h4 id="generating-to-an-io-stream"><a href="#generating-to-an-io-stream">Generating to an IO Stream</a></h4>
 
 <p>You can generate CSV data to an IO stream, with or without headers.</p>
 
-<h4 id="label-Recipe-3A+Generate+to+IO+Stream+with+Headers">Recipe: Generate to IO Stream with Headers<span><a href="#label-Recipe-3A+Generate+to+IO+Stream+with+Headers">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="label-Recipe-3A+Generate+to+IO+Stream+with+Headers" class="legacy-anchor"></span>
+<h4 id="recipe-generate-to-io-stream-with-headers"><a href="#recipe-generate-to-io-stream-with-headers">Recipe: Generate to IO Stream with Headers</a></h4>
 
 <p>Use class method <a href="../../../CSV.html#method-c-new"><code>CSV.new</code></a> with option <code>headers</code> to generate CSV data to an IO stream:</p>
 
@@ -586,7 +660,8 @@
 <span class="ruby-identifier">p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; &quot;Name,Value\nFoo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
 
-<h5 id="label-Recipe-3A+Generate+to+IO+Stream+Without+Headers">Recipe: Generate to IO Stream Without Headers<span><a href="#label-Recipe-3A+Generate+to+IO+Stream+Without+Headers">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="label-Recipe-3A+Generate+to+IO+Stream+Without+Headers" class="legacy-anchor"></span>
+<h5 id="recipe-generate-to-io-stream-without-headers"><a href="#recipe-generate-to-io-stream-without-headers">Recipe: Generate to IO Stream Without Headers</a></h5>
 
 <p>Use class method <a href="../../../CSV.html#method-c-new"><code>CSV.new</code></a> without option <code>headers</code> to generate CSV data to an IO stream:</p>
 
@@ -600,11 +675,13 @@
 <span class="ruby-identifier">p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
 
-<h3 id="label-Converting+Fields">Converting Fields<span><a href="#label-Converting+Fields">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Converting+Fields" class="legacy-anchor"></span>
+<h3 id="converting-fields"><a href="#converting-fields">Converting Fields</a></h3>
 
 <p>You can use <em>write</em> <em>converters</em> to convert fields when generating CSV.</p>
 
-<h4 id="label-Recipe-3A+Filter+Generated+Field+Strings">Recipe: Filter Generated Field Strings<span><a href="#label-Recipe-3A+Filter+Generated+Field+Strings">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="label-Recipe-3A+Filter+Generated+Field+Strings" class="legacy-anchor"></span>
+<h4 id="recipe-filter-generated-field-strings"><a href="#recipe-filter-generated-field-strings">Recipe: Filter Generated Field Strings</a></h4>
 
 <p>Use option <code>:write_converters</code> and a custom converter to convert field values when generating CSV.</p>
 
@@ -619,7 +696,8 @@
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;foo,0\nbar,1\nbaz,2\n&quot;</span>
 </pre>
 
-<h4 id="label-Recipe-3A+Specify+Multiple+Write+Converters">Recipe: Specify Multiple Write Converters<span><a href="#label-Recipe-3A+Specify+Multiple+Write+Converters">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="label-Recipe-3A+Specify+Multiple+Write+Converters" class="legacy-anchor"></span>
+<h4 id="recipe-specify-multiple-write-converters"><a href="#recipe-specify-multiple-write-converters">Recipe: Specify Multiple Write Converters</a></h4>
 
 <p>Use option <code>:write_converters</code> and multiple custom converters to convert field values when generating CSV.</p>
 
@@ -636,7 +714,8 @@
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;FOO,0\nBAR,1\nBAZ,2\n&quot;</span>
 </pre>
 
-<h3 id="label-RFC+4180+Compliance">RFC 4180 Compliance<span><a href="#label-RFC+4180+Compliance">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-RFC+4180+Compliance" class="legacy-anchor"></span>
+<h3 id="rfc-4180-compliance"><a href="#rfc-4180-compliance">RFC 4180 Compliance</a></h3>
 
 <p>By default, CSV generates data that is compliant with <a href="https://www.rfc-editor.org/rfc/rfc4180">RFC 4180</a> with respect to:</p>
 <ul><li>
@@ -645,11 +724,13 @@
 <p>Quote character.</p>
 </li></ul>
 
-<h4 id="label-Row+Separator">Row Separator<span><a href="#label-Row+Separator">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="label-Row+Separator" class="legacy-anchor"></span>
+<h4 id="row-separator"><a href="#row-separator">Row Separator</a></h4>
 
 <p>RFC 4180 specifies the row separator CRLF (Ruby <code>&quot;\r\n&quot;</code>).</p>
 
-<h5 id="label-Recipe-3A+Generate+Compliant+Row+Separator">Recipe: Generate Compliant Row Separator<span><a href="#label-Recipe-3A+Generate+Compliant+Row+Separator">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="label-Recipe-3A+Generate+Compliant+Row+Separator" class="legacy-anchor"></span>
+<h5 id="recipe-generate-compliant-row-separator"><a href="#recipe-generate-compliant-row-separator">Recipe: Generate Compliant Row Separator</a></h5>
 
 <p>For strict compliance, use option <code>:row_sep</code> to specify row separator <code>&quot;\r\n&quot;</code>:</p>
 
@@ -661,7 +742,8 @@
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0\r\nBar,1\r\nBaz,2\r\n&quot;</span>
 </pre>
 
-<h5 id="label-Recipe-3A+Generate+Non-Compliant+Row+Separator">Recipe: Generate Non-Compliant Row Separator<span><a href="#label-Recipe-3A+Generate+Non-Compliant+Row+Separator">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="label-Recipe-3A+Generate+Non-Compliant+Row+Separator" class="legacy-anchor"></span>
+<h5 id="recipe-generate-non-compliant-row-separator"><a href="#recipe-generate-non-compliant-row-separator">Recipe: Generate Non-Compliant Row Separator</a></h5>
 
 <p>For data with non-compliant row separators, use option <code>:row_sep</code> with a different value: This example source uses semicolon (<code>&quot;;&#39;</code>) as its row separator:</p>
 
@@ -673,11 +755,13 @@
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0;Bar,1;Baz,2;&quot;</span>
 </pre>
 
-<h4 id="label-Column+Separator">Column Separator<span><a href="#label-Column+Separator">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="label-Column+Separator" class="legacy-anchor"></span>
+<h4 id="column-separator"><a href="#column-separator">Column Separator</a></h4>
 
 <p>RFC 4180 specifies column separator COMMA (Ruby <code>&quot;,&quot;</code>).</p>
 
-<h5 id="label-Recipe-3A+Generate+Compliant+Column+Separator">Recipe: Generate Compliant Column Separator<span><a href="#label-Recipe-3A+Generate+Compliant+Column+Separator">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="label-Recipe-3A+Generate+Compliant+Column+Separator" class="legacy-anchor"></span>
+<h5 id="recipe-generate-compliant-column-separator"><a href="#recipe-generate-compliant-column-separator">Recipe: Generate Compliant Column Separator</a></h5>
 
 <p>Because the CSV default comma separator is <code>&quot;,&quot;</code>, you need not specify option <code>:col_sep</code> for compliant data:</p>
 
@@ -689,7 +773,8 @@
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
 
-<h5 id="label-Recipe-3A+Generate+Non-Compliant+Column+Separator">Recipe: Generate Non-Compliant Column Separator<span><a href="#label-Recipe-3A+Generate+Non-Compliant+Column+Separator">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="label-Recipe-3A+Generate+Non-Compliant+Column+Separator" class="legacy-anchor"></span>
+<h5 id="recipe-generate-non-compliant-column-separator"><a href="#recipe-generate-non-compliant-column-separator">Recipe: Generate Non-Compliant Column Separator</a></h5>
 
 <p>For data with non-compliant column separators, use option <code>:col_sep</code>. This example source uses TAB (<code>&quot;\t&quot;</code>) as its column separator:</p>
 
@@ -701,7 +786,8 @@
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo\t0\nBar\t1\nBaz\t2\n&quot;</span>
 </pre>
 
-<h4 id="label-Quotes">Quotes<span><a href="#label-Quotes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<span id="label-Quotes" class="legacy-anchor"></span>
+<h4 id="quotes"><a href="#quotes">Quotes</a></h4>
 
 <p>IFC 4180 allows most fields to be quoted or not. By default, CSV does not quote most fields.</p>
 
@@ -733,7 +819,8 @@
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;\&quot;Foo\&quot;\&quot;Foo\&quot;,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
 
-<h5 id="label-Recipe-3A+Quote+All+Fields">Recipe: Quote All Fields<span><a href="#label-Recipe-3A+Quote+All+Fields">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="label-Recipe-3A+Quote+All+Fields" class="legacy-anchor"></span>
+<h5 id="recipe-quote-all-fields"><a href="#recipe-quote-all-fields">Recipe: Quote All Fields</a></h5>
 
 <p>Use option <code>:force_quotes</code> to force quoted fields:</p>
 
@@ -745,7 +832,8 @@
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;\&quot;Foo\&quot;,\&quot;0\&quot;\n\&quot;Bar\&quot;,\&quot;1\&quot;\n\&quot;Baz\&quot;,\&quot;2\&quot;\n&quot;</span>
 </pre>
 
-<h5 id="label-Recipe-3A+Quote+Empty+Fields">Recipe: Quote Empty Fields<span><a href="#label-Recipe-3A+Quote+Empty+Fields">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="label-Recipe-3A+Quote+Empty+Fields" class="legacy-anchor"></span>
+<h5 id="recipe-quote-empty-fields"><a href="#recipe-quote-empty-fields">Recipe: Quote Empty Fields</a></h5>
 
 <p>Use option <code>:quote_empty</code> to force quoting for empty fields:</p>
 
@@ -757,7 +845,8 @@
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\n\&quot;\&quot;,2\n&quot;</span>
 </pre>
 
-<h5 id="label-Recipe-3A+Generate+Compliant+Quote+Character">Recipe: Generate Compliant Quote Character<span><a href="#label-Recipe-3A+Generate+Compliant+Quote+Character">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="label-Recipe-3A+Generate+Compliant+Quote+Character" class="legacy-anchor"></span>
+<h5 id="recipe-generate-compliant-quote-character"><a href="#recipe-generate-compliant-quote-character">Recipe: Generate Compliant Quote Character</a></h5>
 
 <p>RFC 4180 specifies quote character DQUOTE (Ruby <code>&quot;\&quot;&quot;</code>).</p>
 
@@ -771,7 +860,8 @@
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;\&quot;Foo\&quot;,\&quot;0\&quot;\n\&quot;Bar\&quot;,\&quot;1\&quot;\n\&quot;Baz\&quot;,\&quot;2\&quot;\n&quot;</span>
 </pre>
 
-<h5 id="label-Recipe-3A+Generate+Non-Compliant+Quote+Character">Recipe: Generate Non-Compliant Quote Character<span><a href="#label-Recipe-3A+Generate+Non-Compliant+Quote+Character">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<span id="label-Recipe-3A+Generate+Non-Compliant+Quote+Character" class="legacy-anchor"></span>
+<h5 id="recipe-generate-non-compliant-quote-character"><a href="#recipe-generate-non-compliant-quote-character">Recipe: Generate Non-Compliant Quote Character</a></h5>
 
 <p>For data with non-compliant quote characters, use option <code>:quote_char</code>. This example source uses SQUOTE (<code>&quot;&#39;&quot;</code>) as its quote character:</p>
 
@@ -784,5 +874,27 @@
 </pre>
 
 </main>
+
+<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+  <div class="toc-sticky">
+    <h3 class="toc-heading">On This Page</h3>
+    <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
+      <!-- Generated by JavaScript based on page headings -->
+    </nav>
+  </div>
+</aside>
+
+
+<footer class="site-footer">
+  
+
+  <div class="footer-bottom">
+    <p>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
+    </p>
+  </div>
+</footer>
+
 </body>
 

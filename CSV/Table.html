@@ -8,12 +8,39 @@
 <title>class CSV::Table - RDoc Documentation</title>
 
 
-  <meta name="keywords" content="ruby,class,CSV::Table">
+  <meta
+    name="keywords"
+    content="ruby,class,CSV::Table"
+  >
+
+    <meta
+      name="description"
+      content="class CSV::Table: Table instance represents \CSV data. see {class CSV}[."
+    >
 
 
-    <meta name="description" content="class CSV::Table: Table instance represents \CSV data. see {class CSV}[.">
 
 
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="class CSV::Table - RDoc Documentation">
+
+
+
+    <meta property="og:description" content="Table instance represents \CSV data. see {class CSV}[.">
+
+
+
+
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="class CSV::Table - RDoc Documentation">
+
+
+
+    <meta name="twitter:description" content="Table instance represents \CSV data. see {class CSV}[.">
 
 
 
@@ -22,256 +49,596 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/navigation.js" defer></script>
-<script src="../js/search.js" defer></script>
-<script src="../js/search_index.js" defer></script>
-<script src="../js/searcher.js" defer></script>
-<script src="../js/darkfish.js" defer></script>
+<script
+  src="../js/theme-toggle.js?v=7.2.0"
+></script>
 
-<link href="../css/fonts.css" rel="stylesheet">
-<link href="../css/rdoc.css" rel="stylesheet">
+<script
+  src="../js/search_navigation.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="../js/search_data.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="../js/search_ranker.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="../js/search_controller.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="../js/c_highlighter.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="../js/bash_highlighter.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="../js/aliki.js?v=7.2.0"
+  defer
+></script>
+
+<link
+  href="../css/rdoc.css?v=7.2.0"
+  rel="stylesheet"
+>
 
 
 
-<body id="top" role="document" class="class">
+
+<body role="document" class="class has-toc">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <!-- Chevron (right arrow) - used for expand/collapse -->
+  <symbol
+    id="icon-chevron"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </symbol>
+
+  <!-- File/Document - Pages section -->
+  <symbol
+    id="icon-file"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path
+      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+    ></path>
+
+    <polyline points="14 2 14 8 20 8"></polyline>
+  </symbol>
+
+  <!-- Layers/Stack - Classes and Modules section -->
+  <symbol
+    id="icon-layers"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+    <polyline points="2 17 12 22 22 17"></polyline>
+    <polyline points="2 12 12 17 22 12"></polyline>
+  </symbol>
+
+  <!-- Curly braces with C - Class Methods section -->
+  <symbol
+    id="icon-class-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      C
+    </text>
+  </symbol>
+
+  <!-- Curly braces with I - Instance Methods section -->
+  <symbol
+    id="icon-instance-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      I
+    </text>
+  </symbol>
+
+  <!-- Double chevrons up - Ancestors section -->
+  <symbol
+    id="icon-ancestors"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="17 11 12 6 7 11"></polyline>
+    <polyline points="17 18 12 13 7 18"></polyline>
+  </symbol>
+
+  <!-- User with plus - Included Modules section -->
+  <symbol
+    id="icon-includes"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+
+    <line
+      x1="20"
+      y1="8"
+      x2="20"
+      y2="14"
+    ></line>
+
+    <line
+      x1="23"
+      y1="11"
+      x2="17"
+      y2="11"
+    ></line>
+  </symbol>
+
+  <!-- User with check - Extended Modules section -->
+  <symbol
+    id="icon-extends"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+    <polyline points="17 11 19 13 23 9"></polyline>
+  </symbol>
+
+  <!-- List - Sections section -->
+  <symbol
+    id="icon-list"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <line
+      x1="8"
+      y1="6"
+      x2="21"
+      y2="6"
+    ></line>
+
+    <line
+      x1="8"
+      y1="12"
+      x2="21"
+      y2="12"
+    ></line>
+
+    <line
+      x1="8"
+      y1="18"
+      x2="21"
+      y2="18"
+    ></line>
+
+    <line
+      x1="3"
+      y1="6"
+      x2="3.01"
+      y2="6"
+    ></line>
+
+    <line
+      x1="3"
+      y1="12"
+      x2="3.01"
+      y2="12"
+    ></line>
+
+    <line
+      x1="3"
+      y1="18"
+      x2="3.01"
+      y2="18"
+    ></line>
+  </symbol>
+</svg>
+
+<header class="top-navbar">
+  <a href="../index.html" class="navbar-brand">
+    RDoc Documentation
+  </a>
+
+  <!-- Desktop search bar -->
+  <div class="navbar-search navbar-search-desktop" role="search">
+    <form action="#" method="get" accept-charset="utf-8">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results-desktop"
+             type="text" name="search" placeholder="Search (/) for a class, method..."
+             spellcheck="false" autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+      <ul id="search-results-desktop" aria-label="Search Results"
+          aria-busy="false" aria-expanded="false"
+          aria-atomic="false" class="initially-hidden search-results"></ul>
+    </form>
+  </div>
+
+  <!-- Mobile search icon button -->
+  <button id="search-toggle" class="navbar-search-mobile" aria-label="Open search" type="button">
+    <span aria-hidden="true">🔍</span>
+  </button>
+
+  <!-- Theme toggle button -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" type="button">
+    <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+  </button>
+</header>
+
+<!-- Search Modal (Mobile) -->
+<div id="search-modal" class="search-modal" hidden aria-modal="true" role="dialog" aria-label="Search">
+  <div class="search-modal-backdrop"></div>
+  <div class="search-modal-content">
+    <div class="search-modal-header">
+      <form class="search-modal-form" action="#" method="get" accept-charset="utf-8">
+        <span class="search-modal-icon" aria-hidden="true">🔍</span>
+        <input id="search-field-mobile" role="combobox" aria-label="Search"
+               aria-autocomplete="list" aria-controls="search-results-mobile"
+               type="text" name="search" placeholder="Search documentation"
+               spellcheck="false" autocomplete="off">
+        <button type="button" class="search-modal-close" aria-label="Close search" id="search-modal-close">
+          <span aria-hidden="true">esc</span>
+        </button>
+      </form>
+    </div>
+    <div class="search-modal-body">
+      <ul id="search-results-mobile" aria-label="Search Results"
+          aria-busy="false" aria-expanded="false"
+          aria-atomic="false" class="search-results search-modal-results initially-hidden"></ul>
+      <div class="search-modal-empty">
+        <p>No recent searches</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
   <span aria-hidden="true">&#9776;</span>
 </div>
 
 
-<nav id="navigation" role="navigation">
-  <div id="project-navigation">
-    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
-  <h2>
-    <a href="../index.html" rel="home">Home</a>
-  </h2>
-
-  <div id="table-of-contents-navigation">
-    <a href="../table_of_contents.html#pages">Pages</a>
-    <a href="../table_of_contents.html#classes">Classes</a>
-    <a href="../table_of_contents.html#methods">Methods</a>
-  </div>
-</div>
-
-    <div id="search-section" role="search" class="project-section initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <div id="search-field-wrapper">
-      <input id="search-field" role="combobox" aria-label="Search"
-             aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </div>
-
-    <ul id="search-results" aria-label="Search Results"
-        aria-busy="false" aria-expanded="false"
-        aria-atomic="false" class="initially-hidden"></ul>
-  </form>
-</div>
-
-  </div>
-
+<nav id="navigation" role="navigation" hidden>
   
-<div class="nav-section">
-  <h3>Table of Contents</h3>
+
+
+
+
+  <div id="fileindex-section" class="nav-section">
+    <details class="nav-section-collapsible" >
+      <summary class="nav-section-header">
+        <span class="nav-section-icon">
+          <svg>
+            <use href="#icon-file"></use>
+          </svg>
+        </span>
+
+        <span class="nav-section-title">Pages</span>
+
+        <span class="nav-section-chevron">
+          <svg>
+            <use href="#icon-chevron"></use>
+          </svg>
+        </span>
+      </summary>
+
+      <ul class="nav-list">
 
 
 
 
 
-  <ul class="link-list" role="directory">
-    
+
+            <li>
+              <a href="../LICENSE_txt.html">
+                LICENSE
+              </a>
+            </li>
+
+
+
+
+            <li>
+              <a href="../NEWS_md.html">
+                NEWS
+              </a>
+            </li>
+
+
+
+
+            <li>
+              <a href="../README_md.html">
+                README
+              </a>
+            </li>
+
 
 
 
 
           <li>
-            <details open>
+            <details >
               <summary>
-      <a href="#class-CSV::Table-label-CSV-3A-3ATable">CSV::Table</a>
-</summary>
-              <ul class="link-list" role="directory">
                 
+                  doc
+                  
+                
+              </summary>
 
+              <ul class="link-list">
 
+                  <li>
+                    <a href="../doc/csv/recipes/filtering_rdoc.html">
+                      filtering
+                    </a>
+                  </li>
 
+                  <li>
+                    <a href="../doc/csv/recipes/generating_rdoc.html">
+                      generating
+                    </a>
+                  </li>
 
-          <li>
-      <a href="#class-CSV::Table-label-Instance+Methods">Instance Methods</a>
-</li>
+                  <li>
+                    <a href="../doc/csv/recipes/parsing_rdoc.html">
+                      parsing
+                    </a>
+                  </li>
 
-
+                  <li>
+                    <a href="../doc/csv/recipes/recipes_rdoc.html">
+                      recipes
+                    </a>
+                  </li>
 
               </ul>
             </details>
           </li>
 
-
-
-
-          <li>
-      <a href="#class-CSV::Table-label-Creating+a+CSV-3A-3ATable+Instance">Creating a CSV::Table Instance</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV::Table-label-Headers">Headers</a>
-</li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#class-CSV::Table-label-Access+Modes">Access Modes</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#class-CSV::Table-label-Row+Mode">Row Mode</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV::Table-label-Column+Mode">Column Mode</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#class-CSV::Table-label-Mixed+Mode">Mixed Mode</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-  </ul>
-</div>
+      </ul>
+    </details>
+  </div>
 
 
   
 
   
 <div id="parent-class-section" class="nav-section">
-  <h3>Ancestors</h3>
-  <ul><li><a href="../Object.html">Object</a><ul><li>BasicObject</li></ul></li></ul>
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-ancestors"></use></svg>
+      </span>
+      <span class="nav-section-title">Ancestors</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
+    <ul><li><a href="../Object.html">Object</a><ul><li>BasicObject</li></ul></li></ul>
+  </details>
 </div>
 
 
   
 <div id="includes-section" class="nav-section">
-  <h3>Included Modules</h3>
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-includes"></use></svg>
+      </span>
+      <span class="nav-section-title">Included Modules</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
 
-  <ul class="link-list">
+    <ul class="nav-list">
 
 
-    <li><span class="include">Enumerable</span></li>
+      <li><span class="include">Enumerable</span></li>
 
 
-  </ul>
+    </ul>
+  </details>
 </div>
 
 
   
 <div id="extends-section" class="nav-section">
-  <h3>Extended With Modules</h3>
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-extends"></use></svg>
+      </span>
+      <span class="nav-section-title">Extended With Modules</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
 
-  <ul class="link-list">
+    <ul class="nav-list">
 
 
-    <li><span class="extend">Forwardable</span></li>
+      <li><span class="extend">Forwardable</span></li>
 
 
-  </ul>
+    </ul>
+  </details>
 </div>
 
 
   
   <div class="nav-section">
-    <h3>Class Methods</h3>
-    <ul class="link-list" role="directory">
+    <details class="nav-section-collapsible" open>
+      <summary class="nav-section-header">
+        <span class="nav-section-icon">
+          <svg><use href="#icon-class-methods"></use></svg>
+        </span>
+        <span class="nav-section-title">Class Methods</span>
+        <span class="nav-section-chevron">
+          <svg><use href="#icon-chevron"></use></svg>
+        </span>
+      </summary>
+      <ul class="nav-list" role="directory">
 
-      <li ><a href="#method-c-new">new</a></li>
+        <li ><a href="#method-c-new">new</a></li>
 
-    </ul>
+      </ul>
+    </details>
   </div>
 
 
 
   <div class="nav-section">
-    <h3>Instance Methods</h3>
-    <ul class="link-list" role="directory">
+    <details class="nav-section-collapsible" open>
+      <summary class="nav-section-header">
+        <span class="nav-section-icon">
+          <svg><use href="#icon-instance-methods"></use></svg>
+        </span>
+        <span class="nav-section-title">Instance Methods</span>
+        <span class="nav-section-chevron">
+          <svg><use href="#icon-chevron"></use></svg>
+        </span>
+      </summary>
+      <ul class="nav-list" role="directory">
 
-      <li ><a href="#method-i-3C-3C">&lt;&lt;</a></li>
+        <li ><a href="#method-i-3C-3C">&lt;&lt;</a></li>
 
-      <li ><a href="#method-i-3D-3D">==</a></li>
+        <li ><a href="#method-i-3D-3D">==</a></li>
 
-      <li ><a href="#method-i-5B-5D">[]</a></li>
+        <li ><a href="#method-i-5B-5D">[]</a></li>
 
-      <li ><a href="#method-i-5B-5D-3D">[]=</a></li>
+        <li ><a href="#method-i-5B-5D-3D">[]=</a></li>
 
-      <li ><a href="#method-i-by_col">by_col</a></li>
+        <li ><a href="#method-i-by_col">by_col</a></li>
 
-      <li ><a href="#method-i-by_col-21">by_col!</a></li>
+        <li ><a href="#method-i-by_col-21">by_col!</a></li>
 
-      <li ><a href="#method-i-by_col_or_row">by_col_or_row</a></li>
+        <li ><a href="#method-i-by_col_or_row">by_col_or_row</a></li>
 
-      <li ><a href="#method-i-by_col_or_row-21">by_col_or_row!</a></li>
+        <li ><a href="#method-i-by_col_or_row-21">by_col_or_row!</a></li>
 
-      <li ><a href="#method-i-by_row">by_row</a></li>
+        <li ><a href="#method-i-by_row">by_row</a></li>
 
-      <li ><a href="#method-i-by_row-21">by_row!</a></li>
+        <li ><a href="#method-i-by_row-21">by_row!</a></li>
 
-      <li ><a href="#method-i-delete">delete</a></li>
+        <li ><a href="#method-i-delete">delete</a></li>
 
-      <li ><a href="#method-i-delete_if">delete_if</a></li>
+        <li ><a href="#method-i-delete_if">delete_if</a></li>
 
-      <li ><a href="#method-i-dig">dig</a></li>
+        <li ><a href="#method-i-dig">dig</a></li>
 
-      <li ><a href="#method-i-each">each</a></li>
+        <li ><a href="#method-i-each">each</a></li>
 
-      <li ><a href="#method-i-headers">headers</a></li>
+        <li ><a href="#method-i-headers">headers</a></li>
 
-      <li ><a href="#method-i-inspect">inspect</a></li>
+        <li ><a href="#method-i-inspect">inspect</a></li>
 
-      <li ><a href="#method-i-push">push</a></li>
+        <li ><a href="#method-i-push">push</a></li>
 
-      <li ><a href="#method-i-to_a">to_a</a></li>
+        <li ><a href="#method-i-to_a">to_a</a></li>
 
-      <li ><a href="#method-i-to_csv">to_csv</a></li>
+        <li ><a href="#method-i-to_csv">to_csv</a></li>
 
-      <li ><a href="#method-i-to_s">to_s</a></li>
+        <li ><a href="#method-i-to_s">to_s</a></li>
 
-      <li ><a href="#method-i-values_at">values_at</a></li>
+        <li ><a href="#method-i-values_at">values_at</a></li>
 
-    </ul>
+      </ul>
+    </details>
   </div>
 
 
+  <div id="classindex-section" class="nav-section">
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-layers"></use></svg>
+      </span>
+      <span class="nav-section-title">Classes and Modules</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
 
-  <footer id="validator-badges" role="contentinfo">
-  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.15.1.</p>
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
-</footer>
+    <ul class="link-list nav-list"><li><code><a href="../Array.html">Array</a></code></li><li><details><summary><code><a href="../CSV.html">CSV</a></code></summary><ul class="link-list nav-list"><li><code><a href="../CSV/FieldsConverter.html">FieldsConverter</a></code></li><li><code><a href="../CSV/InputRecordSeparator.html">InputRecordSeparator</a></code></li><li><code><a href="../CSV/InvalidEncodingError.html">InvalidEncodingError</a></code></li><li><code><a href="../CSV/MalformedCSVError.html">MalformedCSVError</a></code></li><li><details><summary><code><a href="../CSV/Parser.html">Parser</a></code></summary><ul class="link-list nav-list"><li><code><a href="../CSV/Parser/InputsScanner.html">InputsScanner</a></code></li><li><code><a href="../CSV/Parser/InvalidEncoding.html">InvalidEncoding</a></code></li><li><code><a href="../CSV/Parser/Scanner.html">Scanner</a></code></li><li><code><a href="../CSV/Parser/UnexpectedError.html">UnexpectedError</a></code></li></ul></details></li><li><code><a href="../CSV/Row.html">Row</a></code></li><li><code><a href="../CSV/TSV.html">TSV</a></code></li><li><code><a href="../CSV/Table.html">Table</a></code></li><li><code><a href="../CSV/Writer.html">Writer</a></code></li></ul></details></li><li><code><a href="../Object.html">Object</a></code></li><li><code><a href="../String.html">String</a></code></li></ul>
+  </details>
+</div>
 
 </nav>
 
-<main role="main" aria-labelledby="class-CSV::Table">
+<main role="main" aria-labelledby="class-csv-table">
   
   
     <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
@@ -291,24 +658,27 @@
     </ol>
   
 
-  <h1 id="class-CSV::Table" class="anchor-link class">
+  <span id="class-CSV::Table" class="legacy-anchor"></span>
+  <h1 id="class-csv-table" class="anchor-link class">
     class CSV::Table
   </h1>
 
   <section class="description">
     
-<h1 id="class-CSV::Table-label-CSV-3A-3ATable">CSV::Table<span><a href="#class-CSV::Table-label-CSV-3A-3ATable">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<span id="class-CSV::Table-label-CSV-3A-3ATable" class="legacy-anchor"></span>
+<h1 id="class-csv-table-csvtable"><a href="#class-csv-table-csvtable">CSV::Table</a></h1>
 
 <p>A CSV::Table instance represents CSV data. (see <a href="../CSV.html">class CSV</a>).</p>
 
 <p>The instance may have:</p>
 <ul><li>
-<p>Rows: each is a Table::Row object.</p>
+<p>Rows: each is a <a href="Row.html"><code>Table::Row</code></a> object.</p>
 </li><li>
 <p>Headers: names for the columns.</p>
 </li></ul>
 
-<h3 id="class-CSV::Table-label-Instance+Methods">Instance Methods<span><a href="#class-CSV::Table-label-Instance+Methods">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="class-CSV::Table-label-Instance+Methods" class="legacy-anchor"></span>
+<h3 id="class-csv-table-instance-methods"><a href="#class-csv-table-instance-methods">Instance Methods</a></h3>
 
 <p>CSV::Table has three groups of instance methods:</p>
 <ul><li>
@@ -326,7 +696,8 @@
 </li></ul>
 </li></ul>
 
-<h2 id="class-CSV::Table-label-Creating+a+CSV-3A-3ATable+Instance">Creating a CSV::Table Instance<span><a href="#class-CSV::Table-label-Creating+a+CSV-3A-3ATable+Instance">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="class-CSV::Table-label-Creating+a+CSV-3A-3ATable+Instance" class="legacy-anchor"></span>
+<h2 id="class-csv-table-creating-a-csvtable-instance"><a href="#class-csv-table-creating-a-csvtable-instance">Creating a CSV::Table Instance</a></h2>
 
 <p>Commonly, a new CSV::Table instance is created by parsing CSV source using headers:</p>
 
@@ -337,7 +708,8 @@
 
 <p>You can also create an instance directly. See <a href="Table.html#method-c-new"><code>::new</code></a>.</p>
 
-<h2 id="class-CSV::Table-label-Headers">Headers<span><a href="#class-CSV::Table-label-Headers">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="class-CSV::Table-label-Headers" class="legacy-anchor"></span>
+<h2 id="class-csv-table-headers"><a href="#class-csv-table-headers">Headers</a></h2>
 
 <p>If a table has headers, the headers serve as labels for the columns of data. Each header serves as the label for its column.</p>
 
@@ -356,7 +728,8 @@
 <span class="ruby-identifier">table</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; []</span>
 </pre>
 
-<h2 id="class-CSV::Table-label-Access+Modes">Access Modes<span><a href="#class-CSV::Table-label-Access+Modes">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="class-CSV::Table-label-Access+Modes" class="legacy-anchor"></span>
+<h2 id="class-csv-table-access-modes"><a href="#class-csv-table-access-modes">Access Modes</a></h2>
 
 <p>CSV::Table provides three modes for accessing table data:</p>
 <ul><li>
@@ -382,7 +755,8 @@
 <p><a href="Table.html#method-i-values_at"><code>values_at</code></a></p>
 </li></ul>
 
-<h3 id="class-CSV::Table-label-Row+Mode">Row Mode<span><a href="#class-CSV::Table-label-Row+Mode">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="class-CSV::Table-label-Row+Mode" class="legacy-anchor"></span>
+<h3 id="class-csv-table-row-mode"><a href="#class-csv-table-row-mode">Row Mode</a></h3>
 
 <p>Set a table to row mode with method <a href="Table.html#method-i-by_row-21"><code>by_row!</code></a>:</p>
 
@@ -412,7 +786,8 @@
 <span class="ruby-identifier">table</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">2</span>] <span class="ruby-comment"># =&gt; [[&quot;Name&quot;, #&lt;CSV::Row &quot;Name&quot;:&quot;bat&quot; &quot;Value&quot;:4&gt;], [&quot;Value&quot;, #&lt;CSV::Row &quot;Name&quot;:&quot;bad&quot; &quot;Value&quot;:5&gt;]]</span>
 </pre>
 
-<h3 id="class-CSV::Table-label-Column+Mode">Column Mode<span><a href="#class-CSV::Table-label-Column+Mode">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="class-CSV::Table-label-Column+Mode" class="legacy-anchor"></span>
+<h3 id="class-csv-table-column-mode"><a href="#class-csv-table-column-mode">Column Mode</a></h3>
 
 <p>Set a table to column mode with method <a href="Table.html#method-i-by_col-21"><code>by_col!</code></a>:</p>
 
@@ -439,7 +814,8 @@
 <span class="ruby-identifier">table</span>[<span class="ruby-string">&#39;Name&#39;</span>] <span class="ruby-comment"># =&gt; [&quot;Foo&quot;, &quot;Bar&quot;, &quot;Baz&quot;]</span>
 </pre>
 
-<h3 id="class-CSV::Table-label-Mixed+Mode">Mixed Mode<span><a href="#class-CSV::Table-label-Mixed+Mode">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="class-CSV::Table-label-Mixed+Mode" class="legacy-anchor"></span>
+<h3 id="class-csv-table-mixed-mode"><a href="#class-csv-table-mixed-mode">Mixed Mode</a></h3>
 
 <p>In mixed mode, you can refer to either rows or columns:</p>
 <ul><li>
@@ -488,7 +864,8 @@
   </section>
 
 
-  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+  <span id="5Buntitled-5D" class="legacy-anchor"></span>
+  <section class="documentation-section anchor-link">
 
 
 
@@ -498,7 +875,7 @@
 
     <section class="attribute-method-details method-section">
       <header>
-        <h3>Attributes</h3>
+        <h3 id="untitled-attributes"><a href="#untitled-attributes">Attributes</a></h3>
       </header>
 
 
@@ -538,9 +915,12 @@
 
 
 
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
+
+
+
+     <section id="public-class-untitled-method-details" class="method-section anchor-link">
        <header>
-         <h3>Public Class Methods</h3>
+         <h3 id="public-class-untitled-methods"><a href="#public-class-untitled-methods">Public Class Methods</a></h3>
        </header>
 
 
@@ -565,13 +945,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 199</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">array_of_rows</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@table</span> = <span class="ruby-identifier">array_of_rows</span>
   <span class="ruby-ivar">@headers</span> = <span class="ruby-identifier">headers</span>
@@ -587,6 +962,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns a new CSV::Table object.</p>
@@ -663,9 +1041,15 @@
 
     </section>
 
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+
+
+
+
+
+
+     <section id="public-instance-untitled-method-details" class="method-section anchor-link">
        <header>
-         <h3>Public Instance Methods</h3>
+         <h3 id="public-instance-untitled-methods"><a href="#public-instance-untitled-methods">Public Instance Methods</a></h3>
        </header>
 
 
@@ -690,13 +1074,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="3C-3C-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 762</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 762</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-identifier">row_or_array</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">row_or_array</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Array</span>  <span class="ruby-comment"># append Array</span>
     <span class="ruby-ivar">@table</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">headers</span>, <span class="ruby-identifier">row_or_array</span>)
@@ -708,6 +1087,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>If <code>row_or_array</code> is a CSV::Row object, it is appended to the table:</p>
@@ -755,19 +1137,17 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 965</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 965</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@table</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">table</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Table</span>
   <span class="ruby-ivar">@table</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns <code>true</code> if all each row of <code>self</code> <code>==</code> the corresponding row of <code>other_table</code>, otherwise, <code>false</code>.</p>
@@ -841,13 +1221,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 514</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 514</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">index_or_header</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:row</span> <span class="ruby-keyword">or</span>  <span class="ruby-comment"># by index</span>
      (<span class="ruby-ivar">@mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:col_or_row</span> <span class="ruby-keyword">and</span> (<span class="ruby-identifier">index_or_header</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Integer</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">index_or_header</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Range</span>)))
@@ -858,6 +1233,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns data from the table;  does not modify the table.</p>
@@ -1097,13 +1475,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="5B-5D-3D-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 649</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 649</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]=</span>(<span class="ruby-identifier">index_or_header</span>, <span class="ruby-identifier">value</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:row</span> <span class="ruby-keyword">or</span>  <span class="ruby-comment"># by index</span>
      (<span class="ruby-ivar">@mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:col_or_row</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">index_or_header</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Integer</span>)
@@ -1138,6 +1511,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Puts data onto the table.</p>
@@ -1323,18 +1699,16 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="by_col-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 242</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 242</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">by_col</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@table</span>.<span class="ruby-identifier">dup</span>).<span class="ruby-identifier">by_col!</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns a duplicate of <code>self</code>, in column mode (see <a href="#class-CSV::Table-label-Column+Mode">Column Mode</a>):</p>
@@ -1385,13 +1759,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="by_col-21-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 257</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 257</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">by_col!</span>
   <span class="ruby-ivar">@mode</span> = <span class="ruby-value">:col</span>
 
@@ -1399,6 +1768,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Sets the mode for <code>self</code> to column mode (see <a href="#class-CSV::Table-label-Column+Mode">Column Mode</a>); returns <code>self</code>:</p>
@@ -1442,18 +1814,16 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="by_col_or_row-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 280</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 280</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">by_col_or_row</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@table</span>.<span class="ruby-identifier">dup</span>).<span class="ruby-identifier">by_col_or_row!</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns a duplicate of <code>self</code>, in mixed mode (see <a href="#class-CSV::Table-label-Mixed+Mode">Mixed Mode</a>):</p>
@@ -1504,13 +1874,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="by_col_or_row-21-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 295</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 295</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">by_col_or_row!</span>
   <span class="ruby-ivar">@mode</span> = <span class="ruby-value">:col_or_row</span>
 
@@ -1518,6 +1883,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Sets the mode for <code>self</code> to mixed mode (see <a href="#class-CSV::Table-label-Mixed+Mode">Mixed Mode</a>); returns <code>self</code>:</p>
@@ -1561,18 +1929,16 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="by_row-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 318</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 318</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">by_row</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@table</span>.<span class="ruby-identifier">dup</span>).<span class="ruby-identifier">by_row!</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns a duplicate of <code>self</code>, in row mode (see <a href="#class-CSV::Table-label-Row+Mode">Row Mode</a>):</p>
@@ -1623,13 +1989,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="by_row-21-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 333</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 333</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">by_row!</span>
   <span class="ruby-ivar">@mode</span> = <span class="ruby-value">:row</span>
 
@@ -1637,6 +1998,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Sets the mode for <code>self</code> to row mode (see <a href="#class-CSV::Table-label-Row+Mode">Row Mode</a>); returns <code>self</code>:</p>
@@ -1688,13 +2052,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 834</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 834</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">indexes_or_headers</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">indexes_or_headers</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;wrong number of arguments (given 0, expected 1+)&quot;</span>
@@ -1720,6 +2079,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>If the access mode is <code>:row</code> or <code>:col_or_row</code>, and each argument is either an Integer or a Range, returns deleted rows. Otherwise, returns deleted columns data.</p>
@@ -1792,13 +2154,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="delete_if-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 887</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 887</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_if</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">enum_for</span>(<span class="ruby-identifier">__method__</span>) { <span class="ruby-ivar">@mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:row</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:col_or_row</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">size</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
 
@@ -1814,6 +2171,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Removes rows or columns for which the block returns a truthy value; returns <code>self</code>.</p>
@@ -1873,13 +2233,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="dig-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 1021</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 1021</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dig</span>(<span class="ruby-identifier">index_or_header</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">index_or_headers</span>)
   <span class="ruby-identifier">value</span> = <span class="ruby-keyword">self</span>[<span class="ruby-identifier">index_or_header</span>]
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
@@ -1895,6 +2250,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Extracts the nested value specified by the sequence of <code>index</code> or <code>header</code> objects by calling dig at each step, returning nil if any intermediate step is nil.</p>
@@ -1930,13 +2288,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 930</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 930</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">enum_for</span>(<span class="ruby-identifier">__method__</span>) { <span class="ruby-ivar">@mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:col</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">size</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
 
@@ -1952,6 +2305,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Calls the block with each row or column; returns <code>self</code>.</p>
@@ -2019,13 +2375,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="headers-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 360</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 360</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">headers</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-ivar">@headers</span>.<span class="ruby-identifier">dup</span>
@@ -2035,6 +2386,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns a new Array containing the String headers for the table.</p>
@@ -2091,13 +2445,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="inspect-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 1048</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 1048</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
   <span class="ruby-identifier">inspected</span> = <span class="ruby-node">+&quot;#&lt;#{self.class} mode:#{@mode} row_count:#{to_a.size}&gt;&quot;</span>
   <span class="ruby-identifier">summary</span> = <span class="ruby-identifier">to_csv</span>(<span class="ruby-value">limit:</span> <span class="ruby-value">5</span>)
@@ -2106,6 +2455,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns a <code>US-ASCII</code>-encoded String showing table:</p>
@@ -2155,13 +2507,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="push-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 788</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 788</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">rows</span>)
   <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">row</span> }
 
@@ -2169,6 +2516,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>A shortcut for appending multiple rows. Equivalent to:</p>
@@ -2219,13 +2569,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 978</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 978</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>
   <span class="ruby-identifier">array</span> = [<span class="ruby-identifier">headers</span>]
   <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
@@ -2236,6 +2581,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the table as an Array of Arrays; the headers are in the first row:</p>
@@ -2276,13 +2624,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="to_csv-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 1004</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 1004</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_csv</span>(<span class="ruby-value">write_headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">limit:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">array</span> = <span class="ruby-identifier">write_headers</span> <span class="ruby-operator">?</span> [<span class="ruby-identifier">headers</span>.<span class="ruby-identifier">to_csv</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)] <span class="ruby-operator">:</span> []
   <span class="ruby-identifier">limit</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">size</span>
@@ -2296,6 +2639,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>Returns the table as CSV string. See <a href="../CSV.html#class-CSV-label-Options+for+Generating">Options for Generating</a>.</p>
@@ -2385,13 +2731,8 @@
               <summary>Source</summary>
             </details>
           </div>
-
-
-
-        <div class="method-description">
-
           <div class="method-source-code" id="values_at-source">
-            <pre><span class="ruby-comment"># File lib/csv/table.rb, line 734</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/table.rb, line 734</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">values_at</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">indices_or_headers</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:row</span> <span class="ruby-keyword">or</span>  <span class="ruby-comment"># by indices</span>
      ( <span class="ruby-ivar">@mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:col_or_row</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">indices_or_headers</span>.<span class="ruby-identifier">all?</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
@@ -2407,6 +2748,9 @@
 <span class="ruby-keyword">end</span></pre>
           </div>
 
+
+
+        <div class="method-description">
 
 
           <p>If the access mode is <code>:row</code> or <code>:col_or_row</code>, and each argument is either an Integer or a Range, returns rows. Otherwise, returns columns data.</p>
@@ -2477,8 +2821,33 @@
 
     </section>
 
+
+
+
   </section>
 
 </main>
+
+<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+  <div class="toc-sticky">
+    <h3 class="toc-heading">On This Page</h3>
+    <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
+      <!-- Generated by JavaScript based on page headings -->
+    </nav>
+  </div>
+</aside>
+
+
+<footer class="site-footer">
+  
+
+  <div class="footer-bottom">
+    <p>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
+    </p>
+  </div>
+</footer>
+
 </body>
 

@@ -9,8 +9,33 @@
 
 
   <meta name="keywords" content="ruby,documentation,NEWS">
-  <meta name="description" content="NEWS: News ## 3. Fixed `StringScanner` document URL.">
+  <meta
+    name="description"
+    content="NEWS: News ## 3. Fixed `StringScanner` document URL."
+  >
 
+
+
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="NEWS - RDoc Documentation">
+
+
+
+    <meta property="og:description" content="News ## 3. Fixed `StringScanner` document URL.">
+
+
+
+
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NEWS - RDoc Documentation">
+
+
+
+    <meta name="twitter:description" content="News ## 3. Fixed `StringScanner` document URL.">
 
 
 
@@ -19,1421 +44,458 @@
   var index_rel_prefix = "./";
 </script>
 
-<script src="./js/navigation.js" defer></script>
-<script src="./js/search.js" defer></script>
-<script src="./js/search_index.js" defer></script>
-<script src="./js/searcher.js" defer></script>
-<script src="./js/darkfish.js" defer></script>
+<script
+  src="./js/theme-toggle.js?v=7.2.0"
+></script>
 
-<link href="./css/fonts.css" rel="stylesheet">
-<link href="./css/rdoc.css" rel="stylesheet">
+<script
+  src="./js/search_navigation.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/search_data.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/search_ranker.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/search_controller.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/c_highlighter.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/bash_highlighter.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/aliki.js?v=7.2.0"
+  defer
+></script>
+
+<link
+  href="./css/rdoc.css?v=7.2.0"
+  rel="stylesheet"
+>
 
 
 
-<body id="top" role="document" class="file">
+
+<body role="document" class="file has-toc">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <!-- Chevron (right arrow) - used for expand/collapse -->
+  <symbol
+    id="icon-chevron"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </symbol>
+
+  <!-- File/Document - Pages section -->
+  <symbol
+    id="icon-file"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path
+      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+    ></path>
+
+    <polyline points="14 2 14 8 20 8"></polyline>
+  </symbol>
+
+  <!-- Layers/Stack - Classes and Modules section -->
+  <symbol
+    id="icon-layers"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+    <polyline points="2 17 12 22 22 17"></polyline>
+    <polyline points="2 12 12 17 22 12"></polyline>
+  </symbol>
+
+  <!-- Curly braces with C - Class Methods section -->
+  <symbol
+    id="icon-class-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      C
+    </text>
+  </symbol>
+
+  <!-- Curly braces with I - Instance Methods section -->
+  <symbol
+    id="icon-instance-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      I
+    </text>
+  </symbol>
+
+  <!-- Double chevrons up - Ancestors section -->
+  <symbol
+    id="icon-ancestors"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="17 11 12 6 7 11"></polyline>
+    <polyline points="17 18 12 13 7 18"></polyline>
+  </symbol>
+
+  <!-- User with plus - Included Modules section -->
+  <symbol
+    id="icon-includes"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+
+    <line
+      x1="20"
+      y1="8"
+      x2="20"
+      y2="14"
+    ></line>
+
+    <line
+      x1="23"
+      y1="11"
+      x2="17"
+      y2="11"
+    ></line>
+  </symbol>
+
+  <!-- User with check - Extended Modules section -->
+  <symbol
+    id="icon-extends"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+    <polyline points="17 11 19 13 23 9"></polyline>
+  </symbol>
+
+  <!-- List - Sections section -->
+  <symbol
+    id="icon-list"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <line
+      x1="8"
+      y1="6"
+      x2="21"
+      y2="6"
+    ></line>
+
+    <line
+      x1="8"
+      y1="12"
+      x2="21"
+      y2="12"
+    ></line>
+
+    <line
+      x1="8"
+      y1="18"
+      x2="21"
+      y2="18"
+    ></line>
+
+    <line
+      x1="3"
+      y1="6"
+      x2="3.01"
+      y2="6"
+    ></line>
+
+    <line
+      x1="3"
+      y1="12"
+      x2="3.01"
+      y2="12"
+    ></line>
+
+    <line
+      x1="3"
+      y1="18"
+      x2="3.01"
+      y2="18"
+    ></line>
+  </symbol>
+</svg>
+
+<header class="top-navbar">
+  <a href="./index.html" class="navbar-brand">
+    RDoc Documentation
+  </a>
+
+  <!-- Desktop search bar -->
+  <div class="navbar-search navbar-search-desktop" role="search">
+    <form action="#" method="get" accept-charset="utf-8">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results-desktop"
+             type="text" name="search" placeholder="Search (/) for a class, method..."
+             spellcheck="false" autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+      <ul id="search-results-desktop" aria-label="Search Results"
+          aria-busy="false" aria-expanded="false"
+          aria-atomic="false" class="initially-hidden search-results"></ul>
+    </form>
+  </div>
+
+  <!-- Mobile search icon button -->
+  <button id="search-toggle" class="navbar-search-mobile" aria-label="Open search" type="button">
+    <span aria-hidden="true">🔍</span>
+  </button>
+
+  <!-- Theme toggle button -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" type="button">
+    <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+  </button>
+</header>
+
+<!-- Search Modal (Mobile) -->
+<div id="search-modal" class="search-modal" hidden aria-modal="true" role="dialog" aria-label="Search">
+  <div class="search-modal-backdrop"></div>
+  <div class="search-modal-content">
+    <div class="search-modal-header">
+      <form class="search-modal-form" action="#" method="get" accept-charset="utf-8">
+        <span class="search-modal-icon" aria-hidden="true">🔍</span>
+        <input id="search-field-mobile" role="combobox" aria-label="Search"
+               aria-autocomplete="list" aria-controls="search-results-mobile"
+               type="text" name="search" placeholder="Search documentation"
+               spellcheck="false" autocomplete="off">
+        <button type="button" class="search-modal-close" aria-label="Close search" id="search-modal-close">
+          <span aria-hidden="true">esc</span>
+        </button>
+      </form>
+    </div>
+    <div class="search-modal-body">
+      <ul id="search-results-mobile" aria-label="Search Results"
+          aria-busy="false" aria-expanded="false"
+          aria-atomic="false" class="search-results search-modal-results initially-hidden"></ul>
+      <div class="search-modal-empty">
+        <p>No recent searches</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
   <span aria-hidden="true">&#9776;</span>
 </div>
 
 
-<nav id="navigation" role="navigation">
-  <div id="project-navigation">
-    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
-  <h2>
-    <a href="./index.html" rel="home">Home</a>
-  </h2>
-
-  <div id="table-of-contents-navigation">
-    <a href="./table_of_contents.html#pages">Pages</a>
-    <a href="./table_of_contents.html#classes">Classes</a>
-    <a href="./table_of_contents.html#methods">Methods</a>
-  </div>
-</div>
-
-    <div id="search-section" role="search" class="project-section initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <div id="search-field-wrapper">
-      <input id="search-field" role="combobox" aria-label="Search"
-             aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </div>
-
-    <ul id="search-results" aria-label="Search Results"
-        aria-busy="false" aria-expanded="false"
-        aria-atomic="false" class="initially-hidden"></ul>
-  </form>
-</div>
-
-  </div>
-
-  
-<div class="nav-section">
-  <h3>Table of Contents</h3>
-
-
-
-
-
-  <ul class="link-list" role="directory">
-    
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-News">News</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.3.5+-+2025-06-01">3.3.5 - 2025-06-01</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.3.4+-+2025-04-13">3.3.4 - 2025-04-13</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.3.3+-+2025-03-20">3.3.3 - 2025-03-20</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.3.2+-+2024-12-21">3.3.2 - 2024-12-21</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.3.1+-+2024-12-15">3.3.1 - 2024-12-15</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.3.0+-+2024-03-22">3.3.0 - 2024-03-22</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.2.9+-+2024-03-22">3.2.9 - 2024-03-22</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.2.8+-+2023-11-08">3.2.8 - 2023-11-08</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.2.7+-+2023-06-26">3.2.7 - 2023-06-26</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.2.6+-+2022-12-08">3.2.6 - 2022-12-08</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.2.5+-+2022-08-26">3.2.5 - 2022-08-26</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.2.4+-+2022-08-22">3.2.4 - 2022-08-22</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.2.3+-+2022-04-09">3.2.3 - 2022-04-09</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.2.2+-+2021-12-24">3.2.2 - 2021-12-24</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.2.1+-+2021-10-23">3.2.1 - 2021-10-23</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.2.0+-+2021-06-06">3.2.0 - 2021-06-06</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.1.9+-+2020-11-23">3.1.9 - 2020-11-23</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.1.8+-+2020-11-18">3.1.8 - 2020-11-18</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.1.7+-+2020-08-04">3.1.7 - 2020-08-04</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.1.6+-+2020-07-20">3.1.6 - 2020-07-20</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.1.5+-+2020-05-18">3.1.5 - 2020-05-18</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.1.4+-+2020-05-17">3.1.4 - 2020-05-17</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.1.3+-+2020-05-09">3.1.3 - 2020-05-09</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.1.2+-+2019-10-12">3.1.2 - 2019-10-12</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.1.1+-+2019-04-26">3.1.1 - 2019-04-26</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.1.0+-+2019-04-17">3.1.0 - 2019-04-17</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.0.9+-+2019-04-15">3.0.9 - 2019-04-15</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.0.8+-+2019-04-11">3.0.8 - 2019-04-11</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.0.7+-+2019-04-08">3.0.7 - 2019-04-08</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.0.6+-+2019-03-30">3.0.6 - 2019-03-30</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.0.5+-+2019-03-24">3.0.5 - 2019-03-24</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.0.4+-+2019-01-25">3.0.4 - 2019-01-25</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.0.3+-+2019-01-12">3.0.3 - 2019-01-12</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.0.2+-+2018-12-23">3.0.2 - 2018-12-23</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.0.1+-+2018-12-07">3.0.1 - 2018-12-07</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-3.0.0+-+2018-06-06">3.0.0 - 2018-06-06</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-1.0.2+-+2018-05-03">1.0.2 - 2018-05-03</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-
-          <li>
-            <details open>
-              <summary>
-      <a href="#label-1.0.1+-+2018-02-09">1.0.1 - 2018-02-09</a>
-</summary>
-              <ul class="link-list" role="directory">
-                
-
-
-
-
-          <li>
-      <a href="#label-Improvements">Improvements</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Fixes">Fixes</a>
-</li>
-
-
-
-
-          <li>
-      <a href="#label-Thanks">Thanks</a>
-</li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-              </ul>
-            </details>
-          </li>
-
-
-
-  </ul>
-</div>
-
-
+<nav id="navigation" role="navigation" hidden>
   
 
 
 
 
-<div id="fileindex-section" class="nav-section">
-  <h3>Pages</h3>
-
-  <ul class="link-list">
 
 
+  <div id="fileindex-section" class="nav-section">
+    <details class="nav-section-collapsible" open>
+      <summary class="nav-section-header">
+        <span class="nav-section-icon">
+          <svg>
+            <use href="#icon-file"></use>
+          </svg>
+        </span>
 
-    <li><a href="./LICENSE_txt.html">LICENSE</a></li>
+        <span class="nav-section-title">Pages</span>
+
+        <span class="nav-section-chevron">
+          <svg>
+            <use href="#icon-chevron"></use>
+          </svg>
+        </span>
+      </summary>
+
+      <ul class="nav-list">
 
 
 
-    <li><a href="./NEWS_md.html">NEWS</a></li>
 
 
 
-    <li><a href="./README_md.html">README</a></li>
+            <li>
+              <a href="./LICENSE_txt.html">
+                LICENSE
+              </a>
+            </li>
 
 
 
-    <li><details><summary>doc</summary>
-    <ul class="link-list">
 
-      <li><a href="./doc/csv/recipes/filtering_rdoc.html">filtering</a></li>
+            <li>
+              <a href="./NEWS_md.html">
+                NEWS
+              </a>
+            </li>
 
-      <li><a href="./doc/csv/recipes/generating_rdoc.html">generating</a></li>
 
-      <li><a href="./doc/csv/recipes/parsing_rdoc.html">parsing</a></li>
 
-      <li><a href="./doc/csv/recipes/recipes_rdoc.html">recipes</a></li>
 
-    </ul></details></li>
+            <li>
+              <a href="./README_md.html">
+                README
+              </a>
+            </li>
 
-  </ul>
+
+
+
+
+          <li>
+            <details >
+              <summary>
+                
+                  doc
+                  
+                
+              </summary>
+
+              <ul class="link-list">
+
+                  <li>
+                    <a href="./doc/csv/recipes/filtering_rdoc.html">
+                      filtering
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="./doc/csv/recipes/generating_rdoc.html">
+                      generating
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="./doc/csv/recipes/parsing_rdoc.html">
+                      parsing
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="./doc/csv/recipes/recipes_rdoc.html">
+                      recipes
+                    </a>
+                  </li>
+
+              </ul>
+            </details>
+          </li>
+
+      </ul>
+    </details>
+  </div>
+
+
+  <div id="classindex-section" class="nav-section">
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-layers"></use></svg>
+      </span>
+      <span class="nav-section-title">Classes and Modules</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
+
+    <ul class="link-list nav-list"><li><code><a href="./Array.html">Array</a></code></li><li><details><summary><code><a href="./CSV.html">CSV</a></code></summary><ul class="link-list nav-list"><li><code><a href="./CSV/FieldsConverter.html">FieldsConverter</a></code></li><li><code><a href="./CSV/InputRecordSeparator.html">InputRecordSeparator</a></code></li><li><code><a href="./CSV/InvalidEncodingError.html">InvalidEncodingError</a></code></li><li><code><a href="./CSV/MalformedCSVError.html">MalformedCSVError</a></code></li><li><details><summary><code><a href="./CSV/Parser.html">Parser</a></code></summary><ul class="link-list nav-list"><li><code><a href="./CSV/Parser/InputsScanner.html">InputsScanner</a></code></li><li><code><a href="./CSV/Parser/InvalidEncoding.html">InvalidEncoding</a></code></li><li><code><a href="./CSV/Parser/Scanner.html">Scanner</a></code></li><li><code><a href="./CSV/Parser/UnexpectedError.html">UnexpectedError</a></code></li></ul></details></li><li><code><a href="./CSV/Row.html">Row</a></code></li><li><code><a href="./CSV/TSV.html">TSV</a></code></li><li><code><a href="./CSV/Table.html">Table</a></code></li><li><code><a href="./CSV/Writer.html">Writer</a></code></li></ul></details></li><li><code><a href="./Object.html">Object</a></code></li><li><code><a href="./String.html">String</a></code></li></ul>
+  </details>
 </div>
-
-
-
-  <footer id="validator-badges" role="contentinfo">
-  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.15.1.</p>
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
-</footer>
 
 </nav>
 
 <main role="main" aria-label="Page NEWS.md">
 
-<h1 id="label-News">News<span><a href="#label-News">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<span id="label-News" class="legacy-anchor"></span>
+<h1 id="news"><a href="#news">News</a></h1>
 
-<h2 id="label-3.3.5+-+2025-06-01">3.3.5 - 2025-06-01<span><a href="#label-3.3.5+-+2025-06-01">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.3.5+-+2025-06-01" class="legacy-anchor"></span>
+<h2 id="335---2025-06-01"><a href="#335---2025-06-01">3.3.5 - 2025-06-01</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements" class="legacy-anchor"></span>
+<h3 id="improvements"><a href="#improvements">Improvements</a></h3>
 <ul><li>
 <p>docs: Fixed <code>StringScanner</code> document URL.</p>
 <ul><li>
@@ -1443,14 +505,17 @@
 </li></ul>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks" class="legacy-anchor"></span>
+<h3 id="thanks"><a href="#thanks">Thanks</a></h3>
 <ul><li>
 <p>Petrik de Heus</p>
 </li></ul>
 
-<h2 id="label-3.3.4+-+2025-04-13">3.3.4 - 2025-04-13<span><a href="#label-3.3.4+-+2025-04-13">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.3.4+-+2025-04-13" class="legacy-anchor"></span>
+<h2 id="334---2025-04-13"><a href="#334---2025-04-13">3.3.4 - 2025-04-13</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-1" class="legacy-anchor"></span>
+<h3 id="improvements-1"><a href="#improvements-1">Improvements</a></h3>
 <ul><li>
 <p><code>csv-filter</code>: Removed an experimental command line tool.</p>
 <ul><li>
@@ -1458,9 +523,11 @@
 </li></ul>
 </li></ul>
 
-<h2 id="label-3.3.3+-+2025-03-20">3.3.3 - 2025-03-20<span><a href="#label-3.3.3+-+2025-03-20">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.3.3+-+2025-03-20" class="legacy-anchor"></span>
+<h2 id="333---2025-03-20"><a href="#333---2025-03-20">3.3.3 - 2025-03-20</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-2" class="legacy-anchor"></span>
+<h3 id="improvements-2"><a href="#improvements-2">Improvements</a></h3>
 <ul><li>
 <p><code>csv-filter</code>: Added an experimental command line tool to filter a <a href="CSV.html"><code>CSV</code></a>.</p>
 <ul><li>
@@ -1468,7 +535,8 @@
 </li></ul>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes" class="legacy-anchor"></span>
+<h3 id="fixes"><a href="#fixes">Fixes</a></h3>
 <ul><li>
 <p>Fixed wrong EOF detection for <code>ARGF</code></p>
 <ul><li>
@@ -1489,7 +557,8 @@
 </li></ul>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-1" class="legacy-anchor"></span>
+<h3 id="thanks-1"><a href="#thanks-1">Thanks</a></h3>
 <ul><li>
 <p>Takeshi Nishimatsu</p>
 </li><li>
@@ -1498,9 +567,11 @@
 <p>Dave Burgess</p>
 </li></ul>
 
-<h2 id="label-3.3.2+-+2024-12-21">3.3.2 - 2024-12-21<span><a href="#label-3.3.2+-+2024-12-21">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.3.2+-+2024-12-21" class="legacy-anchor"></span>
+<h2 id="332---2024-12-21"><a href="#332---2024-12-21">3.3.2 - 2024-12-21</a></h2>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-1" class="legacy-anchor"></span>
+<h3 id="fixes-1"><a href="#fixes-1">Fixes</a></h3>
 <ul><li>
 <p>Fixed a parse bug with a quoted line with <code>col_sep</code> and an empty line. This was introduced in 3.3.1.</p>
 <ul><li>
@@ -1510,14 +581,17 @@
 </li></ul>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-2" class="legacy-anchor"></span>
+<h3 id="thanks-2"><a href="#thanks-2">Thanks</a></h3>
 <ul><li>
 <p>stoodfarback</p>
 </li></ul>
 
-<h2 id="label-3.3.1+-+2024-12-15">3.3.1 - 2024-12-15<span><a href="#label-3.3.1+-+2024-12-15">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.3.1+-+2024-12-15" class="legacy-anchor"></span>
+<h2 id="331---2024-12-15"><a href="#331---2024-12-15">3.3.1 - 2024-12-15</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-3" class="legacy-anchor"></span>
+<h3 id="improvements-3"><a href="#improvements-3">Improvements</a></h3>
 <ul><li>
 <p><a href="CSV.html#method-c-open"><code>CSV.open</code></a>: Changed to detect BOM by default. Note that this isn’t enabled on Windows because Ruby may have a bug. See also: <a href="https://bugs.ruby-lang.org/issues/20526">bugs.ruby-lang.org/issues/20526</a></p>
 <ul><li>
@@ -1567,7 +641,8 @@
 </li></ul>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-3" class="legacy-anchor"></span>
+<h3 id="thanks-3"><a href="#thanks-3">Thanks</a></h3>
 <ul><li>
 <p>Junichi Ito</p>
 </li><li>
@@ -1582,16 +657,20 @@
 <p>Jas</p>
 </li></ul>
 
-<h2 id="label-3.3.0+-+2024-03-22">3.3.0 - 2024-03-22<span><a href="#label-3.3.0+-+2024-03-22">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.3.0+-+2024-03-22" class="legacy-anchor"></span>
+<h2 id="330---2024-03-22"><a href="#330---2024-03-22">3.3.0 - 2024-03-22</a></h2>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-2" class="legacy-anchor"></span>
+<h3 id="fixes-2"><a href="#fixes-2">Fixes</a></h3>
 <ul><li>
 <p>Fixed a regression parse bug in 3.2.9 that parsing with <code>:skip_lines</code> may cause wrong result.</p>
 </li></ul>
 
-<h2 id="label-3.2.9+-+2024-03-22">3.2.9 - 2024-03-22<span><a href="#label-3.2.9+-+2024-03-22">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.2.9+-+2024-03-22" class="legacy-anchor"></span>
+<h2 id="329---2024-03-22"><a href="#329---2024-03-22">3.2.9 - 2024-03-22</a></h2>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-3" class="legacy-anchor"></span>
+<h3 id="fixes-3"><a href="#fixes-3">Fixes</a></h3>
 <ul><li>
 <p>Fixed a parse bug that wrong result may be happen when:</p>
 <ul><li>
@@ -1607,14 +686,17 @@
 <p>GH-296</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-4" class="legacy-anchor"></span>
+<h3 id="thanks-4"><a href="#thanks-4">Thanks</a></h3>
 <ul><li>
 <p>Ryo Tsukamoto</p>
 </li></ul>
 
-<h2 id="label-3.2.8+-+2023-11-08">3.2.8 - 2023-11-08<span><a href="#label-3.2.8+-+2023-11-08">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.2.8+-+2023-11-08" class="legacy-anchor"></span>
+<h2 id="328---2023-11-08"><a href="#328---2023-11-08">3.2.8 - 2023-11-08</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-4" class="legacy-anchor"></span>
+<h3 id="improvements-4"><a href="#improvements-4">Improvements</a></h3>
 <ul><li>
 <p>Added <a href="CSV/InvalidEncodingError.html"><code>CSV::InvalidEncodingError</code></a>.</p>
 
@@ -1623,14 +705,17 @@
 <p>GH-287</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-5" class="legacy-anchor"></span>
+<h3 id="thanks-5"><a href="#thanks-5">Thanks</a></h3>
 <ul><li>
 <p>Kosuke Shibata</p>
 </li></ul>
 
-<h2 id="label-3.2.7+-+2023-06-26">3.2.7 - 2023-06-26<span><a href="#label-3.2.7+-+2023-06-26">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.2.7+-+2023-06-26" class="legacy-anchor"></span>
+<h2 id="327---2023-06-26"><a href="#327---2023-06-26">3.2.7 - 2023-06-26</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-5" class="legacy-anchor"></span>
+<h3 id="improvements-5"><a href="#improvements-5">Improvements</a></h3>
 <ul><li>
 <p>Removed an unused internal variable. <a href="https://github.com/ruby/csv/issues/273">GH-273</a> [Patch by Mau Magnaguagno]</p>
 </li><li>
@@ -1641,14 +726,16 @@
 <p>Added a documentation for <code>liberal_parsing: {backslash_quotes: true}</code>. <a href="https://github.com/ruby/csv/issues/280">GH-280</a> [Patch by Mark Schneider]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-4" class="legacy-anchor"></span>
+<h3 id="fixes-4"><a href="#fixes-4">Fixes</a></h3>
 <ul><li>
 <p>Fixed a wrong execution result in documents. <a href="https://github.com/ruby/csv/issues/276">GH-276</a> [Patch by Yuki Tsujimoto]</p>
 </li><li>
 <p>Fixed a bug that the same line is used multiple times. <a href="https://github.com/ruby/csv/issues/279">GH-279</a> [Reported by Gabriel Nagy]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-6" class="legacy-anchor"></span>
+<h3 id="thanks-6"><a href="#thanks-6">Thanks</a></h3>
 <ul><li>
 <p>Mau Magnaguagno</p>
 </li><li>
@@ -1663,9 +750,11 @@
 <p>Gabriel Nagy</p>
 </li></ul>
 
-<h2 id="label-3.2.6+-+2022-12-08">3.2.6 - 2022-12-08<span><a href="#label-3.2.6+-+2022-12-08">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.2.6+-+2022-12-08" class="legacy-anchor"></span>
+<h2 id="326---2022-12-08"><a href="#326---2022-12-08">3.2.6 - 2022-12-08</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-6" class="legacy-anchor"></span>
+<h3 id="improvements-6"><a href="#improvements-6">Improvements</a></h3>
 <ul><li>
 <p><a href="CSV.html#method-i-read"><code>CSV#read</code></a> consumes the same lines with other methods like <a href="CSV.html#method-i-shift"><code>CSV#shift</code></a>. [<a href="https://github.com/ruby/csv/issues/258">GitHub#258</a>] [Reported by Lhoussaine Ghallou]</p>
 </li><li>
@@ -1674,12 +763,14 @@
 <p>Simplify some implementations. [<a href="https://github.com/ruby/csv/pull/262">GitHub#262</a>] [<a href="https://github.com/ruby/csv/pull/263">GitHub#263</a>] [Patch by Mau Magnaguagno]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-5" class="legacy-anchor"></span>
+<h3 id="fixes-5"><a href="#fixes-5">Fixes</a></h3>
 <ul><li>
 <p>Fixed <a href="CSV.html#method-c-generate_lines"><code>CSV.generate_lines</code></a> document. [<a href="https://github.com/ruby/csv/pull/257">GitHub#257</a>] [Patch by Sampat Badhe]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-7" class="legacy-anchor"></span>
+<h3 id="thanks-7"><a href="#thanks-7">Thanks</a></h3>
 <ul><li>
 <p>Sampat Badhe</p>
 </li><li>
@@ -1688,23 +779,28 @@
 <p>Mau Magnaguagno</p>
 </li></ul>
 
-<h2 id="label-3.2.5+-+2022-08-26">3.2.5 - 2022-08-26<span><a href="#label-3.2.5+-+2022-08-26">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.2.5+-+2022-08-26" class="legacy-anchor"></span>
+<h2 id="325---2022-08-26"><a href="#325---2022-08-26">3.2.5 - 2022-08-26</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-7" class="legacy-anchor"></span>
+<h3 id="improvements-7"><a href="#improvements-7">Improvements</a></h3>
 <ul><li>
 <p>Added <a href="CSV.html#method-c-generate_lines"><code>CSV.generate_lines</code></a>. [<a href="https://github.com/ruby/csv/issues/255">GitHub#255</a>] [Reported by OKURA Masafumi] [<a href="https://github.com/ruby/csv/pull/256">GitHub#256</a>] [Patch by Eriko Sugiyama]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-8" class="legacy-anchor"></span>
+<h3 id="thanks-8"><a href="#thanks-8">Thanks</a></h3>
 <ul><li>
 <p>OKURA Masafumi</p>
 </li><li>
 <p>Eriko Sugiyama</p>
 </li></ul>
 
-<h2 id="label-3.2.4+-+2022-08-22">3.2.4 - 2022-08-22<span><a href="#label-3.2.4+-+2022-08-22">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.2.4+-+2022-08-22" class="legacy-anchor"></span>
+<h2 id="324---2022-08-22"><a href="#324---2022-08-22">3.2.4 - 2022-08-22</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-8" class="legacy-anchor"></span>
+<h3 id="improvements-8"><a href="#improvements-8">Improvements</a></h3>
 <ul><li>
 <p>Cleaned up internal implementations. [<a href="https://github.com/ruby/csv/pull/249">GitHub#249</a>] [<a href="https://github.com/ruby/csv/pull/250">GitHub#250</a>] [<a href="https://github.com/ruby/csv/pull/251">GitHub#251</a>] [Patch by Mau Magnaguagno]</p>
 </li><li>
@@ -1712,15 +808,17 @@
 </li><li>
 <p>Added support for transcoding <a href="String.html"><code>String</code></a> <a href="CSV.html"><code>CSV</code></a>. Syntax is <code>from-encoding:to-encoding</code>. [<a href="https://github.com/ruby/csv/issues/254">GitHub#254</a>] [Reported by Richard Stueven]</p>
 </li><li>
-<p>Added quoted information to <code>CSV::FieldInfo</code>. [<a href="https://github.com/ruby/csv/pull/253">GitHub#254</a>] [Reported by Hirokazu SUZUKI]</p>
+<p>Added quoted information to <a href="CSV.html#FieldInfo"><code>CSV::FieldInfo</code></a>. [<a href="https://github.com/ruby/csv/pull/253">GitHub#254</a>] [Reported by Hirokazu SUZUKI]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-6" class="legacy-anchor"></span>
+<h3 id="fixes-6"><a href="#fixes-6">Fixes</a></h3>
 <ul><li>
 <p>Fixed a link in documents. [<a href="https://github.com/ruby/csv/pull/244">GitHub#244</a>] [Patch by Peter Zhu]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-9" class="legacy-anchor"></span>
+<h3 id="thanks-9"><a href="#thanks-9">Thanks</a></h3>
 <ul><li>
 <p>Peter Zhu</p>
 </li><li>
@@ -1733,9 +831,11 @@
 <p>Hirokazu SUZUKI</p>
 </li></ul>
 
-<h2 id="label-3.2.3+-+2022-04-09">3.2.3 - 2022-04-09<span><a href="#label-3.2.3+-+2022-04-09">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.2.3+-+2022-04-09" class="legacy-anchor"></span>
+<h2 id="323---2022-04-09"><a href="#323---2022-04-09">3.2.3 - 2022-04-09</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-9" class="legacy-anchor"></span>
+<h3 id="improvements-9"><a href="#improvements-9">Improvements</a></h3>
 <ul><li>
 <p>Added contents summary to <a href="CSV/Table.html#method-i-inspect"><code>CSV::Table#inspect</code></a>. [GitHub#229][Patch by Eriko Sugiyama] [GitHub#235][Patch by Sampat Badhe]</p>
 </li><li>
@@ -1750,14 +850,16 @@
 <p>Added <code>:symbol_raw</code> to built-in header converters. [GitHub#237][Reported by taki] [GitHub#239][Patch by Eriko Sugiyama]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-7" class="legacy-anchor"></span>
+<h3 id="fixes-7"><a href="#fixes-7">Fixes</a></h3>
 <ul><li>
-<p>Fixed a bug that some texts may be dropped unexpectedly. [Bug #<a href="ruby-core:105587">18245]</a>[Reported by Hassan Abdul Rehman]</p>
+<p>Fixed a bug that some texts may be dropped unexpectedly. [Bug #18245][ruby-core:105587][Reported by Hassan Abdul Rehman]</p>
 </li><li>
 <p>Fixed a bug that <code>:field_size_limit</code> doesn’t work with not complex row. [GitHub#238][Reported by Dan Buettner]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-10" class="legacy-anchor"></span>
+<h3 id="thanks-10"><a href="#thanks-10">Thanks</a></h3>
 <ul><li>
 <p>Hassan Abdul Rehman</p>
 </li><li>
@@ -1774,21 +876,25 @@
 <p>taki</p>
 </li></ul>
 
-<h2 id="label-3.2.2+-+2021-12-24">3.2.2 - 2021-12-24<span><a href="#label-3.2.2+-+2021-12-24">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.2.2+-+2021-12-24" class="legacy-anchor"></span>
+<h2 id="322---2021-12-24"><a href="#322---2021-12-24">3.2.2 - 2021-12-24</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-10" class="legacy-anchor"></span>
+<h3 id="improvements-10"><a href="#improvements-10">Improvements</a></h3>
 <ul><li>
 <p>Added a validation for invalid option combination. [GitHub#225][Patch by adamroyjones]</p>
 </li><li>
 <p>Improved documentation for developers. [GitHub#227][Patch by Eriko Sugiyama]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-8" class="legacy-anchor"></span>
+<h3 id="fixes-8"><a href="#fixes-8">Fixes</a></h3>
 <ul><li>
 <p>Fixed a bug that all of <code>ARGF</code> contents may not be consumed. [GitHub#228][Reported by Rafael Navaza]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-11" class="legacy-anchor"></span>
+<h3 id="thanks-11"><a href="#thanks-11">Thanks</a></h3>
 <ul><li>
 <p>adamroyjones</p>
 </li><li>
@@ -1797,9 +903,11 @@
 <p>Rafael Navaza</p>
 </li></ul>
 
-<h2 id="label-3.2.1+-+2021-10-23">3.2.1 - 2021-10-23<span><a href="#label-3.2.1+-+2021-10-23">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.2.1+-+2021-10-23" class="legacy-anchor"></span>
+<h2 id="321---2021-10-23"><a href="#321---2021-10-23">3.2.1 - 2021-10-23</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-11" class="legacy-anchor"></span>
+<h3 id="improvements-11"><a href="#improvements-11">Improvements</a></h3>
 <ul><li>
 <p>doc: Fixed wrong class name. [GitHub#217][Patch by Vince]</p>
 </li><li>
@@ -1811,7 +919,8 @@
 </li></ul>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-12" class="legacy-anchor"></span>
+<h3 id="thanks-12"><a href="#thanks-12">Thanks</a></h3>
 <ul><li>
 <p>Vince</p>
 </li><li>
@@ -1820,9 +929,11 @@
 <p>rm155</p>
 </li></ul>
 
-<h2 id="label-3.2.0+-+2021-06-06">3.2.0 - 2021-06-06<span><a href="#label-3.2.0+-+2021-06-06">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.2.0+-+2021-06-06" class="legacy-anchor"></span>
+<h2 id="320---2021-06-06"><a href="#320---2021-06-06">3.2.0 - 2021-06-06</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-12" class="legacy-anchor"></span>
+<h3 id="improvements-12"><a href="#improvements-12">Improvements</a></h3>
 <ul><li>
 <p><a href="CSV.html#method-c-open"><code>CSV.open</code></a>: Added support for <code>:newline</code> option. [GitHub#198][Patch by Nobuyoshi Nakada]</p>
 </li><li>
@@ -1833,12 +944,14 @@
 <p><a href="CSV/Row.html"><code>CSV::Row</code></a>: Added support for pattern matching. [GitHub#207][Patch by Kevin Newton]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-9" class="legacy-anchor"></span>
+<h3 id="fixes-9"><a href="#fixes-9">Fixes</a></h3>
 <ul><li>
-<p>Fixed typos in documentation. [<a href="GitHub#205">GitHub#196]</a>[Patch by Sampat Badhe]</p>
+<p>Fixed typos in documentation. [GitHub#196][GitHub#205][Patch by Sampat Badhe]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-13" class="legacy-anchor"></span>
+<h3 id="thanks-13"><a href="#thanks-13">Thanks</a></h3>
 <ul><li>
 <p>Sampat Badhe</p>
 </li><li>
@@ -1849,59 +962,70 @@
 <p>Kevin Newton</p>
 </li></ul>
 
-<h2 id="label-3.1.9+-+2020-11-23">3.1.9 - 2020-11-23<span><a href="#label-3.1.9+-+2020-11-23">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.1.9+-+2020-11-23" class="legacy-anchor"></span>
+<h2 id="319---2020-11-23"><a href="#319---2020-11-23">3.1.9 - 2020-11-23</a></h2>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-10" class="legacy-anchor"></span>
+<h3 id="fixes-10"><a href="#fixes-10">Fixes</a></h3>
 <ul><li>
 <p>Fixed a compatibility bug that the line to be processed by <code>skip_lines:</code> has a row separator. [GitHub#194][Reported by Josef Šimánek]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-14" class="legacy-anchor"></span>
+<h3 id="thanks-14"><a href="#thanks-14">Thanks</a></h3>
 <ul><li>
 <p>Josef Šimánek</p>
 </li></ul>
 
-<h2 id="label-3.1.8+-+2020-11-18">3.1.8 - 2020-11-18<span><a href="#label-3.1.8+-+2020-11-18">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.1.8+-+2020-11-18" class="legacy-anchor"></span>
+<h2 id="318---2020-11-18"><a href="#318---2020-11-18">3.1.8 - 2020-11-18</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-13" class="legacy-anchor"></span>
+<h3 id="improvements-13"><a href="#improvements-13">Improvements</a></h3>
 <ul><li>
 <p>Improved documentation. [Patch by Burdette Lamar]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-15" class="legacy-anchor"></span>
+<h3 id="thanks-15"><a href="#thanks-15">Thanks</a></h3>
 <ul><li>
 <p>Burdette Lamar</p>
 </li></ul>
 
-<h2 id="label-3.1.7+-+2020-08-04">3.1.7 - 2020-08-04<span><a href="#label-3.1.7+-+2020-08-04">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.1.7+-+2020-08-04" class="legacy-anchor"></span>
+<h2 id="317---2020-08-04"><a href="#317---2020-08-04">3.1.7 - 2020-08-04</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-14" class="legacy-anchor"></span>
+<h3 id="improvements-14"><a href="#improvements-14">Improvements</a></h3>
 <ul><li>
-<p>Improved document. [<a href="GitHub#160">GitHub#158]</a>[GitHub#161] [Patch by Burdette Lamar]</p>
+<p>Improved document. [GitHub#158][GitHub#160][GitHub#161] [Patch by Burdette Lamar]</p>
 </li><li>
 <p>Updated required Ruby version to 2.5.0 or later. [GitHub#159] [Patch by Gabriel Nagy]</p>
 </li><li>
 <p>Removed stringio 0.1.3 or later dependency.</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-16" class="legacy-anchor"></span>
+<h3 id="thanks-16"><a href="#thanks-16">Thanks</a></h3>
 <ul><li>
 <p>Burdette Lamar</p>
 </li><li>
 <p>Gabriel Nagy</p>
 </li></ul>
 
-<h2 id="label-3.1.6+-+2020-07-20">3.1.6 - 2020-07-20<span><a href="#label-3.1.6+-+2020-07-20">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.1.6+-+2020-07-20" class="legacy-anchor"></span>
+<h2 id="316---2020-07-20"><a href="#316---2020-07-20">3.1.6 - 2020-07-20</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-15" class="legacy-anchor"></span>
+<h3 id="improvements-15"><a href="#improvements-15">Improvements</a></h3>
 <ul><li>
-<p>Improved document. [<a href="GitHub#135">GitHub#127]</a>[<a href="GitHub#137">GitHub#136]</a>[<a href="GitHub#140">GitHub#139]</a> [<a href="GitHub#142">GitHub#141]</a>[<a href="GitHub#145">GitHub#143]</a>[<a href="GitHub#148">GitHub#146]</a> [<a href="GitHub#151">GitHub#148]</a>[<a href="GitHub#154">GitHub#152]</a>[<a href="GitHub#157">GitHub#155]</a> [Patch by Burdette Lamar]</p>
+<p>Improved document. [GitHub#127][GitHub#135][GitHub#136][GitHub#137][GitHub#139][GitHub#140] [GitHub#141][GitHub#142][GitHub#143][GitHub#145][GitHub#146][GitHub#148] [GitHub#148][GitHub#151][GitHub#152][GitHub#154][GitHub#155][GitHub#157] [Patch by Burdette Lamar]</p>
 </li><li>
 <p><a href="CSV.html#method-c-open"><code>CSV.open</code></a>: Added support for <code>undef: :replace</code>. [GitHub#129][Patch by Koichi ITO]</p>
 </li><li>
 <p><a href="CSV.html#method-c-open"><code>CSV.open</code></a>: Added support for <code>invalid: :replace</code>. [GitHub#129][Patch by Koichi ITO]</p>
 </li><li>
-<p>Don't run quotable check for invalid encoding field values. [GitHub#131][Patch by Koichi ITO]</p>
+<p>Don’t run quotable check for invalid encoding field values. [GitHub#131][Patch by Koichi ITO]</p>
 </li><li>
 <p>Added support for specifying the target indexes and names to <code>force_quotes:</code>. [GitHub#153][Reported by Aleksandr]</p>
 </li><li>
@@ -1910,7 +1034,8 @@
 <p>Changed to require the stringio gem 0.1.3 or later.</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-17" class="legacy-anchor"></span>
+<h3 id="thanks-17"><a href="#thanks-17">Thanks</a></h3>
 <ul><li>
 <p>Burdette Lamar</p>
 </li><li>
@@ -1919,56 +1044,67 @@
 <p>Aleksandr</p>
 </li></ul>
 
-<h2 id="label-3.1.5+-+2020-05-18">3.1.5 - 2020-05-18<span><a href="#label-3.1.5+-+2020-05-18">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.1.5+-+2020-05-18" class="legacy-anchor"></span>
+<h2 id="315---2020-05-18"><a href="#315---2020-05-18">3.1.5 - 2020-05-18</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-16" class="legacy-anchor"></span>
+<h3 id="improvements-16"><a href="#improvements-16">Improvements</a></h3>
 <ul><li>
 <p>Improved document. [GitHub#124][Patch by Burdette Lamar]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-11" class="legacy-anchor"></span>
+<h3 id="fixes-11"><a href="#fixes-11">Fixes</a></h3>
 <ul><li>
 <p>Added missing document files. [GitHub#125][Reported by joast]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-18" class="legacy-anchor"></span>
+<h3 id="thanks-18"><a href="#thanks-18">Thanks</a></h3>
 <ul><li>
 <p>Burdette Lamar</p>
 </li><li>
 <p>joast</p>
 </li></ul>
 
-<h2 id="label-3.1.4+-+2020-05-17">3.1.4 - 2020-05-17<span><a href="#label-3.1.4+-+2020-05-17">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.1.4+-+2020-05-17" class="legacy-anchor"></span>
+<h2 id="314---2020-05-17"><a href="#314---2020-05-17">3.1.4 - 2020-05-17</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-17" class="legacy-anchor"></span>
+<h3 id="improvements-17"><a href="#improvements-17">Improvements</a></h3>
 <ul><li>
 <p>Improved document. [GitHub#122][Patch by Burdette Lamar]</p>
 </li><li>
-<p>Stopped to dropping stack trace for exception caused by <a href="CSV.html#method-c-parse_line"><code>CSV.parse_line</code></a>. [GitHub#120][Reported by Kyle d'Oliveira]</p>
+<p>Stopped to dropping stack trace for exception caused by <a href="CSV.html#method-c-parse_line"><code>CSV.parse_line</code></a>. [GitHub#120][Reported by Kyle d’Oliveira]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-12" class="legacy-anchor"></span>
+<h3 id="fixes-12"><a href="#fixes-12">Fixes</a></h3>
 <ul><li>
 <p>Fixed a bug that <code>:write_nil_value</code> or <code>:write_empty_value</code> don’t work with non <a href="String.html"><code>String</code></a> objects. [GitHub#123][Reported by asm256]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-19" class="legacy-anchor"></span>
+<h3 id="thanks-19"><a href="#thanks-19">Thanks</a></h3>
 <ul><li>
 <p>Burdette Lamar</p>
 </li><li>
 <p>asm256</p>
 </li><li>
-<p>Kyle d'Oliveira</p>
+<p>Kyle d’Oliveira</p>
 </li></ul>
 
-<h2 id="label-3.1.3+-+2020-05-09">3.1.3 - 2020-05-09<span><a href="#label-3.1.3+-+2020-05-09">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.1.3+-+2020-05-09" class="legacy-anchor"></span>
+<h2 id="313---2020-05-09"><a href="#313---2020-05-09">3.1.3 - 2020-05-09</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-18" class="legacy-anchor"></span>
+<h3 id="improvements-18"><a href="#improvements-18">Improvements</a></h3>
 <ul><li>
 <p><code>CSV::Row#dup</code>: Copied deeply. [GitHub#108][Patch by Jim Kane]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-13" class="legacy-anchor"></span>
+<h3 id="fixes-13"><a href="#fixes-13">Fixes</a></h3>
 <ul><li>
 <p>Fixed a infinite loop bug for zero length match <code>skip_lines</code>. [GitHub#110][Patch by Mike MacDonald]</p>
 </li><li>
@@ -1979,7 +1115,8 @@
 <p>Fixed a parse bug when split charcter exists in middle of column value. [GitHub#115][Reported by TOMITA Masahiro]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-20" class="legacy-anchor"></span>
+<h3 id="thanks-20"><a href="#thanks-20">Thanks</a></h3>
 <ul><li>
 <p>Jim Kane</p>
 </li><li>
@@ -1990,18 +1127,21 @@
 <p>TOMITA Masahiro</p>
 </li></ul>
 
-<h2 id="label-3.1.2+-+2019-10-12">3.1.2 - 2019-10-12<span><a href="#label-3.1.2+-+2019-10-12">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.1.2+-+2019-10-12" class="legacy-anchor"></span>
+<h2 id="312---2019-10-12"><a href="#312---2019-10-12">3.1.2 - 2019-10-12</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-19" class="legacy-anchor"></span>
+<h3 id="improvements-19"><a href="#improvements-19">Improvements</a></h3>
 <ul><li>
 <p>Added <code>:col_sep</code> check. [GitHub#94][Reported by Florent Beaurain]</p>
 </li><li>
 <p>Suppressed warnings. [GitHub#96][Patch by Nobuyoshi Nakada]</p>
 </li><li>
-<p>Improved documentation. [<a href="GitHub#102">GitHub#101]</a>[Patch by Vitor Oliveira]</p>
+<p>Improved documentation. [GitHub#101][GitHub#102][Patch by Vitor Oliveira]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-14" class="legacy-anchor"></span>
+<h3 id="fixes-14"><a href="#fixes-14">Fixes</a></h3>
 <ul><li>
 <p>Fixed a typo in documentation. [GitHub#95][Patch by Yuji Yaginuma]</p>
 </li><li>
@@ -2014,7 +1154,8 @@
 <p>Fixed a bug that <a href="CSV.html#method-c-generate_line"><code>CSV.generate_line</code></a> doesn’t work with <code>Encoding.default_internal</code>. [GitHub#105][Reported by David Rodríguez]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-21" class="legacy-anchor"></span>
+<h3 id="thanks-21"><a href="#thanks-21">Thanks</a></h3>
 <ul><li>
 <p>Florent Beaurain</p>
 </li><li>
@@ -2031,9 +1172,11 @@
 <p>David Rodríguez</p>
 </li></ul>
 
-<h2 id="label-3.1.1+-+2019-04-26">3.1.1 - 2019-04-26<span><a href="#label-3.1.1+-+2019-04-26">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.1.1+-+2019-04-26" class="legacy-anchor"></span>
+<h2 id="311---2019-04-26"><a href="#311---2019-04-26">3.1.1 - 2019-04-26</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-20" class="legacy-anchor"></span>
+<h3 id="improvements-20"><a href="#improvements-20">Improvements</a></h3>
 <ul><li>
 <p>Added documentation for <code>strip</code> option. [GitHub#88][Patch by hayashiyoshino]</p>
 </li><li>
@@ -2042,12 +1185,14 @@
 <p>Added documentation for <code>quote_empty</code> option. [GitHub#89][Patch by kawa_tech]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-15" class="legacy-anchor"></span>
+<h3 id="fixes-15"><a href="#fixes-15">Fixes</a></h3>
 <ul><li>
 <p>Fixed a bug that <code>strip; true</code> removes a newline.</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-22" class="legacy-anchor"></span>
+<h3 id="thanks-22"><a href="#thanks-22">Thanks</a></h3>
 <ul><li>
 <p>hayashiyoshino</p>
 </li><li>
@@ -2056,56 +1201,70 @@
 <p>kawa_tech</p>
 </li></ul>
 
-<h2 id="label-3.1.0+-+2019-04-17">3.1.0 - 2019-04-17<span><a href="#label-3.1.0+-+2019-04-17">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.1.0+-+2019-04-17" class="legacy-anchor"></span>
+<h2 id="310---2019-04-17"><a href="#310---2019-04-17">3.1.0 - 2019-04-17</a></h2>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-16" class="legacy-anchor"></span>
+<h3 id="fixes-16"><a href="#fixes-16">Fixes</a></h3>
 <ul><li>
 <p>Fixed a backward incompatibility bug that <a href="CSV.html#method-i-eof-3F"><code>CSV#eof?</code></a> may raises an error. [GitHub#86][Reported by krororo]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-23" class="legacy-anchor"></span>
+<h3 id="thanks-23"><a href="#thanks-23">Thanks</a></h3>
 <ul><li>
 <p>krororo</p>
 </li></ul>
 
-<h2 id="label-3.0.9+-+2019-04-15">3.0.9 - 2019-04-15<span><a href="#label-3.0.9+-+2019-04-15">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.0.9+-+2019-04-15" class="legacy-anchor"></span>
+<h2 id="309---2019-04-15"><a href="#309---2019-04-15">3.0.9 - 2019-04-15</a></h2>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-17" class="legacy-anchor"></span>
+<h3 id="fixes-17"><a href="#fixes-17">Fixes</a></h3>
 <ul><li>
 <p>Fixed a test for Windows.</p>
 </li></ul>
 
-<h2 id="label-3.0.8+-+2019-04-11">3.0.8 - 2019-04-11<span><a href="#label-3.0.8+-+2019-04-11">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.0.8+-+2019-04-11" class="legacy-anchor"></span>
+<h2 id="308---2019-04-11"><a href="#308---2019-04-11">3.0.8 - 2019-04-11</a></h2>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-18" class="legacy-anchor"></span>
+<h3 id="fixes-18"><a href="#fixes-18">Fixes</a></h3>
 <ul><li>
 <p>Fixed a bug that <code>strip: String</code> doesn’t work.</p>
 </li></ul>
 
-<h2 id="label-3.0.7+-+2019-04-08">3.0.7 - 2019-04-08<span><a href="#label-3.0.7+-+2019-04-08">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.0.7+-+2019-04-08" class="legacy-anchor"></span>
+<h2 id="307---2019-04-08"><a href="#307---2019-04-08">3.0.7 - 2019-04-08</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-21" class="legacy-anchor"></span>
+<h3 id="improvements-21"><a href="#improvements-21">Improvements</a></h3>
 <ul><li>
 <p>Improve parse performance 1.5x by introducing loose parser.</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-19" class="legacy-anchor"></span>
+<h3 id="fixes-19"><a href="#fixes-19">Fixes</a></h3>
 <ul><li>
 <p>Fix performance regression in 3.0.5.</p>
 </li><li>
 <p>Fix a bug that <a href="CSV.html#method-i-line"><code>CSV#line</code></a> returns wrong value when you use <code>quote_char: nil</code>.</p>
 </li></ul>
 
-<h2 id="label-3.0.6+-+2019-03-30">3.0.6 - 2019-03-30<span><a href="#label-3.0.6+-+2019-03-30">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.0.6+-+2019-03-30" class="legacy-anchor"></span>
+<h2 id="306---2019-03-30"><a href="#306---2019-03-30">3.0.6 - 2019-03-30</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-22" class="legacy-anchor"></span>
+<h3 id="improvements-22"><a href="#improvements-22">Improvements</a></h3>
 <ul><li>
 <p><a href="CSV.html#method-c-foreach"><code>CSV.foreach</code></a>: Added support for <code>mode</code>.</p>
 </li></ul>
 
-<h2 id="label-3.0.5+-+2019-03-24">3.0.5 - 2019-03-24<span><a href="#label-3.0.5+-+2019-03-24">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.0.5+-+2019-03-24" class="legacy-anchor"></span>
+<h2 id="305---2019-03-24"><a href="#305---2019-03-24">3.0.5 - 2019-03-24</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-23" class="legacy-anchor"></span>
+<h3 id="improvements-23"><a href="#improvements-23">Improvements</a></h3>
 <ul><li>
 <p>Added <code>:liberal_parsing =&gt; {backslash_quote: true}</code> option. [GitHub#74][Patch by 284km]</p>
 </li><li>
@@ -2126,7 +1285,8 @@
 <p>Added <code>:strip</code> option. [GitHub#58]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-20" class="legacy-anchor"></span>
+<h3 id="fixes-20"><a href="#fixes-20">Fixes</a></h3>
 <ul><li>
 <p>Fixed a compatibility bug that <a href="CSV.html#method-i-each"><code>CSV#each</code></a> doesn’t care <a href="CSV.html#method-i-shift"><code>CSV#shift</code></a>. [GitHub#76][Patch by Alyssa Ross]</p>
 </li><li>
@@ -2137,7 +1297,8 @@
 <p>Fixed a bug that <code>:skip_lines</code> doesn’t work with multibyte characters data. [GitHub#83][Reported by ff2248]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-24" class="legacy-anchor"></span>
+<h3 id="thanks-24"><a href="#thanks-24">Thanks</a></h3>
 <ul><li>
 <p>Alyssa Ross</p>
 </li><li>
@@ -2156,23 +1317,27 @@
 <p>ff2248</p>
 </li></ul>
 
-<h2 id="label-3.0.4+-+2019-01-25">3.0.4 - 2019-01-25<span><a href="#label-3.0.4+-+2019-01-25">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.0.4+-+2019-01-25" class="legacy-anchor"></span>
+<h2 id="304---2019-01-25"><a href="#304---2019-01-25">3.0.4 - 2019-01-25</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-24" class="legacy-anchor"></span>
+<h3 id="improvements-24"><a href="#improvements-24">Improvements</a></h3>
 <ul><li>
 <p>Removed duplicated <a href="CSV/Row.html#method-i-include-3F"><code>CSV::Row#include?</code></a> implementations. [GitHub#69][Patch by Max Schwenk]</p>
 </li><li>
 <p>Removed duplicated <a href="CSV/Row.html#method-i-header-3F"><code>CSV::Row#header?</code></a> implementations. [GitHub#70][Patch by Max Schwenk]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-21" class="legacy-anchor"></span>
+<h3 id="fixes-21"><a href="#fixes-21">Fixes</a></h3>
 <ul><li>
 <p>Fixed a typo in document. [GitHub#72][Patch by Artur Beljajev]</p>
 </li><li>
 <p>Fixed a compatibility bug when row headers are changed. [GitHub#71][Reported by tomoyuki kosaka]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-25" class="legacy-anchor"></span>
+<h3 id="thanks-25"><a href="#thanks-25">Thanks</a></h3>
 <ul><li>
 <p>Max Schwenk</p>
 </li><li>
@@ -2181,9 +1346,11 @@
 <p>tomoyuki kosaka</p>
 </li></ul>
 
-<h2 id="label-3.0.3+-+2019-01-12">3.0.3 - 2019-01-12<span><a href="#label-3.0.3+-+2019-01-12">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.0.3+-+2019-01-12" class="legacy-anchor"></span>
+<h2 id="303---2019-01-12"><a href="#303---2019-01-12">3.0.3 - 2019-01-12</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-25" class="legacy-anchor"></span>
+<h3 id="improvements-25"><a href="#improvements-25">Improvements</a></h3>
 <ul><li>
 <p>Migrated benchmark tool to benchmark-driver from benchmark-ips. [GitHub#57][Patch by 284km]</p>
 </li><li>
@@ -2192,7 +1359,8 @@
 <p>Added <code>quote_empty:</code> write option. [GitHub#35][Reported by Dave Myron]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-22" class="legacy-anchor"></span>
+<h3 id="fixes-22"><a href="#fixes-22">Fixes</a></h3>
 <ul><li>
 <p>Fixed a compatibility bug that <a href="CSV.html#method-c-generate"><code>CSV.generate</code></a> always return <code>ASCII-8BIT</code> encoding string. [GitHub#63][Patch by Watson]</p>
 </li><li>
@@ -2203,7 +1371,8 @@
 <p>Fixed a compatibility bug that double each parse twice. [GitHub#68][Reported by Max Schwenk]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-26" class="legacy-anchor"></span>
+<h3 id="thanks-26"><a href="#thanks-26">Thanks</a></h3>
 <ul><li>
 <p>Watson</p>
 </li><li>
@@ -2216,9 +1385,11 @@
 <p>Max Schwenk</p>
 </li></ul>
 
-<h2 id="label-3.0.2+-+2018-12-23">3.0.2 - 2018-12-23<span><a href="#label-3.0.2+-+2018-12-23">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.0.2+-+2018-12-23" class="legacy-anchor"></span>
+<h2 id="302---2018-12-23"><a href="#302---2018-12-23">3.0.2 - 2018-12-23</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-26" class="legacy-anchor"></span>
+<h3 id="improvements-26"><a href="#improvements-26">Improvements</a></h3>
 <ul><li>
 <p>Changed to use strscan in parser. [GitHub#52][Patch by 284km]</p>
 </li><li>
@@ -2227,14 +1398,16 @@
 <p>Improves <a href="CSV.html"><code>CSV</code></a> parse performance for complex case. 3.0.2 will be about 2 times faster than 3.0.1.</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-23" class="legacy-anchor"></span>
+<h3 id="fixes-23"><a href="#fixes-23">Fixes</a></h3>
 <ul><li>
 <p>Fixed a parse error bug for new line only input with <code>headers</code> option. [GitHub#53][Reported by Chris Beer]</p>
 </li><li>
 <p>Fixed some typos in document. [GitHub#54][Patch by Victor Shepelev]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-27" class="legacy-anchor"></span>
+<h3 id="thanks-27"><a href="#thanks-27">Thanks</a></h3>
 <ul><li>
 <p>284km</p>
 </li><li>
@@ -2243,9 +1416,11 @@
 <p>Victor Shepelev</p>
 </li></ul>
 
-<h2 id="label-3.0.1+-+2018-12-07">3.0.1 - 2018-12-07<span><a href="#label-3.0.1+-+2018-12-07">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.0.1+-+2018-12-07" class="legacy-anchor"></span>
+<h2 id="301---2018-12-07"><a href="#301---2018-12-07">3.0.1 - 2018-12-07</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-27" class="legacy-anchor"></span>
+<h3 id="improvements-27"><a href="#improvements-27">Improvements</a></h3>
 <ul><li>
 <p>Added a test. [GitHub#38][Patch by 284km]</p>
 </li><li>
@@ -2264,12 +1439,14 @@
 <p>Improved auto CR row separator detection. [GitHub#51][Reported by Yuki Kurihara]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-24" class="legacy-anchor"></span>
+<h3 id="fixes-24"><a href="#fixes-24">Fixes</a></h3>
 <ul><li>
 <p>Fixed a typo in document. [GitHub#40][Patch by Marcus Stollsteimer]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-28" class="legacy-anchor"></span>
+<h3 id="thanks-28"><a href="#thanks-28">Thanks</a></h3>
 <ul><li>
 <p>284km</p>
 </li><li>
@@ -2288,29 +1465,34 @@
 <p>Yuki Kurihara</p>
 </li></ul>
 
-<h2 id="label-3.0.0+-+2018-06-06">3.0.0 - 2018-06-06<span><a href="#label-3.0.0+-+2018-06-06">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-3.0.0+-+2018-06-06" class="legacy-anchor"></span>
+<h2 id="300---2018-06-06"><a href="#300---2018-06-06">3.0.0 - 2018-06-06</a></h2>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-25" class="legacy-anchor"></span>
+<h3 id="fixes-25"><a href="#fixes-25">Fixes</a></h3>
 <ul><li>
 <p>Fixed a bug that header isn’t returned for empty row. [GitHub#37][Patch by Grace Lee]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-29" class="legacy-anchor"></span>
+<h3 id="thanks-29"><a href="#thanks-29">Thanks</a></h3>
 <ul><li>
 <p>Grace Lee</p>
 </li></ul>
 
-<h2 id="label-1.0.2+-+2018-05-03">1.0.2 - 2018-05-03<span><a href="#label-1.0.2+-+2018-05-03">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-1.0.2+-+2018-05-03" class="legacy-anchor"></span>
+<h2 id="102---2018-05-03"><a href="#102---2018-05-03">1.0.2 - 2018-05-03</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-28" class="legacy-anchor"></span>
+<h3 id="improvements-28"><a href="#improvements-28">Improvements</a></h3>
 <ul><li>
-<p>Split file for CSV::VERSION</p>
+<p>Split file for <a href="CSV.html#VERSION"><code>CSV::VERSION</code></a></p>
 </li><li>
 <p>Code cleanup: Split <a href="lib/csv_rb.html">csv.rb</a> into a more manageable structure [GitHub#19][Patch by Espartaco Palma] [GitHub#20][Patch by Steven Daniels]</p>
 </li><li>
 <p>Use <a href="CSV/MalformedCSVError.html"><code>CSV::MalformedCSVError</code></a> for invalid encoding line [GitHub#26][Reported by deepj]</p>
 </li><li>
-<p>Support implicit Row &lt;-&gt; <a href="Array.html"><code>Array</code></a> conversion [Bug #<a href="ruby-core:63582">10013]</a>[Reported by Dawid Janczak]</p>
+<p>Support implicit Row &lt;-&gt; <a href="Array.html"><code>Array</code></a> conversion [Bug #10013][ruby-core:63582][Reported by Dawid Janczak]</p>
 </li><li>
 <p>Update class docs [GitHub#32][Patch by zverok]</p>
 </li><li>
@@ -2321,18 +1503,20 @@
 <p>Add :nil_value and :empty_value option</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-26" class="legacy-anchor"></span>
+<h3 id="fixes-26"><a href="#fixes-26">Fixes</a></h3>
 <ul><li>
-<p>Fix a bug that "bom|utf-8" doesn't work [GitHub#23][Reported by Pavel Lobashov]</p>
+<p>Fix a bug that “bom|utf-8” doesn’t work [GitHub#23][Reported by Pavel Lobashov]</p>
 </li><li>
 <p><a href="CSV/Row.html#method-i-to_h"><code>CSV::Row#to_h</code></a>, to_hash: uses the same value as <code>Row#[]</code> [Bug #14482][Reported by tomoya ishida]</p>
 </li><li>
 <p>Make row separator detection more robust [GitHub#25][Reported by deepj]</p>
 </li><li>
-<p>Fix a bug that too much separator when col_sep is <code>&quot; &quot;</code> [Bug #<a href="ruby-core:63582">8784]</a>[Reported by Sylvain Laperche]</p>
+<p>Fix a bug that too much separator when col_sep is <code>&quot; &quot;</code> [Bug #8784][ruby-core:63582][Reported by Sylvain Laperche]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-30" class="legacy-anchor"></span>
+<h3 id="thanks-30"><a href="#thanks-30">Thanks</a></h3>
 <ul><li>
 <p>Espartaco Palma</p>
 </li><li>
@@ -2355,9 +1539,11 @@
 <p>Ryunosuke Sato</p>
 </li></ul>
 
-<h2 id="label-1.0.1+-+2018-02-09">1.0.1 - 2018-02-09<span><a href="#label-1.0.1+-+2018-02-09">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<span id="label-1.0.1+-+2018-02-09" class="legacy-anchor"></span>
+<h2 id="101---2018-02-09"><a href="#101---2018-02-09">1.0.1 - 2018-02-09</a></h2>
 
-<h3 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Improvements-29" class="legacy-anchor"></span>
+<h3 id="improvements-29"><a href="#improvements-29">Improvements</a></h3>
 <ul><li>
 <p><a href="CSV/Table.html#method-i-delete"><code>CSV::Table#delete</code></a>: Added bulk delete support. You can delete multiple rows and columns at once. [GitHub#4][Patch by Vladislav]</p>
 </li><li>
@@ -2372,14 +1558,16 @@
 <p>Added ISO 8601 support to date time converter. [GitHub#16]</p>
 </li></ul>
 
-<h3 id="label-Fixes">Fixes<span><a href="#label-Fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Fixes-27" class="legacy-anchor"></span>
+<h3 id="fixes-27"><a href="#fixes-27">Fixes</a></h3>
 <ul><li>
-<p>Fixed wrong <code>CSV::VERSION</code>. [GitHub#10][Reported by Marcus Stollsteimer]</p>
+<p>Fixed wrong <a href="CSV.html#VERSION"><code>CSV::VERSION</code></a>. [GitHub#10][Reported by Marcus Stollsteimer]</p>
 </li><li>
 <p><a href="CSV.html#method-c-generate"><code>CSV.generate</code></a>: Fixed a regression bug that <a href="String.html"><code>String</code></a> argument is ignored. [GitHub#13][Patch by pavel]</p>
 </li></ul>
 
-<h3 id="label-Thanks">Thanks<span><a href="#label-Thanks">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<span id="label-Thanks-31" class="legacy-anchor"></span>
+<h3 id="thanks-31"><a href="#thanks-31">Thanks</a></h3>
 <ul><li>
 <p>Vladislav</p>
 </li><li>
@@ -2395,5 +1583,27 @@
 </li></ul>
 
 </main>
+
+<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+  <div class="toc-sticky">
+    <h3 class="toc-heading">On This Page</h3>
+    <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
+      <!-- Generated by JavaScript based on page headings -->
+    </nav>
+  </div>
+</aside>
+
+
+<footer class="site-footer">
+  
+
+  <div class="footer-bottom">
+    <p>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
+    </p>
+  </div>
+</footer>
+
 </body>
 
