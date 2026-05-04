@@ -1302,10 +1302,10 @@ class CSV
 
     #
     # :call-seq:
-    #   foreach(path_or_io, mode='r', **options) {|row| ... )
-    #   foreach(path_or_io, mode='r', **options) -> new_enumerator
+    #   foreach(filename_or_io, mode='r', **options) {|row| ... )
+    #   foreach(filename_or_io, mode='r', **options) -> new_enumerator
     #
-    # Calls the block with each row read from source +path_or_io+.
+    # Calls the block with each row read from source +filename_or_io+.
     #
     # \Path input without headers:
     #
@@ -1371,7 +1371,7 @@ class CSV
     #   CSV.foreach(path) # => #<Enumerator: CSV:foreach("t.csv", "r")>
     #
     # Arguments:
-    # * Argument +path_or_io+ must be a file path or an \IO stream.
+    # * Argument +filename_or_io+ must be a file path or an \IO stream.
     # * Argument +mode+, if given, must be a \File mode.
     #   See {Access Modes}[https://docs.ruby-lang.org/en/master/File.html#class-File-label-Access+Modes].
     # * Arguments <tt>**options</tt> must be keyword options.
@@ -1386,9 +1386,9 @@ class CSV
     #     encoding: 'UTF-32BE:UTF-8'
     #   would read +UTF-32BE+ data from the file
     #   but transcode it to +UTF-8+ before parsing.
-    def foreach(path, mode="r", **options, &block)
-      return to_enum(__method__, path, mode, **options) unless block_given?
-      open(path, mode, **options) do |csv|
+    def foreach(filename_or_io, mode="r", **options, &block)
+      return to_enum(__method__, filename_or_io, mode, **options) unless block_given?
+      open(filename_or_io, mode, **options) do |csv|
         csv.each(&block)
       end
     end
@@ -1565,8 +1565,8 @@ class CSV
 
     #
     # :call-seq:
-    #   open(path_or_io, mode = "rb", **options ) -> new_csv
-    #   open(path_or_io, mode = "rb", **options ) { |csv| ... } -> object
+    #   open(filename_or_io, mode = "rb", **options ) -> new_csv
+    #   open(filename_or_io, mode = "rb", **options ) { |csv| ... } -> object
     #
     # possible options elements:
     #   keyword form:
@@ -1575,14 +1575,14 @@ class CSV
     #     :undef => :replace   # replace undefined conversion
     #     :replace => string   # replacement string ("?" or "\uFFFD" if not specified)
     #
-    # * Argument +path_or_io+, must be a file path or an \IO stream.
+    # * Argument +filename_or_io+, must be a file path or an \IO stream.
     # :include: ../doc/csv/arguments/io.rdoc
     # * Argument +mode+, if given, must be a \File mode.
     #   See {Access Modes}[https://docs.ruby-lang.org/en/master/File.html#class-File-label-Access+Modes].
     # * Arguments <tt>**options</tt> must be keyword options.
     #   See {Options for Generating}[#class-CSV-label-Options+for+Generating].
     # * This method optionally accepts an additional <tt>:encoding</tt> option
-    #   that you can use to specify the Encoding of the data read from +path+ or +io+.
+    #   that you can use to specify the Encoding of the data read from +filename_or_io+.
     #   You must provide this unless your data is in the encoding
     #   given by <tt>Encoding::default_external</tt>.
     #   Parsing will use this to determine how to parse the data.
@@ -1919,16 +1919,16 @@ class CSV
     #   path = 't.csv'
     #   File.write(path, string)
     #   CSV.read(path, headers: true) # => #<CSV::Table mode:col_or_row row_count:4>
-    def read(path, **options)
-      open(path, **options) { |csv| csv.read }
+    def read(filename_or_io, **options)
+      open(filename_or_io, **options) { |csv| csv.read }
     end
 
     # :call-seq:
     #   CSV.readlines(source, **options)
     #
     # Alias for CSV.read.
-    def readlines(path, **options)
-      read(path, **options)
+    def readlines(filename_or_io, **options)
+      read(filename_or_io, **options)
     end
 
     # :call-seq:
@@ -1946,14 +1946,14 @@ class CSV
     #   path = 't.csv'
     #   File.write(path, string)
     #   CSV.table(path) # => #<CSV::Table mode:col_or_row row_count:4>
-    def table(path, **options)
+    def table(filename_or_io, **options)
       default_options = {
         headers:           true,
         converters:        :numeric,
         header_converters: :symbol,
       }
       options = default_options.merge(options)
-      read(path, **options)
+      read(filename_or_io, **options)
     end
 
     ON_WINDOWS = /mingw|mswin/.match?(RUBY_PLATFORM)
