@@ -1901,10 +1901,10 @@ class CSV
 
     #
     # :call-seq:
-    #   read(source, **options) -> array_of_arrays
-    #   read(source, headers: true, **options) -> csv_table
+    #   read(path_or_io, **options) -> array_of_arrays
+    #   read(path_or_io, headers: true, **options) -> csv_table
     #
-    # Opens the given +source+ with the given +options+ (see CSV.open),
+    # Opens the given +path_or_io+ with the given +options+ (see CSV.open),
     # reads the source (see CSV#read), and returns the result,
     # which will be either an \Array of Arrays or a CSV::Table.
     #
@@ -1924,7 +1924,7 @@ class CSV
     end
 
     # :call-seq:
-    #   CSV.readlines(source, **options)
+    #   CSV.readlines(path_or_io, **options)
     #
     # Alias for CSV.read.
     def readlines(path_or_io, **options)
@@ -1932,9 +1932,9 @@ class CSV
     end
 
     # :call-seq:
-    #   CSV.table(source, **options)
+    #   CSV.table(path_or_io, **options)
     #
-    # Calls CSV.read with +source+, +options+, and certain default options:
+    # Calls CSV.read with +path_or_io+, +options+, and certain default options:
     # - +headers+: +true+
     # - +converters+: +:numeric+
     # - +header_converters+: +:symbol+
