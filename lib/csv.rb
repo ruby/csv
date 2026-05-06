@@ -1377,7 +1377,7 @@ class CSV
     # * Arguments <tt>**options</tt> must be keyword options.
     #   See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
     # * This method optionally accepts an additional <tt>:encoding</tt> option
-    #   that you can use to specify the Encoding of the data read from +path+ or +io+.
+    #   that you can use to specify the Encoding of the data read from +path_or_io+.
     #   You must provide this unless your data is in the encoding
     #   given by <tt>Encoding::default_external</tt>.
     #   Parsing will use this to determine how to parse the data.
