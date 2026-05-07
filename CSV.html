@@ -3184,9 +3184,9 @@ BAZ,-2</pre>
           </div>
           <div class="method-source-code" id="foreach-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1389</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">foreach</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>=<span class="ruby-string">&quot;r&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-identifier">__method__</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
-  <span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">foreach</span>(<span class="ruby-identifier">path_or_io</span>, <span class="ruby-identifier">mode</span>=<span class="ruby-string">&quot;r&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-identifier">__method__</span>, <span class="ruby-identifier">path_or_io</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-identifier">open</span>(<span class="ruby-identifier">path_or_io</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -3277,7 +3277,7 @@ BAZ,-2</pre>
 </li><li>
 <p>Arguments <code>**options</code> must be keyword options. See <a href="#class-CSV-label-Options+for+Parsing">Options for Parsing</a>.</p>
 </li><li>
-<p>This method optionally accepts an additional <code>:encoding</code> option that you can use to specify the Encoding of the data read from <code>path</code> or <code>io</code>. You must provide this unless your data is in the encoding given by <code>Encoding::default_external</code>. Parsing will use this to determine how to parse the data. You may provide a second Encoding to have the data transcoded as it is read. For example,</p>
+<p>This method optionally accepts an additional <code>:encoding</code> option that you can use to specify the Encoding of the data read from <code>path_or_io</code>. You must provide this unless your data is in the encoding given by <code>Encoding::default_external</code>. Parsing will use this to determine how to parse the data. You may provide a second Encoding to have the data transcoded as it is read. For example,</p>
 
 <pre>encoding: &#39;UTF-32BE:UTF-8&#39;</pre>
 
@@ -3952,11 +3952,11 @@ BAZ,-2</pre>
           </div>
           <div class="method-source-code" id="open-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1647</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open</span>(<span class="ruby-identifier">filename_or_io</span>, <span class="ruby-identifier">mode</span>=<span class="ruby-string">&quot;r&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open</span>(<span class="ruby-identifier">path_or_io</span>, <span class="ruby-identifier">mode</span>=<span class="ruby-string">&quot;r&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-comment"># wrap a File opened with the remaining +args+ with no newline</span>
   <span class="ruby-comment"># decorator</span>
   <span class="ruby-identifier">file_opts</span> = {}
-  <span class="ruby-identifier">may_enable_bom_detection_automatically</span>(<span class="ruby-identifier">filename_or_io</span>,
+  <span class="ruby-identifier">may_enable_bom_detection_automatically</span>(<span class="ruby-identifier">path_or_io</span>,
                                          <span class="ruby-identifier">mode</span>,
                                          <span class="ruby-identifier">options</span>,
                                          <span class="ruby-identifier">file_opts</span>)
@@ -3969,11 +3969,11 @@ BAZ,-2</pre>
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:replace</span>)
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-regexp">/newline\z/</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-identifier">k</span>)}
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">filename_or_io</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">StringIO</span>)
-    <span class="ruby-identifier">f</span> = <span class="ruby-identifier">create_stringio</span>(<span class="ruby-identifier">filename_or_io</span>.<span class="ruby-identifier">string</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">file_opts</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path_or_io</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">StringIO</span>)
+    <span class="ruby-identifier">f</span> = <span class="ruby-identifier">create_stringio</span>(<span class="ruby-identifier">path_or_io</span>.<span class="ruby-identifier">string</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">file_opts</span>)
   <span class="ruby-keyword">else</span>
     <span class="ruby-keyword">begin</span>
-      <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename_or_io</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">file_opts</span>)
+      <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path_or_io</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">file_opts</span>)
     <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
       <span class="ruby-identifier">raise</span> <span class="ruby-keyword">unless</span> <span class="ruby-regexp">/needs binmode/</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">mode</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;r&quot;</span>
       <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;rb&quot;</span>
@@ -4028,7 +4028,7 @@ BAZ,-2</pre>
 </li><li>
 <p>Arguments <code>**options</code> must be keyword options. See <a href="#class-CSV-label-Options+for+Generating">Options for Generating</a>.</p>
 </li><li>
-<p>This method optionally accepts an additional <code>:encoding</code> option that you can use to specify the Encoding of the data read from <code>path</code> or <code>io</code>. You must provide this unless your data is in the encoding given by <code>Encoding::default_external</code>. Parsing will use this to determine how to parse the data. You may provide a second Encoding to have the data transcoded as it is read. For example,</p>
+<p>This method optionally accepts an additional <code>:encoding</code> option that you can use to specify the Encoding of the data read from <code>path_or_io</code>. You must provide this unless your data is in the encoding given by <code>Encoding::default_external</code>. Parsing will use this to determine how to parse the data. You may provide a second Encoding to have the data transcoded as it is read. For example,</p>
 
 <pre>encoding: &#39;UTF-32BE:UTF-8&#39;</pre>
 
@@ -4532,7 +4532,7 @@ BAZ,-2</pre>
               <div class="method-heading">
                 <a href="#method-c-read" title="Link to this method">
                   <span class="method-callseq">
-                    read(source, **options) &rarr; array_of_arrays
+                    read(path_or_io, **options) &rarr; array_of_arrays
                   </span>
                 </a>
               </div>
@@ -4540,7 +4540,7 @@ BAZ,-2</pre>
               <div class="method-heading">
                 <a href="#method-c-read" title="Link to this method">
                   <span class="method-callseq">
-                    read(source, headers: true, **options) &rarr; csv_table
+                    read(path_or_io, headers: true, **options) &rarr; csv_table
                   </span>
                 </a>
               </div>
@@ -4556,8 +4556,8 @@ BAZ,-2</pre>
           </div>
           <div class="method-source-code" id="read-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1922</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
-  <span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">read</span> }
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read</span>(<span class="ruby-identifier">path_or_io</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">open</span>(<span class="ruby-identifier">path_or_io</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">read</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
 
@@ -4566,7 +4566,7 @@ BAZ,-2</pre>
         <div class="method-description">
 
 
-          <p>Opens the given <code>source</code> with the given <code>options</code> (see <a href="CSV.html#method-c-open"><code>CSV.open</code></a>), reads the source (see <a href="CSV.html#method-i-read"><code>CSV#read</code></a>), and returns the result, which will be either an Array of Arrays or a <a href="CSV/Table.html"><code>CSV::Table</code></a>.</p>
+          <p>Opens the given <code>path_or_io</code> with the given <code>options</code> (see <a href="CSV.html#method-c-open"><code>CSV.open</code></a>), reads the source (see <a href="CSV.html#method-i-read"><code>CSV#read</code></a>), and returns the result, which will be either an Array of Arrays or a <a href="CSV/Table.html"><code>CSV::Table</code></a>.</p>
 
 <p>Without headers:</p>
 
@@ -4601,7 +4601,7 @@ BAZ,-2</pre>
               <div class="method-heading">
                 <a href="#method-c-readlines" title="Link to this method">
                   <span class="method-callseq">
-                    readlines(source, **options)
+                    readlines(path_or_io, **options)
                   </span>
                 </a>
               </div>
@@ -4617,8 +4617,8 @@ BAZ,-2</pre>
           </div>
           <div class="method-source-code" id="readlines-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1930</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">readlines</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
-  <span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">readlines</span>(<span class="ruby-identifier">path_or_io</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">read</span>(<span class="ruby-identifier">path_or_io</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
@@ -4646,7 +4646,7 @@ BAZ,-2</pre>
               <div class="method-heading">
                 <a href="#method-c-table" title="Link to this method">
                   <span class="method-callseq">
-                    table(source, **options)
+                    table(path_or_io, **options)
                   </span>
                 </a>
               </div>
@@ -4662,14 +4662,14 @@ BAZ,-2</pre>
           </div>
           <div class="method-source-code" id="table-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 1949</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">table</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">table</span>(<span class="ruby-identifier">path_or_io</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">default_options</span> = {
     <span class="ruby-value">headers:</span>           <span class="ruby-keyword">true</span>,
     <span class="ruby-value">converters:</span>        <span class="ruby-value">:numeric</span>,
     <span class="ruby-value">header_converters:</span> <span class="ruby-value">:symbol</span>,
   }
   <span class="ruby-identifier">options</span> = <span class="ruby-identifier">default_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
-  <span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">read</span>(<span class="ruby-identifier">path_or_io</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
@@ -4678,7 +4678,7 @@ BAZ,-2</pre>
         <div class="method-description">
 
 
-          <p>Calls <a href="CSV.html#method-c-read"><code>CSV.read</code></a> with <code>source</code>, <code>options</code>, and certain default options:</p>
+          <p>Calls <a href="CSV.html#method-c-read"><code>CSV.read</code></a> with <code>path_or_io</code>, <code>options</code>, and certain default options:</p>
 <ul><li>
 <p><code>headers</code>: <code>true</code></p>
 </li><li>
