@@ -1377,7 +1377,7 @@ class CSV
     # * Arguments <tt>**options</tt> must be keyword options.
     #   See {Options for Parsing}[#class-CSV-label-Options+for+Parsing].
     # * This method optionally accepts an additional <tt>:encoding</tt> option
-    #   that you can use to specify the Encoding of the data read from +path+ or +io+.
+    #   that you can use to specify the Encoding of the data read from +path_or_io+.
     #   You must provide this unless your data is in the encoding
     #   given by <tt>Encoding::default_external</tt>.
     #   Parsing will use this to determine how to parse the data.
@@ -1386,9 +1386,9 @@ class CSV
     #     encoding: 'UTF-32BE:UTF-8'
     #   would read +UTF-32BE+ data from the file
     #   but transcode it to +UTF-8+ before parsing.
-    def foreach(path, mode="r", **options, &block)
-      return to_enum(__method__, path, mode, **options) unless block_given?
-      open(path, mode, **options) do |csv|
+    def foreach(path_or_io, mode="r", **options, &block)
+      return to_enum(__method__, path_or_io, mode, **options) unless block_given?
+      open(path_or_io, mode, **options) do |csv|
         csv.each(&block)
       end
     end
@@ -1582,7 +1582,7 @@ class CSV
     # * Arguments <tt>**options</tt> must be keyword options.
     #   See {Options for Generating}[#class-CSV-label-Options+for+Generating].
     # * This method optionally accepts an additional <tt>:encoding</tt> option
-    #   that you can use to specify the Encoding of the data read from +path+ or +io+.
+    #   that you can use to specify the Encoding of the data read from +path_or_io+.
     #   You must provide this unless your data is in the encoding
     #   given by <tt>Encoding::default_external</tt>.
     #   Parsing will use this to determine how to parse the data.
@@ -1644,11 +1644,11 @@ class CSV
     # Raises an exception if the argument is not a \String object or \IO object:
     #   # Raises TypeError (no implicit conversion of Symbol into String)
     #   CSV.open(:foo)
-    def open(filename_or_io, mode="r", **options)
+    def open(path_or_io, mode="r", **options)
       # wrap a File opened with the remaining +args+ with no newline
       # decorator
       file_opts = {}
-      may_enable_bom_detection_automatically(filename_or_io,
+      may_enable_bom_detection_automatically(path_or_io,
                                              mode,
                                              options,
                                              file_opts)
@@ -1661,11 +1661,11 @@ class CSV
       options.delete(:replace)
       options.delete_if {|k, _| /newline\z/.match?(k)}
 
-      if filename_or_io.is_a?(StringIO)
-        f = create_stringio(filename_or_io.string, mode, **file_opts)
+      if path_or_io.is_a?(StringIO)
+        f = create_stringio(path_or_io.string, mode, **file_opts)
       else
         begin
-          f = File.open(filename_or_io, mode, **file_opts)
+          f = File.open(path_or_io, mode, **file_opts)
         rescue ArgumentError => e
           raise unless /needs binmode/.match?(e.message) and mode == "r"
           mode = "rb"
@@ -1901,10 +1901,10 @@ class CSV
 
     #
     # :call-seq:
-    #   read(source, **options) -> array_of_arrays
-    #   read(source, headers: true, **options) -> csv_table
+    #   read(path_or_io, **options) -> array_of_arrays
+    #   read(path_or_io, headers: true, **options) -> csv_table
     #
-    # Opens the given +source+ with the given +options+ (see CSV.open),
+    # Opens the given +path_or_io+ with the given +options+ (see CSV.open),
     # reads the source (see CSV#read), and returns the result,
     # which will be either an \Array of Arrays or a CSV::Table.
     #
@@ -1919,22 +1919,22 @@ class CSV
     #   path = 't.csv'
     #   File.write(path, string)
     #   CSV.read(path, headers: true) # => #<CSV::Table mode:col_or_row row_count:4>
-    def read(path, **options)
-      open(path, **options) { |csv| csv.read }
+    def read(path_or_io, **options)
+      open(path_or_io, **options) { |csv| csv.read }
     end
 
     # :call-seq:
-    #   CSV.readlines(source, **options)
+    #   CSV.readlines(path_or_io, **options)
     #
     # Alias for CSV.read.
-    def readlines(path, **options)
-      read(path, **options)
+    def readlines(path_or_io, **options)
+      read(path_or_io, **options)
     end
 
     # :call-seq:
-    #   CSV.table(source, **options)
+    #   CSV.table(path_or_io, **options)
     #
-    # Calls CSV.read with +source+, +options+, and certain default options:
+    # Calls CSV.read with +path_or_io+, +options+, and certain default options:
     # - +headers+: +true+
     # - +converters+: +:numeric+
     # - +header_converters+: +:symbol+
@@ -1946,25 +1946,25 @@ class CSV
     #   path = 't.csv'
     #   File.write(path, string)
     #   CSV.table(path) # => #<CSV::Table mode:col_or_row row_count:4>
-    def table(path, **options)
+    def table(path_or_io, **options)
       default_options = {
         headers:           true,
         converters:        :numeric,
         header_converters: :symbol,
       }
       options = default_options.merge(options)
-      read(path, **options)
+      read(path_or_io, **options)
     end
 
     ON_WINDOWS = /mingw|mswin/.match?(RUBY_PLATFORM)
     private_constant :ON_WINDOWS
 
     private
-    def may_enable_bom_detection_automatically(filename_or_io,
+    def may_enable_bom_detection_automatically(path_or_io,
                                                mode,
                                                options,
                                                file_opts)
-      if filename_or_io.is_a?(StringIO)
+      if path_or_io.is_a?(StringIO)
         # Support to StringIO was dropped for Ruby 2.6 and earlier without BOM support:
         # https://github.com/ruby/stringio/pull/47
         return if RUBY_VERSION < "2.7"
