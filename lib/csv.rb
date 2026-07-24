@@ -2688,11 +2688,17 @@ class CSV
   #   end
   def each(&block)
     return to_enum(__method__) unless block_given?
-    begin
-      while true
-        yield(parser_enumerator.next)
+    # Avoid per-row Enumerator#next (Fiber-backed, slow on JRuby) unless a
+    # #shift/#peek has already started pull-based iteration.
+    if @parser_enumerator.nil?
+      parser.parse(&block)
+    else
+      begin
+        while true
+          yield(@parser_enumerator.next)
+        end
+      rescue StopIteration
       end
-    rescue StopIteration
     end
   end
 
