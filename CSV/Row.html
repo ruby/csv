@@ -50,46 +50,46 @@
 </script>
 
 <script
-  src="../js/theme-toggle.js?v=7.2.0"
+  src="../js/theme-toggle.js?v=8.0.0"
 ></script>
 
 <script
-  src="../js/search_navigation.js?v=7.2.0"
+  src="../js/search_navigation.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/search_data.js?v=7.2.0"
+  src="../js/search_data.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/search_ranker.js?v=7.2.0"
+  src="../js/search_ranker.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/search_controller.js?v=7.2.0"
+  src="../js/search_controller.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/c_highlighter.js?v=7.2.0"
+  src="../js/c_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/bash_highlighter.js?v=7.2.0"
+  src="../js/bash_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/aliki.js?v=7.2.0"
+  src="../js/aliki.js?v=8.0.0"
   defer
 ></script>
 
 <link
-  href="../css/rdoc.css?v=7.2.0"
+  href="../css/rdoc.css?v=8.0.0"
   rel="stylesheet"
 >
 
@@ -363,12 +363,12 @@
   </div>
 </div>
 
-<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+<div id="sidebar-navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar-navigation">
   <span aria-hidden="true">&#9776;</span>
 </div>
 
 
-<nav id="navigation" role="navigation" hidden>
+<nav id="sidebar-navigation" role="navigation" hidden>
   
 
 
@@ -411,15 +411,6 @@
             <li>
               <a href="../NEWS_md.html">
                 NEWS
-              </a>
-            </li>
-
-
-
-
-            <li>
-              <a href="../README_md.html">
-                README
               </a>
             </li>
 
@@ -505,9 +496,11 @@
 
     <ul class="nav-list">
 
+      <li>
 
-      <li><span class="include">Enumerable</span></li>
+        <span class="include">Enumerable</span>
 
+      </li>
 
     </ul>
   </details>
@@ -529,9 +522,11 @@
 
     <ul class="nav-list">
 
+      <li>
 
-      <li><span class="extend">Forwardable</span></li>
+        <span class="extend">Forwardable</span>
 
+      </li>
 
     </ul>
   </details>
@@ -667,7 +662,7 @@
       
       <li>
         
-        <a href="../CSV.html">CSV</a><span>::</span>
+        <a href="../CSV.html">CSV</a><span class="separator">::</span>
         
       </li>
       
@@ -681,8 +676,9 @@
   
 
   <span id="class-CSV::Row" class="legacy-anchor"></span>
-  <h1 id="class-csv-row" class="anchor-link class">
-    class CSV::Row
+  <h1 id="class-csv-row" class="anchor-link class page-title">
+    <span class="page-title-kind">class</span>
+    <span class="page-title-name">CSV::Row</span>
   </h1>
 
   <section class="description">
@@ -723,8 +719,8 @@
 
 <p>Commonly, a new CSV::Row instance is created by parsing CSV source that has headers:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">table</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span> <span class="ruby-identifier">row</span> }
 </pre>
 
@@ -744,15 +740,15 @@
 
 <p>A CSV::Row that was created by parsing CSV source inherits its headers from the table:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Value&quot;]</span>
 </pre>
 
 <p>You can also create a new row with headers; like the keys in a Hash, the headers need not be Strings:</p>
 
-<pre class="ruby"><span class="ruby-identifier">row</span> = <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>([<span class="ruby-value">:name</span>, <span class="ruby-value">:value</span>], [<span class="ruby-string">&#39;foo&#39;</span>, <span class="ruby-value">0</span>])
+<pre class="ruby"><span class="ruby-identifier">row</span> = <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>([<span class="ruby-value">:</span><span class="ruby-value">name</span>, <span class="ruby-value">:</span><span class="ruby-value">value</span>], [<span class="ruby-string">&#39;</span><span class="ruby-string">foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>])
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [:name, :value]</span>
 </pre>
 
@@ -760,8 +756,8 @@
 
 <pre class="ruby"><span class="ruby-identifier">table</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Table mode:col_or_row row_count:5&gt;</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [:name, :value]</span>
-<span class="ruby-identifier">row</span>[<span class="ruby-value">:name</span>] <span class="ruby-comment"># =&gt; &quot;foo&quot;</span>
-<span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;Name&#39;</span>] <span class="ruby-comment"># =&gt; nil</span>
+<span class="ruby-identifier">row</span>[<span class="ruby-value">:</span><span class="ruby-value">name</span>] <span class="ruby-comment"># =&gt; &quot;foo&quot;</span>
+<span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>] <span class="ruby-comment"># =&gt; nil</span>
 </pre>
 
 <span id="class-CSV::Row-label-Accessing+Fields" class="legacy-anchor"></span>
@@ -771,17 +767,17 @@
 
 <p>Fetch a field using method <a href="Row.html#method-i-5B-5D"><code>[]</code></a>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">row</span> = <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], [<span class="ruby-string">&#39;foo&#39;</span>, <span class="ruby-value">0</span>])
+<pre class="ruby"><span class="ruby-identifier">row</span> = <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>], [<span class="ruby-string">&#39;</span><span class="ruby-string">foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>])
 <span class="ruby-identifier">row</span>[<span class="ruby-value">1</span>] <span class="ruby-comment"># =&gt; 0</span>
-<span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;Value&#39;</span>] <span class="ruby-comment"># =&gt; 0</span>
+<span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>] <span class="ruby-comment"># =&gt; 0</span>
 </pre>
 
 <p>Set a field using method <a href="Row.html#method-i-5B-5D-3D"><code>[]=</code></a>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">row</span> = <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], [<span class="ruby-string">&#39;foo&#39;</span>, <span class="ruby-value">0</span>])
+<pre class="ruby"><span class="ruby-identifier">row</span> = <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>], [<span class="ruby-string">&#39;</span><span class="ruby-string">foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>])
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;foo&quot; &quot;Value&quot;:0&gt;</span>
-<span class="ruby-identifier">row</span>[<span class="ruby-value">0</span>] = <span class="ruby-string">&#39;bar&#39;</span>
-<span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;Value&#39;</span>] = <span class="ruby-value">1</span>
+<span class="ruby-identifier">row</span>[<span class="ruby-value">0</span>] = <span class="ruby-string">&#39;</span><span class="ruby-string">bar</span><span class="ruby-string">&#39;</span>
+<span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>] = <span class="ruby-value">1</span>
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;bar&quot; &quot;Value&quot;:1&gt;</span>
 </pre>
 
@@ -809,6 +805,7 @@
             <span class="method-name">row</span>
             <span class="attribute-access-type">[R]</span>
           </a>
+
         </div>
 
         <div class="method-description">
@@ -834,36 +831,43 @@
 
       <div id="method-c-new" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-c-new" title="Link to this method">
-                  <span class="method-callseq">
-                    CSV::Row.new(headers, fields, header_row = false) &rarr; csv_row
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-c-new" title="Link to this method">
+                    <span class="method-callseq">
+                      CSV::Row.new(headers, fields, header_row = false) &rarr; csv_row
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="new-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 105</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">headers</span>, <span class="ruby-identifier">fields</span>, <span class="ruby-identifier">header_row</span> = <span class="ruby-keyword">false</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">headers</span>, <span class="ruby-identifier">fields</span>, <span class="ruby-identifier">header_row</span> = <span class="ruby-keyword">false</span>)
   <span class="ruby-ivar">@header_row</span> = <span class="ruby-identifier">header_row</span>
   <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">freeze</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">String</span> }
 
   <span class="ruby-comment"># handle extra headers or fields</span>
-  <span class="ruby-ivar">@row</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">size</span>
+  <span class="ruby-ivar">@row</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">size</span> &gt;= <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">size</span>
     <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">fields</span>)
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">headers</span>).<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:reverse!</span>)
+    <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">headers</span>).<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:</span><span class="ruby-value">reverse!</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -875,13 +879,13 @@
 
           <p>Returns the new CSV::Row instance constructed from arguments <code>headers</code> and <code>fields</code>; both should be Arrays; note that the fields need not be Strings:</p>
 
-<pre class="ruby"><span class="ruby-identifier">row</span> = <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], [<span class="ruby-string">&#39;foo&#39;</span>, <span class="ruby-value">0</span>])
+<pre class="ruby"><span class="ruby-identifier">row</span> = <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>], [<span class="ruby-string">&#39;</span><span class="ruby-string">foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>])
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;foo&quot; &quot;Value&quot;:0&gt;</span>
 </pre>
 
 <p>If the Array lengths are different, the shorter is <code>nil</code>-filled:</p>
 
-<pre class="ruby"><span class="ruby-identifier">row</span> = <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>, <span class="ruby-string">&#39;Date&#39;</span>, <span class="ruby-string">&#39;Size&#39;</span>], [<span class="ruby-string">&#39;foo&#39;</span>, <span class="ruby-value">0</span>])
+<pre class="ruby"><span class="ruby-identifier">row</span> = <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">Date</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">Size</span><span class="ruby-string">&#39;</span>], [<span class="ruby-string">&#39;</span><span class="ruby-string">foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>])
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;foo&quot; &quot;Value&quot;:0 &quot;Date&quot;:nil &quot;Size&quot;:nil&gt;</span>
 </pre>
 
@@ -893,7 +897,7 @@
 
 <p>If the optional argument <code>header_row</code> is given as <code>true</code>, the created row is a header row:</p>
 
-<pre class="ruby"><span class="ruby-identifier">row</span> = <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], [<span class="ruby-string">&#39;foo&#39;</span>, <span class="ruby-value">0</span>], <span class="ruby-identifier">header_row</span> = <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">row</span> = <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>], [<span class="ruby-string">&#39;</span><span class="ruby-string">foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>], <span class="ruby-identifier">header_row</span> = <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;foo&quot; &quot;Value&quot;:0&gt;</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">field_row?</span> <span class="ruby-comment"># =&gt; false</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">header_row?</span> <span class="ruby-comment"># =&gt; true</span>
@@ -925,44 +929,51 @@
 
       <div id="method-i-3C-3C" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-3C-3C" title="Link to this method">
-                  <span class="method-callseq">
-                    row &lt;&lt; [header, value] &rarr; self
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-3C-3C" title="Link to this method">
+                    <span class="method-callseq">
+                      row &lt;&lt; [header, value] &rarr; self
+                    </span>
+                  </a>
+                </div>
 
-              <div class="method-heading">
-                <a href="#method-i-3C-3C" title="Link to this method">
-                  <span class="method-callseq">
-                    row &lt;&lt; hash &rarr; self
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-3C-3C" title="Link to this method">
+                    <span class="method-callseq">
+                      row &lt;&lt; hash &rarr; self
+                    </span>
+                  </a>
+                </div>
 
-              <div class="method-heading">
-                <a href="#method-i-3C-3C" title="Link to this method">
-                  <span class="method-callseq">
-                    row &lt;&lt; value &rarr; self
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-3C-3C" title="Link to this method">
+                    <span class="method-callseq">
+                      row &lt;&lt; value &rarr; self
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="3C-3C-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 389</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-identifier">arg</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">&lt;&lt;</span>(<span class="ruby-identifier">arg</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>  <span class="ruby-comment"># appending a header and name</span>
     <span class="ruby-ivar">@row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">arg</span>
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)                  <span class="ruby-comment"># append header and name pairs</span>
@@ -984,28 +995,28 @@
 
 <p>If the argument is a 2-element Array <code>[header, value]</code>, a field is added with the given <code>header</code> and <code>value</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;NAME&#39;</span>, <span class="ruby-string">&#39;Bat&#39;</span>]
+<span class="ruby-identifier">row</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">NAME</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">Bat</span><span class="ruby-string">&#39;</span>]
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;Foo&quot; &quot;Name&quot;:&quot;Bar&quot; &quot;Name&quot;:&quot;Baz&quot; &quot;NAME&quot;:&quot;Bat&quot;&gt;</span>
 </pre>
 
 <p>If the argument is a Hash, each <code>key-value</code> pair is added as a field with header <code>key</code> and value <code>value</code>.</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-value">NAME:</span> <span class="ruby-string">&#39;Bat&#39;</span>, <span class="ruby-value">name:</span> <span class="ruby-string">&#39;Bam&#39;</span>}
+<span class="ruby-identifier">row</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-value">NAME</span><span class="ruby-value">:</span> <span class="ruby-string">&#39;</span><span class="ruby-string">Bat</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">name</span><span class="ruby-value">:</span> <span class="ruby-string">&#39;</span><span class="ruby-string">Bam</span><span class="ruby-string">&#39;</span>}
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;Foo&quot; &quot;Name&quot;:&quot;Bar&quot; &quot;Name&quot;:&quot;Baz&quot; NAME:&quot;Bat&quot; name:&quot;Bam&quot;&gt;</span>
 </pre>
 
 <p>Otherwise, the given <code>value</code> is added as a field with no header.</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Bag&#39;</span>
+<span class="ruby-identifier">row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;</span><span class="ruby-string">Bag</span><span class="ruby-string">&#39;</span>
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;Foo&quot; &quot;Name&quot;:&quot;Bar&quot; &quot;Name&quot;:&quot;Baz&quot; nil:&quot;Bag&quot;&gt;</span>
 </pre>
 
@@ -1021,28 +1032,35 @@
 
       <div id="method-i-3D-3D" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-3D-3D" title="Link to this method">
-                  <span class="method-callseq">
-                    row == other &rarr; true or false
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-3D-3D" title="Link to this method">
+                    <span class="method-callseq">
+                      row == other &rarr; true or false
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="3D-3D-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 633</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">==</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@row</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">row</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Row</span>
   <span class="ruby-ivar">@row</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1055,8 +1073,8 @@
 
           <p>Returns <code>true</code> if <code>other</code> is a /CSV::Row that has the same fields (headers and values) in the same order as <code>self</code>; otherwise returns <code>false</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">other_row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">row</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other_row</span> <span class="ruby-comment"># =&gt; true</span>
@@ -1076,12 +1094,18 @@
 
       <div id="method-i-5B-5D" class="method-detail anchor-link method-alias">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-5B-5D" title="Link to this method">
-                <span class="method-name">[]</span>
-              </a>
-            </div>
+              <div class="method-heading">
+                <a href="#method-i-5B-5D" title="Link to this method">
+                  <span class="method-name">[]</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
 
         </div>
 
@@ -1101,44 +1125,51 @@
 
       <div id="method-i-5B-5D-3D" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-5B-5D-3D" title="Link to this method">
-                  <span class="method-callseq">
-                    row[index] = value &rarr; value
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-5B-5D-3D" title="Link to this method">
+                    <span class="method-callseq">
+                      row[index] = value &rarr; value
+                    </span>
+                  </a>
+                </div>
 
-              <div class="method-heading">
-                <a href="#method-i-5B-5D-3D" title="Link to this method">
-                  <span class="method-callseq">
-                    row[header, offset] = value &rarr; value
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-5B-5D-3D" title="Link to this method">
+                    <span class="method-callseq">
+                      row[header, offset] = value &rarr; value
+                    </span>
+                  </a>
+                </div>
 
-              <div class="method-heading">
-                <a href="#method-i-5B-5D-3D" title="Link to this method">
-                  <span class="method-callseq">
-                    row[header] = value &rarr; value
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-5B-5D-3D" title="Link to this method">
+                    <span class="method-callseq">
+                      row[header] = value &rarr; value
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="5B-5D-3D-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 339</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]=</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">[]=</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">value</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Integer</span>
@@ -1169,18 +1200,18 @@
 
 <p>Assign field value by Integer index:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>[<span class="ruby-value">0</span>] = <span class="ruby-string">&#39;Bat&#39;</span>
+<span class="ruby-identifier">row</span>[<span class="ruby-value">0</span>] = <span class="ruby-string">&#39;</span><span class="ruby-string">Bat</span><span class="ruby-string">&#39;</span>
 <span class="ruby-identifier">row</span>[<span class="ruby-value">1</span>] = <span class="ruby-value">3</span>
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;Bat&quot; &quot;Value&quot;:3&gt;</span>
 </pre>
 
 <p>Counts backward from the last column if <code>index</code> is negative:</p>
 
-<pre class="ruby"><span class="ruby-identifier">row</span>[<span class="ruby-value">-1</span>] = <span class="ruby-value">4</span>
-<span class="ruby-identifier">row</span>[<span class="ruby-value">-2</span>] = <span class="ruby-string">&#39;Bam&#39;</span>
+<pre class="ruby"><span class="ruby-identifier">row</span>[-<span class="ruby-value">1</span>] = <span class="ruby-value">4</span>
+<span class="ruby-identifier">row</span>[-<span class="ruby-value">2</span>] = <span class="ruby-string">&#39;</span><span class="ruby-string">Bam</span><span class="ruby-string">&#39;</span>
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;Bam&quot; &quot;Value&quot;:4&gt;</span>
 </pre>
 
@@ -1195,28 +1226,28 @@
 
 <p>Assign field value by header (first found):</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;Name&#39;</span>] = <span class="ruby-string">&#39;Bat&#39;</span>
+<span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>] = <span class="ruby-string">&#39;</span><span class="ruby-string">Bat</span><span class="ruby-string">&#39;</span>
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;Bat&quot; &quot;Name&quot;:&quot;Bar&quot; &quot;Name&quot;:&quot;Baz&quot;&gt;</span>
 </pre>
 
 <p>Assign field value by header, ignoring <code>offset</code> leading fields:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-value">2</span>] = <span class="ruby-value">4</span>
+<span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>] = <span class="ruby-value">4</span>
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;Foo&quot; &quot;Name&quot;:&quot;Bar&quot; &quot;Name&quot;:4&gt;</span>
 </pre>
 
 <p>Append new field by (new) header:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;New&#39;</span>] = <span class="ruby-value">6</span>
+<span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">New</span><span class="ruby-string">&#39;</span>] = <span class="ruby-value">6</span>
 <span class="ruby-identifier">row</span><span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;foo&quot; &quot;Value&quot;:&quot;0&quot; &quot;New&quot;:6&gt;</span>
 </pre>
 
@@ -1232,28 +1263,35 @@
 
       <div id="method-i-deconstruct" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-deconstruct" title="Link to this method">
-                  <span class="method-callseq">
-                    deconstruct &rarr; array
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-deconstruct" title="Link to this method">
+                    <span class="method-callseq">
+                      deconstruct &rarr; array
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="deconstruct-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 706</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deconstruct</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">deconstruct</span>
   <span class="ruby-identifier">fields</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1277,28 +1315,35 @@
 
       <div id="method-i-deconstruct_keys" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-deconstruct_keys" title="Link to this method">
-                  <span class="method-callseq">
-                    deconstruct_keys(keys) &rarr; hash
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-deconstruct_keys" title="Link to this method">
+                    <span class="method-callseq">
+                      deconstruct_keys(keys) &rarr; hash
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="deconstruct_keys-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 691</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deconstruct_keys</span>(<span class="ruby-identifier">keys</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">deconstruct_keys</span>(<span class="ruby-identifier">keys</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">to_h</span>
   <span class="ruby-keyword">else</span>
@@ -1326,44 +1371,51 @@
 
       <div id="method-i-delete" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-delete" title="Link to this method">
-                  <span class="method-callseq">
-                    delete(index) &rarr; [header, value] or nil
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-delete" title="Link to this method">
+                    <span class="method-callseq">
+                      delete(index) &rarr; [header, value] or nil
+                    </span>
+                  </a>
+                </div>
 
-              <div class="method-heading">
-                <a href="#method-i-delete" title="Link to this method">
-                  <span class="method-callseq">
-                    delete(header) &rarr; [header, value] or empty_array
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-delete" title="Link to this method">
+                    <span class="method-callseq">
+                      delete(header) &rarr; [header, value] or empty_array
+                    </span>
+                  </a>
+                </div>
 
-              <div class="method-heading">
-                <a href="#method-i-delete" title="Link to this method">
-                  <span class="method-callseq">
-                    delete(header, offset) &rarr; [header, value] or empty_array
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-delete" title="Link to this method">
+                    <span class="method-callseq">
+                      delete(header, offset) &rarr; [header, value] or empty_array
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="delete-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 451</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">header_or_index</span>, <span class="ruby-identifier">minimum_index</span> = <span class="ruby-value">0</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">header_or_index</span>, <span class="ruby-identifier">minimum_index</span> = <span class="ruby-value">0</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">header_or_index</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Integer</span>                 <span class="ruby-comment"># by index</span>
     <span class="ruby-ivar">@row</span>.<span class="ruby-identifier">delete_at</span>(<span class="ruby-identifier">header_or_index</span>)
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">i</span> = <span class="ruby-identifier">index</span>(<span class="ruby-identifier">header_or_index</span>, <span class="ruby-identifier">minimum_index</span>)  <span class="ruby-comment"># by header</span>
@@ -1383,8 +1435,8 @@
 
 <p>If an Integer argument <code>index</code> is given, removes and returns the field at offset <code>index</code>, or returns <code>nil</code> if the field does not exist:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Bar&quot;]</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">50</span>) <span class="ruby-comment"># =&gt; nil</span>
@@ -1392,20 +1444,20 @@
 
 <p>Otherwise, if the single argument <code>header</code> is given, removes and returns the first-found field with the given header, of returns a new empty Array if the field does not exist:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;Name&#39;</span>) <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Foo&quot;]</span>
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;NAME&#39;</span>) <span class="ruby-comment"># =&gt; []</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Foo&quot;]</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">NAME</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; []</span>
 </pre>
 
 <p>If argument <code>header</code> and Integer argument <code>offset</code> are given, removes and returns the first-found field with the given header whose <code>index</code> is at least as large as <code>offset</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Bar&quot;]</span>
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;NAME&#39;</span>, <span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; []</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Bar&quot;]</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">NAME</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; []</span>
 </pre>
 
 
@@ -1420,28 +1472,35 @@
 
       <div id="method-i-delete_if" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-delete_if" title="Link to this method">
-                  <span class="method-callseq">
-                    delete_if {|header, value| ... } &rarr; self
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-delete_if" title="Link to this method">
+                    <span class="method-callseq">
+                      delete_if {|header, value| ... } &rarr; self
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="delete_if-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 476</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_if</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_if</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">enum_for</span>(<span class="ruby-identifier">__method__</span>) { <span class="ruby-identifier">size</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
 
   <span class="ruby-ivar">@row</span>.<span class="ruby-identifier">delete_if</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -1459,12 +1518,12 @@
 
 <p>Removes each field for which the block returns a truthy value:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;B&#39;</span>) } <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">B</span><span class="ruby-string">&#39;</span>) } <span class="ruby-comment"># =&gt; true</span>
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;Foo&quot;&gt;</span>
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">header</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;B&#39;</span>) } <span class="ruby-comment"># =&gt; false</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">header</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">B</span><span class="ruby-string">&#39;</span>) } <span class="ruby-comment"># =&gt; false</span>
 </pre>
 
 <p>If no block is given, returns a new Enumerator:</p>
@@ -1484,36 +1543,43 @@
 
       <div id="method-i-dig" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-dig" title="Link to this method">
-                  <span class="method-callseq">
-                    dig(index_or_header, *identifiers) &rarr; object
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-dig" title="Link to this method">
+                    <span class="method-callseq">
+                      dig(index_or_header, *identifiers) &rarr; object
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="dig-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 739</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dig</span>(<span class="ruby-identifier">index_or_header</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">indexes</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dig</span>(<span class="ruby-identifier">index_or_header</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">indexes</span>)
   <span class="ruby-identifier">value</span> = <span class="ruby-identifier">field</span>(<span class="ruby-identifier">index_or_header</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">indexes</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">value</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:dig</span>)
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-node">&quot;#{value.class} does not have \#dig method&quot;</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:</span><span class="ruby-value">dig</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">#{</span><span class="ruby-identifier">value</span>.<span class="ruby-identifier">class</span><span class="ruby-string">}</span><span class="ruby-string"> does not have \#dig method</span><span class="ruby-string">&quot;</span>
     <span class="ruby-keyword">end</span>
     <span class="ruby-identifier">value</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">indexes</span>)
   <span class="ruby-keyword">end</span>
@@ -1531,11 +1597,11 @@
 
 <p>Examples:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; &quot;0&quot;</span>
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;Value&#39;</span>) <span class="ruby-comment"># =&gt; &quot;0&quot;</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; &quot;0&quot;</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-value">5</span>) <span class="ruby-comment"># =&gt; nil</span>
 </pre>
 
@@ -1551,28 +1617,35 @@
 
       <div id="method-i-each" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-each" title="Link to this method">
-                  <span class="method-callseq">
-                    each {|header, value| ... } &rarr; self
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-each" title="Link to this method">
+                    <span class="method-callseq">
+                      each {|header, value| ... } &rarr; self
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="each-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 610</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">enum_for</span>(<span class="ruby-identifier">__method__</span>) { <span class="ruby-identifier">size</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
 
   <span class="ruby-ivar">@row</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -1588,17 +1661,17 @@
 
           <p>Calls the block with each header-value pair; returns <code>self</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span> [<span class="ruby-identifier">header</span>, <span class="ruby-identifier">value</span>] }
 </pre>
 
 <p>Output:</p>
 
-<pre class="ruby">[<span class="ruby-string">&quot;Name&quot;</span>, <span class="ruby-string">&quot;Foo&quot;</span>]
-[<span class="ruby-string">&quot;Name&quot;</span>, <span class="ruby-string">&quot;Bar&quot;</span>]
-[<span class="ruby-string">&quot;Name&quot;</span>, <span class="ruby-string">&quot;Baz&quot;</span>]
+<pre class="ruby">[<span class="ruby-string">&quot;</span><span class="ruby-string">Name</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">Foo</span><span class="ruby-string">&quot;</span>]
+[<span class="ruby-string">&quot;</span><span class="ruby-string">Name</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">Bar</span><span class="ruby-string">&quot;</span>]
+[<span class="ruby-string">&quot;</span><span class="ruby-string">Name</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">Baz</span><span class="ruby-string">&quot;</span>]
 </pre>
 
 <p>If no block is given, returns a new Enumerator:</p>
@@ -1622,12 +1695,18 @@
 
       <div id="method-i-each_pair" class="method-detail anchor-link method-alias">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-each_pair" title="Link to this method">
-                <span class="method-name">each_pair</span>
-              </a>
-            </div>
+              <div class="method-heading">
+                <a href="#method-i-each_pair" title="Link to this method">
+                  <span class="method-name">each_pair</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
 
         </div>
 
@@ -1647,45 +1726,52 @@
 
       <div id="method-i-fetch" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-fetch" title="Link to this method">
-                  <span class="method-callseq">
-                    fetch(header) &rarr; value
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-fetch" title="Link to this method">
+                    <span class="method-callseq">
+                      fetch(header) &rarr; value
+                    </span>
+                  </a>
+                </div>
 
-              <div class="method-heading">
-                <a href="#method-i-fetch" title="Link to this method">
-                  <span class="method-callseq">
-                    fetch(header, default) &rarr; value
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-fetch" title="Link to this method">
+                    <span class="method-callseq">
+                      fetch(header, default) &rarr; value
+                    </span>
+                  </a>
+                </div>
 
-              <div class="method-heading">
-                <a href="#method-i-fetch" title="Link to this method">
-                  <span class="method-callseq">
-                    fetch(header) {|row| ... } &rarr; value
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-fetch" title="Link to this method">
+                    <span class="method-callseq">
+                      fetch(header) {|row| ... } &rarr; value
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="fetch-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 258</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch</span>(<span class="ruby-identifier">header</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">varargs</span>)
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Too many arguments&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">varargs</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">header</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">varargs</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">Too many arguments</span><span class="ruby-string">&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">varargs</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
   <span class="ruby-identifier">pair</span> = <span class="ruby-ivar">@row</span>.<span class="ruby-identifier">assoc</span>(<span class="ruby-identifier">header</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">pair</span>
     <span class="ruby-identifier">pair</span>.<span class="ruby-identifier">last</span>
@@ -1693,7 +1779,7 @@
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
       <span class="ruby-keyword">yield</span> <span class="ruby-identifier">header</span>
     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">varargs</span>.<span class="ruby-identifier">empty?</span>
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">KeyError</span>, <span class="ruby-node">&quot;key not found: #{header}&quot;</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">KeyError</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">key not found: </span><span class="ruby-string">#{</span><span class="ruby-identifier">header</span><span class="ruby-string">}</span><span class="ruby-string">&quot;</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">varargs</span>.<span class="ruby-identifier">first</span>
     <span class="ruby-keyword">end</span>
@@ -1711,10 +1797,10 @@
 
 <p>With the single argument <code>header</code>, returns the field value for that header (first found):</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;Name&#39;</span>) <span class="ruby-comment"># =&gt; &quot;Foo&quot;</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; &quot;Foo&quot;</span>
 </pre>
 
 <p>Raises exception <code>KeyError</code> if the header does not exist.</p>
@@ -1722,21 +1808,21 @@
 
 <p>With arguments <code>header</code> and <code>default</code> given, returns the field value for the header (first found) if the header exists, otherwise returns <code>default</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-comment"># =&gt; &quot;Foo&quot;</span>
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:nosuch</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-comment"># =&gt; &quot;&quot;</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; &quot;Foo&quot;</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:</span><span class="ruby-value">nosuch</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; &quot;&quot;</span>
 </pre>
 <hr>
 
 <p>With argument <code>header</code> and a block given, returns the field value for the header (first found) if the header exists; otherwise calls the block and returns its return value:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;Name&#39;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span><span class="ruby-operator">|</span> <span class="ruby-identifier">fail</span> <span class="ruby-string">&#39;Cannot happen&#39;</span> } <span class="ruby-comment"># =&gt; &quot;Foo&quot;</span>
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:nosuch</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;Header &#39;#{header} not found&#39;&quot;</span> } <span class="ruby-comment"># =&gt; &quot;Header &#39;nosuch not found&#39;&quot;</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span><span class="ruby-operator">|</span> <span class="ruby-identifier">fail</span> <span class="ruby-string">&#39;</span><span class="ruby-string">Cannot happen</span><span class="ruby-string">&#39;</span> } <span class="ruby-comment"># =&gt; &quot;Foo&quot;</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:</span><span class="ruby-value">nosuch</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span><span class="ruby-operator">|</span> <span class="ruby-string">&quot;</span><span class="ruby-string">Header &#39;</span><span class="ruby-string">#{</span><span class="ruby-identifier">header</span><span class="ruby-string">}</span><span class="ruby-string"> not found&#39;</span><span class="ruby-string">&quot;</span> } <span class="ruby-comment"># =&gt; &quot;Header &#39;nosuch not found&#39;&quot;</span>
 </pre>
 
 
@@ -1751,53 +1837,60 @@
 
       <div id="method-i-field" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-field" title="Link to this method">
-                  <span class="method-callseq">
-                    field(index) &rarr; value
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-field" title="Link to this method">
+                    <span class="method-callseq">
+                      field(index) &rarr; value
+                    </span>
+                  </a>
+                </div>
 
-              <div class="method-heading">
-                <a href="#method-i-field" title="Link to this method">
-                  <span class="method-callseq">
-                    field(header) &rarr; value
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-field" title="Link to this method">
+                    <span class="method-callseq">
+                      field(header) &rarr; value
+                    </span>
+                  </a>
+                </div>
 
-              <div class="method-heading">
-                <a href="#method-i-field" title="Link to this method">
-                  <span class="method-callseq">
-                    field(header, offset) &rarr; value
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-field" title="Link to this method">
+                    <span class="method-callseq">
+                      field(header, offset) &rarr; value
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="field-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 203</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field</span>(<span class="ruby-identifier">header_or_index</span>, <span class="ruby-identifier">minimum_index</span> = <span class="ruby-value">0</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">field</span>(<span class="ruby-identifier">header_or_index</span>, <span class="ruby-identifier">minimum_index</span> = <span class="ruby-value">0</span>)
   <span class="ruby-comment"># locate the pair</span>
-  <span class="ruby-identifier">finder</span> = (<span class="ruby-identifier">header_or_index</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Integer</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">header_or_index</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Range</span>)) <span class="ruby-operator">?</span> <span class="ruby-value">:[]</span> <span class="ruby-operator">:</span> <span class="ruby-value">:assoc</span>
-  <span class="ruby-identifier">pair</span>   = <span class="ruby-ivar">@row</span>[<span class="ruby-identifier">minimum_index</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">public_send</span>(<span class="ruby-identifier">finder</span>, <span class="ruby-identifier">header_or_index</span>)
+  <span class="ruby-identifier">finder</span> = (<span class="ruby-identifier">header_or_index</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Integer</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">header_or_index</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Range</span>)) <span class="ruby-operator">?</span> <span class="ruby-value">:</span><span class="ruby-value">[]</span> <span class="ruby-operator">:</span> <span class="ruby-value">:</span><span class="ruby-value">assoc</span>
+  <span class="ruby-identifier">pair</span>   = <span class="ruby-ivar">@row</span>[<span class="ruby-identifier">minimum_index</span>..-<span class="ruby-value">1</span>].<span class="ruby-identifier">public_send</span>(<span class="ruby-identifier">finder</span>, <span class="ruby-identifier">header_or_index</span>)
 
   <span class="ruby-comment"># return the field if we have a pair</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">pair</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">header_or_index</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Range</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">pair</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:last</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">pair</span>.<span class="ruby-identifier">last</span>
+    <span class="ruby-identifier">header_or_index</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Range</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">pair</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:</span><span class="ruby-value">last</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">pair</span>.<span class="ruby-identifier">last</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1812,8 +1905,8 @@
 
 <p>Fetch field value by Integer index:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">field</span>(<span class="ruby-value">0</span>) <span class="ruby-comment"># =&gt; &quot;foo&quot;</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">field</span>(<span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; &quot;bar&quot;</span>
@@ -1821,31 +1914,31 @@
 
 <p>Counts backward from the last column if <code>index</code> is negative:</p>
 
-<pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">field</span>(<span class="ruby-value">-1</span>) <span class="ruby-comment"># =&gt; &quot;0&quot;</span>
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">field</span>(<span class="ruby-value">-2</span>) <span class="ruby-comment"># =&gt; &quot;foo&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">field</span>(-<span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; &quot;0&quot;</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">field</span>(-<span class="ruby-value">2</span>) <span class="ruby-comment"># =&gt; &quot;foo&quot;</span>
 </pre>
 
 <p>Returns <code>nil</code> if <code>index</code> is out of range:</p>
 
 <pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">field</span>(<span class="ruby-value">2</span>) <span class="ruby-comment"># =&gt; nil</span>
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">field</span>(<span class="ruby-value">-3</span>) <span class="ruby-comment"># =&gt; nil</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">field</span>(-<span class="ruby-value">3</span>) <span class="ruby-comment"># =&gt; nil</span>
 </pre>
 <hr>
 
 <p>Fetch field value by header (first found):</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">field</span>(<span class="ruby-string">&#39;Name&#39;</span>) <span class="ruby-comment"># =&gt; &quot;Foo&quot;</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">field</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; &quot;Foo&quot;</span>
 </pre>
 
 <p>Fetch field value by header, ignoring <code>offset</code> leading fields:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">field</span>(<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-value">2</span>) <span class="ruby-comment"># =&gt; &quot;Baz&quot;</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">field</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>) <span class="ruby-comment"># =&gt; &quot;Baz&quot;</span>
 </pre>
 
 <p>Returns <code>nil</code> if the header does not exist.</p>
@@ -1866,28 +1959,35 @@
 
       <div id="method-i-field-3F" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-field-3F" title="Link to this method">
-                  <span class="method-callseq">
-                    field?(value) &rarr; true or false
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-field-3F" title="Link to this method">
+                    <span class="method-callseq">
+                      field?(value) &rarr; true or false
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="field-3F-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 589</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field?</span>(<span class="ruby-identifier">data</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">field?</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">data</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1899,11 +1999,11 @@
 
           <p>Returns <code>true</code> if <code>value</code> is a field in this row, <code>false</code> otherwise:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">field?</span>(<span class="ruby-string">&#39;Bar&#39;</span>) <span class="ruby-comment"># =&gt; true</span>
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">field?</span>(<span class="ruby-string">&#39;BAR&#39;</span>) <span class="ruby-comment"># =&gt; false</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">field?</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">field?</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">BAR</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; false</span>
 </pre>
 
 
@@ -1918,28 +2018,35 @@
 
       <div id="method-i-field_row-3F" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-field_row-3F" title="Link to this method">
-                  <span class="method-callseq">
-                    field_row? &rarr; true or false
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-field_row-3F" title="Link to this method">
+                    <span class="method-callseq">
+                      field_row? &rarr; true or false
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="field_row-3F-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 148</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field_row?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">field_row?</span>
   <span class="ruby-keyword">not</span> <span class="ruby-identifier">header_row?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1963,30 +2070,37 @@
 
       <div id="method-i-fields" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-fields" title="Link to this method">
-                  <span class="method-callseq">
-                    fields(*specifiers) &rarr; array_of_fields
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-fields" title="Link to this method">
+                    <span class="method-callseq">
+                      fields(*specifiers) &rarr; array_of_fields
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="fields-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 530</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fields</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">headers_and_or_indices</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">fields</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">headers_and_or_indices</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">headers_and_or_indices</span>.<span class="ruby-identifier">empty?</span>  <span class="ruby-comment"># return all fields--no arguments</span>
-    <span class="ruby-ivar">@row</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:last</span>)
+    <span class="ruby-ivar">@row</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:</span><span class="ruby-value">last</span>)
   <span class="ruby-keyword">else</span>                              <span class="ruby-comment"># or work like values_at()</span>
     <span class="ruby-identifier">all</span> = []
     <span class="ruby-identifier">headers_and_or_indices</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">h_or_i</span><span class="ruby-operator">|</span>
@@ -1995,8 +2109,8 @@
                                                     <span class="ruby-identifier">index</span>(<span class="ruby-identifier">h_or_i</span>.<span class="ruby-identifier">begin</span>)
         <span class="ruby-identifier">index_end</span>   = <span class="ruby-identifier">h_or_i</span>.<span class="ruby-identifier">end</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Integer</span>)   <span class="ruby-operator">?</span> <span class="ruby-identifier">h_or_i</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">:</span>
                                                     <span class="ruby-identifier">index</span>(<span class="ruby-identifier">h_or_i</span>.<span class="ruby-identifier">end</span>)
-        <span class="ruby-identifier">new_range</span>   = <span class="ruby-identifier">h_or_i</span>.<span class="ruby-identifier">exclude_end?</span> <span class="ruby-operator">?</span> (<span class="ruby-identifier">index_begin</span><span class="ruby-operator">...</span><span class="ruby-identifier">index_end</span>) <span class="ruby-operator">:</span>
-                                            (<span class="ruby-identifier">index_begin</span><span class="ruby-operator">..</span><span class="ruby-identifier">index_end</span>)
+        <span class="ruby-identifier">new_range</span>   = <span class="ruby-identifier">h_or_i</span>.<span class="ruby-identifier">exclude_end?</span> <span class="ruby-operator">?</span> (<span class="ruby-identifier">index_begin</span>...<span class="ruby-identifier">index_end</span>) <span class="ruby-operator">:</span>
+                                            (<span class="ruby-identifier">index_begin</span>..<span class="ruby-identifier">index_end</span>)
         <span class="ruby-identifier">all</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">fields</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-identifier">new_range</span>))
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">all</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">field</span>(<span class="ruby-operator">*</span><span class="ruby-constant">Array</span>(<span class="ruby-identifier">h_or_i</span>))
@@ -2031,33 +2145,33 @@
 
 <p>When the specifier is an Integer <code>index</code>, returns <code>self.field(index)</code>L</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">fields</span>(<span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; [&quot;Bar&quot;]</span>
 </pre>
 
 <p>When the specifier is a Range of Integers <code>range</code>, returns <code>self.field(range)</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">fields</span>(<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">2</span>) <span class="ruby-comment"># =&gt; [&quot;Bar&quot;, &quot;Baz&quot;]</span>
+<pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">fields</span>(<span class="ruby-value">1</span>..<span class="ruby-value">2</span>) <span class="ruby-comment"># =&gt; [&quot;Bar&quot;, &quot;Baz&quot;]</span>
 </pre>
 
 <p>When the specifier is a 2-element Array <code>array</code>, returns <code>self.field(array)</code>L</p>
 
-<pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">fields</span>(<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; [&quot;Foo&quot;, &quot;Bar&quot;]</span>
+<pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">fields</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; [&quot;Foo&quot;, &quot;Bar&quot;]</span>
 </pre>
 
 <p>When the specifier is a header <code>header</code>, returns <code>self.field(header)</code>L</p>
 
-<pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">fields</span>(<span class="ruby-string">&#39;Name&#39;</span>) <span class="ruby-comment"># =&gt; [&quot;Foo&quot;]</span>
+<pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">fields</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; [&quot;Foo&quot;]</span>
 </pre>
 
 <p>When the specifier is a Range of headers <code>range</code>, forms a new Range <code>new_range</code> from the indexes of <code>range.start</code> and <code>range.end</code>, and returns <code>self.field(new_range)</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,NAME,name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,NAME,name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">fields</span>(<span class="ruby-string">&#39;Name&#39;</span><span class="ruby-operator">..</span><span class="ruby-string">&#39;NAME&#39;</span>) <span class="ruby-comment"># =&gt; [&quot;Foo&quot;, &quot;Bar&quot;]</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">fields</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>..<span class="ruby-string">&#39;</span><span class="ruby-string">NAME</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; [&quot;Foo&quot;, &quot;Bar&quot;]</span>
 </pre>
 
 <p>Returns all fields if no argument given:</p>
@@ -2081,28 +2195,35 @@
 
       <div id="method-i-has_key-3F" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-has_key-3F" title="Link to this method">
-                  <span class="method-callseq">
-                    has_key?(header) &rarr; true or false
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-has_key-3F" title="Link to this method">
+                    <span class="method-callseq">
+                      has_key?(header) &rarr; true or false
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="has_key-3F-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 279</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">has_key?</span>(<span class="ruby-identifier">header</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">header</span>)
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-ivar">@row</span>.<span class="ruby-identifier">assoc</span>(<span class="ruby-identifier">header</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -2130,12 +2251,18 @@
 
       <div id="method-i-header-3F" class="method-detail anchor-link method-alias">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-header-3F" title="Link to this method">
-                <span class="method-name">header?</span>
-              </a>
-            </div>
+              <div class="method-heading">
+                <a href="#method-i-header-3F" title="Link to this method">
+                  <span class="method-name">header?</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
 
         </div>
 
@@ -2155,28 +2282,35 @@
 
       <div id="method-i-header_row-3F" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-header_row-3F" title="Link to this method">
-                  <span class="method-callseq">
-                    header_row? &rarr; true or false
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-header_row-3F" title="Link to this method">
+                    <span class="method-callseq">
+                      header_row? &rarr; true or false
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="header_row-3F-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 140</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_row?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">header_row?</span>
   <span class="ruby-ivar">@header_row</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -2200,29 +2334,36 @@
 
       <div id="method-i-headers" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-headers" title="Link to this method">
-                  <span class="method-callseq">
-                    headers &rarr; array_of_headers
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-headers" title="Link to this method">
+                    <span class="method-callseq">
+                      headers &rarr; array_of_headers
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="headers-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 160</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">headers</span>
-  <span class="ruby-ivar">@row</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:first</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">headers</span>
+  <span class="ruby-ivar">@row</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:</span><span class="ruby-value">first</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
@@ -2233,8 +2374,8 @@
 
           <p>Returns the headers for this row:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Value&quot;]</span>
 </pre>
@@ -2251,12 +2392,18 @@
 
       <div id="method-i-include-3F" class="method-detail anchor-link method-alias">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-include-3F" title="Link to this method">
-                <span class="method-name">include?</span>
-              </a>
-            </div>
+              <div class="method-heading">
+                <a href="#method-i-include-3F" title="Link to this method">
+                  <span class="method-name">include?</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
 
         </div>
 
@@ -2276,38 +2423,45 @@
 
       <div id="method-i-index" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-index" title="Link to this method">
-                  <span class="method-callseq">
-                    index(header) &rarr; index
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-index" title="Link to this method">
+                    <span class="method-callseq">
+                      index(header) &rarr; index
+                    </span>
+                  </a>
+                </div>
 
-              <div class="method-heading">
-                <a href="#method-i-index" title="Link to this method">
-                  <span class="method-callseq">
-                    index(header, offset) &rarr; index
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-index" title="Link to this method">
+                    <span class="method-callseq">
+                      index(header, offset) &rarr; index
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="index-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 573</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>(<span class="ruby-identifier">header</span>, <span class="ruby-identifier">minimum_index</span> = <span class="ruby-value">0</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>(<span class="ruby-identifier">header</span>, <span class="ruby-identifier">minimum_index</span> = <span class="ruby-value">0</span>)
   <span class="ruby-comment"># find the pair</span>
-  <span class="ruby-identifier">index</span> = <span class="ruby-identifier">headers</span>[<span class="ruby-identifier">minimum_index</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">index</span>(<span class="ruby-identifier">header</span>)
+  <span class="ruby-identifier">index</span> = <span class="ruby-identifier">headers</span>[<span class="ruby-identifier">minimum_index</span>..-<span class="ruby-value">1</span>].<span class="ruby-identifier">index</span>(<span class="ruby-identifier">header</span>)
   <span class="ruby-comment"># return the index at the right offset, if we found one</span>
   <span class="ruby-identifier">index</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">minimum_index</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2322,17 +2476,17 @@
 
 <p>With the single argument <code>header</code>, returns the index of the first-found field with the given <code>header</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;Name&#39;</span>) <span class="ruby-comment"># =&gt; 0</span>
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;NAME&#39;</span>) <span class="ruby-comment"># =&gt; nil</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; 0</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">NAME</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; nil</span>
 </pre>
 
 <p>With arguments <code>header</code> and <code>offset</code>, returns the index of the first-found field with given <code>header</code>, but ignoring the first <code>offset</code> fields:</p>
 
-<pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; 1</span>
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-value">3</span>) <span class="ruby-comment"># =&gt; nil</span>
+<pre class="ruby"><span class="ruby-identifier">row</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; 1</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">3</span>) <span class="ruby-comment"># =&gt; nil</span>
 </pre>
 
 
@@ -2347,30 +2501,37 @@
 
       <div id="method-i-initialize_copy" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-initialize_copy" title="Link to this method">
-                  <span class="method-callseq">
-                    initialize_copy(other_row) &rarr; self
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-initialize_copy" title="Link to this method">
+                    <span class="method-callseq">
+                      initialize_copy(other_row) &rarr; self
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="initialize_copy-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 130</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize_copy</span>(<span class="ruby-identifier">other</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize_copy</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-identifier">super_return_value</span> = <span class="ruby-keyword">super</span>
-  <span class="ruby-ivar">@row</span> = <span class="ruby-ivar">@row</span>.<span class="ruby-identifier">collect</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:dup</span>)
+  <span class="ruby-ivar">@row</span> = <span class="ruby-ivar">@row</span>.<span class="ruby-identifier">collect</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:</span><span class="ruby-value">dup</span>)
   <span class="ruby-identifier">super_return_value</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -2399,41 +2560,48 @@
 
       <div id="method-i-inspect" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-inspect" title="Link to this method">
-                  <span class="method-callseq">
-                    inspect &rarr; string
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-inspect" title="Link to this method">
+                    <span class="method-callseq">
+                      inspect &rarr; string
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="inspect-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 764</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
-  <span class="ruby-identifier">str</span> = [<span class="ruby-string">&quot;#&lt;&quot;</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>]
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">inspect</span>
+  <span class="ruby-identifier">str</span> = [<span class="ruby-string">&quot;</span><span class="ruby-string">#&lt;</span><span class="ruby-string">&quot;</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>]
   <span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">header</span>, <span class="ruby-identifier">field</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">header</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">header</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">header</span>.<span class="ruby-identifier">inspect</span>) <span class="ruby-operator">&lt;&lt;</span>
-           <span class="ruby-string">&quot;:&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">inspect</span>
+    <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;</span><span class="ruby-string"> </span><span class="ruby-string">&quot;</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">header</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">header</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">header</span>.<span class="ruby-identifier">inspect</span>) <span class="ruby-operator">&lt;&lt;</span>
+           <span class="ruby-string">&quot;</span><span class="ruby-string">:</span><span class="ruby-string">&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">inspect</span>
   <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&gt;&quot;</span>
+  <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;</span><span class="ruby-string">&gt;</span><span class="ruby-string">&quot;</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">str</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-identifier">str</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>)
   <span class="ruby-keyword">rescue</span>  <span class="ruby-comment"># any encoding error</span>
     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">e</span> = <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">Converter</span>.<span class="ruby-identifier">asciicompat_encoding</span>(<span class="ruby-identifier">s</span>.<span class="ruby-identifier">encoding</span>)
-      <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">e</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-string">&quot;ASCII-8BIT&quot;</span>)
-    <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+      <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">e</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-string">&quot;</span><span class="ruby-string">ASCII-8BIT</span><span class="ruby-string">&quot;</span>)
+    <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -2452,8 +2620,8 @@
 
 <p>Example:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">inspect</span> <span class="ruby-comment"># =&gt; &quot;#&lt;CSV::Row \&quot;Name\&quot;:\&quot;foo\&quot; \&quot;Value\&quot;:\&quot;0\&quot;&gt;&quot;</span>
 </pre>
@@ -2470,12 +2638,18 @@
 
       <div id="method-i-key-3F" class="method-detail anchor-link method-alias">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-key-3F" title="Link to this method">
-                <span class="method-name">key?</span>
-              </a>
-            </div>
+              <div class="method-heading">
+                <a href="#method-i-key-3F" title="Link to this method">
+                  <span class="method-name">key?</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
 
         </div>
 
@@ -2495,12 +2669,18 @@
 
       <div id="method-i-member-3F" class="method-detail anchor-link method-alias">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-member-3F" title="Link to this method">
-                <span class="method-name">member?</span>
-              </a>
-            </div>
+              <div class="method-heading">
+                <a href="#method-i-member-3F" title="Link to this method">
+                  <span class="method-name">member?</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
 
         </div>
 
@@ -2520,28 +2700,35 @@
 
       <div id="method-i-push" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-push" title="Link to this method">
-                  <span class="method-callseq">
-                    push(*values) &rarr; self
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-push" title="Link to this method">
+                    <span class="method-callseq">
+                      push(*values) &rarr; self
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="push-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 410</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">arg</span> }
 
   <span class="ruby-keyword">self</span>  <span class="ruby-comment"># for chaining</span>
@@ -2555,10 +2742,10 @@
 
           <p>Appends each of the given <code>values</code> to <code>self</code> as a field; returns <code>self</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;Bat&#39;</span>, <span class="ruby-string">&#39;Bam&#39;</span>)
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">Bat</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">Bam</span><span class="ruby-string">&#39;</span>)
 <span class="ruby-identifier">row</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;Foo&quot; &quot;Name&quot;:&quot;Bar&quot; &quot;Name&quot;:&quot;Baz&quot; nil:&quot;Bat&quot; nil:&quot;Bam&quot;&gt;</span>
 </pre>
 
@@ -2574,28 +2761,35 @@
 
       <div id="method-i-to_csv" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-to_csv" title="Link to this method">
-                  <span class="method-callseq">
-                    to_csv &rarr; csv_string
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-to_csv" title="Link to this method">
+                    <span class="method-callseq">
+                      to_csv &rarr; csv_string
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="to_csv-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 718</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_csv</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_csv</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">to_csv</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -2607,8 +2801,8 @@
 
           <p>Returns the row as a CSV <a href="../String.html"><code>String</code></a>. Headers are not included:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">to_csv</span> <span class="ruby-comment"># =&gt; &quot;foo,0\n&quot;</span>
 </pre>
@@ -2629,44 +2823,51 @@
 
       <div id="method-i-to_h" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
 
-              <div class="method-heading">
-                <a href="#method-i-to_h" title="Link to this method">
-                  <span class="method-callseq">
-                    to_h &rarr; hash
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-to_h" title="Link to this method">
+                    <span class="method-callseq">
+                      to_h &rarr; hash
+                    </span>
+                  </a>
+                </div>
 
-              <div class="method-heading">
-                <a href="#method-i-to_h" title="Link to this method">
-                  <span class="method-callseq">
-                    to_h {|key, value| ... } &rarr; hash
-                  </span>
-                </a>
-              </div>
+                <div class="method-heading">
+                  <a href="#method-i-to_h" title="Link to this method">
+                    <span class="method-callseq">
+                      to_h {|key, value| ... } &rarr; hash
+                    </span>
+                  </a>
+                </div>
 
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="to_h-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/row.rb, line 660</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_h</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_h</span>
   <span class="ruby-identifier">hash</span> = {}
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
     <span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">_value</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">result</span> = <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">key</span>, <span class="ruby-keyword">self</span>[<span class="ruby-identifier">key</span>])
       <span class="ruby-identifier">result_array</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">try_convert</span>(<span class="ruby-identifier">result</span>)
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-node">&quot;wrong element type #{result.class} (expected array)&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">result_array</span>.<span class="ruby-identifier">nil?</span>
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;wrong array length (expected 2, was #{result_array.size})&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">result_array</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">wrong element type </span><span class="ruby-string">#{</span><span class="ruby-identifier">result</span>.<span class="ruby-identifier">class</span><span class="ruby-string">}</span><span class="ruby-string"> (expected array)</span><span class="ruby-string">&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">result_array</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">wrong array length (expected 2, was </span><span class="ruby-string">#{</span><span class="ruby-identifier">result_array</span>.<span class="ruby-identifier">size</span><span class="ruby-string">}</span><span class="ruby-string">)</span><span class="ruby-string">&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">result_array</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
 
       <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> = <span class="ruby-identifier">result_array</span>
       <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
@@ -2691,26 +2892,26 @@
 
           <p>Returns the new Hash formed by adding each header-value pair in <code>self</code> as a key-value pair in the Hash.</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">to_h</span> <span class="ruby-comment"># =&gt; {&quot;Name&quot;=&gt;&quot;foo&quot;, &quot;Value&quot;=&gt;&quot;0&quot;}</span>
 </pre>
 
 <p>Header order is preserved, but repeated headers are ignored:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Name,Name\nFoo,Bar,Baz\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Name,Name\nFoo,Bar,Baz\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
 <span class="ruby-identifier">row</span>.<span class="ruby-identifier">to_h</span> <span class="ruby-comment"># =&gt; {&quot;Name&quot;=&gt;&quot;Foo&quot;}</span>
 </pre>
 
 <p>If a block is given, will call it with (key, value) arguments and use result as a hash entry:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,1\nbar,2\nbaz,3\n&quot;</span>
-<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,1\nbar,2\nbaz,3\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">table</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">row</span> = <span class="ruby-identifier">table</span>[<span class="ruby-value">0</span>]
-<span class="ruby-identifier">row</span>.<span class="ruby-identifier">to_h</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">key</span>, <span class="ruby-node">&quot;#{key}-#{value}&quot;</span>] } <span class="ruby-comment"># =&gt; {&quot;Name&quot;=&gt;&quot;Name-foo&quot;, &quot;Value&quot;=&gt;&quot;Value-1&quot;}</span>
+<span class="ruby-identifier">row</span>.<span class="ruby-identifier">to_h</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">key</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">#{</span><span class="ruby-identifier">key</span><span class="ruby-string">}</span><span class="ruby-string">-</span><span class="ruby-string">#{</span><span class="ruby-identifier">value</span><span class="ruby-string">}</span><span class="ruby-string">&quot;</span>] } <span class="ruby-comment"># =&gt; {&quot;Name&quot;=&gt;&quot;Name-foo&quot;, &quot;Value&quot;=&gt;&quot;Value-1&quot;}</span>
 </pre>
 
 
@@ -2729,12 +2930,18 @@
 
       <div id="method-i-to_hash" class="method-detail anchor-link method-alias">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-to_hash" title="Link to this method">
-                <span class="method-name">to_hash</span>
-              </a>
-            </div>
+              <div class="method-heading">
+                <a href="#method-i-to_hash" title="Link to this method">
+                  <span class="method-name">to_hash</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
 
         </div>
 
@@ -2754,12 +2961,18 @@
 
       <div id="method-i-to_s" class="method-detail anchor-link method-alias">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-to_s" title="Link to this method">
-                <span class="method-name">to_s</span>
-              </a>
-            </div>
+              <div class="method-heading">
+                <a href="#method-i-to_s" title="Link to this method">
+                  <span class="method-name">to_s</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
 
         </div>
 
@@ -2779,12 +2992,18 @@
 
       <div id="method-i-values_at" class="method-detail anchor-link method-alias">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-values_at" title="Link to this method">
-                <span class="method-name">values_at</span>
-              </a>
-            </div>
+              <div class="method-heading">
+                <a href="#method-i-values_at" title="Link to this method">
+                  <span class="method-name">values_at</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
 
         </div>
 
@@ -2811,7 +3030,7 @@
 
 </main>
 
-<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+<aside id="table-of-contents" class="table-of-contents" role="complementary" aria-label="Table of Contents">
   <div class="toc-sticky">
     <h3 class="toc-heading">On This Page</h3>
     <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
@@ -2826,7 +3045,7 @@
 
   <div class="footer-bottom">
     <p>
-      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 8.0.0</a>
       using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
     </p>
   </div>

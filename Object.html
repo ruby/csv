@@ -56,46 +56,46 @@
 </script>
 
 <script
-  src="./js/theme-toggle.js?v=7.2.0"
+  src="./js/theme-toggle.js?v=8.0.0"
 ></script>
 
 <script
-  src="./js/search_navigation.js?v=7.2.0"
+  src="./js/search_navigation.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="./js/search_data.js?v=7.2.0"
+  src="./js/search_data.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="./js/search_ranker.js?v=7.2.0"
+  src="./js/search_ranker.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="./js/search_controller.js?v=7.2.0"
+  src="./js/search_controller.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="./js/c_highlighter.js?v=7.2.0"
+  src="./js/c_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="./js/bash_highlighter.js?v=7.2.0"
+  src="./js/bash_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="./js/aliki.js?v=7.2.0"
+  src="./js/aliki.js?v=8.0.0"
   defer
 ></script>
 
 <link
-  href="./css/rdoc.css?v=7.2.0"
+  href="./css/rdoc.css?v=8.0.0"
   rel="stylesheet"
 >
 
@@ -369,12 +369,12 @@
   </div>
 </div>
 
-<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+<div id="sidebar-navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar-navigation">
   <span aria-hidden="true">&#9776;</span>
 </div>
 
 
-<nav id="navigation" role="navigation" hidden>
+<nav id="sidebar-navigation" role="navigation" hidden>
   
 
 
@@ -417,15 +417,6 @@
             <li>
               <a href="./NEWS_md.html">
                 NEWS
-              </a>
-            </li>
-
-
-
-
-            <li>
-              <a href="./README_md.html">
-                README
               </a>
             </li>
 
@@ -546,8 +537,9 @@
   
 
   <span id="class-Object" class="legacy-anchor"></span>
-  <h1 id="class-object" class="anchor-link class">
-    class Object
+  <h1 id="class-object" class="anchor-link class page-title">
+    <span class="page-title-kind">class</span>
+    <span class="page-title-name">Object</span>
   </h1>
 
   <section class="description">
@@ -583,25 +575,32 @@
 
       <div id="method-i-CSV" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-CSV" title="Link to this method">
-                <span class="method-name">CSV</span>
-                <span class="method-args">(*args, **options, &amp;block)</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-CSV" title="Link to this method">
+                  <span class="method-name">CSV</span>
+                  <span class="method-args">(*args, **options, &amp;block)</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="CSV-source">
-            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 3011</span>
-<span class="ruby-keyword">def</span> <span class="ruby-constant">CSV</span>(<span class="ruby-operator">*</span><span class="ruby-identifier ruby-title">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv.rb, line 2983</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">CSV</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">instance</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -613,25 +612,25 @@
 
           <p>Passes <code>args</code> to <a href="CSV.html#method-c-instance"><code>CSV::instance</code></a>.</p>
 
-<pre class="ruby"><span class="ruby-constant">CSV</span>(<span class="ruby-string">&quot;CSV,data&quot;</span>).<span class="ruby-identifier">read</span>
+<pre class="ruby"><span class="ruby-constant">CSV</span>(<span class="ruby-string">&quot;</span><span class="ruby-string">CSV,data</span><span class="ruby-string">&quot;</span>).<span class="ruby-identifier">read</span>
   <span class="ruby-comment">#=&gt; [[&quot;CSV&quot;, &quot;data&quot;]]</span>
 </pre>
 
 <p>If a block is given, the instance is passed the block and the return value becomes the return value of the block.</p>
 
-<pre class="ruby"><span class="ruby-constant">CSV</span>(<span class="ruby-string">&quot;CSV,data&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">read</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot;data&quot;</span>) }
+<pre class="ruby"><span class="ruby-constant">CSV</span>(<span class="ruby-string">&quot;</span><span class="ruby-string">CSV,data</span><span class="ruby-string">&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">read</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot;</span><span class="ruby-string">data</span><span class="ruby-string">&quot;</span>) }
 } <span class="ruby-comment">#=&gt; true</span>
 
-<span class="ruby-constant">CSV</span>(<span class="ruby-string">&quot;CSV,data&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">read</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot;zombies&quot;</span>) }
+<span class="ruby-constant">CSV</span>(<span class="ruby-string">&quot;</span><span class="ruby-string">CSV,data</span><span class="ruby-string">&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">read</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot;</span><span class="ruby-string">zombies</span><span class="ruby-string">&quot;</span>) }
 } <span class="ruby-comment">#=&gt; false</span>
 </pre>
 
 <p><a href="CSV.html"><code>CSV</code></a> options may also be given.</p>
 
 <pre class="ruby"><span class="ruby-identifier">io</span> = <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-constant">CSV</span>(<span class="ruby-identifier">io</span>, <span class="ruby-value">col_sep:</span> <span class="ruby-string">&quot;;&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&quot;a&quot;</span>, <span class="ruby-string">&quot;b&quot;</span>, <span class="ruby-string">&quot;c&quot;</span>] }
+<span class="ruby-constant">CSV</span>(<span class="ruby-identifier">io</span>, <span class="ruby-value">col_sep</span><span class="ruby-value">:</span> <span class="ruby-string">&quot;</span><span class="ruby-string">;</span><span class="ruby-string">&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&quot;</span><span class="ruby-string">a</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">b</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">c</span><span class="ruby-string">&quot;</span>] }
 </pre>
 
 <p>This API is not Ractor-safe.</p>
@@ -655,7 +654,7 @@
 
 </main>
 
-<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+<aside id="table-of-contents" class="table-of-contents" role="complementary" aria-label="Table of Contents">
   <div class="toc-sticky">
     <h3 class="toc-heading">On This Page</h3>
     <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
@@ -670,7 +669,7 @@
 
   <div class="footer-bottom">
     <p>
-      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 8.0.0</a>
       using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
     </p>
   </div>

@@ -50,46 +50,46 @@
 </script>
 
 <script
-  src="../js/theme-toggle.js?v=7.2.0"
+  src="../js/theme-toggle.js?v=8.0.0"
 ></script>
 
 <script
-  src="../js/search_navigation.js?v=7.2.0"
+  src="../js/search_navigation.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/search_data.js?v=7.2.0"
+  src="../js/search_data.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/search_ranker.js?v=7.2.0"
+  src="../js/search_ranker.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/search_controller.js?v=7.2.0"
+  src="../js/search_controller.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/c_highlighter.js?v=7.2.0"
+  src="../js/c_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/bash_highlighter.js?v=7.2.0"
+  src="../js/bash_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/aliki.js?v=7.2.0"
+  src="../js/aliki.js?v=8.0.0"
   defer
 ></script>
 
 <link
-  href="../css/rdoc.css?v=7.2.0"
+  href="../css/rdoc.css?v=8.0.0"
   rel="stylesheet"
 >
 
@@ -363,12 +363,12 @@
   </div>
 </div>
 
-<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+<div id="sidebar-navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar-navigation">
   <span aria-hidden="true">&#9776;</span>
 </div>
 
 
-<nav id="navigation" role="navigation" hidden>
+<nav id="sidebar-navigation" role="navigation" hidden>
   
 
 
@@ -411,15 +411,6 @@
             <li>
               <a href="../NEWS_md.html">
                 NEWS
-              </a>
-            </li>
-
-
-
-
-            <li>
-              <a href="../README_md.html">
-                README
               </a>
             </li>
 
@@ -563,7 +554,7 @@
       
       <li>
         
-        <a href="../CSV.html">CSV</a><span>::</span>
+        <a href="../CSV.html">CSV</a><span class="separator">::</span>
         
       </li>
       
@@ -577,8 +568,9 @@
   
 
   <span id="class-CSV::Writer" class="legacy-anchor"></span>
-  <h1 id="class-csv-writer" class="anchor-link class">
-    class CSV::Writer
+  <h1 id="class-csv-writer" class="anchor-link class page-title">
+    <span class="page-title-kind">class</span>
+    <span class="page-title-name">CSV::Writer</span>
   </h1>
 
   <section class="description">
@@ -609,6 +601,7 @@
             <span class="method-name">headers</span>
             <span class="attribute-access-type">[R]</span>
           </a>
+
         </div>
 
         <div class="method-description">
@@ -625,6 +618,7 @@
             <span class="method-name">lineno</span>
             <span class="attribute-access-type">[R]</span>
           </a>
+
         </div>
 
         <div class="method-description">
@@ -650,34 +644,41 @@
 
       <div id="method-c-new" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-c-new" title="Link to this method">
-                <span class="method-name">new</span>
-                <span class="method-args">(output, options)</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-c-new" title="Link to this method">
+                  <span class="method-name">new</span>
+                  <span class="method-args">(output, options)</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="new-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/writer.rb, line 16</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>)
   <span class="ruby-ivar">@output</span> = <span class="ruby-identifier">output</span>
   <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
   <span class="ruby-ivar">@lineno</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@fields_converter</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">prepare</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:write_headers</span>] <span class="ruby-keyword">and</span> <span class="ruby-ivar">@headers</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:</span><span class="ruby-value">write_headers</span>] <span class="ruby-keyword">and</span> <span class="ruby-ivar">@headers</span>
     <span class="ruby-keyword">self</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@headers</span>
   <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@fields_converter</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:fields_converter</span>]
+  <span class="ruby-ivar">@fields_converter</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:</span><span class="ruby-value">fields_converter</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
 
@@ -714,25 +715,32 @@
 
       <div id="method-i-3C-3C" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-3C-3C" title="Link to this method">
-                <span class="method-name">&lt;&lt;</span>
-                <span class="method-args">(row)</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-3C-3C" title="Link to this method">
+                  <span class="method-name">&lt;&lt;</span>
+                  <span class="method-args">(row)</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="3C-3C-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/writer.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-identifier">row</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">&lt;&lt;</span>(<span class="ruby-identifier">row</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">row</span>
   <span class="ruby-keyword">when</span> <span class="ruby-constant">Row</span>
     <span class="ruby-identifier">row</span> = <span class="ruby-identifier">row</span>.<span class="ruby-identifier">fields</span>
@@ -740,16 +748,16 @@
     <span class="ruby-identifier">row</span> = <span class="ruby-ivar">@headers</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-identifier">header</span>]}
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-ivar">@headers</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">row</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@use_headers</span>
-  <span class="ruby-ivar">@lineno</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-ivar">@headers</span> ||= <span class="ruby-identifier">row</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@use_headers</span>
+  <span class="ruby-ivar">@lineno</span> += <span class="ruby-value">1</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@fields_converter</span>
     <span class="ruby-identifier">row</span> = <span class="ruby-ivar">@fields_converter</span>.<span class="ruby-identifier">convert</span>(<span class="ruby-identifier">row</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">lineno</span>)
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">i</span> = <span class="ruby-value">-1</span>
+  <span class="ruby-identifier">i</span> = -<span class="ruby-value">1</span>
   <span class="ruby-identifier">converted_row</span> = <span class="ruby-identifier">row</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">i</span> += <span class="ruby-value">1</span>
     <span class="ruby-identifier">quote</span>(<span class="ruby-identifier">field</span>, <span class="ruby-identifier">i</span>)
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">line</span> = <span class="ruby-identifier">converted_row</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@column_separator</span>) <span class="ruby-operator">+</span> <span class="ruby-ivar">@row_separator</span>
@@ -781,27 +789,34 @@
 
       <div id="method-i-rewind" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-rewind" title="Link to this method">
-                <span class="method-name">rewind</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-rewind" title="Link to this method">
+                  <span class="method-name">rewind</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="rewind-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/writer.rb, line 63</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">rewind</span>
   <span class="ruby-ivar">@lineno</span> = <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@headers</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:headers</span>].<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@headers</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:</span><span class="ruby-value">headers</span>].<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
@@ -831,7 +846,7 @@
 
 </main>
 
-<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+<aside id="table-of-contents" class="table-of-contents" role="complementary" aria-label="Table of Contents">
   <div class="toc-sticky">
     <h3 class="toc-heading">On This Page</h3>
     <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
@@ -846,7 +861,7 @@
 
   <div class="footer-bottom">
     <p>
-      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 8.0.0</a>
       using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
     </p>
   </div>

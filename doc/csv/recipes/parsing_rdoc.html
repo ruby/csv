@@ -45,46 +45,46 @@
 </script>
 
 <script
-  src="../../../js/theme-toggle.js?v=7.2.0"
+  src="../../../js/theme-toggle.js?v=8.0.0"
 ></script>
 
 <script
-  src="../../../js/search_navigation.js?v=7.2.0"
+  src="../../../js/search_navigation.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../../js/search_data.js?v=7.2.0"
+  src="../../../js/search_data.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../../js/search_ranker.js?v=7.2.0"
+  src="../../../js/search_ranker.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../../js/search_controller.js?v=7.2.0"
+  src="../../../js/search_controller.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../../js/c_highlighter.js?v=7.2.0"
+  src="../../../js/c_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../../js/bash_highlighter.js?v=7.2.0"
+  src="../../../js/bash_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../../js/aliki.js?v=7.2.0"
+  src="../../../js/aliki.js?v=8.0.0"
   defer
 ></script>
 
 <link
-  href="../../../css/rdoc.css?v=7.2.0"
+  href="../../../css/rdoc.css?v=8.0.0"
   rel="stylesheet"
 >
 
@@ -358,12 +358,12 @@
   </div>
 </div>
 
-<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+<div id="sidebar-navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar-navigation">
   <span aria-hidden="true">&#9776;</span>
 </div>
 
 
-<nav id="navigation" role="navigation" hidden>
+<nav id="sidebar-navigation" role="navigation" hidden>
   
 
 
@@ -408,15 +408,6 @@
             <li>
               <a href="../../../NEWS_md.html">
                 NEWS
-              </a>
-            </li>
-
-
-
-
-            <li>
-              <a href="../../../README_md.html">
-                README
               </a>
             </li>
 
@@ -497,7 +488,7 @@
 
 <p>All code snippets on this page assume that the following has been executed:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;csv&#39;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;</span><span class="ruby-string">csv</span><span class="ruby-string">&#39;</span>
 </pre>
 
 <span id="label-Contents" class="legacy-anchor"></span>
@@ -646,13 +637,13 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-parse"><code>CSV.parse</code></a> with option <code>headers</code> to read a source String all at once (may have memory resource implications):</p>
 
-<pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">string</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>) <span class="ruby-comment"># =&gt; #&lt;CSV::Table mode:col_or_row row_count:4&gt;</span>
+<pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">string</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-comment"># =&gt; #&lt;CSV::Table mode:col_or_row row_count:4&gt;</span>
 </pre>
 
 <p>Use instance method <a href="../../../CSV.html#method-i-each"><code>CSV#each</code></a> with option <code>headers</code> to read a source String one row at a time:</p>
 
-<pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">string</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+<pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">string</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">p</span> <span class="ruby-identifier">row</span>
 <span class="ruby-keyword">end</span>
 </pre>
@@ -669,7 +660,7 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-parse"><code>CSV.parse</code></a> without option <code>headers</code> to read a source String all at once (may have memory resource implications):</p>
 
-<pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;foo,0\nbar,1\nbaz,2\n&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">foo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">string</span>) <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;0&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
 </pre>
 
@@ -682,9 +673,9 @@
 
 <p>Output:</p>
 
-<pre class="ruby">[<span class="ruby-string">&quot;foo&quot;</span>, <span class="ruby-string">&quot;0&quot;</span>]
-[<span class="ruby-string">&quot;bar&quot;</span>, <span class="ruby-string">&quot;1&quot;</span>]
-[<span class="ruby-string">&quot;baz&quot;</span>, <span class="ruby-string">&quot;2&quot;</span>]
+<pre class="ruby">[<span class="ruby-string">&quot;</span><span class="ruby-string">foo</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">0</span><span class="ruby-string">&quot;</span>]
+[<span class="ruby-string">&quot;</span><span class="ruby-string">bar</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">1</span><span class="ruby-string">&quot;</span>]
+[<span class="ruby-string">&quot;</span><span class="ruby-string">baz</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">2</span><span class="ruby-string">&quot;</span>]
 </pre>
 
 <span id="label-Parsing+from+a+File" class="legacy-anchor"></span>
@@ -697,15 +688,15 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-read"><code>CSV.read</code></a> with option <code>headers</code> to read a file all at once:</p>
 
-<pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
+<pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;</span><span class="ruby-string">t.csv</span><span class="ruby-string">&#39;</span>
 <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">string</span>)
-<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>) <span class="ruby-comment"># =&gt; #&lt;CSV::Table mode:col_or_row row_count:4&gt;</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-comment"># =&gt; #&lt;CSV::Table mode:col_or_row row_count:4&gt;</span>
 </pre>
 
 <p>Use class method <a href="../../../CSV.html#method-c-foreach"><code>CSV.foreach</code></a> with option <code>headers</code> to read one row at a time:</p>
 
-<pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">foreach</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+<pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">foreach</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">p</span> <span class="ruby-identifier">row</span>
 <span class="ruby-keyword">end</span>
 </pre>
@@ -722,8 +713,8 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-read"><code>CSV.read</code></a> without option <code>headers</code> to read a file all at once:</p>
 
-<pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;foo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
+<pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">foo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;</span><span class="ruby-string">t.csv</span><span class="ruby-string">&#39;</span>
 <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">string</span>)
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;0&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
 </pre>
@@ -737,9 +728,9 @@
 
 <p>Output:</p>
 
-<pre class="ruby">[<span class="ruby-string">&quot;foo&quot;</span>, <span class="ruby-string">&quot;0&quot;</span>]
-[<span class="ruby-string">&quot;bar&quot;</span>, <span class="ruby-string">&quot;1&quot;</span>]
-[<span class="ruby-string">&quot;baz&quot;</span>, <span class="ruby-string">&quot;2&quot;</span>]
+<pre class="ruby">[<span class="ruby-string">&quot;</span><span class="ruby-string">foo</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">0</span><span class="ruby-string">&quot;</span>]
+[<span class="ruby-string">&quot;</span><span class="ruby-string">bar</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">1</span><span class="ruby-string">&quot;</span>]
+[<span class="ruby-string">&quot;</span><span class="ruby-string">baz</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">2</span><span class="ruby-string">&quot;</span>]
 </pre>
 
 <span id="label-Parsing+from+an+IO+Stream" class="legacy-anchor"></span>
@@ -752,18 +743,18 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-parse"><code>CSV.parse</code></a> with option <code>headers</code> to read an IO stream all at once:</p>
 
-<pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
+<pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;</span><span class="ruby-string">t.csv</span><span class="ruby-string">&#39;</span>
 <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">string</span>)
 <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
-  <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>)
+  <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-keyword">end</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Table mode:col_or_row row_count:4&gt;</span>
 </pre>
 
 <p>Use class method <a href="../../../CSV.html#method-c-foreach"><code>CSV.foreach</code></a> with option <code>headers</code> to read one row at a time:</p>
 
 <pre class="ruby"><span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
-  <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">foreach</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+  <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">foreach</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">p</span> <span class="ruby-identifier">row</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span>
@@ -781,8 +772,8 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-parse"><code>CSV.parse</code></a> without option <code>headers</code> to read an IO stream all at once:</p>
 
-<pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;foo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
+<pre class="ruby"><span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">foo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;</span><span class="ruby-string">t.csv</span><span class="ruby-string">&#39;</span>
 <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">string</span>)
 <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
   <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">file</span>)
@@ -800,9 +791,9 @@
 
 <p>Output:</p>
 
-<pre class="ruby">[<span class="ruby-string">&quot;foo&quot;</span>, <span class="ruby-string">&quot;0&quot;</span>]
-[<span class="ruby-string">&quot;bar&quot;</span>, <span class="ruby-string">&quot;1&quot;</span>]
-[<span class="ruby-string">&quot;baz&quot;</span>, <span class="ruby-string">&quot;2&quot;</span>]
+<pre class="ruby">[<span class="ruby-string">&quot;</span><span class="ruby-string">foo</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">0</span><span class="ruby-string">&quot;</span>]
+[<span class="ruby-string">&quot;</span><span class="ruby-string">bar</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">1</span><span class="ruby-string">&quot;</span>]
+[<span class="ruby-string">&quot;</span><span class="ruby-string">baz</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">2</span><span class="ruby-string">&quot;</span>]
 </pre>
 
 <span id="label-RFC+4180+Compliance" class="legacy-anchor"></span>
@@ -829,18 +820,18 @@
 
 <p>For strict compliance, use option <code>:row_sep</code> to specify row separator <code>&quot;\r\n&quot;</code>, which allows the compliant row separator:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;foo,1\r\nbar,1\r\nbaz,2\r\n&quot;</span>
-<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">row_sep:</span> <span class="ruby-string">&quot;\r\n&quot;</span>) <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;1&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">foo,1\r\nbar,1\r\nbaz,2\r\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">row_sep</span><span class="ruby-value">:</span> <span class="ruby-string">&quot;</span><span class="ruby-string">\r\n</span><span class="ruby-string">&quot;</span>) <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;1&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
 </pre>
 
 <p>But rejects other row separators:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;foo,1\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">row_sep:</span> <span class="ruby-string">&quot;\r\n&quot;</span>) <span class="ruby-comment"># Raised MalformedCSVError</span>
-<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;foo,1\rbar,1\rbaz,2\r&quot;</span>
-<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">row_sep:</span> <span class="ruby-string">&quot;\r\n&quot;</span>) <span class="ruby-comment"># Raised MalformedCSVError</span>
-<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;foo,1\n\rbar,1\n\rbaz,2\n\r&quot;</span>
-<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">row_sep:</span> <span class="ruby-string">&quot;\r\n&quot;</span>) <span class="ruby-comment"># Raised MalformedCSVError</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">foo,1\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">row_sep</span><span class="ruby-value">:</span> <span class="ruby-string">&quot;</span><span class="ruby-string">\r\n</span><span class="ruby-string">&quot;</span>) <span class="ruby-comment"># Raised MalformedCSVError</span>
+<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">foo,1\rbar,1\rbaz,2\r</span><span class="ruby-string">&quot;</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">row_sep</span><span class="ruby-value">:</span> <span class="ruby-string">&quot;</span><span class="ruby-string">\r\n</span><span class="ruby-string">&quot;</span>) <span class="ruby-comment"># Raised MalformedCSVError</span>
+<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">foo,1\n\rbar,1\n\rbaz,2\n\r</span><span class="ruby-string">&quot;</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">row_sep</span><span class="ruby-value">:</span> <span class="ruby-string">&quot;</span><span class="ruby-string">\r\n</span><span class="ruby-string">&quot;</span>) <span class="ruby-comment"># Raised MalformedCSVError</span>
 </pre>
 
 <span id="label-Recipe-3A+Handle+Non-Compliant+Row+Separator" class="legacy-anchor"></span>
@@ -848,8 +839,8 @@
 
 <p>For data with non-compliant row separators, use option <code>:row_sep</code>. This example source uses semicolon (<code>&quot;;&quot;</code>) as its row separator:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;foo,1;bar,1;baz,2;&quot;</span>
-<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">row_sep:</span> <span class="ruby-string">&#39;;&#39;</span>) <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;1&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">foo,1;bar,1;baz,2;</span><span class="ruby-string">&quot;</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">row_sep</span><span class="ruby-value">:</span> <span class="ruby-string">&#39;</span><span class="ruby-string">;</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;1&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
 </pre>
 
 <span id="label-Column+Separator" class="legacy-anchor"></span>
@@ -862,7 +853,7 @@
 
 <p>Because the CSV default comma separator is ‘,’, you need not specify option <code>:col_sep</code> for compliant data:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;foo,1\nbar,1\nbaz,2\n&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">foo,1\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>) <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;1&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
 </pre>
 
@@ -871,8 +862,8 @@
 
 <p>For data with non-compliant column separators, use option <code>:col_sep</code>. This example source uses TAB (<code>&quot;\t&quot;</code>) as its column separator:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;foo,1\tbar,1\tbaz,2&quot;</span>
-<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">col_sep:</span> <span class="ruby-string">&quot;\t&quot;</span>) <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;1&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">foo,1\tbar,1\tbaz,2</span><span class="ruby-string">&quot;</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">col_sep</span><span class="ruby-value">:</span> <span class="ruby-string">&quot;</span><span class="ruby-string">\t</span><span class="ruby-string">&quot;</span>) <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;1&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
 </pre>
 
 <span id="label-Quote+Character" class="legacy-anchor"></span>
@@ -885,7 +876,7 @@
 
 <p>Because the CSV default quote character is <code>&quot;\&quot;&quot;</code>, you need not specify option <code>:quote_char</code> for compliant data:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;\&quot;foo\&quot;,\&quot;1\&quot;\n\&quot;bar\&quot;,\&quot;1\&quot;\n\&quot;baz\&quot;,\&quot;2\&quot;\n&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">\&quot;foo\&quot;,\&quot;1\&quot;\n\&quot;bar\&quot;,\&quot;1\&quot;\n\&quot;baz\&quot;,\&quot;2\&quot;\n</span><span class="ruby-string">&quot;</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>) <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;1&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
 </pre>
 
@@ -894,8 +885,8 @@
 
 <p>For data with non-compliant quote characters, use option <code>:quote_char</code>. This example source uses SQUOTE (<code>&quot;&#39;&quot;</code>) as its quote character:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;&#39;foo&#39;,&#39;1&#39;\n&#39;bar&#39;,&#39;1&#39;\n&#39;baz&#39;,&#39;2&#39;\n&quot;</span>
-<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">quote_char:</span> <span class="ruby-string">&quot;&#39;&quot;</span>) <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;1&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">&#39;foo&#39;,&#39;1&#39;\n&#39;bar&#39;,&#39;1&#39;\n&#39;baz&#39;,&#39;2&#39;\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">quote_char</span><span class="ruby-value">:</span> <span class="ruby-string">&quot;</span><span class="ruby-string">&#39;</span><span class="ruby-string">&quot;</span>) <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;1&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
 </pre>
 
 <span id="label-Recipe-3A+Allow+Liberal+Parsing" class="legacy-anchor"></span>
@@ -903,9 +894,9 @@
 
 <p>Use option <code>:liberal_parsing</code> to specify that CSV should attempt to parse input not conformant with RFC 4180, such as double quotes in unquoted fields:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&#39;is,this &quot;three, or four&quot;,fields&#39;</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&#39;</span><span class="ruby-string">is,this &quot;three, or four&quot;,fields</span><span class="ruby-string">&#39;</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>) <span class="ruby-comment"># Raises MalformedCSVError</span>
-<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">liberal_parsing:</span> <span class="ruby-keyword">true</span>) <span class="ruby-comment"># =&gt; [[&quot;is&quot;, &quot;this \&quot;three&quot;, &quot; or four\&quot;&quot;, &quot;fields&quot;]]</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">liberal_parsing</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-comment"># =&gt; [[&quot;is&quot;, &quot;this \&quot;three&quot;, &quot; or four\&quot;&quot;, &quot;fields&quot;]]</span>
 </pre>
 
 <span id="label-Special+Handling" class="legacy-anchor"></span>
@@ -923,15 +914,15 @@
 
 <p>Use option <code>:skip_blanks</code> to ignore blank lines:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-identifier">&lt;&lt;-EOT</span>
-<span class="ruby-value">foo,0
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&lt;&lt;-EOT</span>
+<span class="ruby-string">foo,0
 
 bar,1
 baz,2
 
 ,</span>
-<span class="ruby-identifier">EOT</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">skip_blanks:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-string">EOT</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">skip_blanks</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">parsed</span> <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;0&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;], [nil, nil]]</span>
 </pre>
 
@@ -940,14 +931,14 @@ baz,2
 
 <p>Use option <code>:skip_lines</code> to ignore selected lines.</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-identifier">&lt;&lt;-EOT</span>
-<span class="ruby-value"># Comment
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&lt;&lt;-EOT</span>
+<span class="ruby-string"># Comment
 foo,0
 bar,1
 baz,2
 # Another comment</span>
-<span class="ruby-identifier">EOT</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">skip_lines:</span> <span class="ruby-regexp">/^#/</span>)
+<span class="ruby-string">EOT</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">skip_lines</span><span class="ruby-value">:</span> <span class="ruby-regexp">/^#/</span>)
 <span class="ruby-identifier">parsed</span> <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;0&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
 </pre>
 
@@ -961,7 +952,7 @@ baz,2
 
 <p>Use option <code>:strip</code> to strip parsed field values:</p>
 
-<pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-string">&#39; a , b &#39;</span>, <span class="ruby-value">strip:</span> <span class="ruby-keyword">true</span>) <span class="ruby-comment"># =&gt; [&quot;a&quot;, &quot;b&quot;]</span>
+<pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-string">&#39;</span><span class="ruby-string"> a , b </span><span class="ruby-string">&#39;</span>, <span class="ruby-value">strip</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-comment"># =&gt; [&quot;a&quot;, &quot;b&quot;]</span>
 </pre>
 
 <span id="label-Recipe-3A+Handle+Null+Fields" class="legacy-anchor"></span>
@@ -969,7 +960,7 @@ baz,2
 
 <p>Use option <code>:nil_value</code> to specify a value that will replace each field that is null (no text):</p>
 
-<pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-string">&#39;a,,b,,c&#39;</span>, <span class="ruby-value">nil_value:</span> <span class="ruby-value">0</span>) <span class="ruby-comment"># =&gt; [&quot;a&quot;, 0, &quot;b&quot;, 0, &quot;c&quot;]</span>
+<pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">a,,b,,c</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">nil_value</span><span class="ruby-value">:</span> <span class="ruby-value">0</span>) <span class="ruby-comment"># =&gt; [&quot;a&quot;, 0, &quot;b&quot;, 0, &quot;c&quot;]</span>
 </pre>
 
 <span id="label-Recipe-3A+Handle+Empty+Fields" class="legacy-anchor"></span>
@@ -977,7 +968,7 @@ baz,2
 
 <p>Use option <code>:empty_value</code> to specify a value that will replace each field that is empty (String of length 0);</p>
 
-<pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-string">&#39;a,&quot;&quot;,b,&quot;&quot;,c&#39;</span>, <span class="ruby-value">empty_value:</span> <span class="ruby-string">&#39;x&#39;</span>) <span class="ruby-comment"># =&gt; [&quot;a&quot;, &quot;x&quot;, &quot;b&quot;, &quot;x&quot;, &quot;c&quot;]</span>
+<pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse_line</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">a,&quot;&quot;,b,&quot;&quot;,c</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">empty_value</span><span class="ruby-value">:</span> <span class="ruby-string">&#39;</span><span class="ruby-string">x</span><span class="ruby-string">&#39;</span>) <span class="ruby-comment"># =&gt; [&quot;a&quot;, &quot;x&quot;, &quot;b&quot;, &quot;x&quot;, &quot;c&quot;]</span>
 </pre>
 
 <span id="label-Converting+Fields" class="legacy-anchor"></span>
@@ -1017,9 +1008,9 @@ baz,2
 
 <p>Convert fields to Integer objects using built-in converter <code>:integer</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters:</span> <span class="ruby-value">:integer</span>)
-<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;Value&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Integer, Integer, Integer]</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">integer</span>)
+<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Integer, Integer, Integer]</span>
 </pre>
 
 <span id="label-Recipe-3A+Convert+Fields+to+Floats" class="legacy-anchor"></span>
@@ -1027,9 +1018,9 @@ baz,2
 
 <p>Convert fields to Float objects using built-in converter <code>:float</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters:</span> <span class="ruby-value">:float</span>)
-<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;Value&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Float, Float, Float]</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">float</span>)
+<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Float, Float, Float]</span>
 </pre>
 
 <span id="label-Recipe-3A+Convert+Fields+to+Numerics" class="legacy-anchor"></span>
@@ -1037,9 +1028,9 @@ baz,2
 
 <p>Convert fields to Integer and Float objects using built-in converter <code>:numeric</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1.1\nbaz,2.2\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters:</span> <span class="ruby-value">:numeric</span>)
-<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;Value&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Integer, Float, Float]</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1.1\nbaz,2.2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">numeric</span>)
+<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Integer, Float, Float]</span>
 </pre>
 
 <span id="label-Recipe-3A+Convert+Fields+to+Dates" class="legacy-anchor"></span>
@@ -1047,9 +1038,9 @@ baz,2
 
 <p>Convert fields to Date objects using built-in converter <code>:date</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Date\nfoo,2001-02-03\nbar,2001-02-04\nbaz,2001-02-03\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters:</span> <span class="ruby-value">:date</span>)
-<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;Date&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Date, Date, Date]</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Date\nfoo,2001-02-03\nbar,2001-02-04\nbaz,2001-02-03\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">date</span>)
+<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Date</span><span class="ruby-string">&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Date, Date, Date]</span>
 </pre>
 
 <span id="label-Recipe-3A+Convert+Fields+to+DateTimes" class="legacy-anchor"></span>
@@ -1057,9 +1048,9 @@ baz,2
 
 <p>Convert fields to DateTime objects using built-in converter <code>:date_time</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,DateTime\nfoo,2001-02-03\nbar,2001-02-04\nbaz,2020-05-07T14:59:00-05:00\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters:</span> <span class="ruby-value">:date_time</span>)
-<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;DateTime&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [DateTime, DateTime, DateTime]</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,DateTime\nfoo,2001-02-03\nbar,2001-02-04\nbaz,2020-05-07T14:59:00-05:00\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">date_time</span>)
+<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">DateTime</span><span class="ruby-string">&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [DateTime, DateTime, DateTime]</span>
 </pre>
 
 <span id="label-Recipe-3A+Convert+Fields+to+Times" class="legacy-anchor"></span>
@@ -1067,9 +1058,9 @@ baz,2
 
 <p>Convert fields to Time objects using built-in converter <code>:time</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Time\nfoo,2001-02-03\nbar,2001-02-04\nbaz,2020-05-07T14:59:00-05:00\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters:</span> <span class="ruby-value">:time</span>)
-<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;Time&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Time, Time, Time]</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Time\nfoo,2001-02-03\nbar,2001-02-04\nbaz,2020-05-07T14:59:00-05:00\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">time</span>)
+<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Time</span><span class="ruby-string">&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Time, Time, Time]</span>
 </pre>
 
 <span id="label-Recipe-3A+Convert+Assorted+Fields+to+Objects" class="legacy-anchor"></span>
@@ -1077,9 +1068,9 @@ baz,2
 
 <p>Convert assorted fields to objects using built-in converter <code>:all</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Type,Value\nInteger,0\nFloat,1.0\nDateTime,2001-02-04\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters:</span> <span class="ruby-value">:all</span>)
-<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;Value&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Integer, Float, DateTime]</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Type,Value\nInteger,0\nFloat,1.0\nDateTime,2001-02-04\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">all</span>)
+<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Integer, Float, DateTime]</span>
 </pre>
 
 <span id="label-Recipe-3A+Convert+Fields+to+Other+Objects" class="legacy-anchor"></span>
@@ -1090,9 +1081,9 @@ baz,2
 <pre class="ruby"><span class="ruby-identifier">rational_converter</span> = <span class="ruby-identifier">proc</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field</span>, <span class="ruby-identifier">field_context</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">field_context</span>.<span class="ruby-identifier">index</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">to_r</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">field</span>
 <span class="ruby-keyword">end</span>
-<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters:</span> <span class="ruby-identifier">rational_converter</span>)
-<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;Value&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Rational, Rational, Rational]</span>
+<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> <span class="ruby-identifier">rational_converter</span>)
+<span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>].<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Rational, Rational, Rational]</span>
 </pre>
 
 <span id="label-Recipe-3A+Filter+Field+Strings" class="legacy-anchor"></span>
@@ -1101,10 +1092,10 @@ baz,2
 <p>Define a custom field converter to modify String fields. This example defines and uses a custom field converter that strips whitespace from each field value:</p>
 
 <pre class="ruby"><span class="ruby-identifier">strip_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">strip</span> }
-<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\n foo , 0 \n bar , 1 \n baz , 2 \n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters:</span> <span class="ruby-identifier">strip_converter</span>)
-<span class="ruby-identifier">parsed</span>[<span class="ruby-string">&#39;Name&#39;</span>] <span class="ruby-comment"># =&gt; [&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;]</span>
-<span class="ruby-identifier">parsed</span>[<span class="ruby-string">&#39;Value&#39;</span>] <span class="ruby-comment"># =&gt; [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;]</span>
+<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\n foo , 0 \n bar , 1 \n baz , 2 \n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> <span class="ruby-identifier">strip_converter</span>)
+<span class="ruby-identifier">parsed</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>] <span class="ruby-comment"># =&gt; [&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;]</span>
+<span class="ruby-identifier">parsed</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>] <span class="ruby-comment"># =&gt; [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;]</span>
 </pre>
 
 <span id="label-Recipe-3A+Register+Field+Converters" class="legacy-anchor"></span>
@@ -1115,10 +1106,10 @@ baz,2
 <pre class="ruby"><span class="ruby-identifier">rational_converter</span> = <span class="ruby-identifier">proc</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field</span>, <span class="ruby-identifier">field_context</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">field_context</span>.<span class="ruby-identifier">index</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">to_r</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">field</span>
 <span class="ruby-keyword">end</span>
-<span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Converters</span>[<span class="ruby-value">:rational</span>] = <span class="ruby-identifier">rational_converter</span>
-<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters:</span> <span class="ruby-value">:rational</span>)
-<span class="ruby-identifier">parsed</span>[<span class="ruby-string">&#39;Value&#39;</span>] <span class="ruby-comment"># =&gt; [(0/1), (1/1), (2/1)]</span>
+<span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Converters</span>[<span class="ruby-value">:</span><span class="ruby-value">rational</span>] = <span class="ruby-identifier">rational_converter</span>
+<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">rational</span>)
+<span class="ruby-identifier">parsed</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>] <span class="ruby-comment"># =&gt; [(0/1), (1/1), (2/1)]</span>
 </pre>
 
 <span id="label-Using+Multiple+Field+Converters" class="legacy-anchor"></span>
@@ -1136,9 +1127,9 @@ baz,2
 
 <p>Apply multiple field converters by specifying them in option <code>:converters</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1.0\nbaz,2.0\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters:</span> [<span class="ruby-value">:integer</span>, <span class="ruby-value">:float</span>])
-<span class="ruby-identifier">parsed</span>[<span class="ruby-string">&#39;Value&#39;</span>] <span class="ruby-comment"># =&gt; [0, 1.0, 2.0]</span>
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1.0\nbaz,2.0\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> [<span class="ruby-value">:</span><span class="ruby-value">integer</span>, <span class="ruby-value">:</span><span class="ruby-value">float</span>])
+<span class="ruby-identifier">parsed</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>] <span class="ruby-comment"># =&gt; [0, 1.0, 2.0]</span>
 </pre>
 
 <span id="label-Recipe-3A+Specify+Multiple+Field+Converters+in+a+Custom+Converter+List" class="legacy-anchor"></span>
@@ -1147,12 +1138,12 @@ baz,2
 <p>Apply multiple field converters by defining and registering a custom converter list:</p>
 
 <pre class="ruby"><span class="ruby-identifier">strip_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">strip</span> }
-<span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Converters</span>[<span class="ruby-value">:strip</span>] = <span class="ruby-identifier">strip_converter</span>
-<span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Converters</span>[<span class="ruby-value">:my_converters</span>] = [<span class="ruby-value">:integer</span>, <span class="ruby-value">:float</span>, <span class="ruby-value">:strip</span>]
-<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\n foo , 0 \n bar , 1.0 \n baz , 2.0 \n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters:</span> <span class="ruby-value">:my_converters</span>)
-<span class="ruby-identifier">parsed</span>[<span class="ruby-string">&#39;Name&#39;</span>] <span class="ruby-comment"># =&gt; [&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;]</span>
-<span class="ruby-identifier">parsed</span>[<span class="ruby-string">&#39;Value&#39;</span>] <span class="ruby-comment"># =&gt; [0, 1.0, 2.0]</span>
+<span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Converters</span>[<span class="ruby-value">:</span><span class="ruby-value">strip</span>] = <span class="ruby-identifier">strip_converter</span>
+<span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">Converters</span>[<span class="ruby-value">:</span><span class="ruby-value">my_converters</span>] = [<span class="ruby-value">:</span><span class="ruby-value">integer</span>, <span class="ruby-value">:</span><span class="ruby-value">float</span>, <span class="ruby-value">:</span><span class="ruby-value">strip</span>]
+<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\n foo , 0 \n bar , 1.0 \n baz , 2.0 \n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">my_converters</span>)
+<span class="ruby-identifier">parsed</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>] <span class="ruby-comment"># =&gt; [&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;]</span>
+<span class="ruby-identifier">parsed</span>[<span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>] <span class="ruby-comment"># =&gt; [0, 1.0, 2.0]</span>
 </pre>
 
 <span id="label-Converting+Headers" class="legacy-anchor"></span>
@@ -1174,8 +1165,8 @@ baz,2
 
 <p>Convert headers to lowercase using built-in converter <code>:downcase</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">header_converters:</span> <span class="ruby-value">:downcase</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">header_converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">downcase</span>)
 <span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;name&quot;, &quot;value&quot;]</span>
 </pre>
 
@@ -1184,8 +1175,8 @@ baz,2
 
 <p>Convert headers to downcased Symbols using built-in converter <code>:symbol</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">header_converters:</span> <span class="ruby-value">:symbol</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">header_converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">symbol</span>)
 <span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [:name, :value]</span>
 <span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">headers</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span><span class="ruby-operator">|</span> <span class="ruby-identifier">header</span>.<span class="ruby-identifier">class</span>} <span class="ruby-comment"># =&gt; [Symbol, Symbol]</span>
 </pre>
@@ -1196,8 +1187,8 @@ baz,2
 <p>Define a custom header converter to modify String fields. This example defines and uses a custom header converter that capitalizes each header String:</p>
 
 <pre class="ruby"><span class="ruby-identifier">capitalize_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span><span class="ruby-operator">|</span> <span class="ruby-identifier">header</span>.<span class="ruby-identifier">capitalize</span> }
-<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;NAME,VALUE\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">header_converters:</span> <span class="ruby-identifier">capitalize_converter</span>)
+<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">NAME,VALUE\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">header_converters</span><span class="ruby-value">:</span> <span class="ruby-identifier">capitalize_converter</span>)
 <span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Value&quot;]</span>
 </pre>
 
@@ -1207,9 +1198,9 @@ baz,2
 <p>Register a custom header converter, assigning it a name; then refer to the converter by its name:</p>
 
 <pre class="ruby"><span class="ruby-identifier">capitalize_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">header</span><span class="ruby-operator">|</span> <span class="ruby-identifier">header</span>.<span class="ruby-identifier">capitalize</span> }
-<span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">HeaderConverters</span>[<span class="ruby-value">:capitalize</span>] = <span class="ruby-identifier">capitalize_converter</span>
-<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;NAME,VALUE\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">header_converters:</span> <span class="ruby-value">:capitalize</span>)
+<span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">HeaderConverters</span>[<span class="ruby-value">:</span><span class="ruby-value">capitalize</span>] = <span class="ruby-identifier">capitalize_converter</span>
+<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">NAME,VALUE\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">header_converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">capitalize</span>)
 <span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Value&quot;]</span>
 </pre>
 
@@ -1228,8 +1219,8 @@ baz,2
 
 <p>Apply multiple header converters by specifying them in option <code>:header_converters</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1.0\nbaz,2.0\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">header_converters:</span> [<span class="ruby-value">:downcase</span>, <span class="ruby-value">:symbol</span>])
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1.0\nbaz,2.0\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">header_converters</span><span class="ruby-value">:</span> [<span class="ruby-value">:</span><span class="ruby-value">downcase</span>, <span class="ruby-value">:</span><span class="ruby-value">symbol</span>])
 <span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [:name, :value]</span>
 </pre>
 
@@ -1238,9 +1229,9 @@ baz,2
 
 <p>Apply multiple header converters by defining and registering a custom header converter list:</p>
 
-<pre class="ruby"><span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">HeaderConverters</span>[<span class="ruby-value">:my_header_converters</span>] = [<span class="ruby-value">:symbol</span>, <span class="ruby-value">:downcase</span>]
-<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;NAME,VALUE\nfoo,0\nbar,1.0\nbaz,2.0\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">header_converters:</span> <span class="ruby-value">:my_header_converters</span>)
+<pre class="ruby"><span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">HeaderConverters</span>[<span class="ruby-value">:</span><span class="ruby-value">my_header_converters</span>] = [<span class="ruby-value">:</span><span class="ruby-value">symbol</span>, <span class="ruby-value">:</span><span class="ruby-value">downcase</span>]
+<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">NAME,VALUE\nfoo,0\nbar,1.0\nbaz,2.0\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">header_converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">my_header_converters</span>)
 <span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [:name, :value]</span>
 </pre>
 
@@ -1252,18 +1243,18 @@ baz,2
 
 <p>To capture unconverted field values, use option <code>:unconverted_fields</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;Name,Value\nfoo,0\nbar,1\nbaz,2\n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">converters:</span> <span class="ruby-value">:integer</span>, <span class="ruby-value">unconverted_fields:</span> <span class="ruby-keyword">true</span>)
+<pre class="ruby"><span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">Name,Value\nfoo,0\nbar,1\nbaz,2\n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> <span class="ruby-value">:</span><span class="ruby-value">integer</span>, <span class="ruby-value">unconverted_fields</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
 <span class="ruby-identifier">parsed</span> <span class="ruby-comment"># =&gt; [[&quot;Name&quot;, &quot;Value&quot;], [&quot;foo&quot;, 0], [&quot;bar&quot;, 1], [&quot;baz&quot;, 2]]</span>
 <span class="ruby-identifier">parsed</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span> <span class="ruby-identifier">row</span>.<span class="ruby-identifier">unconverted_fields</span> }
 </pre>
 
 <p>Output:</p>
 
-<pre class="ruby">[<span class="ruby-string">&quot;Name&quot;</span>, <span class="ruby-string">&quot;Value&quot;</span>]
-[<span class="ruby-string">&quot;foo&quot;</span>, <span class="ruby-string">&quot;0&quot;</span>]
-[<span class="ruby-string">&quot;bar&quot;</span>, <span class="ruby-string">&quot;1&quot;</span>]
-[<span class="ruby-string">&quot;baz&quot;</span>, <span class="ruby-string">&quot;2&quot;</span>]
+<pre class="ruby">[<span class="ruby-string">&quot;</span><span class="ruby-string">Name</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">Value</span><span class="ruby-string">&quot;</span>]
+[<span class="ruby-string">&quot;</span><span class="ruby-string">foo</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">0</span><span class="ruby-string">&quot;</span>]
+[<span class="ruby-string">&quot;</span><span class="ruby-string">bar</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">1</span><span class="ruby-string">&quot;</span>]
+[<span class="ruby-string">&quot;</span><span class="ruby-string">baz</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">2</span><span class="ruby-string">&quot;</span>]
 </pre>
 
 <span id="label-Recipe-3A+Capture+Field+Info" class="legacy-anchor"></span>
@@ -1272,8 +1263,8 @@ baz,2
 <p>To capture field info in a custom converter, accept two block arguments. The first is the field value; the second is a <a href="../../../CSV.html#FieldInfo"><code>CSV::FieldInfo</code></a> object:</p>
 
 <pre class="ruby"><span class="ruby-identifier">strip_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">field</span>, <span class="ruby-identifier">field_info</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span> <span class="ruby-identifier">field_info</span>; <span class="ruby-identifier">field</span>.<span class="ruby-identifier">strip</span> }
-<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot; foo , 0 \n bar , 1 \n baz , 2 \n&quot;</span>
-<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">converters:</span> <span class="ruby-identifier">strip_converter</span>)
+<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;</span><span class="ruby-string"> foo , 0 \n bar , 1 \n baz , 2 \n</span><span class="ruby-string">&quot;</span>
+<span class="ruby-identifier">parsed</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">converters</span><span class="ruby-value">:</span> <span class="ruby-identifier">strip_converter</span>)
 <span class="ruby-identifier">parsed</span> <span class="ruby-comment"># =&gt; [[&quot;foo&quot;, &quot;0&quot;], [&quot;bar&quot;, &quot;1&quot;], [&quot;baz&quot;, &quot;2&quot;]]</span>
 </pre>
 
@@ -1289,7 +1280,7 @@ baz,2
 
 </main>
 
-<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+<aside id="table-of-contents" class="table-of-contents" role="complementary" aria-label="Table of Contents">
   <div class="toc-sticky">
     <h3 class="toc-heading">On This Page</h3>
     <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
@@ -1304,7 +1295,7 @@ baz,2
 
   <div class="footer-bottom">
     <p>
-      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 8.0.0</a>
       using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
     </p>
   </div>

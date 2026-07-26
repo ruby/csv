@@ -45,46 +45,46 @@
 </script>
 
 <script
-  src="../../../js/theme-toggle.js?v=7.2.0"
+  src="../../../js/theme-toggle.js?v=8.0.0"
 ></script>
 
 <script
-  src="../../../js/search_navigation.js?v=7.2.0"
+  src="../../../js/search_navigation.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../../js/search_data.js?v=7.2.0"
+  src="../../../js/search_data.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../../js/search_ranker.js?v=7.2.0"
+  src="../../../js/search_ranker.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../../js/search_controller.js?v=7.2.0"
+  src="../../../js/search_controller.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../../js/c_highlighter.js?v=7.2.0"
+  src="../../../js/c_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../../js/bash_highlighter.js?v=7.2.0"
+  src="../../../js/bash_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../../js/aliki.js?v=7.2.0"
+  src="../../../js/aliki.js?v=8.0.0"
   defer
 ></script>
 
 <link
-  href="../../../css/rdoc.css?v=7.2.0"
+  href="../../../css/rdoc.css?v=8.0.0"
   rel="stylesheet"
 >
 
@@ -358,12 +358,12 @@
   </div>
 </div>
 
-<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+<div id="sidebar-navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar-navigation">
   <span aria-hidden="true">&#9776;</span>
 </div>
 
 
-<nav id="navigation" role="navigation" hidden>
+<nav id="sidebar-navigation" role="navigation" hidden>
   
 
 
@@ -408,15 +408,6 @@
             <li>
               <a href="../../../NEWS_md.html">
                 NEWS
-              </a>
-            </li>
-
-
-
-
-            <li>
-              <a href="../../../README_md.html">
-                README
               </a>
             </li>
 
@@ -497,7 +488,7 @@
 
 <p>All code snippets on this page assume that the following has been executed:</p>
 
-<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;csv&#39;</span>
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;</span><span class="ruby-string">csv</span><span class="ruby-string">&#39;</span>
 </pre>
 
 <span id="label-Contents" class="legacy-anchor"></span>
@@ -580,10 +571,10 @@
 
 <p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
-<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">headers:</span> [<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], <span class="ruby-value">write_headers:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>], <span class="ruby-value">write_headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Name,Value\nFoo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
@@ -596,9 +587,9 @@
 <p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
 <pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
@@ -615,11 +606,11 @@
 
 <p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
-<pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
-<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;w&#39;</span>, <span class="ruby-value">headers:</span> [<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], <span class="ruby-value">write_headers:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;</span><span class="ruby-string">t.csv</span><span class="ruby-string">&#39;</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">w</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>], <span class="ruby-value">write_headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; &quot;Name,Value\nFoo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
@@ -631,11 +622,11 @@
 
 <p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
-<pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
-<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;</span><span class="ruby-string">t.csv</span><span class="ruby-string">&#39;</span>
+<span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">w</span><span class="ruby-string">&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
@@ -650,12 +641,12 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-new"><code>CSV.new</code></a> with option <code>headers</code> to generate CSV data to an IO stream:</p>
 
-<pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
-<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value">headers:</span> [<span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-string">&#39;Value&#39;</span>], <span class="ruby-value">write_headers:</span> <span class="ruby-keyword">true</span>)
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;</span><span class="ruby-string">t.csv</span><span class="ruby-string">&#39;</span>
+<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">w</span><span class="ruby-string">&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">Value</span><span class="ruby-string">&#39;</span>], <span class="ruby-value">write_headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; &quot;Name,Value\nFoo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
@@ -665,12 +656,12 @@
 
 <p>Use class method <a href="../../../CSV.html#method-c-new"><code>CSV.new</code></a> without option <code>headers</code> to generate CSV data to an IO stream:</p>
 
-<pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;t.csv&#39;</span>
-<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+<pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;</span><span class="ruby-string">t.csv</span><span class="ruby-string">&#39;</span>
+<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">w</span><span class="ruby-string">&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>)
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>) <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
@@ -687,11 +678,11 @@
 
 <p>This example defines and uses a custom write converter to strip whitespace from generated fields:</p>
 
-<pre class="ruby"><span class="ruby-identifier">strip_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:strip</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">strip</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">field</span> }
-<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-value">write_converters:</span> <span class="ruby-identifier">strip_converter</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39; foo &#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39; bar &#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39; baz &#39;</span>, <span class="ruby-value">2</span>]
+<pre class="ruby"><span class="ruby-identifier">strip_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:</span><span class="ruby-value">strip</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">strip</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">field</span> }
+<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-value">write_converters</span><span class="ruby-value">:</span> <span class="ruby-identifier">strip_converter</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string"> foo </span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string"> bar </span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string"> baz </span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;foo,0\nbar,1\nbaz,2\n&quot;</span>
 </pre>
@@ -703,13 +694,13 @@
 
 <p>This example defines and uses two custom write converters to strip and upcase generated fields:</p>
 
-<pre class="ruby"><span class="ruby-identifier">strip_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:strip</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">strip</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">field</span> }
-<span class="ruby-identifier">upcase_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:upcase</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">upcase</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">field</span> }
+<pre class="ruby"><span class="ruby-identifier">strip_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:</span><span class="ruby-value">strip</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">strip</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">field</span> }
+<span class="ruby-identifier">upcase_converter</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:</span><span class="ruby-value">upcase</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">upcase</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">field</span> }
 <span class="ruby-identifier">converters</span> = [<span class="ruby-identifier">strip_converter</span>, <span class="ruby-identifier">upcase_converter</span>]
-<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-value">write_converters:</span> <span class="ruby-identifier">converters</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39; foo &#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39; bar &#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39; baz &#39;</span>, <span class="ruby-value">2</span>]
+<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-value">write_converters</span><span class="ruby-value">:</span> <span class="ruby-identifier">converters</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string"> foo </span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string"> bar </span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string"> baz </span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;FOO,0\nBAR,1\nBAZ,2\n&quot;</span>
 </pre>
@@ -734,10 +725,10 @@
 
 <p>For strict compliance, use option <code>:row_sep</code> to specify row separator <code>&quot;\r\n&quot;</code>:</p>
 
-<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">row_sep:</span> <span class="ruby-string">&quot;\r\n&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">row_sep</span><span class="ruby-value">:</span> <span class="ruby-string">&quot;</span><span class="ruby-string">\r\n</span><span class="ruby-string">&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0\r\nBar,1\r\nBaz,2\r\n&quot;</span>
 </pre>
@@ -747,10 +738,10 @@
 
 <p>For data with non-compliant row separators, use option <code>:row_sep</code> with a different value: This example source uses semicolon (<code>&quot;;&#39;</code>) as its row separator:</p>
 
-<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">row_sep:</span> <span class="ruby-string">&quot;;&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">row_sep</span><span class="ruby-value">:</span> <span class="ruby-string">&quot;</span><span class="ruby-string">;</span><span class="ruby-string">&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0;Bar,1;Baz,2;&quot;</span>
 </pre>
@@ -765,10 +756,10 @@
 
 <p>Because the CSV default comma separator is <code>&quot;,&quot;</code>, you need not specify option <code>:col_sep</code> for compliant data:</p>
 
-<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
@@ -778,10 +769,10 @@
 
 <p>For data with non-compliant column separators, use option <code>:col_sep</code>. This example source uses TAB (<code>&quot;\t&quot;</code>) as its column separator:</p>
 
-<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">col_sep:</span> <span class="ruby-string">&quot;\t&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">col_sep</span><span class="ruby-value">:</span> <span class="ruby-string">&quot;</span><span class="ruby-string">\t</span><span class="ruby-string">&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo\t0\nBar\t1\nBaz\t2\n&quot;</span>
 </pre>
@@ -794,27 +785,27 @@
 <p>However, a field containing the current row separator, column separator, or quote character is automatically quoted, producing IFC 4180 compliance:</p>
 
 <pre class="ruby"><span class="ruby-comment"># Field contains row separator.</span>
-<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">row_sep</span> = <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">row_sep</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-node">&quot;Foo#{row_sep}Foo&quot;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&quot;</span><span class="ruby-string">Foo</span><span class="ruby-string">#{</span><span class="ruby-identifier">row_sep</span><span class="ruby-string">}</span><span class="ruby-string">Foo</span><span class="ruby-string">&quot;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;\&quot;Foo\nFoo\&quot;,0\nBar,1\nBaz,2\n&quot;</span>
 <span class="ruby-comment"># Field contains column separator.</span>
-<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">col_sep</span> = <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">col_sep</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-node">&quot;Foo#{col_sep}Foo&quot;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&quot;</span><span class="ruby-string">Foo</span><span class="ruby-string">#{</span><span class="ruby-identifier">col_sep</span><span class="ruby-string">}</span><span class="ruby-string">Foo</span><span class="ruby-string">&quot;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;\&quot;Foo,Foo\&quot;,0\nBar,1\nBaz,2\n&quot;</span>
 <span class="ruby-comment"># Field contains quote character.</span>
-<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+<span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">quote_char</span> = <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">quote_char</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-node">&quot;Foo#{quote_char}Foo&quot;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&quot;</span><span class="ruby-string">Foo</span><span class="ruby-string">#{</span><span class="ruby-identifier">quote_char</span><span class="ruby-string">}</span><span class="ruby-string">Foo</span><span class="ruby-string">&quot;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;\&quot;Foo\&quot;\&quot;Foo\&quot;,0\nBar,1\nBaz,2\n&quot;</span>
 </pre>
@@ -824,10 +815,10 @@
 
 <p>Use option <code>:force_quotes</code> to force quoted fields:</p>
 
-<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">force_quotes:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">force_quotes</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;\&quot;Foo\&quot;,\&quot;0\&quot;\n\&quot;Bar\&quot;,\&quot;1\&quot;\n\&quot;Baz\&quot;,\&quot;2\&quot;\n&quot;</span>
 </pre>
@@ -837,10 +828,10 @@
 
 <p>Use option <code>:quote_empty</code> to force quoting for empty fields:</p>
 
-<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">quote_empty:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">2</span>]
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">quote_empty</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;Foo,0\nBar,1\n\&quot;\&quot;,2\n&quot;</span>
 </pre>
@@ -852,10 +843,10 @@
 
 <p>Because the CSV default quote character is also <code>&quot;\&quot;&quot;</code>, you need not specify option <code>:quote_char</code> for compliant data:</p>
 
-<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">force_quotes:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">force_quotes</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;\&quot;Foo\&quot;,\&quot;0\&quot;\n\&quot;Bar\&quot;,\&quot;1\&quot;\n\&quot;Baz\&quot;,\&quot;2\&quot;\n&quot;</span>
 </pre>
@@ -865,17 +856,17 @@
 
 <p>For data with non-compliant quote characters, use option <code>:quote_char</code>. This example source uses SQUOTE (<code>&quot;&#39;&quot;</code>) as its quote character:</p>
 
-<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">quote_char:</span> <span class="ruby-string">&quot;&#39;&quot;</span>, <span class="ruby-value">force_quotes:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Foo&#39;</span>, <span class="ruby-value">0</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Bar&#39;</span>, <span class="ruby-value">1</span>]
-  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;Baz&#39;</span>, <span class="ruby-value">2</span>]
+<pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">quote_char</span><span class="ruby-value">:</span> <span class="ruby-string">&quot;</span><span class="ruby-string">&#39;</span><span class="ruby-string">&quot;</span>, <span class="ruby-value">force_quotes</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Bar</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">1</span>]
+  <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Baz</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">2</span>]
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">output_string</span> <span class="ruby-comment"># =&gt; &quot;&#39;Foo&#39;,&#39;0&#39;\n&#39;Bar&#39;,&#39;1&#39;\n&#39;Baz&#39;,&#39;2&#39;\n&quot;</span>
 </pre>
 
 </main>
 
-<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+<aside id="table-of-contents" class="table-of-contents" role="complementary" aria-label="Table of Contents">
   <div class="toc-sticky">
     <h3 class="toc-heading">On This Page</h3>
     <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
@@ -890,7 +881,7 @@
 
   <div class="footer-bottom">
     <p>
-      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 8.0.0</a>
       using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
     </p>
   </div>

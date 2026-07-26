@@ -50,46 +50,46 @@
 </script>
 
 <script
-  src="../../js/theme-toggle.js?v=7.2.0"
+  src="../../js/theme-toggle.js?v=8.0.0"
 ></script>
 
 <script
-  src="../../js/search_navigation.js?v=7.2.0"
+  src="../../js/search_navigation.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../js/search_data.js?v=7.2.0"
+  src="../../js/search_data.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../js/search_ranker.js?v=7.2.0"
+  src="../../js/search_ranker.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../js/search_controller.js?v=7.2.0"
+  src="../../js/search_controller.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../js/c_highlighter.js?v=7.2.0"
+  src="../../js/c_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../js/bash_highlighter.js?v=7.2.0"
+  src="../../js/bash_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../../js/aliki.js?v=7.2.0"
+  src="../../js/aliki.js?v=8.0.0"
   defer
 ></script>
 
 <link
-  href="../../css/rdoc.css?v=7.2.0"
+  href="../../css/rdoc.css?v=8.0.0"
   rel="stylesheet"
 >
 
@@ -363,12 +363,12 @@
   </div>
 </div>
 
-<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+<div id="sidebar-navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar-navigation">
   <span aria-hidden="true">&#9776;</span>
 </div>
 
 
-<nav id="navigation" role="navigation" hidden>
+<nav id="sidebar-navigation" role="navigation" hidden>
   
 
 
@@ -411,15 +411,6 @@
             <li>
               <a href="../../NEWS_md.html">
                 NEWS
-              </a>
-            </li>
-
-
-
-
-            <li>
-              <a href="../../README_md.html">
-                README
               </a>
             </li>
 
@@ -579,13 +570,13 @@
       
       <li>
         
-        <a href="../../CSV.html">CSV</a><span>::</span>
+        <a href="../../CSV.html">CSV</a><span class="separator">::</span>
         
       </li>
       
       <li>
         
-        <a href="../../CSV/Parser.html">Parser</a><span>::</span>
+        <a href="../../CSV/Parser.html">Parser</a><span class="separator">::</span>
         
       </li>
       
@@ -599,8 +590,9 @@
   
 
   <span id="class-CSV::Parser::InputsScanner" class="legacy-anchor"></span>
-  <h1 id="class-csv-parser-inputsscanner" class="anchor-link class">
-    class CSV::Parser::InputsScanner
+  <h1 id="class-csv-parser-inputsscanner" class="anchor-link class page-title">
+    <span class="page-title-kind">class</span>
+    <span class="page-title-name">CSV::Parser::InputsScanner</span>
   </h1>
 
   <section class="description">
@@ -636,25 +628,32 @@
 
       <div id="method-c-new" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-c-new" title="Link to this method">
-                <span class="method-name">new</span>
-                <span class="method-args">(inputs, encoding, row_separator, chunk_size: 8192)</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-c-new" title="Link to this method">
+                  <span class="method-name">new</span>
+                  <span class="method-args">(inputs, encoding, row_separator, chunk_size: 8192)</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="new-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 100</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">inputs</span>, <span class="ruby-identifier">encoding</span>, <span class="ruby-identifier">row_separator</span>, <span class="ruby-value">chunk_size:</span> <span class="ruby-value">8192</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">inputs</span>, <span class="ruby-identifier">encoding</span>, <span class="ruby-identifier">row_separator</span>, <span class="ruby-value">chunk_size:</span> <span class="ruby-value">8192</span>)
   <span class="ruby-ivar">@inputs</span> = <span class="ruby-identifier">inputs</span>.<span class="ruby-identifier">dup</span>
   <span class="ruby-ivar">@encoding</span> = <span class="ruby-identifier">encoding</span>
   <span class="ruby-ivar">@row_separator</span> = <span class="ruby-identifier">row_separator</span>
@@ -698,25 +697,32 @@
 
       <div id="method-i-check" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-check" title="Link to this method">
-                <span class="method-name">check</span>
-                <span class="method-args">(pattern)</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-check" title="Link to this method">
+                  <span class="method-name">check</span>
+                  <span class="method-args">(pattern)</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="check-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 270</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check</span>(<span class="ruby-identifier">pattern</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">check</span>(<span class="ruby-identifier">pattern</span>)
   <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">check</span>(<span class="ruby-identifier">pattern</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -740,25 +746,32 @@
 
       <div id="method-i-each_line" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-each_line" title="Link to this method">
-                <span class="method-name">each_line</span>
-                <span class="method-args">(row_separator) { |buffer| ... }</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-each_line" title="Link to this method">
+                  <span class="method-name">each_line</span>
+                  <span class="method-args">(row_separator) { |buffer| ... }</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="each_line-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 110</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_line</span>(<span class="ruby-identifier">row_separator</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_line</span>(<span class="ruby-identifier">row_separator</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">enum_for</span>(<span class="ruby-identifier">__method__</span>, <span class="ruby-identifier">row_separator</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-identifier">buffer</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">input</span> = <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">rest</span>
@@ -768,14 +781,14 @@
   <span class="ruby-comment"># trace(__method__, :start, input)</span>
   <span class="ruby-keyword">while</span> <span class="ruby-keyword">true</span>
     <span class="ruby-identifier">input</span>.<span class="ruby-identifier">each_line</span>(<span class="ruby-identifier">row_separator</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-      <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">pos</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">bytesize</span>
+      <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">pos</span> += <span class="ruby-identifier">line</span>.<span class="ruby-identifier">bytesize</span>
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">buffer</span>
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">n_row_separator_chars</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span> <span class="ruby-keyword">and</span>
           <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-identifier">row_separator</span>[<span class="ruby-value">0</span>]) <span class="ruby-keyword">and</span>
           <span class="ruby-identifier">line</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-identifier">row_separator</span>[<span class="ruby-value">1</span>])
           <span class="ruby-identifier">buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>]
-          <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
-          <span class="ruby-identifier">position</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">offset</span>
+          <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">1</span>..-<span class="ruby-value">1</span>]
+          <span class="ruby-identifier">position</span> += <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">offset</span>
           <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">pos</span> = <span class="ruby-identifier">position</span>
           <span class="ruby-identifier">offset</span> = <span class="ruby-value">0</span>
           <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">buffer</span>)
@@ -788,7 +801,7 @@
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-identifier">row_separator</span>)
-        <span class="ruby-identifier">position</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">offset</span>
+        <span class="ruby-identifier">position</span> += <span class="ruby-identifier">line</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">offset</span>
         <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">pos</span> = <span class="ruby-identifier">position</span>
         <span class="ruby-identifier">offset</span> = <span class="ruby-value">0</span>
         <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">line</span>)
@@ -824,26 +837,33 @@
 
       <div id="method-i-eos-3F" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-eos-3F" title="Link to this method">
-                <span class="method-name">eos?</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-eos-3F" title="Link to this method">
+                  <span class="method-name">eos?</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="eos-3F-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 183</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eos?</span>
-  <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">eos?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">eos?</span>
+  <span class="ruby-ivar">@last_scanner</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">eos?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
@@ -866,25 +886,32 @@
 
       <div id="method-i-keep_back" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-keep_back" title="Link to this method">
-                <span class="method-name">keep_back</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-keep_back" title="Link to this method">
+                  <span class="method-name">keep_back</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="keep_back-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 210</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_back</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">keep_back</span>
   <span class="ruby-comment"># trace(__method__, :start)</span>
   <span class="ruby-identifier">scanner</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">buffer</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">buffer</span>
@@ -903,9 +930,9 @@
     <span class="ruby-ivar">@scanner</span> = <span class="ruby-constant">StringScanner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">buffer</span>)
   <span class="ruby-keyword">else</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@scanner</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">scanner</span>
-      <span class="ruby-identifier">message</span> = <span class="ruby-string">&quot;scanners are different but no buffer: &quot;</span>
-      <span class="ruby-identifier">message</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;#{@scanner.inspect}(#{@scanner.object_id}): &quot;</span>
-      <span class="ruby-identifier">message</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;#{scanner.inspect}(#{scanner.object_id})&quot;</span>
+      <span class="ruby-identifier">message</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">scanners are different but no buffer: </span><span class="ruby-string">&quot;</span>
+      <span class="ruby-identifier">message</span> += <span class="ruby-string">&quot;</span><span class="ruby-string">#{</span><span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">inspect</span><span class="ruby-string">}</span><span class="ruby-string">(</span><span class="ruby-string">#{</span><span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">object_id</span><span class="ruby-string">}</span><span class="ruby-string">): </span><span class="ruby-string">&quot;</span>
+      <span class="ruby-identifier">message</span> += <span class="ruby-string">&quot;</span><span class="ruby-string">#{</span><span class="ruby-identifier">scanner</span>.<span class="ruby-identifier">inspect</span><span class="ruby-string">}</span><span class="ruby-string">(</span><span class="ruby-string">#{</span><span class="ruby-identifier">scanner</span>.<span class="ruby-identifier">object_id</span><span class="ruby-string">}</span><span class="ruby-string">)</span><span class="ruby-string">&quot;</span>
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">UnexpectedError</span>, <span class="ruby-identifier">message</span>
     <span class="ruby-keyword">end</span>
     <span class="ruby-comment"># trace(__method__, :repos, start, buffer)</span>
@@ -943,25 +970,32 @@
 
       <div id="method-i-keep_drop" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-keep_drop" title="Link to this method">
-                <span class="method-name">keep_drop</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-keep_drop" title="Link to this method">
+                  <span class="method-name">keep_drop</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="keep_drop-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 249</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_drop</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">keep_drop</span>
   <span class="ruby-identifier">_</span>, <span class="ruby-identifier">_</span>, <span class="ruby-identifier">buffer</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-comment"># trace(__method__, :done, :empty) unless buffer</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">buffer</span>
@@ -998,25 +1032,32 @@
 
       <div id="method-i-keep_end" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-keep_end" title="Link to this method">
-                <span class="method-name">keep_end</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-keep_end" title="Link to this method">
+                  <span class="method-name">keep_end</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="keep_end-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 194</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_end</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">keep_end</span>
   <span class="ruby-comment"># trace(__method__, :start)</span>
   <span class="ruby-identifier">scanner</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">buffer</span> = <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">scanner</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@scanner</span>
@@ -1052,25 +1093,32 @@
 
       <div id="method-i-keep_start" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-keep_start" title="Link to this method">
-                <span class="method-name">keep_start</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-keep_start" title="Link to this method">
+                  <span class="method-name">keep_start</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="keep_start-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 187</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keep_start</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">keep_start</span>
   <span class="ruby-comment"># trace(__method__, :start)</span>
   <span class="ruby-identifier">adjust_last_keep</span>
   <span class="ruby-ivar">@keeps</span>.<span class="ruby-identifier">push</span>([<span class="ruby-ivar">@scanner</span>, <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">pos</span>, <span class="ruby-keyword">nil</span>])
@@ -1097,25 +1145,32 @@
 
       <div id="method-i-rest" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-rest" title="Link to this method">
-                <span class="method-name">rest</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-rest" title="Link to this method">
+                  <span class="method-name">rest</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="rest-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 266</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rest</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">rest</span>
   <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">rest</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1139,25 +1194,32 @@
 
       <div id="method-i-scan" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-scan" title="Link to this method">
-                <span class="method-name">scan</span>
-                <span class="method-args">(pattern)</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-scan" title="Link to this method">
+                  <span class="method-name">scan</span>
+                  <span class="method-args">(pattern)</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="scan-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 156</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">scan</span>(<span class="ruby-identifier">pattern</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">scan</span>(<span class="ruby-identifier">pattern</span>)
   <span class="ruby-comment"># trace(__method__, pattern, :start)</span>
   <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-identifier">pattern</span>)
   <span class="ruby-comment"># trace(__method__, pattern, :done, :last, value) if @last_scanner</span>
@@ -1188,25 +1250,32 @@
 
       <div id="method-i-scan_all" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-scan_all" title="Link to this method">
-                <span class="method-name">scan_all</span>
-                <span class="method-args">(pattern)</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-scan_all" title="Link to this method">
+                  <span class="method-name">scan_all</span>
+                  <span class="method-args">(pattern)</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="scan_all-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 167</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">scan_all</span>(<span class="ruby-identifier">pattern</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">scan_all</span>(<span class="ruby-identifier">pattern</span>)
   <span class="ruby-comment"># trace(__method__, pattern, :start)</span>
   <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-identifier">pattern</span>)
   <span class="ruby-comment"># trace(__method__, pattern, :done, :last, value) if @last_scanner</span>
@@ -1249,7 +1318,7 @@
 
 </main>
 
-<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+<aside id="table-of-contents" class="table-of-contents" role="complementary" aria-label="Table of Contents">
   <div class="toc-sticky">
     <h3 class="toc-heading">On This Page</h3>
     <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
@@ -1264,7 +1333,7 @@
 
   <div class="footer-bottom">
     <p>
-      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 8.0.0</a>
       using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
     </p>
   </div>

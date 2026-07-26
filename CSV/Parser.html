@@ -50,46 +50,46 @@
 </script>
 
 <script
-  src="../js/theme-toggle.js?v=7.2.0"
+  src="../js/theme-toggle.js?v=8.0.0"
 ></script>
 
 <script
-  src="../js/search_navigation.js?v=7.2.0"
+  src="../js/search_navigation.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/search_data.js?v=7.2.0"
+  src="../js/search_data.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/search_ranker.js?v=7.2.0"
+  src="../js/search_ranker.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/search_controller.js?v=7.2.0"
+  src="../js/search_controller.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/c_highlighter.js?v=7.2.0"
+  src="../js/c_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/bash_highlighter.js?v=7.2.0"
+  src="../js/bash_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="../js/aliki.js?v=7.2.0"
+  src="../js/aliki.js?v=8.0.0"
   defer
 ></script>
 
 <link
-  href="../css/rdoc.css?v=7.2.0"
+  href="../css/rdoc.css?v=8.0.0"
   rel="stylesheet"
 >
 
@@ -363,12 +363,12 @@
   </div>
 </div>
 
-<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+<div id="sidebar-navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar-navigation">
   <span aria-hidden="true">&#9776;</span>
 </div>
 
 
-<nav id="navigation" role="navigation" hidden>
+<nav id="sidebar-navigation" role="navigation" hidden>
   
 
 
@@ -411,15 +411,6 @@
             <li>
               <a href="../NEWS_md.html">
                 NEWS
-              </a>
-            </li>
-
-
-
-
-            <li>
-              <a href="../README_md.html">
-                README
               </a>
             </li>
 
@@ -533,6 +524,8 @@
 
         <li ><a href="#method-i-column_separator">column_separator</a></li>
 
+        <li ><a href="#method-i-eof-3F">eof?</a></li>
+
         <li ><a href="#method-i-field_size_limit">field_size_limit</a></li>
 
         <li ><a href="#method-i-header_row-3F">header_row?</a></li>
@@ -593,7 +586,7 @@
       
       <li>
         
-        <a href="../CSV.html">CSV</a><span>::</span>
+        <a href="../CSV.html">CSV</a><span class="separator">::</span>
         
       </li>
       
@@ -607,8 +600,9 @@
   
 
   <span id="class-CSV::Parser" class="legacy-anchor"></span>
-  <h1 id="class-csv-parser" class="anchor-link class">
-    class CSV::Parser
+  <h1 id="class-csv-parser" class="anchor-link class page-title">
+    <span class="page-title-kind">class</span>
+    <span class="page-title-name">CSV::Parser</span>
   </h1>
 
   <section class="description">
@@ -630,14 +624,6 @@
         <h3 id="untitled-constants"><a href="#untitled-constants">Constants</a></h3>
       </header>
       <dl>
-
-        <dt id="ARGF_OBJECT_ID">ARGF_OBJECT_ID</dt>
-
-        <dd>
-
-          
-        </dd>
-
 
         <dt id="SCANNER_TEST">SCANNER_TEST</dt>
 
@@ -689,29 +675,36 @@
 
       <div id="method-c-eof-3F" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-c-eof-3F" title="Link to this method">
-                <span class="method-name">eof?</span>
-                <span class="method-args">(input)</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-c-eof-3F" title="Link to this method">
+                  <span class="method-name">eof?</span>
+                  <span class="method-args">(input)</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="eof-3F-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 25</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eof?</span>(<span class="ruby-identifier">input</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">eof?</span>(<span class="ruby-identifier">input</span>)
   <span class="ruby-comment"># We can&#39;t use input != ARGF in Ractor. Because ARGF isn&#39;t a</span>
   <span class="ruby-comment"># shareable object.</span>
   <span class="ruby-identifier">input</span>.<span class="ruby-identifier">object_id</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">ARGF_OBJECT_ID</span> <span class="ruby-keyword">and</span>
-    <span class="ruby-identifier">input</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:eof</span>) <span class="ruby-keyword">and</span>
+    <span class="ruby-identifier">input</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:</span><span class="ruby-value">eof</span>) <span class="ruby-keyword">and</span>
     <span class="ruby-identifier">input</span>.<span class="ruby-identifier">eof?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -735,25 +728,32 @@
 
       <div id="method-c-new" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-c-new" title="Link to this method">
-                <span class="method-name">new</span>
-                <span class="method-args">(input, options)</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-c-new" title="Link to this method">
+                  <span class="method-name">new</span>
+                  <span class="method-args">(input, options)</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="new-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 348</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">input</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">input</span>, <span class="ruby-identifier">options</span>)
   <span class="ruby-ivar">@input</span> = <span class="ruby-identifier">input</span>
   <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
   <span class="ruby-ivar">@samples</span> = []
@@ -795,26 +795,83 @@
 
       <div id="method-i-column_separator" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-column_separator" title="Link to this method">
-                <span class="method-name">column_separator</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-column_separator" title="Link to this method">
+                  <span class="method-name">column_separator</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="column_separator-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 356</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">column_separator</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">column_separator</span>
   <span class="ruby-ivar">@column_separator</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+        <div class="method-description">
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-eof-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+          <div class="method-heading-group">
+
+              <div class="method-heading">
+                <a href="#method-i-eof-3F" title="Link to this method">
+                  <span class="method-name">eof?</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
+            </div>
+
+        </div>
+
+
+          <div class="method-source-code" id="eof-3F-source">
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 447</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">eof?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@scanner</span>.<span class="ruby-identifier">eos?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
@@ -837,25 +894,32 @@
 
       <div id="method-i-field_size_limit" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-field_size_limit" title="Link to this method">
-                <span class="method-name">field_size_limit</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-field_size_limit" title="Link to this method">
+                  <span class="method-name">field_size_limit</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="field_size_limit-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 368</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field_size_limit</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">field_size_limit</span>
   <span class="ruby-ivar">@max_field_size</span>&amp;.<span class="ruby-identifier">succ</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -879,25 +943,32 @@
 
       <div id="method-i-header_row-3F" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-header_row-3F" title="Link to this method">
-                <span class="method-name">header_row?</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-header_row-3F" title="Link to this method">
+                  <span class="method-name">header_row?</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="header_row-3F-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 388</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_row?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">header_row?</span>
   <span class="ruby-ivar">@use_headers</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@headers</span>.<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -921,25 +992,32 @@
 
       <div id="method-i-headers" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-headers" title="Link to this method">
-                <span class="method-name">headers</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-headers" title="Link to this method">
+                  <span class="method-name">headers</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="headers-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 384</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">headers</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">headers</span>
   <span class="ruby-ivar">@headers</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -963,25 +1041,32 @@
 
       <div id="method-i-liberal_parsing-3F" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-liberal_parsing-3F" title="Link to this method">
-                <span class="method-name">liberal_parsing?</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-liberal_parsing-3F" title="Link to this method">
+                  <span class="method-name">liberal_parsing?</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="liberal_parsing-3F-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 400</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">liberal_parsing?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">liberal_parsing?</span>
   <span class="ruby-ivar">@liberal_parsing</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1005,25 +1090,32 @@
 
       <div id="method-i-line" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-line" title="Link to this method">
-                <span class="method-name">line</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-line" title="Link to this method">
+                  <span class="method-name">line</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="line-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 408</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">line</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">line</span>
   <span class="ruby-identifier">last_line</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1047,25 +1139,32 @@
 
       <div id="method-i-lineno" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-lineno" title="Link to this method">
-                <span class="method-name">lineno</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-lineno" title="Link to this method">
+                  <span class="method-name">lineno</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="lineno-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 404</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lineno</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">lineno</span>
   <span class="ruby-ivar">@lineno</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1089,25 +1188,32 @@
 
       <div id="method-i-max_field_size" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-max_field_size" title="Link to this method">
-                <span class="method-name">max_field_size</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-max_field_size" title="Link to this method">
+                  <span class="method-name">max_field_size</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="max_field_size-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 372</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">max_field_size</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">max_field_size</span>
   <span class="ruby-ivar">@max_field_size</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1131,25 +1237,32 @@
 
       <div id="method-i-parse" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-parse" title="Link to this method">
-                <span class="method-name">parse</span>
-                <span class="method-args">() { |headers| ... }</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-parse" title="Link to this method">
+                  <span class="method-name">parse</span>
+                  <span class="method-args">() { |headers| ... }</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="parse-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 412</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parse</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-identifier">__method__</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@return_headers</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@headers</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@raw_headers</span>
@@ -1161,7 +1274,7 @@
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-ivar">@scanner</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">build_scanner</span>
+    <span class="ruby-ivar">@scanner</span> ||= <span class="ruby-identifier">build_scanner</span>
     <span class="ruby-identifier">__send__</span>(<span class="ruby-ivar">@parse_method</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">InvalidEncoding</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@scanner</span>
@@ -1178,8 +1291,8 @@
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">lineno</span> = <span class="ruby-ivar">@lineno</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
     <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">message</span> = <span class="ruby-node">&quot;This should not be happen: #{error.message}: &quot;</span>
-    <span class="ruby-identifier">message</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;Please report this to https://github.com/ruby/csv/issues&quot;</span>
+    <span class="ruby-identifier">message</span> = <span class="ruby-string">&quot;</span><span class="ruby-string">This should not be happen: </span><span class="ruby-string">#{</span><span class="ruby-identifier">error</span>.<span class="ruby-identifier">message</span><span class="ruby-string">}</span><span class="ruby-string">: </span><span class="ruby-string">&quot;</span>
+    <span class="ruby-identifier">message</span> += <span class="ruby-string">&quot;</span><span class="ruby-string">Please report this to https://github.com/ruby/csv/issues</span><span class="ruby-string">&quot;</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">MalformedCSVError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">message</span>, <span class="ruby-identifier">lineno</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1204,25 +1317,32 @@
 
       <div id="method-i-quote_character" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-quote_character" title="Link to this method">
-                <span class="method-name">quote_character</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-quote_character" title="Link to this method">
+                  <span class="method-name">quote_character</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="quote_character-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 364</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quote_character</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">quote_character</span>
   <span class="ruby-ivar">@quote_character</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1246,25 +1366,32 @@
 
       <div id="method-i-return_headers-3F" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-return_headers-3F" title="Link to this method">
-                <span class="method-name">return_headers?</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-return_headers-3F" title="Link to this method">
+                  <span class="method-name">return_headers?</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="return_headers-3F-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 392</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">return_headers?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">return_headers?</span>
   <span class="ruby-ivar">@return_headers</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1288,25 +1415,32 @@
 
       <div id="method-i-row_separator" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-row_separator" title="Link to this method">
-                <span class="method-name">row_separator</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-row_separator" title="Link to this method">
+                  <span class="method-name">row_separator</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="row_separator-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 360</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">row_separator</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">row_separator</span>
   <span class="ruby-ivar">@row_separator</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1330,25 +1464,32 @@
 
       <div id="method-i-skip_blanks-3F" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-skip_blanks-3F" title="Link to this method">
-                <span class="method-name">skip_blanks?</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-skip_blanks-3F" title="Link to this method">
+                  <span class="method-name">skip_blanks?</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="skip_blanks-3F-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 396</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_blanks?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">skip_blanks?</span>
   <span class="ruby-ivar">@skip_blanks</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1372,25 +1513,32 @@
 
       <div id="method-i-skip_lines" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-skip_lines" title="Link to this method">
-                <span class="method-name">skip_lines</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-skip_lines" title="Link to this method">
+                  <span class="method-name">skip_lines</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="skip_lines-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 376</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_lines</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">skip_lines</span>
   <span class="ruby-ivar">@skip_lines</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1414,25 +1562,32 @@
 
       <div id="method-i-unconverted_fields-3F" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-unconverted_fields-3F" title="Link to this method">
-                <span class="method-name">unconverted_fields?</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-unconverted_fields-3F" title="Link to this method">
+                  <span class="method-name">unconverted_fields?</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="unconverted_fields-3F-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 380</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unconverted_fields?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">unconverted_fields?</span>
   <span class="ruby-ivar">@unconverted_fields</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1456,25 +1611,32 @@
 
       <div id="method-i-use_headers-3F" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-use_headers-3F" title="Link to this method">
-                <span class="method-name">use_headers?</span>
-                <span class="method-args">()</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-use_headers-3F" title="Link to this method">
+                  <span class="method-name">use_headers?</span>
+                  <span class="method-args">()</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="use_headers-3F-source">
-            <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 447</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">use_headers?</span>
+            <pre class="ruby"><span class="ruby-comment"># File lib/csv/parser.rb, line 452</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">use_headers?</span>
   <span class="ruby-ivar">@use_headers</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1505,7 +1667,7 @@
 
 </main>
 
-<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+<aside id="table-of-contents" class="table-of-contents" role="complementary" aria-label="Table of Contents">
   <div class="toc-sticky">
     <h3 class="toc-heading">On This Page</h3>
     <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
@@ -1520,7 +1682,7 @@
 
   <div class="footer-bottom">
     <p>
-      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 8.0.0</a>
       using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
     </p>
   </div>

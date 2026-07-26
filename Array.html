@@ -56,46 +56,46 @@
 </script>
 
 <script
-  src="./js/theme-toggle.js?v=7.2.0"
+  src="./js/theme-toggle.js?v=8.0.0"
 ></script>
 
 <script
-  src="./js/search_navigation.js?v=7.2.0"
+  src="./js/search_navigation.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="./js/search_data.js?v=7.2.0"
+  src="./js/search_data.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="./js/search_ranker.js?v=7.2.0"
+  src="./js/search_ranker.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="./js/search_controller.js?v=7.2.0"
+  src="./js/search_controller.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="./js/c_highlighter.js?v=7.2.0"
+  src="./js/c_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="./js/bash_highlighter.js?v=7.2.0"
+  src="./js/bash_highlighter.js?v=8.0.0"
   defer
 ></script>
 
 <script
-  src="./js/aliki.js?v=7.2.0"
+  src="./js/aliki.js?v=8.0.0"
   defer
 ></script>
 
 <link
-  href="./css/rdoc.css?v=7.2.0"
+  href="./css/rdoc.css?v=8.0.0"
   rel="stylesheet"
 >
 
@@ -369,12 +369,12 @@
   </div>
 </div>
 
-<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+<div id="sidebar-navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar-navigation">
   <span aria-hidden="true">&#9776;</span>
 </div>
 
 
-<nav id="navigation" role="navigation" hidden>
+<nav id="sidebar-navigation" role="navigation" hidden>
   
 
 
@@ -417,15 +417,6 @@
             <li>
               <a href="./NEWS_md.html">
                 NEWS
-              </a>
-            </li>
-
-
-
-
-            <li>
-              <a href="./README_md.html">
-                README
               </a>
             </li>
 
@@ -546,8 +537,9 @@
   
 
   <span id="class-Array" class="legacy-anchor"></span>
-  <h1 id="class-array" class="anchor-link class">
-    class Array
+  <h1 id="class-array" class="anchor-link class page-title">
+    <span class="page-title-kind">class</span>
+    <span class="page-title-name">Array</span>
   </h1>
 
   <section class="description">
@@ -583,25 +575,32 @@
 
       <div id="method-i-to_csv" class="method-detail anchor-link ">
         <div class="method-header">
+          <div class="method-heading-group">
 
-            <div class="method-heading">
-              <a href="#method-i-to_csv" title="Link to this method">
-                <span class="method-name">to_csv</span>
-                <span class="method-args">(**options)</span>
-              </a>
+              <div class="method-heading">
+                <a href="#method-i-to_csv" title="Link to this method">
+                  <span class="method-name">to_csv</span>
+                  <span class="method-args">(**options)</span>
+                </a>
+              </div>
+
+
+
+          </div>
+
+
+            <div class="method-controls">
+              <details class="method-source-toggle">
+                <summary><span class="method-source-icon" aria-hidden="true">{}</span> Source</summary>
+              </details>
             </div>
 
         </div>
 
 
-          <div class="method-controls">
-            <details class="method-source-toggle">
-              <summary>Source</summary>
-            </details>
-          </div>
           <div class="method-source-code" id="to_csv-source">
             <pre class="ruby"><span class="ruby-comment"># File lib/csv/core_ext/array.rb, line 6</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_csv</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_csv</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate_line</span>(<span class="ruby-keyword">self</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -613,7 +612,7 @@
 
           <p>Equivalent to <a href="CSV.html#method-c-generate_line"><code>CSV::generate_line(self, options)</code></a></p>
 
-<pre class="ruby">[<span class="ruby-string">&quot;CSV&quot;</span>, <span class="ruby-string">&quot;data&quot;</span>].<span class="ruby-identifier">to_csv</span>
+<pre class="ruby">[<span class="ruby-string">&quot;</span><span class="ruby-string">CSV</span><span class="ruby-string">&quot;</span>, <span class="ruby-string">&quot;</span><span class="ruby-string">data</span><span class="ruby-string">&quot;</span>].<span class="ruby-identifier">to_csv</span>
   <span class="ruby-comment">#=&gt; &quot;CSV,data\n&quot;</span>
 </pre>
 
@@ -636,7 +635,7 @@
 
 </main>
 
-<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+<aside id="table-of-contents" class="table-of-contents" role="complementary" aria-label="Table of Contents">
   <div class="toc-sticky">
     <h3 class="toc-heading">On This Page</h3>
     <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
@@ -651,7 +650,7 @@
 
   <div class="footer-bottom">
     <p>
-      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 8.0.0</a>
       using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
     </p>
   </div>
