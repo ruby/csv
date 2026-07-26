@@ -181,7 +181,7 @@ class CSV
       end
 
       def eos?
-        @scanner.eos?
+        @last_scanner and @scanner.eos?
       end
 
       def keep_start
@@ -442,6 +442,11 @@ class CSV
         message += "Please report this to https://github.com/ruby/csv/issues"
         raise MalformedCSVError.new(message, lineno)
       end
+    end
+
+    def eof?
+      return false if @scanner.nil?
+      @scanner.eos?
     end
 
     def use_headers?

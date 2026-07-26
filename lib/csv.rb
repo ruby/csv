@@ -2110,8 +2110,6 @@ class CSV
       strip: strip,
     }
     @parser = nil
-    @parser_enumerator = nil
-    @eof_error = nil
 
     @writer_options = {
       encoding: @encoding,
@@ -2430,24 +2428,13 @@ class CSV
   end
 
   def eof?
-    return false if @eof_error
-    begin
-      parser_enumerator.peek
-      false
-    rescue MalformedCSVError => error
-      @eof_error = error
-      false
-    rescue StopIteration
-      true
-    end
+    parser.eof?
   end
   alias_method :eof, :eof?
 
   # Rewinds the underlying IO object and resets CSV's lineno() counter.
   def rewind
     @parser = nil
-    @parser_enumerator = nil
-    @eof_error = nil
     @writer.rewind if @writer
     @io.rewind
   end
@@ -2687,13 +2674,7 @@ class CSV
   #     p row
   #   end
   def each(&block)
-    return to_enum(__method__) unless block_given?
-    begin
-      while true
-        yield(parser_enumerator.next)
-      end
-    rescue StopIteration
-    end
+    parser.parse(&block)
   end
 
   # :call-seq:
@@ -2801,15 +2782,10 @@ class CSV
   #   # Raises IOError (not opened for reading)
   #   csv.shift
   def shift
-    if @eof_error
-      eof_error, @eof_error = @eof_error, nil
-      raise eof_error
+    parser.parse do |row|
+      return row
     end
-    begin
-      parser_enumerator.next
-    rescue StopIteration
-      nil
-    end
+    nil
   end
   alias_method :gets,     :shift
   alias_method :readline, :shift
@@ -2969,10 +2945,6 @@ class CSV
   def parser_options
     @parser_options.merge(header_fields_converter: header_fields_converter,
                           fields_converter: parser_fields_converter)
-  end
-
-  def parser_enumerator
-    @parser_enumerator ||= parser.parse
   end
 
   def writer
