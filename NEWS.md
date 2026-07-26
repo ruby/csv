@@ -1,5 +1,43 @@
 # News
 
+## 3.3.6 - 2026-07-27
+
+### Improvements
+
+  * `CSV::Row#to_h`: Added support for block.
+    * GH-356
+    * Patch by Vlad
+
+  * Ensured using `path_or_io` for parameter name that accepts path or
+    IO.
+    * GH-358
+    * Patch by Yuto Urushima
+
+  * Changed to not using enumerator in `CSV`.
+    * GH-361
+    * GH-363
+    * Reported by Cas Donoghue
+
+### Fixes
+
+  * Fixed a bug that `\r` in unquoted fields are rejected when row
+    separator doesn't contain `\r`
+    * GH-60
+    * GH-346
+    * Patch by Jas
+
+  * Fixed a typo in documentation.
+    * GH-350
+    * Patch by tmr111116
+
+### Thanks
+
+  * Jas
+  * tmr111116
+  * Vlad
+  * Yuto Urushima
+  * Cas Donoghue
+
 ## 3.3.5 - 2025-06-01
 
 ### Improvements
@@ -10,7 +48,7 @@
 
 ### Thanks
 
-  *  Petrik de Heus
+  * Petrik de Heus
 
 ## 3.3.4 - 2025-04-13
 
