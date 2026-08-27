@@ -240,7 +240,7 @@ class CSV
     #
     # Also note that changes to the duplicate table will not affect the original.
     def by_col
-      self.class.new(@table.dup).by_col!
+      self.class.new(@table.dup, headers: headers).by_col!
     end
 
     # :call-seq:
@@ -278,7 +278,7 @@ class CSV
     #
     # Also note that changes to the duplicate table will not affect the original.
     def by_col_or_row
-      self.class.new(@table.dup).by_col_or_row!
+      self.class.new(@table.dup, headers: headers).by_col_or_row!
     end
 
     # :call-seq:
@@ -316,7 +316,7 @@ class CSV
     #
     # Also note that changes to the duplicate table will not affect the original.
     def by_row
-      self.class.new(@table.dup).by_row!
+      self.class.new(@table.dup, headers: headers).by_row!
     end
 
     # :call-seq:
