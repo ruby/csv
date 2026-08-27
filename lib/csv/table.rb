@@ -845,7 +845,7 @@ class CSV
           else
             @headers.delete(index_or_header)
           end
-          @table.map { |row| row.delete(index_or_header).last }
+          @table.map { |row| row.delete(index_or_header)&.last }
         end
       end
       if indexes_or_headers.size == 1
