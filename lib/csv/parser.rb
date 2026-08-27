@@ -1034,7 +1034,8 @@ class CSV
         @last_line = original_line
         emit_row(row, quoted_fields, &block)
       end
-      @scanner.keep_drop
+    ensure
+      @scanner.keep_drop if @parse_method == :parse_quotable_loose
     end
 
     def parse_quotable_robust(&block)
