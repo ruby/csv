@@ -51,6 +51,13 @@ class TestCSVTable < Test::Unit::TestCase
     assert_equal(:col_or_row, @table.mode)
   end
 
+  def test_copy_modes_preserve_header_only_table_headers
+    [:by_col, :by_row, :by_col_or_row].each do |mode|
+      copied = @header_only_table.public_send(mode)
+      assert_equal(%w[A B C], copied.headers, mode)
+    end
+  end
+
   def test_headers
     assert_equal(@rows.first.headers, @table.headers)
   end
