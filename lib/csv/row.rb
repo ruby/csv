@@ -726,8 +726,7 @@ class CSV
     # Finds and returns the object in nested object that is specified
     # by +index_or_header+ and +specifiers+.
     #
-    # The nested objects may be instances of various classes.
-    # See {Dig Methods}[rdoc-ref:dig_methods.rdoc].
+    # The nested objects may be instances of various classes that respond to +dig+.
     #
     # Examples:
     #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
