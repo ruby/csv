@@ -16,7 +16,7 @@ All code snippets on this page assume that the following has been executed:
   - {Generating to a File}[#label-Generating+to+a+File]
     - {Recipe: Generate to File with Headers}[#label-Recipe-3A+Generate+to+File+with+Headers]
     - {Recipe: Generate to File Without Headers}[#label-Recipe-3A+Generate+to+File+Without+Headers]
-  - {Generating to IO an Stream}[#label-Generating+to+an+IO+Stream]
+  - {Generating to an IO Stream}[#label-Generating+to+an+IO+Stream]
     - {Recipe: Generate to IO Stream with Headers}[#label-Recipe-3A+Generate+to+IO+Stream+with+Headers]
     - {Recipe: Generate to IO Stream Without Headers}[#label-Recipe-3A+Generate+to+IO+Stream+Without+Headers]
 - {Converting Fields}[#label-Converting+Fields]
@@ -71,11 +71,11 @@ that are to be generated:
 
 ==== Generating to a \File
 
-You can generate /CSV data to a \File, with or without headers.
+You can generate \CSV data to a \File, with or without headers.
 
 ===== Recipe: Generate to \File with Headers
 
-Use class method CSV.open with option +headers+ generate to a \File.
+Use class method CSV.open with option +headers+ to generate to a \File.
 
 This example uses method CSV#<< to append the rows
 that are to be generated:
@@ -105,7 +105,7 @@ that are to be generated:
 
 You can generate \CSV data to an \IO stream, with or without headers.
 
-==== Recipe: Generate to \IO Stream with Headers
+===== Recipe: Generate to \IO Stream with Headers
 
 Use class method CSV.new with option +headers+ to generate \CSV data to an \IO stream:
   path = 't.csv'
@@ -187,7 +187,7 @@ For strict compliance, use option +:row_sep+ to specify row separator <tt>"\r\n"
 ===== Recipe: Generate Non-Compliant Row Separator
 
 For data with non-compliant row separators, use option +:row_sep+ with a different value:
-This example source uses semicolon (<tt>";'</tt>) as its row separator:
+This example source uses semicolon (<tt>";"</tt>) as its row separator:
   output_string = CSV.generate('', row_sep: ";") do |csv|
     csv << ['Foo', 0]
     csv << ['Bar', 1]
@@ -223,11 +223,11 @@ This example source uses TAB (<tt>"\t"</tt>) as its column separator:
 
 ==== Quotes
 
-IFC 4180 allows most fields to be quoted or not.
+RFC 4180 allows most fields to be quoted or not.
 By default, \CSV does not quote most fields.
 
 However, a field containing the current row separator, column separator,
-or quote character is automatically quoted, producing IFC 4180 compliance:
+or quote character is automatically quoted, producing RFC 4180 compliance:
   # Field contains row separator.
   output_string = CSV.generate('') do |csv|
     row_sep = csv.row_sep

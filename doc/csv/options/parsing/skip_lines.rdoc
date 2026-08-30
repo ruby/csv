@@ -2,8 +2,9 @@
 
 Specifies an object to use in identifying comment lines in the input that are to be ignored:
 * If a \Regexp, ignores lines that match it.
-* If a \String, converts it to a \Regexp, ignores lines that match it.
+* If a \String, ignores lines that include it.
 * If +nil+, no lines are considered to be comments.
+* Otherwise, the object must respond to +match+; ignores lines for which +match+ returns a truthy value.
 
 Default value:
   CSV::DEFAULT_OPTIONS.fetch(:skip_lines) # => nil
@@ -32,6 +33,7 @@ Using a \String:
 
 ---
 
-Raises an exception if given an object that is not a \Regexp, a \String, or +nil+:
+Raises an exception if given an object that is not a \Regexp, a \String, +nil+,
+or an object that responds to +match+:
   # Raises ArgumentError (:skip_lines has to respond to #match: 0)
   CSV.parse(str, skip_lines: 0)

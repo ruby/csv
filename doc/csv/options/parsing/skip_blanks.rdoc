@@ -6,7 +6,7 @@ a line that contains a column separator is not considered to be blank.
 Default value:
   CSV::DEFAULT_OPTIONS.fetch(:skip_blanks) # => false
 
-See also option {skiplines}[#class-CSV-label-Option+skip_lines].
+See also option {skip_lines}[#class-CSV-label-Option+skip_lines].
 
 For examples in this section:
   str = <<-EOT
