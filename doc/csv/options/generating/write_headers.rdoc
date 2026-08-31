@@ -17,7 +17,7 @@ Without +write_headers+:
     csv.shift
   end # => ["foo", "0"]
 
-With +write_headers+":
+With +write_headers+:
   CSV.open(file_path,'w',
       :write_headers => true,
       :headers => ['Name','Value']

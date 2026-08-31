@@ -1,6 +1,6 @@
 ====== Option +quote_char+
 
-Specifies the character (\String of length 1) used used to quote fields
+Specifies the character (\String of length 1) used to quote fields
 in both parsing and generating.
 This String will be transcoded into the data's \Encoding before use.
 
