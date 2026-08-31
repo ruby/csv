@@ -727,6 +727,7 @@ class CSV
     # by +index_or_header+ and +specifiers+.
     #
     # The nested objects may be instances of various classes that respond to +dig+.
+    # See {Dig Methods}[https://docs.ruby-lang.org/en/master/language/dig_methods_rdoc.html].
     #
     # Examples:
     #   source = "Name,Value\nfoo,0\nbar,1\nbaz,2\n"
