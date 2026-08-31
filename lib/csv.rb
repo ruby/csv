@@ -1165,7 +1165,7 @@ class CSV
     #   File.read('t.csv') # => "Name,Value\nFOO,0\nBAR,-1\nBAZ,-2\n"
     #
     # When neither +in_string_or_io+ nor +out_string_or_io+ given,
-    # parses from {ARGF}[rdoc-ref:ARGF]
+    # parses from {ARGF}[https://docs.ruby-lang.org/en/master/ARGF.html]
     # and generates to STDOUT.
     #
     # Without headers:
