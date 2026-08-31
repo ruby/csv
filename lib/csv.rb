@@ -1025,8 +1025,7 @@ class CSV
     #   CSV.instance(s0) {|csv| :foo } # => :foo
     def instance(data = $stdout, **options)
       # create a _signature_ for this method call, data object and options
-      sig = [data.object_id] +
-            options.values_at(*DEFAULT_OPTIONS.keys)
+      sig = [self, data.object_id, options]
 
       # fetch or create the instance for this signature
       @@instances ||= Hash.new
