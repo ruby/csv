@@ -1253,7 +1253,7 @@
 <span id="class-CSV-label-Option+quote_char" class="legacy-anchor"></span>
 <h6 id="class-csv-option-quotechar"><a href="#class-csv-option-quotechar">Option <a href="CSV.html#method-i-quote_char"><code>quote_char</code></a></a></h6>
 
-<p>Specifies the character (String of length 1) used used to quote fields in both parsing and generating. This <a href="String.html"><code>String</code></a> will be transcoded into the data’s Encoding before use.</p>
+<p>Specifies the character (String of length 1) used to quote fields in both parsing and generating. This <a href="String.html"><code>String</code></a> will be transcoded into the data’s Encoding before use.</p>
 
 <p>Default value:</p>
 
@@ -1462,9 +1462,10 @@ bar,1
 bax,2</span>
 <span class="ruby-string">EOT</span>
 <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-keyword">true</span>)
-<span class="ruby-identifier">csv</span> <span class="ruby-comment"># =&gt; #&lt;CSV io_type:StringIO encoding:UTF-8 lineno:2 col_sep:&quot;,&quot; row_sep:&quot;\n&quot; quote_char:&quot;\&quot;&quot; headers:[&quot;Name&quot;, &quot;Count&quot;]&gt;</span>
+<span class="ruby-identifier">csv</span> <span class="ruby-comment"># =&gt; #&lt;CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:&quot;,&quot; row_sep:&quot;\n&quot; quote_char:&quot;\&quot;&quot; headers:true&gt;</span>
+<span class="ruby-identifier">csv</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">csv</span>.<span class="ruby-identifier">shift</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;foo&quot; &quot;Count&quot;:&quot;0&quot;&gt;</span>
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Count&quot;]</span>
-<span class="ruby-identifier">csv</span>.<span class="ruby-identifier">shift</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;bar&quot; &quot;Count&quot;:&quot;1&quot;&gt;</span>
 </pre>
 <hr>
 
@@ -1478,7 +1479,7 @@ bax,2</span>
 <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Name</span><span class="ruby-string">&#39;</span>, <span class="ruby-string">&#39;</span><span class="ruby-string">Count</span><span class="ruby-string">&#39;</span>])
 <span class="ruby-identifier">csv</span>
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Count&quot;]</span>
-<span class="ruby-identifier">csv</span>.<span class="ruby-identifier">shift</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;bar&quot; &quot;Count&quot;:&quot;1&quot;&gt;</span>
+<span class="ruby-identifier">csv</span>.<span class="ruby-identifier">shift</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;foo&quot; &quot;Count&quot;:&quot;0&quot;&gt;</span>
 </pre>
 <hr>
 
@@ -1492,7 +1493,7 @@ bax,2</span>
 <span class="ruby-identifier">csv</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">headers</span><span class="ruby-value">:</span> <span class="ruby-string">&#39;</span><span class="ruby-string">Name,Count</span><span class="ruby-string">&#39;</span>)
 <span class="ruby-identifier">csv</span>
 <span class="ruby-identifier">csv</span>.<span class="ruby-identifier">headers</span> <span class="ruby-comment"># =&gt; [&quot;Name&quot;, &quot;Count&quot;]</span>
-<span class="ruby-identifier">csv</span>.<span class="ruby-identifier">shift</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;bar&quot; &quot;Count&quot;:&quot;1&quot;&gt;</span>
+<span class="ruby-identifier">csv</span>.<span class="ruby-identifier">shift</span> <span class="ruby-comment"># =&gt; #&lt;CSV::Row &quot;Name&quot;:&quot;foo&quot; &quot;Count&quot;:&quot;0&quot;&gt;</span>
 </pre>
 
 <span id="class-CSV-label-Option+return_headers" class="legacy-anchor"></span>
@@ -1583,7 +1584,7 @@ baz,2</span>
 <pre class="ruby"><span class="ruby-constant">CSV</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_OPTIONS</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:</span><span class="ruby-value">skip_blanks</span>) <span class="ruby-comment"># =&gt; false</span>
 </pre>
 
-<p>See also option <a href="#class-CSV-label-Option+skip_lines">skiplines</a>.</p>
+<p>See also option <a href="#class-CSV-label-Option+skip_lines">skip_lines</a>.</p>
 
 <p>For examples in this section:</p>
 
@@ -1622,9 +1623,11 @@ baz,2
 <ul><li>
 <p>If a Regexp, ignores lines that match it.</p>
 </li><li>
-<p>If a String, converts it to a Regexp, ignores lines that match it.</p>
+<p>If a String, ignores lines that include it.</p>
 </li><li>
 <p>If <code>nil</code>, no lines are considered to be comments.</p>
+</li><li>
+<p>Otherwise, the object must respond to <code>match</code>; ignores lines for which <code>match</code> returns a truthy value.</p>
 </li></ul>
 
 <p>Default value:</p>
@@ -1663,7 +1666,7 @@ baz,2
 </pre>
 <hr>
 
-<p>Raises an exception if given an object that is not a Regexp, a String, or <code>nil</code>:</p>
+<p>Raises an exception if given an object that is not a Regexp, a String, <code>nil</code>, or an object that responds to <code>match</code>:</p>
 
 <pre class="ruby"><span class="ruby-comment"># Raises ArgumentError (:skip_lines has to respond to #match: 0)</span>
 <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">skip_lines</span><span class="ruby-value">:</span> <span class="ruby-value">0</span>)
@@ -1977,7 +1980,7 @@ baz,2
 <span id="class-CSV-label-Option+quote_char-1" class="legacy-anchor"></span>
 <h6 id="class-csv-option-quotechar-1"><a href="#class-csv-option-quotechar-1">Option <a href="CSV.html#method-i-quote_char"><code>quote_char</code></a></a></h6>
 
-<p>Specifies the character (String of length 1) used used to quote fields in both parsing and generating. This <a href="String.html"><code>String</code></a> will be transcoded into the data’s Encoding before use.</p>
+<p>Specifies the character (String of length 1) used to quote fields in both parsing and generating. This <a href="String.html"><code>String</code></a> will be transcoded into the data’s Encoding before use.</p>
 
 <p>Default value:</p>
 
@@ -2047,7 +2050,7 @@ baz,2
 <span class="ruby-keyword">end</span> <span class="ruby-comment"># =&gt; [&quot;foo&quot;, &quot;0&quot;]</span>
 </pre>
 
-<p>With <code>write_headers</code>“:</p>
+<p>With <code>write_headers</code>:</p>
 
 <pre class="ruby"><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file_path</span>,<span class="ruby-string">&#39;</span><span class="ruby-string">w</span><span class="ruby-string">&#39;</span>,
     <span class="ruby-value">:</span><span class="ruby-value">write_headers</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,

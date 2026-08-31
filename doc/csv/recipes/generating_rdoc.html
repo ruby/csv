@@ -510,7 +510,7 @@
 <p><a href="#label-Recipe-3A+Generate+to+File+Without+Headers">Recipe: Generate to File Without Headers</a></p>
 </li></ul>
 </li><li>
-<p><a href="#label-Generating+to+an+IO+Stream">Generating to IO an Stream</a></p>
+<p><a href="#label-Generating+to+an+IO+Stream">Generating to an IO Stream</a></p>
 <ul><li>
 <p><a href="#label-Recipe-3A+Generate+to+IO+Stream+with+Headers">Recipe: Generate to IO Stream with Headers</a></p>
 </li><li>
@@ -597,12 +597,12 @@
 <span id="label-Generating+to+a+File" class="legacy-anchor"></span>
 <h4 id="generating-to-a-file"><a href="#generating-to-a-file">Generating to a File</a></h4>
 
-<p>You can generate /CSV data to a File, with or without headers.</p>
+<p>You can generate CSV data to a File, with or without headers.</p>
 
 <span id="label-Recipe-3A+Generate+to+File+with+Headers" class="legacy-anchor"></span>
 <h5 id="recipe-generate-to-file-with-headers"><a href="#recipe-generate-to-file-with-headers">Recipe: Generate to File with Headers</a></h5>
 
-<p>Use class method <a href="../../../CSV.html#method-c-open"><code>CSV.open</code></a> with option <code>headers</code> generate to a File.</p>
+<p>Use class method <a href="../../../CSV.html#method-c-open"><code>CSV.open</code></a> with option <code>headers</code> to generate to a File.</p>
 
 <p>This example uses method <a href="../../../CSV.html#method-i-3C-3C"><code>CSV#&lt;&lt;</code></a> to append the rows that are to be generated:</p>
 
@@ -637,7 +637,7 @@
 <p>You can generate CSV data to an IO stream, with or without headers.</p>
 
 <span id="label-Recipe-3A+Generate+to+IO+Stream+with+Headers" class="legacy-anchor"></span>
-<h4 id="recipe-generate-to-io-stream-with-headers"><a href="#recipe-generate-to-io-stream-with-headers">Recipe: Generate to IO Stream with Headers</a></h4>
+<h5 id="recipe-generate-to-io-stream-with-headers"><a href="#recipe-generate-to-io-stream-with-headers">Recipe: Generate to IO Stream with Headers</a></h5>
 
 <p>Use class method <a href="../../../CSV.html#method-c-new"><code>CSV.new</code></a> with option <code>headers</code> to generate CSV data to an IO stream:</p>
 
@@ -736,7 +736,7 @@
 <span id="label-Recipe-3A+Generate+Non-Compliant+Row+Separator" class="legacy-anchor"></span>
 <h5 id="recipe-generate-non-compliant-row-separator"><a href="#recipe-generate-non-compliant-row-separator">Recipe: Generate Non-Compliant Row Separator</a></h5>
 
-<p>For data with non-compliant row separators, use option <code>:row_sep</code> with a different value: This example source uses semicolon (<code>&quot;;&#39;</code>) as its row separator:</p>
+<p>For data with non-compliant row separators, use option <code>:row_sep</code> with a different value: This example source uses semicolon (<code>&quot;;&quot;</code>) as its row separator:</p>
 
 <pre class="ruby"><span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">row_sep</span><span class="ruby-value">:</span> <span class="ruby-string">&quot;</span><span class="ruby-string">;</span><span class="ruby-string">&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-string">&#39;</span><span class="ruby-string">Foo</span><span class="ruby-string">&#39;</span>, <span class="ruby-value">0</span>]
@@ -780,9 +780,9 @@
 <span id="label-Quotes" class="legacy-anchor"></span>
 <h4 id="quotes"><a href="#quotes">Quotes</a></h4>
 
-<p>IFC 4180 allows most fields to be quoted or not. By default, CSV does not quote most fields.</p>
+<p>RFC 4180 allows most fields to be quoted or not. By default, CSV does not quote most fields.</p>
 
-<p>However, a field containing the current row separator, column separator, or quote character is automatically quoted, producing IFC 4180 compliance:</p>
+<p>However, a field containing the current row separator, column separator, or quote character is automatically quoted, producing RFC 4180 compliance:</p>
 
 <pre class="ruby"><span class="ruby-comment"># Field contains row separator.</span>
 <span class="ruby-identifier">output_string</span> = <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-string">&#39;</span><span class="ruby-string">&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
