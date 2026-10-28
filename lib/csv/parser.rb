@@ -978,63 +978,69 @@ class CSV
 
     def parse_quotable_loose(&block)
       @scanner.keep_start
-      @scanner.each_line(@row_separator) do |line|
-        if @skip_lines and skip_line?(line)
-          @scanner.keep_drop
-          @scanner.keep_start
-          next
-        end
-        original_line = line
-        line = line.delete_suffix(@row_separator)
-
-        if line.empty?
-          if @skip_blanks
+      kept = true
+      begin
+        @scanner.each_line(@row_separator) do |line|
+          if @skip_lines and skip_line?(line)
             @scanner.keep_drop
             @scanner.keep_start
             next
           end
-          row = []
-          quoted_fields = FieldsConverter::NO_QUOTED_FIELDS
-        elsif line.include?(@cr) or line.include?(@lf)
-          @scanner.keep_back
-          @parse_method = :parse_quotable_robust
-          return parse_quotable_robust(&block)
-        else
-          row = line.split(@split_column_separator, -1)
-          quoted_fields = []
-          n_columns = row.size
-          i = 0
-          while i < n_columns
-            column = row[i]
-            if column.empty?
-              quoted_fields << false
-              row[i] = nil
-            else
-              n_quotes = column.count(@quote_character)
-              if n_quotes.zero?
-                quoted_fields << false
-                # no quote
-              elsif n_quotes == 2 and
-                   column.start_with?(@quote_character) and
-                   column.end_with?(@quote_character)
-                quoted_fields << true
-                row[i] = column[1..-2]
-              else
-                @scanner.keep_back
-                @parse_method = :parse_quotable_robust
-                return parse_quotable_robust(&block)
-              end
-              validate_field_size(row[i])
+          original_line = line
+          line = line.delete_suffix(@row_separator)
+
+          if line.empty?
+            if @skip_blanks
+              @scanner.keep_drop
+              @scanner.keep_start
+              next
             end
-            i += 1
+            row = []
+            quoted_fields = FieldsConverter::NO_QUOTED_FIELDS
+          elsif line.include?(@cr) or line.include?(@lf)
+            kept = false
+            @scanner.keep_back
+            @parse_method = :parse_quotable_robust
+            return parse_quotable_robust(&block)
+          else
+            row = line.split(@split_column_separator, -1)
+            quoted_fields = []
+            n_columns = row.size
+            i = 0
+            while i < n_columns
+              column = row[i]
+              if column.empty?
+                quoted_fields << false
+                row[i] = nil
+              else
+                n_quotes = column.count(@quote_character)
+                if n_quotes.zero?
+                  quoted_fields << false
+                  # no quote
+                elsif n_quotes == 2 and
+                     column.start_with?(@quote_character) and
+                     column.end_with?(@quote_character)
+                  quoted_fields << true
+                  row[i] = column[1..-2]
+                else
+                  kept = false
+                  @scanner.keep_back
+                  @parse_method = :parse_quotable_robust
+                  return parse_quotable_robust(&block)
+                end
+                validate_field_size(row[i])
+              end
+              i += 1
+            end
           end
+          @scanner.keep_drop
+          @scanner.keep_start
+          @last_line = original_line
+          emit_row(row, quoted_fields, &block)
         end
-        @scanner.keep_drop
-        @scanner.keep_start
-        @last_line = original_line
-        emit_row(row, quoted_fields, &block)
+      ensure
+        @scanner.keep_drop if kept
       end
-      @scanner.keep_drop
     end
 
     def parse_quotable_robust(&block)
