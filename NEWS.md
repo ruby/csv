@@ -1,5 +1,24 @@
 # News
 
+## 3.3.7 - 2026-10-28
+
+### Improvements
+
+  * Improved documents.
+    * GH-376
+    * Patch by Oskar Eichler
+
+  * Improved error handling.
+    * GH-378
+    * GH-379
+    * Reported by sswander
+
+### Thanks
+
+  * Oskar Eichler
+
+  * sswander
+
 ## 3.3.6 - 2026-07-27
 
 ### Improvements
