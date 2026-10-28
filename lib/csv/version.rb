@@ -2,5 +2,5 @@
 
 class CSV
   # The version of the installed library.
-  VERSION = "3.3.7"
+  VERSION = "3.3.8"
 end
