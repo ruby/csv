@@ -942,7 +942,11 @@ class CSV
     def validate_field_size(field)
       return unless @max_field_size
       return if field.size <= @max_field_size
-      ignore_broken_line
+      if block_given?
+        yield
+      else
+        ignore_broken_line
+      end
       message = "Field size exceeded: #{field.size} > #{@max_field_size}"
       raise MalformedCSVError.new(message, @lineno)
     end
@@ -1055,7 +1059,7 @@ class CSV
         value = parse_column_value
         if value
           @scanner.scan_all(@strip_value) if @strip_value
-          validate_field_size(value)
+          validate_field_size(value) {ignore_broken_record}
         end
         if parse_column_end
           row << value
@@ -1262,6 +1266,20 @@ class CSV
       @scanner.scan_all(@not_line_end)
       @scanner.scan_all(@line_end)
       @lineno += 1
+    end
+
+    def ignore_broken_record
+      lineno = @lineno
+      begin
+        while parse_column_end
+          @scanner.scan_all(@strip_value) if @strip_value
+          parse_column_value
+          @scanner.scan_all(@strip_value) if @strip_value
+        end
+        ignore_broken_line unless parse_row_end
+      rescue MalformedCSVError
+      end
+      @lineno = lineno + 1
     end
 
     def start_row

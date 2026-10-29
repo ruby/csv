@@ -329,6 +329,83 @@ line,5,jkl
     assert_parse_errors_out(data, max_field_size: 4)
   end
 
+  def test_max_field_size_multiline_record_liberal_parsing
+    csv = CSV.new(%Q{abcde,"x\ny"\nc,d\n},
+                  max_field_size: 4, liberal_parsing: true)
+    error = assert_raise(CSV::MalformedCSVError) do
+      csv.shift
+    end
+    assert_equal("Field size exceeded: 5 > 4 in line 1.",
+                 error.message)
+    assert_equal(%Q{abcde,"x\ny"\n}, csv.line)
+    assert_equal(["c", "d"], csv.shift)
+    assert_equal(2, csv.lineno)
+  end
+
+  def test_max_field_size_three_line_record_liberal_parsing
+    csv = CSV.new(%Q{abcde,"x\ny\nz"\nc,d\n},
+                  max_field_size: 4, liberal_parsing: true)
+    error = assert_raise(CSV::MalformedCSVError) do
+      csv.shift
+    end
+    assert_equal("Field size exceeded: 5 > 4 in line 1.",
+                 error.message)
+    assert_equal(%Q{abcde,"x\ny\nz"\n}, csv.line)
+    assert_equal(["c", "d"], csv.shift)
+    assert_equal(2, csv.lineno)
+  end
+
+  def test_max_field_size_multiline_record_after_multiline_row
+    csv = CSV.new(%Q{"a\nb",c\nabcde,"x\ny"\nc,d\n}, max_field_size: 4)
+    assert_equal(["a\nb", "c"], csv.shift)
+    error = assert_raise(CSV::MalformedCSVError) do
+      csv.shift
+    end
+    assert_equal("Field size exceeded: 5 > 4 in line 2.",
+                 error.message)
+    assert_equal(%Q{abcde,"x\ny"\n}, csv.line)
+    assert_equal(["c", "d"], csv.shift)
+    assert_equal(3, csv.lineno)
+  end
+
+  def test_max_field_size_multiline_record_strip
+    csv = CSV.new(%Q{abcde , "x\ny" \nc,d\n},
+                  max_field_size: 4, strip: true)
+    error = assert_raise(CSV::MalformedCSVError) do
+      csv.shift
+    end
+    assert_equal("Field size exceeded: 5 > 4 in line 1.",
+                 error.message)
+    assert_equal(%Q{abcde , "x\ny" \n}, csv.line)
+    assert_equal(["c", "d"], csv.shift)
+    assert_equal(2, csv.lineno)
+  end
+
+  def test_max_field_size_value_after_quoted_field
+    csv = CSV.new(%Q{"abcde"junk,b\nc,d\n}, max_field_size: 4)
+    error = assert_raise(CSV::MalformedCSVError) do
+      csv.shift
+    end
+    assert_equal("Field size exceeded: 5 > 4 in line 1.",
+                 error.message)
+    assert_equal(%Q{"abcde"junk,b\n}, csv.line)
+    assert_equal(["c", "d"], csv.shift)
+    assert_equal(2, csv.lineno)
+  end
+
+  def test_max_field_size_unclosed_quote_liberal_parsing
+    csv = CSV.new(%Q{abcde,"x\nc,d\n},
+                  max_field_size: 4, liberal_parsing: true)
+    error = assert_raise(CSV::MalformedCSVError) do
+      csv.shift
+    end
+    assert_equal("Field size exceeded: 5 > 4 in line 1.",
+                 error.message)
+    assert_equal(%Q{abcde,"x\nc,d\n}, csv.line)
+    assert_nil(csv.shift)
+    assert_equal(1, csv.lineno)
+  end
+
   def test_row_sep_auto_cr
     assert_equal([["a"]], CSV.parse("a\r"))
   end
