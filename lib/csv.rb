@@ -374,6 +374,8 @@ require_relative "csv/writer"
 #
 # :include: ../doc/csv/options/parsing/field_size_limit.rdoc
 #
+# :include: ../doc/csv/options/parsing/max_field_size.rdoc
+#
 # :include: ../doc/csv/options/parsing/converters.rdoc
 #
 # :include: ../doc/csv/options/parsing/unconverted_fields.rdoc
