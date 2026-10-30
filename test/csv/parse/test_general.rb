@@ -329,6 +329,70 @@ line,5,jkl
     assert_parse_errors_out(data, max_field_size: 4)
   end
 
+  def test_max_field_size_recover_no_quote
+    assert_equal([
+                   "Field size exceeded: 5 > 4 in line 1.",
+                   "abcde,b\n",
+                   ["c", "d"],
+                   2,
+                 ],
+                 parse_after_error("abcde,b\nc,d\n",
+                                   max_field_size: 4,
+                                   quote_char: nil))
+  end
+
+  def test_max_field_size_recover_quotable_loose
+    assert_equal([
+                   "Field size exceeded: 5 > 4 in line 1.",
+                   "abcde,b\n",
+                   ["c", "d"],
+                   2,
+                 ],
+                 parse_after_error("abcde,b\nc,d\n", max_field_size: 4))
+  end
+
+  def test_max_field_size_recover_multiline_record
+    assert_equal([
+                   "Field size exceeded: 5 > 4 in line 1.",
+                   %Q{abcde,"x\ny"\n},
+                   ["c", "d"],
+                   2,
+                 ],
+                 parse_after_error(%Q{abcde,"x\ny"\nc,d\n}, max_field_size: 4))
+  end
+
+  def test_max_field_size_recover_multiline_record_strip
+    assert_equal([
+                   "Field size exceeded: 5 > 4 in line 1.",
+                   %Q{abcde , "x\ny" \n},
+                   ["c", "d"],
+                   2,
+                 ],
+                 parse_after_error(%Q{abcde , "x\ny" \nc,d\n},
+                                   max_field_size: 4,
+                                   strip: true))
+  end
+
+  def test_max_field_size_malformed_record
+    assert_equal([
+                   "Any value after quoted field isn't allowed in line 1.",
+                   %Q{"abcde"junk,b\n},
+                   ["c", "d"],
+                   2,
+                 ],
+                 parse_after_error(%Q{"abcde"junk,b\nc,d\n}, max_field_size: 4))
+  end
+
+  def test_max_field_size_unclosed_quote
+    assert_equal([
+                   "Unclosed quoted field in line 1.",
+                   %Q{abcde,"x\nc,d\n},
+                   nil,
+                   1,
+                 ],
+                 parse_after_error(%Q{abcde,"x\nc,d\n}, max_field_size: 4))
+  end
+
   def test_row_sep_auto_cr
     assert_equal([["a"]], CSV.parse("a\r"))
   end
@@ -382,5 +446,13 @@ line,5,jkl
         fail("Parse didn't error out")
       end
     end
+  end
+
+  def parse_after_error(data, **options)
+    csv = CSV.new(data, **options)
+    error = assert_raise(CSV::MalformedCSVError) do
+      csv.shift
+    end
+    [error.message, csv.line, csv.shift, csv.lineno]
   end
 end
