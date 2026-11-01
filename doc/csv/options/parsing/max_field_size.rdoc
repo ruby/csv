@@ -1,0 +1,50 @@
+====== Option +max_field_size+
+
+Specifies the \Integer maximum field size in characters.
+
+Default value:
+  CSV::DEFAULT_OPTIONS.fetch(:max_field_size) # => nil
+
+If a field is longer than this size,
+CSV raises a MalformedCSVError for the record.
+The size is checked after the whole record is read.
+You can continue to read the next record after the error;
+the record that has the long field is skipped.
+
+This doesn't limit how much data CSV reads.
+For example, CSV reads the whole record that has a long field,
+and an unclosed quoted field is read to the end of the input.
+If you need to limit memory usage, limit the input size yourself.
+
+For examples in this section:
+  str = <<~EOT
+    a,b
+    abcde,"x
+    y"
+    c,d
+  EOT
+  str # => "a,b\nabcde,\"x\ny\"\nc,d\n"
+
+Using the default +nil+:
+  ary = CSV.parse(str)
+  ary # => [["a", "b"], ["abcde", "x\ny"], ["c", "d"]]
+
+Using <tt>5</tt>:
+  ary = CSV.parse(str, max_field_size: 5)
+  ary # => [["a", "b"], ["abcde", "x\ny"], ["c", "d"]]
+
+---
+
+Raises an exception if a field is too long:
+  # Raises CSV::MalformedCSVError (Field size exceeded: 5 > 4 in line 2.)
+  CSV.parse(str, max_field_size: 4)
+
+Continues to read the next record after the exception:
+  csv = CSV.new(str, max_field_size: 4)
+  csv.shift # => ["a", "b"]
+  begin
+    csv.shift
+  rescue CSV::MalformedCSVError
+  end
+  csv.line # => "abcde,\"x\ny\"\n"
+  csv.shift # => ["c", "d"]
