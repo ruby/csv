@@ -153,6 +153,7 @@ class CSV
         @quotable_pattern =
           Regexp.new("[\r\n".encode(@encoding) +
                      Regexp.escape(@column_separator) +
+                     Regexp.escape(@row_separator) +
                      Regexp.escape(@quote_character.encode(@encoding)) +
                      "]".encode(@encoding))
       end
