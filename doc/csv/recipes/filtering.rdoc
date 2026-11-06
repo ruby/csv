@@ -9,6 +9,7 @@ All code snippets on this page assume that the following has been executed:
 
 === Contents
 
+- {Filtering Rows with Pattern Matching}[#label-Filtering+Rows+with+Pattern+Matching]
 - {Source and Output Formats}[#label-Source+and+Output+Formats]
   - {Filtering String to String}[#label-Filtering+String+to+String]
     - {Recipe: Filter String to String parsing Headers}[#label-Recipe-3A+Filter+String+to+String+parsing+Headers]
@@ -26,6 +27,38 @@ All code snippets on this page assume that the following has been executed:
     - {Recipe: Filter IO Stream to IO Stream parsing Headers}[#label-Recipe-3A+Filter+IO+Stream+to+IO+Stream+parsing+Headers]
     - {Recipe: Filter IO Stream to IO Stream parsing and writing Headers}[#label-Recipe-3A+Filter+IO+Stream+to+IO+Stream+parsing+and+writing+Headers]
     - {Recipe: Filter IO Stream to IO Stream Without Headers}[#label-Recipe-3A+Filter+IO+Stream+to+IO+Stream+Without+Headers]
+
+=== Filtering Rows with Pattern Matching
+
+This example uses Ruby 3.0 or later, where +in+ returns +true+ or +false+.
+Hash patterns use symbol keys. When parsing known headers for a hash pattern,
+use <tt>header_converters: :symbol</tt>:
+
+  source = <<~CSV
+    Name,Department,Salary
+    Bob,Engineering,1000
+    Jane,Sales,2000
+    John,Management,5000
+  CSV
+  data = CSV.parse(source, headers: true, header_converters: :symbol)
+  data.headers # => [:name, :department, :salary]
+  selected = data.select { _1 in name: /^J/ }
+  selected.map(&:fields)
+  # => [["Jane", "Sales", "2000"], ["John", "Management", "5000"]]
+
+Header conversion is opt-in: CSV::Row preserves the header key types supplied
+by the parser. Without conversion, these headers remain strings and a
+following symbol-key pattern matches no rows:
+
+  data = CSV.parse(source, headers: true)
+  data.headers # => ["Name", "Department", "Salary"]
+  data.select { _1 in Name: /^J/ } # => []
+
+An array pattern matches the row's fields independently of header key types:
+
+  selected = data.select { _1 in [/^J/, _, _] }
+  selected.map(&:fields)
+  # => [["Jane", "Sales", "2000"], ["John", "Management", "5000"]]
 
 === Source and Output Formats
 
