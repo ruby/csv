@@ -73,6 +73,13 @@ class TestCSVRow < Test::Unit::TestCase
     assert_equal(4, @row.field("A", 3))
     assert_equal(nil, @row.field("A", 4))
     assert_equal(nil, @row.field("A", 5))
+
+    # offset past the end of the row
+    assert_nil(@row.field("A", 6))
+    assert_nil(@row.field("A", 100))
+    assert_nil(@row["A", 6])
+    assert_nil(@row.index("A", 6))
+    assert_equal([nil], @row.values_at(["A", 6]))
   end
 
   def test_fetch

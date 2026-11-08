@@ -203,7 +203,8 @@ class CSV
     def field(header_or_index, minimum_index = 0)
       # locate the pair
       finder = (header_or_index.is_a?(Integer) || header_or_index.is_a?(Range)) ? :[] : :assoc
-      pair   = @row[minimum_index..-1].public_send(finder, header_or_index)
+      # Array#[] returns nil, not [], once the offset is past the end
+      pair   = (@row[minimum_index..-1] || []).public_send(finder, header_or_index)
 
       # return the field if we have a pair
       if pair.nil?
@@ -572,7 +573,7 @@ class CSV
     #   row.index('Name', 3) # => nil
     def index(header, minimum_index = 0)
       # find the pair
-      index = headers[minimum_index..-1].index(header)
+      index = (headers[minimum_index..-1] || []).index(header)
       # return the index at the right offset, if we found one
       index.nil? ? nil : index + minimum_index
     end
