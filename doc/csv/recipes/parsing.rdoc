@@ -61,6 +61,8 @@ All code snippets on this page assume that the following has been executed:
   - {Using Multiple Header Converters}[#label-Using+Multiple+Header+Converters]
     - {Recipe: Specify Multiple Header Converters in Option :header_converters}[#label-Recipe-3A+Specify+Multiple+Header+Converters+in+Option+-3Aheader_converters]
     - {Recipe: Specify Multiple Header Converters in a Custom Header Converter List}[#label-Recipe-3A+Specify+Multiple+Header+Converters+in+a+Custom+Header+Converter+List]
+- {Pattern Matching}[#label-Pattern+Matching]
+  - {Recipe: Match Parsed Rows by Header or Position}[#label-Recipe-3A+Match+Parsed+Rows+by+Header+or+Position]
 - {Diagnostics}[#label-Diagnostics]
   - {Recipe: Capture Unconverted Fields}[#label-Recipe-3A+Capture+Unconverted+Fields]
   - {Recipe: Capture Field Info}[#label-Recipe-3A+Capture+Field+Info]
@@ -521,6 +523,45 @@ Apply multiple header converters by defining and registering a custom header con
   source = "NAME,VALUE\nfoo,0\nbar,1.0\nbaz,2.0\n"
   parsed = CSV.parse(source, headers: true, header_converters: :my_header_converters)
   parsed.headers # => [:name, :value]
+
+=== Pattern Matching
+
+==== Recipe: Match Parsed Rows by Header or Position
+
+This example requires Ruby 3.0 or later.
+Hash patterns use symbol keys. The built-in +:symbol+ header converter
+also downcases headers and replaces spaces with underscores:
+
+  source = <<~CSV
+    First Name,Department,Salary
+    Bob,Engineering,1000
+    Jane,Sales,2000
+    John,Management,5000
+  CSV
+  data = CSV.parse(source, headers: true, header_converters: :symbol)
+  data.headers # => [:first_name, :department, :salary]
+  selected = data.select { _1 in first_name: /^J/ }
+  selected.map(&:fields)
+  # => [["Jane", "Sales", "2000"], ["John", "Management", "5000"]]
+
+Headers are strings by default. So a symbol key doesn't match:
+
+  data = CSV.parse(source, headers: true)
+  data.headers # => ["First Name", "Department", "Salary"]
+  data.select { _1 in first_name: /^J/ } # => []
+
+To keep the original case, use a custom converter that calls +to_sym+:
+
+  case_sensitive = CSV.parse("Name\nJane\n", headers: true,
+                             header_converters: ->(header) { header.to_sym })
+  case_sensitive.headers # => [:Name]
+  case_sensitive.first in Name: /^J/ # => true
+
+An array pattern matches the row's fields independently of header key types:
+
+  selected = data.select { _1 in [/^J/, _, _] }
+  selected.map(&:fields)
+  # => [["Jane", "Sales", "2000"], ["John", "Management", "5000"]]
 
 === Diagnostics
 
