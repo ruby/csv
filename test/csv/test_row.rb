@@ -341,6 +341,47 @@ class TestCSVRow < Test::Unit::TestCase
     end
   end
 
+  def test_to_hash_with_integer_headers
+    row = CSV::Row.new([10, 0, -1], ["ten", "zero", "last"])
+    assert_equal({10 => "ten", 0 => "zero", -1 => "last"}, row.to_h)
+  end
+
+  def test_to_hash_with_integer_headers_and_block
+    row = CSV::Row.new([10, 0, -1], ["ten", "zero", "last"])
+    hash = row.to_h { |key, value| [key.to_s, value] }
+    assert_equal({"10" => "ten", "0" => "zero", "-1" => "last"}, hash)
+  end
+
+  def test_to_hash_with_range_headers
+    row = CSV::Row.new([0..1, "name"], ["range", "other"])
+    assert_equal({(0..1) => "range", "name" => "other"}, row.to_hash)
+  end
+
+  def test_to_hash_with_range_headers_and_block
+    row = CSV::Row.new([0..1, "name"], ["range", "other"])
+    hash = row.to_hash { |key, value| [key.to_s, value] }
+    assert_equal({"0..1" => "range", "name" => "other"}, hash)
+  end
+
+  def test_to_hash_with_integer_header_converter
+    row = CSV.parse_line("2024,2025\n5,6\n",
+                         headers: true,
+                         header_converters: ->(header) { Integer(header) },
+                         converters: :integer)
+    assert_equal({2024 => 5, 2025 => 6}, row.to_h)
+  end
+
+  def test_to_hash_with_block_and_duplicate_integer_headers
+    row = CSV::Row.new([10, 10, 20], [1, 2, 3])
+    calls = []
+    hash = row.to_h do |key, value|
+      calls << [key, value]
+      [calls.size, value]
+    end
+    assert_equal([[10, 1], [10, 1], [20, 3]], calls)
+    assert_equal({1 => 1, 2 => 1, 3 => 3}, hash)
+  end
+
   def test_to_hash_with_block_transform_values
     hash = @row.to_hash { |k, v| [k, v**2] }
     assert_equal({"A" => 1, "B" => 4, "C" => 9}, hash)
