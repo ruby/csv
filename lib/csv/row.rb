@@ -662,7 +662,7 @@ class CSV
 
       if block_given?
         each do |key, _value|
-          result = yield(key, self[key])
+          result = yield(key, fetch(key))
           result_array = Array.try_convert(result)
           raise TypeError, "wrong element type #{result.class} (expected array)" if result_array.nil?
           raise ArgumentError, "wrong array length (expected 2, was #{result_array.size})" unless result_array.size == 2
@@ -675,7 +675,7 @@ class CSV
         end
       else
         each do |key, _value|
-          hash[key] = self[key] unless hash.key?(key)
+          hash[key] = fetch(key) unless hash.key?(key)
         end
       end
 
