@@ -600,8 +600,6 @@ class CSV
         @column_ends = @column_separator.each_char.collect do |char|
           Regexp.new(Regexp.escape(char))
         end
-        @first_column_separators = Regexp.new(@escaped_first_column_separator +
-                                              "+".encode(@encoding))
       else
         if STRING_SCANNER_SCAN_ACCEPT_STRING
           @column_end = @column_separator
@@ -609,7 +607,6 @@ class CSV
           @column_end = Regexp.new(@escaped_column_separator)
         end
         @column_ends = nil
-        @first_column_separators = nil
       end
 
       escaped_row_separator = Regexp.escape(@row_separator)
@@ -688,6 +685,31 @@ class CSV
       @unquoted_value = Regexp.new("[^".encode(@encoding) +
                                    no_unquoted_values +
                                    "]+".encode(@encoding))
+
+      # @unquoted_value stops at these characters but they may still be
+      # a part of an unquoted value when they aren't a complete separator:
+      # "a:b" with col_sep: "::" and "a|b" with row_sep: "|\n".
+      # CR and LF are never allowed in an unquoted value.
+      separator_characters = []
+      if @column_separator.size > 1
+        separator_characters << @column_separator[0]
+      end
+      if @row_separator.size > 1
+        separator_characters.concat(@row_separator.each_char.to_a)
+      end
+      separator_characters -= [@cr, @lf, @quote_character]
+      separator_characters.uniq!
+      if separator_characters.empty?
+        @unquoted_separator_character = nil
+      else
+        escaped_separator_characters = separator_characters.collect do |character|
+          Regexp.escape(character).encode(@encoding)
+        end
+        @unquoted_separator_character =
+          Regexp.new("[".encode(@encoding) +
+                     escaped_separator_characters.join +
+                     "]".encode(@encoding))
+      end
     end
 
     def resolve_row_separator(separator)
@@ -1137,30 +1159,42 @@ class CSV
 
     def parse_unquoted_column_value
       value = @scanner.scan_all(@unquoted_value)
+      if @unquoted_separator_character
+        while true
+          break if at_separator?(@column_end, @column_ends)
+          break if at_separator?(@row_end, @row_ends)
+          separator_character = @scanner.scan(@unquoted_separator_character)
+          break if separator_character.nil?
+          if value
+            value << separator_character
+          else
+            value = separator_character
+          end
+          sub_value = @scanner.scan_all(@unquoted_value)
+          value << sub_value if sub_value
+        end
+      end
       return nil unless value
 
       @unquoted_column_value = true
-      if @first_column_separators
-        while true
-          @scanner.keep_start
-          is_column_end = @column_ends.all? do |column_end|
-            @scanner.scan(column_end)
-          end
-          @scanner.keep_back
-          break if is_column_end
-          sub_separator = @scanner.scan_all(@first_column_separators)
-          break if sub_separator.nil?
-          value << sub_separator
-          sub_value = @scanner.scan_all(@unquoted_value)
-          break if sub_value.nil?
-          value << sub_value
-        end
-      end
       value.gsub!(@backslash_quote_character, @quote_character) if @backslash_quote
       if @rstrip_value
         value.gsub!(@rstrip_value, "")
       end
       value
+    end
+
+    def at_separator?(separator, separator_characters)
+      @scanner.keep_start
+      if separator_characters
+        found = separator_characters.all? do |separator_character|
+          @scanner.scan(separator_character)
+        end
+      else
+        found = @scanner.scan(separator)
+      end
+      @scanner.keep_back
+      found
     end
 
     def parse_quoted_column_value

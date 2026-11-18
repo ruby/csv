@@ -37,4 +37,9 @@ class TestCSVParseColumnSeparator < Test::Unit::TestCase
                  ],
                  CSV.parse(data, col_sep: "<=>"))
   end
+
+  def test_multiple_characters_sub_separator_at_value_start
+    assert_equal([["\"", ":a"]],
+                 CSV.parse(%Q{"""":::a\n}, col_sep: "::"))
+  end
 end
