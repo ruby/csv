@@ -1,0 +1,17 @@
+loop_count: 100
+contexts:
+  - gems:
+      csv: 3.3.0
+  - name: "master"
+    prelude: |
+      $LOAD_PATH.unshift(File.expand_path("lib"))
+      require "csv"
+prelude: |-
+  n_columns = Integer(ENV.fetch("N_COLUMNS", "50"), 10)
+  n_rows = Integer(ENV.fetch("N_ROWS", "1000"), 10)
+  header = Array.new(n_columns) { |i| "column#{i}" }.join(",")
+  row = Array.new(n_columns, "AAAAA").join(",") + "\r\n"
+  header_input = header + "\r\n" + row * n_rows
+benchmark:
+  header_input_as_arrays: CSV.parse(header_input)
+  header_input_as_table: 'CSV.parse(header_input, headers: true)'
