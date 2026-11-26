@@ -51,6 +51,7 @@ class CSV
     #
     class Scanner < StringScanner
       alias_method :scan_all, :scan
+      alias_method :skip_all, :skip
 
       def initialize(*args)
         super
@@ -178,6 +179,24 @@ class CSV
         end
         # trace(__method__, pattern, :done, value)
         value
+      end
+
+      def skip(pattern)
+        length = @scanner.skip(pattern)
+        return length if @last_scanner
+
+        read_chunk if length and @scanner.eos?
+        length
+      end
+
+      def skip_all(pattern)
+        length = @scanner.skip(pattern)
+        return length if @last_scanner
+        return nil if length.nil?
+        while @scanner.eos? and read_chunk and (sub_length = @scanner.skip(pattern))
+          length += sub_length
+        end
+        length
       end
 
       def eos?
@@ -507,6 +526,7 @@ class CSV
         end
         @escaped_quote_character = Regexp.escape(@quote_character)
         @escaped_quote = Regexp.new(@escaped_quote_character)
+        @quote_character_bytesize = @quote_character.bytesize
       end
     end
 
@@ -1044,10 +1064,10 @@ class CSV
       while true
         @quoted_column_value = false
         @unquoted_column_value = false
-        @scanner.scan_all(@strip_value) if @strip_value
+        @scanner.skip_all(@strip_value) if @strip_value
         value = parse_column_value
         if value
-          @scanner.scan_all(@strip_value) if @strip_value
+          @scanner.skip_all(@strip_value) if @strip_value
         end
         if parse_column_end
           row << value
@@ -1109,7 +1129,7 @@ class CSV
       if @liberal_parsing
         quoted_value = parse_quoted_column_value
         if quoted_value
-          @scanner.scan_all(@strip_value) if @strip_value
+          @scanner.skip_all(@strip_value) if @strip_value
           unquoted_value = parse_unquoted_column_value
           if unquoted_value
             if @double_quote_outside_quote
@@ -1144,7 +1164,7 @@ class CSV
         while true
           @scanner.keep_start
           is_column_end = @column_ends.all? do |column_end|
-            @scanner.scan(column_end)
+            @scanner.skip(column_end)
           end
           @scanner.keep_back
           break if is_column_end
@@ -1164,21 +1184,21 @@ class CSV
     end
 
     def parse_quoted_column_value
-      quotes = @scanner.scan_all(@quotes)
-      return nil unless quotes
+      n_quotes = @scanner.skip_all(@quotes)
+      return nil unless n_quotes
 
       @quoted_column_value = true
-      n_quotes = quotes.size
+      n_quotes /= @quote_character_bytesize
       if (n_quotes % 2).zero?
-        quotes[0, (n_quotes - 2) / 2]
+        @quote_character * ((n_quotes - 2) / 2)
       else
-        value = quotes[0, n_quotes / 2]
+        value = @quote_character * (n_quotes / 2)
         while true
           quoted_value = @scanner.scan_all(@quoted_value)
           value << quoted_value if quoted_value
           if @backslash_quote
-            if @scanner.scan(@escaped_backslash)
-              if @scanner.scan(@escaped_quote)
+            if @scanner.skip(@escaped_backslash)
+              if @scanner.skip(@escaped_quote)
                 value << @quote_character
               else
                 value << @backslash_character
@@ -1187,17 +1207,17 @@ class CSV
             end
           end
 
-          quotes = @scanner.scan_all(@quotes)
-          unless quotes
+          n_quotes = @scanner.skip_all(@quotes)
+          unless n_quotes
             ignore_broken_line
             message = "Unclosed quoted field"
             raise MalformedCSVError.new(message, @lineno)
           end
-          n_quotes = quotes.size
+          n_quotes /= @quote_character_bytesize
           if n_quotes == 1
             break
           else
-            value << quotes[0, n_quotes / 2]
+            value << @quote_character * (n_quotes / 2)
             break if (n_quotes % 2) == 1
           end
         end
@@ -1206,11 +1226,11 @@ class CSV
     end
 
     def parse_column_end
-      return true if @scanner.scan(@column_end)
+      return true if @scanner.skip(@column_end)
       return false unless @column_ends
 
       @scanner.keep_start
-      if @column_ends.all? {|column_end| @scanner.scan(column_end)}
+      if @column_ends.all? {|column_end| @scanner.skip(column_end)}
         @scanner.keep_drop
         true
       else
@@ -1220,10 +1240,10 @@ class CSV
     end
 
     def parse_row_end
-      return true if @scanner.scan(@row_end)
+      return true if @scanner.skip(@row_end)
       return false unless @row_ends
       @scanner.keep_start
-      if @row_ends.all? {|row_end| @scanner.scan(row_end)}
+      if @row_ends.all? {|row_end| @scanner.skip(row_end)}
         @scanner.keep_drop
         true
       else
@@ -1251,8 +1271,8 @@ class CSV
     end
 
     def ignore_broken_line
-      @scanner.scan_all(@not_line_end)
-      @scanner.scan_all(@line_end)
+      @scanner.skip_all(@not_line_end)
+      @scanner.skip_all(@line_end)
       @lineno += 1
     end
 
