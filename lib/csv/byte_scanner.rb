@@ -74,14 +74,13 @@ class CSV
         @bytes = bytes
         @items = items
         @n_items = items ? items.size : 0
-        @stops = items ? items.dup : nil
-        @next = Array.new(@n_items, -1)
-        @string = nil
-        @string_size = -1
-        @last_pos = 0
       end
 
-      # The number of bytes the pattern matches at +pos+ in +string+, or nil.
+      # The stop bytes of a :run_except pattern, as one-byte Strings.
+      attr_reader :items
+
+      # The number of bytes the pattern matches at +pos+ in +string+, or nil,
+      # for every kind but :run_except, which ByteScanner answers.
       # Like the regular expressions it replaces, it matches nothing at the
       # end of the String: String#getbyte answers nil there.
       def match_length(string, pos)
@@ -92,8 +91,6 @@ class CSV
           match_byte_run(string, pos)
         elsif kind == :byte_until
           match_byte_until(string, pos)
-        elsif kind == :run_except
-          run_except_length(string, pos)
         elsif kind == :run_in
           match_run_in(string, pos)
         elsif kind == :literal
@@ -101,47 +98,6 @@ class CSV
         else
           match_alternation(string, pos)
         end
-      end
-
-      def run_except_length(string, pos)
-        # Each stop byte is found with String#byteindex, a byte search with
-        # no regular expression. The stops are kept in order of their next
-        # position, so when the scan passes the nearest one, only that one
-        # is searched again and moved back to its place, usually with one
-        # comparison. A String is searched once per stop byte however many
-        # values it has, and a stop byte that never appears costs one
-        # search, not one per value. Kept positions hold only for the same
-        # String and for positions that do not move back.
-        size = string.bytesize
-        positions = @next
-        unless string.equal?(@string) and
-               size == @string_size and
-               pos >= @last_pos
-          @string = string
-          @string_size = size
-          positions.fill(-1)
-        end
-        @last_pos = pos
-        nearest = positions[0]
-        if nearest < pos
-          stops = @stops
-          last = @n_items - 1
-          while nearest < pos
-            stop = stops[0]
-            position = string.byteindex(stop, pos) || size
-            i = 0
-            while i < last and (next_position = positions[i + 1]) < position
-              positions[i] = next_position
-              stops[i] = stops[i + 1]
-              i += 1
-            end
-            positions[i] = position
-            stops[i] = stop
-            nearest = positions[0]
-          end
-        end
-        length = nearest - pos
-        length > 0 ? length : nil
       end
 
       private
@@ -210,13 +166,21 @@ class CSV
 
       def initialize(string)
         @string = string
+        @size = string.bytesize
         @pos = 0
+        @run_pattern = nil
+        @run_stops = nil
+        @run_positions = nil
+        @run_last = 0
+        @run_short = true
       end
 
       def pos=(position)
-        size = @string.bytesize
+        size = @size
         position += size if position < 0
         raise RangeError, "index out of range" if position < 0 or position > size
+        # The kept run_except positions hold only while the scan moves on.
+        @run_pattern = nil if position < @pos
         @pos = position
       end
 
@@ -235,10 +199,10 @@ class CSV
           length = i - pos
         elsif kind == :byte_until
           stop = string.byteindex(pattern.bytes, pos)
-          length = (stop || string.bytesize) - pos
+          length = (stop || @size) - pos
           return nil unless length > 0
         elsif kind == :run_except
-          length = pattern.run_except_length(string, pos)
+          length = run_except_length(pattern, pos)
           return nil unless length
         else
           length = pattern.match_length(string, pos)
@@ -252,22 +216,52 @@ class CSV
         string = @string
         pos = @pos
         kind = pattern.kind
-        if kind == :byte
-          return nil unless string.getbyte(pos) == pattern.bytes
-          length = 1
-        elsif kind == :byte_run
-          byte = pattern.bytes
-          return nil unless string.getbyte(pos) == byte
-          i = pos + 1
-          i += 1 while string.getbyte(i) == byte
-          length = i - pos
+        if kind == :run_except
+          # Most values are short: look at their first bytes before the
+          # kept positions, which cost a search for each value.
+          # After a long value the search goes first.
+          if @run_short
+            table = pattern.bytes
+            i = pos
+            limit = pos + 8
+            while i < limit and (byte = string.getbyte(i))
+              break if table[byte]
+              i += 1
+            end
+            if i < limit
+              return nil if i == pos
+              @pos = i
+              return string.byteslice(pos, i - pos)
+            end
+          end
+          positions = @run_positions
+          positions = run_start(pattern) unless pattern.equal?(@run_pattern)
+          nearest = positions[0]
+          if nearest < pos
+            stops = @run_stops
+            size = @size
+            last = @run_last
+            while nearest < pos
+              stop = stops[0]
+              position = string.byteindex(stop, pos) || size
+              k = 0
+              while k < last and (next_position = positions[k + 1]) < position
+                positions[k] = next_position
+                stops[k] = stops[k + 1]
+                k += 1
+              end
+              positions[k] = position
+              stops[k] = stop
+              nearest = positions[0]
+            end
+          end
+          length = nearest - pos
+          @run_short = length < 8
+          return nil unless length > 0
         elsif kind == :byte_until
           stop = string.byteindex(pattern.bytes, pos)
-          length = (stop || string.bytesize) - pos
+          length = (stop || @size) - pos
           return nil unless length > 0
-        elsif kind == :run_except
-          length = pattern.run_except_length(string, pos)
-          return nil unless length
         else
           length = pattern.match_length(string, pos)
           return nil unless length
@@ -277,20 +271,77 @@ class CSV
       end
 
       def check(pattern)
-        length = pattern.match_length(@string, @pos)
+        if pattern.kind == :run_except
+          length = run_except_length(pattern, @pos)
+        else
+          length = pattern.match_length(@string, @pos)
+        end
         length and @string.byteslice(@pos, length)
       end
 
       def eos?
-        @pos >= @string.bytesize
+        @pos >= @size
       end
 
       def rest
-        @string.byteslice(@pos, @string.bytesize - @pos)
+        @string.byteslice(@pos, @size - @pos)
       end
 
       def inspect
         "#<#{self.class} #{@pos}/#{@string.bytesize}>"
+      end
+
+      private
+
+      # A :run_except pattern's stop bytes are found with String#byteindex,
+      # a byte search with no regular expression. The stops are kept in
+      # order of their next position, so when the scan passes the nearest
+      # one, only that one is searched again and moved back to its place,
+      # usually with one comparison. The String is searched once per stop
+      # byte however many values it has, and a stop byte that never appears
+      # costs one search, not one per value. The positions are kept for the
+      # last pattern scanned, while the scan does not move back.
+      def run_except_length(pattern, pos)
+        positions = @run_positions
+        positions = run_start(pattern) unless pattern.equal?(@run_pattern)
+        nearest = positions[0]
+        nearest = run_advance(pos) if nearest < pos
+        length = nearest - pos
+        length > 0 ? length : nil
+      end
+
+      def run_start(pattern)
+        items = pattern.items
+        @run_pattern = pattern
+        @run_stops = items.dup
+        @run_last = items.size - 1
+        @run_positions = Array.new(items.size, -1)
+      end
+
+      # Its own method so that ZJIT profiles the search loop when it runs,
+      # not only on the first scans, which often find the nearest stop still
+      # ahead.
+      def run_advance(pos)
+        string = @string
+        size = @size
+        positions = @run_positions
+        stops = @run_stops
+        last = @run_last
+        nearest = positions[0]
+        while nearest < pos
+          stop = stops[0]
+          position = string.byteindex(stop, pos) || size
+          i = 0
+          while i < last and (next_position = positions[i + 1]) < position
+            positions[i] = next_position
+            stops[i] = stops[i + 1]
+            i += 1
+          end
+          positions[i] = position
+          stops[i] = stop
+          nearest = positions[0]
+        end
+        nearest
       end
     end
   end

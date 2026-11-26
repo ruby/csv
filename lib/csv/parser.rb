@@ -100,6 +100,16 @@ class CSV
         super
         @keeps = []
       end
+
+      # The lines only move the position on, so it is set as it is.
+      def each_line(row_separator)
+        position = @pos
+        rest.each_line(row_separator) do |line|
+          position += line.bytesize
+          @pos = position
+          yield(line)
+        end
+      end
     end
 
     #
@@ -1281,15 +1291,24 @@ class CSV
 
       @quoted_column_value = true
       n_quotes /= @quote_character_bytesize
-      if (n_quotes % 2).zero?
+      if (n_quotes % 2) == 0
         @quote_character * ((n_quotes - 2) / 2)
       else
-        value = @quote_character * (n_quotes / 2)
+        # value stays nil until there is text, so that a value with no
+        # escaped quotes is the scanned String itself.
+        value = @quote_character * (n_quotes / 2) if n_quotes > 1
         while true
           quoted_value = @scanner.scan_all(@quoted_value)
-          value << quoted_value if quoted_value
+          if quoted_value
+            if value
+              value << quoted_value
+            else
+              value = quoted_value
+            end
+          end
           if @backslash_quote
             if @scanner.skip(@escaped_backslash)
+              value ||= @quote_character * 0
               if @scanner.skip(@escaped_quote)
                 value << @quote_character
               else
@@ -1309,11 +1328,17 @@ class CSV
           if n_quotes == 1
             break
           else
-            value << @quote_character * (n_quotes / 2)
+            if value.nil?
+              value = @quote_character * (n_quotes / 2)
+            elsif n_quotes < 4
+              value << @quote_character
+            else
+              value << @quote_character * (n_quotes / 2)
+            end
             break if (n_quotes % 2) == 1
           end
         end
-        value
+        value || @quote_character * 0
       end
     end
 
