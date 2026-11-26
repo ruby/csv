@@ -2,6 +2,7 @@
 
 require "strscan"
 
+require_relative "byte_scanner"
 require_relative "input_record_separator"
 require_relative "row"
 require_relative "table"
@@ -49,15 +50,7 @@ class CSV
     # on the methods. For more information, please visit:
     # https://docs.ruby-lang.org/en/master/StringScanner.html
     #
-    class Scanner < StringScanner
-      alias_method :scan_all, :scan
-      alias_method :skip_all, :skip
-
-      def initialize(*args)
-        super
-        @keeps = []
-      end
-
+    module ScannerKeeps
       def each_line(row_separator)
         position = pos
         rest.each_line(row_separator) do |line|
@@ -85,6 +78,30 @@ class CSV
       end
     end
 
+    class Scanner < StringScanner
+      include ScannerKeeps
+      alias_method :scan_all, :scan
+      alias_method :skip_all, :skip
+
+      def initialize(*args)
+        super
+        @keeps = []
+      end
+    end
+
+    # CSV::Parser::Scanner on ByteScanner, which scans with BytePattern in
+    # Ruby instead of StringScanner and regular expressions.
+    class ByteKeepScanner < ByteScanner
+      include ScannerKeeps
+      alias_method :scan_all, :scan
+      alias_method :skip_all, :skip
+
+      def initialize(*args)
+        super
+        @keeps = []
+      end
+    end
+
     #
     # CSV::InputsScanner receives IO inputs, encoding and the chunk_size.
     # It also controls the life cycle of the object with its methods +keep_start+,
@@ -98,8 +115,10 @@ class CSV
     # If there is no more data (eos? = true), it returns "".
     #
     class InputsScanner
-      def initialize(inputs, encoding, row_separator, chunk_size: 8192)
+      def initialize(inputs, encoding, row_separator, chunk_size: 8192,
+                     scanner_class: StringScanner)
         @inputs = inputs.dup
+        @scanner_class = scanner_class
         @encoding = encoding
         @row_separator = row_separator
         @chunk_size = chunk_size
@@ -242,7 +261,7 @@ class CSV
             @inputs.unshift(StringIO.new(keep))
             @last_scanner = false
           end
-          @scanner = StringScanner.new(buffer)
+          @scanner = @scanner_class.new(buffer)
         else
           if @scanner != scanner
             message = "scanners are different but no buffer: "
@@ -334,7 +353,7 @@ class CSV
           string = input.read
           raise InvalidEncoding unless string.valid_encoding?
           # trace(__method__, :stringio, string)
-          @scanner = StringScanner.new(string)
+          @scanner = @scanner_class.new(string)
           @inputs.shift
           @last_scanner = @inputs.empty?
           true
@@ -343,7 +362,7 @@ class CSV
           if chunk
             raise InvalidEncoding unless chunk.valid_encoding?
             # trace(__method__, :chunk, chunk)
-            @scanner = StringScanner.new(chunk)
+            @scanner = @scanner_class.new(chunk)
             if Parser.eof?(input)
               @inputs.shift
               @last_scanner = @inputs.empty?
@@ -351,7 +370,7 @@ class CSV
             true
           else
             # trace(__method__, :no_chunk)
-            @scanner = StringScanner.new("".encode(@encoding))
+            @scanner = @scanner_class.new("".encode(@encoding))
             @inputs.shift
             @last_scanner = @inputs.empty?
             if @last_scanner
@@ -485,6 +504,7 @@ class CSV
       prepare_quoted
       prepare_unquoted
       prepare_line
+      prepare_byte_scanning
       prepare_header
       prepare_parser
     end
@@ -780,6 +800,72 @@ class CSV
       @scanner = nil
     end
 
+    BYTE_SCANNABLE_ENCODINGS = [
+      Encoding::UTF_8,
+      Encoding::US_ASCII,
+      Encoding::ASCII_8BIT,
+    ].freeze
+    BYTE_SCANNER_DISABLED = (ENV["CSV_PARSER_BYTE_SCANNER"] == "no")
+
+    # Whether every pattern can be answered by BytePattern: the patterns
+    # are made of ASCII characters only, and in these encodings an ASCII
+    # byte is always an ASCII character.
+    def byte_scannable?
+      return false if BYTE_SCANNER_DISABLED
+      return false unless BytePattern::BYTEINDEX_AVAILABLE
+      return false unless BYTE_SCANNABLE_ENCODINGS.include?(@encoding)
+      [
+        @column_separator,
+        @row_separator,
+        @quote_character,
+        (@strip if @strip.is_a?(String)),
+      ].all? {|value| value.nil? or value.ascii_only?}
+    end
+
+    # Replaces the Regexp patterns that prepare_separators, prepare_quoted,
+    # prepare_unquoted and prepare_strip build with equivalent BytePatterns.
+    def prepare_byte_scanning
+      @byte_scanning = byte_scannable?
+      return unless @byte_scanning
+
+      @column_end = BytePattern.literal(@column_separator)
+      if @column_separator.size > 1
+        @column_ends = @column_separator.each_char.collect do |char|
+          BytePattern.literal(char)
+        end
+        @first_column_separators = BytePattern.run_in(@column_separator[0])
+      end
+      @row_end = BytePattern.literal(@row_separator)
+      if @row_separator.size > 1
+        @row_ends = @row_separator.each_char.collect do |char|
+          BytePattern.literal(char)
+        end
+      end
+      @line_end = BytePattern.alternation(["\r\n", "\n", "\r"])
+      @not_line_end = BytePattern.run_except("\r\n")
+
+      if @quote_character
+        @escaped_quote = BytePattern.literal(@quote_character)
+        @quotes = BytePattern.run_in(@quote_character)
+        no_quoted_values = @quote_character.dup
+        no_quoted_values << @backslash_character if @backslash_quote
+        @quoted_value = BytePattern.run_except(no_quoted_values)
+
+        no_unquoted_values = @row_separator + @column_separator[0]
+        no_unquoted_values << @quote_character unless @liberal_parsing
+        @unquoted_value = BytePattern.run_except(no_unquoted_values)
+
+        if @strip.is_a?(String)
+          @strip_value = BytePattern.run_in(@strip)
+        elsif @strip
+          @strip_value = BytePattern.run_in(" \t\f\v")
+        end
+      end
+      if @backslash_quote
+        @escaped_backslash = BytePattern.literal(@backslash_character)
+      end
+    end
+
     def last_line
       if @scanner
         @last_line ||= @scanner.keep_end
@@ -900,7 +986,8 @@ class CSV
         InputsScanner.new(inputs,
                           @encoding,
                           @row_separator,
-                          chunk_size: chunk_size)
+                          chunk_size: chunk_size,
+                          scanner_class: inputs_scanner_class)
       end
     else
       def build_scanner
@@ -919,15 +1006,20 @@ class CSV
               raise InvalidEncodingError.new(@encoding, @lineno + index + 1)
             end
           end
-          Scanner.new(string)
+          (@byte_scanning ? ByteKeepScanner : Scanner).new(string)
         else
           inputs = @samples.collect do |sample|
             StringIO.new(sample)
           end
           inputs << @input
-          InputsScanner.new(inputs, @encoding, @row_separator)
+          InputsScanner.new(inputs, @encoding, @row_separator,
+                            scanner_class: inputs_scanner_class)
         end
       end
+    end
+
+    def inputs_scanner_class
+      @byte_scanning ? ByteScanner : StringScanner
     end
 
     def skip_needless_lines
