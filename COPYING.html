@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>COPYING - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,documentation,COPYING">
+  <meta
+    name="description"
+    content="COPYING: CSV is copyrighted free software by James Edward Gray II and other contributors. or modify it under either the terms of the 2-clause BSDL (see the fil"
+  >
+
+
+
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="COPYING - RDoc Documentation">
+
+
+
+    <meta property="og:description" content="CSV is copyrighted free software by James Edward Gray II and other contributors. or modify it under either the terms of the 2-clause BSDL (see the fil">
+
+
+
+
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="COPYING - RDoc Documentation">
+
+
+
+    <meta name="twitter:description" content="CSV is copyrighted free software by James Edward Gray II and other contributors. or modify it under either the terms of the 2-clause BSDL (see the fil">
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script
+  src="./js/theme-toggle.js?v=8.1.0"
+></script>
+
+<script
+  src="./js/search_navigation.js?v=8.1.0"
+  defer
+></script>
+
+<script
+  src="./js/search_data.js?v=8.1.0"
+  defer
+></script>
+
+<script
+  src="./js/search_ranker.js?v=8.1.0"
+  defer
+></script>
+
+<script
+  src="./js/search_controller.js?v=8.1.0"
+  defer
+></script>
+
+<script
+  src="./js/c_highlighter.js?v=8.1.0"
+  defer
+></script>
+
+<script
+  src="./js/bash_highlighter.js?v=8.1.0"
+  defer
+></script>
+
+<script
+  src="./js/aliki.js?v=8.1.0"
+  defer
+></script>
+
+<link
+  href="./css/rdoc.css?v=8.1.0"
+  rel="stylesheet"
+>
+
+
+
+
+<body role="document" class="file has-toc">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <!-- Chevron (right arrow) - used for expand/collapse -->
+  <symbol
+    id="icon-chevron"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </symbol>
+
+  <!-- File/Document - Pages section -->
+  <symbol
+    id="icon-file"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path
+      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+    ></path>
+
+    <polyline points="14 2 14 8 20 8"></polyline>
+  </symbol>
+
+  <!-- Layers/Stack - Classes and Modules section -->
+  <symbol
+    id="icon-layers"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+    <polyline points="2 17 12 22 22 17"></polyline>
+    <polyline points="2 12 12 17 22 12"></polyline>
+  </symbol>
+
+  <!-- Curly braces with C - Class Methods section -->
+  <symbol
+    id="icon-class-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      C
+    </text>
+  </symbol>
+
+  <!-- Curly braces with I - Instance Methods section -->
+  <symbol
+    id="icon-instance-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      I
+    </text>
+  </symbol>
+
+  <!-- Double chevrons up - Ancestors section -->
+  <symbol
+    id="icon-ancestors"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="17 11 12 6 7 11"></polyline>
+    <polyline points="17 18 12 13 7 18"></polyline>
+  </symbol>
+
+  <!-- User with plus - Included Modules section -->
+  <symbol
+    id="icon-includes"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+
+    <line
+      x1="20"
+      y1="8"
+      x2="20"
+      y2="14"
+    ></line>
+
+    <line
+      x1="23"
+      y1="11"
+      x2="17"
+      y2="11"
+    ></line>
+  </symbol>
+
+  <!-- User with check - Extended Modules section -->
+  <symbol
+    id="icon-extends"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+    <polyline points="17 11 19 13 23 9"></polyline>
+  </symbol>
+
+  <!-- List - Sections section -->
+  <symbol
+    id="icon-list"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <line
+      x1="8"
+      y1="6"
+      x2="21"
+      y2="6"
+    ></line>
+
+    <line
+      x1="8"
+      y1="12"
+      x2="21"
+      y2="12"
+    ></line>
+
+    <line
+      x1="8"
+      y1="18"
+      x2="21"
+      y2="18"
+    ></line>
+
+    <line
+      x1="3"
+      y1="6"
+      x2="3.01"
+      y2="6"
+    ></line>
+
+    <line
+      x1="3"
+      y1="12"
+      x2="3.01"
+      y2="12"
+    ></line>
+
+    <line
+      x1="3"
+      y1="18"
+      x2="3.01"
+      y2="18"
+    ></line>
+  </symbol>
+</svg>
+
+<header class="top-navbar">
+  <a href="./index.html" class="navbar-brand">
+    RDoc Documentation
+  </a>
+
+  <div class="navbar-search" data-search-container>
+    <button id="search-toggle" class="navbar-search-mobile" aria-label="Open search"
+            aria-controls="search-surface" aria-expanded="false" type="button">
+      <span aria-hidden="true">🔍</span>
+    </button>
+
+    <div class="search-backdrop" data-search-close></div>
+    <div id="search-surface" class="search-surface">
+      <form class="search-form" role="search" action="#" method="get" accept-charset="utf-8">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input id="search-field" role="combobox" aria-label="Search"
+               aria-autocomplete="list" aria-controls="search-results"
+               type="text" name="search" placeholder="Search (/) for a class, method..."
+               spellcheck="false" autocomplete="off"
+               title="Type to search, Up and Down to navigate, Enter to load">
+        <button type="button" class="search-close" aria-label="Close search" data-search-close>
+          <span aria-hidden="true">esc</span>
+        </button>
+      </form>
+
+      <div class="search-body">
+        <ul id="search-results" aria-label="Search Results"
+            aria-busy="false" aria-expanded="false"
+            aria-atomic="false" class="initially-hidden search-results"></ul>
+        <div class="search-empty">
+          <p>No recent searches</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Theme toggle button -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" type="button">
+    <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+  </button>
+</header>
+
+<div id="sidebar-navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar-navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="sidebar-navigation" role="navigation" hidden>
+  
+
+
+
+
+
+
+  <div id="fileindex-section" class="nav-section">
+    <details class="nav-section-collapsible" open>
+      <summary class="nav-section-header">
+        <span class="nav-section-icon">
+          <svg>
+            <use href="#icon-file"></use>
+          </svg>
+        </span>
+
+        <span class="nav-section-title">Pages</span>
+
+        <span class="nav-section-chevron">
+          <svg>
+            <use href="#icon-chevron"></use>
+          </svg>
+        </span>
+      </summary>
+
+      <ul class="nav-list">
+
+
+
+
+
+
+            <li>
+              <a href="./COPYING.html">
+                COPYING
+              </a>
+            </li>
+
+
+
+
+            <li>
+              <a href="./LICENSE_txt.html">
+                LICENSE
+              </a>
+            </li>
+
+
+
+
+            <li>
+              <a href="./NEWS_md.html">
+                NEWS
+              </a>
+            </li>
+
+
+
+
+
+          <li>
+            <details >
+              <summary>
+                
+                  doc
+                  
+                
+              </summary>
+
+              <ul class="link-list">
+
+                  <li>
+                    <a href="./doc/csv/recipes/filtering_rdoc.html">
+                      filtering
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="./doc/csv/recipes/generating_rdoc.html">
+                      generating
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="./doc/csv/recipes/parsing_rdoc.html">
+                      parsing
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="./doc/csv/recipes/recipes_rdoc.html">
+                      recipes
+                    </a>
+                  </li>
+
+              </ul>
+            </details>
+          </li>
+
+      </ul>
+    </details>
+  </div>
+
+
+  <div id="classindex-section" class="nav-section">
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-layers"></use></svg>
+      </span>
+      <span class="nav-section-title">Classes and Modules</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
+
+    <ul class="link-list nav-list"><li><code><a href="./Array.html">Array</a></code></li><li><details><summary><code><a href="./CSV.html">CSV</a></code></summary><ul class="link-list nav-list"><li><code><a href="./CSV/FieldsConverter.html">FieldsConverter</a></code></li><li><code><a href="./CSV/InputRecordSeparator.html">InputRecordSeparator</a></code></li><li><code><a href="./CSV/InvalidEncodingError.html">InvalidEncodingError</a></code></li><li><code><a href="./CSV/MalformedCSVError.html">MalformedCSVError</a></code></li><li><details><summary><code><a href="./CSV/Parser.html">Parser</a></code></summary><ul class="link-list nav-list"><li><code><a href="./CSV/Parser/InputsScanner.html">InputsScanner</a></code></li><li><code><a href="./CSV/Parser/InvalidEncoding.html">InvalidEncoding</a></code></li><li><code><a href="./CSV/Parser/Scanner.html">Scanner</a></code></li><li><code><a href="./CSV/Parser/UnexpectedError.html">UnexpectedError</a></code></li></ul></details></li><li><code><a href="./CSV/Row.html">Row</a></code></li><li><code><a href="./CSV/TSV.html">TSV</a></code></li><li><code><a href="./CSV/Table.html">Table</a></code></li><li><code><a href="./CSV/Writer.html">Writer</a></code></li></ul></details></li><li><code><a href="./Object.html">Object</a></code></li><li><code><a href="./String.html">String</a></code></li></ul>
+  </details>
+</div>
+
+</nav>
+
+<main role="main" aria-label="Page COPYING">
+
+<p><a href="CSV.html"><code>CSV</code></a> is copyrighted free software by James Edward Gray II and other contributors. You can redistribute it and/or modify it under either the terms of the 2-clause BSDL (see the file <a href="LICENSE_txt.html">LICENSE.txt</a>), or the conditions below:</p>
+<ol><li>
+<p>You may make and give away verbatim copies of the source form of the software without restriction, provided that you duplicate all of the original copyright notices and associated disclaimers.</p>
+</li><li>
+<p>You may modify your copy of the software in any way, provided that you do at least ONE of the following:</p>
+<ol style="list-style-type: lower-alpha"><li>
+<p>place your modifications in the Public Domain or otherwise make them Freely Available, such as by posting said modifications to Usenet or an equivalent medium, or by allowing the author to include your modifications in the software.</p>
+</li><li>
+<p>use the modified software only within your corporation or organization.</p>
+</li><li>
+<p>give non-standard binaries non-standard names, with instructions on where to get the original software distribution.</p>
+</li><li>
+<p>make other distribution arrangements with the author.</p>
+</li></ol>
+</li><li>
+<p>You may distribute the software in object code or binary form, provided that you do at least ONE of the following:</p>
+<ol style="list-style-type: lower-alpha"><li>
+<p>distribute the binaries and library files of the software, together with instructions (in the manual page or equivalent) on where to get the original distribution.</p>
+</li><li>
+<p>accompany the distribution with the machine-readable source of the software.</p>
+</li><li>
+<p>give non-standard binaries non-standard names, with instructions on where to get the original software distribution.</p>
+</li><li>
+<p>make other distribution arrangements with the author.</p>
+</li></ol>
+</li><li>
+<p>You may modify and include the part of the software into any other software (possibly commercial).  But some files in the distribution are not written by the author, so that they are not under these terms.</p>
+
+<p>For the list of those files and their copying conditions, see the file LEGAL.</p>
+</li><li>
+<p>The scripts and library files supplied as input to or produced as output from the software do not automatically fall under the copyright of the software, but belong to whomever generated them, and may be sold commercially, and may be aggregated with this software.</p>
+</li><li>
+<p>THIS SOFTWARE IS PROVIDED “AS IS” AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</p>
+</li></ol>
+
+</main>
+
+<aside id="table-of-contents" class="table-of-contents" role="complementary" aria-label="Table of Contents">
+  <div class="toc-sticky">
+    <h3 class="toc-heading">On This Page</h3>
+    <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
+      <!-- Generated by JavaScript based on page headings -->
+    </nav>
+  </div>
+</aside>
+
+
+<footer class="site-footer">
+  
+
+  <div class="footer-bottom">
+    <p>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 8.1.0</a>
+      using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+
