@@ -50,6 +50,6 @@ Please do not submit issues and PRs that aim to introduce RuboCop in this reposi
 
 ## License
 
-The gem is available as open source under the terms of the [2-Clause BSD License](https://opensource.org/licenses/BSD-2-Clause).
+The gem is available as open source under the terms of [Ruby's license](COPYING) or the [2-Clause BSD License](LICENSE.txt).
 
-See [LICENSE.txt](LICENSE.txt) for details.
+See [COPYING](COPYING) and [LICENSE.txt](LICENSE.txt) for details.
