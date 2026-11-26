@@ -40,6 +40,7 @@ Gem::Specification.new do |spec|
   spec.files = files
   spec.rdoc_options.concat(["--main", "README.md"])
   rdoc_files = [
+    "COPYING",
     "LICENSE.txt",
     "NEWS.md",
     "README.md",
