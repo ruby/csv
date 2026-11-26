@@ -279,6 +279,41 @@ class CSV
         length and @string.byteslice(@pos, length)
       end
 
+      # Appends to +values+ each value that +pattern+, a :run_except
+      # pattern, scans up to the byte +separator+, or nil for an empty
+      # value, and moves past the separator. Stops before the first value
+      # that ends some other way: at a quote, a new line or the end of the
+      # String. Returns the number of values appended.
+      def scan_separated(pattern, separator, values)
+        string = @string
+        table = pattern.bytes
+        pos = @pos
+        short = @run_short
+        n = 0
+        while true
+          i = pos
+          if short
+            limit = pos + 8
+            while i < limit and (byte = string.getbyte(i))
+              break if table[byte]
+              i += 1
+            end
+          end
+          if i == pos + 8 or not short
+            i = pos + (run_except_length(pattern, pos) || 0)
+            byte = string.getbyte(i)
+            short = i - pos < 8
+          end
+          break unless byte == separator
+          values << (i == pos ? nil : string.byteslice(pos, i - pos))
+          pos = i + 1
+          n += 1
+        end
+        @run_short = short
+        @pos = pos
+        n
+      end
+
       def eos?
         @pos >= @size
       end

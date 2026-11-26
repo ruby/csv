@@ -836,6 +836,7 @@ class CSV
     # prepare_unquoted and prepare_strip build with equivalent BytePatterns.
     def prepare_byte_scanning
       @byte_scanning = byte_scannable?
+      @separated_value_end = nil
       return unless @byte_scanning
 
       @column_end = BytePattern.literal(@column_separator)
@@ -869,6 +870,16 @@ class CSV
           @strip_value = BytePattern.run_in(@strip)
         elsif @strip
           @strip_value = BytePattern.run_in(" \t\f\v")
+        end
+
+        # Plain values that end with a one-byte column separator need
+        # nothing of parse_column_value, so the robust loop takes a run
+        # of them in one call.
+        if @column_separator.bytesize == 1 and
+           not @liberal_parsing and
+           not @strip and
+           @unquoted_value.kind == :run_except
+          @separated_value_end = @column_separator.getbyte(0)
         end
       end
       if @backslash_quote
@@ -1161,11 +1172,17 @@ class CSV
     def parse_quotable_robust(&block)
       row = []
       quoted_fields = []
+      separator = @separated_value_end
+      separator = nil unless @scanner.is_a?(ByteKeepScanner)
       skip_needless_lines
       start_row
       while true
         @quoted_column_value = false
         @unquoted_column_value = false
+        if separator
+          n = @scanner.scan_separated(@unquoted_value, separator, row)
+          quoted_fields.fill(false, quoted_fields.size, n) if n > 0
+        end
         @scanner.skip_all(@strip_value) if @strip_value
         value = parse_column_value
         if value

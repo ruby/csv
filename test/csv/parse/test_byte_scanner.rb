@@ -88,4 +88,23 @@ class TestCSVParseByteScanner < Test::Unit::TestCase
     assert_equal("abc", ByteScanner.new("abc,d").scan(pattern))
     assert_equal("x", ByteScanner.new("x\nyz").scan(pattern))
   end
+
+  def test_scan_separated
+    pattern = BytePattern.run_except(",\"\r\n")
+    long = "b" * 20
+    [
+      ["a,b,,c\n", ["a", "b", nil], 5],
+      [",,", [nil, nil], 2],
+      ["#{long},x,#{long},\"q\"", [long, "x", long], 44],
+      ["x,#{long},,y", ["x", long, nil], 24],
+      ["abc", [], 0],
+    ].each do |input, expected_values, expected_pos|
+      scanner = ByteScanner.new(input)
+      values = []
+      n = scanner.scan_separated(pattern, ",".ord, values)
+      assert_equal([expected_values, expected_values.size, expected_pos],
+                   [values, n, scanner.pos],
+                   input.inspect)
+    end
+  end
 end
