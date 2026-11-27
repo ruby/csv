@@ -1046,7 +1046,8 @@ class CSV
     #   table.inspect # => "#<CSV::Table mode:col_or_row row_count:4>\nName,Value\nfoo,0\nbar,1\nbaz,2\n"
     #
     def inspect
-      inspected = +"#<#{self.class} mode:#{@mode} row_count:#{to_a.size}>"
+      row_count = 1 + @table.count {|row| not row.header_row?}
+      inspected = +"#<#{self.class} mode:#{@mode} row_count:#{row_count}>"
       summary = to_csv(limit: 5)
       inspected << "\n" << summary if summary.encoding.ascii_compatible?
       inspected
