@@ -417,6 +417,7 @@ class CSV
         if @unconverted_fields
           headers = add_unconverted_fields(headers, [])
         end
+        @raw_headers = nil
         yield headers
       end
 
