@@ -107,4 +107,15 @@ class TestCSVParseByteScanner < Test::Unit::TestCase
                    input.inspect)
     end
   end
+
+  def test_trailing_length
+    [[BytePattern.run_in(" "), / +\z/],
+     [BytePattern.run_in(" \t\f\v"), /[ \t\f\v]+\z/]].each do |pattern, regexp|
+      ["", "a", "a ", "a \t\v", " \f ", "日本 ", " a b"].each do |input|
+        expected = input[regexp]&.bytesize || 0
+        assert_equal(expected, pattern.trailing_length(input),
+                     "#{regexp.inspect} in #{input.inspect}")
+      end
+    end
+  end
 end

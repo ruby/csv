@@ -79,6 +79,21 @@ class CSV
       # The stop bytes of a :run_except pattern, as one-byte Strings.
       attr_reader :items
 
+      # The number of bytes at the end of +string+ that a :byte_run or
+      # :run_in pattern matches, as /[...]+\z/ would, or 0.
+      def trailing_length(string)
+        size = string.bytesize
+        i = size
+        if @kind == :byte_run
+          byte = @bytes
+          i -= 1 while i > 0 and string.getbyte(i - 1) == byte
+        else
+          members = @bytes
+          i -= 1 while i > 0 and members[string.getbyte(i - 1)]
+        end
+        size - i
+      end
+
       # The number of bytes the pattern matches at +pos+ in +string+, or nil,
       # for every kind but :run_except, which ByteScanner answers.
       # Like the regular expressions it replaces, it matches nothing at the

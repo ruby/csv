@@ -511,10 +511,13 @@ class CSV
       prepare_strip
       prepare_separators
       validate_strip_and_col_sep_options
-      prepare_quoted
-      prepare_unquoted
+      @byte_scanning = byte_scannable?
+      if @byte_scanning
+        prepare_byte_scanning
+      else
+        prepare_patterns
+      end
       prepare_line
-      prepare_byte_scanning
       prepare_header
       prepare_parser
     end
@@ -555,7 +558,6 @@ class CSV
           raise ArgumentError, message
         end
         @escaped_quote_character = Regexp.escape(@quote_character)
-        @escaped_quote = Regexp.new(@escaped_quote_character)
         @quote_character_bytesize = @quote_character.bytesize
       end
     end
@@ -566,7 +568,6 @@ class CSV
       @backslash_character = "\\".encode(@encoding)
 
       @escaped_backslash_character = Regexp.escape(@backslash_character)
-      @escaped_backslash = Regexp.new(@escaped_backslash_character)
       if @quote_character.nil?
         @backslash_quote_character = nil
       else
@@ -608,19 +609,22 @@ class CSV
         end
         @strip = @strip.encode(@encoding)
         @escaped_strip = Regexp.escape(@strip)
-        if @quote_character
-          @strip_value = Regexp.new(@escaped_strip +
-                                    "+".encode(@encoding))
-          @rstrip_value = Regexp.new(@escaped_strip +
-                                     "+\\z".encode(@encoding))
-        end
       elsif @strip
-        strip_values = " \t\f\v"
-        @escaped_strip = strip_values.encode(@encoding)
-        if @quote_character
-          @strip_value = Regexp.new("[#{strip_values}]+".encode(@encoding))
-          @rstrip_value = Regexp.new("[#{strip_values}]+\\z".encode(@encoding))
-        end
+        @escaped_strip = STRIP_VALUES.encode(@encoding)
+      end
+    end
+
+    STRIP_VALUES = " \t\f\v"
+
+    def prepare_strip_patterns
+      return unless @quote_character
+
+      if @strip.is_a?(String)
+        @strip_value = Regexp.new(@escaped_strip + "+".encode(@encoding))
+        @rstrip_value = Regexp.new(@escaped_strip + "+\\z".encode(@encoding))
+      elsif @strip
+        @strip_value = Regexp.new("[#{STRIP_VALUES}]+".encode(@encoding))
+        @rstrip_value = Regexp.new("[#{STRIP_VALUES}]+\\z".encode(@encoding))
       end
     end
 
@@ -645,6 +649,11 @@ class CSV
 
       @escaped_column_separator = Regexp.escape(@column_separator)
       @escaped_first_column_separator = Regexp.escape(@column_separator[0])
+      @cr = "\r".encode(@encoding)
+      @lf = "\n".encode(@encoding)
+    end
+
+    def prepare_separator_patterns
       if @column_separator.size > 1
         @column_end = Regexp.new(@escaped_column_separator)
         @column_ends = @column_separator.each_char.collect do |char|
@@ -672,8 +681,6 @@ class CSV
         @row_ends = nil
       end
 
-      @cr = "\r".encode(@encoding)
-      @lf = "\n".encode(@encoding)
       @line_end = Regexp.new("\r\n|\n|\r".encode(@encoding))
       @not_line_end = Regexp.new("[^\r\n]+".encode(@encoding))
     end
@@ -692,7 +699,8 @@ class CSV
                 "col_sep (#{@escaped_column_separator}) options are incompatible."
         end
       else
-        if Regexp.new("\\A[#{@escaped_strip}]|[#{@escaped_strip}]\\z").match?(@column_separator)
+        if @escaped_strip.include?(@column_separator[0]) or
+           @escaped_strip.include?(@column_separator[-1])
           raise ArgumentError,
                 "The provided strip (true) and " \
                 "col_sep (#{@escaped_column_separator}) options are incompatible."
@@ -700,8 +708,21 @@ class CSV
       end
     end
 
+    # Regexp patterns, for the StringScanner path. prepare_byte_scanning
+    # builds BytePatterns instead.
+    def prepare_patterns
+      prepare_strip_patterns
+      prepare_separator_patterns
+      prepare_quoted
+      prepare_unquoted
+    end
+
     def prepare_quoted
+      if @backslash_quote
+        @escaped_backslash = Regexp.new(@escaped_backslash_character)
+      end
       if @quote_character
+        @escaped_quote = Regexp.new(@escaped_quote_character)
         @quotes = Regexp.new(@escaped_quote_character +
                              "+".encode(@encoding))
         no_quoted_values = @escaped_quote_character.dup
@@ -824,6 +845,10 @@ class CSV
       return false if BYTE_SCANNER_DISABLED
       return false unless BytePattern::BYTEINDEX_AVAILABLE
       return false unless BYTE_SCANNABLE_ENCODINGS.include?(@encoding)
+      # Without a quote character, strip: true splits with
+      # / \t\f\v*SEP \t\f\v*/, not a character class, so it rarely splits.
+      # The StringScanner path keeps that behavior.
+      return false if @quote_character.nil? and @strip == true
       [
         @column_separator,
         @row_separator,
@@ -832,13 +857,10 @@ class CSV
       ].all? {|value| value.nil? or value.ascii_only?}
     end
 
-    # Replaces the Regexp patterns that prepare_separators, prepare_quoted,
-    # prepare_unquoted and prepare_strip build with equivalent BytePatterns.
+    # Builds the BytePatterns that stand for the Regexp patterns of
+    # prepare_patterns, so that no Regexp runs over the input.
     def prepare_byte_scanning
-      @byte_scanning = byte_scannable?
       @separated_value_end = nil
-      return unless @byte_scanning
-
       @column_end = BytePattern.literal(@column_separator)
       if @column_separator.size > 1
         @column_ends = @column_separator.each_char.collect do |char|
@@ -869,8 +891,9 @@ class CSV
         if @strip.is_a?(String)
           @strip_value = BytePattern.run_in(@strip)
         elsif @strip
-          @strip_value = BytePattern.run_in(" \t\f\v")
+          @strip_value = BytePattern.run_in(STRIP_VALUES)
         end
+        @rstrip_value = @strip_value
 
         # Plain values that end with a one-byte column separator need
         # nothing of parse_column_value, so the robust loop takes a run
@@ -885,6 +908,43 @@ class CSV
       if @backslash_quote
         @escaped_backslash = BytePattern.literal(@backslash_character)
       end
+
+      # String#split(" ") splits on runs of whitespace, and splitting
+      # around stripped separators needs a Regexp: split_line does both.
+      if @strip or @column_separator == " "
+        @split_column_separator = nil
+        if @strip.is_a?(String)
+          @split_strip = BytePattern.run_in(@strip)
+        elsif @strip
+          @split_strip = BytePattern.run_in(STRIP_VALUES)
+        end
+      else
+        @split_column_separator = @column_separator
+      end
+    end
+
+    def split_line(line)
+      return [] if line.empty?
+
+      separator = @column_separator
+      separator_size = separator.bytesize
+      strip = @split_strip
+      row = []
+      pos = 0
+      while true
+        stop = line.byteindex(separator, pos)
+        value = line.byteslice(pos, (stop || line.bytesize) - pos)
+        if strip
+          leading = strip.match_length(value, 0)
+          value = value.byteslice(leading, value.bytesize - leading) if leading
+          trailing = strip.trailing_length(value)
+          value = value.byteslice(0, value.bytesize - trailing) if trailing > 0
+        end
+        row << value
+        break unless stop
+        pos = stop + separator_size
+      end
+      row
     end
 
     def last_line
@@ -1090,7 +1150,7 @@ class CSV
           row = []
         else
           line = strip_value(line)
-          row = line.split(@split_column_separator, -1)
+          row = @split_column_separator ? line.split(@split_column_separator, -1) : split_line(line)
           n_columns = row.size
           i = 0
           while i < n_columns
@@ -1130,7 +1190,7 @@ class CSV
             @parse_method = :parse_quotable_robust
             return parse_quotable_robust(&block)
           else
-            row = line.split(@split_column_separator, -1)
+            row = @split_column_separator ? line.split(@split_column_separator, -1) : split_line(line)
             quoted_fields = []
             n_columns = row.size
             i = 0
@@ -1297,7 +1357,12 @@ class CSV
       end
       value.gsub!(@backslash_quote_character, @quote_character) if @backslash_quote
       if @rstrip_value
-        value.gsub!(@rstrip_value, "")
+        if @byte_scanning
+          length = @rstrip_value.trailing_length(value)
+          value.bytesplice(value.bytesize - length, length, "") if length > 0
+        else
+          value.gsub!(@rstrip_value, "")
+        end
       end
       value
     end
