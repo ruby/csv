@@ -2,6 +2,7 @@
 
 require "strscan"
 
+require_relative "byte_scanner"
 require_relative "input_record_separator"
 require_relative "row"
 require_relative "table"
@@ -49,14 +50,7 @@ class CSV
     # on the methods. For more information, please visit:
     # https://docs.ruby-lang.org/en/master/StringScanner.html
     #
-    class Scanner < StringScanner
-      alias_method :scan_all, :scan
-
-      def initialize(*args)
-        super
-        @keeps = []
-      end
-
+    module ScannerKeeps
       def each_line(row_separator)
         position = pos
         rest.each_line(row_separator) do |line|
@@ -84,6 +78,40 @@ class CSV
       end
     end
 
+    class Scanner < StringScanner
+      include ScannerKeeps
+      alias_method :scan_all, :scan
+      alias_method :skip_all, :skip
+
+      def initialize(*args)
+        super
+        @keeps = []
+      end
+    end
+
+    # CSV::Parser::Scanner on ByteScanner, which scans with BytePattern in
+    # Ruby instead of StringScanner and regular expressions.
+    class ByteKeepScanner < ByteScanner
+      include ScannerKeeps
+      alias_method :scan_all, :scan
+      alias_method :skip_all, :skip
+
+      def initialize(*args)
+        super
+        @keeps = []
+      end
+
+      # The lines only move the position on, so it is set as it is.
+      def each_line(row_separator)
+        position = @pos
+        rest.each_line(row_separator) do |line|
+          position += line.bytesize
+          @pos = position
+          yield(line)
+        end
+      end
+    end
+
     #
     # CSV::InputsScanner receives IO inputs, encoding and the chunk_size.
     # It also controls the life cycle of the object with its methods +keep_start+,
@@ -97,8 +125,10 @@ class CSV
     # If there is no more data (eos? = true), it returns "".
     #
     class InputsScanner
-      def initialize(inputs, encoding, row_separator, chunk_size: 8192)
+      def initialize(inputs, encoding, row_separator, chunk_size: 8192,
+                     scanner_class: StringScanner)
         @inputs = inputs.dup
+        @scanner_class = scanner_class
         @encoding = encoding
         @row_separator = row_separator
         @chunk_size = chunk_size
@@ -180,6 +210,24 @@ class CSV
         value
       end
 
+      def skip(pattern)
+        length = @scanner.skip(pattern)
+        return length if @last_scanner
+
+        read_chunk if length and @scanner.eos?
+        length
+      end
+
+      def skip_all(pattern)
+        length = @scanner.skip(pattern)
+        return length if @last_scanner
+        return nil if length.nil?
+        while @scanner.eos? and read_chunk and (sub_length = @scanner.skip(pattern))
+          length += sub_length
+        end
+        length
+      end
+
       def eos?
         @last_scanner and @scanner.eos?
       end
@@ -223,7 +271,7 @@ class CSV
             @inputs.unshift(StringIO.new(keep))
             @last_scanner = false
           end
-          @scanner = StringScanner.new(buffer)
+          @scanner = @scanner_class.new(buffer)
         else
           if @scanner != scanner
             message = "scanners are different but no buffer: "
@@ -315,7 +363,7 @@ class CSV
           string = input.read
           raise InvalidEncoding unless string.valid_encoding?
           # trace(__method__, :stringio, string)
-          @scanner = StringScanner.new(string)
+          @scanner = @scanner_class.new(string)
           @inputs.shift
           @last_scanner = @inputs.empty?
           true
@@ -324,7 +372,7 @@ class CSV
           if chunk
             raise InvalidEncoding unless chunk.valid_encoding?
             # trace(__method__, :chunk, chunk)
-            @scanner = StringScanner.new(chunk)
+            @scanner = @scanner_class.new(chunk)
             if Parser.eof?(input)
               @inputs.shift
               @last_scanner = @inputs.empty?
@@ -332,7 +380,7 @@ class CSV
             true
           else
             # trace(__method__, :no_chunk)
-            @scanner = StringScanner.new("".encode(@encoding))
+            @scanner = @scanner_class.new("".encode(@encoding))
             @inputs.shift
             @last_scanner = @inputs.empty?
             if @last_scanner
@@ -463,8 +511,12 @@ class CSV
       prepare_strip
       prepare_separators
       validate_strip_and_col_sep_options
-      prepare_quoted
-      prepare_unquoted
+      @byte_scanning = byte_scannable?
+      if @byte_scanning
+        prepare_byte_scanning
+      else
+        prepare_patterns
+      end
       prepare_line
       prepare_header
       prepare_parser
@@ -506,7 +558,7 @@ class CSV
           raise ArgumentError, message
         end
         @escaped_quote_character = Regexp.escape(@quote_character)
-        @escaped_quote = Regexp.new(@escaped_quote_character)
+        @quote_character_bytesize = @quote_character.bytesize
       end
     end
 
@@ -516,7 +568,6 @@ class CSV
       @backslash_character = "\\".encode(@encoding)
 
       @escaped_backslash_character = Regexp.escape(@backslash_character)
-      @escaped_backslash = Regexp.new(@escaped_backslash_character)
       if @quote_character.nil?
         @backslash_quote_character = nil
       else
@@ -558,19 +609,22 @@ class CSV
         end
         @strip = @strip.encode(@encoding)
         @escaped_strip = Regexp.escape(@strip)
-        if @quote_character
-          @strip_value = Regexp.new(@escaped_strip +
-                                    "+".encode(@encoding))
-          @rstrip_value = Regexp.new(@escaped_strip +
-                                     "+\\z".encode(@encoding))
-        end
       elsif @strip
-        strip_values = " \t\f\v"
-        @escaped_strip = strip_values.encode(@encoding)
-        if @quote_character
-          @strip_value = Regexp.new("[#{strip_values}]+".encode(@encoding))
-          @rstrip_value = Regexp.new("[#{strip_values}]+\\z".encode(@encoding))
-        end
+        @escaped_strip = STRIP_VALUES.encode(@encoding)
+      end
+    end
+
+    STRIP_VALUES = " \t\f\v"
+
+    def prepare_strip_patterns
+      return unless @quote_character
+
+      if @strip.is_a?(String)
+        @strip_value = Regexp.new(@escaped_strip + "+".encode(@encoding))
+        @rstrip_value = Regexp.new(@escaped_strip + "+\\z".encode(@encoding))
+      elsif @strip
+        @strip_value = Regexp.new("[#{STRIP_VALUES}]+".encode(@encoding))
+        @rstrip_value = Regexp.new("[#{STRIP_VALUES}]+\\z".encode(@encoding))
       end
     end
 
@@ -595,6 +649,11 @@ class CSV
 
       @escaped_column_separator = Regexp.escape(@column_separator)
       @escaped_first_column_separator = Regexp.escape(@column_separator[0])
+      @cr = "\r".encode(@encoding)
+      @lf = "\n".encode(@encoding)
+    end
+
+    def prepare_separator_patterns
       if @column_separator.size > 1
         @column_end = Regexp.new(@escaped_column_separator)
         @column_ends = @column_separator.each_char.collect do |char|
@@ -622,8 +681,6 @@ class CSV
         @row_ends = nil
       end
 
-      @cr = "\r".encode(@encoding)
-      @lf = "\n".encode(@encoding)
       @line_end = Regexp.new("\r\n|\n|\r".encode(@encoding))
       @not_line_end = Regexp.new("[^\r\n]+".encode(@encoding))
     end
@@ -642,7 +699,8 @@ class CSV
                 "col_sep (#{@escaped_column_separator}) options are incompatible."
         end
       else
-        if Regexp.new("\\A[#{@escaped_strip}]|[#{@escaped_strip}]\\z").match?(@column_separator)
+        if @escaped_strip.include?(@column_separator[0]) or
+           @escaped_strip.include?(@column_separator[-1])
           raise ArgumentError,
                 "The provided strip (true) and " \
                 "col_sep (#{@escaped_column_separator}) options are incompatible."
@@ -650,8 +708,21 @@ class CSV
       end
     end
 
+    # Regexp patterns, for the StringScanner path. prepare_byte_scanning
+    # builds BytePatterns instead.
+    def prepare_patterns
+      prepare_strip_patterns
+      prepare_separator_patterns
+      prepare_quoted
+      prepare_unquoted
+    end
+
     def prepare_quoted
+      if @backslash_quote
+        @escaped_backslash = Regexp.new(@escaped_backslash_character)
+      end
       if @quote_character
+        @escaped_quote = Regexp.new(@escaped_quote_character)
         @quotes = Regexp.new(@escaped_quote_character +
                              "+".encode(@encoding))
         no_quoted_values = @escaped_quote_character.dup
@@ -758,6 +829,122 @@ class CSV
       @lineno = 0
       @last_line = nil
       @scanner = nil
+    end
+
+    BYTE_SCANNABLE_ENCODINGS = [
+      Encoding::UTF_8,
+      Encoding::US_ASCII,
+      Encoding::ASCII_8BIT,
+    ].freeze
+    BYTE_SCANNER_DISABLED = (ENV["CSV_PARSER_BYTE_SCANNER"] == "no")
+
+    # Whether every pattern can be answered by BytePattern: the patterns
+    # are made of ASCII characters only, and in these encodings an ASCII
+    # byte is always an ASCII character.
+    def byte_scannable?
+      return false if BYTE_SCANNER_DISABLED
+      return false unless BytePattern::BYTEINDEX_AVAILABLE
+      return false unless BYTE_SCANNABLE_ENCODINGS.include?(@encoding)
+      # Without a quote character, strip: true splits with
+      # / \t\f\v*SEP \t\f\v*/, not a character class, so it rarely splits.
+      # The StringScanner path keeps that behavior.
+      return false if @quote_character.nil? and @strip == true
+      [
+        @column_separator,
+        @row_separator,
+        @quote_character,
+        (@strip if @strip.is_a?(String)),
+      ].all? {|value| value.nil? or value.ascii_only?}
+    end
+
+    # Builds the BytePatterns that stand for the Regexp patterns of
+    # prepare_patterns, so that no Regexp runs over the input.
+    def prepare_byte_scanning
+      @separated_value_end = nil
+      @column_end = BytePattern.literal(@column_separator)
+      if @column_separator.size > 1
+        @column_ends = @column_separator.each_char.collect do |char|
+          BytePattern.literal(char)
+        end
+        @first_column_separators = BytePattern.run_in(@column_separator[0])
+      end
+      @row_end = BytePattern.literal(@row_separator)
+      if @row_separator.size > 1
+        @row_ends = @row_separator.each_char.collect do |char|
+          BytePattern.literal(char)
+        end
+      end
+      @line_end = BytePattern.alternation(["\r\n", "\n", "\r"])
+      @not_line_end = BytePattern.run_except("\r\n")
+
+      if @quote_character
+        @escaped_quote = BytePattern.literal(@quote_character)
+        @quotes = BytePattern.run_in(@quote_character)
+        no_quoted_values = @quote_character.dup
+        no_quoted_values << @backslash_character if @backslash_quote
+        @quoted_value = BytePattern.run_except(no_quoted_values)
+
+        no_unquoted_values = @row_separator + @column_separator[0]
+        no_unquoted_values << @quote_character unless @liberal_parsing
+        @unquoted_value = BytePattern.run_except(no_unquoted_values)
+
+        if @strip.is_a?(String)
+          @strip_value = BytePattern.run_in(@strip)
+        elsif @strip
+          @strip_value = BytePattern.run_in(STRIP_VALUES)
+        end
+        @rstrip_value = @strip_value
+
+        # Plain values that end with a one-byte column separator need
+        # nothing of parse_column_value, so the robust loop takes a run
+        # of them in one call.
+        if @column_separator.bytesize == 1 and
+           not @liberal_parsing and
+           not @strip and
+           @unquoted_value.kind == :run_except
+          @separated_value_end = @column_separator.getbyte(0)
+        end
+      end
+      if @backslash_quote
+        @escaped_backslash = BytePattern.literal(@backslash_character)
+      end
+
+      # String#split(" ") splits on runs of whitespace, and splitting
+      # around stripped separators needs a Regexp: split_line does both.
+      if @strip or @column_separator == " "
+        @split_column_separator = nil
+        if @strip.is_a?(String)
+          @split_strip = BytePattern.run_in(@strip)
+        elsif @strip
+          @split_strip = BytePattern.run_in(STRIP_VALUES)
+        end
+      else
+        @split_column_separator = @column_separator
+      end
+    end
+
+    def split_line(line)
+      return [] if line.empty?
+
+      separator = @column_separator
+      separator_size = separator.bytesize
+      strip = @split_strip
+      row = []
+      pos = 0
+      while true
+        stop = line.byteindex(separator, pos)
+        value = line.byteslice(pos, (stop || line.bytesize) - pos)
+        if strip
+          leading = strip.match_length(value, 0)
+          value = value.byteslice(leading, value.bytesize - leading) if leading
+          trailing = strip.trailing_length(value)
+          value = value.byteslice(0, value.bytesize - trailing) if trailing > 0
+        end
+        row << value
+        break unless stop
+        pos = stop + separator_size
+      end
+      row
     end
 
     def last_line
@@ -880,7 +1067,8 @@ class CSV
         InputsScanner.new(inputs,
                           @encoding,
                           @row_separator,
-                          chunk_size: chunk_size)
+                          chunk_size: chunk_size,
+                          scanner_class: inputs_scanner_class)
       end
     else
       def build_scanner
@@ -899,15 +1087,20 @@ class CSV
               raise InvalidEncodingError.new(@encoding, @lineno + index + 1)
             end
           end
-          Scanner.new(string)
+          (@byte_scanning ? ByteKeepScanner : Scanner).new(string)
         else
           inputs = @samples.collect do |sample|
             StringIO.new(sample)
           end
           inputs << @input
-          InputsScanner.new(inputs, @encoding, @row_separator)
+          InputsScanner.new(inputs, @encoding, @row_separator,
+                            scanner_class: inputs_scanner_class)
         end
       end
+    end
+
+    def inputs_scanner_class
+      @byte_scanning ? ByteScanner : StringScanner
     end
 
     def skip_needless_lines
@@ -957,7 +1150,7 @@ class CSV
           row = []
         else
           line = strip_value(line)
-          row = line.split(@split_column_separator, -1)
+          row = @split_column_separator ? line.split(@split_column_separator, -1) : split_line(line)
           n_columns = row.size
           i = 0
           while i < n_columns
@@ -997,7 +1190,7 @@ class CSV
             @parse_method = :parse_quotable_robust
             return parse_quotable_robust(&block)
           else
-            row = line.split(@split_column_separator, -1)
+            row = @split_column_separator ? line.split(@split_column_separator, -1) : split_line(line)
             quoted_fields = []
             n_columns = row.size
             i = 0
@@ -1039,15 +1232,21 @@ class CSV
     def parse_quotable_robust(&block)
       row = []
       quoted_fields = []
+      separator = @separated_value_end
+      separator = nil unless @scanner.is_a?(ByteKeepScanner)
       skip_needless_lines
       start_row
       while true
         @quoted_column_value = false
         @unquoted_column_value = false
-        @scanner.scan_all(@strip_value) if @strip_value
+        if separator
+          n = @scanner.scan_separated(@unquoted_value, separator, row)
+          quoted_fields.fill(false, quoted_fields.size, n) if n > 0
+        end
+        @scanner.skip_all(@strip_value) if @strip_value
         value = parse_column_value
         if value
-          @scanner.scan_all(@strip_value) if @strip_value
+          @scanner.skip_all(@strip_value) if @strip_value
         end
         if parse_column_end
           row << value
@@ -1109,7 +1308,7 @@ class CSV
       if @liberal_parsing
         quoted_value = parse_quoted_column_value
         if quoted_value
-          @scanner.scan_all(@strip_value) if @strip_value
+          @scanner.skip_all(@strip_value) if @strip_value
           unquoted_value = parse_unquoted_column_value
           if unquoted_value
             if @double_quote_outside_quote
@@ -1144,7 +1343,7 @@ class CSV
         while true
           @scanner.keep_start
           is_column_end = @column_ends.all? do |column_end|
-            @scanner.scan(column_end)
+            @scanner.skip(column_end)
           end
           @scanner.keep_back
           break if is_column_end
@@ -1158,27 +1357,41 @@ class CSV
       end
       value.gsub!(@backslash_quote_character, @quote_character) if @backslash_quote
       if @rstrip_value
-        value.gsub!(@rstrip_value, "")
+        if @byte_scanning
+          length = @rstrip_value.trailing_length(value)
+          value.bytesplice(value.bytesize - length, length, "") if length > 0
+        else
+          value.gsub!(@rstrip_value, "")
+        end
       end
       value
     end
 
     def parse_quoted_column_value
-      quotes = @scanner.scan_all(@quotes)
-      return nil unless quotes
+      n_quotes = @scanner.skip_all(@quotes)
+      return nil unless n_quotes
 
       @quoted_column_value = true
-      n_quotes = quotes.size
-      if (n_quotes % 2).zero?
-        quotes[0, (n_quotes - 2) / 2]
+      n_quotes /= @quote_character_bytesize
+      if (n_quotes % 2) == 0
+        @quote_character * ((n_quotes - 2) / 2)
       else
-        value = quotes[0, n_quotes / 2]
+        # value stays nil until there is text, so that a value with no
+        # escaped quotes is the scanned String itself.
+        value = @quote_character * (n_quotes / 2) if n_quotes > 1
         while true
           quoted_value = @scanner.scan_all(@quoted_value)
-          value << quoted_value if quoted_value
+          if quoted_value
+            if value
+              value << quoted_value
+            else
+              value = quoted_value
+            end
+          end
           if @backslash_quote
-            if @scanner.scan(@escaped_backslash)
-              if @scanner.scan(@escaped_quote)
+            if @scanner.skip(@escaped_backslash)
+              value ||= @quote_character * 0
+              if @scanner.skip(@escaped_quote)
                 value << @quote_character
               else
                 value << @backslash_character
@@ -1187,30 +1400,36 @@ class CSV
             end
           end
 
-          quotes = @scanner.scan_all(@quotes)
-          unless quotes
+          n_quotes = @scanner.skip_all(@quotes)
+          unless n_quotes
             ignore_broken_line
             message = "Unclosed quoted field"
             raise MalformedCSVError.new(message, @lineno)
           end
-          n_quotes = quotes.size
+          n_quotes /= @quote_character_bytesize
           if n_quotes == 1
             break
           else
-            value << quotes[0, n_quotes / 2]
+            if value.nil?
+              value = @quote_character * (n_quotes / 2)
+            elsif n_quotes < 4
+              value << @quote_character
+            else
+              value << @quote_character * (n_quotes / 2)
+            end
             break if (n_quotes % 2) == 1
           end
         end
-        value
+        value || @quote_character * 0
       end
     end
 
     def parse_column_end
-      return true if @scanner.scan(@column_end)
+      return true if @scanner.skip(@column_end)
       return false unless @column_ends
 
       @scanner.keep_start
-      if @column_ends.all? {|column_end| @scanner.scan(column_end)}
+      if @column_ends.all? {|column_end| @scanner.skip(column_end)}
         @scanner.keep_drop
         true
       else
@@ -1220,10 +1439,10 @@ class CSV
     end
 
     def parse_row_end
-      return true if @scanner.scan(@row_end)
+      return true if @scanner.skip(@row_end)
       return false unless @row_ends
       @scanner.keep_start
-      if @row_ends.all? {|row_end| @scanner.scan(row_end)}
+      if @row_ends.all? {|row_end| @scanner.skip(row_end)}
         @scanner.keep_drop
         true
       else
@@ -1251,8 +1470,8 @@ class CSV
     end
 
     def ignore_broken_line
-      @scanner.scan_all(@not_line_end)
-      @scanner.scan_all(@line_end)
+      @scanner.skip_all(@not_line_end)
+      @scanner.skip_all(@line_end)
       @lineno += 1
     end
 
