@@ -731,11 +731,11 @@ class CSV
     end
 
     def detect_row_separator(sample, cr, lf)
-      lf_index = sample.index(lf)
+      lf_index = find_unquoted_string_index(sample, lf)
       if lf_index
-        cr_index = sample[0, lf_index].index(cr)
+        cr_index = find_unquoted_string_index(sample[0, lf_index], cr)
       else
-        cr_index = sample.index(cr)
+        cr_index = find_unquoted_string_index(sample, cr)
       end
       if cr_index and lf_index
         if cr_index + 1 == lf_index
@@ -752,6 +752,21 @@ class CSV
       else
         :auto
       end
+    end
+
+    # Index of the first +target+ that is outside a quoted field, so a CR or
+    # LF inside quotes is not mistaken for the row separator.
+    def find_unquoted_string_index(text, target)
+      return text.index(target) if @quote_character.nil?
+      in_quote = false
+      text.each_char.with_index do |char, i|
+        if char == @quote_character
+          in_quote = !in_quote
+        elsif char == target and not in_quote
+          return i
+        end
+      end
+      nil
     end
 
     def prepare_line
