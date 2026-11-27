@@ -117,7 +117,10 @@ class CSV
                       "#{name_or_index.inspect}: #{force_quotes.inspect}"
             raise ArgumentError, message
           end
-          index = @headers.index(name)
+          index = @headers.index do |header|
+            header = header.to_s if header.is_a?(Symbol)
+            header == name
+          end
           next if index.nil?
           @force_quotes_fields[index] = true
         else
