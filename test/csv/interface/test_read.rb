@@ -145,6 +145,35 @@ class TestCSVInterfaceRead < Test::Unit::TestCase
     end
   end
 
+  def test_open_encoding_invalid_line_number
+    File.open(@input.path, "wb") do |file|
+      file << "a,b\nc,d\n\xFF,1\n"
+    end
+    CSV.open(@input.path, encoding: "UTF-8") do |csv|
+      error = assert_raise(CSV::InvalidEncodingError) do
+        csv.read
+      end
+      assert_equal([Encoding::UTF_8, "Invalid byte sequence in UTF-8 in line 3."],
+                   [error.encoding, error.message])
+    end
+  end
+
+  def test_open_encoding_invalid_line_number_in_partial_sample
+    # The row separator is detected from the first 32 KiB of a File. The
+    # invalid byte is in that sample, but the file is longer than it.
+    File.open(@input.path, "wb") do |file|
+      file << "a,b\n\x80,1\n"
+      file << "x,y\n" * 16384
+    end
+    CSV.open(@input.path, encoding: "UTF-8") do |csv|
+      error = assert_raise(CSV::InvalidEncodingError) do
+        csv.read
+      end
+      assert_equal([Encoding::UTF_8, "Invalid byte sequence in UTF-8 in line 2."],
+                   [error.encoding, error.message])
+    end
+  end
+
   def test_open_encoding_nonexistent
     _output, error = capture_output do
       CSV.open(@input.path, encoding: "nonexistent") do
