@@ -891,21 +891,28 @@ class CSV
           string = @samples[0]
         end
         if string
-          unless string.valid_encoding?
-            index = string.lines(@row_separator).index do |line|
-              !line.valid_encoding?
-            end
-            if index
-              raise InvalidEncodingError.new(@encoding, @lineno + index + 1)
-            end
-          end
+          check_encoding(string)
           Scanner.new(string)
         else
+          unless @samples.all?(&:valid_encoding?)
+            check_encoding(@samples.join(""))
+          end
           inputs = @samples.collect do |sample|
             StringIO.new(sample)
           end
           inputs << @input
           InputsScanner.new(inputs, @encoding, @row_separator)
+        end
+      end
+
+      def check_encoding(string)
+        return if string.valid_encoding?
+
+        index = string.lines(@row_separator).index do |line|
+          !line.valid_encoding?
+        end
+        if index
+          raise InvalidEncodingError.new(@encoding, @lineno + index + 1)
         end
       end
     end
